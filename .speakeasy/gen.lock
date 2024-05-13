@@ -5,10 +5,11 @@ management:
   docVersion: 0.0.1
   speakeasyVersion: 1.286.3
   generationVersion: 2.329.0
-  releaseVersion: 0.0.2
-  configChecksum: 1811403dfa2691e159da12b9afc1de9d
+  releaseVersion: 0.0.3
+  configChecksum: db082d7e17d934bf9628d061fcb63c62
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
+  published: true
 features:
   python:
     additionalDependencies: 0.1.0

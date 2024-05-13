@@ -2,8 +2,8 @@ speakeasyVersion: 1.286.3
 sources:
     dub:
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:fbd0094ba88103250b42fd4f78e46e04ced3e5d934676fabf350e3394a516a97
-        sourceBlobDigest: sha256:2bcbbc05b96c991e9fda1412dbfc4cf9b84345799657d2bd2083f4acbb478f26
+        sourceRevisionDigest: sha256:04d2e11f2af844a975630080c2f7211859631806e76e301bc9b8341f6f610677
+        sourceBlobDigest: sha256:2031366b32c362598eafd0b4705f79dd4b47f875816d9ff6429047802526f076
         tags:
             - latest
             - main
@@ -11,8 +11,8 @@ targets:
     my-first-target:
         source: dub
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:fbd0094ba88103250b42fd4f78e46e04ced3e5d934676fabf350e3394a516a97
-        sourceBlobDigest: sha256:2bcbbc05b96c991e9fda1412dbfc4cf9b84345799657d2bd2083f4acbb478f26
+        sourceRevisionDigest: sha256:04d2e11f2af844a975630080c2f7211859631806e76e301bc9b8341f6f610677
+        sourceBlobDigest: sha256:2031366b32c362598eafd0b4705f79dd4b47f875816d9ff6429047802526f076
         outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
@@ -27,3 +27,6 @@ workflow:
         my-first-target:
             target: python
             source: dub
+            publish:
+                pypi:
+                    token: $pypi_token
