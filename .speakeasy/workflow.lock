@@ -1,20 +1,22 @@
-speakeasyVersion: 1.286.0
+speakeasyVersion: 1.286.3
 sources:
     dub:
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:00d5c2489bd923d9e3208c526537d6be077c6ed349fc9e5be364b3c948b98bbd
-        sourceBlobDigest: sha256:dfb204c01dff8c4409b5f94498dff70b2ab92737ad4e03c7940c20e25ae641a5
+        sourceRevisionDigest: sha256:fbd0094ba88103250b42fd4f78e46e04ced3e5d934676fabf350e3394a516a97
+        sourceBlobDigest: sha256:2bcbbc05b96c991e9fda1412dbfc4cf9b84345799657d2bd2083f4acbb478f26
         tags:
             - latest
+            - main
 targets:
     my-first-target:
         source: dub
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:00d5c2489bd923d9e3208c526537d6be077c6ed349fc9e5be364b3c948b98bbd
-        sourceBlobDigest: sha256:dfb204c01dff8c4409b5f94498dff70b2ab92737ad4e03c7940c20e25ae641a5
-        outLocation: /Users/steventey/Documents/Dub/dub-python
+        sourceRevisionDigest: sha256:fbd0094ba88103250b42fd4f78e46e04ced3e5d934676fabf350e3394a516a97
+        sourceBlobDigest: sha256:2bcbbc05b96c991e9fda1412dbfc4cf9b84345799657d2bd2083f4acbb478f26
+        outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
+    speakeasyVersion: latest
     sources:
         dub:
             inputs:
