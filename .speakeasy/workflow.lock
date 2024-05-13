@@ -1,0 +1,27 @@
+speakeasyVersion: 1.286.0
+sources:
+    dub:
+        sourceNamespace: dub
+        sourceRevisionDigest: sha256:00d5c2489bd923d9e3208c526537d6be077c6ed349fc9e5be364b3c948b98bbd
+        sourceBlobDigest: sha256:dfb204c01dff8c4409b5f94498dff70b2ab92737ad4e03c7940c20e25ae641a5
+        tags:
+            - latest
+targets:
+    my-first-target:
+        source: dub
+        sourceNamespace: dub
+        sourceRevisionDigest: sha256:00d5c2489bd923d9e3208c526537d6be077c6ed349fc9e5be364b3c948b98bbd
+        sourceBlobDigest: sha256:dfb204c01dff8c4409b5f94498dff70b2ab92737ad4e03c7940c20e25ae641a5
+        outLocation: /Users/steventey/Documents/Dub/dub-python
+workflow:
+    workflowVersion: 1.0.0
+    sources:
+        dub:
+            inputs:
+                - location: https://api.dub.co/
+            registry:
+                location: registry.speakeasyapi.dev/dub/dub/dub
+    targets:
+        my-first-target:
+            target: python
+            source: dub
