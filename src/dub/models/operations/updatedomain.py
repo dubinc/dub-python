@@ -18,6 +18,7 @@ class UpdateDomainGlobals:
     
 
 
+
 class UpdateDomainType(str, Enum):
     r"""The type of redirect to use for this domain."""
     REDIRECT = 'redirect'

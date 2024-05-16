@@ -7,6 +7,7 @@ from dub import utils
 from enum import Enum
 from typing import Optional
 
+
 class InternalServerErrorCode(str, Enum):
     r"""A short code indicating the error code returned."""
     INTERNAL_SERVER_ERROR = 'internal_server_error'

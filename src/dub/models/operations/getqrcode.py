@@ -6,6 +6,7 @@ from ...models.components import httpmetadata as components_httpmetadata
 from enum import Enum
 from typing import Optional
 
+
 class Level(str, Enum):
     r"""The level of error correction to use for the QR code. Defaults to `L` if not provided."""
     L = 'L'

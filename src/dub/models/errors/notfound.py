@@ -7,6 +7,7 @@ from dub import utils
 from enum import Enum
 from typing import Optional
 
+
 class NotFoundCode(str, Enum):
     r"""A short code indicating the error code returned."""
     NOT_FOUND = 'not_found'
