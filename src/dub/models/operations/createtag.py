@@ -18,6 +18,7 @@ class CreateTagGlobals:
     
 
 
+
 class Color(str, Enum):
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
     RED = 'red'

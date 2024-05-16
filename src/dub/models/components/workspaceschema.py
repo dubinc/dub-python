@@ -7,6 +7,7 @@ from dub import utils
 from enum import Enum
 from typing import List, Optional
 
+
 class Plan(str, Enum):
     r"""The plan of the workspace."""
     FREE = 'free'
@@ -16,6 +17,7 @@ class Plan(str, Enum):
     BUSINESS_EXTRA = 'business extra'
     BUSINESS_MAX = 'business max'
     ENTERPRISE = 'enterprise'
+
 
 class Role(str, Enum):
     r"""The role of the authenticated user in the workspace."""

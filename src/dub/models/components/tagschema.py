@@ -6,6 +6,7 @@ from dataclasses_json import Undefined, dataclass_json
 from dub import utils
 from enum import Enum
 
+
 class Color(str, Enum):
     r"""The color of the tag."""
     RED = 'red'

@@ -1,9 +1,0 @@
-# GetCityAnalyticsResponse
-
-
-## Fields
-
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `http_meta`                                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                       | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `response_bodies`                                                                                        | List[[operations.GetCityAnalyticsResponseBody](../../models/operations/getcityanalyticsresponsebody.md)] | :heavy_minus_sign:                                                                                       | The top cities by number of clicks                                                                       |

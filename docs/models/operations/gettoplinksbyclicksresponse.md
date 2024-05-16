@@ -1,0 +1,9 @@
+# GetTopLinksByClicksResponse
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `http_meta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `response_bodies`                                                                                              | List[[operations.GetTopLinksByClicksResponseBody](../../models/operations/gettoplinksbyclicksresponsebody.md)] | :heavy_minus_sign:                                                                                             | The top links by number of clicks                                                                              |

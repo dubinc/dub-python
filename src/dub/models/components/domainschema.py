@@ -7,6 +7,7 @@ from dub import utils
 from enum import Enum
 from typing import Optional
 
+
 class Type(str, Enum):
     r"""The type of redirect to use for this domain."""
     REDIRECT = 'redirect'

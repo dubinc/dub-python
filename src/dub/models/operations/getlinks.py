@@ -16,6 +16,7 @@ class GetLinksGlobals:
     
 
 
+
 class Sort(str, Enum):
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
     CREATED_AT = 'createdAt'

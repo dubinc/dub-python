@@ -1,0 +1,9 @@
+# GetBrowsersByClicksResponse
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `http_meta`                                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `response_bodies`                                                                                              | List[[operations.GetBrowsersByClicksResponseBody](../../models/operations/getbrowsersbyclicksresponsebody.md)] | :heavy_minus_sign:                                                                                             | The top browsers by number of clicks                                                                           |

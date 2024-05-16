@@ -7,6 +7,7 @@ from dub import utils
 from enum import Enum
 from typing import Optional
 
+
 class Code(str, Enum):
     r"""A short code indicating the error code returned."""
     BAD_REQUEST = 'bad_request'

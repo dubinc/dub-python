@@ -15,8 +15,10 @@ class GetLinksCountGlobals:
     
 
 
+
 class Two(str, Enum):
     TAG_ID = 'tagId'
+
 
 class One(str, Enum):
     DOMAIN = 'domain'

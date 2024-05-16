@@ -7,6 +7,7 @@ from dub import utils
 from enum import Enum
 from typing import Optional
 
+
 class RateLimitExceededCode(str, Enum):
     r"""A short code indicating the error code returned."""
     RATE_LIMIT_EXCEEDED = 'rate_limit_exceeded'
