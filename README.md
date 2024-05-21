@@ -142,6 +142,12 @@ if res.link_schema is not None:
 * [set_primary](docs/sdks/domains/README.md#set_primary) - Set a domain as primary
 * [transfer](docs/sdks/domains/README.md#transfer) - Transfer a domain
 
+### [track](docs/sdks/track/README.md)
+
+* [lead](docs/sdks/track/README.md#lead) - Track a lead
+* [sale](docs/sdks/track/README.md#sale) - Track a sale
+* [customer](docs/sdks/track/README.md#customer) - Track a customer
+
 ### [metatags](docs/sdks/metatags/README.md)
 
 * [get](docs/sdks/metatags/README.md#get) - Retrieve the metatags for a URL

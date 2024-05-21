@@ -16,6 +16,10 @@ class GetLinksGlobals:
     
 
 
+QueryParamTagIds = Union[str, List[str]]
+
+QueryParamTagNames = Union[str, List[str]]
+
 
 class Sort(str, Enum):
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
@@ -30,9 +34,9 @@ class GetLinksRequest:
     r"""The domain to filter the links by. E.g. `ac.me`. If not provided, all links for the workspace will be returned."""
     tag_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagId', 'style': 'form', 'explode': True }})
     r"""The tag ID to filter the links by. This field is deprecated – use `tagIds` instead."""
-    tag_ids: Optional[Union[str, List[str]]] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagIds', 'style': 'form', 'explode': True }})
+    tag_ids: Optional[QueryParamTagIds] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagIds', 'style': 'form', 'explode': True }})
     r"""The tag IDs to filter the links by."""
-    tag_names: Optional[Union[str, List[str]]] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagNames', 'style': 'form', 'explode': True }})
+    tag_names: Optional[QueryParamTagNames] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagNames', 'style': 'form', 'explode': True }})
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
     search: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'search', 'style': 'form', 'explode': True }})
     r"""The search term to filter the links by. The search term will be matched against the short link slug and the destination url."""

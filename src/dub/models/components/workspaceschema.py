@@ -75,6 +75,8 @@ class WorkspaceSchema:
     r"""The Stripe ID of the workspace."""
     billing_cycle_start: float = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('billingCycleStart') }})
     r"""The date and time when the billing cycle starts for the workspace."""
+    stripe_connect_id: Optional[str] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('stripeConnectId') }})
+    r"""[BETA]: The Stripe Connect ID of the workspace."""
     created_at: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('createdAt') }})
     r"""The date and time when the workspace was created."""
     users: List[Users] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('users') }})
@@ -85,5 +87,7 @@ class WorkspaceSchema:
     r"""The invite code of the workspace."""
     logo: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('logo'), 'exclude': lambda f: f is WorkspaceSchema.UNSET }})
     r"""The logo of the workspace."""
+    beta_tester: Optional[bool] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('betaTester'), 'exclude': lambda f: f is None }})
+    r"""Whether the workspace is enrolled in the beta testing program."""
     
 

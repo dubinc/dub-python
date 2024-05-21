@@ -1,6 +1,6 @@
-# GetCountriesByClicksCountry
+# ClicksByCitiesCountry
 
-The 2-letter country code: https://d.to/geo
+The 2-letter country code of the city: https://d.to/geo
 
 
 ## Values

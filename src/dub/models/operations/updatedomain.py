@@ -39,6 +39,8 @@ class UpdateDomainRequestBody:
     r"""Redirect users to a specific URL when any link under this domain has expired."""
     archived: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('archived'), 'exclude': lambda f: f is None }})
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
+    noindex: Optional[bool] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noindex'), 'exclude': lambda f: f is None }})
+    r"""Prevent search engines from indexing the domain. Defaults to `false`."""
     placeholder: Optional[str] = dataclasses.field(default='https://dub.co/help/article/what-is-dub', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('placeholder'), 'exclude': lambda f: f is UpdateDomainRequestBody.UNSET }})
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
     

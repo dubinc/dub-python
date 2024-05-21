@@ -82,7 +82,7 @@ s = dub.Dub(
 
 res = s.analytics.country(request=operations.GetCountriesByClicksDeprecatedRequest())
 
-if res.response_bodies is not None:
+if res.clicks_by_countries is not None:
     # handle response
     pass
 
@@ -132,7 +132,7 @@ s = dub.Dub(
 
 res = s.analytics.city(request=operations.GetCitiesByClicksDeprecatedRequest())
 
-if res.response_bodies is not None:
+if res.clicks_by_cities is not None:
     # handle response
     pass
 

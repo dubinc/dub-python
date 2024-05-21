@@ -8,6 +8,7 @@ from .metatags import Metatags
 from .qr_codes import QRCodes
 from .sdkconfiguration import SDKConfiguration
 from .tags import Tags
+from .track import Track
 from .utils.retries import RetryConfig
 from .workspaces import Workspaces
 from dub import utils
@@ -23,6 +24,7 @@ class Dub:
     workspaces: Workspaces
     tags: Tags
     domains: Domains
+    track: Track
     metatags: Metatags
 
     sdk_configuration: SDKConfiguration
@@ -103,4 +105,5 @@ class Dub:
         self.workspaces = Workspaces(self.sdk_configuration)
         self.tags = Tags(self.sdk_configuration)
         self.domains = Domains(self.sdk_configuration)
+        self.track = Track(self.sdk_configuration)
         self.metatags = Metatags(self.sdk_configuration)

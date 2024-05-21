@@ -15,6 +15,10 @@ class GetLinksCountGlobals:
     
 
 
+GetLinksCountQueryParamTagIds = Union[str, List[str]]
+
+GetLinksCountQueryParamTagNames = Union[str, List[str]]
+
 
 class Two(str, Enum):
     TAG_ID = 'tagId'
@@ -23,6 +27,8 @@ class Two(str, Enum):
 class One(str, Enum):
     DOMAIN = 'domain'
 
+GroupBy = Union['One', 'Two']
+
 
 @dataclasses.dataclass
 class GetLinksCountRequest:
@@ -30,9 +36,9 @@ class GetLinksCountRequest:
     r"""The domain to filter the links by. E.g. `ac.me`. If not provided, all links for the workspace will be returned."""
     tag_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagId', 'style': 'form', 'explode': True }})
     r"""The tag ID to filter the links by. This field is deprecated – use `tagIds` instead."""
-    tag_ids: Optional[Union[str, List[str]]] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagIds', 'style': 'form', 'explode': True }})
+    tag_ids: Optional[GetLinksCountQueryParamTagIds] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagIds', 'style': 'form', 'explode': True }})
     r"""The tag IDs to filter the links by."""
-    tag_names: Optional[Union[str, List[str]]] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagNames', 'style': 'form', 'explode': True }})
+    tag_names: Optional[GetLinksCountQueryParamTagNames] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'tagNames', 'style': 'form', 'explode': True }})
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
     search: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'search', 'style': 'form', 'explode': True }})
     r"""The search term to filter the links by. The search term will be matched against the short link slug and the destination url."""
@@ -42,7 +48,7 @@ class GetLinksCountRequest:
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
     with_tags: Optional[bool] = dataclasses.field(default=True, metadata={'query_param': { 'field_name': 'withTags', 'style': 'form', 'explode': True }})
     r"""Whether to include tags in the response. Defaults to `false` if not provided."""
-    group_by: Optional[Union[One, Two]] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
+    group_by: Optional[GroupBy] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
     r"""The field to group the links by."""
     
 

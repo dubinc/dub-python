@@ -33,6 +33,8 @@ class DomainSchema:
     r"""Whether the domain is the primary domain for the workspace."""
     archived: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('archived'), 'exclude': lambda f: f is None }})
     r"""Whether the domain is archived."""
+    noindex: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noindex'), 'exclude': lambda f: f is None }})
+    r"""Prevent search engines from indexing the domain."""
     placeholder: Optional[str] = dataclasses.field(default='https://dub.co/help/article/what-is-dub', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('placeholder'), 'exclude': lambda f: f is None }})
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
     clicks: Optional[float] = dataclasses.field(default=0, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('clicks'), 'exclude': lambda f: f is None }})

@@ -337,8 +337,8 @@ class Clicks:
         if http_res.status_code == 200:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, Optional[List[operations.GetCountriesByClicksResponseBody]])
-                res.response_bodies = out
+                out = utils.unmarshal_json(http_res.text, Optional[List[components.ClicksByCountry]])
+                res.clicks_by_countries = out
             else:
                 content_type = http_res.headers.get('Content-Type')
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
@@ -473,8 +473,8 @@ class Clicks:
         if http_res.status_code == 200:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, Optional[List[operations.GetCitiesByClicksResponseBody]])
-                res.response_bodies = out
+                out = utils.unmarshal_json(http_res.text, Optional[List[components.ClicksByCities]])
+                res.clicks_by_cities = out
             else:
                 content_type = http_res.headers.get('Content-Type')
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
