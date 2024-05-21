@@ -1,4 +1,4 @@
-# GetOSByClicksQueryParamCountry
+# CountryCode
 
 The country to retrieve analytics for.
 
