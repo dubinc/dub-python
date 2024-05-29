@@ -35,9 +35,10 @@ class DeleteDomainResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class DeleteDomainResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     object: Optional[DeleteDomainResponseBody] = dataclasses.field(default=None)
     r"""The domain was deleted."""
     

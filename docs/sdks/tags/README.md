@@ -20,6 +20,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.tags.list()
 
 if res.tag_schemas is not None:
@@ -61,6 +62,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.tags.create(tag='<value>', color=operations.Color.BLUE)
 

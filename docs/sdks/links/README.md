@@ -27,6 +27,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.links.list(request=operations.GetLinksRequest())
 
 if res.link_schemas is not None:
@@ -74,6 +75,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.links.create(request=operations.CreateLinkRequestBody(
     url='https://google/com',
@@ -129,6 +131,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.links.count(request=operations.GetLinksCountRequest())
 
 if res.number is not None:
@@ -175,6 +178,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.links.get(domain='<value>', key='<value>', link_id='clux0rgak00011...', external_id='ext_123456')
 
@@ -226,6 +230,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.links.delete(link_id='<value>')
 
 if res.object is not None:
@@ -273,6 +278,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.links.update(link_id='<value>', request_body=operations.UpdateLinkRequestBody(
     url='https://google/com',
@@ -329,6 +335,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.links.create_many(request=[
     operations.RequestBody(
         url='https://google/com',
@@ -384,6 +391,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.links.upsert(request=operations.UpsertLinkRequestBody(
     url='https://google/com',

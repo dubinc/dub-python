@@ -8,6 +8,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.links.create(request=operations.CreateLinkRequestBody(
     url='https://google/com',
     external_id='123456',
@@ -30,6 +31,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.links.upsert(request=operations.UpsertLinkRequestBody(
     url='https://google/com',

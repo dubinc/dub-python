@@ -347,5 +347,9 @@ class LinkSchema:
     r"""Whether the short link's stats are publicly accessible."""
     clicks: Optional[float] = dataclasses.field(default=0, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('clicks'), 'exclude': lambda f: f is None }})
     r"""The number of clicks on the short link."""
+    leads: Optional[float] = dataclasses.field(default=0, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('leads'), 'exclude': lambda f: f is None }})
+    r"""[BETA]: The number of leads the short links has generated."""
+    sales: Optional[float] = dataclasses.field(default=0, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('sales'), 'exclude': lambda f: f is None }})
+    r"""[BETA]: The number of sales the short links has generated."""
     
 

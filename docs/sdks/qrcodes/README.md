@@ -20,6 +20,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.qr_codes.get(request=operations.GetQRCodeRequest(
     url='https://brief-micronutrient.org',
 ))

@@ -89,9 +89,10 @@ class UpdateLinkRequest:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class UpdateLinkResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     link_schema: Optional[components_linkschema.LinkSchema] = dataclasses.field(default=None)
     r"""The updated link"""
     

@@ -4,6 +4,7 @@ from __future__ import annotations
 import dataclasses
 from ...models.components import httpmetadata as components_httpmetadata
 from ...models.components import linkschema as components_linkschema
+from dataclasses_json import Undefined, dataclass_json
 from typing import Optional
 
 
@@ -29,9 +30,10 @@ class GetLinkInfoRequest:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class GetLinkInfoResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     link_schema: Optional[components_linkschema.LinkSchema] = dataclasses.field(default=None)
     r"""The retrieved link"""
     

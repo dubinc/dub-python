@@ -22,6 +22,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.track.lead(request=operations.TrackLeadRequestBody(
     click_id='<value>',
     event_name='Signup',
@@ -74,6 +75,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.track.sale(request=operations.TrackSaleRequestBody(
     customer_id='<value>',
     amount=996500,
@@ -125,6 +127,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.track.customer(request=operations.TrackCustomerRequestBody(
     customer_id='<value>',

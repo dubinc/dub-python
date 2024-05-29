@@ -41,9 +41,10 @@ class CreateTagRequestBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class CreateTagResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     tag_schema: Optional[components_tagschema.TagSchema] = dataclasses.field(default=None)
     r"""The created tag"""
     

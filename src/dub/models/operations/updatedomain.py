@@ -56,9 +56,10 @@ class UpdateDomainRequest:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class UpdateDomainResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     domain_schema: Optional[components_domainschema.DomainSchema] = dataclasses.field(default=None)
     r"""The domain was updated."""
     
