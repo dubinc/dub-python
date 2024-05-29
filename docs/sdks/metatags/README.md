@@ -19,6 +19,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.metatags.get(url='https://dub.co')
 
 if res.object is not None:

@@ -80,9 +80,10 @@ class RequestBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class BulkCreateLinksResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     link_schemas: Optional[List[components_linkschema.LinkSchema]] = dataclasses.field(default=None)
     r"""The created links"""
     

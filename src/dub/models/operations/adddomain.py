@@ -47,9 +47,10 @@ class AddDomainRequestBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class AddDomainResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     domain_schema: Optional[components_domainschema.DomainSchema] = dataclasses.field(default=None)
     r"""The domain was added."""
     

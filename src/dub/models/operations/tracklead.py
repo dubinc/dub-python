@@ -11,20 +11,19 @@ from typing import Any, Dict, Optional
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class TrackLeadRequestBody:
-    UNSET='__SPEAKEASY_UNSET__'
     click_id: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('clickId') }})
     r"""The ID of the click in th Dub. You can read this value from `dclid` cookie."""
     event_name: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('eventName') }})
     r"""The name of the event to track."""
     customer_id: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerId') }})
     r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-    customer_name: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerName'), 'exclude': lambda f: f is TrackLeadRequestBody.UNSET }})
+    customer_name: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerName'), 'exclude': lambda f: f is None }})
     r"""Name of the customer in the client's app."""
-    customer_email: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerEmail'), 'exclude': lambda f: f is TrackLeadRequestBody.UNSET }})
+    customer_email: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerEmail'), 'exclude': lambda f: f is None }})
     r"""Email of the customer in the client's app."""
-    customer_avatar: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerAvatar'), 'exclude': lambda f: f is TrackLeadRequestBody.UNSET }})
+    customer_avatar: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerAvatar'), 'exclude': lambda f: f is None }})
     r"""Avatar of the customer in the client's app."""
-    metadata: Optional[Dict[str, Any]] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('metadata'), 'exclude': lambda f: f is TrackLeadRequestBody.UNSET }})
+    metadata: Optional[Dict[str, Any]] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('metadata'), 'exclude': lambda f: f is None }})
     r"""Additional metadata to be stored with the lead event"""
     
 
@@ -40,14 +39,15 @@ class TrackLeadResponseBody:
     customer_name: Optional[str] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerName') }})
     customer_email: Optional[str] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerEmail') }})
     customer_avatar: Optional[str] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerAvatar') }})
-    metadata: Optional[Dict[str, Any]] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('metadata') }})
+    metadata: Optional[Dict[str, Any]] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('metadata'), 'exclude': lambda f: f is None }})
     
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class TrackLeadResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     object: Optional[TrackLeadResponseBody] = dataclasses.field(default=None)
     r"""A lead was tracked."""
     

@@ -24,6 +24,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.domains.list()
 
 if res.domain_schemas is not None:
@@ -65,6 +66,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.domains.add(request=operations.AddDomainRequestBody(
     slug='acme.com',
@@ -120,6 +122,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.domains.delete(slug='acme.com')
 
 if res.object is not None:
@@ -167,6 +170,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.domains.update(slug='acme.com', request_body=operations.UpdateDomainRequestBody(
     slug='acme.com',
@@ -223,6 +227,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.domains.set_primary(slug='acme.com')
 
 if res.domain_schema is not None:
@@ -270,6 +275,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.domains.transfer(slug='acme.com', request_body=operations.TransferDomainRequestBody(
     new_workspace_id='<value>',

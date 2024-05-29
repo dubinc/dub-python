@@ -4,6 +4,7 @@ from __future__ import annotations
 import dataclasses
 from ...models.components import httpmetadata as components_httpmetadata
 from ...models.components import tagschema as components_tagschema
+from dataclasses_json import Undefined, dataclass_json
 from typing import List, Optional
 
 
@@ -21,9 +22,10 @@ class GetTagsRequest:
     pass
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class GetTagsResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     tag_schemas: Optional[List[components_tagschema.TagSchema]] = dataclasses.field(default=None)
     r"""A list of tags"""
     

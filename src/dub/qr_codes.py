@@ -65,7 +65,7 @@ class QRCodes:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.BadRequest)
+                out = utils.unmarshal_json(http_res.text, errors.BadRequest, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -73,7 +73,7 @@ class QRCodes:
         elif http_res.status_code == 401:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.Unauthorized)
+                out = utils.unmarshal_json(http_res.text, errors.Unauthorized, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -81,7 +81,7 @@ class QRCodes:
         elif http_res.status_code == 403:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.Forbidden)
+                out = utils.unmarshal_json(http_res.text, errors.Forbidden, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -89,7 +89,7 @@ class QRCodes:
         elif http_res.status_code == 404:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.NotFound)
+                out = utils.unmarshal_json(http_res.text, errors.NotFound, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -97,7 +97,7 @@ class QRCodes:
         elif http_res.status_code == 409:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.Conflict)
+                out = utils.unmarshal_json(http_res.text, errors.Conflict, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -105,7 +105,7 @@ class QRCodes:
         elif http_res.status_code == 410:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.InviteExpired)
+                out = utils.unmarshal_json(http_res.text, errors.InviteExpired, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -113,7 +113,7 @@ class QRCodes:
         elif http_res.status_code == 422:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.UnprocessableEntity)
+                out = utils.unmarshal_json(http_res.text, errors.UnprocessableEntity, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -121,7 +121,7 @@ class QRCodes:
         elif http_res.status_code == 429:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.RateLimitExceeded)
+                out = utils.unmarshal_json(http_res.text, errors.RateLimitExceeded, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')
@@ -131,7 +131,7 @@ class QRCodes:
         elif http_res.status_code == 500:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.InternalServerError)
+                out = utils.unmarshal_json(http_res.text, errors.InternalServerError, infer_missing=True)
                 raise out
             else:
                 content_type = http_res.headers.get('Content-Type')

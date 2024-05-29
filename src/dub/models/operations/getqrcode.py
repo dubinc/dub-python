@@ -3,6 +3,7 @@
 from __future__ import annotations
 import dataclasses
 from ...models.components import httpmetadata as components_httpmetadata
+from dataclasses_json import Undefined, dataclass_json
 from enum import Enum
 from typing import Optional
 
@@ -33,9 +34,10 @@ class GetQRCodeRequest:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class GetQRCodeResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     res: Optional[str] = dataclasses.field(default=None)
     r"""The QR code"""
     

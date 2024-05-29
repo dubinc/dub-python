@@ -35,9 +35,10 @@ class DeleteLinkResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class DeleteLinkResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     object: Optional[DeleteLinkResponseBody] = dataclasses.field(default=None)
     r"""The deleted link"""
     

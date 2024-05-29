@@ -21,6 +21,7 @@ s = dub.Dub(
     workspace_id='<value>',
 )
 
+
 res = s.workspaces.list()
 
 if res.workspace_schemas is not None:
@@ -62,6 +63,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.workspaces.create(request=operations.CreateWorkspaceRequestBody(
     name='<value>',
@@ -112,6 +114,7 @@ s = dub.Dub(
     token="DUB_API_KEY",
     workspace_id='<value>',
 )
+
 
 res = s.workspaces.get(id_or_slug='<value>')
 

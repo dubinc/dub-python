@@ -80,9 +80,10 @@ class UpsertLinkRequestBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class UpsertLinkResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     link_schema: Optional[components_linkschema.LinkSchema] = dataclasses.field(default=None)
     r"""The upserted link"""
     

@@ -30,9 +30,10 @@ class GetMetatagsResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class GetMetatagsResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     object: Optional[GetMetatagsResponseBody] = dataclasses.field(default=None)
     r"""The retrieved metatags"""
     

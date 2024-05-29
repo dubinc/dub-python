@@ -19,9 +19,10 @@ class CreateWorkspaceRequestBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class CreateWorkspaceResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     workspace_schema: Optional[components_workspaceschema.WorkspaceSchema] = dataclasses.field(default=None)
     r"""The created workspace"""
     
