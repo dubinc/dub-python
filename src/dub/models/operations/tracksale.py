@@ -9,6 +9,15 @@ from enum import Enum
 from typing import Any, Dict, Optional
 
 
+@dataclasses.dataclass
+class TrackSaleGlobals:
+    workspace_id: str = dataclasses.field(metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
+    project_slug: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'projectSlug', 'style': 'form', 'explode': True }})
+    r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
+    
+
+
+
 class PaymentProcessor(str, Enum):
     r"""The payment processor via which the sale was made."""
     STRIPE = 'stripe'
