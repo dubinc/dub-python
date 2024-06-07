@@ -20,18 +20,25 @@ class Track:
         Track a lead for a short link.
         """
         hook_ctx = HookContext(operation_id='trackLead', oauth2_scopes=[], security_source=self.sdk_configuration.security)
+        _globals = operations.TrackLeadGlobals(
+            workspace_id=self.sdk_configuration.globals.workspace_id,
+            project_slug=self.sdk_configuration.globals.project_slug,
+        )
+        
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
-        url = base_url + '/track/lead'
+        url = utils.generate_url(base_url, '/track/lead', request, _globals)
         
         if callable(self.sdk_configuration.security):
             headers, query_params = utils.get_security(self.sdk_configuration.security())
         else:
             headers, query_params = utils.get_security(self.sdk_configuration.security)
         
+        headers = { **utils.get_headers(request, _globals), **headers }
         req_content_type, data, form = utils.serialize_request_body(request, Optional[operations.TrackLeadRequestBody], "request", False, True, 'json')
         if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
+        query_params = { **utils.get_query_params(request, _globals), **query_params }
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
         client = self.sdk_configuration.client
@@ -152,18 +159,25 @@ class Track:
         Track a sale for a short link.
         """
         hook_ctx = HookContext(operation_id='trackSale', oauth2_scopes=[], security_source=self.sdk_configuration.security)
+        _globals = operations.TrackSaleGlobals(
+            workspace_id=self.sdk_configuration.globals.workspace_id,
+            project_slug=self.sdk_configuration.globals.project_slug,
+        )
+        
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
-        url = base_url + '/track/sale'
+        url = utils.generate_url(base_url, '/track/sale', request, _globals)
         
         if callable(self.sdk_configuration.security):
             headers, query_params = utils.get_security(self.sdk_configuration.security())
         else:
             headers, query_params = utils.get_security(self.sdk_configuration.security)
         
+        headers = { **utils.get_headers(request, _globals), **headers }
         req_content_type, data, form = utils.serialize_request_body(request, Optional[operations.TrackSaleRequestBody], "request", False, True, 'json')
         if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
+        query_params = { **utils.get_query_params(request, _globals), **query_params }
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
         client = self.sdk_configuration.client
@@ -279,23 +293,37 @@ class Track:
 
     
     
-    def customer(self, request: Optional[operations.TrackCustomerRequestBody] = None) -> operations.TrackCustomerResponse:
+    def customer(self, customer_id: str, customer_name: Optional[str] = None, customer_email: Optional[str] = None, customer_avatar: Optional[str] = None) -> operations.TrackCustomerResponse:
         r"""Track a customer
         Track a customer for an authenticated workspace.
         """
         hook_ctx = HookContext(operation_id='trackCustomer', oauth2_scopes=[], security_source=self.sdk_configuration.security)
+        request = operations.TrackCustomerRequestBody(
+            customer_id=customer_id,
+            customer_name=customer_name,
+            customer_email=customer_email,
+            customer_avatar=customer_avatar,
+        )
+        
+        _globals = operations.TrackCustomerGlobals(
+            workspace_id=self.sdk_configuration.globals.workspace_id,
+            project_slug=self.sdk_configuration.globals.project_slug,
+        )
+        
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
-        url = base_url + '/track/customer'
+        url = utils.generate_url(base_url, '/track/customer', request, _globals)
         
         if callable(self.sdk_configuration.security):
             headers, query_params = utils.get_security(self.sdk_configuration.security())
         else:
             headers, query_params = utils.get_security(self.sdk_configuration.security)
         
+        headers = { **utils.get_headers(request, _globals), **headers }
         req_content_type, data, form = utils.serialize_request_body(request, Optional[operations.TrackCustomerRequestBody], "request", False, True, 'json')
         if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
+        query_params = { **utils.get_query_params(request, _globals), **query_params }
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
         client = self.sdk_configuration.client
