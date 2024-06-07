@@ -23,6 +23,11 @@ s = dub.Dub(
 
 res = s.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
     timezone='America/New_York',
+    city='New York',
+    device='Desktop',
+    browser='Chrome',
+    os='Windows',
+    referer='google.com',
 ))
 
 if res.one_of is not None:
