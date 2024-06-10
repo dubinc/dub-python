@@ -35,6 +35,8 @@ class TrackSaleRequestBody:
     r"""The amount of the sale. Should be passed in cents."""
     payment_processor: PaymentProcessor = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('paymentProcessor') }})
     r"""The payment processor via which the sale was made."""
+    event_name: Optional[str] = dataclasses.field(default='Purchase', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('eventName'), 'exclude': lambda f: f is None }})
+    r"""The name of the sale event. It can be used to track different types of event for example 'Purchase', 'Upgrade', 'Payment', etc."""
     invoice_id: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('invoiceId'), 'exclude': lambda f: f is TrackSaleRequestBody.UNSET }})
     r"""The invoice ID of the sale."""
     currency: Optional[str] = dataclasses.field(default='usd', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('currency'), 'exclude': lambda f: f is None }})
@@ -49,6 +51,7 @@ class TrackSaleRequestBody:
 @dataclasses.dataclass
 class TrackSaleResponseBody:
     r"""A sale was tracked."""
+    event_name: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('eventName') }})
     customer_id: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('customerId') }})
     amount: float = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('amount') }})
     payment_processor: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('paymentProcessor') }})

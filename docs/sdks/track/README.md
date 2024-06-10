@@ -25,7 +25,7 @@ s = dub.Dub(
 
 res = s.track.lead(request=operations.TrackLeadRequestBody(
     click_id='<value>',
-    event_name='Signup',
+    event_name='Sign up',
     customer_id='<value>',
 ))
 
@@ -80,6 +80,7 @@ res = s.track.sale(request=operations.TrackSaleRequestBody(
     customer_id='<value>',
     amount=996500,
     payment_processor=operations.PaymentProcessor.SHOPIFY,
+    event_name='Purchase',
 ))
 
 if res.object is not None:

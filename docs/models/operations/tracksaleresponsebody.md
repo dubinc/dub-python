@@ -7,6 +7,7 @@ A sale was tracked.
 
 | Field               | Type                | Required            | Description         |
 | ------------------- | ------------------- | ------------------- | ------------------- |
+| `event_name`        | *str*               | :heavy_check_mark:  | N/A                 |
 | `customer_id`       | *str*               | :heavy_check_mark:  | N/A                 |
 | `amount`            | *float*             | :heavy_check_mark:  | N/A                 |
 | `payment_processor` | *str*               | :heavy_check_mark:  | N/A                 |
