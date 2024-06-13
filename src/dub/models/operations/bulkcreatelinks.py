@@ -18,10 +18,6 @@ class BulkCreateLinksGlobals:
     
 
 
-BulkCreateLinksTagIds = Union[str, List[str]]
-
-BulkCreateLinksTagNames = Union[str, List[str]]
-
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
@@ -88,3 +84,7 @@ class BulkCreateLinksResponse:
     r"""The created links"""
     
 
+
+BulkCreateLinksTagIds = Union[str, List[str]]
+
+BulkCreateLinksTagNames = Union[str, List[str]]

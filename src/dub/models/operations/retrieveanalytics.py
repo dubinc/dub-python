@@ -128,8 +128,6 @@ class RetrieveAnalyticsRequest:
     
 
 
-RetrieveAnalyticsResponseBody = Union[components_clickscount.ClicksCount, List[components_clickstimeseries.ClicksTimeseries], List[components_clickscountries.ClicksCountries], List[components_clickscities.ClicksCities], List[components_clicksdevices.ClicksDevices], List[components_clicksbrowsers.ClicksBrowsers], List[components_clicksos.ClicksOS], List[components_clicksreferers.ClicksReferers], List[components_clickstoplinks.ClicksTopLinks], List[components_clickstopurls.ClicksTopUrls], components_leadscount.LeadsCount, List[components_leadstimeseries.LeadsTimeseries], List[components_leadscountries.LeadsCountries], List[components_leadscities.LeadsCities], List[components_leadsdevices.LeadsDevices], List[components_leadsbrowsers.LeadsBrowsers], List[components_leadsos.LeadsOS], List[components_leadsreferers.LeadsReferers], List[components_leadstoplinks.LeadsTopLinks], List[components_leadstopurls.LeadsTopUrls], components_salescount.SalesCount, List[components_salestimeseries.SalesTimeseries], List[components_salescountries.SalesCountries], List[components_salescities.SalesCities], List[components_salesdevices.SalesDevices], List[components_salesbrowsers.SalesBrowsers], List[components_salesos.SalesOS], List[components_salesreferers.SalesReferers], List[components_salestoplinks.SalesTopLinks], List[components_salestopurls.SalesTopUrls]]
-
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
@@ -139,3 +137,5 @@ class RetrieveAnalyticsResponse:
     r"""Analytics data"""
     
 
+
+RetrieveAnalyticsResponseBody = Union[components_clickscount.ClicksCount, List[components_clickstimeseries.ClicksTimeseries], List[components_clickscountries.ClicksCountries], List[components_clickscities.ClicksCities], List[components_clicksdevices.ClicksDevices], List[components_clicksbrowsers.ClicksBrowsers], List[components_clicksos.ClicksOS], List[components_clicksreferers.ClicksReferers], List[components_clickstoplinks.ClicksTopLinks], List[components_clickstopurls.ClicksTopUrls], components_leadscount.LeadsCount, List[components_leadstimeseries.LeadsTimeseries], List[components_leadscountries.LeadsCountries], List[components_leadscities.LeadsCities], List[components_leadsdevices.LeadsDevices], List[components_leadsbrowsers.LeadsBrowsers], List[components_leadsos.LeadsOS], List[components_leadsreferers.LeadsReferers], List[components_leadstoplinks.LeadsTopLinks], List[components_leadstopurls.LeadsTopUrls], components_salescount.SalesCount, List[components_salestimeseries.SalesTimeseries], List[components_salescountries.SalesCountries], List[components_salescities.SalesCities], List[components_salesdevices.SalesDevices], List[components_salesbrowsers.SalesBrowsers], List[components_salesos.SalesOS], List[components_salesreferers.SalesReferers], List[components_salestoplinks.SalesTopLinks], List[components_salestopurls.SalesTopUrls]]

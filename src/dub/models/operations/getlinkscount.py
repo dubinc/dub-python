@@ -16,10 +16,6 @@ class GetLinksCountGlobals:
     
 
 
-GetLinksCountQueryParamTagIds = Union[str, List[str]]
-
-GetLinksCountQueryParamTagNames = Union[str, List[str]]
-
 
 class Two(str, Enum):
     TAG_ID = 'tagId'
@@ -27,8 +23,6 @@ class Two(str, Enum):
 
 class One(str, Enum):
     DOMAIN = 'domain'
-
-GroupBy = Union['One', 'Two']
 
 
 @dataclasses.dataclass
@@ -63,3 +57,9 @@ class GetLinksCountResponse:
     r"""A list of links"""
     
 
+
+GetLinksCountQueryParamTagIds = Union[str, List[str]]
+
+GetLinksCountQueryParamTagNames = Union[str, List[str]]
+
+GroupBy = Union[One, Two]

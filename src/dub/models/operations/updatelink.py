@@ -18,10 +18,6 @@ class UpdateLinkGlobals:
     
 
 
-UpdateLinkTagIds = Union[str, List[str]]
-
-UpdateLinkTagNames = Union[str, List[str]]
-
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
@@ -97,3 +93,7 @@ class UpdateLinkResponse:
     r"""The updated link"""
     
 
+
+UpdateLinkTagIds = Union[str, List[str]]
+
+UpdateLinkTagNames = Union[str, List[str]]

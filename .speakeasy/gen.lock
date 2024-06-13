@@ -3,10 +3,10 @@ id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
   docChecksum: ba3e83845a082a6c2321d0eeaaf9c23c
   docVersion: 0.0.1
-  speakeasyVersion: 1.300.1
-  generationVersion: 2.339.1
-  releaseVersion: 0.0.9
-  configChecksum: 6a795b8c6f3147de55ab5ab3db71a90e
+  speakeasyVersion: 1.306.0
+  generationVersion: 2.340.3
+  releaseVersion: 0.0.10
+  configChecksum: 1b292604eae58fc843a078a43ed423a5
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -28,7 +28,7 @@ features:
     nullables: 0.1.0
     responseFormat: 0.1.0
     sdkHooks: 0.1.0
-    unions: 2.82.7
+    unions: 2.82.8
 generatedFiles:
   - src/dub/sdkconfiguration.py
   - src/dub/links.py

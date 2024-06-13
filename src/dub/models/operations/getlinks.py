@@ -17,10 +17,6 @@ class GetLinksGlobals:
     
 
 
-QueryParamTagIds = Union[str, List[str]]
-
-QueryParamTagNames = Union[str, List[str]]
-
 
 class Sort(str, Enum):
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
@@ -63,3 +59,7 @@ class GetLinksResponse:
     r"""A list of links"""
     
 
+
+QueryParamTagIds = Union[str, List[str]]
+
+QueryParamTagNames = Union[str, List[str]]
