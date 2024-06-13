@@ -18,10 +18,6 @@ class CreateLinkGlobals:
     
 
 
-TagIds = Union[str, List[str]]
-
-TagNames = Union[str, List[str]]
-
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
@@ -88,3 +84,7 @@ class CreateLinkResponse:
     r"""The created link"""
     
 
+
+TagIds = Union[str, List[str]]
+
+TagNames = Union[str, List[str]]

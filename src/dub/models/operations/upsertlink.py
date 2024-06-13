@@ -18,10 +18,6 @@ class UpsertLinkGlobals:
     
 
 
-UpsertLinkTagIds = Union[str, List[str]]
-
-UpsertLinkTagNames = Union[str, List[str]]
-
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
@@ -88,3 +84,7 @@ class UpsertLinkResponse:
     r"""The upserted link"""
     
 
+
+UpsertLinkTagIds = Union[str, List[str]]
+
+UpsertLinkTagNames = Union[str, List[str]]
