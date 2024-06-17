@@ -3,10 +3,10 @@ id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
   docChecksum: ba3e83845a082a6c2321d0eeaaf9c23c
   docVersion: 0.0.1
-  speakeasyVersion: 1.306.0
-  generationVersion: 2.340.3
-  releaseVersion: 0.0.10
-  configChecksum: 1b292604eae58fc843a078a43ed423a5
+  speakeasyVersion: 1.308.1
+  generationVersion: 2.342.6
+  releaseVersion: 0.0.11
+  configChecksum: fb6d9ad02364413eb395464a72f6962b
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.3
-    core: 4.6.9
+    core: 4.6.11
     deprecations: 2.81.1
     examples: 2.81.3
     flattening: 2.81.1
@@ -40,8 +40,10 @@ generatedFiles:
   - src/dub/track.py
   - src/dub/metatags.py
   - src/dub/sdk.py
+  - Makefile
   - py.typed
   - pylintrc
+  - scripts/publish.sh
   - setup.py
   - src/dub/__init__.py
   - src/dub/utils/__init__.py
