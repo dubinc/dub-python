@@ -5,183 +5,183 @@ Analytics data
 
 ## Supported Types
 
-### ClicksCount
+### `components.ClicksCount`
 
 ```python
-retrieveAnalyticsResponseBody: components.ClicksCount = /* values here */
+value: components.ClicksCount = /* values here */
 ```
 
-### 
+### `List[components.ClicksTimeseries]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksTimeseries] = /* values here */
+value: List[components.ClicksTimeseries] = /* values here */
 ```
 
-### 
+### `List[components.ClicksCountries]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksCountries] = /* values here */
+value: List[components.ClicksCountries] = /* values here */
 ```
 
-### 
+### `List[components.ClicksCities]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksCities] = /* values here */
+value: List[components.ClicksCities] = /* values here */
 ```
 
-### 
+### `List[components.ClicksDevices]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksDevices] = /* values here */
+value: List[components.ClicksDevices] = /* values here */
 ```
 
-### 
+### `List[components.ClicksBrowsers]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksBrowsers] = /* values here */
+value: List[components.ClicksBrowsers] = /* values here */
 ```
 
-### 
+### `List[components.ClicksOS]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksOS] = /* values here */
+value: List[components.ClicksOS] = /* values here */
 ```
 
-### 
+### `List[components.ClicksReferers]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksReferers] = /* values here */
+value: List[components.ClicksReferers] = /* values here */
 ```
 
-### 
+### `List[components.ClicksTopLinks]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksTopLinks] = /* values here */
+value: List[components.ClicksTopLinks] = /* values here */
 ```
 
-### 
+### `List[components.ClicksTopUrls]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.ClicksTopUrls] = /* values here */
+value: List[components.ClicksTopUrls] = /* values here */
 ```
 
-### LeadsCount
+### `components.LeadsCount`
 
 ```python
-retrieveAnalyticsResponseBody: components.LeadsCount = /* values here */
+value: components.LeadsCount = /* values here */
 ```
 
-### 
+### `List[components.LeadsTimeseries]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsTimeseries] = /* values here */
+value: List[components.LeadsTimeseries] = /* values here */
 ```
 
-### 
+### `List[components.LeadsCountries]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsCountries] = /* values here */
+value: List[components.LeadsCountries] = /* values here */
 ```
 
-### 
+### `List[components.LeadsCities]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsCities] = /* values here */
+value: List[components.LeadsCities] = /* values here */
 ```
 
-### 
+### `List[components.LeadsDevices]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsDevices] = /* values here */
+value: List[components.LeadsDevices] = /* values here */
 ```
 
-### 
+### `List[components.LeadsBrowsers]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsBrowsers] = /* values here */
+value: List[components.LeadsBrowsers] = /* values here */
 ```
 
-### 
+### `List[components.LeadsOS]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsOS] = /* values here */
+value: List[components.LeadsOS] = /* values here */
 ```
 
-### 
+### `List[components.LeadsReferers]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsReferers] = /* values here */
+value: List[components.LeadsReferers] = /* values here */
 ```
 
-### 
+### `List[components.LeadsTopLinks]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsTopLinks] = /* values here */
+value: List[components.LeadsTopLinks] = /* values here */
 ```
 
-### 
+### `List[components.LeadsTopUrls]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.LeadsTopUrls] = /* values here */
+value: List[components.LeadsTopUrls] = /* values here */
 ```
 
-### SalesCount
+### `components.SalesCount`
 
 ```python
-retrieveAnalyticsResponseBody: components.SalesCount = /* values here */
+value: components.SalesCount = /* values here */
 ```
 
-### 
+### `List[components.SalesTimeseries]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesTimeseries] = /* values here */
+value: List[components.SalesTimeseries] = /* values here */
 ```
 
-### 
+### `List[components.SalesCountries]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesCountries] = /* values here */
+value: List[components.SalesCountries] = /* values here */
 ```
 
-### 
+### `List[components.SalesCities]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesCities] = /* values here */
+value: List[components.SalesCities] = /* values here */
 ```
 
-### 
+### `List[components.SalesDevices]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesDevices] = /* values here */
+value: List[components.SalesDevices] = /* values here */
 ```
 
-### 
+### `List[components.SalesBrowsers]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesBrowsers] = /* values here */
+value: List[components.SalesBrowsers] = /* values here */
 ```
 
-### 
+### `List[components.SalesOS]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesOS] = /* values here */
+value: List[components.SalesOS] = /* values here */
 ```
 
-### 
+### `List[components.SalesReferers]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesReferers] = /* values here */
+value: List[components.SalesReferers] = /* values here */
 ```
 
-### 
+### `List[components.SalesTopLinks]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesTopLinks] = /* values here */
+value: List[components.SalesTopLinks] = /* values here */
 ```
 
-### 
+### `List[components.SalesTopUrls]`
 
 ```python
-retrieveAnalyticsResponseBody: List[components.SalesTopUrls] = /* values here */
+value: List[components.SalesTopUrls] = /* values here */
 ```
 

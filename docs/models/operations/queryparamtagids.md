@@ -5,15 +5,15 @@ The tag IDs to filter the links by.
 
 ## Supported Types
 
-### 
+### `str`
 
 ```python
-queryParamTagIds: str = /* values here */
+value: str = /* values here */
 ```
 
-### 
+### `List[str]`
 
 ```python
-queryParamTagIds: List[str] = /* values here */
+value: List[str] = /* values here */
 ```
 

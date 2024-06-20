@@ -154,12 +154,12 @@ class Domains:
 
     
     
-    def add(self, request: Optional[operations.AddDomainRequestBody] = None) -> operations.AddDomainResponse:
-        r"""Add a domain
-        Add a domain to the authenticated workspace.
+    def create(self, request: Optional[operations.CreateDomainRequestBody] = None) -> operations.CreateDomainResponse:
+        r"""Create a domain
+        Create a domain for the authenticated workspace.
         """
-        hook_ctx = HookContext(operation_id='addDomain', oauth2_scopes=[], security_source=self.sdk_configuration.security)
-        _globals = operations.AddDomainGlobals(
+        hook_ctx = HookContext(operation_id='createDomain', oauth2_scopes=[], security_source=self.sdk_configuration.security)
+        _globals = operations.CreateDomainGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
             project_slug=self.sdk_configuration.globals.project_slug,
         )
@@ -174,7 +174,7 @@ class Domains:
             headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         headers = { **utils.get_headers(request, _globals), **headers }
-        req_content_type, data, form = utils.serialize_request_body(request, Optional[operations.AddDomainRequestBody], "request", False, True, 'json')
+        req_content_type, data, form = utils.serialize_request_body(request, Optional[operations.CreateDomainRequestBody], "request", False, True, 'json')
         if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
             headers['content-type'] = req_content_type
         query_params = { **utils.get_query_params(request, _globals), **query_params }
@@ -202,7 +202,7 @@ class Domains:
             
         
         
-        res = operations.AddDomainResponse(http_meta=components.HTTPMetadata(request=req, response=http_res))
+        res = operations.CreateDomainResponse(http_meta=components.HTTPMetadata(request=req, response=http_res))
         
         if http_res.status_code == 201:
             # pylint: disable=no-else-return

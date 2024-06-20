@@ -5,15 +5,15 @@ The unique name of the tags assigned to the short link (case insensitive).
 
 ## Supported Types
 
-### 
+### `str`
 
 ```python
-upsertLinkTagNames: str = /* values here */
+value: str = /* values here */
 ```
 
-### 
+### `List[str]`
 
 ```python
-upsertLinkTagNames: List[str] = /* values here */
+value: List[str] = /* values here */
 ```
 

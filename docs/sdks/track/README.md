@@ -19,7 +19,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -72,7 +71,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -125,7 +123,6 @@ import dub
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
