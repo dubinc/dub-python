@@ -4,7 +4,7 @@
 ### Available Operations
 
 * [list](#list) - Retrieve a list of domains
-* [add](#add) - Add a domain
+* [create](#create) - Create a domain
 * [delete](#delete) - Delete a domain
 * [update](#update) - Update a domain
 * [set_primary](#set_primary) - Set a domain as primary
@@ -21,7 +21,6 @@ import dub
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -52,9 +51,9 @@ if res.domain_schemas is not None:
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
 
-## add
+## create
 
-Add a domain to the authenticated workspace.
+Create a domain for the authenticated workspace.
 
 ### Example Usage
 
@@ -64,11 +63,10 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
-res = s.domains.add(request=operations.AddDomainRequestBody(
+res = s.domains.create(request=operations.CreateDomainRequestBody(
     slug='acme.com',
     type=operations.Type.REDIRECT,
     target='https://acme.com/landing',
@@ -85,14 +83,14 @@ if res.domain_schema is not None:
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `request`                                                                          | [operations.AddDomainRequestBody](../../models/operations/adddomainrequestbody.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `request`                                                                                | [operations.CreateDomainRequestBody](../../models/operations/createdomainrequestbody.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
 
-**[operations.AddDomainResponse](../../models/operations/adddomainresponse.md)**
+**[operations.CreateDomainResponse](../../models/operations/createdomainresponse.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -119,7 +117,6 @@ import dub
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -168,7 +165,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -224,7 +220,6 @@ import dub
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -273,7 +268,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 

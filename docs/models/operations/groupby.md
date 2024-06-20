@@ -5,15 +5,15 @@ The field to group the links by.
 
 ## Supported Types
 
-### One
+### `operations.One`
 
 ```python
-groupBy: operations.One = /* values here */
+value: operations.One = /* values here */
 ```
 
-### Two
+### `operations.Two`
 
 ```python
-groupBy: operations.Two = /* values here */
+value: operations.Two = /* values here */
 ```
 

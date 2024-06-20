@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: ba3e83845a082a6c2321d0eeaaf9c23c
+  docChecksum: 4e9799bd93fdf4959c9efd6004900847
   docVersion: 0.0.1
-  speakeasyVersion: 1.308.1
-  generationVersion: 2.342.6
-  releaseVersion: 0.0.11
-  configChecksum: fb6d9ad02364413eb395464a72f6962b
+  speakeasyVersion: 1.310.0
+  generationVersion: 2.347.4
+  releaseVersion: 0.0.12
+  configChecksum: f9161a58015954f12a9c7c8546e0e791
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -40,7 +40,6 @@ generatedFiles:
   - src/dub/track.py
   - src/dub/metatags.py
   - src/dub/sdk.py
-  - Makefile
   - py.typed
   - pylintrc
   - scripts/publish.sh
@@ -66,7 +65,7 @@ generatedFiles:
   - src/dub/models/operations/gettags.py
   - src/dub/models/operations/createtag.py
   - src/dub/models/operations/listdomains.py
-  - src/dub/models/operations/adddomain.py
+  - src/dub/models/operations/createdomain.py
   - src/dub/models/operations/deletedomain.py
   - src/dub/models/operations/updatedomain.py
   - src/dub/models/operations/setprimarydomain.py
@@ -195,10 +194,10 @@ generatedFiles:
   - docs/models/operations/listdomainsglobals.md
   - docs/models/operations/listdomainsrequest.md
   - docs/models/operations/listdomainsresponse.md
-  - docs/models/operations/adddomainglobals.md
+  - docs/models/operations/createdomainglobals.md
   - docs/models/operations/type.md
-  - docs/models/operations/adddomainrequestbody.md
-  - docs/models/operations/adddomainresponse.md
+  - docs/models/operations/createdomainrequestbody.md
+  - docs/models/operations/createdomainresponse.md
   - docs/models/operations/deletedomainglobals.md
   - docs/models/operations/deletedomainrequest.md
   - docs/models/operations/deletedomainresponsebody.md

@@ -11,8 +11,8 @@ from typing import Optional
 
 
 @dataclasses.dataclass
-class AddDomainGlobals:
-    workspace_id: str = dataclasses.field(metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
+class CreateDomainGlobals:
+    workspace_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
     project_slug: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'projectSlug', 'style': 'form', 'explode': True }})
     r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
     
@@ -27,21 +27,21 @@ class Type(str, Enum):
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
-class AddDomainRequestBody:
+class CreateDomainRequestBody:
     UNSET='__SPEAKEASY_UNSET__'
     slug: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('slug') }})
     r"""Name of the domain."""
     type: Optional[Type] = dataclasses.field(default=Type.REDIRECT, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('type'), 'exclude': lambda f: f is None }})
     r"""The type of redirect to use for this domain."""
-    target: Optional[str] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('target'), 'exclude': lambda f: f is AddDomainRequestBody.UNSET }})
+    target: Optional[str] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('target'), 'exclude': lambda f: f is CreateDomainRequestBody.UNSET }})
     r"""The page your users will get redirected to when they visit your domain."""
-    expired_url: Optional[str] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('expiredUrl'), 'exclude': lambda f: f is AddDomainRequestBody.UNSET }})
+    expired_url: Optional[str] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('expiredUrl'), 'exclude': lambda f: f is CreateDomainRequestBody.UNSET }})
     r"""Redirect users to a specific URL when any link under this domain has expired."""
     archived: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('archived'), 'exclude': lambda f: f is None }})
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
     noindex: Optional[bool] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noindex'), 'exclude': lambda f: f is None }})
     r"""Prevent search engines from indexing the domain. Defaults to `false`."""
-    placeholder: Optional[str] = dataclasses.field(default='https://dub.co/help/article/what-is-dub', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('placeholder'), 'exclude': lambda f: f is AddDomainRequestBody.UNSET }})
+    placeholder: Optional[str] = dataclasses.field(default='https://dub.co/help/article/what-is-dub', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('placeholder'), 'exclude': lambda f: f is CreateDomainRequestBody.UNSET }})
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
     
 
@@ -49,9 +49,9 @@ class AddDomainRequestBody:
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
-class AddDomainResponse:
+class CreateDomainResponse:
     http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     domain_schema: Optional[components_domainschema.DomainSchema] = dataclasses.field(default=None)
-    r"""The domain was added."""
+    r"""The domain was created."""
     
 

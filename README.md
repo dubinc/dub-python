@@ -30,7 +30,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -56,7 +55,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -111,7 +109,7 @@ if res.link_schema is not None:
 ### [domains](docs/sdks/domains/README.md)
 
 * [list](docs/sdks/domains/README.md#list) - Retrieve a list of domains
-* [add](docs/sdks/domains/README.md#add) - Add a domain
+* [create](docs/sdks/domains/README.md#create) - Create a domain
 * [delete](docs/sdks/domains/README.md#delete) - Delete a domain
 * [update](docs/sdks/domains/README.md#update) - Update a domain
 * [set_primary](docs/sdks/domains/README.md#set_primary) - Set a domain as primary
@@ -154,7 +152,6 @@ from dub.models import errors, operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 res = None
@@ -219,7 +216,6 @@ from dub.models import operations
 s = dub.Dub(
     server_idx=0,
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -242,7 +238,6 @@ from dub.models import operations
 s = dub.Dub(
     server_url="https://api.dub.co",
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 
@@ -289,7 +284,6 @@ from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
-    workspace_id='<value>',
 )
 
 

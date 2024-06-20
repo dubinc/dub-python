@@ -5,15 +5,15 @@ The unique IDs of the tags assigned to the short link.
 
 ## Supported Types
 
-### 
+### `str`
 
 ```python
-upsertLinkTagIds: str = /* values here */
+value: str = /* values here */
 ```
 
-### 
+### `List[str]`
 
 ```python
-upsertLinkTagIds: List[str] = /* values here */
+value: List[str] = /* values here */
 ```
 
