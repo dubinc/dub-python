@@ -72,6 +72,8 @@ class UpsertLinkRequestBody:
     r"""The Android destination URL for the short link for Android device targeting."""
     geo: Optional[components_linkgeotargeting.LinkGeoTargeting] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('geo'), 'exclude': lambda f: f is UpsertLinkRequestBody.UNSET }})
     r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
+    do_index: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('doIndex'), 'exclude': lambda f: f is None }})
+    r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
     
 
 
