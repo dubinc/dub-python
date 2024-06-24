@@ -343,6 +343,8 @@ class LinkSchema:
     r"""Whether the short link uses Custom Social Media Cards feature."""
     rewrite: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('rewrite'), 'exclude': lambda f: f is None }})
     r"""Whether the short link uses link cloaking."""
+    do_index: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('doIndex'), 'exclude': lambda f: f is None }})
+    r"""Whether to allow search engines to index the short link."""
     public_stats: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('publicStats'), 'exclude': lambda f: f is None }})
     r"""Whether the short link's stats are publicly accessible."""
     clicks: Optional[float] = dataclasses.field(default=0, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('clicks'), 'exclude': lambda f: f is None }})

@@ -6,7 +6,6 @@ from ...models.components import domainschema as components_domainschema
 from ...models.components import httpmetadata as components_httpmetadata
 from dataclasses_json import Undefined, dataclass_json
 from dub import utils
-from enum import Enum
 from typing import Optional
 
 
@@ -19,28 +18,16 @@ class UpdateDomainGlobals:
 
 
 
-class UpdateDomainType(str, Enum):
-    r"""The type of redirect to use for this domain."""
-    REDIRECT = 'redirect'
-    REWRITE = 'rewrite'
-
-
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class UpdateDomainRequestBody:
     UNSET='__SPEAKEASY_UNSET__'
     slug: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('slug'), 'exclude': lambda f: f is None }})
     r"""Name of the domain."""
-    type: Optional[UpdateDomainType] = dataclasses.field(default=UpdateDomainType.REDIRECT, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('type'), 'exclude': lambda f: f is None }})
-    r"""The type of redirect to use for this domain."""
-    target: Optional[str] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('target'), 'exclude': lambda f: f is UpdateDomainRequestBody.UNSET }})
-    r"""The page your users will get redirected to when they visit your domain."""
     expired_url: Optional[str] = dataclasses.field(default=UNSET, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('expiredUrl'), 'exclude': lambda f: f is UpdateDomainRequestBody.UNSET }})
     r"""Redirect users to a specific URL when any link under this domain has expired."""
     archived: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('archived'), 'exclude': lambda f: f is None }})
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
-    noindex: Optional[bool] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noindex'), 'exclude': lambda f: f is None }})
-    r"""Prevent search engines from indexing the domain. Defaults to `false`."""
     placeholder: Optional[str] = dataclasses.field(default='https://dub.co/help/article/what-is-dub', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('placeholder'), 'exclude': lambda f: f is UpdateDomainRequestBody.UNSET }})
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
     

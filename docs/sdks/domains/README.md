@@ -59,21 +59,13 @@ Create a domain for the authenticated workspace.
 
 ```python
 import dub
-from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.domains.create(request=operations.CreateDomainRequestBody(
-    slug='acme.com',
-    type=operations.Type.REDIRECT,
-    target='https://acme.com/landing',
-    expired_url='https://acme.com/expired',
-    archived=False,
-    placeholder='https://dub.co/help/article/what-is-dub',
-))
+res = s.domains.create(slug='acme.com', expired_url='https://acme.com/expired', archived=False, placeholder='https://dub.co/help/article/what-is-dub')
 
 if res.domain_schema is not None:
     # handle response
@@ -83,9 +75,12 @@ if res.domain_schema is not None:
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `request`                                                                                | [operations.CreateDomainRequestBody](../../models/operations/createdomainrequestbody.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `slug`                                                                                                             | *str*                                                                                                              | :heavy_check_mark:                                                                                                 | Name of the domain.                                                                                                | acme.com                                                                                                           |
+| `expired_url`                                                                                                      | *Optional[str]*                                                                                                    | :heavy_minus_sign:                                                                                                 | Redirect users to a specific URL when any link under this domain has expired.                                      | https://acme.com/expired                                                                                           |
+| `archived`                                                                                                         | *Optional[bool]*                                                                                                   | :heavy_minus_sign:                                                                                                 | Whether to archive this domain. `false` will unarchive a previously archived domain.                               | false                                                                                                              |
+| `placeholder`                                                                                                      | *Optional[str]*                                                                                                    | :heavy_minus_sign:                                                                                                 | Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened. | https://dub.co/help/article/what-is-dub                                                                            |
 
 
 ### Response
@@ -170,8 +165,6 @@ s = dub.Dub(
 
 res = s.domains.update(slug='acme.com', request_body=operations.UpdateDomainRequestBody(
     slug='acme.com',
-    type=operations.UpdateDomainType.REDIRECT,
-    target='https://acme.com/landing',
     expired_url='https://acme.com/expired',
     archived=False,
     placeholder='https://dub.co/help/article/what-is-dub',

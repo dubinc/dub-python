@@ -154,11 +154,18 @@ class Domains:
 
     
     
-    def create(self, request: Optional[operations.CreateDomainRequestBody] = None) -> operations.CreateDomainResponse:
+    def create(self, slug: str, expired_url: Optional[str] = None, archived: Optional[bool] = None, placeholder: Optional[str] = None) -> operations.CreateDomainResponse:
         r"""Create a domain
         Create a domain for the authenticated workspace.
         """
         hook_ctx = HookContext(operation_id='createDomain', oauth2_scopes=[], security_source=self.sdk_configuration.security)
+        request = operations.CreateDomainRequestBody(
+            slug=slug,
+            expired_url=expired_url,
+            archived=archived,
+            placeholder=placeholder,
+        )
+        
         _globals = operations.CreateDomainGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
             project_slug=self.sdk_configuration.globals.project_slug,
