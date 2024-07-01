@@ -30,10 +30,10 @@ python:
       shared: models/components
       webhooks: models/webhooks
   inputModelSuffix: input
-  maxMethodParams: 4
+  maxMethodParams: 0
   methodArguments: require-security-and-request
   outputModelSuffix: output
   packageName: dub
   projectUrls: {}
-  responseFormat: envelope-http
+  responseFormat: flat
   templateVersion: v1
