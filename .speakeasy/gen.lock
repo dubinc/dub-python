@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: f8b1be2fa34844de98cc6c19757c0e81
+  docChecksum: 5419a35a3e662a9a0df7547a5a8ffdc3
   docVersion: 0.0.1
-  speakeasyVersion: 1.314.2
-  generationVersion: 2.349.6
-  releaseVersion: 0.0.14
-  configChecksum: ec9c29b7400ec732dede23e1edd1fd80
+  speakeasyVersion: 1.322.3
+  generationVersion: 2.354.2
+  releaseVersion: 0.0.15
+  configChecksum: 1560ea2fca1ba7b9bbaac6d553dbc348
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -59,8 +59,6 @@ generatedFiles:
   - src/dub/models/operations/upsertlink.py
   - src/dub/models/operations/getqrcode.py
   - src/dub/models/operations/retrieveanalytics.py
-  - src/dub/models/operations/getworkspaces.py
-  - src/dub/models/operations/createworkspace.py
   - src/dub/models/operations/getworkspace.py
   - src/dub/models/operations/gettags.py
   - src/dub/models/operations/createtag.py
@@ -179,9 +177,6 @@ generatedFiles:
   - docs/models/operations/retrieveanalyticsrequest.md
   - docs/models/operations/retrieveanalyticsresponsebody.md
   - docs/models/operations/retrieveanalyticsresponse.md
-  - docs/models/operations/getworkspacesresponse.md
-  - docs/models/operations/createworkspacerequestbody.md
-  - docs/models/operations/createworkspaceresponse.md
   - docs/models/operations/getworkspacerequest.md
   - docs/models/operations/getworkspaceresponse.md
   - docs/models/operations/gettagsglobals.md

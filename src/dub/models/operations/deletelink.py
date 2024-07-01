@@ -11,6 +11,7 @@ from typing import Optional
 @dataclasses.dataclass
 class DeleteLinkGlobals:
     workspace_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
+    r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
     project_slug: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'projectSlug', 'style': 'form', 'explode': True }})
     r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
     

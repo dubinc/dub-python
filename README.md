@@ -97,8 +97,6 @@ if res.link_schema is not None:
 
 ### [workspaces](docs/sdks/workspaces/README.md)
 
-* [list](docs/sdks/workspaces/README.md#list) - Retrieve a list of workspaces
-* [create](docs/sdks/workspaces/README.md#create) - Create a workspace
 * [get](docs/sdks/workspaces/README.md#get) - Retrieve a workspace
 
 ### [tags](docs/sdks/tags/README.md)

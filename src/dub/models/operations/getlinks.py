@@ -12,6 +12,7 @@ from typing import List, Optional, Union
 @dataclasses.dataclass
 class GetLinksGlobals:
     workspace_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
+    r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
     project_slug: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'projectSlug', 'style': 'form', 'explode': True }})
     r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
     
@@ -45,7 +46,7 @@ class GetLinksRequest:
     r"""Whether to include tags in the response. Defaults to `false` if not provided."""
     sort: Optional[Sort] = dataclasses.field(default=Sort.CREATED_AT, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
-    page: Optional[float] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
+    page: Optional[int] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     r"""The page number for pagination (each page contains 100 links)."""
     
 
