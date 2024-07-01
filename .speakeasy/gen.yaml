@@ -35,5 +35,5 @@ python:
   outputModelSuffix: output
   packageName: dub
   projectUrls: {}
-  responseFormat: envelope-http
+  responseFormat: flat
   templateVersion: v1
