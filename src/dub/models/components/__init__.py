@@ -12,7 +12,6 @@ from .clickstoplinks import *
 from .clickstopurls import *
 from .countrycode import *
 from .domainschema import *
-from .httpmetadata import *
 from .leadsbrowsers import *
 from .leadscities import *
 from .leadscount import *
@@ -39,4 +38,4 @@ from .security import *
 from .tagschema import *
 from .workspaceschema import *
 
-__all__ = ["ClicksBrowsers","ClicksCities","ClicksCitiesCountry","ClicksCount","ClicksCountries","ClicksDevices","ClicksOS","ClicksReferers","ClicksTimeseries","ClicksTopLinks","ClicksTopUrls","Color","Country","CountryCode","DomainSchema","Domains","Geo","HTTPMetadata","LeadsBrowsers","LeadsCities","LeadsCitiesCountry","LeadsCount","LeadsCountries","LeadsCountriesCountry","LeadsDevices","LeadsOS","LeadsReferers","LeadsTimeseries","LeadsTopLinks","LeadsTopUrls","LinkGeoTargeting","LinkSchema","Plan","Role","SalesBrowsers","SalesCities","SalesCitiesCountry","SalesCount","SalesCountries","SalesCountriesCountry","SalesDevices","SalesOS","SalesReferers","SalesTimeseries","SalesTopLinks","SalesTopUrls","Security","TagSchema","Users","WorkspaceSchema"]
+__all__ = ["ClicksBrowsers","ClicksCities","ClicksCitiesCountry","ClicksCount","ClicksCountries","ClicksDevices","ClicksOS","ClicksReferers","ClicksTimeseries","ClicksTopLinks","ClicksTopUrls","Color","Country","CountryCode","DomainSchema","Domains","Geo","LeadsBrowsers","LeadsCities","LeadsCitiesCountry","LeadsCount","LeadsCountries","LeadsCountriesCountry","LeadsDevices","LeadsOS","LeadsReferers","LeadsTimeseries","LeadsTopLinks","LeadsTopUrls","LinkGeoTargeting","LinkSchema","Plan","Role","SalesBrowsers","SalesCities","SalesCitiesCountry","SalesCount","SalesCountries","SalesCountriesCountry","SalesDevices","SalesOS","SalesReferers","SalesTimeseries","SalesTopLinks","SalesTopUrls","Security","TagSchema","Users","WorkspaceSchema"]

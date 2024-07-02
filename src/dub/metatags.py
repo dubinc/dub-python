@@ -4,7 +4,7 @@ import requests as requests_http
 from .sdkconfiguration import SDKConfiguration
 from dub import utils
 from dub._hooks import AfterErrorContext, AfterSuccessContext, BeforeRequestContext, HookContext
-from dub.models import components, errors, operations
+from dub.models import errors, operations
 from typing import Optional
 
 class Metatags:
@@ -15,15 +15,11 @@ class Metatags:
         
     
     
-    def get(self, url: str) -> operations.GetMetatagsResponse:
+    def get(self, request: operations.GetMetatagsRequest) -> operations.GetMetatagsResponseBody:
         r"""Retrieve the metatags for a URL
         Retrieve the metatags for a URL.
         """
         hook_ctx = HookContext(operation_id='getMetatags', oauth2_scopes=[], security_source=self.sdk_configuration.security)
-        request = operations.GetMetatagsRequest(
-            url=url,
-        )
-        
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/metatags'
@@ -58,22 +54,19 @@ class Metatags:
             
         
         
-        res = operations.GetMetatagsResponse(http_meta=components.HTTPMetadata(request=req, response=http_res))
         
         if http_res.status_code == 200:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
                 out = utils.unmarshal_json(http_res.text, Optional[operations.GetMetatagsResponseBody])
-                res.object = out
-            else:
-                content_type = http_res.headers.get('Content-Type')
-                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+                return out
+            
+            content_type = http_res.headers.get('Content-Type')
+            raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
         elif http_res.status_code >= 400 and http_res.status_code < 500 or http_res.status_code >= 500 and http_res.status_code < 600:
             raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
         else:
             raise errors.SDKError('unknown status code received', http_res.status_code, http_res.text, http_res)
-
-        return res
 
     
 

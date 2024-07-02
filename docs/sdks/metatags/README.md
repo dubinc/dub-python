@@ -13,15 +13,18 @@ Retrieve the metatags for a URL.
 
 ```python
 import dub
+from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.metatags.get(url='https://dub.co')
+res = s.metatags.get(request=operations.GetMetatagsRequest(
+    url='https://dub.co',
+))
 
-if res.object is not None:
+if res is not None:
     # handle response
     pass
 
@@ -29,14 +32,14 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                         | Type                              | Required                          | Description                       | Example                           |
-| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `url`                             | *str*                             | :heavy_check_mark:                | The URL to retrieve metatags for. | https://dub.co                    |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [operations.GetMetatagsRequest](../../models/operations/getmetatagsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[operations.GetMetatagsResponse](../../models/operations/getmetatagsresponse.md)**
+**[operations.GetMetatagsResponseBody](../../models/operations/getmetatagsresponsebody.md)**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

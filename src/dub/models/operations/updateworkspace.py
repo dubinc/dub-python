@@ -5,7 +5,7 @@ import dataclasses
 
 
 @dataclasses.dataclass
-class GetWorkspaceRequest:
+class UpdateWorkspaceRequest:
     id_or_slug: str = dataclasses.field(metadata={'path_param': { 'field_name': 'idOrSlug', 'style': 'simple', 'explode': False }})
     r"""The ID or slug of the workspace."""
     

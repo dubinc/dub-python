@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
 from dataclasses_json import Undefined, dataclass_json
 from dub import utils
 from typing import Optional
@@ -26,15 +25,5 @@ class GetMetatagsResponseBody:
     r"""The meta description tag for the URL."""
     image: Optional[str] = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('image') }})
     r"""The OpenGraph image for the URL."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class GetMetatagsResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    object: Optional[GetMetatagsResponseBody] = dataclasses.field(default=None)
-    r"""The retrieved metatags"""
     
 

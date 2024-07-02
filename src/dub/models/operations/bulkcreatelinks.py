@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
 from ...models.components import linkgeotargeting as components_linkgeotargeting
-from ...models.components import linkschema as components_linkschema
 from dataclasses_json import Undefined, dataclass_json
 from dub import utils
 from typing import List, Optional, Union
@@ -75,16 +73,6 @@ class RequestBody:
     r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
     do_index: Optional[bool] = dataclasses.field(default=False, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('doIndex'), 'exclude': lambda f: f is None }})
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class BulkCreateLinksResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    link_schemas: Optional[List[components_linkschema.LinkSchema]] = dataclasses.field(default=None)
-    r"""The created links"""
     
 
 

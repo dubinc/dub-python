@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
-from ...models.components import linkschema as components_linkschema
-from dataclasses_json import Undefined, dataclass_json
 from enum import Enum
 from typing import List, Optional, Union
 
@@ -48,16 +45,6 @@ class GetLinksRequest:
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
     page: Optional[int] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     r"""The page number for pagination (each page contains 100 links)."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class GetLinksResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    link_schemas: Optional[List[components_linkschema.LinkSchema]] = dataclasses.field(default=None)
-    r"""A list of links"""
     
 
 

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
 from dataclasses_json import Undefined, dataclass_json
 from dub import utils
 from typing import Optional
@@ -32,15 +31,5 @@ class DeleteDomainResponseBody:
     r"""The domain was deleted."""
     slug: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('slug') }})
     r"""The domain name."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class DeleteDomainResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    object: Optional[DeleteDomainResponseBody] = dataclasses.field(default=None)
-    r"""The domain was deleted."""
     
 

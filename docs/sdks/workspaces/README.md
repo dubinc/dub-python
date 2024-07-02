@@ -4,6 +4,7 @@
 ### Available Operations
 
 * [get](#get) - Retrieve a workspace
+* [update](#update) - Update a workspace
 
 ## get
 
@@ -13,15 +14,18 @@ Retrieve a workspace for the authenticated user.
 
 ```python
 import dub
+from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.workspaces.get(id_or_slug='<value>')
+res = s.workspaces.get(request=operations.GetWorkspaceRequest(
+    id_or_slug='<value>',
+))
 
-if res.workspace_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -29,14 +33,64 @@ if res.workspace_schema is not None:
 
 ### Parameters
 
-| Parameter                        | Type                             | Required                         | Description                      |
-| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `id_or_slug`                     | *str*                            | :heavy_check_mark:               | The ID or slug of the workspace. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `request`                                                                        | [operations.GetWorkspaceRequest](../../models/operations/getworkspacerequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[operations.GetWorkspaceResponse](../../models/operations/getworkspaceresponse.md)**
+**[components.WorkspaceSchema](../../models/components/workspaceschema.md)**
+### Errors
+
+| Error Object               | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4xx-5xx                    | */*                        |
+
+## update
+
+Update a workspace by ID or slug.
+
+### Example Usage
+
+```python
+import dub
+from dub.models import operations
+
+s = dub.Dub(
+    token="DUB_API_KEY",
+)
+
+
+res = s.workspaces.update(request=operations.UpdateWorkspaceRequest(
+    id_or_slug='<value>',
+))
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `request`                                                                              | [operations.UpdateWorkspaceRequest](../../models/operations/updateworkspacerequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+
+
+### Response
+
+**[components.WorkspaceSchema](../../models/components/workspaceschema.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

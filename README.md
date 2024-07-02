@@ -41,7 +41,7 @@ res = s.links.create(request=operations.CreateLinkRequestBody(
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -66,7 +66,7 @@ res = s.links.upsert(request=operations.UpsertLinkRequestBody(
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -98,11 +98,13 @@ if res.link_schema is not None:
 ### [workspaces](docs/sdks/workspaces/README.md)
 
 * [get](docs/sdks/workspaces/README.md#get) - Retrieve a workspace
+* [update](docs/sdks/workspaces/README.md#update) - Update a workspace
 
 ### [tags](docs/sdks/tags/README.md)
 
 * [list](docs/sdks/tags/README.md#list) - Retrieve a list of tags
 * [create](docs/sdks/tags/README.md#create) - Create a new tag
+* [update](docs/sdks/tags/README.md#update) - Update a tag
 
 ### [domains](docs/sdks/domains/README.md)
 
@@ -110,8 +112,6 @@ if res.link_schema is not None:
 * [create](docs/sdks/domains/README.md#create) - Create a domain
 * [delete](docs/sdks/domains/README.md#delete) - Delete a domain
 * [update](docs/sdks/domains/README.md#update) - Update a domain
-* [set_primary](docs/sdks/domains/README.md#set_primary) - Set a domain as primary
-* [transfer](docs/sdks/domains/README.md#transfer) - Transfer a domain
 
 ### [track](docs/sdks/track/README.md)
 
@@ -187,7 +187,7 @@ except errors.SDKError as e:
     # handle exception
     raise(e)
 
-if res.link_schemas is not None:
+if res is not None:
     # handle response
     pass
 
@@ -219,7 +219,7 @@ s = dub.Dub(
 
 res = s.links.list(request=operations.GetLinksRequest())
 
-if res.link_schemas is not None:
+if res is not None:
     # handle response
     pass
 
@@ -241,7 +241,7 @@ s = dub.Dub(
 
 res = s.links.list(request=operations.GetLinksRequest())
 
-if res.link_schemas is not None:
+if res is not None:
     # handle response
     pass
 
@@ -287,7 +287,7 @@ s = dub.Dub(
 
 res = s.links.list(request=operations.GetLinksRequest())
 
-if res.link_schemas is not None:
+if res is not None:
     # handle response
     pass
 

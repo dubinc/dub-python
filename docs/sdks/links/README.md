@@ -29,7 +29,7 @@ s = dub.Dub(
 
 res = s.links.list(request=operations.GetLinksRequest())
 
-if res.link_schemas is not None:
+if res is not None:
     # handle response
     pass
 
@@ -44,7 +44,7 @@ if res.link_schemas is not None:
 
 ### Response
 
-**[operations.GetLinksResponse](../../models/operations/getlinksresponse.md)**
+**[List[components.LinkSchema]](../../models/.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -83,7 +83,7 @@ res = s.links.create(request=operations.CreateLinkRequestBody(
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -98,7 +98,7 @@ if res.link_schema is not None:
 
 ### Response
 
-**[operations.CreateLinkResponse](../../models/operations/createlinkresponse.md)**
+**[components.LinkSchema](../../models/components/linkschema.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -131,7 +131,7 @@ s = dub.Dub(
 
 res = s.links.count(request=operations.GetLinksCountRequest())
 
-if res.number is not None:
+if res is not None:
     # handle response
     pass
 
@@ -146,7 +146,7 @@ if res.number is not None:
 
 ### Response
 
-**[operations.GetLinksCountResponse](../../models/operations/getlinkscountresponse.md)**
+**[float](../../models/.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -170,15 +170,19 @@ Retrieve the info for a link.
 
 ```python
 import dub
+from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.links.get(domain='<value>', key='<value>', link_id='clux0rgak00011...', external_id='ext_123456')
+res = s.links.get(request=operations.GetLinkInfoRequest(
+    link_id='clux0rgak00011...',
+    external_id='ext_123456',
+))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -186,17 +190,14 @@ if res.link_schema is not None:
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     | Example                                                                                                         |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `domain`                                                                                                        | *Optional[str]*                                                                                                 | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |                                                                                                                 |
-| `key`                                                                                                           | *Optional[str]*                                                                                                 | :heavy_minus_sign:                                                                                              | The key of the link to retrieve. E.g. for `d.to/github`, the key is `github`.                                   |                                                                                                                 |
-| `link_id`                                                                                                       | *Optional[str]*                                                                                                 | :heavy_minus_sign:                                                                                              | The unique ID of the short link.                                                                                | clux0rgak00011...                                                                                               |
-| `external_id`                                                                                                   | *Optional[str]*                                                                                                 | :heavy_minus_sign:                                                                                              | This is the ID of the link in the your database. Must be prefixed with `ext_` when passed as a query parameter. | ext_123456                                                                                                      |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [operations.GetLinkInfoRequest](../../models/operations/getlinkinforequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[operations.GetLinkInfoResponse](../../models/operations/getlinkinforesponse.md)**
+**[components.LinkSchema](../../models/components/linkschema.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -228,7 +229,7 @@ s = dub.Dub(
 
 res = s.links.delete(link_id='<value>')
 
-if res.object is not None:
+if res is not None:
     # handle response
     pass
 
@@ -243,7 +244,7 @@ if res.object is not None:
 
 ### Response
 
-**[operations.DeleteLinkResponse](../../models/operations/deletelinkresponse.md)**
+**[operations.DeleteLinkResponseBody](../../models/operations/deletelinkresponsebody.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -282,7 +283,7 @@ res = s.links.update(link_id='<value>', request_body=operations.UpdateLinkReques
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -298,7 +299,7 @@ if res.link_schema is not None:
 
 ### Response
 
-**[operations.UpdateLinkResponse](../../models/operations/updatelinkresponse.md)**
+**[components.LinkSchema](../../models/components/linkschema.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -339,7 +340,7 @@ res = s.links.create_many(request=[
     ),
 ])
 
-if res.link_schemas is not None:
+if res is not None:
     # handle response
     pass
 
@@ -354,7 +355,7 @@ if res.link_schemas is not None:
 
 ### Response
 
-**[operations.BulkCreateLinksResponse](../../models/operations/bulkcreatelinksresponse.md)**
+**[List[components.LinkSchema]](../../models/.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -393,7 +394,7 @@ res = s.links.upsert(request=operations.UpsertLinkRequestBody(
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -408,7 +409,7 @@ if res.link_schema is not None:
 
 ### Response
 
-**[operations.UpsertLinkResponse](../../models/operations/upsertlinkresponse.md)**
+**[components.LinkSchema](../../models/components/linkschema.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
