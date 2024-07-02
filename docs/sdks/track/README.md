@@ -28,7 +28,7 @@ res = s.track.lead(request=operations.TrackLeadRequestBody(
     customer_id='<value>',
 ))
 
-if res.object is not None:
+if res is not None:
     # handle response
     pass
 
@@ -43,7 +43,7 @@ if res.object is not None:
 
 ### Response
 
-**[operations.TrackLeadResponse](../../models/operations/trackleadresponse.md)**
+**[operations.TrackLeadResponseBody](../../models/operations/trackleadresponsebody.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -81,7 +81,7 @@ res = s.track.sale(request=operations.TrackSaleRequestBody(
     event_name='Purchase',
 ))
 
-if res.object is not None:
+if res is not None:
     # handle response
     pass
 
@@ -96,7 +96,7 @@ if res.object is not None:
 
 ### Response
 
-**[operations.TrackSaleResponse](../../models/operations/tracksaleresponse.md)**
+**[operations.TrackSaleResponseBody](../../models/operations/tracksaleresponsebody.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -120,15 +120,18 @@ Track a customer for an authenticated workspace.
 
 ```python
 import dub
+from dub.models import operations
 
 s = dub.Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.track.customer(customer_id='<value>', customer_name='<value>', customer_email='Wilson.Smith@gmail.com', customer_avatar='<value>')
+res = s.track.customer(request=operations.TrackCustomerRequestBody(
+    customer_id='<value>',
+))
 
-if res.object is not None:
+if res is not None:
     # handle response
     pass
 
@@ -136,17 +139,14 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `customer_id`                                                                                                     | *str*                                                                                                             | :heavy_check_mark:                                                                                                | This is the unique identifier for the customer in the client's app. This is used to track the customer's journey. |
-| `customer_name`                                                                                                   | *Optional[str]*                                                                                                   | :heavy_minus_sign:                                                                                                | Name of the customer in the client's app.                                                                         |
-| `customer_email`                                                                                                  | *Optional[str]*                                                                                                   | :heavy_minus_sign:                                                                                                | Email of the customer in the client's app.                                                                        |
-| `customer_avatar`                                                                                                 | *Optional[str]*                                                                                                   | :heavy_minus_sign:                                                                                                | Avatar of the customer in the client's app.                                                                       |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `request`                                                                                  | [operations.TrackCustomerRequestBody](../../models/operations/trackcustomerrequestbody.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
 
-**[operations.TrackCustomerResponse](../../models/operations/trackcustomerresponse.md)**
+**[operations.TrackCustomerResponseBody](../../models/operations/trackcustomerresponsebody.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

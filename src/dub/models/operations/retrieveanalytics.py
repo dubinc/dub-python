@@ -13,7 +13,6 @@ from ...models.components import clickstimeseries as components_clickstimeseries
 from ...models.components import clickstoplinks as components_clickstoplinks
 from ...models.components import clickstopurls as components_clickstopurls
 from ...models.components import countrycode as components_countrycode
-from ...models.components import httpmetadata as components_httpmetadata
 from ...models.components import leadsbrowsers as components_leadsbrowsers
 from ...models.components import leadscities as components_leadscities
 from ...models.components import leadscount as components_leadscount
@@ -34,7 +33,6 @@ from ...models.components import salesreferers as components_salesreferers
 from ...models.components import salestimeseries as components_salestimeseries
 from ...models.components import salestoplinks as components_salestoplinks
 from ...models.components import salestopurls as components_salestopurls
-from dataclasses_json import Undefined, dataclass_json
 from enum import Enum
 from typing import List, Optional, Union
 
@@ -126,16 +124,6 @@ class RetrieveAnalyticsRequest:
     r"""Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: Optional[bool] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'root', 'style': 'form', 'explode': True }})
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class RetrieveAnalyticsResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    one_of: Optional[RetrieveAnalyticsResponseBody] = dataclasses.field(default=None)
-    r"""Analytics data"""
     
 
 

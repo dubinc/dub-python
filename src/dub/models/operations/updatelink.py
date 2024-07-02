@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
 from ...models.components import linkgeotargeting as components_linkgeotargeting
-from ...models.components import linkschema as components_linkschema
 from dataclasses_json import Undefined, dataclass_json
 from dub import utils
 from typing import List, Optional, Union
@@ -84,16 +82,6 @@ class UpdateLinkRequest:
     link_id: str = dataclasses.field(metadata={'path_param': { 'field_name': 'linkId', 'style': 'simple', 'explode': False }})
     r"""The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`."""
     request_body: Optional[UpdateLinkRequestBody] = dataclasses.field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class UpdateLinkResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    link_schema: Optional[components_linkschema.LinkSchema] = dataclasses.field(default=None)
-    r"""The updated link"""
     
 
 

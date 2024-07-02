@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
-from ...models.components import linkschema as components_linkschema
-from dataclasses_json import Undefined, dataclass_json
 from typing import Optional
 
 
@@ -27,15 +24,5 @@ class GetLinkInfoRequest:
     r"""The unique ID of the short link."""
     external_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'externalId', 'style': 'form', 'explode': True }})
     r"""This is the ID of the link in the your database. Must be prefixed with `ext_` when passed as a query parameter."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class GetLinkInfoResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    link_schema: Optional[components_linkschema.LinkSchema] = dataclasses.field(default=None)
-    r"""The retrieved link"""
     
 

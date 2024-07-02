@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import httpmetadata as components_httpmetadata
-from dataclasses_json import Undefined, dataclass_json
 from enum import Enum
 from typing import List, Optional, Union
 
@@ -46,16 +44,6 @@ class GetLinksCountRequest:
     r"""Whether to include tags in the response. Defaults to `false` if not provided."""
     group_by: Optional[GroupBy] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
     r"""The field to group the links by."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class GetLinksCountResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    number: Optional[float] = dataclasses.field(default=None)
-    r"""A list of links"""
     
 
 

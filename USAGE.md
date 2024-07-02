@@ -16,7 +16,7 @@ res = s.links.create(request=operations.CreateLinkRequestBody(
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 
@@ -39,7 +39,7 @@ res = s.links.upsert(request=operations.UpsertLinkRequestBody(
     ],
 ))
 
-if res.link_schema is not None:
+if res is not None:
     # handle response
     pass
 

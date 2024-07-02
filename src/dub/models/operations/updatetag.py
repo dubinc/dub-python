@@ -9,7 +9,7 @@ from typing import Optional
 
 
 @dataclasses.dataclass
-class CreateTagGlobals:
+class UpdateTagGlobals:
     workspace_id: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
     r"""Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible."""
     project_slug: Optional[str] = dataclasses.field(default=None, metadata={'query_param': { 'field_name': 'projectSlug', 'style': 'form', 'explode': True }})
@@ -18,7 +18,7 @@ class CreateTagGlobals:
 
 
 
-class Color(str, Enum):
+class UpdateTagColor(str, Enum):
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
     RED = 'red'
     YELLOW = 'yellow'
@@ -31,15 +31,24 @@ class Color(str, Enum):
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
-class CreateTagRequestBody:
+class UpdateTagRequestBody:
     name: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('name'), 'exclude': lambda f: f is None }})
     r"""The name of the tag to create."""
-    color: Optional[Color] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('color'), 'exclude': lambda f: f is None }})
+    color: Optional[UpdateTagColor] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('color'), 'exclude': lambda f: f is None }})
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
     tag: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('tag'), 'exclude': lambda f: f is None }})
     r"""The name of the tag to create.
 
     Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
     """
+    
+
+
+
+@dataclasses.dataclass
+class UpdateTagRequest:
+    id: str = dataclasses.field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    r"""The ID of the tag"""
+    request_body: Optional[UpdateTagRequestBody] = dataclasses.field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 

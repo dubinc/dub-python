@@ -29,7 +29,7 @@ res = s.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
     referer='google.com',
 ))
 
-if res.one_of is not None:
+if res is not None:
     # handle response
     pass
 
@@ -44,7 +44,7 @@ if res.one_of is not None:
 
 ### Response
 
-**[operations.RetrieveAnalyticsResponse](../../models/operations/retrieveanalyticsresponse.md)**
+**[operations.RetrieveAnalyticsResponseBody](../../models/operations/retrieveanalyticsresponsebody.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

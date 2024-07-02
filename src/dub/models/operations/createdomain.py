@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 import dataclasses
-from ...models.components import domainschema as components_domainschema
-from ...models.components import httpmetadata as components_httpmetadata
 from dataclasses_json import Undefined, dataclass_json
 from dub import utils
 from typing import Optional
@@ -31,15 +29,5 @@ class CreateDomainRequestBody:
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
     placeholder: Optional[str] = dataclasses.field(default='https://dub.co/help/article/what-is-dub', metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('placeholder'), 'exclude': lambda f: f is CreateDomainRequestBody.UNSET }})
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
-    
-
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclasses.dataclass
-class CreateDomainResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
-    domain_schema: Optional[components_domainschema.DomainSchema] = dataclasses.field(default=None)
-    r"""The domain was created."""
     
 

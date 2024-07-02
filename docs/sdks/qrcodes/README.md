@@ -24,7 +24,7 @@ res = s.qr_codes.get(request=operations.GetQRCodeRequest(
     url='https://brief-micronutrient.org',
 ))
 
-if res.res is not None:
+if res is not None:
     # handle response
     pass
 
@@ -39,7 +39,7 @@ if res.res is not None:
 
 ### Response
 
-**[operations.GetQRCodeResponse](../../models/operations/getqrcoderesponse.md)**
+**[str](../../models/.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
