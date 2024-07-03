@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: c0895b6571175adfc5c4d2c3943adf22
+  docChecksum: a161f5bf3b2f2db5151fac8953378ea9
   docVersion: 0.0.1
-  speakeasyVersion: 1.325.0
-  generationVersion: 2.356.0
-  releaseVersion: 0.0.16
-  configChecksum: 95e1665e3990d1e1279fe9d67a5bfb12
+  speakeasyVersion: 1.326.0
+  generationVersion: 2.359.0
+  releaseVersion: 0.0.17
+  configChecksum: 80d6262f339798b3f7fc43981865876f
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -102,6 +102,7 @@ generatedFiles:
   - src/dub/models/operations/deletelink.py
   - src/dub/models/operations/updatelink.py
   - src/dub/models/operations/bulkcreatelinks.py
+  - src/dub/models/operations/bulkupdatelinks.py
   - src/dub/models/operations/upsertlink.py
   - src/dub/models/operations/getqrcode.py
   - src/dub/models/operations/retrieveanalytics.py
@@ -230,6 +231,10 @@ generatedFiles:
   - docs/models/operations/bulkcreatelinkstagids.md
   - docs/models/operations/bulkcreatelinkstagnames.md
   - docs/models/operations/requestbody.md
+  - docs/models/operations/bulkupdatelinkstagids.md
+  - docs/models/operations/bulkupdatelinkstagnames.md
+  - docs/models/operations/data.md
+  - docs/models/operations/bulkupdatelinksrequestbody.md
   - docs/models/operations/upsertlinkglobals.md
   - docs/models/operations/upsertlinktagids.md
   - docs/models/operations/upsertlinktagnames.md

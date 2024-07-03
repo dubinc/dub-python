@@ -10,6 +10,7 @@
 * [delete](#delete) - Delete a link
 * [update](#update) - Update a link
 * [create_many](#create_many) - Bulk create links
+* [update_many](#update_many) - Bulk update links
 * [upsert](#upsert) - Upsert a link
 
 ## list
@@ -351,6 +352,64 @@ if res is not None:
 | Parameter                                        | Type                                             | Required                                         | Description                                      |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | `request`                                        | [List[operations.RequestBody]](../../models/.md) | :heavy_check_mark:                               | The request object to use for the request.       |
+
+
+### Response
+
+**[List[components.LinkSchema]](../../models/.md)**
+### Errors
+
+| Error Object               | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4xx-5xx                    | */*                        |
+
+## update_many
+
+Bulk update up to 100 links with the same data for the authenticated workspace.
+
+### Example Usage
+
+```python
+import dub
+from dub.models import operations
+
+s = dub.Dub(
+    token="DUB_API_KEY",
+)
+
+
+res = s.links.update_many(request=operations.BulkUpdateLinksRequestBody(
+    link_ids=[
+        '<value>',
+    ],
+    data=operations.Data(
+        url='https://google/com',
+        tag_ids=[
+            'clux0rgak00011...',
+        ],
+    ),
+))
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `request`                                                                                      | [operations.BulkUpdateLinksRequestBody](../../models/operations/bulkupdatelinksrequestbody.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
