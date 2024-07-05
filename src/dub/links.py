@@ -17,12 +17,11 @@ class Links:
     
     def list(self, request: operations.GetLinksRequest) -> List[components.LinkSchema]:
         r"""Retrieve a list of links
-        Retrieve a list of links for the authenticated workspace. The list will be paginated and the provided query parameters allow filtering the returned links.
+        Retrieve a paginated list of links for the authenticated workspace.
         """
         hook_ctx = HookContext(operation_id='getLinks', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.GetLinksGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -155,7 +154,6 @@ class Links:
         hook_ctx = HookContext(operation_id='createLink', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.CreateLinkGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -285,13 +283,12 @@ class Links:
     
     
     def count(self, request: operations.GetLinksCountRequest) -> float:
-        r"""Retrieve the number of links
-        Retrieve the number of links for the authenticated workspace. The provided query parameters allow filtering the returned links.
+        r"""Retrieve links count
+        Retrieve the number of links for the authenticated workspace.
         """
         hook_ctx = HookContext(operation_id='getLinksCount', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.GetLinksCountGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -424,7 +421,6 @@ class Links:
         hook_ctx = HookContext(operation_id='getLinkInfo', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.GetLinkInfoGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -561,7 +557,6 @@ class Links:
         
         _globals = operations.DeleteLinkGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -699,7 +694,6 @@ class Links:
         
         _globals = operations.UpdateLinkGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -835,7 +829,6 @@ class Links:
         hook_ctx = HookContext(operation_id='bulkCreateLinks', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.BulkCreateLinksGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -1100,7 +1093,6 @@ class Links:
         hook_ctx = HookContext(operation_id='upsertLink', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.UpsertLinkGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())

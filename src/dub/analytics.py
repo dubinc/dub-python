@@ -22,7 +22,6 @@ class Analytics:
         hook_ctx = HookContext(operation_id='retrieveAnalytics', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.RetrieveAnalyticsGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
