@@ -22,7 +22,6 @@ class Tags:
         hook_ctx = HookContext(operation_id='getTags', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.GetTagsGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -155,7 +154,6 @@ class Tags:
         hook_ctx = HookContext(operation_id='createTag', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.CreateTagGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -291,7 +289,6 @@ class Tags:
         hook_ctx = HookContext(operation_id='updateTag', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.UpdateTagGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())

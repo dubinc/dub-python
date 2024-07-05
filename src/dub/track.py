@@ -22,7 +22,6 @@ class Track:
         hook_ctx = HookContext(operation_id='trackLead', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.TrackLeadGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -158,7 +157,6 @@ class Track:
         hook_ctx = HookContext(operation_id='trackSale', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.TrackSaleGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -294,7 +292,6 @@ class Track:
         hook_ctx = HookContext(operation_id='trackCustomer', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.TrackCustomerGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())

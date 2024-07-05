@@ -22,7 +22,6 @@ class Domains:
         hook_ctx = HookContext(operation_id='listDomains', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.ListDomainsGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -155,7 +154,6 @@ class Domains:
         hook_ctx = HookContext(operation_id='createDomain', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         _globals = operations.CreateDomainGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -295,7 +293,6 @@ class Domains:
         
         _globals = operations.DeleteDomainGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
@@ -433,7 +430,6 @@ class Domains:
         
         _globals = operations.UpdateDomainGlobals(
             workspace_id=self.sdk_configuration.globals.workspace_id,
-            project_slug=self.sdk_configuration.globals.project_slug,
         )
         
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
