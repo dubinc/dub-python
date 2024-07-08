@@ -36,4 +36,4 @@ python:
   packageName: dub
   projectUrls: {}
   responseFormat: flat
-  templateVersion: v1
+  templateVersion: v2
