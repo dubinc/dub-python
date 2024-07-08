@@ -3,32 +3,32 @@ id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
   docChecksum: bdbe0b838757272c0b9e043ea9c5cb5f
   docVersion: 0.0.1
-  speakeasyVersion: 1.326.3
+  speakeasyVersion: 1.327.0
   generationVersion: 2.359.6
-  releaseVersion: 0.0.18
-  configChecksum: e2de8442dab8baedd89ab6b339933cc8
-  repoURL: https://github.com/dubinc/dub-python.git
-  installationURL: https://github.com/dubinc/dub-python.git
+  releaseVersion: 0.0.19
+  configChecksum: 71e4ef6370d8642a0b0f03aa155523bb
+  repoURL: https://github.com/simplesagar/dub-python.git
+  installationURL: https://github.com/simplesagar/dub-python.git
   published: true
 features:
   python:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.3
-    core: 4.6.13
-    deprecations: 2.81.1
-    examples: 2.81.3
-    flattening: 2.81.1
-    globalSecurity: 2.83.5
+    constsAndDefaults: 0.1.0
+    core: 0.2.9
+    deprecations: 0.1.1
+    examples: 0.1.0
+    flattening: 0.1.0
+    globalSecurity: 0.1.0
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.2
-    globals: 2.82.1
+    globalServerURLs: 0.1.0
+    globals: 0.1.0
     hiddenGlobals: 0.1.0
-    nameOverrides: 2.81.2
+    nameOverrides: 0.1.0
     nullables: 0.1.0
     responseFormat: 0.1.0
     sdkHooks: 0.1.0
-    unions: 2.82.8
+    unions: 0.1.0
 generatedFiles:
   - src/dub/sdkconfiguration.py
   - src/dub/links.py
@@ -42,12 +42,26 @@ generatedFiles:
   - src/dub/sdk.py
   - py.typed
   - pylintrc
+  - pyproject.toml
   - scripts/publish.sh
-  - setup.py
   - src/dub/__init__.py
+  - src/dub/basesdk.py
+  - src/dub/httpclient.py
+  - src/dub/types/__init__.py
+  - src/dub/types/basemodel.py
   - src/dub/utils/__init__.py
+  - src/dub/utils/enums.py
+  - src/dub/utils/eventstreaming.py
+  - src/dub/utils/forms.py
+  - src/dub/utils/headers.py
+  - src/dub/utils/metadata.py
+  - src/dub/utils/queryparams.py
+  - src/dub/utils/requestbodies.py
   - src/dub/utils/retries.py
-  - src/dub/utils/utils.py
+  - src/dub/utils/security.py
+  - src/dub/utils/serializers.py
+  - src/dub/utils/url.py
+  - src/dub/utils/values.py
   - src/dub/models/errors/sdkerror.py
   - src/dub/models/components/linkschema.py
   - src/dub/models/components/tagschema.py

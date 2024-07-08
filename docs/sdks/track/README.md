@@ -14,19 +14,18 @@ Track a lead for a short link.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.track.lead(request=operations.TrackLeadRequestBody(
-    click_id='<value>',
-    event_name='Sign up',
-    customer_id='<value>',
-))
+res = s.track.lead(request={
+    "click_id": "<value>",
+    "event_name": "Sign up",
+    "customer_id": "<value>",
+})
 
 if res is not None:
     # handle response
@@ -66,20 +65,20 @@ Track a sale for a short link.
 ### Example Usage
 
 ```python
-import dub
+from dub import Dub
 from dub.models import operations
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.track.sale(request=operations.TrackSaleRequestBody(
-    customer_id='<value>',
-    amount=996500,
-    payment_processor=operations.PaymentProcessor.SHOPIFY,
-    event_name='Purchase',
-))
+res = s.track.sale(request={
+    "customer_id": "<value>",
+    "amount": 996500,
+    "payment_processor": operations.PaymentProcessor.SHOPIFY,
+    "event_name": "Purchase",
+})
 
 if res is not None:
     # handle response
@@ -119,17 +118,16 @@ Track a customer for an authenticated workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.track.customer(request=operations.TrackCustomerRequestBody(
-    customer_id='<value>',
-))
+res = s.track.customer(request={
+    "customer_id": "<value>",
+})
 
 if res is not None:
     # handle response

@@ -12,22 +12,21 @@ Retrieve analytics for a link, a domain, or the authenticated workspace. The res
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
-    timezone='America/New_York',
-    city='New York',
-    device='Desktop',
-    browser='Chrome',
-    os='Windows',
-    referer='google.com',
-))
+res = s.analytics.retrieve(request={
+    "timezone": "America/New_York",
+    "city": "New York",
+    "device": "Desktop",
+    "browser": "Chrome",
+    "os": "Windows",
+    "referer": "google.com",
+})
 
 if res is not None:
     # handle response
