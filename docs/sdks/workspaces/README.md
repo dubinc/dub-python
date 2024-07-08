@@ -13,17 +13,16 @@ Retrieve a workspace for the authenticated user.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.workspaces.get(request=operations.GetWorkspaceRequest(
-    id_or_slug='<value>',
-))
+res = s.workspaces.get(request={
+    "id_or_slug": "<value>",
+})
 
 if res is not None:
     # handle response
@@ -63,17 +62,16 @@ Update a workspace by ID or slug.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.workspaces.update(request=operations.UpdateWorkspaceRequest(
-    id_or_slug='<value>',
-))
+res = s.workspaces.update(request={
+    "id_or_slug": "<value>",
+})
 
 if res is not None:
     # handle response

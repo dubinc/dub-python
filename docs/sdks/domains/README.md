@@ -15,27 +15,20 @@ Retrieve a list of domains associated with the authenticated workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.domains.list(request=operations.ListDomainsRequest())
+res = s.domains.list()
 
 if res is not None:
     # handle response
     pass
 
 ```
-
-### Parameters
-
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `request`                                                                      | [operations.ListDomainsRequest](../../models/operations/listdomainsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
@@ -63,20 +56,19 @@ Create a domain for the authenticated workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.domains.create(request=operations.CreateDomainRequestBody(
-    slug='acme.com',
-    expired_url='https://acme.com/expired',
-    archived=False,
-    placeholder='https://dub.co/help/article/what-is-dub',
-))
+res = s.domains.create(request={
+    "slug": "acme.com",
+    "expired_url": "https://acme.com/expired",
+    "archived": False,
+    "placeholder": "https://dub.co/help/article/what-is-dub",
+})
 
 if res is not None:
     # handle response
@@ -116,14 +108,14 @@ Delete a domain from a workspace. It cannot be undone. This will also delete all
 ### Example Usage
 
 ```python
-import dub
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.domains.delete(slug='acme.com')
+res = s.domains.delete(slug="acme.com")
 
 if res is not None:
     # handle response
@@ -163,20 +155,19 @@ Update a domain for the authenticated workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.domains.update(slug='acme.com', request_body=operations.UpdateDomainRequestBody(
-    slug='acme.com',
-    expired_url='https://acme.com/expired',
-    archived=False,
-    placeholder='https://dub.co/help/article/what-is-dub',
-))
+res = s.domains.update(slug="acme.com", request_body={
+    "slug": "acme.com",
+    "expired_url": "https://acme.com/expired",
+    "archived": False,
+    "placeholder": "https://dub.co/help/article/what-is-dub",
+})
 
 if res is not None:
     # handle response

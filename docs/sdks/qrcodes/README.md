@@ -12,17 +12,16 @@ Retrieve a QR code for a link.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.qr_codes.get(request=operations.GetQRCodeRequest(
-    url='https://brief-micronutrient.org',
-))
+res = s.qr_codes.get(request={
+    "url": "https://brief-micronutrient.org",
+})
 
 if res is not None:
     # handle response
