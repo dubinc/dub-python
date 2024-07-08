@@ -12,17 +12,16 @@ Retrieve the metatags for a URL.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.metatags.get(request=operations.GetMetatagsRequest(
-    url='https://dub.co',
-))
+res = s.metatags.get(request={
+    "url": "https://dub.co",
+})
 
 if res is not None:
     # handle response

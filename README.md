@@ -14,8 +14,14 @@ Learn more about the Dub.co Python SDK in the [official documentation](https://d
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+PIP
 ```bash
 pip install dub
+```
+
+Poetry
+```bash
+poetry add dub
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -25,51 +31,101 @@ pip install dub
 ### Example 1
 
 ```python
-import dub
-from dub.models import operations
+# Synchronous Example
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.links.create(request=operations.CreateLinkRequestBody(
-    url='https://google/com',
-    external_id='123456',
-    tag_ids=[
-        'clux0rgak00011...',
+res = s.links.create(request={
+    "url": "https://google/com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
     ],
-))
+})
 
 if res is not None:
     # handle response
     pass
+```
 
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from dub import Dub
+
+async def main():
+    s = Dub(
+        token="DUB_API_KEY",
+    )
+    res = await s.links.create_async(request={
+        "url": "https://google/com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
+    if res is not None:
+        # handle response
+        pass
+
+asyncio.run(main())
 ```
 
 ### Example 2
 
 ```python
-import dub
-from dub.models import operations
+# Synchronous Example
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.links.upsert(request=operations.UpsertLinkRequestBody(
-    url='https://google/com',
-    external_id='123456',
-    tag_ids=[
-        'clux0rgak00011...',
+res = s.links.upsert(request={
+    "url": "https://google/com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
     ],
-))
+})
 
 if res is not None:
     # handle response
     pass
+```
 
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from dub import Dub
+
+async def main():
+    s = Dub(
+        token="DUB_API_KEY",
+    )
+    res = await s.links.upsert_async(request={
+        "url": "https://google/com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
+    if res is not None:
+        # handle response
+        pass
+
+asyncio.run(main())
 ```
 <!-- End SDK Example Usage [usage] -->
 
@@ -146,16 +202,16 @@ Handling errors in this SDK should largely match your expectations.  All operati
 ### Example
 
 ```python
-import dub
-from dub.models import errors, operations
+from dub import Dub
+from dub.models import errors
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 res = None
 try:
-    res = s.links.list(request=operations.GetLinksRequest())
+    res = s.links.list(request={})
 
 except errors.BadRequest as e:
     # handle exception
@@ -209,16 +265,15 @@ You can override the default server globally by passing a server index to the `s
 #### Example
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     server_idx=0,
     token="DUB_API_KEY",
 )
 
 
-res = s.links.list(request=operations.GetLinksRequest())
+res = s.links.list(request={})
 
 if res is not None:
     # handle response
@@ -231,16 +286,15 @@ if res is not None:
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     server_url="https://api.dub.co",
     token="DUB_API_KEY",
 )
 
 
-res = s.links.list(request=operations.GetLinksRequest())
+res = s.links.list(request={})
 
 if res is not None:
     # handle response
@@ -252,16 +306,81 @@ if res is not None:
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
-The Python SDK makes API calls using the [requests](https://pypi.org/project/requests/) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `requests.Session` object.
+The Python SDK makes API calls using the [httpx](https://www.python-httpx.org/) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with your own HTTP client instance.
+Depending on whether you are using the sync or async version of the SDK, you can pass an instance of `HttpClient` or `AsyncHttpClient` respectively, which are Protocol's ensuring that the client has the necessary methods to make API calls.
+This allows you to wrap the client with your own custom logic, such as adding custom headers, logging, or error handling, or you can just pass an instance of `httpx.Client` or `httpx.AsyncClient` directly.
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-import dub
-import requests
+from dub import Dub
+import httpx
 
-http_client = requests.Session()
-http_client.headers.update({'x-custom-header': 'someValue'})
-s = dub.Dub(client=http_client)
+http_client = httpx.Client(headers={"x-custom-header": "someValue"})
+s = Dub(client=http_client)
+```
+
+or you could wrap the client with your own custom logic:
+```python
+from dub import Dub
+from dub.httpclient import AsyncHttpClient
+import httpx
+
+class CustomClient(AsyncHttpClient):
+    client: AsyncHttpClient
+
+    def __init__(self, client: AsyncHttpClient):
+        self.client = client
+
+    async def send(
+        self,
+        request: httpx.Request,
+        *,
+        stream: bool = False,
+        auth: Union[
+            httpx._types.AuthTypes, httpx._client.UseClientDefault, None
+        ] = httpx.USE_CLIENT_DEFAULT,
+        follow_redirects: Union[
+            bool, httpx._client.UseClientDefault
+        ] = httpx.USE_CLIENT_DEFAULT,
+    ) -> httpx.Response:
+        request.headers["Client-Level-Header"] = "added by client"
+
+        return await self.client.send(
+            request, stream=stream, auth=auth, follow_redirects=follow_redirects
+        )
+
+    def build_request(
+        self,
+        method: str,
+        url: httpx._types.URLTypes,
+        *,
+        content: Optional[httpx._types.RequestContent] = None,
+        data: Optional[httpx._types.RequestData] = None,
+        files: Optional[httpx._types.RequestFiles] = None,
+        json: Optional[Any] = None,
+        params: Optional[httpx._types.QueryParamTypes] = None,
+        headers: Optional[httpx._types.HeaderTypes] = None,
+        cookies: Optional[httpx._types.CookieTypes] = None,
+        timeout: Union[
+            httpx._types.TimeoutTypes, httpx._client.UseClientDefault
+        ] = httpx.USE_CLIENT_DEFAULT,
+        extensions: Optional[httpx._types.RequestExtensions] = None,
+    ) -> httpx.Request:
+        return self.client.build_request(
+            method,
+            url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+s = Dub(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
@@ -278,15 +397,14 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.links.list(request=operations.GetLinksRequest())
+res = s.links.list(request={})
 
 if res is not None:
     # handle response

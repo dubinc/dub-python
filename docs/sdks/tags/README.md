@@ -14,27 +14,20 @@ Retrieve a list of tags for the authenticated workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.tags.list(request=operations.GetTagsRequest())
+res = s.tags.list()
 
 if res is not None:
     # handle response
     pass
 
 ```
-
-### Parameters
-
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `request`                                                              | [operations.GetTagsRequest](../../models/operations/gettagsrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
 
 
 ### Response
@@ -62,15 +55,14 @@ Create a new tag for the authenticated workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.tags.create(request=operations.CreateTagRequestBody())
+res = s.tags.create(request={})
 
 if res is not None:
     # handle response
@@ -110,17 +102,14 @@ Update a tag in the workspace.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.tags.update(request=operations.UpdateTagRequest(
-    id='<id>',
-))
+res = s.tags.update(id="<value>", request_body={})
 
 if res is not None:
     # handle response
@@ -130,9 +119,10 @@ if res is not None:
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `request`                                                                  | [operations.UpdateTagRequest](../../models/operations/updatetagrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `id`                                                                                         | *str*                                                                                        | :heavy_check_mark:                                                                           | The ID of the tag to update.                                                                 |
+| `request_body`                                                                               | [Optional[operations.UpdateTagRequestBody]](../../models/operations/updatetagrequestbody.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
 
 
 ### Response
