@@ -13,3 +13,7 @@ targets:
         publish:
             pypi:
                 token: $pypi_token
+        codeSamples:
+            output: codeSamples.yaml
+            registry:
+                location: registry.speakeasyapi.dev/dub/dub/code-samples-python-my-first-target
