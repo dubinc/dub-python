@@ -13,17 +13,16 @@ Retrieve a workspace for the authenticated user.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.workspaces.get(request=operations.GetWorkspaceRequest(
-    id_or_slug='<value>',
-))
+res = s.workspaces.get(request={
+    "id_or_slug": "<value>",
+})
 
 if res is not None:
     # handle response
@@ -63,17 +62,14 @@ Update a workspace by ID or slug.
 ### Example Usage
 
 ```python
-import dub
-from dub.models import operations
+from dub import Dub
 
-s = dub.Dub(
+s = Dub(
     token="DUB_API_KEY",
 )
 
 
-res = s.workspaces.update(request=operations.UpdateWorkspaceRequest(
-    id_or_slug='<value>',
-))
+res = s.workspaces.update(id_or_slug="<value>", request_body={})
 
 if res is not None:
     # handle response
@@ -83,9 +79,10 @@ if res is not None:
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `request`                                                                              | [operations.UpdateWorkspaceRequest](../../models/operations/updateworkspacerequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `id_or_slug`                                                                                             | *str*                                                                                                    | :heavy_check_mark:                                                                                       | The ID or slug of the workspace to update.                                                               |
+| `request_body`                                                                                           | [Optional[operations.UpdateWorkspaceRequestBody]](../../models/operations/updateworkspacerequestbody.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 
 
 ### Response
