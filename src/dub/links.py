@@ -14,6 +14,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
         r"""Retrieve a list of links
 
@@ -21,6 +22,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -37,14 +39,12 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetLinksGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -94,6 +94,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
         r"""Retrieve a list of links
 
@@ -101,6 +102,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -117,14 +119,12 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetLinksGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -174,6 +174,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.CreateLinkRequestBody, operations.CreateLinkRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Create a new link
 
@@ -181,6 +182,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -197,15 +199,13 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.CreateLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateLinkRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -255,6 +255,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.CreateLinkRequestBody, operations.CreateLinkRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Create a new link
 
@@ -262,6 +263,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -278,15 +280,13 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.CreateLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateLinkRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -336,6 +336,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> float:
         r"""Retrieve links count
 
@@ -343,6 +344,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -359,14 +361,12 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetLinksCountGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -416,6 +416,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> float:
         r"""Retrieve links count
 
@@ -423,6 +424,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -439,14 +441,12 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetLinksCountGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -496,6 +496,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Retrieve a link
 
@@ -503,6 +504,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -519,14 +521,12 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetLinkInfoGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -576,6 +576,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Retrieve a link
 
@@ -583,6 +584,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -599,14 +601,12 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetLinkInfoGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -656,6 +656,7 @@ class Links(BaseSDK):
         self, *,
         link_id: str,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> operations.DeleteLinkResponseBody:
         r"""Delete a link
 
@@ -663,6 +664,7 @@ class Links(BaseSDK):
 
         :param link_id: The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -684,10 +686,8 @@ class Links(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.DeleteLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -737,6 +737,7 @@ class Links(BaseSDK):
         self, *,
         link_id: str,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> operations.DeleteLinkResponseBody:
         r"""Delete a link
 
@@ -744,6 +745,7 @@ class Links(BaseSDK):
 
         :param link_id: The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -765,10 +767,8 @@ class Links(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.DeleteLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -819,6 +819,7 @@ class Links(BaseSDK):
         link_id: str,
         request_body: Optional[Union[operations.UpdateLinkRequestBody, operations.UpdateLinkRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Update a link
 
@@ -827,6 +828,7 @@ class Links(BaseSDK):
         :param link_id: The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -849,11 +851,9 @@ class Links(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpdateLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateLinkRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -904,6 +904,7 @@ class Links(BaseSDK):
         link_id: str,
         request_body: Optional[Union[operations.UpdateLinkRequestBody, operations.UpdateLinkRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Update a link
 
@@ -912,6 +913,7 @@ class Links(BaseSDK):
         :param link_id: The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -934,11 +936,9 @@ class Links(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpdateLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateLinkRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -988,6 +988,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
         r"""Bulk create links
 
@@ -995,6 +996,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -1011,15 +1013,13 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.BulkCreateLinksGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[List[operations.RequestBody]]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -1069,6 +1069,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
         r"""Bulk create links
 
@@ -1076,6 +1077,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -1092,15 +1094,13 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.BulkCreateLinksGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[List[operations.RequestBody]]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -1150,6 +1150,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.BulkUpdateLinksRequestBody, operations.BulkUpdateLinksRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
         r"""Bulk update links
 
@@ -1157,6 +1158,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -1179,6 +1181,7 @@ class Links(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.BulkUpdateLinksRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -1228,6 +1231,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.BulkUpdateLinksRequestBody, operations.BulkUpdateLinksRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
         r"""Bulk update links
 
@@ -1235,6 +1239,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -1257,6 +1262,7 @@ class Links(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.BulkUpdateLinksRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -1306,6 +1312,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.UpsertLinkRequestBody, operations.UpsertLinkRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Upsert a link
 
@@ -1313,6 +1320,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -1329,15 +1337,13 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpsertLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.UpsertLinkRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -1387,6 +1393,7 @@ class Links(BaseSDK):
         self, *,
         request: Optional[Union[operations.UpsertLinkRequestBody, operations.UpsertLinkRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
         r"""Upsert a link
 
@@ -1394,6 +1401,7 @@ class Links(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -1410,15 +1418,13 @@ class Links(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpsertLinkGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.UpsertLinkRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(

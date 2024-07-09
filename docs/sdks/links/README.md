@@ -75,7 +75,7 @@ s = Dub(
 
 
 res = s.links.create(request={
-    "url": "https://google/com",
+    "url": "https://google.com",
     "external_id": "123456",
     "tag_ids": [
         "clux0rgak00011...",
@@ -272,7 +272,7 @@ s = Dub(
 
 
 res = s.links.update(link_id="<value>", request_body={
-    "url": "https://google/com",
+    "url": "https://google.com",
     "external_id": "123456",
     "tag_ids": [
         "clux0rgak00011...",
@@ -327,7 +327,7 @@ s = Dub(
 
 res = s.links.create_many(request=[
     {
-        "url": "https://google/com",
+        "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
@@ -385,7 +385,7 @@ res = s.links.update_many(request={
         "<value>",
     ],
     "data": {
-        "url": "https://google/com",
+        "url": "https://google.com",
         "tag_ids": [
             "clux0rgak00011...",
         ],
@@ -438,7 +438,7 @@ s = Dub(
 
 
 res = s.links.upsert(request={
-    "url": "https://google/com",
+    "url": "https://google.com",
     "external_id": "123456",
     "tag_ids": [
         "clux0rgak00011...",

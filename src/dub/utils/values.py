@@ -3,7 +3,8 @@
 from datetime import datetime
 from enum import Enum
 from email.message import Message
-from typing import Any, Dict, List, Tuple, Union
+import os
+from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
 from httpx import Response
 from pydantic import BaseModel
@@ -44,6 +45,23 @@ def match_status_codes(status_codes: List[str], status_code: int) -> bool:
         if code.endswith("XX") and code.startswith(str(status_code)[:1]):
             return True
     return False
+
+T = TypeVar("T")
+
+def get_global_from_env(
+    value: Optional[T],
+    env_key: str,
+    type_cast: Callable[[str], T] = str
+) -> Optional[T]:
+    if value is not None:
+        return value
+    env_value = os.getenv(env_key)
+    if env_value is not None:
+        try:
+            return type_cast(env_value)
+        except ValueError:
+            pass
+    return None
 
 
 def match_response(

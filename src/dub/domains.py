@@ -13,36 +13,32 @@ class Domains(BaseSDK):
     def list(
         self, *,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.DomainSchema]:
         r"""Retrieve a list of domains
 
         Retrieve a list of domains associated with the authenticated workspace.
 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
         if server_url is not None:
             base_url = server_url
-        
-        request = operations.ListDomainsRequest(
-        )
-        
         req = self.build_request(
             method="GET",
             path="/domains",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.ListDomainsGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -91,36 +87,32 @@ class Domains(BaseSDK):
     async def list_async(
         self, *,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.DomainSchema]:
         r"""Retrieve a list of domains
 
         Retrieve a list of domains associated with the authenticated workspace.
 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
         if server_url is not None:
             base_url = server_url
-        
-        request = operations.ListDomainsRequest(
-        )
-        
         req = self.build_request(
             method="GET",
             path="/domains",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.ListDomainsGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -170,6 +162,7 @@ class Domains(BaseSDK):
         self, *,
         request: Optional[Union[operations.CreateDomainRequestBody, operations.CreateDomainRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.DomainSchema:
         r"""Create a domain
 
@@ -177,6 +170,7 @@ class Domains(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -193,15 +187,13 @@ class Domains(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.CreateDomainGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateDomainRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -251,6 +243,7 @@ class Domains(BaseSDK):
         self, *,
         request: Optional[Union[operations.CreateDomainRequestBody, operations.CreateDomainRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.DomainSchema:
         r"""Create a domain
 
@@ -258,6 +251,7 @@ class Domains(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -274,15 +268,13 @@ class Domains(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.CreateDomainGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateDomainRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -332,6 +324,7 @@ class Domains(BaseSDK):
         self, *,
         slug: str,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> operations.DeleteDomainResponseBody:
         r"""Delete a domain
 
@@ -339,6 +332,7 @@ class Domains(BaseSDK):
 
         :param slug: The domain name.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -360,10 +354,8 @@ class Domains(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.DeleteDomainGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -413,6 +405,7 @@ class Domains(BaseSDK):
         self, *,
         slug: str,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> operations.DeleteDomainResponseBody:
         r"""Delete a domain
 
@@ -420,6 +413,7 @@ class Domains(BaseSDK):
 
         :param slug: The domain name.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -441,10 +435,8 @@ class Domains(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.DeleteDomainGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -495,6 +487,7 @@ class Domains(BaseSDK):
         slug: str,
         request_body: Optional[Union[operations.UpdateDomainRequestBody, operations.UpdateDomainRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.DomainSchema:
         r"""Update a domain
 
@@ -503,6 +496,7 @@ class Domains(BaseSDK):
         :param slug: The domain name.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -525,11 +519,9 @@ class Domains(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpdateDomainGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateDomainRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -580,6 +572,7 @@ class Domains(BaseSDK):
         slug: str,
         request_body: Optional[Union[operations.UpdateDomainRequestBody, operations.UpdateDomainRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.DomainSchema:
         r"""Update a domain
 
@@ -588,6 +581,7 @@ class Domains(BaseSDK):
         :param slug: The domain name.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -610,11 +604,9 @@ class Domains(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpdateDomainGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateDomainRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(

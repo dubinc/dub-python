@@ -3,20 +3,11 @@
 from __future__ import annotations
 from dub.models.components import linkgeotargeting as components_linkgeotargeting
 from dub.types import BaseModel, Nullable
-from dub.utils import FieldMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, TypedDict, Union
 from typing_extensions import Annotated, NotRequired
 
-
-class UpsertLinkGlobalsTypedDict(TypedDict):
-    workspace_id: NotRequired[str]
-    
-
-class UpsertLinkGlobals(BaseModel):
-    workspace_id: Annotated[Optional[str], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.", alias="workspaceId"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
-    
 
 class UpsertLinkRequestBodyTypedDict(TypedDict):
     url: str

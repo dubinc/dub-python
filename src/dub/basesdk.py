@@ -39,6 +39,7 @@ class BaseSDK:
         accept_header_value,
         _globals=None,
         security=None,
+        timeout_config: Optional[int] = None,
         get_serialized_body: Optional[
             Callable[[], Optional[SerializedRequestBody]]
         ] = None,
@@ -69,7 +70,8 @@ class BaseSDK:
         if security is not None:
             if callable(security):
                 security = security()
-
+        
+        if security is not None:
             security_headers, security_query_params = utils.get_security(security)
             headers = {**headers, **security_headers}
             query_params = {**query_params, **security_query_params}
@@ -93,6 +95,11 @@ class BaseSDK:
         ):
             headers["content-type"] = serialized_request_body.media_type
 
+        if timeout_config is not None:
+            timeout = timeout_config / 1000 if timeout_config is not None else None
+        else:
+            timeout = self.sdk_configuration.timeout_config / 1000 if self.sdk_configuration.timeout_config is not None else None
+
         return client.build_request(
             method,
             url,
@@ -101,6 +108,7 @@ class BaseSDK:
             data=serialized_request_body.data,
             files=serialized_request_body.files,
             headers=headers,
+            timeout=timeout,
         )
 
     def do_request(

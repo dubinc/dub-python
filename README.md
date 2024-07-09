@@ -40,7 +40,7 @@ s = Dub(
 
 
 res = s.links.create(request={
-    "url": "https://google/com",
+    "url": "https://google.com",
     "external_id": "123456",
     "tag_ids": [
         "clux0rgak00011...",
@@ -65,7 +65,7 @@ async def main():
         token="DUB_API_KEY",
     )
     res = await s.links.create_async(request={
-        "url": "https://google/com",
+        "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
@@ -90,7 +90,7 @@ s = Dub(
 
 
 res = s.links.upsert(request={
-    "url": "https://google/com",
+    "url": "https://google.com",
     "external_id": "123456",
     "tag_ids": [
         "clux0rgak00011...",
@@ -115,7 +115,7 @@ async def main():
         token="DUB_API_KEY",
     )
     res = await s.links.upsert_async(request={
-        "url": "https://google/com",
+        "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",

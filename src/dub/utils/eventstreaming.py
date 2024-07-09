@@ -2,7 +2,8 @@
 
 import re
 import json
-from typing import Callable, Iterator, TypeVar, Optional, Generator
+from typing import Callable, TypeVar, Optional, Generator, AsyncGenerator
+import httpx
 
 T = TypeVar("T")
 
@@ -20,13 +21,46 @@ MESSAGE_BOUNDARIES = [
     b"\r\r",
 ]
 
+async def stream_events_async(
+    response: httpx.Response, decoder: Callable[[str], T]
+) -> AsyncGenerator[T, None]:
+    buffer = bytearray()
+    position = 0
+    async for chunk in response.aiter_bytes():
+        buffer += chunk
+        for i in range(position, len(buffer)):
+            char = buffer[i: i + 1]
+            seq: Optional[bytes] = None
+            if char in [b"\r", b"\n"]:
+                for boundary in MESSAGE_BOUNDARIES:
+                    seq = _peek_sequence(i, buffer, boundary)
+                    if seq is not None:
+                        break
+            if seq is None:
+                continue
+
+            block = buffer[position:i]
+            position = i + len(seq)
+            event = _parse_event(block, decoder)
+            if event is not None:
+                yield event
+
+        if position > 0:
+            buffer = buffer[position:]
+            position = 0
+
+    event = _parse_event(buffer, decoder)
+    if event is not None:
+        yield event
+
+
 
 def stream_events(
-    stream: Iterator[bytes], decoder: Callable[[str], T]
+    response: httpx.Response, decoder: Callable[[str], T]
 ) -> Generator[T, None, None]:
     buffer = bytearray()
     position = 0
-    for chunk in stream:
+    for chunk in response.iter_bytes():
         buffer += chunk
         for i in range(position, len(buffer)):
             char = buffer[i : i + 1]

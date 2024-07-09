@@ -1,9 +1,9 @@
-speakeasyVersion: 1.327.0
+speakeasyVersion: 1.330.0
 sources:
     dub:
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:7cb5a6f77af859e4b583608c7cf88cc81a3408a724f961ff43d326d9f52f570e
-        sourceBlobDigest: sha256:0aa314984bceec52b66d91c35ce4871b625b28b397e2ef1a54ca1a496b776201
+        sourceRevisionDigest: sha256:36b30392b6c56ded160105e727c1ebb7177fc73e8cd8a60a3c3fe67a88153f31
+        sourceBlobDigest: sha256:30a4438988b106dbc6e8271468965647d30246d84ae5eab4b1c080b703e56013
         tags:
             - latest
             - main
@@ -11,8 +11,10 @@ targets:
     my-first-target:
         source: dub
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:7cb5a6f77af859e4b583608c7cf88cc81a3408a724f961ff43d326d9f52f570e
-        sourceBlobDigest: sha256:0aa314984bceec52b66d91c35ce4871b625b28b397e2ef1a54ca1a496b776201
+        sourceRevisionDigest: sha256:36b30392b6c56ded160105e727c1ebb7177fc73e8cd8a60a3c3fe67a88153f31
+        sourceBlobDigest: sha256:30a4438988b106dbc6e8271468965647d30246d84ae5eab4b1c080b703e56013
+        codeSamplesNamespace: code-samples-python-my-first-target
+        codeSamplesRevisionDigest: sha256:5a59cb0eab8f007ec8871c40968815ae8fcb5f92e3205d5ace20b72ff1619cf0
         outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
@@ -30,3 +32,7 @@ workflow:
             publish:
                 pypi:
                     token: $pypi_token
+            codeSamples:
+                output: codeSamples.yaml
+                registry:
+                    location: registry.speakeasyapi.dev/dub/dub/code-samples-python-my-first-target

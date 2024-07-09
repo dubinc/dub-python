@@ -13,36 +13,32 @@ class Tags(BaseSDK):
     def list(
         self, *,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.TagSchema]:
         r"""Retrieve a list of tags
 
         Retrieve a list of tags for the authenticated workspace.
 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
         if server_url is not None:
             base_url = server_url
-        
-        request = operations.GetTagsRequest(
-        )
-        
         req = self.build_request(
             method="GET",
             path="/tags",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetTagsGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -91,36 +87,32 @@ class Tags(BaseSDK):
     async def list_async(
         self, *,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> List[components.TagSchema]:
         r"""Retrieve a list of tags
 
         Retrieve a list of tags for the authenticated workspace.
 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
         if server_url is not None:
             base_url = server_url
-        
-        request = operations.GetTagsRequest(
-        )
-        
         req = self.build_request(
             method="GET",
             path="/tags",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.GetTagsGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -170,6 +162,7 @@ class Tags(BaseSDK):
         self, *,
         request: Optional[Union[operations.CreateTagRequestBody, operations.CreateTagRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
         r"""Create a new tag
 
@@ -177,6 +170,7 @@ class Tags(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -193,15 +187,13 @@ class Tags(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.CreateTagGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateTagRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -251,6 +243,7 @@ class Tags(BaseSDK):
         self, *,
         request: Optional[Union[operations.CreateTagRequestBody, operations.CreateTagRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
         r"""Create a new tag
 
@@ -258,6 +251,7 @@ class Tags(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -274,15 +268,13 @@ class Tags(BaseSDK):
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.CreateTagGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateTagRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -333,6 +325,7 @@ class Tags(BaseSDK):
         id: str,
         request_body: Optional[Union[operations.UpdateTagRequestBody, operations.UpdateTagRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
         r"""Update a tag
 
@@ -341,6 +334,7 @@ class Tags(BaseSDK):
         :param id: The ID of the tag to update.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -363,11 +357,9 @@ class Tags(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpdateTagGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateTagRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -418,6 +410,7 @@ class Tags(BaseSDK):
         id: str,
         request_body: Optional[Union[operations.UpdateTagRequestBody, operations.UpdateTagRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
         r"""Update a tag
 
@@ -426,6 +419,7 @@ class Tags(BaseSDK):
         :param id: The ID of the tag to update.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -448,11 +442,9 @@ class Tags(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
-            _globals=operations.UpdateTagGlobals(
-                workspace_id=self.sdk_configuration.globals.workspace_id,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateTagRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(

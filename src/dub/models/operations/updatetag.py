@@ -2,20 +2,12 @@
 
 from __future__ import annotations
 from dub.types import BaseModel
-from dub.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata, RequestMetadata
+from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 from enum import Enum
 import pydantic
 from typing import Optional, TypedDict
 from typing_extensions import Annotated, NotRequired
 
-
-class UpdateTagGlobalsTypedDict(TypedDict):
-    workspace_id: NotRequired[str]
-    
-
-class UpdateTagGlobals(BaseModel):
-    workspace_id: Annotated[Optional[str], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.", alias="workspaceId"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
-    
 
 class UpdateTagColor(str, Enum):
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
