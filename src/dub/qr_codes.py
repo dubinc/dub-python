@@ -14,6 +14,7 @@ class QRCodes(BaseSDK):
         self, *,
         request: Union[operations.GetQRCodeRequest, operations.GetQRCodeRequestTypedDict],
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> str:
         r"""Retrieve a QR code
 
@@ -21,6 +22,7 @@ class QRCodes(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -42,6 +44,7 @@ class QRCodes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="image/png",
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -91,6 +94,7 @@ class QRCodes(BaseSDK):
         self, *,
         request: Union[operations.GetQRCodeRequest, operations.GetQRCodeRequestTypedDict],
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> str:
         r"""Retrieve a QR code
 
@@ -98,6 +102,7 @@ class QRCodes(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -119,6 +124,7 @@ class QRCodes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="image/png",
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(

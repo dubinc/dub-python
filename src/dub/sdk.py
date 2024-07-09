@@ -9,7 +9,7 @@ from dub.analytics import Analytics
 from dub.domains import Domains
 from dub.links import Links
 from dub.metatags import Metatags
-from dub.models import components, internal
+from dub.models import components
 from dub.qr_codes import QRCodes
 from dub.tags import Tags
 from dub.track import Track
@@ -32,26 +32,24 @@ class Dub(BaseSDK):
     def __init__(
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
-        workspace_id: Optional[str] = None,
-        project_slug: Optional[str] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
-        retry_config: Optional[Nullable[RetryConfig]] = UNSET
+        retry_config: Optional[Nullable[RetryConfig]] = UNSET,
+        timeout_config: Optional[int] = None
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
         :param token: The token required for authentication
-        :param workspace_id: Configures the workspace_id parameter for all supported operations
-        :param project_slug: Configures the project_slug parameter for all supported operations
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
         :param client: The HTTP client to use for all synchronous methods
         :param async_client: The Async HTTP client to use for all asynchronous methods
         :param retry_config: The retry configuration to use for all supported methods
+        :param timeout_config: Optional request timeout applied to each operation in milliseconds
         """
         if client is None:
             client = httpx.Client()
@@ -77,19 +75,15 @@ class Dub(BaseSDK):
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
     
-        _globals = internal.Globals(
-            workspace_id=workspace_id,
-            project_slug=project_slug,
-        )
 
         BaseSDK.__init__(self, SDKConfiguration(
             client=client,
             async_client=async_client,
-            globals=_globals,
             security=security,
             server_url=server_url,
             server_idx=server_idx,
-            retry_config=retry_config
+            retry_config=retry_config,
+            timeout_config=timeout_config
         ))
 
         hooks = SDKHooks()

@@ -2,20 +2,12 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable
-from dub.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata, RequestMetadata
+from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
 from typing import Optional, TypedDict
 from typing_extensions import Annotated, NotRequired
 
-
-class UpdateDomainGlobalsTypedDict(TypedDict):
-    workspace_id: NotRequired[str]
-    
-
-class UpdateDomainGlobals(BaseModel):
-    workspace_id: Annotated[Optional[str], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.", alias="workspaceId"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
-    
 
 class UpdateDomainRequestBodyTypedDict(TypedDict):
     slug: NotRequired[str]

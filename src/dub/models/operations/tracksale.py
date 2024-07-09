@@ -2,21 +2,12 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable
-from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, Optional, TypedDict
 from typing_extensions import Annotated, NotRequired
 
-
-class TrackSaleGlobalsTypedDict(TypedDict):
-    workspace_id: NotRequired[str]
-    
-
-class TrackSaleGlobals(BaseModel):
-    workspace_id: Annotated[Optional[str], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.", alias="workspaceId"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
-    
 
 class PaymentProcessor(str, Enum):
     r"""The payment processor via which the sale was made."""

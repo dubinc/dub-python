@@ -5,7 +5,7 @@ from ._hooks import SDKHooks
 from .httpclient import AsyncHttpClient, HttpClient
 from .utils import RetryConfig, remove_suffix
 from dataclasses import dataclass
-from dub.models import components, internal
+from dub.models import components
 from dub.types import Nullable, UNSET
 from typing import Callable, Dict, Optional, Tuple, Union
 
@@ -20,16 +20,16 @@ SERVERS = [
 class SDKConfiguration:
     client: HttpClient
     async_client: AsyncHttpClient
-    globals: internal.Globals
     security: Optional[Union[components.Security,Callable[[], components.Security]]] = None
     server_url: Optional[str] = ""
     server_idx: Optional[int] = 0
     language: str = "python"
     openapi_doc_version: str = "0.0.1"
-    sdk_version: str = "0.0.19"
-    gen_version: str = "2.359.6"
-    user_agent: str = "speakeasy-sdk/python 0.0.19 2.359.6 0.0.1 dub"
+    sdk_version: str = "0.1.0"
+    gen_version: str = "2.361.10"
+    user_agent: str = "speakeasy-sdk/python 0.1.0 2.361.10 0.0.1 dub"
     retry_config: Optional[Nullable[RetryConfig]] = UNSET
+    timeout_config: Optional[int] = None
 
     def __post_init__(self):
         self._hooks = SDKHooks()

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 095ac23ad79b88e598171eb4620de038
+  docChecksum: 2dc0e57ebc2df7985435f1560ba8e4cc
   docVersion: 0.0.1
-  speakeasyVersion: 1.327.0
-  generationVersion: 2.359.6
-  releaseVersion: 0.0.19
-  configChecksum: e11e50b5bc5293e2ddb0174dc56c61ee
+  speakeasyVersion: 1.330.0
+  generationVersion: 2.361.10
+  releaseVersion: 0.1.0
+  configChecksum: 842972d3e85b75b89e24b5c8269651e2
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.2.9
+    core: 0.2.11
     deprecations: 0.1.1
     examples: 0.1.0
     flattening: 0.1.0
@@ -22,8 +22,6 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 0.1.0
-    globals: 0.1.0
-    hiddenGlobals: 0.1.0
     nameOverrides: 0.1.0
     nullables: 0.1.0
     responseFormat: 0.1.0
@@ -122,10 +120,8 @@ generatedFiles:
   - src/dub/models/operations/retrieveanalytics.py
   - src/dub/models/operations/getworkspace.py
   - src/dub/models/operations/updateworkspace.py
-  - src/dub/models/operations/gettags.py
   - src/dub/models/operations/createtag.py
   - src/dub/models/operations/updatetag.py
-  - src/dub/models/operations/listdomains.py
   - src/dub/models/operations/createdomain.py
   - src/dub/models/operations/deletedomain.py
   - src/dub/models/operations/updatedomain.py
@@ -133,12 +129,10 @@ generatedFiles:
   - src/dub/models/operations/tracksale.py
   - src/dub/models/operations/trackcustomer.py
   - src/dub/models/operations/getmetatags.py
-  - src/dub/models/internal/globals.py
   - src/dub/models/__init__.py
   - src/dub/models/errors/__init__.py
   - src/dub/models/components/__init__.py
   - src/dub/models/operations/__init__.py
-  - src/dub/models/internal/__init__.py
   - docs/models/components/geo.md
   - docs/models/components/linkschema.md
   - docs/models/components/color.md
@@ -215,33 +209,26 @@ generatedFiles:
   - docs/models/errors/internalservererrorcode.md
   - docs/models/errors/internalservererrorerror.md
   - docs/models/errors/internalservererror.md
-  - docs/models/operations/getlinksglobals.md
   - docs/models/operations/queryparamtagids.md
   - docs/models/operations/queryparamtagnames.md
   - docs/models/operations/sort.md
   - docs/models/operations/getlinksrequest.md
-  - docs/models/operations/createlinkglobals.md
   - docs/models/operations/tagids.md
   - docs/models/operations/tagnames.md
   - docs/models/operations/createlinkrequestbody.md
-  - docs/models/operations/getlinkscountglobals.md
   - docs/models/operations/getlinkscountqueryparamtagids.md
   - docs/models/operations/getlinkscountqueryparamtagnames.md
   - docs/models/operations/two.md
   - docs/models/operations/one.md
   - docs/models/operations/groupby.md
   - docs/models/operations/getlinkscountrequest.md
-  - docs/models/operations/getlinkinfoglobals.md
   - docs/models/operations/getlinkinforequest.md
-  - docs/models/operations/deletelinkglobals.md
   - docs/models/operations/deletelinkrequest.md
   - docs/models/operations/deletelinkresponsebody.md
-  - docs/models/operations/updatelinkglobals.md
   - docs/models/operations/updatelinktagids.md
   - docs/models/operations/updatelinktagnames.md
   - docs/models/operations/updatelinkrequestbody.md
   - docs/models/operations/updatelinkrequest.md
-  - docs/models/operations/bulkcreatelinksglobals.md
   - docs/models/operations/bulkcreatelinkstagids.md
   - docs/models/operations/bulkcreatelinkstagnames.md
   - docs/models/operations/requestbody.md
@@ -249,13 +236,11 @@ generatedFiles:
   - docs/models/operations/bulkupdatelinkstagnames.md
   - docs/models/operations/data.md
   - docs/models/operations/bulkupdatelinksrequestbody.md
-  - docs/models/operations/upsertlinkglobals.md
   - docs/models/operations/upsertlinktagids.md
   - docs/models/operations/upsertlinktagnames.md
   - docs/models/operations/upsertlinkrequestbody.md
   - docs/models/operations/level.md
   - docs/models/operations/getqrcoderequest.md
-  - docs/models/operations/retrieveanalyticsglobals.md
   - docs/models/operations/event.md
   - docs/models/operations/queryparamgroupby.md
   - docs/models/operations/interval.md
@@ -264,38 +249,25 @@ generatedFiles:
   - docs/models/operations/getworkspacerequest.md
   - docs/models/operations/updateworkspacerequestbody.md
   - docs/models/operations/updateworkspacerequest.md
-  - docs/models/operations/gettagsglobals.md
-  - docs/models/operations/gettagsrequest.md
-  - docs/models/operations/createtagglobals.md
   - docs/models/operations/color.md
   - docs/models/operations/createtagrequestbody.md
-  - docs/models/operations/updatetagglobals.md
   - docs/models/operations/updatetagcolor.md
   - docs/models/operations/updatetagrequestbody.md
   - docs/models/operations/updatetagrequest.md
-  - docs/models/operations/listdomainsglobals.md
-  - docs/models/operations/listdomainsrequest.md
-  - docs/models/operations/createdomainglobals.md
   - docs/models/operations/createdomainrequestbody.md
-  - docs/models/operations/deletedomainglobals.md
   - docs/models/operations/deletedomainrequest.md
   - docs/models/operations/deletedomainresponsebody.md
-  - docs/models/operations/updatedomainglobals.md
   - docs/models/operations/updatedomainrequestbody.md
   - docs/models/operations/updatedomainrequest.md
-  - docs/models/operations/trackleadglobals.md
   - docs/models/operations/trackleadrequestbody.md
   - docs/models/operations/trackleadresponsebody.md
-  - docs/models/operations/tracksaleglobals.md
   - docs/models/operations/paymentprocessor.md
   - docs/models/operations/tracksalerequestbody.md
   - docs/models/operations/tracksaleresponsebody.md
-  - docs/models/operations/trackcustomerglobals.md
   - docs/models/operations/trackcustomerrequestbody.md
   - docs/models/operations/trackcustomerresponsebody.md
   - docs/models/operations/getmetatagsrequest.md
   - docs/models/operations/getmetatagsresponsebody.md
-  - docs/models/internal/globals.md
   - docs/sdks/dub/README.md
   - docs/sdks/links/README.md
   - docs/sdks/qrcodes/README.md

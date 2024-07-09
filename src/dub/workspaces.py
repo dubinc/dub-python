@@ -14,6 +14,7 @@ class Workspaces(BaseSDK):
         self, *,
         request: Union[operations.GetWorkspaceRequest, operations.GetWorkspaceRequestTypedDict],
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.WorkspaceSchema:
         r"""Retrieve a workspace
 
@@ -21,6 +22,7 @@ class Workspaces(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -42,6 +44,7 @@ class Workspaces(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -91,6 +94,7 @@ class Workspaces(BaseSDK):
         self, *,
         request: Union[operations.GetWorkspaceRequest, operations.GetWorkspaceRequestTypedDict],
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.WorkspaceSchema:
         r"""Retrieve a workspace
 
@@ -98,6 +102,7 @@ class Workspaces(BaseSDK):
 
         :param request: The request object to send.
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -119,6 +124,7 @@ class Workspaces(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
@@ -169,6 +175,7 @@ class Workspaces(BaseSDK):
         id_or_slug: str,
         request_body: Optional[Union[operations.UpdateWorkspaceRequestBody, operations.UpdateWorkspaceRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.WorkspaceSchema:
         r"""Update a workspace
 
@@ -177,6 +184,7 @@ class Workspaces(BaseSDK):
         :param id_or_slug: The ID or slug of the workspace to update.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -201,6 +209,7 @@ class Workspaces(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateWorkspaceRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = self.do_request(
@@ -251,6 +260,7 @@ class Workspaces(BaseSDK):
         id_or_slug: str,
         request_body: Optional[Union[operations.UpdateWorkspaceRequestBody, operations.UpdateWorkspaceRequestBodyTypedDict]] = None,
         server_url: Optional[str] = None,
+        timeout_config: Optional[int] = None,
     ) -> components.WorkspaceSchema:
         r"""Update a workspace
 
@@ -259,6 +269,7 @@ class Workspaces(BaseSDK):
         :param id_or_slug: The ID or slug of the workspace to update.
         :param request_body: 
         :param server_url: Override the default server URL for this method
+        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
@@ -283,6 +294,7 @@ class Workspaces(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateWorkspaceRequestBody]),
+            timeout_config=timeout_config,
         )
         
         http_res = await self.do_request_async(
