@@ -3,7 +3,7 @@
 from .basesdk import BaseSDK
 from dub._hooks import HookContext
 from dub.models import components, errors, operations
-from dub.types import BaseModel
+from dub.types import BaseModel, Nullable, UNSET
 import dub.utils as utils
 from typing import List, Optional, Union
 
@@ -12,6 +12,7 @@ class Tags(BaseSDK):
     
     def list(
         self, *,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.TagSchema]:
@@ -19,11 +20,15 @@ class Tags(BaseSDK):
 
         Retrieve a list of tags for the authenticated workspace.
 
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         req = self.build_request(
@@ -41,10 +46,25 @@ class Tags(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="getTags", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -86,6 +106,7 @@ class Tags(BaseSDK):
     
     async def list_async(
         self, *,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.TagSchema]:
@@ -93,11 +114,15 @@ class Tags(BaseSDK):
 
         Retrieve a list of tags for the authenticated workspace.
 
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         req = self.build_request(
@@ -115,10 +140,25 @@ class Tags(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="getTags", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -161,6 +201,7 @@ class Tags(BaseSDK):
     def create(
         self, *,
         request: Optional[Union[operations.CreateTagRequestBody, operations.CreateTagRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
@@ -169,11 +210,15 @@ class Tags(BaseSDK):
         Create a new tag for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -196,10 +241,25 @@ class Tags(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="createTag", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -242,6 +302,7 @@ class Tags(BaseSDK):
     async def create_async(
         self, *,
         request: Optional[Union[operations.CreateTagRequestBody, operations.CreateTagRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
@@ -250,11 +311,15 @@ class Tags(BaseSDK):
         Create a new tag for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -277,10 +342,25 @@ class Tags(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="createTag", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -324,6 +404,7 @@ class Tags(BaseSDK):
         self, *,
         id: str,
         request_body: Optional[Union[operations.UpdateTagRequestBody, operations.UpdateTagRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
@@ -333,11 +414,15 @@ class Tags(BaseSDK):
 
         :param id: The ID of the tag to update.
         :param request_body: 
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -362,10 +447,25 @@ class Tags(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="updateTag", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -409,6 +509,7 @@ class Tags(BaseSDK):
         self, *,
         id: str,
         request_body: Optional[Union[operations.UpdateTagRequestBody, operations.UpdateTagRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.TagSchema:
@@ -418,11 +519,15 @@ class Tags(BaseSDK):
 
         :param id: The ID of the tag to update.
         :param request_body: 
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -447,10 +552,25 @@ class Tags(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="updateTag", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         

@@ -3,31 +3,33 @@ id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
   docChecksum: d074e83422312242c953b9123b5c20aa
   docVersion: 0.0.1
-  speakeasyVersion: 1.330.0
-  generationVersion: 2.361.10
-  releaseVersion: 0.2.0
-  configChecksum: c5f1e6166028cd54c6b662be7bb78732
+  speakeasyVersion: 1.331.0
+  generationVersion: 2.365.0
+  releaseVersion: 0.3.0
+  configChecksum: 22cf933045c93a75dfa8a0bd76057b37
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 features:
   python:
-    additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.0
-    core: 0.2.11
-    deprecations: 0.1.1
-    errors: 0.1.0
-    examples: 0.1.0
-    flattening: 0.1.0
-    globalSecurity: 0.1.0
-    globalSecurityCallbacks: 0.1.0
-    globalSecurityFlattening: 0.1.0
-    globalServerURLs: 0.1.0
-    nameOverrides: 0.1.0
-    nullables: 0.1.0
-    responseFormat: 0.1.0
-    sdkHooks: 0.1.0
-    unions: 0.1.0
+    additionalDependencies: 1.0.0
+    constsAndDefaults: 1.0.0
+    core: 5.0.0
+    defaultEnabledRetries: 0.2.0
+    deprecations: 3.0.0
+    errors: 3.0.0
+    examples: 3.0.0
+    flattening: 3.0.0
+    globalSecurity: 3.0.0
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.0.0
+    nameOverrides: 3.0.0
+    nullables: 1.0.0
+    responseFormat: 1.0.0
+    retries: 3.0.0
+    sdkHooks: 1.0.0
+    unions: 3.0.0
 generatedFiles:
   - src/dub/sdkconfiguration.py
   - src/dub/links.py
@@ -270,6 +272,7 @@ generatedFiles:
   - docs/models/operations/getmetatagsrequest.md
   - docs/models/operations/getmetatagsresponsebody.md
   - docs/sdks/dub/README.md
+  - docs/models/utils/retryconfig.md
   - docs/sdks/links/README.md
   - docs/sdks/qrcodes/README.md
   - docs/sdks/analytics/README.md
