@@ -3,7 +3,7 @@
 from .basesdk import BaseSDK
 from dub._hooks import HookContext
 from dub.models import components, errors, operations
-from dub.types import BaseModel
+from dub.types import BaseModel, Nullable, UNSET
 import dub.utils as utils
 from typing import List, Optional, Union
 
@@ -13,6 +13,7 @@ class Links(BaseSDK):
     def list(
         self, *,
         request: Optional[Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
@@ -21,11 +22,15 @@ class Links(BaseSDK):
         Retrieve a paginated list of links for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -47,10 +52,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="getLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -93,6 +113,7 @@ class Links(BaseSDK):
     async def list_async(
         self, *,
         request: Optional[Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
@@ -101,11 +122,15 @@ class Links(BaseSDK):
         Retrieve a paginated list of links for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -127,10 +152,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="getLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -173,6 +213,7 @@ class Links(BaseSDK):
     def create(
         self, *,
         request: Optional[Union[operations.CreateLinkRequestBody, operations.CreateLinkRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -181,11 +222,15 @@ class Links(BaseSDK):
         Create a new link for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -208,10 +253,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="createLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -254,6 +314,7 @@ class Links(BaseSDK):
     async def create_async(
         self, *,
         request: Optional[Union[operations.CreateLinkRequestBody, operations.CreateLinkRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -262,11 +323,15 @@ class Links(BaseSDK):
         Create a new link for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -289,10 +354,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="createLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -335,6 +415,7 @@ class Links(BaseSDK):
     def count(
         self, *,
         request: Optional[Union[operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> float:
@@ -343,11 +424,15 @@ class Links(BaseSDK):
         Retrieve the number of links for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -369,10 +454,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="getLinksCount", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -415,6 +515,7 @@ class Links(BaseSDK):
     async def count_async(
         self, *,
         request: Optional[Union[operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> float:
@@ -423,11 +524,15 @@ class Links(BaseSDK):
         Retrieve the number of links for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -449,10 +554,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="getLinksCount", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -495,6 +615,7 @@ class Links(BaseSDK):
     def get(
         self, *,
         request: Optional[Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -503,11 +624,15 @@ class Links(BaseSDK):
         Retrieve the info for a link.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -529,10 +654,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="getLinkInfo", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -575,6 +715,7 @@ class Links(BaseSDK):
     async def get_async(
         self, *,
         request: Optional[Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -583,11 +724,15 @@ class Links(BaseSDK):
         Retrieve the info for a link.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -609,10 +754,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="getLinkInfo", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -655,6 +815,7 @@ class Links(BaseSDK):
     def delete(
         self, *,
         link_id: str,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> operations.DeleteLinkResponseBody:
@@ -663,11 +824,15 @@ class Links(BaseSDK):
         Delete a link for the authenticated workspace.
 
         :param link_id: The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -690,10 +855,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="deleteLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -736,6 +916,7 @@ class Links(BaseSDK):
     async def delete_async(
         self, *,
         link_id: str,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> operations.DeleteLinkResponseBody:
@@ -744,11 +925,15 @@ class Links(BaseSDK):
         Delete a link for the authenticated workspace.
 
         :param link_id: The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -771,10 +956,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="deleteLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -818,6 +1018,7 @@ class Links(BaseSDK):
         self, *,
         link_id: str,
         request_body: Optional[Union[operations.UpdateLinkRequestBody, operations.UpdateLinkRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -827,11 +1028,15 @@ class Links(BaseSDK):
 
         :param link_id: The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
         :param request_body: 
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -856,10 +1061,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="updateLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -903,6 +1123,7 @@ class Links(BaseSDK):
         self, *,
         link_id: str,
         request_body: Optional[Union[operations.UpdateLinkRequestBody, operations.UpdateLinkRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -912,11 +1133,15 @@ class Links(BaseSDK):
 
         :param link_id: The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
         :param request_body: 
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -941,10 +1166,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="updateLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -987,6 +1227,7 @@ class Links(BaseSDK):
     def create_many(
         self, *,
         request: Optional[Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
@@ -995,11 +1236,15 @@ class Links(BaseSDK):
         Bulk create up to 100 links for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -1022,10 +1267,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="bulkCreateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -1068,6 +1328,7 @@ class Links(BaseSDK):
     async def create_many_async(
         self, *,
         request: Optional[Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
@@ -1076,11 +1337,15 @@ class Links(BaseSDK):
         Bulk create up to 100 links for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -1103,10 +1368,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="bulkCreateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -1149,6 +1429,7 @@ class Links(BaseSDK):
     def update_many(
         self, *,
         request: Optional[Union[operations.BulkUpdateLinksRequestBody, operations.BulkUpdateLinksRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
@@ -1157,11 +1438,15 @@ class Links(BaseSDK):
         Bulk update up to 100 links with the same data for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -1184,10 +1469,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="bulkUpdateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -1230,6 +1530,7 @@ class Links(BaseSDK):
     async def update_many_async(
         self, *,
         request: Optional[Union[operations.BulkUpdateLinksRequestBody, operations.BulkUpdateLinksRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> List[components.LinkSchema]:
@@ -1238,11 +1539,15 @@ class Links(BaseSDK):
         Bulk update up to 100 links with the same data for the authenticated workspace.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -1265,10 +1570,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="bulkUpdateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -1311,6 +1631,7 @@ class Links(BaseSDK):
     def upsert(
         self, *,
         request: Optional[Union[operations.UpsertLinkRequestBody, operations.UpsertLinkRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -1319,11 +1640,15 @@ class Links(BaseSDK):
         Upsert a link for the authenticated workspace by its URL. If a link with the same URL already exists, return it (or update it if there are any changes). Otherwise, a new link will be created.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -1346,10 +1671,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = self.do_request(
             hook_ctx=HookContext(operation_id="upsertLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         
@@ -1392,6 +1732,7 @@ class Links(BaseSDK):
     async def upsert_async(
         self, *,
         request: Optional[Union[operations.UpsertLinkRequestBody, operations.UpsertLinkRequestBodyTypedDict]] = None,
+        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
         server_url: Optional[str] = None,
         timeout_config: Optional[int] = None,
     ) -> components.LinkSchema:
@@ -1400,11 +1741,15 @@ class Links(BaseSDK):
         Upsert a link for the authenticated workspace by its URL. If a link with the same URL already exists, return it (or update it if there are any changes). Otherwise, a new link will be created.
 
         :param request: The request object to send.
+        :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_config: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
+        if timeout_config is None:
+            timeout_config = self.sdk_configuration.timeout_config
+        
         if server_url is not None:
             base_url = server_url
         
@@ -1427,10 +1772,25 @@ class Links(BaseSDK):
             timeout_config=timeout_config,
         )
         
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, [
+                "429",
+                "500",
+                "502",
+                "503",
+                "504"
+            ])                
+        
         http_res = await self.do_request_async(
             hook_ctx=HookContext(operation_id="upsertLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
+            retry_config=retry_config
         )
         
         

@@ -95,10 +95,7 @@ class BaseSDK:
         ):
             headers["content-type"] = serialized_request_body.media_type
 
-        if timeout_config is not None:
-            timeout = timeout_config / 1000 if timeout_config is not None else None
-        else:
-            timeout = self.sdk_configuration.timeout_config / 1000 if self.sdk_configuration.timeout_config is not None else None
+        timeout = timeout_config / 1000 if timeout_config is not None else None
 
         return client.build_request(
             method,

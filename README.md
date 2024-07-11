@@ -413,6 +413,50 @@ if res is not None:
 ```
 <!-- End Authentication [security] -->
 
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
+```python
+from dub import Dub
+from dub.utils import BackoffStrategy, RetryConfig
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+
+res = s.links.list(request={},
+    RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
+```python
+from dub import Dub
+from dub.utils import BackoffStrategy, RetryConfig
+
+s = Dub(
+    retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+    token="DUB_API_KEY",
+)
+
+
+res = s.links.list(request={})
+
+if res is not None:
+    # handle response
+    pass
+
+```
+<!-- End Retries [retries] -->
+
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
 # Development
