@@ -17,7 +17,6 @@ class Event(str, Enum):
     SALES = "sales"
     COMPOSITE = "composite"
 
-
 class QueryParamGroupBy(str, Enum):
     r"""The parameter to group the analytics data points by. Defaults to 'count' if undefined."""
     COUNT = "count"
@@ -32,7 +31,6 @@ class QueryParamGroupBy(str, Enum):
     TOP_URLS = "top_urls"
     TRIGGER = "trigger"
 
-
 class Interval(str, Enum):
     r"""The interval to retrieve analytics for. Takes precedence over start and end. If undefined, defaults to 24h."""
     TWENTY_FOURH = "24h"
@@ -43,7 +41,6 @@ class Interval(str, Enum):
     ONEY = "1y"
     ALL = "all"
     ALL_UNFILTERED = "all_unfiltered"
-
 
 class RetrieveAnalyticsRequestTypedDict(TypedDict):
     event: NotRequired[Event]

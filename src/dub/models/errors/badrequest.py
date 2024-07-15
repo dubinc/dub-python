@@ -12,7 +12,6 @@ class Code(str, Enum):
     r"""A short code indicating the error code returned."""
     BAD_REQUEST = "bad_request"
 
-
 class ErrorTypedDict(TypedDict):
     code: Code
     r"""A short code indicating the error code returned."""

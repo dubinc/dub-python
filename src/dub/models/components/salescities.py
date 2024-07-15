@@ -259,7 +259,6 @@ class SalesCitiesCountry(str, Enum):
     SS = "SS"
     XK = "XK"
 
-
 class SalesCitiesTypedDict(TypedDict):
     city: str
     r"""The name of the city"""

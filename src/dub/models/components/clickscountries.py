@@ -259,7 +259,6 @@ class Country(str, Enum):
     SS = "SS"
     XK = "XK"
 
-
 class ClicksCountriesTypedDict(TypedDict):
     country: Country
     r"""The 2-letter country code: https://d.to/geo"""

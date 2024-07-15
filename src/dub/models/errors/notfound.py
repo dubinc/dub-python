@@ -12,7 +12,6 @@ class NotFoundCode(str, Enum):
     r"""A short code indicating the error code returned."""
     NOT_FOUND = "not_found"
 
-
 class NotFoundErrorTypedDict(TypedDict):
     code: NotFoundCode
     r"""A short code indicating the error code returned."""

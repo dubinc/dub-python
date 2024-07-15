@@ -256,4 +256,3 @@ class CountryCode(str, Enum):
     SX = "SX"
     SS = "SS"
     XK = "XK"
-

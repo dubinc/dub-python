@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: d074e83422312242c953b9123b5c20aa
+  docChecksum: fe340caa479dc343bdc532bc03f01fa9
   docVersion: 0.0.1
-  speakeasyVersion: 1.331.0
-  generationVersion: 2.365.0
-  releaseVersion: 0.3.0
-  configChecksum: 22cf933045c93a75dfa8a0bd76057b37
+  speakeasyVersion: 1.335.0
+  generationVersion: 2.370.2
+  releaseVersion: 0.3.1
+  configChecksum: 8a359861ee567f69750211070e5f10d8
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -41,6 +41,7 @@ generatedFiles:
   - src/dub/track.py
   - src/dub/metatags.py
   - src/dub/sdk.py
+  - .vscode/settings.json
   - py.typed
   - pylintrc
   - pyproject.toml

@@ -12,7 +12,6 @@ class ConflictCode(str, Enum):
     r"""A short code indicating the error code returned."""
     CONFLICT = "conflict"
 
-
 class ConflictErrorTypedDict(TypedDict):
     code: ConflictCode
     r"""A short code indicating the error code returned."""

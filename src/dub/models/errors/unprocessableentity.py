@@ -12,7 +12,6 @@ class UnprocessableEntityCode(str, Enum):
     r"""A short code indicating the error code returned."""
     UNPROCESSABLE_ENTITY = "unprocessable_entity"
 
-
 class UnprocessableEntityErrorTypedDict(TypedDict):
     code: UnprocessableEntityCode
     r"""A short code indicating the error code returned."""

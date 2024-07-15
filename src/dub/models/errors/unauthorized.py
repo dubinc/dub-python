@@ -12,7 +12,6 @@ class UnauthorizedCode(str, Enum):
     r"""A short code indicating the error code returned."""
     UNAUTHORIZED = "unauthorized"
 
-
 class UnauthorizedErrorTypedDict(TypedDict):
     code: UnauthorizedCode
     r"""A short code indicating the error code returned."""

@@ -19,7 +19,6 @@ class UpdateTagColor(str, Enum):
     PINK = "pink"
     BROWN = "brown"
 
-
 class UpdateTagRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the tag to create."""

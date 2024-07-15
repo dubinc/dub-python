@@ -12,7 +12,6 @@ class ForbiddenCode(str, Enum):
     r"""A short code indicating the error code returned."""
     FORBIDDEN = "forbidden"
 
-
 class ForbiddenErrorTypedDict(TypedDict):
     code: ForbiddenCode
     r"""A short code indicating the error code returned."""

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from dub.models.components import linkgeotargeting as components_linkgeotargeting
-from dub.types import BaseModel, Nullable
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, TypedDict, Union
@@ -67,7 +67,7 @@ class CreateLinkRequestBody(BaseModel):
     r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
-    external_id: Annotated[Optional[Nullable[str]], pydantic.Field(alias="externalId")] = None
+    external_id: Annotated[OptionalNullable[str], pydantic.Field(alias="externalId")] = UNSET
     r"""This is the ID of the link in your database. If set, it can be used to identify the link in the future. Must be prefixed with `ext_` when passed as a query parameter."""
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
@@ -77,43 +77,43 @@ class CreateLinkRequestBody(BaseModel):
     r"""Whether the short link is archived."""
     public_stats: Annotated[Optional[bool], pydantic.Field(alias="publicStats")] = False
     r"""Whether the short link's stats are publicly accessible."""
-    tag_id: Annotated[Optional[Nullable[str]], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.", alias="tagId")] = None
+    tag_id: Annotated[OptionalNullable[str], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.", alias="tagId")] = UNSET
     r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tagIds` instead."""
     tag_ids: Annotated[Optional[TagIds], pydantic.Field(alias="tagIds")] = None
     r"""The unique IDs of the tags assigned to the short link."""
     tag_names: Annotated[Optional[TagNames], pydantic.Field(alias="tagNames")] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
-    comments: Optional[Nullable[str]] = None
+    comments: OptionalNullable[str] = UNSET
     r"""The comments for the short link."""
-    expires_at: Annotated[Optional[Nullable[str]], pydantic.Field(alias="expiresAt")] = None
+    expires_at: Annotated[OptionalNullable[str], pydantic.Field(alias="expiresAt")] = UNSET
     r"""The date and time when the short link will expire at."""
-    expired_url: Annotated[Optional[Nullable[str]], pydantic.Field(alias="expiredUrl")] = None
+    expired_url: Annotated[OptionalNullable[str], pydantic.Field(alias="expiredUrl")] = UNSET
     r"""The URL to redirect to when the short link has expired."""
-    password: Optional[Nullable[str]] = None
+    password: OptionalNullable[str] = UNSET
     r"""The password required to access the destination URL of the short link."""
     proxy: Optional[bool] = False
     r"""Whether the short link uses Custom Social Media Cards feature."""
-    title: Optional[Nullable[str]] = None
+    title: OptionalNullable[str] = UNSET
     r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
-    description: Optional[Nullable[str]] = None
+    description: OptionalNullable[str] = UNSET
     r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
-    image: Optional[Nullable[str]] = None
+    image: OptionalNullable[str] = UNSET
     r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
     rewrite: Optional[bool] = False
     r"""Whether the short link uses link cloaking."""
-    ios: Optional[Nullable[str]] = None
+    ios: OptionalNullable[str] = UNSET
     r"""The iOS destination URL for the short link for iOS device targeting."""
-    android: Optional[Nullable[str]] = None
+    android: OptionalNullable[str] = UNSET
     r"""The Android destination URL for the short link for Android device targeting."""
-    geo: Optional[Nullable[components_linkgeotargeting.LinkGeoTargeting]] = None
+    geo: OptionalNullable[components_linkgeotargeting.LinkGeoTargeting] = UNSET
     r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
     do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = False
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["domain", "key", "externalId", "prefix", "trackConversion", "archived", "publicStats", "tagId", "tagIds", "tagNames", "comments", "expiresAt", "expiredUrl", "password", "proxy", "title", "description", "image", "rewrite", "ios", "android", "geo", "doIndex"]
-        nullable_fields = ["externalId", "tagId", "comments", "expiresAt", "expiredUrl", "password", "title", "description", "image", "ios", "android", "geo"]
+        optional_fields = ["nullableOptional", "optional"]
+        nullable_fields = ["nullableRequired", "nullableOptional"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -124,13 +124,19 @@ class CreateLinkRequestBody(BaseModel):
             k = f.alias or n
             val = serialized.get(k)
 
-            if val is not None:
+            if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
-            elif not k in optional_fields or (
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields
+                or (
                     k in optional_fields
                     and k in nullable_fields
-                    and (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
-                ):
+                    and (
+                        self.__pydantic_fields_set__.intersection({n})
+                        or k in null_default_fields
+                    )  # pylint: disable=no-member
+                )
+            ):
                 m[k] = val
 
         return m

@@ -15,7 +15,6 @@ class Sort(str, Enum):
     CLICKS = "clicks"
     LAST_CLICKED = "lastClicked"
 
-
 class GetLinksRequestTypedDict(TypedDict):
     domain: NotRequired[str]
     r"""The domain to filter the links by. E.g. `ac.me`. If not provided, all links for the workspace will be returned."""
