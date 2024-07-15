@@ -12,7 +12,6 @@ class InternalServerErrorCode(str, Enum):
     r"""A short code indicating the error code returned."""
     INTERNAL_SERVER_ERROR = "internal_server_error"
 
-
 class InternalServerErrorErrorTypedDict(TypedDict):
     code: InternalServerErrorCode
     r"""A short code indicating the error code returned."""

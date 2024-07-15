@@ -259,7 +259,6 @@ class LeadsCountriesCountry(str, Enum):
     SS = "SS"
     XK = "XK"
 
-
 class LeadsCountriesTypedDict(TypedDict):
     country: LeadsCountriesCountry
     r"""The 2-letter country code: https://d.to/geo"""

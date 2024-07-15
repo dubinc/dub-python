@@ -16,7 +16,6 @@ class Level(str, Enum):
     Q = "Q"
     H = "H"
 
-
 class GetQRCodeRequestTypedDict(TypedDict):
     url: str
     r"""The URL to generate a QR code for."""

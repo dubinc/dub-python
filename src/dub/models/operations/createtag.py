@@ -18,7 +18,6 @@ class Color(str, Enum):
     PINK = "pink"
     BROWN = "brown"
 
-
 class CreateTagRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the tag to create."""

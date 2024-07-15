@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .tagschema import TagSchema, TagSchemaTypedDict
-from dub.types import BaseModel, Nullable
+from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, TypedDict
@@ -682,8 +682,8 @@ class LinkSchema(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["trackConversion", "archived", "proxy", "rewrite", "doIndex", "publicStats", "clicks", "leads", "sales"]
-        nullable_fields = ["externalId", "expiresAt", "expiredUrl", "password", "title", "description", "image", "ios", "android", "geo", "tagId", "tags", "comments", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "lastClicked"]
+        optional_fields = ["nullableOptional", "optional"]
+        nullable_fields = ["nullableRequired", "nullableOptional"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -694,13 +694,19 @@ class LinkSchema(BaseModel):
             k = f.alias or n
             val = serialized.get(k)
 
-            if val is not None:
+            if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
-            elif not k in optional_fields or (
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields
+                or (
                     k in optional_fields
                     and k in nullable_fields
-                    and (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
-                ):
+                    and (
+                        self.__pydantic_fields_set__.intersection({n})
+                        or k in null_default_fields
+                    )  # pylint: disable=no-member
+                )
+            ):
                 m[k] = val
 
         return m

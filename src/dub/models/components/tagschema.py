@@ -16,7 +16,6 @@ class Color(str, Enum):
     PINK = "pink"
     BROWN = "brown"
 
-
 class TagSchemaTypedDict(TypedDict):
     id: str
     r"""The unique ID of the tag."""

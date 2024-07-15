@@ -12,7 +12,6 @@ class InviteExpiredCode(str, Enum):
     r"""A short code indicating the error code returned."""
     INVITE_EXPIRED = "invite_expired"
 
-
 class InviteExpiredErrorTypedDict(TypedDict):
     code: InviteExpiredCode
     r"""A short code indicating the error code returned."""

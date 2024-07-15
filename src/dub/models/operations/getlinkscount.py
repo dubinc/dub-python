@@ -12,10 +12,8 @@ from typing_extensions import Annotated, NotRequired
 class Two(str, Enum):
     TAG_ID = "tagId"
 
-
 class One(str, Enum):
     DOMAIN = "domain"
-
 
 class GetLinksCountRequestTypedDict(TypedDict):
     domain: NotRequired[str]

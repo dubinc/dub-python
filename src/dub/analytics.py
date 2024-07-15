@@ -3,7 +3,7 @@
 from .basesdk import BaseSDK
 from dub._hooks import HookContext
 from dub.models import errors, operations
-from dub.types import BaseModel, Nullable, UNSET
+from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
 from typing import Optional, Union
 
@@ -13,9 +13,9 @@ class Analytics(BaseSDK):
     def retrieve(
         self, *,
         request: Optional[Union[operations.RetrieveAnalyticsRequest, operations.RetrieveAnalyticsRequestTypedDict]] = None,
-        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_config: Optional[int] = None,
+        timeout_ms: Optional[int] = None,
     ) -> operations.RetrieveAnalyticsResponseBody:
         r"""Retrieve analytics for a link, a domain, or the authenticated workspace.
 
@@ -24,12 +24,12 @@ class Analytics(BaseSDK):
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
-        if timeout_config is None:
-            timeout_config = self.sdk_configuration.timeout_config
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
         
         if server_url is not None:
             base_url = server_url
@@ -49,7 +49,7 @@ class Analytics(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            timeout_config=timeout_config,
+            timeout_ms=timeout_ms,
         )
         
         if retries == UNSET:
@@ -113,9 +113,9 @@ class Analytics(BaseSDK):
     async def retrieve_async(
         self, *,
         request: Optional[Union[operations.RetrieveAnalyticsRequest, operations.RetrieveAnalyticsRequestTypedDict]] = None,
-        retries: Optional[Nullable[utils.RetryConfig]] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_config: Optional[int] = None,
+        timeout_ms: Optional[int] = None,
     ) -> operations.RetrieveAnalyticsResponseBody:
         r"""Retrieve analytics for a link, a domain, or the authenticated workspace.
 
@@ -124,12 +124,12 @@ class Analytics(BaseSDK):
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_config: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         """
         base_url = None
         url_variables = None
-        if timeout_config is None:
-            timeout_config = self.sdk_configuration.timeout_config
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
         
         if server_url is not None:
             base_url = server_url
@@ -149,7 +149,7 @@ class Analytics(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            timeout_config=timeout_config,
+            timeout_ms=timeout_ms,
         )
         
         if retries == UNSET:

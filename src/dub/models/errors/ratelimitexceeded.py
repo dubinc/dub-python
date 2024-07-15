@@ -12,7 +12,6 @@ class RateLimitExceededCode(str, Enum):
     r"""A short code indicating the error code returned."""
     RATE_LIMIT_EXCEEDED = "rate_limit_exceeded"
 
-
 class RateLimitExceededErrorTypedDict(TypedDict):
     code: RateLimitExceededCode
     r"""A short code indicating the error code returned."""

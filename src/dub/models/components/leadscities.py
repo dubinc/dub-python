@@ -259,7 +259,6 @@ class LeadsCitiesCountry(str, Enum):
     SS = "SS"
     XK = "XK"
 
-
 class LeadsCitiesTypedDict(TypedDict):
     city: str
     r"""The name of the city"""
