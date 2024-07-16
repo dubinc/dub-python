@@ -5,7 +5,7 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional, TypedDict
+from typing import Dict, List, Optional, TypedDict
 from typing_extensions import Annotated, NotRequired
 
 
@@ -91,8 +91,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The invite code of the workspace."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
-    beta_tester: NotRequired[bool]
-    r"""Whether the workspace is enrolled in the beta testing program."""
+    flags: NotRequired[Dict[str, bool]]
+    r"""The feature flags of the workspace, indicating which features are enabled."""
     
 
 class WorkspaceSchema(BaseModel):
@@ -134,8 +134,8 @@ class WorkspaceSchema(BaseModel):
     r"""The invite code of the workspace."""
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
-    beta_tester: Annotated[Optional[bool], pydantic.Field(alias="betaTester")] = None
-    r"""Whether the workspace is enrolled in the beta testing program."""
+    flags: Optional[Dict[str, bool]] = None
+    r"""The feature flags of the workspace, indicating which features are enabled."""
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
