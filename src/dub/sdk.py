@@ -13,11 +13,11 @@ from dub.models import components
 from dub.qr_codes import QRCodes
 from dub.tags import Tags
 from dub.track import Track
-from dub.types import Nullable, UNSET
+from dub.types import OptionalNullable, UNSET
 import dub.utils as utils
 from dub.workspaces import Workspaces
 import httpx
-from typing import Callable, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union
 
 class Dub(BaseSDK):
     r"""Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
@@ -37,7 +37,7 @@ class Dub(BaseSDK):
         url_params: Optional[Dict[str, str]] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
-        retry_config: Optional[Nullable[RetryConfig]] = UNSET,
+        retry_config: OptionalNullable[RetryConfig] = UNSET,
         timeout_ms: Optional[int] = None
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
@@ -64,8 +64,8 @@ class Dub(BaseSDK):
         assert issubclass(
             type(async_client), AsyncHttpClient
         ), "The provided async_client must implement the AsyncHttpClient protocol."
-
-        security = None
+        
+        security: Any = None
         if callable(token):
             security = lambda: components.Security(token = token()) # pylint: disable=unnecessary-lambda-assignment
         else:

@@ -43,11 +43,13 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     proxy: NotRequired[bool]
     r"""Whether the short link uses Custom Social Media Cards feature."""
     title: NotRequired[Nullable[str]]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     description: NotRequired[Nullable[str]]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     image: NotRequired[Nullable[str]]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    video: NotRequired[Nullable[str]]
+    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     rewrite: NotRequired[bool]
     r"""Whether the short link uses link cloaking."""
     ios: NotRequired[Nullable[str]]
@@ -94,11 +96,13 @@ class CreateLinkRequestBody(BaseModel):
     proxy: Optional[bool] = False
     r"""Whether the short link uses Custom Social Media Cards feature."""
     title: OptionalNullable[str] = UNSET
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     description: OptionalNullable[str] = UNSET
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     image: OptionalNullable[str] = UNSET
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    video: OptionalNullable[str] = UNSET
+    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     rewrite: Optional[bool] = False
     r"""Whether the short link uses link cloaking."""
     ios: OptionalNullable[str] = UNSET
@@ -112,8 +116,8 @@ class CreateLinkRequestBody(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["nullableOptional", "optional"]
-        nullable_fields = ["nullableRequired", "nullableOptional"]
+        optional_fields = ["domain", "key", "externalId", "prefix", "trackConversion", "archived", "publicStats", "tagId", "tagIds", "tagNames", "comments", "expiresAt", "expiredUrl", "password", "proxy", "title", "description", "image", "video", "rewrite", "ios", "android", "geo", "doIndex"]
+        nullable_fields = ["externalId", "tagId", "comments", "expiresAt", "expiredUrl", "password", "title", "description", "image", "video", "ios", "android", "geo"]
         null_default_fields = []
 
         serialized = handler(self)

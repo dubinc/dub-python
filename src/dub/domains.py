@@ -5,7 +5,7 @@ from dub._hooks import HookContext
 from dub.models import components, errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union, cast
 
 class Domains(BaseSDK):
     
@@ -67,7 +67,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.DomainSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -102,6 +102,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def list_async(
@@ -161,7 +162,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.DomainSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -196,6 +197,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def create(
@@ -224,6 +226,7 @@ class Domains(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateDomainRequestBody)
+        request = cast(operations.CreateDomainRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -262,7 +265,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -297,6 +300,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def create_async(
@@ -325,6 +329,7 @@ class Domains(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateDomainRequestBody)
+        request = cast(operations.CreateDomainRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -363,7 +368,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -398,6 +403,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def delete(
@@ -464,7 +470,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.DeleteDomainResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -499,6 +505,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def delete_async(
@@ -565,7 +572,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.DeleteDomainResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -600,6 +607,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def update(
@@ -670,7 +678,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -705,6 +713,7 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def update_async(
@@ -775,7 +784,7 @@ class Domains(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -810,4 +819,5 @@ class Domains(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     

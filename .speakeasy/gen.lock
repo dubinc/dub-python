@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: d0b5f8295789a6e5094c2a864663e7e5
+  docChecksum: ff99d725530dd92bf929c57a1840df75
   docVersion: 0.0.1
-  speakeasyVersion: 1.335.2
-  generationVersion: 2.372.3
-  releaseVersion: 0.4.0
-  configChecksum: 719d50b792f2e12b63f5675e28f6d50f
+  speakeasyVersion: 1.345.1
+  generationVersion: 2.378.1
+  releaseVersion: 0.5.0
+  configChecksum: 3070bcf9e690177352ff689fb4c29896
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.0
-    core: 5.1.2
+    core: 5.2.1
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     envVarSecurityUsage: 0.2.0
@@ -30,7 +30,7 @@ features:
     responseFormat: 1.0.0
     retries: 3.0.0
     sdkHooks: 1.0.0
-    unions: 3.0.0
+    unions: 3.0.1
 generatedFiles:
   - src/dub/sdkconfiguration.py
   - src/dub/links.py
@@ -50,9 +50,11 @@ generatedFiles:
   - src/dub/__init__.py
   - src/dub/basesdk.py
   - src/dub/httpclient.py
+  - src/dub/py.typed
   - src/dub/types/__init__.py
   - src/dub/types/basemodel.py
   - src/dub/utils/__init__.py
+  - src/dub/utils/annotations.py
   - src/dub/utils/enums.py
   - src/dub/utils/eventstreaming.py
   - src/dub/utils/forms.py
@@ -103,6 +105,7 @@ generatedFiles:
   - src/dub/models/components/workspaceschema.py
   - src/dub/models/components/domainschema.py
   - src/dub/models/components/security.py
+  - src/dub/models/components/__init__.py
   - src/dub/models/errors/badrequest.py
   - src/dub/models/errors/unauthorized.py
   - src/dub/models/errors/forbidden.py
@@ -112,6 +115,7 @@ generatedFiles:
   - src/dub/models/errors/unprocessableentity.py
   - src/dub/models/errors/ratelimitexceeded.py
   - src/dub/models/errors/internalservererror.py
+  - src/dub/models/errors/__init__.py
   - src/dub/models/operations/getlinks.py
   - src/dub/models/operations/createlink.py
   - src/dub/models/operations/getlinkscount.py
@@ -134,9 +138,6 @@ generatedFiles:
   - src/dub/models/operations/tracksale.py
   - src/dub/models/operations/trackcustomer.py
   - src/dub/models/operations/getmetatags.py
-  - src/dub/models/__init__.py
-  - src/dub/models/errors/__init__.py
-  - src/dub/models/components/__init__.py
   - src/dub/models/operations/__init__.py
   - docs/models/components/geo.md
   - docs/models/components/linkschema.md
@@ -288,3 +289,4 @@ generatedFiles:
   - src/dub/_hooks/sdkhooks.py
   - src/dub/_hooks/types.py
   - src/dub/_hooks/__init__.py
+  - CONTRIBUTING.md

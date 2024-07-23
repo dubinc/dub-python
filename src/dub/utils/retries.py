@@ -65,7 +65,7 @@ class PermanentError(Exception):
 def retry(func, retries: Retries):
     if retries.config.strategy == "backoff":
 
-        def do_request():
+        def do_request() -> httpx.Response:
             res: httpx.Response
             try:
                 res = func()
@@ -114,7 +114,7 @@ def retry(func, retries: Retries):
 async def retry_async(func, retries: Retries):
     if retries.config.strategy == "backoff":
 
-        async def do_request():
+        async def do_request() -> httpx.Response:
             res: httpx.Response
             try:
                 res = await func()

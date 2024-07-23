@@ -68,7 +68,7 @@ s = Dub(
 )
 
 
-res = s.tags.create(request={})
+res = s.tags.create()
 
 if res is not None:
     # handle response
@@ -116,7 +116,7 @@ s = Dub(
 )
 
 
-res = s.tags.update(id="<value>", request_body={})
+res = s.tags.update(id="<value>")
 
 if res is not None:
     # handle response

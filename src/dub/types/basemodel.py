@@ -2,18 +2,23 @@
 
 from pydantic import ConfigDict, model_serializer
 from pydantic import BaseModel as PydanticBaseModel
-from typing import Optional, TypeVar, Union, NewType
+from typing import Literal, Optional, TypeVar, Union, NewType
 from typing_extensions import TypeAliasType
 
 
 class BaseModel(PydanticBaseModel):
-    model_config = ConfigDict(populate_by_name=True, arbitrary_types_allowed=True)
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, protected_namespaces=()
+    )
 
 
 class Unset(BaseModel):
     @model_serializer(mode="plain")
     def serialize_model(self):
         return UNSET_SENTINEL
+
+    def __bool__(self) -> Literal[False]:
+        return False
 
 
 UNSET = Unset()

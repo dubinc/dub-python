@@ -51,8 +51,8 @@ class DomainSchema(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["nullableOptional", "optional"]
-        nullable_fields = ["nullableRequired", "nullableOptional"]
+        optional_fields = ["verified", "primary", "archived", "placeholder"]
+        nullable_fields = ["expiredUrl"]
         null_default_fields = []
 
         serialized = handler(self)

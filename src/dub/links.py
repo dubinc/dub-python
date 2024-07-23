@@ -5,7 +5,7 @@ from dub._hooks import HookContext
 from dub.models import components, errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union, cast
 
 class Links(BaseSDK):
     
@@ -36,6 +36,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksRequest)
+        request = cast(operations.GetLinksRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -73,7 +74,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -108,6 +109,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def list_async(
@@ -136,6 +138,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksRequest)
+        request = cast(operations.GetLinksRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -173,7 +176,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -208,6 +211,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def create(
@@ -236,6 +240,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateLinkRequestBody)
+        request = cast(operations.CreateLinkRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -274,7 +279,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -309,6 +314,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def create_async(
@@ -337,6 +343,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateLinkRequestBody)
+        request = cast(operations.CreateLinkRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -375,7 +382,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -410,6 +417,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def count(
@@ -438,6 +446,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksCountRequest)
+        request = cast(operations.GetLinksCountRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -475,7 +484,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[float])
         if utils.match_response(http_res, "400", "application/json"):
@@ -510,6 +519,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def count_async(
@@ -538,6 +548,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksCountRequest)
+        request = cast(operations.GetLinksCountRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -575,7 +586,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[float])
         if utils.match_response(http_res, "400", "application/json"):
@@ -610,6 +621,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def get(
@@ -638,6 +650,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinkInfoRequest)
+        request = cast(operations.GetLinkInfoRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -675,7 +688,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -710,6 +723,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def get_async(
@@ -738,6 +752,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinkInfoRequest)
+        request = cast(operations.GetLinkInfoRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -775,7 +790,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -810,6 +825,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def delete(
@@ -876,7 +892,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.DeleteLinkResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -911,6 +927,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def delete_async(
@@ -977,7 +994,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.DeleteLinkResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1012,6 +1029,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def update(
@@ -1082,7 +1100,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1117,6 +1135,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def update_async(
@@ -1187,7 +1206,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1222,6 +1241,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def create_many(
@@ -1250,6 +1270,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, List[operations.RequestBody])
+        request = cast(List[operations.RequestBody], request)
         
         req = self.build_request(
             method="POST",
@@ -1288,7 +1309,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1323,6 +1344,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def create_many_async(
@@ -1351,6 +1373,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, List[operations.RequestBody])
+        request = cast(List[operations.RequestBody], request)
         
         req = self.build_request(
             method="POST",
@@ -1389,7 +1412,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1424,6 +1447,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def update_many(
@@ -1452,6 +1476,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.BulkUpdateLinksRequestBody)
+        request = cast(operations.BulkUpdateLinksRequestBody, request)
         
         req = self.build_request(
             method="PATCH",
@@ -1490,7 +1515,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1525,6 +1550,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def update_many_async(
@@ -1553,6 +1579,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.BulkUpdateLinksRequestBody)
+        request = cast(operations.BulkUpdateLinksRequestBody, request)
         
         req = self.build_request(
             method="PATCH",
@@ -1591,7 +1618,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1626,6 +1653,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def upsert(
@@ -1654,6 +1682,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.UpsertLinkRequestBody)
+        request = cast(operations.UpsertLinkRequestBody, request)
         
         req = self.build_request(
             method="PUT",
@@ -1692,7 +1721,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1727,6 +1756,7 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def upsert_async(
@@ -1755,6 +1785,7 @@ class Links(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.UpsertLinkRequestBody)
+        request = cast(operations.UpsertLinkRequestBody, request)
         
         req = self.build_request(
             method="PUT",
@@ -1793,7 +1824,7 @@ class Links(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
         if utils.match_response(http_res, "400", "application/json"):
@@ -1828,4 +1859,5 @@ class Links(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     

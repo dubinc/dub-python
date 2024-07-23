@@ -5,7 +5,7 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
-from typing import Optional, Union
+from typing import Any, Optional, Union, cast
 
 class QRCodes(BaseSDK):
     
@@ -36,6 +36,7 @@ class QRCodes(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetQRCodeRequest)
+        request = cast(operations.GetQRCodeRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -73,7 +74,7 @@ class QRCodes(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "image/png"):
             return http_res.text
         if utils.match_response(http_res, "400", "application/json"):
@@ -108,6 +109,7 @@ class QRCodes(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def get_async(
@@ -136,6 +138,7 @@ class QRCodes(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetQRCodeRequest)
+        request = cast(operations.GetQRCodeRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -173,7 +176,7 @@ class QRCodes(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "image/png"):
             return http_res.text
         if utils.match_response(http_res, "400", "application/json"):
@@ -208,4 +211,5 @@ class QRCodes(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     

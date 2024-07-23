@@ -542,6 +542,8 @@ class LinkSchemaTypedDict(TypedDict):
     r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
     image: Nullable[str]
     r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    video: Nullable[str]
+    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     ios: Nullable[str]
     r"""The iOS destination URL for the short link for iOS device targeting."""
     android: Nullable[str]
@@ -623,6 +625,8 @@ class LinkSchema(BaseModel):
     r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
     image: Nullable[str]
     r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    video: Nullable[str]
+    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     ios: Nullable[str]
     r"""The iOS destination URL for the short link for iOS device targeting."""
     android: Nullable[str]
@@ -682,8 +686,8 @@ class LinkSchema(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["nullableOptional", "optional"]
-        nullable_fields = ["nullableRequired", "nullableOptional"]
+        optional_fields = ["trackConversion", "archived", "proxy", "rewrite", "doIndex", "publicStats", "clicks", "leads", "sales"]
+        nullable_fields = ["externalId", "expiresAt", "expiredUrl", "password", "title", "description", "image", "video", "ios", "android", "geo", "tagId", "tags", "comments", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "lastClicked"]
         null_default_fields = []
 
         serialized = handler(self)

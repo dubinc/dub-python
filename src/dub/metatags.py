@@ -5,7 +5,7 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
-from typing import Optional, Union
+from typing import Optional, Union, cast
 
 class Metatags(BaseSDK):
     
@@ -36,6 +36,7 @@ class Metatags(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetMetatagsRequest)
+        request = cast(operations.GetMetatagsRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -73,7 +74,6 @@ class Metatags(BaseSDK):
             retry_config=retry_config
         )
         
-        
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.GetMetatagsResponseBody])
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
@@ -81,6 +81,7 @@ class Metatags(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def get_async(
@@ -109,6 +110,7 @@ class Metatags(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetMetatagsRequest)
+        request = cast(operations.GetMetatagsRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -146,7 +148,6 @@ class Metatags(BaseSDK):
             retry_config=retry_config
         )
         
-        
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.GetMetatagsResponseBody])
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
@@ -154,4 +155,5 @@ class Metatags(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     

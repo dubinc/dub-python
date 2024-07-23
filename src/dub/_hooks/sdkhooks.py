@@ -7,7 +7,7 @@ from typing import List, Optional, Tuple
 from dub.httpclient import HttpClient
 
 class SDKHooks(Hooks):
-    def __init__(self):
+    def __init__(self) -> None:
         self.sdk_init_hooks: List[SDKInitHook] = []
         self.before_request_hooks: List[BeforeRequestHook] = []
         self.after_success_hooks: List[AfterSuccessHook] = []

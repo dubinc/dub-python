@@ -43,8 +43,8 @@ class TrackLeadRequestBody(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["nullableOptional", "optional"]
-        nullable_fields = ["nullableRequired", "nullableOptional"]
+        optional_fields = ["customerName", "customerEmail", "customerAvatar", "metadata"]
+        nullable_fields = ["customerName", "customerEmail", "customerAvatar", "metadata"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -98,8 +98,8 @@ class TrackLeadResponseBody(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["nullableOptional", "optional"]
-        nullable_fields = ["nullableRequired", "nullableOptional"]
+        optional_fields = ["metadata"]
+        nullable_fields = ["customerName", "customerEmail", "customerAvatar"]
         null_default_fields = []
 
         serialized = handler(self)

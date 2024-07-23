@@ -139,9 +139,9 @@ class WorkspaceSchema(BaseModel):
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["nullableOptional", "optional"]
-        nullable_fields = ["nullableRequired", "nullableOptional"]
-        null_default_fields = []
+        optional_fields = ["logo", "flags"]
+        nullable_fields = ["stripeId", "stripeConnectId", "inviteCode", "logo"]
+        null_default_fields = ["logo"]
 
         serialized = handler(self)
 

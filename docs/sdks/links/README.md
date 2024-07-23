@@ -27,7 +27,7 @@ s = Dub(
 )
 
 
-res = s.links.list(request={})
+res = s.links.list()
 
 if res is not None:
     # handle response
@@ -129,7 +129,7 @@ s = Dub(
 )
 
 
-res = s.links.count(request={})
+res = s.links.count()
 
 if res is not None:
     # handle response

@@ -5,7 +5,7 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
-from typing import Optional, Union
+from typing import Any, Optional, Union, cast
 
 class Analytics(BaseSDK):
     
@@ -36,6 +36,7 @@ class Analytics(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.RetrieveAnalyticsRequest)
+        request = cast(operations.RetrieveAnalyticsRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -73,7 +74,7 @@ class Analytics(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.RetrieveAnalyticsResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -108,6 +109,7 @@ class Analytics(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def retrieve_async(
@@ -136,6 +138,7 @@ class Analytics(BaseSDK):
         
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.RetrieveAnalyticsRequest)
+        request = cast(operations.RetrieveAnalyticsRequest, request)
         
         req = self.build_request(
             method="GET",
@@ -173,7 +176,7 @@ class Analytics(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.RetrieveAnalyticsResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -208,4 +211,5 @@ class Analytics(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
