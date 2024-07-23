@@ -70,7 +70,7 @@ s = Dub(
 )
 
 
-res = s.workspaces.update(id_or_slug="<value>", request_body={})
+res = s.workspaces.update(id_or_slug="<value>")
 
 if res is not None:
     # handle response

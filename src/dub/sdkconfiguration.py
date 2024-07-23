@@ -6,7 +6,7 @@ from .httpclient import AsyncHttpClient, HttpClient
 from .utils import RetryConfig, remove_suffix
 from dataclasses import dataclass
 from dub.models import components
-from dub.types import Nullable, UNSET
+from dub.types import OptionalNullable, UNSET
 from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
 
@@ -26,10 +26,10 @@ class SDKConfiguration:
     server_idx: Optional[int] = 0
     language: str = "python"
     openapi_doc_version: str = "0.0.1"
-    sdk_version: str = "0.4.0"
-    gen_version: str = "2.372.3"
-    user_agent: str = "speakeasy-sdk/python 0.4.0 2.372.3 0.0.1 dub"
-    retry_config: Optional[Nullable[RetryConfig]] = Field(default_factory=lambda: UNSET)
+    sdk_version: str = "0.5.0"
+    gen_version: str = "2.378.1"
+    user_agent: str = "speakeasy-sdk/python 0.5.0 2.378.1 0.0.1 dub"
+    retry_config: OptionalNullable[RetryConfig] = Field(default_factory=lambda: UNSET)
     timeout_ms: Optional[int] = None
 
     def __post_init__(self):

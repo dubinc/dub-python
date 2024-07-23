@@ -211,7 +211,7 @@ s = Dub(
 
 res = None
 try:
-    res = s.links.list(request={})
+    res = s.links.list()
 
 except errors.BadRequest as e:
     # handle exception
@@ -273,7 +273,7 @@ s = Dub(
 )
 
 
-res = s.links.list(request={})
+res = s.links.list()
 
 if res is not None:
     # handle response
@@ -294,7 +294,7 @@ s = Dub(
 )
 
 
-res = s.links.list(request={})
+res = s.links.list()
 
 if res is not None:
     # handle response
@@ -404,7 +404,7 @@ s = Dub(
 )
 
 
-res = s.links.list(request={})
+res = s.links.list()
 
 if res is not None:
     # handle response
@@ -428,7 +428,7 @@ s = Dub(
 )
 
 
-res = s.links.list(request={},
+res = s.links.list(,
     RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
 if res is not None:
@@ -448,7 +448,7 @@ s = Dub(
 )
 
 
-res = s.links.list(request={})
+res = s.links.list()
 
 if res is not None:
     # handle response

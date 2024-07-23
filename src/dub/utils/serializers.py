@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 import json
-from typing import Type, TypeVar, Union, get_args
+from typing import Any, Union, get_args
 from typing_extensions import get_origin
 from pydantic import ConfigDict, create_model
 from pydantic_core import from_json
@@ -106,14 +106,11 @@ def validate_open_enum(is_int: bool):
     return validate
 
 
-T = TypeVar("T")
-
-
-def unmarshal_json(raw, typ: Type[T]) -> T:
+def unmarshal_json(raw, typ: Any) -> Any:
     return unmarshal(from_json(raw), typ)
 
 
-def unmarshal(val, typ: Type[T]) -> T:
+def unmarshal(val, typ: Any) -> Any:
     unmarshaller = create_model(
         "Unmarshaller",
         body=(typ, ...),
@@ -122,7 +119,8 @@ def unmarshal(val, typ: Type[T]) -> T:
 
     m = unmarshaller(body=val)
 
-    return m.body  # pyright: ignore[reportAttributeAccessIssue]
+    # pyright: ignore[reportAttributeAccessIssue]
+    return m.body  # type: ignore
 
 
 def marshal_json(val, typ):

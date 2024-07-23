@@ -127,9 +127,7 @@ s = Dub(
 )
 
 
-res = s.track.customer(request={
-    "customer_id": "<value>",
-})
+res = s.track.customer()
 
 if res is not None:
     # handle response

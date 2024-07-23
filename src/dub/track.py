@@ -5,7 +5,7 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 import dub.utils as utils
-from typing import Optional, Union
+from typing import Any, Optional, Union, cast
 
 class Track(BaseSDK):
     
@@ -36,6 +36,7 @@ class Track(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackLeadRequestBody)
+        request = cast(operations.TrackLeadRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -74,7 +75,7 @@ class Track(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.TrackLeadResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -109,6 +110,7 @@ class Track(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def lead_async(
@@ -137,6 +139,7 @@ class Track(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackLeadRequestBody)
+        request = cast(operations.TrackLeadRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -175,7 +178,7 @@ class Track(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.TrackLeadResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -210,6 +213,7 @@ class Track(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def sale(
@@ -238,6 +242,7 @@ class Track(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackSaleRequestBody)
+        request = cast(operations.TrackSaleRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -276,7 +281,7 @@ class Track(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.TrackSaleResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -311,6 +316,7 @@ class Track(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def sale_async(
@@ -339,6 +345,7 @@ class Track(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackSaleRequestBody)
+        request = cast(operations.TrackSaleRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -377,7 +384,7 @@ class Track(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.TrackSaleResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -412,6 +419,7 @@ class Track(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     def customer(
@@ -440,6 +448,7 @@ class Track(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackCustomerRequestBody)
+        request = cast(operations.TrackCustomerRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -478,7 +487,7 @@ class Track(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.TrackCustomerResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -513,6 +522,7 @@ class Track(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     
     
     async def customer_async(
@@ -541,6 +551,7 @@ class Track(BaseSDK):
         
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackCustomerRequestBody)
+        request = cast(operations.TrackCustomerRequestBody, request)
         
         req = self.build_request(
             method="POST",
@@ -579,7 +590,7 @@ class Track(BaseSDK):
             retry_config=retry_config
         )
         
-        
+        data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.TrackCustomerResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
@@ -614,4 +625,5 @@ class Track(BaseSDK):
         
         content_type = http_res.headers.get("Content-Type")
         raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+
     

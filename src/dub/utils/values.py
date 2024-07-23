@@ -46,12 +46,12 @@ def match_status_codes(status_codes: List[str], status_code: int) -> bool:
             return True
     return False
 
+
 T = TypeVar("T")
 
+
 def get_global_from_env(
-    value: Optional[T],
-    env_key: str,
-    type_cast: Callable[[str], T] = str
+    value: Optional[T], env_key: str, type_cast: Callable[[str], T]
 ) -> Optional[T]:
     if value is not None:
         return value

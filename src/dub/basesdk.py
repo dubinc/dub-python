@@ -135,11 +135,11 @@ class BaseSDK:
                 raise errors.SDKError("No response received")
 
             if utils.match_status_codes(error_status_codes, http_res.status_code):
-                result, e = self.sdk_configuration.get_hooks().after_error(
+                result, err = self.sdk_configuration.get_hooks().after_error(
                     AfterErrorContext(hook_ctx), http_res, None
                 )
-                if e is not None:
-                    raise e
+                if err is not None:
+                    raise err
                 if result is not None:
                     http_res = result
                 else:
@@ -186,11 +186,11 @@ class BaseSDK:
                 raise errors.SDKError("No response received")
 
             if utils.match_status_codes(error_status_codes, http_res.status_code):
-                result, e = self.sdk_configuration.get_hooks().after_error(
+                result, err = self.sdk_configuration.get_hooks().after_error(
                     AfterErrorContext(hook_ctx), http_res, None
                 )
-                if e is not None:
-                    raise e
+                if err is not None:
+                    raise err
                 if result is not None:
                     http_res = result
                 else:
