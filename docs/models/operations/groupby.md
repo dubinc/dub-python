@@ -17,3 +17,9 @@ value: operations.One = /* values here */
 value: operations.Two = /* values here */
 ```
 
+### `operations.Three`
+
+```python
+value: operations.Three = /* values here */
+```
+
