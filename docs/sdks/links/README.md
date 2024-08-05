@@ -27,11 +27,19 @@ s = Dub(
 )
 
 
-res = s.links.list()
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 
@@ -45,7 +53,7 @@ if res is not None:
 
 ### Response
 
-**[List[components.LinkSchema]](../../models/.md)**
+**[operations.GetLinksResponse](../../models/operations/getlinksresponse.md)**
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

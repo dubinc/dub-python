@@ -211,7 +211,10 @@ s = Dub(
 
 res = None
 try:
-    res = s.links.list()
+    res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
 
 except errors.BadRequest as e:
     # handle exception
@@ -245,8 +248,13 @@ except errors.SDKError as e:
     raise(e)
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 <!-- End Error Handling [errors] -->
@@ -273,11 +281,19 @@ s = Dub(
 )
 
 
-res = s.links.list()
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 
@@ -294,11 +310,19 @@ s = Dub(
 )
 
 
-res = s.links.list()
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 <!-- End Server Selection [server] -->
@@ -404,11 +428,19 @@ s = Dub(
 )
 
 
-res = s.links.list()
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 <!-- End Authentication [security] -->
@@ -428,12 +460,20 @@ s = Dub(
 )
 
 
-res = s.links.list(,
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+},
     RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 
@@ -448,14 +488,69 @@ s = Dub(
 )
 
 
-res = s.links.list()
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
 
 ```
 <!-- End Retries [retries] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `None`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```python
+from dub import Dub
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
+})
+
+if res is not None:
+    while True:
+        # handle items
+
+        res = res.Next()
+        if res is None:
+            break
+
+
+```
+<!-- End Pagination [pagination] -->
+
+<!-- Start Debugging [debug] -->
+## Debugging
+
+To emit debug logs for SDK requests and responses you can pass a logger object directly into your SDK object.
+
+```python
+from dub import Dub
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+s = Dub(debug_logger=logging.getLogger("dub"))
+```
+<!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

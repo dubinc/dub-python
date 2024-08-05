@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: abaf709df8818e2099256e8478ab3dc0
+  docChecksum: e0d1746d131c608a54c04b32762b2faa
   docVersion: 0.0.1
-  speakeasyVersion: 1.346.0
-  generationVersion: 2.379.3
-  releaseVersion: 0.5.1
-  configChecksum: 430b755e68caeb9e4b8f2013f140056c
+  speakeasyVersion: 1.352.1
+  generationVersion: 2.385.1
+  releaseVersion: 0.6.0
+  configChecksum: 59e569de8d3829d8ed9d7cf5249aff66
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    constsAndDefaults: 1.0.0
-    core: 5.2.4
+    constsAndDefaults: 1.0.1
+    core: 5.3.3
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
-    envVarSecurityUsage: 0.2.0
+    envVarSecurityUsage: 0.3.1
     errors: 3.0.0
     examples: 3.0.0
     flattening: 3.0.0
@@ -27,6 +27,7 @@ features:
     globalServerURLs: 3.0.0
     nameOverrides: 3.0.0
     nullables: 1.0.0
+    pagination: 3.0.1
     responseFormat: 1.0.0
     retries: 3.0.0
     sdkHooks: 1.0.0
@@ -43,9 +44,11 @@ generatedFiles:
   - src/dub/metatags.py
   - src/dub/sdk.py
   - .vscode/settings.json
+  - poetry.toml
   - py.typed
   - pylintrc
   - pyproject.toml
+  - scripts/compile.sh
   - scripts/publish.sh
   - src/dub/__init__.py
   - src/dub/basesdk.py
@@ -59,6 +62,7 @@ generatedFiles:
   - src/dub/utils/eventstreaming.py
   - src/dub/utils/forms.py
   - src/dub/utils/headers.py
+  - src/dub/utils/logger.py
   - src/dub/utils/metadata.py
   - src/dub/utils/queryparams.py
   - src/dub/utils/requestbodies.py
@@ -68,6 +72,30 @@ generatedFiles:
   - src/dub/utils/url.py
   - src/dub/utils/values.py
   - src/dub/models/errors/sdkerror.py
+  - src/dub/models/operations/getlinks.py
+  - src/dub/models/operations/createlink.py
+  - src/dub/models/operations/getlinkscount.py
+  - src/dub/models/operations/getlinkinfo.py
+  - src/dub/models/operations/deletelink.py
+  - src/dub/models/operations/updatelink.py
+  - src/dub/models/operations/bulkcreatelinks.py
+  - src/dub/models/operations/bulkupdatelinks.py
+  - src/dub/models/operations/upsertlink.py
+  - src/dub/models/operations/getqrcode.py
+  - src/dub/models/operations/retrieveanalytics.py
+  - src/dub/models/operations/getworkspace.py
+  - src/dub/models/operations/updateworkspace.py
+  - src/dub/models/operations/createtag.py
+  - src/dub/models/operations/updatetag.py
+  - src/dub/models/operations/listdomains.py
+  - src/dub/models/operations/createdomain.py
+  - src/dub/models/operations/deletedomain.py
+  - src/dub/models/operations/updatedomain.py
+  - src/dub/models/operations/tracklead.py
+  - src/dub/models/operations/tracksale.py
+  - src/dub/models/operations/trackcustomer.py
+  - src/dub/models/operations/getmetatags.py
+  - src/dub/models/operations/__init__.py
   - src/dub/models/components/linkschema.py
   - src/dub/models/components/tagschema.py
   - src/dub/models/components/linkgeotargeting.py
@@ -102,6 +130,7 @@ generatedFiles:
   - src/dub/models/components/salestoplinks.py
   - src/dub/models/components/salestopurls.py
   - src/dub/models/components/countrycode.py
+  - src/dub/models/components/continentcode.py
   - src/dub/models/components/workspaceschema.py
   - src/dub/models/components/domainschema.py
   - src/dub/models/components/security.py
@@ -116,109 +145,11 @@ generatedFiles:
   - src/dub/models/errors/ratelimitexceeded.py
   - src/dub/models/errors/internalservererror.py
   - src/dub/models/errors/__init__.py
-  - src/dub/models/operations/getlinks.py
-  - src/dub/models/operations/createlink.py
-  - src/dub/models/operations/getlinkscount.py
-  - src/dub/models/operations/getlinkinfo.py
-  - src/dub/models/operations/deletelink.py
-  - src/dub/models/operations/updatelink.py
-  - src/dub/models/operations/bulkcreatelinks.py
-  - src/dub/models/operations/bulkupdatelinks.py
-  - src/dub/models/operations/upsertlink.py
-  - src/dub/models/operations/getqrcode.py
-  - src/dub/models/operations/retrieveanalytics.py
-  - src/dub/models/operations/getworkspace.py
-  - src/dub/models/operations/updateworkspace.py
-  - src/dub/models/operations/createtag.py
-  - src/dub/models/operations/updatetag.py
-  - src/dub/models/operations/createdomain.py
-  - src/dub/models/operations/deletedomain.py
-  - src/dub/models/operations/updatedomain.py
-  - src/dub/models/operations/tracklead.py
-  - src/dub/models/operations/tracksale.py
-  - src/dub/models/operations/trackcustomer.py
-  - src/dub/models/operations/getmetatags.py
-  - src/dub/models/operations/__init__.py
-  - docs/models/components/geo.md
-  - docs/models/components/linkschema.md
-  - docs/models/components/color.md
-  - docs/models/components/tagschema.md
-  - docs/models/components/linkgeotargeting.md
-  - docs/models/components/clickscount.md
-  - docs/models/components/clickstimeseries.md
-  - docs/models/components/country.md
-  - docs/models/components/clickscountries.md
-  - docs/models/components/clickscitiescountry.md
-  - docs/models/components/clickscities.md
-  - docs/models/components/clicksdevices.md
-  - docs/models/components/clicksbrowsers.md
-  - docs/models/components/clicksos.md
-  - docs/models/components/clicksreferers.md
-  - docs/models/components/clickstoplinks.md
-  - docs/models/components/clickstopurls.md
-  - docs/models/components/leadscount.md
-  - docs/models/components/leadstimeseries.md
-  - docs/models/components/leadscountriescountry.md
-  - docs/models/components/leadscountries.md
-  - docs/models/components/leadscitiescountry.md
-  - docs/models/components/leadscities.md
-  - docs/models/components/leadsdevices.md
-  - docs/models/components/leadsbrowsers.md
-  - docs/models/components/leadsos.md
-  - docs/models/components/leadsreferers.md
-  - docs/models/components/leadstoplinks.md
-  - docs/models/components/leadstopurls.md
-  - docs/models/components/salescount.md
-  - docs/models/components/salestimeseries.md
-  - docs/models/components/salescountriescountry.md
-  - docs/models/components/salescountries.md
-  - docs/models/components/salescitiescountry.md
-  - docs/models/components/salescities.md
-  - docs/models/components/salesdevices.md
-  - docs/models/components/salesbrowsers.md
-  - docs/models/components/salesos.md
-  - docs/models/components/salesreferers.md
-  - docs/models/components/salestoplinks.md
-  - docs/models/components/salestopurls.md
-  - docs/models/components/countrycode.md
-  - docs/models/components/plan.md
-  - docs/models/components/role.md
-  - docs/models/components/users.md
-  - docs/models/components/domains.md
-  - docs/models/components/workspaceschema.md
-  - docs/models/components/domainschema.md
-  - docs/models/components/security.md
-  - docs/models/errors/code.md
-  - docs/models/errors/error.md
-  - docs/models/errors/badrequest.md
-  - docs/models/errors/unauthorizedcode.md
-  - docs/models/errors/unauthorizederror.md
-  - docs/models/errors/unauthorized.md
-  - docs/models/errors/forbiddencode.md
-  - docs/models/errors/forbiddenerror.md
-  - docs/models/errors/forbidden.md
-  - docs/models/errors/notfoundcode.md
-  - docs/models/errors/notfounderror.md
-  - docs/models/errors/notfound.md
-  - docs/models/errors/conflictcode.md
-  - docs/models/errors/conflicterror.md
-  - docs/models/errors/conflict.md
-  - docs/models/errors/inviteexpiredcode.md
-  - docs/models/errors/inviteexpirederror.md
-  - docs/models/errors/inviteexpired.md
-  - docs/models/errors/unprocessableentitycode.md
-  - docs/models/errors/unprocessableentityerror.md
-  - docs/models/errors/unprocessableentity.md
-  - docs/models/errors/ratelimitexceededcode.md
-  - docs/models/errors/ratelimitexceedederror.md
-  - docs/models/errors/ratelimitexceeded.md
-  - docs/models/errors/internalservererrorcode.md
-  - docs/models/errors/internalservererrorerror.md
-  - docs/models/errors/internalservererror.md
   - docs/models/operations/queryparamtagids.md
   - docs/models/operations/queryparamtagnames.md
   - docs/models/operations/sort.md
   - docs/models/operations/getlinksrequest.md
+  - docs/models/operations/getlinksresponse.md
   - docs/models/operations/tagids.md
   - docs/models/operations/tagnames.md
   - docs/models/operations/createlinkrequestbody.md
@@ -261,6 +192,8 @@ generatedFiles:
   - docs/models/operations/updatetagcolor.md
   - docs/models/operations/updatetagrequestbody.md
   - docs/models/operations/updatetagrequest.md
+  - docs/models/operations/listdomainsrequest.md
+  - docs/models/operations/listdomainsresponse.md
   - docs/models/operations/createdomainrequestbody.md
   - docs/models/operations/deletedomainrequest.md
   - docs/models/operations/deletedomainresponsebody.md
@@ -275,6 +208,83 @@ generatedFiles:
   - docs/models/operations/trackcustomerresponsebody.md
   - docs/models/operations/getmetatagsrequest.md
   - docs/models/operations/getmetatagsresponsebody.md
+  - docs/models/components/geo.md
+  - docs/models/components/linkschema.md
+  - docs/models/components/color.md
+  - docs/models/components/tagschema.md
+  - docs/models/components/linkgeotargeting.md
+  - docs/models/components/clickscount.md
+  - docs/models/components/clickstimeseries.md
+  - docs/models/components/country.md
+  - docs/models/components/clickscountries.md
+  - docs/models/components/clickscitiescountry.md
+  - docs/models/components/clickscities.md
+  - docs/models/components/clicksdevices.md
+  - docs/models/components/clicksbrowsers.md
+  - docs/models/components/clicksos.md
+  - docs/models/components/clicksreferers.md
+  - docs/models/components/clickstoplinks.md
+  - docs/models/components/clickstopurls.md
+  - docs/models/components/leadscount.md
+  - docs/models/components/leadstimeseries.md
+  - docs/models/components/leadscountriescountry.md
+  - docs/models/components/leadscountries.md
+  - docs/models/components/leadscitiescountry.md
+  - docs/models/components/leadscities.md
+  - docs/models/components/leadsdevices.md
+  - docs/models/components/leadsbrowsers.md
+  - docs/models/components/leadsos.md
+  - docs/models/components/leadsreferers.md
+  - docs/models/components/leadstoplinks.md
+  - docs/models/components/leadstopurls.md
+  - docs/models/components/salescount.md
+  - docs/models/components/salestimeseries.md
+  - docs/models/components/salescountriescountry.md
+  - docs/models/components/salescountries.md
+  - docs/models/components/salescitiescountry.md
+  - docs/models/components/salescities.md
+  - docs/models/components/salesdevices.md
+  - docs/models/components/salesbrowsers.md
+  - docs/models/components/salesos.md
+  - docs/models/components/salesreferers.md
+  - docs/models/components/salestoplinks.md
+  - docs/models/components/salestopurls.md
+  - docs/models/components/countrycode.md
+  - docs/models/components/continentcode.md
+  - docs/models/components/plan.md
+  - docs/models/components/role.md
+  - docs/models/components/users.md
+  - docs/models/components/domains.md
+  - docs/models/components/workspaceschema.md
+  - docs/models/components/domainschema.md
+  - docs/models/components/security.md
+  - docs/models/errors/code.md
+  - docs/models/errors/error.md
+  - docs/models/errors/badrequest.md
+  - docs/models/errors/unauthorizedcode.md
+  - docs/models/errors/unauthorizederror.md
+  - docs/models/errors/unauthorized.md
+  - docs/models/errors/forbiddencode.md
+  - docs/models/errors/forbiddenerror.md
+  - docs/models/errors/forbidden.md
+  - docs/models/errors/notfoundcode.md
+  - docs/models/errors/notfounderror.md
+  - docs/models/errors/notfound.md
+  - docs/models/errors/conflictcode.md
+  - docs/models/errors/conflicterror.md
+  - docs/models/errors/conflict.md
+  - docs/models/errors/inviteexpiredcode.md
+  - docs/models/errors/inviteexpirederror.md
+  - docs/models/errors/inviteexpired.md
+  - docs/models/errors/unprocessableentitycode.md
+  - docs/models/errors/unprocessableentityerror.md
+  - docs/models/errors/unprocessableentity.md
+  - docs/models/errors/ratelimitexceededcode.md
+  - docs/models/errors/ratelimitexceedederror.md
+  - docs/models/errors/ratelimitexceeded.md
+  - docs/models/errors/internalservererrorcode.md
+  - docs/models/errors/internalservererrorerror.md
+  - docs/models/errors/internalservererror.md
   - docs/sdks/dub/README.md
   - docs/models/utils/retryconfig.md
   - docs/sdks/links/README.md
