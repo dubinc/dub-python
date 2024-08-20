@@ -43,6 +43,8 @@ if res is not None:
 
 ```
 
+
+
 ### Parameters
 
 | Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
@@ -86,9 +88,7 @@ s = Dub(
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+    "tag_ids": "[\"clux0rgak00011...\"]",
 })
 
 if res is not None:
@@ -96,6 +96,8 @@ if res is not None:
     pass
 
 ```
+
+
 
 ### Parameters
 
@@ -144,6 +146,8 @@ if res is not None:
     pass
 
 ```
+
+
 
 ### Parameters
 
@@ -196,6 +200,8 @@ if res is not None:
 
 ```
 
+
+
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -243,6 +249,8 @@ if res is not None:
     pass
 
 ```
+
+
 
 ### Parameters
 
@@ -297,6 +305,8 @@ if res is not None:
     pass
 
 ```
+
+
 
 ### Parameters
 
@@ -355,6 +365,8 @@ if res is not None:
 
 ```
 
+
+
 ### Parameters
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
@@ -401,9 +413,7 @@ res = s.links.update_many(request={
     ],
     "data": {
         "url": "https://google.com",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
+        "tag_ids": "[\"clux0rgak00011...\"]",
     },
 })
 
@@ -412,6 +422,8 @@ if res is not None:
     pass
 
 ```
+
+
 
 ### Parameters
 
@@ -466,6 +478,8 @@ if res is not None:
     pass
 
 ```
+
+
 
 ### Parameters
 

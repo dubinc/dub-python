@@ -10,6 +10,22 @@ from typing import List, Optional, TypedDict, Union
 from typing_extensions import Annotated, NotRequired
 
 
+UpdateLinkTagIdsTypedDict = Union[str, List[str]]
+r"""The unique IDs of the tags assigned to the short link."""
+
+
+UpdateLinkTagIds = Union[str, List[str]]
+r"""The unique IDs of the tags assigned to the short link."""
+
+
+UpdateLinkTagNamesTypedDict = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
+UpdateLinkTagNames = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
 class UpdateLinkRequestBodyTypedDict(TypedDict):
     url: NotRequired[str]
     r"""The destination URL of the short link."""
@@ -147,18 +163,13 @@ class UpdateLinkRequestBody(BaseModel):
             k = f.alias or n
             val = serialized.get(k)
 
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
+
             if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
             elif val != UNSET_SENTINEL and (
-                not k in optional_fields
-                or (
-                    k in optional_fields
-                    and k in nullable_fields
-                    and (
-                        self.__pydantic_fields_set__.intersection({n})
-                        or k in null_default_fields
-                    )  # pylint: disable=no-member
-                )
+                not k in optional_fields or (optional_nullable and is_set)
             ):
                 m[k] = val
 
@@ -176,19 +187,3 @@ class UpdateLinkRequest(BaseModel):
     r"""The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`."""
     request_body: Annotated[Optional[UpdateLinkRequestBody], FieldMetadata(request=RequestMetadata(media_type="application/json"))] = None
     
-
-UpdateLinkTagIdsTypedDict = Union[str, List[str]]
-r"""The unique IDs of the tags assigned to the short link."""
-
-
-UpdateLinkTagIds = Union[str, List[str]]
-r"""The unique IDs of the tags assigned to the short link."""
-
-
-UpdateLinkTagNamesTypedDict = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-
-UpdateLinkTagNames = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-

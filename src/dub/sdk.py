@@ -3,11 +3,13 @@
 from .basesdk import BaseSDK
 from .httpclient import AsyncHttpClient, HttpClient
 from .sdkconfiguration import SDKConfiguration
-from .utils.logger import Logger, NoOpLogger
+from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
+from dub import utils
 from dub._hooks import SDKHooks
 from dub.analytics import Analytics
 from dub.domains import Domains
+from dub.events import Events
 from dub.links import Links
 from dub.metatags import Metatags
 from dub.models import components
@@ -15,7 +17,6 @@ from dub.qr_codes import QRCodes
 from dub.tags import Tags
 from dub.track import Track
 from dub.types import OptionalNullable, UNSET
-import dub.utils as utils
 from dub.workspaces import Workspaces
 import httpx
 from typing import Any, Callable, Dict, Optional, Union
@@ -25,6 +26,7 @@ class Dub(BaseSDK):
     links: Links
     qr_codes: QRCodes
     analytics: Analytics
+    events: Events
     workspaces: Workspaces
     tags: Tags
     domains: Domains
@@ -64,7 +66,7 @@ class Dub(BaseSDK):
             async_client = httpx.AsyncClient()
 
         if debug_logger is None:
-            debug_logger = NoOpLogger()
+            debug_logger = get_default_logger()
 
         assert issubclass(
             type(async_client), AsyncHttpClient
@@ -109,6 +111,7 @@ class Dub(BaseSDK):
         self.links = Links(self.sdk_configuration)
         self.qr_codes = QRCodes(self.sdk_configuration)
         self.analytics = Analytics(self.sdk_configuration)
+        self.events = Events(self.sdk_configuration)
         self.workspaces = Workspaces(self.sdk_configuration)
         self.tags = Tags(self.sdk_configuration)
         self.domains = Domains(self.sdk_configuration)

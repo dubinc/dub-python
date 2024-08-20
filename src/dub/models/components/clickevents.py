@@ -2,47 +2,49 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, UNSET_SENTINEL
-from dub.utils import FieldMetadata, QueryParamMetadata
 from pydantic import model_serializer
 from typing import TypedDict
-from typing_extensions import Annotated
 
 
-class GetMetatagsRequestTypedDict(TypedDict):
+class ClickEventsTypedDict(TypedDict):
+    timestamp: str
+    click_id: str
+    link_id: str
+    domain: str
+    key: str
     url: str
-    r"""The URL to retrieve metatags for."""
+    continent: Nullable[str]
+    country: Nullable[str]
+    city: Nullable[str]
+    device: Nullable[str]
+    browser: Nullable[str]
+    os: Nullable[str]
+    referer: Nullable[str]
+    ip: Nullable[str]
+    qr: Nullable[float]
     
 
-class GetMetatagsRequest(BaseModel):
-    url: Annotated[str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))]
-    r"""The URL to retrieve metatags for."""
-    
-
-class GetMetatagsResponseBodyTypedDict(TypedDict):
-    r"""The retrieved metatags"""
-    
-    title: Nullable[str]
-    r"""The meta title tag for the URL."""
-    description: Nullable[str]
-    r"""The meta description tag for the URL."""
-    image: Nullable[str]
-    r"""The OpenGraph image for the URL."""
-    
-
-class GetMetatagsResponseBody(BaseModel):
-    r"""The retrieved metatags"""
-    
-    title: Nullable[str]
-    r"""The meta title tag for the URL."""
-    description: Nullable[str]
-    r"""The meta description tag for the URL."""
-    image: Nullable[str]
-    r"""The OpenGraph image for the URL."""
+class ClickEvents(BaseModel):
+    timestamp: str
+    click_id: str
+    link_id: str
+    domain: str
+    key: str
+    url: str
+    continent: Nullable[str]
+    country: Nullable[str]
+    city: Nullable[str]
+    device: Nullable[str]
+    browser: Nullable[str]
+    os: Nullable[str]
+    referer: Nullable[str]
+    ip: Nullable[str]
+    qr: Nullable[float]
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
-        nullable_fields = ["title", "description", "image"]
+        nullable_fields = ["continent", "country", "city", "device", "browser", "os", "referer", "ip", "qr"]
         null_default_fields = []
 
         serialized = handler(self)
