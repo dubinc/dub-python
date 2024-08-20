@@ -9,6 +9,22 @@ from typing import List, Optional, TypedDict, Union
 from typing_extensions import Annotated, NotRequired
 
 
+BulkUpdateLinksTagIdsTypedDict = Union[str, List[str]]
+r"""The unique IDs of the tags assigned to the short link."""
+
+
+BulkUpdateLinksTagIds = Union[str, List[str]]
+r"""The unique IDs of the tags assigned to the short link."""
+
+
+BulkUpdateLinksTagNamesTypedDict = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
+BulkUpdateLinksTagNames = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
 class DataTypedDict(TypedDict):
     url: NotRequired[str]
     r"""The destination URL of the short link."""
@@ -132,18 +148,13 @@ class Data(BaseModel):
             k = f.alias or n
             val = serialized.get(k)
 
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
+
             if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
             elif val != UNSET_SENTINEL and (
-                not k in optional_fields
-                or (
-                    k in optional_fields
-                    and k in nullable_fields
-                    and (
-                        self.__pydantic_fields_set__.intersection({n})
-                        or k in null_default_fields
-                    )  # pylint: disable=no-member
-                )
+                not k in optional_fields or (optional_nullable and is_set)
             ):
                 m[k] = val
 
@@ -159,19 +170,3 @@ class BulkUpdateLinksRequestBody(BaseModel):
     link_ids: Annotated[List[str], pydantic.Field(alias="linkIds")]
     data: Data
     
-
-BulkUpdateLinksTagIdsTypedDict = Union[str, List[str]]
-r"""The unique IDs of the tags assigned to the short link."""
-
-
-BulkUpdateLinksTagIds = Union[str, List[str]]
-r"""The unique IDs of the tags assigned to the short link."""
-
-
-BulkUpdateLinksTagNamesTypedDict = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-
-BulkUpdateLinksTagNames = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-

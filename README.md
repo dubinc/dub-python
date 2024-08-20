@@ -42,9 +42,7 @@ s = Dub(
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+    "tag_ids": "[\"clux0rgak00011...\"]",
 })
 
 if res is not None:
@@ -67,9 +65,7 @@ async def main():
     res = await s.links.create_async(request={
         "url": "https://google.com",
         "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
+        "tag_ids": "[\"clux0rgak00011...\"]",
     })
     if res is not None:
         # handle response
@@ -117,9 +113,7 @@ async def main():
     res = await s.links.upsert_async(request={
         "url": "https://google.com",
         "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
+        "tag_ids": "[\"clux0rgak00011...\"]",
     })
     if res is not None:
         # handle response
@@ -151,6 +145,10 @@ asyncio.run(main())
 ### [analytics](docs/sdks/analytics/README.md)
 
 * [retrieve](docs/sdks/analytics/README.md#retrieve) - Retrieve analytics for a link, a domain, or the authenticated workspace.
+
+### [events](docs/sdks/events/README.md)
+
+* [list](docs/sdks/events/README.md#list) - Retrieve a list of events
 
 ### [workspaces](docs/sdks/workspaces/README.md)
 
@@ -541,8 +539,9 @@ if res is not None:
 <!-- Start Debugging [debug] -->
 ## Debugging
 
-To emit debug logs for SDK requests and responses you can pass a logger object directly into your SDK object.
+You can setup your SDK to emit debug logs for SDK requests and responses.
 
+You can pass your own logger class directly into your SDK.
 ```python
 from dub import Dub
 import logging
@@ -551,6 +550,16 @@ logging.basicConfig(level=logging.DEBUG)
 s = Dub(debug_logger=logging.getLogger("dub"))
 ```
 <!-- End Debugging [debug] -->
+
+<!-- Start IDE Support [idesupport] -->
+## IDE Support
+
+### PyCharm
+
+Generally, the SDK will work well with most IDEs out of the box. However, when using PyCharm, you can enjoy much better integration with Pydantic by installing an additional plugin.
+
+- [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
+<!-- End IDE Support [idesupport] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

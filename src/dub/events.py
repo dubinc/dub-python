@@ -3,23 +3,23 @@
 from .basesdk import BaseSDK
 from dub import utils
 from dub._hooks import HookContext
-from dub.models import errors, operations
+from dub.models import components, errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
-from typing import Any, Optional, Union, cast
+from typing import Any, List, Optional, Union, cast
 
-class Analytics(BaseSDK):
+class Events(BaseSDK):
     
     
-    def retrieve(
+    def list(
         self, *,
-        request: Optional[Union[operations.RetrieveAnalyticsRequest, operations.RetrieveAnalyticsRequestTypedDict]] = None,
+        request: Optional[Union[operations.ListEventsRequest, operations.ListEventsRequestTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.RetrieveAnalyticsResponseBody]:
-        r"""Retrieve analytics for a link, a domain, or the authenticated workspace.
+    ) -> Optional[List[components.ClickEvents]]:
+        r"""Retrieve a list of events
 
-        Retrieve analytics for a link, a domain, or the authenticated workspace. The response type depends on the `event` and `type` query parameters.
+        Retrieve a paginated list of events for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -35,12 +35,12 @@ class Analytics(BaseSDK):
             base_url = server_url
         
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.RetrieveAnalyticsRequest)
-        request = cast(operations.RetrieveAnalyticsRequest, request)
+            request = utils.unmarshal(request, operations.ListEventsRequest)
+        request = cast(operations.ListEventsRequest, request)
         
         req = self.build_request(
             method="GET",
-            path="/analytics",
+            path="/events",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -68,7 +68,7 @@ class Analytics(BaseSDK):
             ])                
         
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="retrieveAnalytics", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(operation_id="listEvents", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
             retry_config=retry_config
@@ -76,7 +76,7 @@ class Analytics(BaseSDK):
         
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.RetrieveAnalyticsResponseBody])
+            return utils.unmarshal_json(http_res.text, Optional[List[components.ClickEvents]])
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -112,16 +112,16 @@ class Analytics(BaseSDK):
 
     
     
-    async def retrieve_async(
+    async def list_async(
         self, *,
-        request: Optional[Union[operations.RetrieveAnalyticsRequest, operations.RetrieveAnalyticsRequestTypedDict]] = None,
+        request: Optional[Union[operations.ListEventsRequest, operations.ListEventsRequestTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.RetrieveAnalyticsResponseBody]:
-        r"""Retrieve analytics for a link, a domain, or the authenticated workspace.
+    ) -> Optional[List[components.ClickEvents]]:
+        r"""Retrieve a list of events
 
-        Retrieve analytics for a link, a domain, or the authenticated workspace. The response type depends on the `event` and `type` query parameters.
+        Retrieve a paginated list of events for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -137,12 +137,12 @@ class Analytics(BaseSDK):
             base_url = server_url
         
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.RetrieveAnalyticsRequest)
-        request = cast(operations.RetrieveAnalyticsRequest, request)
+            request = utils.unmarshal(request, operations.ListEventsRequest)
+        request = cast(operations.ListEventsRequest, request)
         
         req = self.build_request(
             method="GET",
-            path="/analytics",
+            path="/events",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -170,7 +170,7 @@ class Analytics(BaseSDK):
             ])                
         
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="retrieveAnalytics", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(operation_id="listEvents", oauth2_scopes=[], security_source=self.sdk_configuration.security),
             request=req,
             error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
             retry_config=retry_config
@@ -178,7 +178,7 @@ class Analytics(BaseSDK):
         
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.RetrieveAnalyticsResponseBody])
+            return utils.unmarshal_json(http_res.text, Optional[List[components.ClickEvents]])
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)

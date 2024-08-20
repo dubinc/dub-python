@@ -10,6 +10,22 @@ from typing import Callable, List, Optional, TypedDict, Union
 from typing_extensions import Annotated, NotRequired
 
 
+QueryParamTagIdsTypedDict = Union[str, List[str]]
+r"""The tag IDs to filter the links by."""
+
+
+QueryParamTagIds = Union[str, List[str]]
+r"""The tag IDs to filter the links by."""
+
+
+QueryParamTagNamesTypedDict = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
+QueryParamTagNames = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
 class Sort(str, Enum):
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
     CREATED_AT = "createdAt"
@@ -75,19 +91,3 @@ class GetLinksResponse(BaseModel):
     
     result: List[components_linkschema.LinkSchema]
     
-
-QueryParamTagIdsTypedDict = Union[str, List[str]]
-r"""The tag IDs to filter the links by."""
-
-
-QueryParamTagIds = Union[str, List[str]]
-r"""The tag IDs to filter the links by."""
-
-
-QueryParamTagNamesTypedDict = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-
-QueryParamTagNames = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-

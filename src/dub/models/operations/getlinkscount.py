@@ -9,6 +9,22 @@ from typing import List, Optional, TypedDict, Union
 from typing_extensions import Annotated, NotRequired
 
 
+GetLinksCountQueryParamTagIdsTypedDict = Union[str, List[str]]
+r"""The tag IDs to filter the links by."""
+
+
+GetLinksCountQueryParamTagIds = Union[str, List[str]]
+r"""The tag IDs to filter the links by."""
+
+
+GetLinksCountQueryParamTagNamesTypedDict = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
+GetLinksCountQueryParamTagNames = Union[str, List[str]]
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
 class Three(str, Enum):
     USER_ID = "userId"
 
@@ -17,6 +33,14 @@ class Two(str, Enum):
 
 class One(str, Enum):
     DOMAIN = "domain"
+
+GroupByTypedDict = Union[One, Two, Three]
+r"""The field to group the links by."""
+
+
+GroupBy = Union[One, Two, Three]
+r"""The field to group the links by."""
+
 
 class GetLinksCountRequestTypedDict(TypedDict):
     domain: NotRequired[str]
@@ -59,27 +83,3 @@ class GetLinksCountRequest(BaseModel):
     group_by: Annotated[Optional[GroupBy], pydantic.Field(alias="groupBy"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
     r"""The field to group the links by."""
     
-
-GetLinksCountQueryParamTagIdsTypedDict = Union[str, List[str]]
-r"""The tag IDs to filter the links by."""
-
-
-GetLinksCountQueryParamTagIds = Union[str, List[str]]
-r"""The tag IDs to filter the links by."""
-
-
-GetLinksCountQueryParamTagNamesTypedDict = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-
-GetLinksCountQueryParamTagNames = Union[str, List[str]]
-r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-
-GroupByTypedDict = Union[One, Two, Three]
-r"""The field to group the links by."""
-
-
-GroupBy = Union[One, Two, Three]
-r"""The field to group the links by."""
-

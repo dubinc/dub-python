@@ -1,27 +1,27 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: e0d1746d131c608a54c04b32762b2faa
+  docChecksum: f10061c7787170c0db643f22823c9aa9
   docVersion: 0.0.1
-  speakeasyVersion: 1.352.1
-  generationVersion: 2.385.1
-  releaseVersion: 0.6.0
-  configChecksum: 59e569de8d3829d8ed9d7cf5249aff66
+  speakeasyVersion: 1.376.0
+  generationVersion: 2.402.5
+  releaseVersion: 0.7.0
+  configChecksum: 682be4507297057159fb98720d362601
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    constsAndDefaults: 1.0.1
-    core: 5.3.3
+    constsAndDefaults: 1.0.2
+    core: 5.4.1
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     envVarSecurityUsage: 0.3.1
     errors: 3.0.0
     examples: 3.0.0
     flattening: 3.0.0
-    globalSecurity: 3.0.0
+    globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.0.0
@@ -31,12 +31,13 @@ features:
     responseFormat: 1.0.0
     retries: 3.0.0
     sdkHooks: 1.0.0
-    unions: 3.0.1
+    unions: 3.0.2
 generatedFiles:
   - src/dub/sdkconfiguration.py
   - src/dub/links.py
   - src/dub/qr_codes.py
   - src/dub/analytics.py
+  - src/dub/events.py
   - src/dub/workspaces.py
   - src/dub/tags.py
   - src/dub/domains.py
@@ -49,6 +50,7 @@ generatedFiles:
   - pylintrc
   - pyproject.toml
   - scripts/compile.sh
+  - scripts/prepare-readme.py
   - scripts/publish.sh
   - src/dub/__init__.py
   - src/dub/basesdk.py
@@ -83,6 +85,7 @@ generatedFiles:
   - src/dub/models/operations/upsertlink.py
   - src/dub/models/operations/getqrcode.py
   - src/dub/models/operations/retrieveanalytics.py
+  - src/dub/models/operations/listevents.py
   - src/dub/models/operations/getworkspace.py
   - src/dub/models/operations/updateworkspace.py
   - src/dub/models/operations/createtag.py
@@ -131,6 +134,7 @@ generatedFiles:
   - src/dub/models/components/salestopurls.py
   - src/dub/models/components/countrycode.py
   - src/dub/models/components/continentcode.py
+  - src/dub/models/components/clickevents.py
   - src/dub/models/components/workspaceschema.py
   - src/dub/models/components/domainschema.py
   - src/dub/models/components/security.py
@@ -184,6 +188,11 @@ generatedFiles:
   - docs/models/operations/interval.md
   - docs/models/operations/retrieveanalyticsrequest.md
   - docs/models/operations/retrieveanalyticsresponsebody.md
+  - docs/models/operations/queryparamevent.md
+  - docs/models/operations/queryparaminterval.md
+  - docs/models/operations/order.md
+  - docs/models/operations/sortby.md
+  - docs/models/operations/listeventsrequest.md
   - docs/models/operations/getworkspacerequest.md
   - docs/models/operations/updateworkspacerequestbody.md
   - docs/models/operations/updateworkspacerequest.md
@@ -251,6 +260,7 @@ generatedFiles:
   - docs/models/components/salestopurls.md
   - docs/models/components/countrycode.md
   - docs/models/components/continentcode.md
+  - docs/models/components/clickevents.md
   - docs/models/components/plan.md
   - docs/models/components/role.md
   - docs/models/components/users.md
@@ -290,6 +300,7 @@ generatedFiles:
   - docs/sdks/links/README.md
   - docs/sdks/qrcodes/README.md
   - docs/sdks/analytics/README.md
+  - docs/sdks/events/README.md
   - docs/sdks/workspaces/README.md
   - docs/sdks/tags/README.md
   - docs/sdks/domains/README.md
