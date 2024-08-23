@@ -67,6 +67,10 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The links usage of the workspace."""
     links_limit: float
     r"""The links limit of the workspace."""
+    sales_usage: float
+    r"""The dollar amount of tracked revenue in the current billing cycle (in cents)."""
+    sales_limit: float
+    r"""The limit of tracked revenue in the current billing cycle (in cents)."""
     domains_limit: float
     r"""The domains limit of the workspace."""
     tags_limit: float
@@ -89,6 +93,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The domains of the workspace."""
     invite_code: Nullable[str]
     r"""The invite code of the workspace."""
+    conversion_enabled: bool
+    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -110,6 +116,10 @@ class WorkspaceSchema(BaseModel):
     r"""The links usage of the workspace."""
     links_limit: Annotated[float, pydantic.Field(alias="linksLimit")]
     r"""The links limit of the workspace."""
+    sales_usage: Annotated[float, pydantic.Field(alias="salesUsage")]
+    r"""The dollar amount of tracked revenue in the current billing cycle (in cents)."""
+    sales_limit: Annotated[float, pydantic.Field(alias="salesLimit")]
+    r"""The limit of tracked revenue in the current billing cycle (in cents)."""
     domains_limit: Annotated[float, pydantic.Field(alias="domainsLimit")]
     r"""The domains limit of the workspace."""
     tags_limit: Annotated[float, pydantic.Field(alias="tagsLimit")]
@@ -132,6 +142,8 @@ class WorkspaceSchema(BaseModel):
     r"""The domains of the workspace."""
     invite_code: Annotated[Nullable[str], pydantic.Field(alias="inviteCode")]
     r"""The invite code of the workspace."""
+    conversion_enabled: Annotated[bool, pydantic.Field(alias="conversionEnabled")]
+    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
     flags: Optional[Dict[str, bool]] = None

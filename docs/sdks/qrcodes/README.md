@@ -1,6 +1,8 @@
 # QRCodes
 (*qr_codes*)
 
+## Overview
+
 ### Available Operations
 
 * [get](#get) - Retrieve a QR code
@@ -29,8 +31,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
@@ -38,10 +38,10 @@ if res is not None:
 | `request`                                                                  | [operations.GetQRCodeRequest](../../models/operations/getqrcoderequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 | `retries`                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)           | :heavy_minus_sign:                                                         | Configuration to override the default retry behavior of the client.        |
 
-
 ### Response
 
 **[str](../../models/.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

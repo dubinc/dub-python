@@ -1,6 +1,8 @@
 # Links
 (*links*)
 
+## Overview
+
 ### Available Operations
 
 * [list](#list) - Retrieve a list of links
@@ -43,8 +45,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
@@ -52,10 +52,10 @@ if res is not None:
 | `request`                                                                | [operations.GetLinksRequest](../../models/operations/getlinksrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
 | `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |
 
-
 ### Response
 
 **[operations.GetLinksResponse](../../models/operations/getlinksresponse.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -70,6 +70,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## create
 
@@ -97,8 +98,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -106,10 +105,10 @@ if res is not None:
 | `request`                                                                            | [operations.CreateLinkRequestBody](../../models/operations/createlinkrequestbody.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
 
-
 ### Response
 
 **[components.LinkSchema](../../models/components/linkschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -124,6 +123,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## count
 
@@ -147,8 +147,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -156,10 +154,10 @@ if res is not None:
 | `request`                                                                          | [operations.GetLinksCountRequest](../../models/operations/getlinkscountrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
 
-
 ### Response
 
 **[float](../../models/.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -174,6 +172,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## get
 
@@ -200,8 +199,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -209,10 +206,10 @@ if res is not None:
 | `request`                                                                      | [operations.GetLinkInfoRequest](../../models/operations/getlinkinforequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |
 
-
 ### Response
 
 **[components.LinkSchema](../../models/components/linkschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -227,6 +224,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## delete
 
@@ -250,8 +248,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
@@ -259,10 +255,10 @@ if res is not None:
 | `link_id`                                                                                                                             | *str*                                                                                                                                 | :heavy_check_mark:                                                                                                                    | The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`. |
 | `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
 
-
 ### Response
 
 **[operations.DeleteLinkResponseBody](../../models/operations/deletelinkresponsebody.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -277,6 +273,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## update
 
@@ -306,8 +303,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
@@ -316,10 +311,10 @@ if res is not None:
 | `request_body`                                                                                                                        | [Optional[operations.UpdateLinkRequestBody]](../../models/operations/updatelinkrequestbody.md)                                        | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   |
 | `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
 
-
 ### Response
 
 **[components.LinkSchema](../../models/components/linkschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -334,6 +329,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## create_many
 
@@ -365,8 +361,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
@@ -374,10 +368,10 @@ if res is not None:
 | `request`                                                           | [List[operations.RequestBody]](../../models/.md)                    | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
-
 ### Response
 
 **[List[components.LinkSchema]](../../models/.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -392,6 +386,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## update_many
 
@@ -423,8 +418,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -432,10 +425,10 @@ if res is not None:
 | `request`                                                                                      | [operations.BulkUpdateLinksRequestBody](../../models/operations/bulkupdatelinksrequestbody.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `retries`                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                               | :heavy_minus_sign:                                                                             | Configuration to override the default retry behavior of the client.                            |
 
-
 ### Response
 
 **[List[components.LinkSchema]](../../models/.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -450,6 +443,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## upsert
 
@@ -479,8 +473,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -488,10 +480,10 @@ if res is not None:
 | `request`                                                                            | [operations.UpsertLinkRequestBody](../../models/operations/upsertlinkrequestbody.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
 
-
 ### Response
 
 **[components.LinkSchema](../../models/components/linkschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

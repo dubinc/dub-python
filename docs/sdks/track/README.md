@@ -1,6 +1,8 @@
 # Track
 (*track*)
 
+## Overview
+
 ### Available Operations
 
 * [lead](#lead) - Track a lead
@@ -33,8 +35,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -42,10 +42,10 @@ if res is not None:
 | `request`                                                                          | [operations.TrackLeadRequestBody](../../models/operations/trackleadrequestbody.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
 
-
 ### Response
 
 **[operations.TrackLeadResponseBody](../../models/operations/trackleadresponsebody.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -60,6 +60,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## sale
 
@@ -89,8 +90,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -98,10 +97,10 @@ if res is not None:
 | `request`                                                                          | [operations.TrackSaleRequestBody](../../models/operations/tracksalerequestbody.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
 
-
 ### Response
 
 **[operations.TrackSaleResponseBody](../../models/operations/tracksaleresponsebody.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -116,6 +115,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## customer
 
@@ -139,8 +139,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -148,10 +146,10 @@ if res is not None:
 | `request`                                                                                  | [operations.TrackCustomerRequestBody](../../models/operations/trackcustomerrequestbody.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
-
 ### Response
 
 **[operations.TrackCustomerResponseBody](../../models/operations/trackcustomerresponsebody.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

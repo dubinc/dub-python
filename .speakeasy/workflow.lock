@@ -1,9 +1,9 @@
-speakeasyVersion: 1.376.0
+speakeasyVersion: 1.377.3
 sources:
     dub:
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:97c2575c7b5f98e5888ec02fae919f5e31e4004cb32da013aa46fb0e98e9169a
-        sourceBlobDigest: sha256:455373fe8320cce294c51c1ff5b3222c25c9638aa5edd6d513c68f9b592abfc3
+        sourceRevisionDigest: sha256:9e136e2473e054b4a7628a99f4c1628853355d2ab148f9f7d5ee934ad386d77e
+        sourceBlobDigest: sha256:794fe89d1aa364c6a6a86032dc1e4d093c444ec18a42a51a0bfaae3cdd86d07e
         tags:
             - latest
             - main
@@ -11,10 +11,10 @@ targets:
     my-first-target:
         source: dub
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:97c2575c7b5f98e5888ec02fae919f5e31e4004cb32da013aa46fb0e98e9169a
-        sourceBlobDigest: sha256:455373fe8320cce294c51c1ff5b3222c25c9638aa5edd6d513c68f9b592abfc3
+        sourceRevisionDigest: sha256:9e136e2473e054b4a7628a99f4c1628853355d2ab148f9f7d5ee934ad386d77e
+        sourceBlobDigest: sha256:794fe89d1aa364c6a6a86032dc1e4d093c444ec18a42a51a0bfaae3cdd86d07e
         codeSamplesNamespace: code-samples-python-my-first-target
-        codeSamplesRevisionDigest: sha256:ed4fbd131ed8a800a2b7f0efea2aa1a23c0bf443614628b6b6d7b1e8428636a4
+        codeSamplesRevisionDigest: sha256:5cabbc9faec0c8f1676e9fab35ed64789456e92117022fc28d289fa607429515
         outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0

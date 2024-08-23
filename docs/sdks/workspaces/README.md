@@ -1,6 +1,8 @@
 # Workspaces
 (*workspaces*)
 
+## Overview
+
 ### Available Operations
 
 * [get](#get) - Retrieve a workspace
@@ -30,8 +32,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -39,10 +39,10 @@ if res is not None:
 | `request`                                                                        | [operations.GetWorkspaceRequest](../../models/operations/getworkspacerequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
 
-
 ### Response
 
 **[components.WorkspaceSchema](../../models/components/workspaceschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -57,6 +57,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## update
 
@@ -80,8 +81,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -90,10 +89,10 @@ if res is not None:
 | `request_body`                                                                                           | [Optional[operations.UpdateWorkspaceRequestBody]](../../models/operations/updateworkspacerequestbody.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 | `retries`                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                         | :heavy_minus_sign:                                                                                       | Configuration to override the default retry behavior of the client.                                      |
 
-
 ### Response
 
 **[components.WorkspaceSchema](../../models/components/workspaceschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
