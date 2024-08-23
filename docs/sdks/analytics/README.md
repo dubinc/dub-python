@@ -1,6 +1,8 @@
 # Analytics
 (*analytics*)
 
+## Overview
+
 ### Available Operations
 
 * [retrieve](#retrieve) - Retrieve analytics for a link, a domain, or the authenticated workspace.
@@ -34,8 +36,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -43,10 +43,10 @@ if res is not None:
 | `request`                                                                                  | [operations.RetrieveAnalyticsRequest](../../models/operations/retrieveanalyticsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
-
 ### Response
 
 **[operations.RetrieveAnalyticsResponseBody](../../models/operations/retrieveanalyticsresponsebody.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

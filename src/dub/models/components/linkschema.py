@@ -600,6 +600,8 @@ class LinkSchemaTypedDict(TypedDict):
     r"""[BETA]: The number of leads the short links has generated."""
     sales: NotRequired[float]
     r"""[BETA]: The number of sales the short links has generated."""
+    sale_amount: NotRequired[float]
+    r"""[BETA]: The total dollar amount of sales the short links has generated (in cents)."""
     
 
 class LinkSchema(BaseModel):
@@ -683,10 +685,12 @@ class LinkSchema(BaseModel):
     r"""[BETA]: The number of leads the short links has generated."""
     sales: Optional[float] = 0
     r"""[BETA]: The number of sales the short links has generated."""
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    r"""[BETA]: The total dollar amount of sales the short links has generated (in cents)."""
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["trackConversion", "archived", "proxy", "rewrite", "doIndex", "publicStats", "clicks", "leads", "sales"]
+        optional_fields = ["trackConversion", "archived", "proxy", "rewrite", "doIndex", "publicStats", "clicks", "leads", "sales", "saleAmount"]
         nullable_fields = ["externalId", "expiresAt", "expiredUrl", "password", "title", "description", "image", "video", "ios", "android", "geo", "tagId", "tags", "comments", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "lastClicked"]
         null_default_fields = []
 

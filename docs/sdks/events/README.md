@@ -1,6 +1,8 @@
 # Events
 (*events*)
 
+## Overview
+
 ### Available Operations
 
 * [list](#list) - Retrieve a list of events
@@ -34,8 +36,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
@@ -43,10 +43,10 @@ if res is not None:
 | `request`                                                                    | [operations.ListEventsRequest](../../models/operations/listeventsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
 
-
 ### Response
 
 **[List[components.ClickEvents]](../../models/.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |

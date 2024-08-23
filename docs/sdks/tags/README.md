@@ -1,6 +1,8 @@
 # Tags
 (*tags*)
 
+## Overview
+
 ### Available Operations
 
 * [list](#list) - Retrieve a list of tags
@@ -29,18 +31,16 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
-
 ### Response
 
 **[List[components.TagSchema]](../../models/.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -55,6 +55,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## create
 
@@ -78,8 +79,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -87,10 +86,10 @@ if res is not None:
 | `request`                                                                          | [operations.CreateTagRequestBody](../../models/operations/createtagrequestbody.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
 
-
 ### Response
 
 **[components.TagSchema](../../models/components/tagschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
@@ -105,6 +104,7 @@ if res is not None:
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## update
 
@@ -128,8 +128,6 @@ if res is not None:
 
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
@@ -138,10 +136,10 @@ if res is not None:
 | `request_body`                                                                               | [Optional[operations.UpdateTagRequestBody]](../../models/operations/updatetagrequestbody.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
 | `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
 
-
 ### Response
 
 **[components.TagSchema](../../models/components/tagschema.md)**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
