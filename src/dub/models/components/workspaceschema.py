@@ -59,6 +59,16 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The name of the workspace."""
     slug: str
     r"""The slug of the workspace."""
+    plan: Plan
+    r"""The plan of the workspace."""
+    stripe_id: Nullable[str]
+    r"""The Stripe ID of the workspace."""
+    billing_cycle_start: float
+    r"""The date and time when the billing cycle starts for the workspace."""
+    stripe_connect_id: Nullable[str]
+    r"""[BETA]: The Stripe Connect ID of the workspace."""
+    invite_code: Nullable[str]
+    r"""The invite code of the workspace."""
     usage: float
     r"""The usage of the workspace."""
     usage_limit: float
@@ -77,24 +87,22 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The tags limit of the workspace."""
     users_limit: float
     r"""The users limit of the workspace."""
-    plan: Plan
-    r"""The plan of the workspace."""
-    stripe_id: Nullable[str]
-    r"""The Stripe ID of the workspace."""
-    billing_cycle_start: float
-    r"""The date and time when the billing cycle starts for the workspace."""
-    stripe_connect_id: Nullable[str]
-    r"""[BETA]: The Stripe Connect ID of the workspace."""
+    ai_usage: float
+    r"""The AI usage of the workspace."""
+    ai_limit: float
+    r"""The AI limit of the workspace."""
+    referral_link_id: Nullable[str]
+    r"""The ID of the referral link of the workspace."""
+    referred_signups: float
+    r"""The number of signups referred by the workspace."""
+    conversion_enabled: bool
+    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     created_at: str
     r"""The date and time when the workspace was created."""
     users: List[UsersTypedDict]
     r"""The role of the authenticated user in the workspace."""
     domains: List[DomainsTypedDict]
     r"""The domains of the workspace."""
-    invite_code: Nullable[str]
-    r"""The invite code of the workspace."""
-    conversion_enabled: bool
-    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -108,6 +116,16 @@ class WorkspaceSchema(BaseModel):
     r"""The name of the workspace."""
     slug: str
     r"""The slug of the workspace."""
+    plan: Plan
+    r"""The plan of the workspace."""
+    stripe_id: Annotated[Nullable[str], pydantic.Field(alias="stripeId")]
+    r"""The Stripe ID of the workspace."""
+    billing_cycle_start: Annotated[float, pydantic.Field(alias="billingCycleStart")]
+    r"""The date and time when the billing cycle starts for the workspace."""
+    stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
+    r"""[BETA]: The Stripe Connect ID of the workspace."""
+    invite_code: Annotated[Nullable[str], pydantic.Field(alias="inviteCode")]
+    r"""The invite code of the workspace."""
     usage: float
     r"""The usage of the workspace."""
     usage_limit: Annotated[float, pydantic.Field(alias="usageLimit")]
@@ -126,24 +144,22 @@ class WorkspaceSchema(BaseModel):
     r"""The tags limit of the workspace."""
     users_limit: Annotated[float, pydantic.Field(alias="usersLimit")]
     r"""The users limit of the workspace."""
-    plan: Plan
-    r"""The plan of the workspace."""
-    stripe_id: Annotated[Nullable[str], pydantic.Field(alias="stripeId")]
-    r"""The Stripe ID of the workspace."""
-    billing_cycle_start: Annotated[float, pydantic.Field(alias="billingCycleStart")]
-    r"""The date and time when the billing cycle starts for the workspace."""
-    stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
-    r"""[BETA]: The Stripe Connect ID of the workspace."""
+    ai_usage: Annotated[float, pydantic.Field(alias="aiUsage")]
+    r"""The AI usage of the workspace."""
+    ai_limit: Annotated[float, pydantic.Field(alias="aiLimit")]
+    r"""The AI limit of the workspace."""
+    referral_link_id: Annotated[Nullable[str], pydantic.Field(alias="referralLinkId")]
+    r"""The ID of the referral link of the workspace."""
+    referred_signups: Annotated[float, pydantic.Field(alias="referredSignups")]
+    r"""The number of signups referred by the workspace."""
+    conversion_enabled: Annotated[bool, pydantic.Field(alias="conversionEnabled")]
+    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date and time when the workspace was created."""
     users: List[Users]
     r"""The role of the authenticated user in the workspace."""
     domains: List[Domains]
     r"""The domains of the workspace."""
-    invite_code: Annotated[Nullable[str], pydantic.Field(alias="inviteCode")]
-    r"""The invite code of the workspace."""
-    conversion_enabled: Annotated[bool, pydantic.Field(alias="conversionEnabled")]
-    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
     flags: Optional[Dict[str, bool]] = None
@@ -152,7 +168,7 @@ class WorkspaceSchema(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["logo", "flags"]
-        nullable_fields = ["stripeId", "stripeConnectId", "inviteCode", "logo"]
+        nullable_fields = ["stripeId", "stripeConnectId", "inviteCode", "referralLinkId", "logo"]
         null_default_fields = ["logo"]
 
         serialized = handler(self)
