@@ -45,7 +45,7 @@ if res is not None:
 
 ### Response
 
-**[List[components.ClickEvents]](../../models/.md)**
+**[operations.ListEventsResponseBody](../../models/operations/listeventsresponsebody.md)**
 
 ### Errors
 

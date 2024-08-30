@@ -3,9 +3,9 @@
 from .basesdk import BaseSDK
 from dub import utils
 from dub._hooks import HookContext
-from dub.models import components, errors, operations
+from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
-from typing import Any, List, Optional, Union, cast
+from typing import Any, Optional, Union, cast
 
 class Events(BaseSDK):
     
@@ -16,7 +16,7 @@ class Events(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[List[components.ClickEvents]]:
+    ) -> Optional[operations.ListEventsResponseBody]:
         r"""Retrieve a list of events
 
         Retrieve a paginated list of events for the authenticated workspace.
@@ -76,7 +76,7 @@ class Events(BaseSDK):
         
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[List[components.ClickEvents]])
+            return utils.unmarshal_json(http_res.text, Optional[operations.ListEventsResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -118,7 +118,7 @@ class Events(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[List[components.ClickEvents]]:
+    ) -> Optional[operations.ListEventsResponseBody]:
         r"""Retrieve a list of events
 
         Retrieve a paginated list of events for the authenticated workspace.
@@ -178,7 +178,7 @@ class Events(BaseSDK):
         
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[List[components.ClickEvents]])
+            return utils.unmarshal_json(http_res.text, Optional[operations.ListEventsResponseBody])
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
