@@ -5,12 +5,10 @@ A sale was tracked.
 
 ## Fields
 
-| Field               | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `event_name`        | *str*               | :heavy_check_mark:  | N/A                 |
-| `customer_id`       | *str*               | :heavy_check_mark:  | N/A                 |
-| `amount`            | *float*             | :heavy_check_mark:  | N/A                 |
-| `payment_processor` | *str*               | :heavy_check_mark:  | N/A                 |
-| `invoice_id`        | *Nullable[str]*     | :heavy_check_mark:  | N/A                 |
-| `currency`          | *str*               | :heavy_check_mark:  | N/A                 |
-| `metadata`          | Dict[str, *Any*]    | :heavy_check_mark:  | N/A                 |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `event_name`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `customer`                                                                   | [operations.TrackSaleCustomer](../../models/operations/tracksalecustomer.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `sale`                                                                       | [operations.Sale](../../models/operations/sale.md)                           | :heavy_check_mark:                                                           | N/A                                                                          |
+| `click`                                                                      | [operations.TrackSaleClick](../../models/operations/tracksaleclick.md)       | :heavy_check_mark:                                                           | N/A                                                                          |
+| `link`                                                                       | [operations.TrackSaleLink](../../models/operations/tracksalelink.md)         | :heavy_check_mark:                                                           | N/A                                                                          |

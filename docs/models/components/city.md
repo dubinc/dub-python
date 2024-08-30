@@ -1,8 +1,8 @@
-# SortBy
+# City
 
 
 ## Values
 
 | Name        | Value       |
 | ----------- | ----------- |
-| `TIMESTAMP` | timestamp   |
+| `WILDCARD_` | *           |

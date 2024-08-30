@@ -11,15 +11,45 @@
 
 Learn more about the Dub.co Python SDK in the [official documentation](https://dub.co/docs/sdks/python/overview).
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs.
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [IDE Support](#ide-support)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Pagination](#pagination)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Debugging](#debugging)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-PIP
+The SDK can be installed with either *pip* or *poetry* package managers.
+
+### PIP
+
+*PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
+
 ```bash
 pip install dub
 ```
 
-Poetry
+### Poetry
+
+*Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
+
 ```bash
 poetry add dub
 ```
@@ -215,31 +245,31 @@ try:
 })
 
 except errors.BadRequest as e:
-    # handle exception
+    # handle e.data: errors.BadRequestData
     raise(e)
 except errors.Unauthorized as e:
-    # handle exception
+    # handle e.data: errors.UnauthorizedData
     raise(e)
 except errors.Forbidden as e:
-    # handle exception
+    # handle e.data: errors.ForbiddenData
     raise(e)
 except errors.NotFound as e:
-    # handle exception
+    # handle e.data: errors.NotFoundData
     raise(e)
 except errors.Conflict as e:
-    # handle exception
+    # handle e.data: errors.ConflictData
     raise(e)
 except errors.InviteExpired as e:
-    # handle exception
+    # handle e.data: errors.InviteExpiredData
     raise(e)
 except errors.UnprocessableEntity as e:
-    # handle exception
+    # handle e.data: errors.UnprocessableEntityData
     raise(e)
 except errors.RateLimitExceeded as e:
-    # handle exception
+    # handle e.data: errors.RateLimitExceededData
     raise(e)
 except errors.InternalServerError as e:
-    # handle exception
+    # handle e.data: errors.InternalServerErrorData
     raise(e)
 except errors.SDKError as e:
     # handle exception
