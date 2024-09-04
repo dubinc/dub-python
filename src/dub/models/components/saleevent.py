@@ -5,14 +5,15 @@ from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import TypedDict
+from typing_extensions import Annotated
 
 
 class SaleEventEvent(str, Enum):
     SALE = "sale"
 
 class SaleEventTypedDict(TypedDict):
+    event: SaleEventEvent
     timestamp: str
     event_id: str
     event_name: str
@@ -36,10 +37,10 @@ class SaleEventTypedDict(TypedDict):
     referer: Nullable[str]
     qr: Nullable[float]
     ip: Nullable[str]
-    event: NotRequired[SaleEventEvent]
     
 
 class SaleEvent(BaseModel):
+    event: SaleEventEvent
     timestamp: str
     event_id: str
     event_name: str
@@ -63,11 +64,10 @@ class SaleEvent(BaseModel):
     referer: Nullable[str]
     qr: Nullable[float]
     ip: Nullable[str]
-    event: Optional[SaleEventEvent] = SaleEventEvent.SALE
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["event"]
+        optional_fields = []
         nullable_fields = ["continent", "country", "city", "device", "browser", "os", "referer", "qr", "ip"]
         null_default_fields = []
 

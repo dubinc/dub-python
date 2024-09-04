@@ -165,6 +165,7 @@ asyncio.run(main())
 * [delete](docs/sdks/links/README.md#delete) - Delete a link
 * [update](docs/sdks/links/README.md#update) - Update a link
 * [create_many](docs/sdks/links/README.md#create_many) - Bulk create links
+* [delete_many](docs/sdks/links/README.md#delete_many) - Bulk delete links
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
 

@@ -4,14 +4,14 @@ from __future__ import annotations
 from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 from enum import Enum
 from pydantic import model_serializer
-from typing import Optional, TypedDict
-from typing_extensions import NotRequired
+from typing import TypedDict
 
 
 class Event(str, Enum):
     CLICK = "click"
 
 class ClickEventTypedDict(TypedDict):
+    event: Event
     timestamp: str
     click_id: str
     link_id: str
@@ -27,10 +27,10 @@ class ClickEventTypedDict(TypedDict):
     referer: Nullable[str]
     ip: Nullable[str]
     qr: Nullable[float]
-    event: NotRequired[Event]
     
 
 class ClickEvent(BaseModel):
+    event: Event
     timestamp: str
     click_id: str
     link_id: str
@@ -46,11 +46,10 @@ class ClickEvent(BaseModel):
     referer: Nullable[str]
     ip: Nullable[str]
     qr: Nullable[float]
-    event: Optional[Event] = Event.CLICK
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["event"]
+        optional_fields = []
         nullable_fields = ["continent", "country", "city", "device", "browser", "os", "referer", "ip", "qr"]
         null_default_fields = []
 
