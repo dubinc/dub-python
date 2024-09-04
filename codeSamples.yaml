@@ -3,83 +3,6 @@ info:
   title: CodeSamples overlay for python target
   version: 0.0.0
 actions:
-  - target: $["paths"]["/links"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: getLinks
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.links.list(request={
-                "page": 1,
-                "page_size": 50,
-            })
-
-            if res is not None:
-                while True:
-                    # handle items
-
-                    res = res.Next()
-                    if res is None:
-                        break
-  - target: $["paths"]["/links/bulk"]["post"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: bulkCreateLinks
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.links.create_many(request=[
-                {
-                    "url": "https://google.com",
-                    "external_id": "123456",
-                    "tag_ids": [
-                        "clux0rgak00011...",
-                    ],
-                },
-            ])
-
-            if res is not None:
-                # handle response
-                pass
-  - target: $["paths"]["/links/bulk"]["patch"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: bulkUpdateLinks
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.links.update_many(request={
-                "link_ids": [
-                    "<value>",
-                ],
-                "data": {
-                    "url": "https://google.com",
-                    "tag_ids": "[\"clux0rgak00011...\"]",
-                },
-            })
-
-            if res is not None:
-                # handle response
-                pass
   - target: $["paths"]["/qr"]["get"]
     update:
       x-codeSamples:
@@ -95,26 +18,6 @@ actions:
 
             res = s.qr_codes.get(request={
                 "url": "https://brief-micronutrient.org",
-            })
-
-            if res is not None:
-                # handle response
-                pass
-  - target: $["paths"]["/workspaces/{idOrSlug}"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: getWorkspace
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.workspaces.get(request={
-                "id_or_slug": "<value>",
             })
 
             if res is not None:
@@ -166,11 +69,11 @@ actions:
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/links"]["post"]
+  - target: $["paths"]["/track/customer"]["post"]
     update:
       x-codeSamples:
         - lang: python
-          label: createLink
+          label: trackCustomer
           source: |-
             from dub import Dub
 
@@ -179,11 +82,7 @@ actions:
             )
 
 
-            res = s.links.create(request={
-                "url": "https://google.com",
-                "external_id": "123456",
-                "tag_ids": "[\"clux0rgak00011...\"]",
-            })
+            res = s.track.customer()
 
             if res is not None:
                 # handle response
@@ -212,6 +111,79 @@ actions:
             if res is not None:
                 # handle response
                 pass
+  - target: $["paths"]["/links/bulk"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: bulkUpdateLinks
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.links.update_many(request={
+                "link_ids": [
+                    "<value>",
+                ],
+                "data": {
+                    "url": "https://google.com",
+                    "tag_ids": "[\"clux0rgak00011...\"]",
+                },
+            })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/links/info"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: getLinkInfo
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.links.get(request={
+                "link_id": "clux0rgak00011...",
+                "external_id": "ext_123456",
+            })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/links/bulk"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: bulkCreateLinks
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.links.create_many(request=[
+                {
+                    "url": "https://google.com",
+                    "external_id": "123456",
+                    "tag_ids": [
+                        "clux0rgak00011...",
+                    ],
+                },
+            ])
+
+            if res is not None:
+                # handle response
+                pass
   - target: $["paths"]["/workspaces/{idOrSlug}"]["patch"]
     update:
       x-codeSamples:
@@ -230,11 +202,11 @@ actions:
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/tags"]["get"]
+  - target: $["paths"]["/tags/{id}"]["patch"]
     update:
       x-codeSamples:
         - lang: python
-          label: getTags
+          label: updateTag
           source: |-
             from dub import Dub
 
@@ -243,16 +215,16 @@ actions:
             )
 
 
-            res = s.tags.list()
+            res = s.tags.update(id="<id>")
 
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/domains"]["post"]
+  - target: $["paths"]["/links"]["post"]
     update:
       x-codeSamples:
         - lang: python
-          label: createDomain
+          label: createLink
           source: |-
             from dub import Dub
 
@@ -261,12 +233,67 @@ actions:
             )
 
 
-            res = s.domains.create(request={
-                "slug": "acme.com",
-                "expired_url": "https://acme.com/expired",
-                "archived": False,
-                "placeholder": "https://dub.co/help/article/what-is-dub",
+            res = s.links.create(request={
+                "url": "https://google.com",
+                "external_id": "123456",
+                "tag_ids": "[\"clux0rgak00011...\"]",
             })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/links/count"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: getLinksCount
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.links.count()
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/workspaces/{idOrSlug}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: getWorkspace
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.workspaces.get(request={
+                "id_or_slug": "<value>",
+            })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/tags"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createTag
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.tags.create()
 
             if res is not None:
                 # handle response
@@ -294,11 +321,11 @@ actions:
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/links/info"]["get"]
+  - target: $["paths"]["/metatags"]["get"]
     update:
       x-codeSamples:
         - lang: python
-          label: getLinkInfo
+          label: getMetatags
           source: |-
             from dub import Dub
 
@@ -307,19 +334,18 @@ actions:
             )
 
 
-            res = s.links.get(request={
-                "link_id": "clux0rgak00011...",
-                "external_id": "ext_123456",
+            res = s.metatags.get(request={
+                "url": "https://dub.co",
             })
 
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/tags/{id}"]["patch"]
+  - target: $["paths"]["/links"]["get"]
     update:
       x-codeSamples:
         - lang: python
-          label: updateTag
+          label: getLinks
           source: |-
             from dub import Dub
 
@@ -328,16 +354,48 @@ actions:
             )
 
 
-            res = s.tags.update(id="<value>")
+            res = s.links.list(request={
+                "page": 1,
+                "page_size": 50,
+            })
+
+            if res is not None:
+                while True:
+                    # handle items
+
+                    res = res.Next()
+                    if res is None:
+                        break
+  - target: $["paths"]["/analytics"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: retrieveAnalytics
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.analytics.retrieve(request={
+                "timezone": "America/New_York",
+                "city": "New York",
+                "device": "Desktop",
+                "browser": "Chrome",
+                "os": "Windows",
+                "referer": "google.com",
+            })
 
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/track/customer"]["post"]
+  - target: $["paths"]["/links/bulk"]["delete"]
     update:
       x-codeSamples:
         - lang: python
-          label: trackCustomer
+          label: bulkDeleteLinks
           source: |-
             from dub import Dub
 
@@ -346,7 +404,100 @@ actions:
             )
 
 
-            res = s.track.customer()
+            res = s.links.delete_many(request={
+                "link_ids": "clux0rgak00011...,clux0rgak00022...",
+            })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/events"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listEvents
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.events.list(request={
+                "timezone": "America/New_York",
+                "city": "New York",
+                "device": "Desktop",
+                "browser": "Chrome",
+                "os": "Windows",
+                "referer": "google.com",
+            })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/tags"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: getTags
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.tags.list()
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/domains"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listDomains
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.domains.list(request={
+                "page": 1,
+                "page_size": 50,
+            })
+
+            if res is not None:
+                while True:
+                    # handle items
+
+                    res = res.Next()
+                    if res is None:
+                        break
+  - target: $["paths"]["/domains"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createDomain
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+
+            res = s.domains.create(request={
+                "slug": "acme.com",
+                "expired_url": "https://acme.com/expired",
+                "archived": False,
+                "placeholder": "https://dub.co/help/article/what-is-dub",
+            })
 
             if res is not None:
                 # handle response
@@ -393,24 +544,6 @@ actions:
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/links/count"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: getLinksCount
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.links.count()
-
-            if res is not None:
-                # handle response
-                pass
   - target: $["paths"]["/links/{linkId}"]["delete"]
     update:
       x-codeSamples:
@@ -425,119 +558,6 @@ actions:
 
 
             res = s.links.delete(link_id="<value>")
-
-            if res is not None:
-                # handle response
-                pass
-  - target: $["paths"]["/analytics"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: retrieveAnalytics
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.analytics.retrieve(request={
-                "timezone": "America/New_York",
-                "city": "New York",
-                "device": "Desktop",
-                "browser": "Chrome",
-                "os": "Windows",
-                "referer": "google.com",
-            })
-
-            if res is not None:
-                # handle response
-                pass
-  - target: $["paths"]["/events"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: listEvents
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.events.list(request={
-                "timezone": "America/New_York",
-                "city": "New York",
-                "device": "Desktop",
-                "browser": "Chrome",
-                "os": "Windows",
-                "referer": "google.com",
-            })
-
-            if res is not None:
-                # handle response
-                pass
-  - target: $["paths"]["/tags"]["post"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: createTag
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.tags.create()
-
-            if res is not None:
-                # handle response
-                pass
-  - target: $["paths"]["/domains"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: listDomains
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.domains.list(request={
-                "page": 1,
-                "page_size": 50,
-            })
-
-            if res is not None:
-                while True:
-                    # handle items
-
-                    res = res.Next()
-                    if res is None:
-                        break
-  - target: $["paths"]["/metatags"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: getMetatags
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-
-            res = s.metatags.get(request={
-                "url": "https://dub.co",
-            })
 
             if res is not None:
                 # handle response

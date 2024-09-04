@@ -12,6 +12,7 @@
 * [delete](#delete) - Delete a link
 * [update](#update) - Update a link
 * [create_many](#create_many) - Bulk create links
+* [delete_many](#delete_many) - Bulk delete links
 * [update_many](#update_many) - Bulk update links
 * [upsert](#upsert) - Upsert a link
 
@@ -371,6 +372,57 @@ if res is not None:
 ### Response
 
 **[List[components.LinkSchema]](../../models/.md)**
+
+### Errors
+
+| Error Object               | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4xx-5xx                    | */*                        |
+
+
+## delete_many
+
+Bulk delete up to 100 links for the authenticated workspace.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+
+res = s.links.delete_many(request={
+    "link_ids": "clux0rgak00011...,clux0rgak00022...",
+})
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `request`                                                                              | [operations.BulkDeleteLinksRequest](../../models/operations/bulkdeletelinksrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+
+### Response
+
+**[operations.BulkDeleteLinksResponseBody](../../models/operations/bulkdeletelinksresponsebody.md)**
 
 ### Errors
 

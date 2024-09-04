@@ -4,14 +4,14 @@ from __future__ import annotations
 from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 from enum import Enum
 from pydantic import model_serializer
-from typing import Optional, TypedDict
-from typing_extensions import NotRequired
+from typing import TypedDict
 
 
 class LeadEventEvent(str, Enum):
     LEAD = "lead"
 
 class LeadEventTypedDict(TypedDict):
+    event: LeadEventEvent
     timestamp: str
     event_id: str
     event_name: str
@@ -32,10 +32,10 @@ class LeadEventTypedDict(TypedDict):
     referer: Nullable[str]
     qr: Nullable[float]
     ip: Nullable[str]
-    event: NotRequired[LeadEventEvent]
     
 
 class LeadEvent(BaseModel):
+    event: LeadEventEvent
     timestamp: str
     event_id: str
     event_name: str
@@ -56,11 +56,10 @@ class LeadEvent(BaseModel):
     referer: Nullable[str]
     qr: Nullable[float]
     ip: Nullable[str]
-    event: Optional[LeadEventEvent] = LeadEventEvent.LEAD
     
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["event"]
+        optional_fields = []
         nullable_fields = ["continent", "country", "city", "device", "browser", "os", "referer", "qr", "ip"]
         null_default_fields = []
 

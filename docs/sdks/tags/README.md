@@ -120,7 +120,7 @@ s = Dub(
 )
 
 
-res = s.tags.update(id="<value>")
+res = s.tags.update(id="<id>")
 
 if res is not None:
     # handle response
