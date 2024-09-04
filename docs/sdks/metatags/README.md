@@ -20,7 +20,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.metatags.get(request={
     "url": "https://dub.co",
 })

@@ -20,7 +20,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.events.list(request={
     "timezone": "America/New_York",
     "city": "New York",

@@ -22,7 +22,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.track.lead(request={
     "click_id": "<value>",
     "event_name": "Sign up",
@@ -76,7 +75,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.track.sale(request={
     "customer_id": "<value>",
     "amount": 996500,
@@ -129,7 +127,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.track.customer()
 

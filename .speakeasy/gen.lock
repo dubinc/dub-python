@@ -3,10 +3,10 @@ id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
   docChecksum: e79768bd6535cef0d8d78eefb5ac63e1
   docVersion: 0.0.1
-  speakeasyVersion: 1.390.1
-  generationVersion: 2.409.0
-  releaseVersion: 0.7.4
-  configChecksum: bd9f10704d95327b294709d762e7c50f
+  speakeasyVersion: 1.390.3
+  generationVersion: 2.409.3
+  releaseVersion: 0.7.5
+  configChecksum: fc15b0c646d314ae77e5561abf01fb37
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
