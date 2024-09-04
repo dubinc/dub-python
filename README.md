@@ -68,7 +68,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
@@ -113,7 +112,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.upsert(request={
     "url": "https://google.com",
@@ -241,9 +239,17 @@ s = Dub(
 res = None
 try:
     res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
-})
+        "page": 1,
+        "page_size": 50,
+    })
+
+    if res is not None:
+        while True:
+            # handle items
+
+            res = res.Next()
+            if res is None:
+                break
 
 except errors.BadRequest as e:
     # handle e.data: errors.BadRequestData
@@ -275,16 +281,6 @@ except errors.InternalServerError as e:
 except errors.SDKError as e:
     # handle exception
     raise(e)
-
-if res is not None:
-    while True:
-        # handle items
-
-        res = res.Next()
-        if res is None:
-            break
-
-
 ```
 <!-- End Error Handling [errors] -->
 
@@ -309,7 +305,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -322,7 +317,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 
@@ -338,7 +332,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -351,7 +344,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Server Selection [server] -->
@@ -456,7 +448,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -469,7 +460,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Authentication [security] -->
@@ -488,7 +478,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -503,7 +492,6 @@ if res is not None:
         if res is None:
             break
 
-
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
@@ -515,7 +503,6 @@ s = Dub(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token="DUB_API_KEY",
 )
-
 
 res = s.links.list(request={
     "page": 1,
@@ -529,7 +516,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Retries [retries] -->
@@ -549,7 +535,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -562,7 +547,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Pagination [pagination] -->

@@ -21,7 +21,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.workspaces.get(request={
     "id_or_slug": "<value>",
 })
@@ -71,7 +70,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.workspaces.update(id_or_slug="<value>")
 

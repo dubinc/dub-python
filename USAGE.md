@@ -7,7 +7,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
@@ -50,7 +49,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.upsert(request={
     "url": "https://google.com",

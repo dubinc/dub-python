@@ -20,7 +20,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.qr_codes.get(request={
     "url": "https://brief-micronutrient.org",
 })

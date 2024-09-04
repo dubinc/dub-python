@@ -23,7 +23,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.domains.list(request={
     "page": 1,
     "page_size": 50,
@@ -36,7 +35,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 
@@ -79,7 +77,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.domains.create(request={
     "slug": "acme.com",
@@ -134,7 +131,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.domains.delete(slug="acme.com")
 
 if res is not None:
@@ -182,7 +178,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.domains.update(slug="acme.com", request_body={
     "slug": "acme.com",
