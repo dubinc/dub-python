@@ -395,7 +395,10 @@ s = Dub(
 )
 
 res = s.links.delete_many(request={
-    "link_ids": "clux0rgak00011...,clux0rgak00022...",
+    "link_ids": [
+        "clux0rgak00011...",
+        "clux0rgak00022...",
+    ],
 })
 
 if res is not None:

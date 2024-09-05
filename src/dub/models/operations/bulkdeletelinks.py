@@ -4,17 +4,17 @@ from __future__ import annotations
 from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 import pydantic
-from typing import TypedDict
+from typing import List, TypedDict
 from typing_extensions import Annotated
 
 
 class BulkDeleteLinksRequestTypedDict(TypedDict):
-    link_ids: str
+    link_ids: List[str]
     r"""Comma-separated list of link IDs to delete. Maximum of 100 IDs. Non-existing IDs will be ignored."""
     
 
 class BulkDeleteLinksRequest(BaseModel):
-    link_ids: Annotated[str, pydantic.Field(alias="linkIds"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))]
+    link_ids: Annotated[List[str], pydantic.Field(alias="linkIds"), FieldMetadata(query=QueryParamMetadata(style="form", explode=False))]
     r"""Comma-separated list of link IDs to delete. Maximum of 100 IDs. Non-existing IDs will be ignored."""
     
 
