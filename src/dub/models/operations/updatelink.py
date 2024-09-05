@@ -74,6 +74,7 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     android: NotRequired[Nullable[str]]
     r"""The Android destination URL for the short link for Android device targeting."""
     geo: NotRequired[Nullable[components_linkgeotargeting.LinkGeoTargetingTypedDict]]
+    r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
     do_index: NotRequired[bool]
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
     utm_source: NotRequired[Nullable[str]]
@@ -136,6 +137,7 @@ class UpdateLinkRequestBody(BaseModel):
     android: OptionalNullable[str] = UNSET
     r"""The Android destination URL for the short link for Android device targeting."""
     geo: OptionalNullable[components_linkgeotargeting.LinkGeoTargeting] = UNSET
+    r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
     do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = False
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
     utm_source: OptionalNullable[str] = UNSET
