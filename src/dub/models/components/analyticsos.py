@@ -18,17 +18,20 @@ class AnalyticsOSTypedDict(TypedDict):
     r"""The number of sales from this OS"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales from this OS"""
-    
+
 
 class AnalyticsOS(BaseModel):
     os: str
     r"""The name of the OS"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this OS"""
+
     leads: Optional[float] = 0
     r"""The number of leads from this OS"""
+
     sales: Optional[float] = 0
     r"""The number of sales from this OS"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales from this OS"""
-    

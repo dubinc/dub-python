@@ -8,6 +8,7 @@ from typing import TypedDict
 
 class Color(str, Enum):
     r"""The color of the tag."""
+
     RED = "red"
     YELLOW = "yellow"
     GREEN = "green"
@@ -16,6 +17,7 @@ class Color(str, Enum):
     PINK = "pink"
     BROWN = "brown"
 
+
 class TagSchemaTypedDict(TypedDict):
     id: str
     r"""The unique ID of the tag."""
@@ -23,13 +25,14 @@ class TagSchemaTypedDict(TypedDict):
     r"""The name of the tag."""
     color: Color
     r"""The color of the tag."""
-    
+
 
 class TagSchema(BaseModel):
     id: str
     r"""The unique ID of the tag."""
+
     name: str
     r"""The name of the tag."""
+
     color: Color
     r"""The color of the tag."""
-    

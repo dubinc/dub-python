@@ -16,15 +16,17 @@ class AnalyticsCountTypedDict(TypedDict):
     r"""The total number of sales"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales"""
-    
+
 
 class AnalyticsCount(BaseModel):
     clicks: Optional[float] = 0
     r"""The total number of clicks"""
+
     leads: Optional[float] = 0
     r"""The total number of leads"""
+
     sales: Optional[float] = 0
     r"""The total number of sales"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales"""
-    

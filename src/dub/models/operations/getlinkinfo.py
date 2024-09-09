@@ -16,14 +16,30 @@ class GetLinkInfoRequestTypedDict(TypedDict):
     r"""The unique ID of the short link."""
     external_id: NotRequired[str]
     r"""This is the ID of the link in the your database. Must be prefixed with `ext_` when passed as a query parameter."""
-    
+
 
 class GetLinkInfoRequest(BaseModel):
-    domain: Annotated[Optional[str], FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
-    key: Annotated[Optional[str], FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
+    domain: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+
+    key: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
     r"""The key of the link to retrieve. E.g. for `d.to/github`, the key is `github`."""
-    link_id: Annotated[Optional[str], pydantic.Field(alias="linkId"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
+
+    link_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="linkId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
     r"""The unique ID of the short link."""
-    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
+
+    external_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="externalId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
     r"""This is the ID of the link in the your database. Must be prefixed with `ext_` when passed as a query parameter."""
-    

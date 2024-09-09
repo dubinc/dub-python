@@ -11,9 +11,12 @@ from typing_extensions import Annotated
 class GetWorkspaceRequestTypedDict(TypedDict):
     id_or_slug: str
     r"""The ID or slug of the workspace."""
-    
+
 
 class GetWorkspaceRequest(BaseModel):
-    id_or_slug: Annotated[str, pydantic.Field(alias="idOrSlug"), FieldMetadata(path=PathParamMetadata(style="simple", explode=False))]
+    id_or_slug: Annotated[
+        str,
+        pydantic.Field(alias="idOrSlug"),
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
     r"""The ID or slug of the workspace."""
-    

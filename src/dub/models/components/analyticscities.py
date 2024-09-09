@@ -10,6 +10,7 @@ from typing_extensions import Annotated, NotRequired
 
 class AnalyticsCitiesCountry(str, Enum):
     r"""The 2-letter country code of the city: https://d.to/geo"""
+
     AF = "AF"
     AL = "AL"
     DZ = "DZ"
@@ -261,6 +262,7 @@ class AnalyticsCitiesCountry(str, Enum):
     SS = "SS"
     XK = "XK"
 
+
 class AnalyticsCitiesTypedDict(TypedDict):
     city: str
     r"""The name of the city"""
@@ -274,19 +276,23 @@ class AnalyticsCitiesTypedDict(TypedDict):
     r"""The number of sales from this city"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales from this city"""
-    
+
 
 class AnalyticsCities(BaseModel):
     city: str
     r"""The name of the city"""
+
     country: AnalyticsCitiesCountry
     r"""The 2-letter country code of the city: https://d.to/geo"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this city"""
+
     leads: Optional[float] = 0
     r"""The number of leads from this city"""
+
     sales: Optional[float] = 0
     r"""The number of sales from this city"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales from this city"""
-    

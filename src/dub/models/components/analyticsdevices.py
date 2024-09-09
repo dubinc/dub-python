@@ -18,17 +18,20 @@ class AnalyticsDevicesTypedDict(TypedDict):
     r"""The number of sales from this device"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales from this device"""
-    
+
 
 class AnalyticsDevices(BaseModel):
     device: str
     r"""The name of the device"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this device"""
+
     leads: Optional[float] = 0
     r"""The number of leads from this device"""
+
     sales: Optional[float] = 0
     r"""The number of sales from this device"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales from this device"""
-    

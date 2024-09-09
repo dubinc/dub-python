@@ -10,7 +10,9 @@ from typing_extensions import NotRequired
 
 class InviteExpiredCode(str, Enum):
     r"""A short code indicating the error code returned."""
+
     INVITE_EXPIRED = "invite_expired"
+
 
 class InviteExpiredErrorTypedDict(TypedDict):
     code: InviteExpiredCode
@@ -19,23 +21,26 @@ class InviteExpiredErrorTypedDict(TypedDict):
     r"""A human readable explanation of what went wrong."""
     doc_url: NotRequired[str]
     r"""A link to our documentation with more details about this error code"""
-    
+
 
 class InviteExpiredError(BaseModel):
     code: InviteExpiredCode
     r"""A short code indicating the error code returned."""
+
     message: str
     r"""A human readable explanation of what went wrong."""
+
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
-    
+
+
 class InviteExpiredData(BaseModel):
     error: InviteExpiredError
-    
 
 
 class InviteExpired(Exception):
     r"""This response is sent when the requested content has been permanently deleted from server, with no forwarding address."""
+
     data: InviteExpiredData
 
     def __init__(self, data: InviteExpiredData):
@@ -43,4 +48,3 @@ class InviteExpired(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, InviteExpiredData)
-

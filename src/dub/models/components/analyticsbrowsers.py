@@ -18,17 +18,20 @@ class AnalyticsBrowsersTypedDict(TypedDict):
     r"""The number of sales from this browser"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales from this browser"""
-    
+
 
 class AnalyticsBrowsers(BaseModel):
     browser: str
     r"""The name of the browser"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this browser"""
+
     leads: Optional[float] = 0
     r"""The number of leads from this browser"""
+
     sales: Optional[float] = 0
     r"""The number of sales from this browser"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales from this browser"""
-    

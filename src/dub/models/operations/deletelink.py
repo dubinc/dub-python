@@ -11,23 +11,26 @@ from typing_extensions import Annotated
 class DeleteLinkRequestTypedDict(TypedDict):
     link_id: str
     r"""The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`."""
-    
+
 
 class DeleteLinkRequest(BaseModel):
-    link_id: Annotated[str, pydantic.Field(alias="linkId"), FieldMetadata(path=PathParamMetadata(style="simple", explode=False))]
+    link_id: Annotated[
+        str,
+        pydantic.Field(alias="linkId"),
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
     r"""The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`."""
-    
+
 
 class DeleteLinkResponseBodyTypedDict(TypedDict):
-    r"""The deleted link"""
-    
+    r"""The deleted link ID."""
+
     id: str
     r"""The ID of the link."""
-    
+
 
 class DeleteLinkResponseBody(BaseModel):
-    r"""The deleted link"""
-    
+    r"""The deleted link ID."""
+
     id: str
     r"""The ID of the link."""
-    

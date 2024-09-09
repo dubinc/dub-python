@@ -10,7 +10,9 @@ from typing_extensions import NotRequired
 
 class NotFoundCode(str, Enum):
     r"""A short code indicating the error code returned."""
+
     NOT_FOUND = "not_found"
+
 
 class NotFoundErrorTypedDict(TypedDict):
     code: NotFoundCode
@@ -19,23 +21,26 @@ class NotFoundErrorTypedDict(TypedDict):
     r"""A human readable explanation of what went wrong."""
     doc_url: NotRequired[str]
     r"""A link to our documentation with more details about this error code"""
-    
+
 
 class NotFoundError(BaseModel):
     code: NotFoundCode
     r"""A short code indicating the error code returned."""
+
     message: str
     r"""A human readable explanation of what went wrong."""
+
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
-    
+
+
 class NotFoundData(BaseModel):
     error: NotFoundError
-    
 
 
 class NotFound(Exception):
     r"""The server cannot find the requested resource."""
+
     data: NotFoundData
 
     def __init__(self, data: NotFoundData):
@@ -43,4 +48,3 @@ class NotFound(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, NotFoundData)
-
