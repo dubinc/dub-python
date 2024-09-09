@@ -18,25 +18,40 @@ class ListDomainsRequestTypedDict(TypedDict):
     r"""The page number for pagination."""
     page_size: NotRequired[float]
     r"""The number of items per page."""
-    
+
 
 class ListDomainsRequest(BaseModel):
-    archived: Annotated[Optional[bool], FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = True
+    archived: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = True
     r"""Whether to include archived domains in the response. Defaults to `false` if not provided."""
-    search: Annotated[Optional[str], FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = None
+
+    search: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
     r"""The search term to filter the domains by."""
-    page: Annotated[Optional[float], FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = 1
+
+    page: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
     r"""The page number for pagination."""
-    page_size: Annotated[Optional[float], pydantic.Field(alias="pageSize"), FieldMetadata(query=QueryParamMetadata(style="form", explode=True))] = 50
+
+    page_size: Annotated[
+        Optional[float],
+        pydantic.Field(alias="pageSize"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 50
     r"""The number of items per page."""
-    
+
 
 class ListDomainsResponseTypedDict(TypedDict):
     result: List[components_domainschema.DomainSchemaTypedDict]
-    
+
 
 class ListDomainsResponse(BaseModel):
     next: Callable[[], Optional[ListDomainsResponse]]
-    
+
     result: List[components_domainschema.DomainSchema]
-    

@@ -10,7 +10,9 @@ from typing_extensions import NotRequired
 
 class UnauthorizedCode(str, Enum):
     r"""A short code indicating the error code returned."""
+
     UNAUTHORIZED = "unauthorized"
+
 
 class UnauthorizedErrorTypedDict(TypedDict):
     code: UnauthorizedCode
@@ -19,23 +21,26 @@ class UnauthorizedErrorTypedDict(TypedDict):
     r"""A human readable explanation of what went wrong."""
     doc_url: NotRequired[str]
     r"""A link to our documentation with more details about this error code"""
-    
+
 
 class UnauthorizedError(BaseModel):
     code: UnauthorizedCode
     r"""A short code indicating the error code returned."""
+
     message: str
     r"""A human readable explanation of what went wrong."""
+
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
-    
+
+
 class UnauthorizedData(BaseModel):
     error: UnauthorizedError
-    
 
 
 class Unauthorized(Exception):
     r"""Although the HTTP standard specifies \"unauthorized\", semantically this response means \"unauthenticated\". That is, the client must authenticate itself to get the requested response."""
+
     data: UnauthorizedData
 
     def __init__(self, data: UnauthorizedData):
@@ -43,4 +48,3 @@ class Unauthorized(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, UnauthorizedData)
-

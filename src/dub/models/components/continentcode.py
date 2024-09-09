@@ -6,6 +6,7 @@ from enum import Enum
 
 class ContinentCode(str, Enum):
     r"""The continent to retrieve analytics for."""
+
     AF = "AF"
     AN = "AN"
     AS = "AS"

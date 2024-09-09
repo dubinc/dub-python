@@ -30,29 +30,43 @@ class AnalyticsTopLinksTypedDict(TypedDict):
     r"""The number of sales from this link"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales from this link"""
-    
+
 
 class AnalyticsTopLinks(BaseModel):
-    link: Annotated[str, pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.")]
+    link: Annotated[
+        str,
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ]
     r"""The unique ID of the short link"""
+
     id: str
     r"""The unique ID of the short link"""
+
     domain: str
     r"""The domain of the short link"""
+
     key: str
     r"""The key of the short link"""
+
     short_link: Annotated[str, pydantic.Field(alias="shortLink")]
     r"""The short link URL"""
+
     url: str
     r"""The destination URL of the short link"""
+
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The creation timestamp of the short link"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this link"""
+
     leads: Optional[float] = 0
     r"""The number of leads from this link"""
+
     sales: Optional[float] = 0
     r"""The number of sales from this link"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales from this link"""
-    

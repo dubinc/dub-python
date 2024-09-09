@@ -18,17 +18,20 @@ class AnalyticsTopUrlsTypedDict(TypedDict):
     r"""The number of sales from this URL"""
     sale_amount: NotRequired[float]
     r"""The total amount of sales from this URL"""
-    
+
 
 class AnalyticsTopUrls(BaseModel):
     url: str
     r"""The destination URL"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this URL"""
+
     leads: Optional[float] = 0
     r"""The number of leads from this URL"""
+
     sales: Optional[float] = 0
     r"""The number of sales from this URL"""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales from this URL"""
-    

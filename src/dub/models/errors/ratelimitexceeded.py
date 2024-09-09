@@ -10,7 +10,9 @@ from typing_extensions import NotRequired
 
 class RateLimitExceededCode(str, Enum):
     r"""A short code indicating the error code returned."""
+
     RATE_LIMIT_EXCEEDED = "rate_limit_exceeded"
+
 
 class RateLimitExceededErrorTypedDict(TypedDict):
     code: RateLimitExceededCode
@@ -19,23 +21,26 @@ class RateLimitExceededErrorTypedDict(TypedDict):
     r"""A human readable explanation of what went wrong."""
     doc_url: NotRequired[str]
     r"""A link to our documentation with more details about this error code"""
-    
+
 
 class RateLimitExceededError(BaseModel):
     code: RateLimitExceededCode
     r"""A short code indicating the error code returned."""
+
     message: str
     r"""A human readable explanation of what went wrong."""
+
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
-    
+
+
 class RateLimitExceededData(BaseModel):
     error: RateLimitExceededError
-    
 
 
 class RateLimitExceeded(Exception):
     r"""The user has sent too many requests in a given amount of time (\"rate limiting\")"""
+
     data: RateLimitExceededData
 
     def __init__(self, data: RateLimitExceededData):
@@ -43,4 +48,3 @@ class RateLimitExceeded(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, RateLimitExceededData)
-

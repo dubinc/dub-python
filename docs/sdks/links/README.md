@@ -38,7 +38,7 @@ if res is not None:
     while True:
         # handle items
 
-        res = res.Next()
+        res = res.next()
         if res is None:
             break
 
@@ -87,7 +87,9 @@ s = Dub(
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
-    "tag_ids": "[\"clux0rgak00011...\"]",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
@@ -453,7 +455,9 @@ res = s.links.update_many(request={
     ],
     "data": {
         "url": "https://google.com",
-        "tag_ids": "[\"clux0rgak00011...\"]",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     },
 })
 

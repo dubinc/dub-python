@@ -11,6 +11,7 @@ from typing_extensions import Annotated, NotRequired
 
 class UpdateTagColor(str, Enum):
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
+
     RED = "red"
     YELLOW = "yellow"
     GREEN = "green"
@@ -19,6 +20,7 @@ class UpdateTagColor(str, Enum):
     PINK = "pink"
     BROWN = "brown"
 
+
 class UpdateTagRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the tag to create."""
@@ -26,25 +28,37 @@ class UpdateTagRequestBodyTypedDict(TypedDict):
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
     tag: NotRequired[str]
     r"""The name of the tag to create."""
-    
+
 
 class UpdateTagRequestBody(BaseModel):
     name: Optional[str] = None
     r"""The name of the tag to create."""
+
     color: Optional[UpdateTagColor] = None
     r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown."""
-    tag: Annotated[Optional[str], pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.")] = None
+
+    tag: Annotated[
+        Optional[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = None
     r"""The name of the tag to create."""
-    
+
 
 class UpdateTagRequestTypedDict(TypedDict):
     id: str
     r"""The ID of the tag to update."""
     request_body: NotRequired[UpdateTagRequestBodyTypedDict]
-    
+
 
 class UpdateTagRequest(BaseModel):
-    id: Annotated[str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))]
+    id: Annotated[
+        str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
+    ]
     r"""The ID of the tag to update."""
-    request_body: Annotated[Optional[UpdateTagRequestBody], FieldMetadata(request=RequestMetadata(media_type="application/json"))] = None
-    
+
+    request_body: Annotated[
+        Optional[UpdateTagRequestBody],
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ] = None

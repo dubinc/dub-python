@@ -8,16 +8,18 @@ from dub.types import BaseModel, OptionalNullable, UNSET
 from jsonpath import JSONPath
 from typing import Any, Dict, List, Optional, Union, cast
 
+
 class Links(BaseSDK):
-    
-    
     def list(
-        self, *,
-        request: Optional[Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> operations.GetLinksResponse:
+    ) -> Optional[operations.GetLinksResponse]:
         r"""Retrieve a list of links
 
         Retrieve a paginated list of links for the authenticated workspace.
@@ -31,14 +33,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksRequest)
         request = cast(operations.GetLinksRequest, request)
-        
+
         req = self.build_request(
             method="GET",
             path="/links",
@@ -53,33 +55,42 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="getLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="getLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         def next_func() -> Optional[operations.GetLinksResponse]:
             body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
             page = request.page if not request.page is None else 0
             next_page = page + 1
-            
 
             if not http_res.text:
                 return None
@@ -106,10 +117,15 @@ class Links(BaseSDK):
                 ),
                 retries=retries,
             )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.GetLinksResponse(result=utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]]), next=next_func)
+            return operations.GetLinksResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, Optional[List[components.LinkSchema]]
+                ),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -137,21 +153,29 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def list_async(
-        self, *,
-        request: Optional[Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> operations.GetLinksResponse:
+    ) -> Optional[operations.GetLinksResponse]:
         r"""Retrieve a list of links
 
         Retrieve a paginated list of links for the authenticated workspace.
@@ -165,15 +189,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksRequest)
         request = cast(operations.GetLinksRequest, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="GET",
             path="/links",
             base_url=base_url,
@@ -187,33 +211,42 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="getLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="getLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         def next_func() -> Optional[operations.GetLinksResponse]:
             body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
             page = request.page if not request.page is None else 0
             next_page = page + 1
-            
 
             if not http_res.text:
                 return None
@@ -240,10 +273,15 @@ class Links(BaseSDK):
                 ),
                 retries=retries,
             )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.GetLinksResponse(result=utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]]), next=next_func)
+            return operations.GetLinksResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, Optional[List[components.LinkSchema]]
+                ),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -271,17 +309,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def create(
-        self, *,
-        request: Optional[Union[operations.CreateLinkRequestBody, operations.CreateLinkRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.CreateLinkRequestBody,
+                operations.CreateLinkRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -299,14 +348,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateLinkRequestBody)
         request = cast(operations.CreateLinkRequestBody, request)
-        
+
         req = self.build_request(
             method="POST",
             path="/links",
@@ -319,31 +368,43 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateLinkRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.CreateLinkRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="createLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="createLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -374,17 +435,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def create_async(
-        self, *,
-        request: Optional[Union[operations.CreateLinkRequestBody, operations.CreateLinkRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.CreateLinkRequestBody,
+                operations.CreateLinkRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -402,15 +474,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateLinkRequestBody)
         request = cast(operations.CreateLinkRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="POST",
             path="/links",
             base_url=base_url,
@@ -422,31 +494,43 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateLinkRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.CreateLinkRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="createLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="createLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -477,17 +561,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def count(
-        self, *,
-        request: Optional[Union[operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.GetLinksCountRequest,
+                operations.GetLinksCountRequestTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -505,14 +600,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksCountRequest)
         request = cast(operations.GetLinksCountRequest, request)
-        
+
         req = self.build_request(
             method="GET",
             path="/links/count",
@@ -527,28 +622,38 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="getLinksCount", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="getLinksCount",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[float])
@@ -579,17 +684,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def count_async(
-        self, *,
-        request: Optional[Union[operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.GetLinksCountRequest,
+                operations.GetLinksCountRequestTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -607,15 +723,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinksCountRequest)
         request = cast(operations.GetLinksCountRequest, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="GET",
             path="/links/count",
             base_url=base_url,
@@ -629,28 +745,38 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="getLinksCount", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="getLinksCount",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[float])
@@ -681,17 +807,25 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def get(
-        self, *,
-        request: Optional[Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -709,14 +843,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinkInfoRequest)
         request = cast(operations.GetLinkInfoRequest, request)
-        
+
         req = self.build_request(
             method="GET",
             path="/links/info",
@@ -731,28 +865,38 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="getLinkInfo", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="getLinkInfo",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -783,17 +927,25 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def get_async(
-        self, *,
-        request: Optional[Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -811,15 +963,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.GetLinkInfoRequest)
         request = cast(operations.GetLinkInfoRequest, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="GET",
             path="/links/info",
             base_url=base_url,
@@ -833,28 +985,38 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="getLinkInfo", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="getLinkInfo",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -885,16 +1047,22 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def delete(
-        self, *,
+        self,
+        *,
         link_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -913,14 +1081,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.DeleteLinkRequest(
             link_id=link_id,
         )
-        
+
         req = self.build_request(
             method="DELETE",
             path="/links/{linkId}",
@@ -935,31 +1103,43 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="deleteLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="deleteLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.DeleteLinkResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.DeleteLinkResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -987,16 +1167,22 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def delete_async(
-        self, *,
+        self,
+        *,
         link_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1015,15 +1201,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.DeleteLinkRequest(
             link_id=link_id,
         )
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="DELETE",
             path="/links/{linkId}",
             base_url=base_url,
@@ -1037,31 +1223,43 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="deleteLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="deleteLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.DeleteLinkResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.DeleteLinkResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1089,18 +1287,29 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def update(
-        self, *,
+        self,
+        *,
         link_id: str,
-        request_body: Optional[Union[operations.UpdateLinkRequestBody, operations.UpdateLinkRequestBodyTypedDict]] = None,
+        request_body: Optional[
+            Union[
+                operations.UpdateLinkRequestBody,
+                operations.UpdateLinkRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1110,7 +1319,7 @@ class Links(BaseSDK):
         Update a link for the authenticated workspace. If there's no change, returns it as it is.
 
         :param link_id: The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
-        :param request_body: 
+        :param request_body:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1119,15 +1328,17 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.UpdateLinkRequest(
             link_id=link_id,
-            request_body=utils.get_pydantic_model(request_body, Optional[operations.UpdateLinkRequestBody]),
+            request_body=utils.get_pydantic_model(
+                request_body, Optional[operations.UpdateLinkRequestBody]
+            ),
         )
-        
+
         req = self.build_request(
             method="PATCH",
             path="/links/{linkId}",
@@ -1140,31 +1351,47 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateLinkRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[operations.UpdateLinkRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="updateLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="updateLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -1195,18 +1422,29 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def update_async(
-        self, *,
+        self,
+        *,
         link_id: str,
-        request_body: Optional[Union[operations.UpdateLinkRequestBody, operations.UpdateLinkRequestBodyTypedDict]] = None,
+        request_body: Optional[
+            Union[
+                operations.UpdateLinkRequestBody,
+                operations.UpdateLinkRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1216,7 +1454,7 @@ class Links(BaseSDK):
         Update a link for the authenticated workspace. If there's no change, returns it as it is.
 
         :param link_id: The id of the link to update. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`.
-        :param request_body: 
+        :param request_body:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1225,16 +1463,18 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.UpdateLinkRequest(
             link_id=link_id,
-            request_body=utils.get_pydantic_model(request_body, Optional[operations.UpdateLinkRequestBody]),
+            request_body=utils.get_pydantic_model(
+                request_body, Optional[operations.UpdateLinkRequestBody]
+            ),
         )
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="PATCH",
             path="/links/{linkId}",
             base_url=base_url,
@@ -1246,31 +1486,47 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateLinkRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[operations.UpdateLinkRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="updateLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="updateLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -1301,17 +1557,25 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def create_many(
-        self, *,
-        request: Optional[Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1329,14 +1593,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, List[operations.RequestBody])
         request = cast(List[operations.RequestBody], request)
-        
+
         req = self.build_request(
             method="POST",
             path="/links/bulk",
@@ -1349,34 +1613,48 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[List[operations.RequestBody]]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[List[operations.RequestBody]]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="bulkCreateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="bulkCreateLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
+            return utils.unmarshal_json(
+                http_res.text, Optional[List[components.LinkSchema]]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1404,17 +1682,25 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def create_many_async(
-        self, *,
-        request: Optional[Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[List[operations.RequestBody], List[operations.RequestBodyTypedDict]]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1432,15 +1718,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, List[operations.RequestBody])
         request = cast(List[operations.RequestBody], request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="POST",
             path="/links/bulk",
             base_url=base_url,
@@ -1452,34 +1738,48 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[List[operations.RequestBody]]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[List[operations.RequestBody]]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="bulkCreateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="bulkCreateLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
+            return utils.unmarshal_json(
+                http_res.text, Optional[List[components.LinkSchema]]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1507,17 +1807,26 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def delete_many(
-        self, *,
-        request: Union[operations.BulkDeleteLinksRequest, operations.BulkDeleteLinksRequestTypedDict],
+        self,
+        *,
+        request: Union[
+            operations.BulkDeleteLinksRequest,
+            operations.BulkDeleteLinksRequestTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1535,14 +1844,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.BulkDeleteLinksRequest)
         request = cast(operations.BulkDeleteLinksRequest, request)
-        
+
         req = self.build_request(
             method="DELETE",
             path="/links/bulk",
@@ -1557,31 +1866,43 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="bulkDeleteLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="bulkDeleteLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.BulkDeleteLinksResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.BulkDeleteLinksResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1609,17 +1930,26 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def delete_many_async(
-        self, *,
-        request: Union[operations.BulkDeleteLinksRequest, operations.BulkDeleteLinksRequestTypedDict],
+        self,
+        *,
+        request: Union[
+            operations.BulkDeleteLinksRequest,
+            operations.BulkDeleteLinksRequestTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1637,15 +1967,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.BulkDeleteLinksRequest)
         request = cast(operations.BulkDeleteLinksRequest, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="DELETE",
             path="/links/bulk",
             base_url=base_url,
@@ -1659,31 +1989,43 @@ class Links(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="bulkDeleteLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="bulkDeleteLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.BulkDeleteLinksResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.BulkDeleteLinksResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1711,17 +2053,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def update_many(
-        self, *,
-        request: Optional[Union[operations.BulkUpdateLinksRequestBody, operations.BulkUpdateLinksRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.BulkUpdateLinksRequestBody,
+                operations.BulkUpdateLinksRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1739,14 +2092,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.BulkUpdateLinksRequestBody)
         request = cast(operations.BulkUpdateLinksRequestBody, request)
-        
+
         req = self.build_request(
             method="PATCH",
             path="/links/bulk",
@@ -1759,34 +2112,52 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.BulkUpdateLinksRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.BulkUpdateLinksRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="bulkUpdateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="bulkUpdateLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
+            return utils.unmarshal_json(
+                http_res.text, Optional[List[components.LinkSchema]]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1814,17 +2185,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def update_many_async(
-        self, *,
-        request: Optional[Union[operations.BulkUpdateLinksRequestBody, operations.BulkUpdateLinksRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.BulkUpdateLinksRequestBody,
+                operations.BulkUpdateLinksRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1842,15 +2224,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.BulkUpdateLinksRequestBody)
         request = cast(operations.BulkUpdateLinksRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="PATCH",
             path="/links/bulk",
             base_url=base_url,
@@ -1862,34 +2244,52 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.BulkUpdateLinksRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.BulkUpdateLinksRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="bulkUpdateLinks", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="bulkUpdateLinks",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[List[components.LinkSchema]])
+            return utils.unmarshal_json(
+                http_res.text, Optional[List[components.LinkSchema]]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -1917,17 +2317,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def upsert(
-        self, *,
-        request: Optional[Union[operations.UpsertLinkRequestBody, operations.UpsertLinkRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.UpsertLinkRequestBody,
+                operations.UpsertLinkRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1945,14 +2356,14 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.UpsertLinkRequestBody)
         request = cast(operations.UpsertLinkRequestBody, request)
-        
+
         req = self.build_request(
             method="PUT",
             path="/links/upsert",
@@ -1965,31 +2376,43 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.UpsertLinkRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.UpsertLinkRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="upsertLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="upsertLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -2020,17 +2443,28 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def upsert_async(
-        self, *,
-        request: Optional[Union[operations.UpsertLinkRequestBody, operations.UpsertLinkRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.UpsertLinkRequestBody,
+                operations.UpsertLinkRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2048,15 +2482,15 @@ class Links(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.UpsertLinkRequestBody)
         request = cast(operations.UpsertLinkRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="PUT",
             path="/links/upsert",
             base_url=base_url,
@@ -2068,31 +2502,43 @@ class Links(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.UpsertLinkRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.UpsertLinkRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="upsertLink", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="upsertLink",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.LinkSchema])
@@ -2123,10 +2569,15 @@ class Links(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )

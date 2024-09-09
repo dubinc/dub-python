@@ -10,7 +10,9 @@ from typing_extensions import NotRequired
 
 class Code(str, Enum):
     r"""A short code indicating the error code returned."""
+
     BAD_REQUEST = "bad_request"
+
 
 class ErrorTypedDict(TypedDict):
     code: Code
@@ -19,23 +21,26 @@ class ErrorTypedDict(TypedDict):
     r"""A human readable explanation of what went wrong."""
     doc_url: NotRequired[str]
     r"""A link to our documentation with more details about this error code"""
-    
+
 
 class Error(BaseModel):
     code: Code
     r"""A short code indicating the error code returned."""
+
     message: str
     r"""A human readable explanation of what went wrong."""
+
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
-    
+
+
 class BadRequestData(BaseModel):
     error: Error
-    
 
 
 class BadRequest(Exception):
     r"""The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)."""
+
     data: BadRequestData
 
     def __init__(self, data: BadRequestData):
@@ -43,4 +48,3 @@ class BadRequest(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, BadRequestData)
-

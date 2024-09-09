@@ -10,23 +10,24 @@ from typing_extensions import Annotated
 class DeleteDomainRequestTypedDict(TypedDict):
     slug: str
     r"""The domain name."""
-    
+
 
 class DeleteDomainRequest(BaseModel):
-    slug: Annotated[str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))]
+    slug: Annotated[
+        str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
+    ]
     r"""The domain name."""
-    
+
 
 class DeleteDomainResponseBodyTypedDict(TypedDict):
     r"""The domain was deleted."""
-    
+
     slug: str
     r"""The domain name."""
-    
+
 
 class DeleteDomainResponseBody(BaseModel):
     r"""The domain was deleted."""
-    
+
     slug: str
     r"""The domain name."""
-    

@@ -7,12 +7,17 @@ from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 from typing import Any, Optional, Union, cast
 
+
 class Track(BaseSDK):
-    
-    
     def lead(
-        self, *,
-        request: Optional[Union[operations.TrackLeadRequestBody, operations.TrackLeadRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.TrackLeadRequestBody,
+                operations.TrackLeadRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -30,14 +35,14 @@ class Track(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackLeadRequestBody)
         request = cast(operations.TrackLeadRequestBody, request)
-        
+
         req = self.build_request(
             method="POST",
             path="/track/lead",
@@ -50,34 +55,48 @@ class Track(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.TrackLeadRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.TrackLeadRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="trackLead", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="trackLead",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.TrackLeadResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.TrackLeadResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -105,17 +124,28 @@ class Track(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def lead_async(
-        self, *,
-        request: Optional[Union[operations.TrackLeadRequestBody, operations.TrackLeadRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.TrackLeadRequestBody,
+                operations.TrackLeadRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -133,15 +163,15 @@ class Track(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackLeadRequestBody)
         request = cast(operations.TrackLeadRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="POST",
             path="/track/lead",
             base_url=base_url,
@@ -153,34 +183,48 @@ class Track(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.TrackLeadRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.TrackLeadRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="trackLead", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="trackLead",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.TrackLeadResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.TrackLeadResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -208,17 +252,28 @@ class Track(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def sale(
-        self, *,
-        request: Optional[Union[operations.TrackSaleRequestBody, operations.TrackSaleRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.TrackSaleRequestBody,
+                operations.TrackSaleRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -236,14 +291,14 @@ class Track(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackSaleRequestBody)
         request = cast(operations.TrackSaleRequestBody, request)
-        
+
         req = self.build_request(
             method="POST",
             path="/track/sale",
@@ -256,34 +311,48 @@ class Track(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.TrackSaleRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.TrackSaleRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="trackSale", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="trackSale",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.TrackSaleResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.TrackSaleResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -311,17 +380,28 @@ class Track(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def sale_async(
-        self, *,
-        request: Optional[Union[operations.TrackSaleRequestBody, operations.TrackSaleRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.TrackSaleRequestBody,
+                operations.TrackSaleRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -339,15 +419,15 @@ class Track(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackSaleRequestBody)
         request = cast(operations.TrackSaleRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="POST",
             path="/track/sale",
             base_url=base_url,
@@ -359,34 +439,48 @@ class Track(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.TrackSaleRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, True, "json", Optional[operations.TrackSaleRequestBody]
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="trackSale", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="trackSale",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.TrackSaleResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.TrackSaleResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -414,17 +508,28 @@ class Track(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def customer(
-        self, *,
-        request: Optional[Union[operations.TrackCustomerRequestBody, operations.TrackCustomerRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.TrackCustomerRequestBody,
+                operations.TrackCustomerRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -442,14 +547,14 @@ class Track(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackCustomerRequestBody)
         request = cast(operations.TrackCustomerRequestBody, request)
-        
+
         req = self.build_request(
             method="POST",
             path="/track/customer",
@@ -462,34 +567,52 @@ class Track(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.TrackCustomerRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.TrackCustomerRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="trackCustomer", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="trackCustomer",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.TrackCustomerResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.TrackCustomerResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -517,17 +640,28 @@ class Track(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def customer_async(
-        self, *,
-        request: Optional[Union[operations.TrackCustomerRequestBody, operations.TrackCustomerRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.TrackCustomerRequestBody,
+                operations.TrackCustomerRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -545,15 +679,15 @@ class Track(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.TrackCustomerRequestBody)
         request = cast(operations.TrackCustomerRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="POST",
             path="/track/customer",
             base_url=base_url,
@@ -565,34 +699,52 @@ class Track(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.TrackCustomerRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.TrackCustomerRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="trackCustomer", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="trackCustomer",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.TrackCustomerResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.TrackCustomerResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -620,10 +772,15 @@ class Track(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )

@@ -8,16 +8,18 @@ from dub.types import BaseModel, OptionalNullable, UNSET
 from jsonpath import JSONPath
 from typing import Any, Dict, List, Optional, Union, cast
 
+
 class Domains(BaseSDK):
-    
-    
     def list(
-        self, *,
-        request: Optional[Union[operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> operations.ListDomainsResponse:
+    ) -> Optional[operations.ListDomainsResponse]:
         r"""Retrieve a list of domains
 
         Retrieve a list of domains associated with the authenticated workspace.
@@ -31,14 +33,14 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.ListDomainsRequest)
         request = cast(operations.ListDomainsRequest, request)
-        
+
         req = self.build_request(
             method="GET",
             path="/domains",
@@ -53,33 +55,42 @@ class Domains(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="listDomains", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="listDomains",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         def next_func() -> Optional[operations.ListDomainsResponse]:
             body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
             page = request.page if not request.page is None else 0
             next_page = page + 1
-            
 
             if not http_res.text:
                 return None
@@ -99,10 +110,15 @@ class Domains(BaseSDK):
                 ),
                 retries=retries,
             )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.ListDomainsResponse(result=utils.unmarshal_json(http_res.text, Optional[List[components.DomainSchema]]), next=next_func)
+            return operations.ListDomainsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, Optional[List[components.DomainSchema]]
+                ),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -130,21 +146,29 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def list_async(
-        self, *,
-        request: Optional[Union[operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> operations.ListDomainsResponse:
+    ) -> Optional[operations.ListDomainsResponse]:
         r"""Retrieve a list of domains
 
         Retrieve a list of domains associated with the authenticated workspace.
@@ -158,15 +182,15 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.ListDomainsRequest)
         request = cast(operations.ListDomainsRequest, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="GET",
             path="/domains",
             base_url=base_url,
@@ -180,33 +204,42 @@ class Domains(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="listDomains", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="listDomains",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         def next_func() -> Optional[operations.ListDomainsResponse]:
             body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
             page = request.page if not request.page is None else 0
             next_page = page + 1
-            
 
             if not http_res.text:
                 return None
@@ -226,10 +259,15 @@ class Domains(BaseSDK):
                 ),
                 retries=retries,
             )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.ListDomainsResponse(result=utils.unmarshal_json(http_res.text, Optional[List[components.DomainSchema]]), next=next_func)
+            return operations.ListDomainsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, Optional[List[components.DomainSchema]]
+                ),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -257,17 +295,28 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def create(
-        self, *,
-        request: Optional[Union[operations.CreateDomainRequestBody, operations.CreateDomainRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.CreateDomainRequestBody,
+                operations.CreateDomainRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -285,14 +334,14 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateDomainRequestBody)
         request = cast(operations.CreateDomainRequestBody, request)
-        
+
         req = self.build_request(
             method="POST",
             path="/domains",
@@ -305,34 +354,52 @@ class Domains(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateDomainRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.CreateDomainRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="createDomain", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="createDomain",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
+            return utils.unmarshal_json(
+                http_res.text, Optional[components.DomainSchema]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -360,17 +427,28 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def create_async(
-        self, *,
-        request: Optional[Union[operations.CreateDomainRequestBody, operations.CreateDomainRequestBodyTypedDict]] = None,
+        self,
+        *,
+        request: Optional[
+            Union[
+                operations.CreateDomainRequestBody,
+                operations.CreateDomainRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -388,15 +466,15 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         if not isinstance(request, BaseModel) and request is not None:
             request = utils.unmarshal(request, operations.CreateDomainRequestBody)
         request = cast(operations.CreateDomainRequestBody, request)
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="POST",
             path="/domains",
             base_url=base_url,
@@ -408,34 +486,52 @@ class Domains(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request, False, True, "json", Optional[operations.CreateDomainRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.CreateDomainRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="createDomain", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="createDomain",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
+            return utils.unmarshal_json(
+                http_res.text, Optional[components.DomainSchema]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -463,16 +559,22 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def delete(
-        self, *,
+        self,
+        *,
         slug: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -491,14 +593,14 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.DeleteDomainRequest(
             slug=slug,
         )
-        
+
         req = self.build_request(
             method="DELETE",
             path="/domains/{slug}",
@@ -513,31 +615,43 @@ class Domains(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="deleteDomain", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="deleteDomain",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.DeleteDomainResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.DeleteDomainResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -565,16 +679,22 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def delete_async(
-        self, *,
+        self,
+        *,
         slug: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -593,15 +713,15 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.DeleteDomainRequest(
             slug=slug,
         )
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="DELETE",
             path="/domains/{slug}",
             base_url=base_url,
@@ -615,31 +735,43 @@ class Domains(BaseSDK):
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="deleteDomain", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="deleteDomain",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[operations.DeleteDomainResponseBody])
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.DeleteDomainResponseBody]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -667,18 +799,29 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     def update(
-        self, *,
+        self,
+        *,
         slug: str,
-        request_body: Optional[Union[operations.UpdateDomainRequestBody, operations.UpdateDomainRequestBodyTypedDict]] = None,
+        request_body: Optional[
+            Union[
+                operations.UpdateDomainRequestBody,
+                operations.UpdateDomainRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -688,7 +831,7 @@ class Domains(BaseSDK):
         Update a domain for the authenticated workspace.
 
         :param slug: The domain name.
-        :param request_body: 
+        :param request_body:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -697,15 +840,17 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.UpdateDomainRequest(
             slug=slug,
-            request_body=utils.get_pydantic_model(request_body, Optional[operations.UpdateDomainRequestBody]),
+            request_body=utils.get_pydantic_model(
+                request_body, Optional[operations.UpdateDomainRequestBody]
+            ),
         )
-        
+
         req = self.build_request(
             method="PATCH",
             path="/domains/{slug}",
@@ -718,34 +863,52 @@ class Domains(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateDomainRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[operations.UpdateDomainRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = self.do_request(
-            hook_ctx=HookContext(operation_id="updateDomain", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="updateDomain",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
+            return utils.unmarshal_json(
+                http_res.text, Optional[components.DomainSchema]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -773,18 +936,29 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )
+
     async def update_async(
-        self, *,
+        self,
+        *,
         slug: str,
-        request_body: Optional[Union[operations.UpdateDomainRequestBody, operations.UpdateDomainRequestBodyTypedDict]] = None,
+        request_body: Optional[
+            Union[
+                operations.UpdateDomainRequestBody,
+                operations.UpdateDomainRequestBodyTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -794,7 +968,7 @@ class Domains(BaseSDK):
         Update a domain for the authenticated workspace.
 
         :param slug: The domain name.
-        :param request_body: 
+        :param request_body:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -803,16 +977,18 @@ class Domains(BaseSDK):
         url_variables = None
         if timeout_ms is None:
             timeout_ms = self.sdk_configuration.timeout_ms
-        
+
         if server_url is not None:
             base_url = server_url
-        
+
         request = operations.UpdateDomainRequest(
             slug=slug,
-            request_body=utils.get_pydantic_model(request_body, Optional[operations.UpdateDomainRequestBody]),
+            request_body=utils.get_pydantic_model(
+                request_body, Optional[operations.UpdateDomainRequestBody]
+            ),
         )
-        
-        req = self.build_request(
+
+        req = self.build_request_async(
             method="PATCH",
             path="/domains/{slug}",
             base_url=base_url,
@@ -824,34 +1000,52 @@ class Domains(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(request.request_body, False, True, "json", Optional[operations.UpdateDomainRequestBody]),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[operations.UpdateDomainRequestBody],
+            ),
             timeout_ms=timeout_ms,
         )
-        
+
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, [
-                "429",
-                "500",
-                "502",
-                "503",
-                "504"
-            ])                
-        
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
         http_res = await self.do_request_async(
-            hook_ctx=HookContext(operation_id="updateDomain", oauth2_scopes=[], security_source=self.sdk_configuration.security),
+            hook_ctx=HookContext(
+                operation_id="updateDomain",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
             request=req,
-            error_status_codes=["400","401","403","404","409","410","422","429","4XX","500","5XX"],
-            retry_config=retry_config
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
         )
-        
+
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Optional[components.DomainSchema])
+            return utils.unmarshal_json(
+                http_res.text, Optional[components.DomainSchema]
+            )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=data)
@@ -879,10 +1073,15 @@ class Domains(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
-        
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res.text, http_res
+            )
 
-    
+        content_type = http_res.headers.get("Content-Type")
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res.text,
+            http_res,
+        )

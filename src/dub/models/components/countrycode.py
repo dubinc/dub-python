@@ -6,6 +6,7 @@ from enum import Enum
 
 class CountryCode(str, Enum):
     r"""The country to retrieve analytics for."""
+
     AF = "AF"
     AL = "AL"
     DZ = "DZ"

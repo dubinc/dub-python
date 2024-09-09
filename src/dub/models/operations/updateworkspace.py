@@ -11,21 +11,29 @@ from typing_extensions import Annotated, NotRequired
 class UpdateWorkspaceRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     slug: NotRequired[str]
-    
+
 
 class UpdateWorkspaceRequestBody(BaseModel):
     name: Optional[str] = None
+
     slug: Optional[str] = None
-    
+
 
 class UpdateWorkspaceRequestTypedDict(TypedDict):
     id_or_slug: str
     r"""The ID or slug of the workspace to update."""
     request_body: NotRequired[UpdateWorkspaceRequestBodyTypedDict]
-    
+
 
 class UpdateWorkspaceRequest(BaseModel):
-    id_or_slug: Annotated[str, pydantic.Field(alias="idOrSlug"), FieldMetadata(path=PathParamMetadata(style="simple", explode=False))]
+    id_or_slug: Annotated[
+        str,
+        pydantic.Field(alias="idOrSlug"),
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
     r"""The ID or slug of the workspace to update."""
-    request_body: Annotated[Optional[UpdateWorkspaceRequestBody], FieldMetadata(request=RequestMetadata(media_type="application/json"))] = None
-    
+
+    request_body: Annotated[
+        Optional[UpdateWorkspaceRequestBody],
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ] = None

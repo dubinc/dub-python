@@ -23,28 +23,50 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""Avatar of the customer in the client's app."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the lead event"""
-    
+
 
 class TrackLeadRequestBody(BaseModel):
     click_id: Annotated[str, pydantic.Field(alias="clickId")]
     r"""The ID of the click in th Dub. You can read this value from `dclid` cookie."""
+
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
     r"""The name of the event to track."""
+
     customer_id: Annotated[str, pydantic.Field(alias="customerId")]
     r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-    customer_name: Annotated[OptionalNullable[str], pydantic.Field(alias="customerName")] = None
+
+    customer_name: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customerName")
+    ] = None
     r"""Name of the customer in the client's app."""
-    customer_email: Annotated[OptionalNullable[str], pydantic.Field(alias="customerEmail")] = None
+
+    customer_email: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customerEmail")
+    ] = None
     r"""Email of the customer in the client's app."""
-    customer_avatar: Annotated[OptionalNullable[str], pydantic.Field(alias="customerAvatar")] = None
+
+    customer_avatar: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customerAvatar")
+    ] = None
     r"""Avatar of the customer in the client's app."""
+
     metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional metadata to be stored with the lead event"""
-    
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["customerName", "customerEmail", "customerAvatar", "metadata"]
-        nullable_fields = ["customerName", "customerEmail", "customerAvatar", "metadata"]
+        optional_fields = [
+            "customerName",
+            "customerEmail",
+            "customerAvatar",
+            "metadata",
+        ]
+        nullable_fields = [
+            "customerName",
+            "customerEmail",
+            "customerAvatar",
+            "metadata",
+        ]
         null_default_fields = ["customerName", "customerEmail", "customerAvatar"]
 
         serialized = handler(self)
@@ -54,9 +76,13 @@ class TrackLeadRequestBody(BaseModel):
         for n, f in self.model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
+            serialized.pop(k, None)
 
             optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
 
             if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
@@ -66,29 +92,32 @@ class TrackLeadRequestBody(BaseModel):
                 m[k] = val
 
         return m
-        
+
 
 class ClickTypedDict(TypedDict):
     id: str
-    
+
 
 class Click(BaseModel):
     id: str
-    
+
 
 class CustomerTypedDict(TypedDict):
     id: str
     name: Nullable[str]
     email: Nullable[str]
     avatar: Nullable[str]
-    
+
 
 class Customer(BaseModel):
     id: str
+
     name: Nullable[str]
+
     email: Nullable[str]
+
     avatar: Nullable[str]
-    
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
@@ -102,9 +131,13 @@ class Customer(BaseModel):
         for n, f in self.model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
+            serialized.pop(k, None)
 
             optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
 
             if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
@@ -114,18 +147,18 @@ class Customer(BaseModel):
                 m[k] = val
 
         return m
-        
+
 
 class TrackLeadResponseBodyTypedDict(TypedDict):
     r"""A lead was tracked."""
-    
+
     click: ClickTypedDict
     customer: CustomerTypedDict
-    
+
 
 class TrackLeadResponseBody(BaseModel):
     r"""A lead was tracked."""
-    
+
     click: Click
+
     customer: Customer
-    

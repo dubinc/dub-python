@@ -21,8 +21,10 @@ from dub.workspaces import Workspaces
 import httpx
 from typing import Any, Callable, Dict, Optional, Union
 
+
 class Dub(BaseSDK):
     r"""Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
+
     links: Links
     qr_codes: QRCodes
     analytics: Analytics
@@ -32,6 +34,7 @@ class Dub(BaseSDK):
     domains: Domains
     track: Track
     metatags: Metatags
+
     def __init__(
         self,
         token: Union[str, Callable[[], str]],
@@ -42,7 +45,7 @@ class Dub(BaseSDK):
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
         timeout_ms: Optional[int] = None,
-        debug_logger: Optional[Logger] = None
+        debug_logger: Optional[Logger] = None,
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
@@ -71,33 +74,37 @@ class Dub(BaseSDK):
         assert issubclass(
             type(async_client), AsyncHttpClient
         ), "The provided async_client must implement the AsyncHttpClient protocol."
-        
+
         security: Any = None
         if callable(token):
-            security = lambda: components.Security(token = token()) # pylint: disable=unnecessary-lambda-assignment
+            security = lambda: components.Security(token=token())  # pylint: disable=unnecessary-lambda-assignment
         else:
-            security = components.Security(token = token)
+            security = components.Security(token=token)
 
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
-    
 
-        BaseSDK.__init__(self, SDKConfiguration(
-            client=client,
-            async_client=async_client,
-            security=security,
-            server_url=server_url,
-            server_idx=server_idx,
-            retry_config=retry_config,
-            timeout_ms=timeout_ms,
-            debug_logger=debug_logger
-        ))
+        BaseSDK.__init__(
+            self,
+            SDKConfiguration(
+                client=client,
+                async_client=async_client,
+                security=security,
+                server_url=server_url,
+                server_idx=server_idx,
+                retry_config=retry_config,
+                timeout_ms=timeout_ms,
+                debug_logger=debug_logger,
+            ),
+        )
 
         hooks = SDKHooks()
 
         current_server_url, *_ = self.sdk_configuration.get_server_details()
-        server_url, self.sdk_configuration.client = hooks.sdk_init(current_server_url, self.sdk_configuration.client)
+        server_url, self.sdk_configuration.client = hooks.sdk_init(
+            current_server_url, self.sdk_configuration.client
+        )
         if current_server_url != server_url:
             self.sdk_configuration.server_url = server_url
 
@@ -105,7 +112,6 @@ class Dub(BaseSDK):
         self.sdk_configuration.__dict__["_hooks"] = hooks
 
         self._init_sdks()
-
 
     def _init_sdks(self):
         self.links = Links(self.sdk_configuration)
@@ -117,4 +123,3 @@ class Dub(BaseSDK):
         self.domains = Domains(self.sdk_configuration)
         self.track = Track(self.sdk_configuration)
         self.metatags = Metatags(self.sdk_configuration)
-    

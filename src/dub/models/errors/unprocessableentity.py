@@ -10,7 +10,9 @@ from typing_extensions import NotRequired
 
 class UnprocessableEntityCode(str, Enum):
     r"""A short code indicating the error code returned."""
+
     UNPROCESSABLE_ENTITY = "unprocessable_entity"
+
 
 class UnprocessableEntityErrorTypedDict(TypedDict):
     code: UnprocessableEntityCode
@@ -19,23 +21,26 @@ class UnprocessableEntityErrorTypedDict(TypedDict):
     r"""A human readable explanation of what went wrong."""
     doc_url: NotRequired[str]
     r"""A link to our documentation with more details about this error code"""
-    
+
 
 class UnprocessableEntityError(BaseModel):
     code: UnprocessableEntityCode
     r"""A short code indicating the error code returned."""
+
     message: str
     r"""A human readable explanation of what went wrong."""
+
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
-    
+
+
 class UnprocessableEntityData(BaseModel):
     error: UnprocessableEntityError
-    
 
 
 class UnprocessableEntity(Exception):
     r"""The request was well-formed but was unable to be followed due to semantic errors."""
+
     data: UnprocessableEntityData
 
     def __init__(self, data: UnprocessableEntityData):
@@ -43,4 +48,3 @@ class UnprocessableEntity(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, UnprocessableEntityData)
-
