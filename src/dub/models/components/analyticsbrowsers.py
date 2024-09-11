@@ -17,7 +17,7 @@ class AnalyticsBrowsersTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales from this browser"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this browser"""
+    r"""The total amount of sales from this browser, in cents"""
 
 
 class AnalyticsBrowsers(BaseModel):
@@ -34,4 +34,4 @@ class AnalyticsBrowsers(BaseModel):
     r"""The number of sales from this browser"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this browser"""
+    r"""The total amount of sales from this browser, in cents"""

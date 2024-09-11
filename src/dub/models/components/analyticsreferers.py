@@ -17,7 +17,7 @@ class AnalyticsReferersTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales from this referer"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this referer"""
+    r"""The total amount of sales from this referer, in cents"""
 
 
 class AnalyticsReferers(BaseModel):
@@ -34,4 +34,4 @@ class AnalyticsReferers(BaseModel):
     r"""The number of sales from this referer"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this referer"""
+    r"""The total amount of sales from this referer, in cents"""

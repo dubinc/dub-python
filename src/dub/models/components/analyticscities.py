@@ -275,7 +275,7 @@ class AnalyticsCitiesTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales from this city"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this city"""
+    r"""The total amount of sales from this city, in cents"""
 
 
 class AnalyticsCities(BaseModel):
@@ -295,4 +295,4 @@ class AnalyticsCities(BaseModel):
     r"""The number of sales from this city"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this city"""
+    r"""The total amount of sales from this city, in cents"""

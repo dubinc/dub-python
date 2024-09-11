@@ -15,7 +15,7 @@ class AnalyticsCountTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The total number of sales"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales"""
+    r"""The total amount of sales, in cents"""
 
 
 class AnalyticsCount(BaseModel):
@@ -29,4 +29,4 @@ class AnalyticsCount(BaseModel):
     r"""The total number of sales"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales"""
+    r"""The total amount of sales, in cents"""
