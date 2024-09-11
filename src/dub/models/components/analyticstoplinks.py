@@ -29,7 +29,7 @@ class AnalyticsTopLinksTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales from this link"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this link"""
+    r"""The total amount of sales from this link, in cents"""
 
 
 class AnalyticsTopLinks(BaseModel):
@@ -69,4 +69,4 @@ class AnalyticsTopLinks(BaseModel):
     r"""The number of sales from this link"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this link"""
+    r"""The total amount of sales from this link, in cents"""

@@ -17,7 +17,7 @@ class AnalyticsTimeseriesTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales in the interval"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales in the interval"""
+    r"""The total amount of sales in the interval, in cents"""
 
 
 class AnalyticsTimeseries(BaseModel):
@@ -34,4 +34,4 @@ class AnalyticsTimeseries(BaseModel):
     r"""The number of sales in the interval"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales in the interval"""
+    r"""The total amount of sales in the interval, in cents"""

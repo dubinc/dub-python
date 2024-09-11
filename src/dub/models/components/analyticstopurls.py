@@ -17,7 +17,7 @@ class AnalyticsTopUrlsTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales from this URL"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this URL"""
+    r"""The total amount of sales from this URL, in cents"""
 
 
 class AnalyticsTopUrls(BaseModel):
@@ -34,4 +34,4 @@ class AnalyticsTopUrls(BaseModel):
     r"""The number of sales from this URL"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this URL"""
+    r"""The total amount of sales from this URL, in cents"""

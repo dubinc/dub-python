@@ -278,7 +278,7 @@ class AnalyticsCountriesTypedDict(TypedDict):
     sales: NotRequired[float]
     r"""The number of sales from this country"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this country"""
+    r"""The total amount of sales from this country, in cents"""
 
 
 class AnalyticsCountries(BaseModel):
@@ -297,4 +297,4 @@ class AnalyticsCountries(BaseModel):
     r"""The number of sales from this country"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this country"""
+    r"""The total amount of sales from this country, in cents"""

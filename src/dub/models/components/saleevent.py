@@ -822,8 +822,7 @@ class SaleEventLinkTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
-    user_id: str
-    r"""The user ID of the creator of the short link."""
+    user_id: Nullable[str]
     workspace_id: str
     r"""The workspace ID of the short link."""
     last_clicked: str
@@ -927,8 +926,7 @@ class SaleEventLink(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
-    user_id: Annotated[str, pydantic.Field(alias="userId")]
-    r"""The user ID of the creator of the short link."""
+    user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
     r"""The workspace ID of the short link."""
@@ -1007,6 +1005,7 @@ class SaleEventLink(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "userId",
         ]
         null_default_fields = []
 
