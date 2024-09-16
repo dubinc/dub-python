@@ -12,9 +12,9 @@ class Events(BaseSDK):
     def list(
         self,
         *,
-        request: Optional[
-            Union[operations.ListEventsRequest, operations.ListEventsRequestTypedDict]
-        ] = None,
+        request: Union[
+            operations.ListEventsRequest, operations.ListEventsRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -134,9 +134,9 @@ class Events(BaseSDK):
     async def list_async(
         self,
         *,
-        request: Optional[
-            Union[operations.ListEventsRequest, operations.ListEventsRequestTypedDict]
-        ] = None,
+        request: Union[
+            operations.ListEventsRequest, operations.ListEventsRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

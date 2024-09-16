@@ -13,9 +13,9 @@ class Domains(BaseSDK):
     def list(
         self,
         *,
-        request: Optional[
-            Union[operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict]
-        ] = None,
+        request: Union[
+            operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -162,9 +162,9 @@ class Domains(BaseSDK):
     async def list_async(
         self,
         *,
-        request: Optional[
-            Union[operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict]
-        ] = None,
+        request: Union[
+            operations.ListDomainsRequest, operations.ListDomainsRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

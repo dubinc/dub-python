@@ -12,12 +12,10 @@ class Analytics(BaseSDK):
     def retrieve(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.RetrieveAnalyticsRequest,
-                operations.RetrieveAnalyticsRequestTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.RetrieveAnalyticsRequest,
+            operations.RetrieveAnalyticsRequestTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -137,12 +135,10 @@ class Analytics(BaseSDK):
     async def retrieve_async(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.RetrieveAnalyticsRequest,
-                operations.RetrieveAnalyticsRequestTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.RetrieveAnalyticsRequest,
+            operations.RetrieveAnalyticsRequestTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

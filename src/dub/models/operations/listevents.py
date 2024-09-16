@@ -219,7 +219,7 @@ class ListEventsRequest(BaseModel):
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 0
+    ] = 1
 
     limit: Annotated[
         Optional[float],

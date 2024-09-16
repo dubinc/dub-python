@@ -13,9 +13,7 @@ class Links(BaseSDK):
     def list(
         self,
         *,
-        request: Optional[
-            Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]
-        ] = None,
+        request: Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -169,9 +167,7 @@ class Links(BaseSDK):
     async def list_async(
         self,
         *,
-        request: Optional[
-            Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict]
-        ] = None,
+        request: Union[operations.GetLinksRequest, operations.GetLinksRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -577,12 +573,9 @@ class Links(BaseSDK):
     def count(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.GetLinksCountRequest,
-                operations.GetLinksCountRequestTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -700,12 +693,9 @@ class Links(BaseSDK):
     async def count_async(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.GetLinksCountRequest,
-                operations.GetLinksCountRequestTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.GetLinksCountRequest, operations.GetLinksCountRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -823,9 +813,9 @@ class Links(BaseSDK):
     def get(
         self,
         *,
-        request: Optional[
-            Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]
-        ] = None,
+        request: Union[
+            operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -943,9 +933,9 @@ class Links(BaseSDK):
     async def get_async(
         self,
         *,
-        request: Optional[
-            Union[operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict]
-        ] = None,
+        request: Union[
+            operations.GetLinkInfoRequest, operations.GetLinkInfoRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
