@@ -138,7 +138,7 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.count()
+res = s.links.count(request={})
 
 if res is not None:
     # handle response

@@ -32,7 +32,12 @@ from .clickevent import (
 )
 from .continentcode import ContinentCode
 from .countrycode import CountryCode
-from .domainschema import DomainSchema, DomainSchemaTypedDict
+from .domainschema import (
+    DomainSchema,
+    DomainSchemaTypedDict,
+    RegisteredDomain,
+    RegisteredDomainTypedDict,
+)
 from .leadevent import (
     Customer,
     CustomerTypedDict,
@@ -199,6 +204,8 @@ __all__ = [
     "OneTypedDict",
     "PaymentProcessor",
     "Plan",
+    "RegisteredDomain",
+    "RegisteredDomainTypedDict",
     "Role",
     "Sale",
     "SaleEvent",
