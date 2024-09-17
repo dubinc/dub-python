@@ -10,7 +10,7 @@ from typing_extensions import Annotated, NotRequired
 
 class TrackLeadRequestBodyTypedDict(TypedDict):
     click_id: str
-    r"""The ID of the click in th Dub. You can read this value from `dclid` cookie."""
+    r"""The ID of the click in th Dub. You can read this value from `dub_id` cookie."""
     event_name: str
     r"""The name of the event to track."""
     customer_id: str
@@ -27,7 +27,7 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
 
 class TrackLeadRequestBody(BaseModel):
     click_id: Annotated[str, pydantic.Field(alias="clickId")]
-    r"""The ID of the click in th Dub. You can read this value from `dclid` cookie."""
+    r"""The ID of the click in th Dub. You can read this value from `dub_id` cookie."""
 
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
     r"""The name of the event to track."""
