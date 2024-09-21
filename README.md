@@ -169,10 +169,10 @@ asyncio.run(main())
 
 ### [domains](docs/sdks/domains/README.md)
 
-* [list](docs/sdks/domains/README.md#list) - Retrieve a list of domains
 * [create](docs/sdks/domains/README.md#create) - Create a domain
-* [delete](docs/sdks/domains/README.md#delete) - Delete a domain
+* [list](docs/sdks/domains/README.md#list) - Retrieve a list of domains
 * [update](docs/sdks/domains/README.md#update) - Update a domain
+* [delete](docs/sdks/domains/README.md#delete) - Delete a domain
 
 
 ### [events](docs/sdks/events/README.md)
@@ -181,15 +181,15 @@ asyncio.run(main())
 
 ### [links](docs/sdks/links/README.md)
 
-* [list](docs/sdks/links/README.md#list) - Retrieve a list of links
 * [create](docs/sdks/links/README.md#create) - Create a new link
+* [list](docs/sdks/links/README.md#list) - Retrieve a list of links
 * [count](docs/sdks/links/README.md#count) - Retrieve links count
 * [get](docs/sdks/links/README.md#get) - Retrieve a link
-* [delete](docs/sdks/links/README.md#delete) - Delete a link
 * [update](docs/sdks/links/README.md#update) - Update a link
+* [delete](docs/sdks/links/README.md#delete) - Delete a link
 * [create_many](docs/sdks/links/README.md#create_many) - Bulk create links
-* [delete_many](docs/sdks/links/README.md#delete_many) - Bulk delete links
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
+* [delete_many](docs/sdks/links/README.md#delete_many) - Bulk delete links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
 
 ### [metatags](docs/sdks/metatags/README.md)
@@ -202,10 +202,10 @@ asyncio.run(main())
 
 ### [tags](docs/sdks/tags/README.md)
 
-* [list](docs/sdks/tags/README.md#list) - Retrieve a list of tags
 * [create](docs/sdks/tags/README.md#create) - Create a new tag
-* [delete](docs/sdks/tags/README.md#delete) - Delete a tag
+* [list](docs/sdks/tags/README.md#list) - Retrieve a list of tags
 * [update](docs/sdks/tags/README.md#update) - Update a tag
+* [delete](docs/sdks/tags/README.md#delete) - Delete a tag
 
 ### [track](docs/sdks/track/README.md)
 
@@ -251,18 +251,17 @@ s = Dub(
 
 res = None
 try:
-    res = s.links.list(request={
-        "page": 1,
-        "page_size": 50,
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     })
 
     if res is not None:
-        while True:
-            # handle items
-
-            res = res.next()
-            if res is None:
-                break
+        # handle response
+        pass
 
 except errors.BadRequest as e:
     # handle e.data: errors.BadRequestData
@@ -318,18 +317,17 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
+res = s.links.create(request={
+    "url": "https://google.com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+    # handle response
+    pass
 
 ```
 
@@ -345,18 +343,17 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
+res = s.links.create(request={
+    "url": "https://google.com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+    # handle response
+    pass
 
 ```
 <!-- End Server Selection [server] -->
@@ -461,18 +458,17 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
+res = s.links.create(request={
+    "url": "https://google.com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+    # handle response
+    pass
 
 ```
 <!-- End Authentication [security] -->
@@ -491,19 +487,18 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
+res = s.links.create(request={
+    "url": "https://google.com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 },
     RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
 if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+    # handle response
+    pass
 
 ```
 
@@ -517,18 +512,17 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
+res = s.links.create(request={
+    "url": "https://google.com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+    # handle response
+    pass
 
 ```
 <!-- End Retries [retries] -->

@@ -252,6 +252,13 @@ actions:
                         "clux0rgak00011...",
                     ],
                 },
+                {
+                    "url": "https://google.com",
+                    "external_id": "123456",
+                    "tag_ids": [
+                        "clux0rgak00011...",
+                    ],
+                },
             ])
 
             if res is not None:
@@ -389,7 +396,7 @@ actions:
             )
 
             res = s.qr_codes.get(request={
-                "url": "https://brief-micronutrient.org",
+                "url": "https://normal-making.name",
             })
 
             if res is not None:
@@ -517,7 +524,7 @@ actions:
             res = s.track.sale(request={
                 "customer_id": "<value>",
                 "amount": 996500,
-                "payment_processor": operations.PaymentProcessor.SHOPIFY,
+                "payment_processor": operations.PaymentProcessor.PADDLE,
                 "event_name": "Purchase",
             })
 

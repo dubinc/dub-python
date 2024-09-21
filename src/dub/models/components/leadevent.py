@@ -1073,12 +1073,15 @@ class LeadEventLink(BaseModel):
 
 
 class CustomerTypedDict(TypedDict):
+    id: str
     name: str
     email: str
     avatar: str
 
 
 class Customer(BaseModel):
+    id: str
+
     name: str
 
     email: str
@@ -1093,12 +1096,6 @@ class LeadEventTypedDict(TypedDict):
     click: LeadEventClickTypedDict
     link: LeadEventLinkTypedDict
     customer: CustomerTypedDict
-    customer_name: str
-    r"""Deprecated. Use `customer.name` instead."""
-    customer_email: str
-    r"""Deprecated. Use `customer.email` instead."""
-    customer_avatar: str
-    r"""Deprecated. Use `customer.avatar` instead."""
     click_id: str
     r"""Deprecated. Use `click.id` instead."""
     link_id: str
@@ -1140,30 +1137,6 @@ class LeadEvent(BaseModel):
     link: LeadEventLink
 
     customer: Customer
-
-    customer_name: Annotated[
-        str,
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-        ),
-    ]
-    r"""Deprecated. Use `customer.name` instead."""
-
-    customer_email: Annotated[
-        str,
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-        ),
-    ]
-    r"""Deprecated. Use `customer.email` instead."""
-
-    customer_avatar: Annotated[
-        str,
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-        ),
-    ]
-    r"""Deprecated. Use `customer.avatar` instead."""
 
     click_id: Annotated[
         str,
