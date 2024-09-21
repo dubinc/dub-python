@@ -1073,12 +1073,15 @@ class SaleEventClick(BaseModel):
 
 
 class SaleEventCustomerTypedDict(TypedDict):
+    id: str
     name: str
     email: str
     avatar: str
 
 
 class SaleEventCustomer(BaseModel):
+    id: str
+
     name: str
 
     email: str
@@ -1156,12 +1159,6 @@ class SaleEventTypedDict(TypedDict):
     click: SaleEventClickTypedDict
     customer: SaleEventCustomerTypedDict
     sale: SaleTypedDict
-    customer_name: str
-    r"""Deprecated. Use `customer.name` instead."""
-    customer_email: str
-    r"""Deprecated. Use `customer.email` instead."""
-    customer_avatar: str
-    r"""Deprecated. Use `customer.avatar` instead."""
     sale_amount: float
     r"""Deprecated. Use `sale.amount` instead."""
     invoice_id: str
@@ -1211,30 +1208,6 @@ class SaleEvent(BaseModel):
     customer: SaleEventCustomer
 
     sale: Sale
-
-    customer_name: Annotated[
-        str,
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-        ),
-    ]
-    r"""Deprecated. Use `customer.name` instead."""
-
-    customer_email: Annotated[
-        str,
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-        ),
-    ]
-    r"""Deprecated. Use `customer.email` instead."""
-
-    customer_avatar: Annotated[
-        str,
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-        ),
-    ]
-    r"""Deprecated. Use `customer.avatar` instead."""
 
     sale_amount: Annotated[
         float,

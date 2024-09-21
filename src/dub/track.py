@@ -39,9 +39,11 @@ class Track(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.TrackLeadRequestBody)
-        request = cast(operations.TrackLeadRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.TrackLeadRequestBody]
+            )
+        request = cast(Optional[operations.TrackLeadRequestBody], request)
 
         req = self.build_request(
             method="POST",
@@ -167,9 +169,11 @@ class Track(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.TrackLeadRequestBody)
-        request = cast(operations.TrackLeadRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.TrackLeadRequestBody]
+            )
+        request = cast(Optional[operations.TrackLeadRequestBody], request)
 
         req = self.build_request_async(
             method="POST",
@@ -295,9 +299,11 @@ class Track(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.TrackSaleRequestBody)
-        request = cast(operations.TrackSaleRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.TrackSaleRequestBody]
+            )
+        request = cast(Optional[operations.TrackSaleRequestBody], request)
 
         req = self.build_request(
             method="POST",
@@ -423,9 +429,11 @@ class Track(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.TrackSaleRequestBody)
-        request = cast(operations.TrackSaleRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.TrackSaleRequestBody]
+            )
+        request = cast(Optional[operations.TrackSaleRequestBody], request)
 
         req = self.build_request_async(
             method="POST",
@@ -551,9 +559,11 @@ class Track(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.TrackCustomerRequestBody)
-        request = cast(operations.TrackCustomerRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.TrackCustomerRequestBody]
+            )
+        request = cast(Optional[operations.TrackCustomerRequestBody], request)
 
         req = self.build_request(
             method="POST",
@@ -683,9 +693,11 @@ class Track(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.TrackCustomerRequestBody)
-        request = cast(operations.TrackCustomerRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.TrackCustomerRequestBody]
+            )
+        request = cast(Optional[operations.TrackCustomerRequestBody], request)
 
         req = self.build_request_async(
             method="POST",
