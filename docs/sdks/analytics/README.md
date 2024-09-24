@@ -27,6 +27,7 @@ res = s.analytics.retrieve(request={
     "browser": "Chrome",
     "os": "Windows",
     "referer": "google.com",
+    "referer_url": "https://dub.co/blog",
 })
 
 if res is not None:

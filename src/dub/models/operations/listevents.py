@@ -78,6 +78,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""The OS to retrieve analytics for."""
     referer: NotRequired[str]
     r"""The referer to retrieve analytics for."""
+    referer_url: NotRequired[str]
+    r"""The full referer URL to retrieve analytics for."""
     url: NotRequired[str]
     r"""The URL to retrieve analytics for."""
     tag_id: NotRequired[str]
@@ -190,6 +192,13 @@ class ListEventsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The referer to retrieve analytics for."""
+
+    referer_url: Annotated[
+        Optional[str],
+        pydantic.Field(alias="refererUrl"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The full referer URL to retrieve analytics for."""
 
     url: Annotated[
         Optional[str],

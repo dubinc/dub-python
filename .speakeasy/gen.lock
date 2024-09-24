@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: bf87a4d4951f97782f297e956ac66cd2
+  docChecksum: 73565d11bf5d47913d55941f5c1c5b59
   docVersion: 0.0.1
-  speakeasyVersion: 1.401.2
-  generationVersion: 2.421.3
-  releaseVersion: 0.10.2
-  configChecksum: d3c2eee31892ccf06c5539bfcfa940e2
+  speakeasyVersion: 1.402.0
+  generationVersion: 2.422.6
+  releaseVersion: 0.10.3
+  configChecksum: 08c12a3c486e7af79b3ae4f1398501dc
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -627,6 +627,7 @@ examples:
           browser: "Chrome"
           os: "Windows"
           referer: "google.com"
+          refererUrl: "https://dub.co/blog"
       responses:
         "200":
           application/json: []
@@ -658,6 +659,7 @@ examples:
           browser: "Chrome"
           os: "Windows"
           referer: "google.com"
+          refererUrl: "https://dub.co/blog"
       responses:
         "200":
           application/json: []

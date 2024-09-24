@@ -1044,6 +1044,7 @@ class SaleEventClickTypedDict(TypedDict):
     browser: str
     os: str
     referer: str
+    referer_url: str
     ip: str
     qr: NotRequired[bool]
 
@@ -1066,6 +1067,8 @@ class SaleEventClick(BaseModel):
     os: str
 
     referer: str
+
+    referer_url: Annotated[str, pydantic.Field(alias="refererUrl")]
 
     ip: str
 

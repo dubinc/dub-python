@@ -71,6 +71,7 @@ class WebhookEvent4ClickTypedDict(TypedDict):
     browser: str
     os: str
     referer: str
+    referer_url: str
     ip: str
     qr: NotRequired[bool]
 
@@ -93,6 +94,8 @@ class WebhookEvent4Click(BaseModel):
     os: str
 
     referer: str
+
+    referer_url: Annotated[str, pydantic.Field(alias="refererUrl")]
 
     ip: str
 
@@ -1264,6 +1267,7 @@ class WebhookEvent3ClickTypedDict(TypedDict):
     browser: str
     os: str
     referer: str
+    referer_url: str
     ip: str
     qr: NotRequired[bool]
 
@@ -1286,6 +1290,8 @@ class WebhookEvent3Click(BaseModel):
     os: str
 
     referer: str
+
+    referer_url: Annotated[str, pydantic.Field(alias="refererUrl")]
 
     ip: str
 
@@ -2360,6 +2366,7 @@ class WebhookEventClickTypedDict(TypedDict):
     browser: str
     os: str
     referer: str
+    referer_url: str
     ip: str
     qr: NotRequired[bool]
 
@@ -2382,6 +2389,8 @@ class WebhookEventClick(BaseModel):
     os: str
 
     referer: str
+
+    referer_url: Annotated[str, pydantic.Field(alias="refererUrl")]
 
     ip: str
 

@@ -44,6 +44,7 @@ class QueryParamGroupBy(str, Enum):
     BROWSERS = "browsers"
     OS = "os"
     REFERERS = "referers"
+    REFERER_URLS = "referer_urls"
     TOP_LINKS = "top_links"
     TOP_URLS = "top_urls"
     TRIGGER = "trigger"
@@ -97,6 +98,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The OS to retrieve analytics for."""
     referer: NotRequired[str]
     r"""The referer to retrieve analytics for."""
+    referer_url: NotRequired[str]
+    r"""The full referer URL to retrieve analytics for."""
     url: NotRequired[str]
     r"""The URL to retrieve analytics for."""
     tag_id: NotRequired[str]
@@ -212,6 +215,13 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The referer to retrieve analytics for."""
+
+    referer_url: Annotated[
+        Optional[str],
+        pydantic.Field(alias="refererUrl"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The full referer URL to retrieve analytics for."""
 
     url: Annotated[
         Optional[str],

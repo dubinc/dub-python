@@ -24,6 +24,7 @@ class ClickTypedDict(TypedDict):
     browser: str
     os: str
     referer: str
+    referer_url: str
     ip: str
     qr: NotRequired[bool]
 
@@ -46,6 +47,8 @@ class Click(BaseModel):
     os: str
 
     referer: str
+
+    referer_url: Annotated[str, pydantic.Field(alias="refererUrl")]
 
     ip: str
 
