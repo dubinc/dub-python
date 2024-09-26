@@ -86,6 +86,8 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     r"""The UTM term of the short link. If set, this will populate or override the UTM term in the destination URL."""
     utm_content: NotRequired[Nullable[str]]
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
+    ref: NotRequired[Nullable[str]]
+    r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
 
 class CreateLinkRequestBody(BaseModel):
@@ -193,6 +195,9 @@ class CreateLinkRequestBody(BaseModel):
     utm_content: OptionalNullable[str] = UNSET
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
 
+    ref: OptionalNullable[str] = UNSET
+    r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -225,6 +230,7 @@ class CreateLinkRequestBody(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "ref",
         ]
         nullable_fields = [
             "externalId",
@@ -245,6 +251,7 @@ class CreateLinkRequestBody(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "ref",
         ]
         null_default_fields = []
 
