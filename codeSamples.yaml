@@ -220,9 +220,6 @@ actions:
             )
 
             res = s.links.update_many(request={
-                "link_ids": [
-                    "<value>",
-                ],
                 "data": {
                     "url": "https://google.com",
                     "tag_ids": [
@@ -297,7 +294,7 @@ actions:
 
             res = s.links.get(request={
                 "link_id": "clux0rgak00011...",
-                "external_id": "ext_123456",
+                "external_id": "123456",
             })
 
             if res is not None:
@@ -338,7 +335,7 @@ actions:
                 token="DUB_API_KEY",
             )
 
-            res = s.links.delete(link_id="<value>")
+            res = s.links.delete(link_id="<id>")
 
             if res is not None:
                 # handle response
@@ -355,7 +352,7 @@ actions:
                 token="DUB_API_KEY",
             )
 
-            res = s.links.update(link_id="<value>", request_body={
+            res = s.links.update(link_id="<id>", request_body={
                 "url": "https://google.com",
                 "external_id": "123456",
                 "tag_ids": [
@@ -502,9 +499,9 @@ actions:
             )
 
             res = s.track.lead(request={
-                "click_id": "<value>",
+                "click_id": "<id>",
                 "event_name": "Sign up",
-                "customer_id": "<value>",
+                "customer_id": "<id>",
             })
 
             if res is not None:
@@ -524,7 +521,7 @@ actions:
             )
 
             res = s.track.sale(request={
-                "customer_id": "<value>",
+                "customer_id": "<id>",
                 "amount": 996500,
                 "payment_processor": operations.PaymentProcessor.PADDLE,
                 "event_name": "Purchase",

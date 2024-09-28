@@ -15,7 +15,7 @@ class GetLinkInfoRequestTypedDict(TypedDict):
     link_id: NotRequired[str]
     r"""The unique ID of the short link."""
     external_id: NotRequired[str]
-    r"""This is the ID of the link in the your database. Must be prefixed with `ext_` when passed as a query parameter."""
+    r"""This is the ID of the link in the your database."""
 
 
 class GetLinkInfoRequest(BaseModel):
@@ -42,4 +42,4 @@ class GetLinkInfoRequest(BaseModel):
         pydantic.Field(alias="externalId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""This is the ID of the link in the your database. Must be prefixed with `ext_` when passed as a query parameter."""
+    r"""This is the ID of the link in the your database."""

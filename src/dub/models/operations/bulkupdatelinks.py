@@ -259,11 +259,20 @@ class Data(BaseModel):
 
 
 class BulkUpdateLinksRequestBodyTypedDict(TypedDict):
-    link_ids: List[str]
     data: DataTypedDict
+    link_ids: NotRequired[List[str]]
+    r"""The IDs of the links to update. Takes precedence over `externalIds`."""
+    external_ids: NotRequired[List[str]]
+    r"""The external IDs of the links to update as stored in your database."""
 
 
 class BulkUpdateLinksRequestBody(BaseModel):
-    link_ids: Annotated[List[str], pydantic.Field(alias="linkIds")]
-
     data: Data
+
+    link_ids: Annotated[Optional[List[str]], pydantic.Field(alias="linkIds")] = None
+    r"""The IDs of the links to update. Takes precedence over `externalIds`."""
+
+    external_ids: Annotated[
+        Optional[List[str]], pydantic.Field(alias="externalIds")
+    ] = None
+    r"""The external IDs of the links to update as stored in your database."""
