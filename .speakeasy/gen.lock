@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: b6e0f68b0350f243f5aab5565767940a
+  docChecksum: 596f43d83d9b42d6000040c93ba5018d
   docVersion: 0.0.1
-  speakeasyVersion: 1.402.14
-  generationVersion: 2.422.22
-  releaseVersion: 0.10.4
-  configChecksum: 93254d6650913362353a8fa99d818ad7
+  speakeasyVersion: 1.404.5
+  generationVersion: 2.426.2
+  releaseVersion: 0.10.5
+  configChecksum: 6b01942061f48e729f98b19eb05ed8f7
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.3
-    core: 5.5.5
+    core: 5.5.6
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     enumUnions: 0.1.0
@@ -30,7 +30,7 @@ features:
     nameOverrides: 3.0.0
     nullables: 1.0.0
     pagination: 3.0.1
-    responseFormat: 1.0.0
+    responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
     unions: 3.0.2
@@ -414,7 +414,7 @@ examples:
       parameters:
         query:
           linkId: "clux0rgak00011..."
-          externalId: "ext_123456"
+          externalId: "123456"
       responses:
         "200":
           application/json: {"id": "<id>", "domain": "ringed-blow.name", "key": "<key>", "externalId": "<value>", "url": "https://monumental-spaghetti.name", "expiresAt": "<value>", "expiredUrl": "http://wiggly-substitution.info", "password": "fKH9v5zJBmg5IWA", "title": "<value>", "description": "Optional reciprocal projection", "image": "https://loremflickr.com/640/480", "video": "<value>", "ios": "<value>", "android": "<value>", "tagId": "<value>", "tags": [], "comments": "<value>", "shortLink": "https://hefty-festival.net", "qrCode": "https://pale-civilisation.name", "utm_source": "<value>", "utm_medium": "<value>", "utm_campaign": "<value>", "utm_term": "<value>", "utm_content": "<value>", "userId": "<value>", "workspaceId": "<value>", "lastClicked": "<value>", "createdAt": "<value>", "updatedAt": "<value>", "projectId": "<value>"}

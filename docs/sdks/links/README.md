@@ -188,7 +188,7 @@ s = Dub(
 
 res = s.links.get(request={
     "link_id": "clux0rgak00011...",
-    "external_id": "ext_123456",
+    "external_id": "123456",
 })
 
 if res is not None:
@@ -397,15 +397,15 @@ s = Dub(
 )
 
 res = s.links.update_many(request={
-    "link_ids": [
-        "<value>",
-    ],
     "data": {
         "url": "https://google.com",
         "tag_ids": [
             "clux0rgak00011...",
         ],
     },
+    "link_ids": [
+        "<value>",
+    ],
 })
 
 if res is not None:
