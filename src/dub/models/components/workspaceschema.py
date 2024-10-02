@@ -109,6 +109,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The role of the authenticated user in the workspace."""
     domains: List[DomainsTypedDict]
     r"""The domains of the workspace."""
+    publishable_key: Nullable[str]
+    r"""The publishable key of the workspace."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -191,6 +193,9 @@ class WorkspaceSchema(BaseModel):
     domains: List[Domains]
     r"""The domains of the workspace."""
 
+    publishable_key: Annotated[Nullable[str], pydantic.Field(alias="publishableKey")]
+    r"""The publishable key of the workspace."""
+
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
 
@@ -205,6 +210,7 @@ class WorkspaceSchema(BaseModel):
             "stripeConnectId",
             "inviteCode",
             "referralLinkId",
+            "publishableKey",
             "logo",
         ]
         null_default_fields = ["logo"]
