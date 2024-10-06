@@ -6,8 +6,8 @@ from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
-from typing import Callable, List, Optional, TypedDict, Union
-from typing_extensions import Annotated, NotRequired
+from typing import Callable, List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 QueryParamTagIdsTypedDict = Union[str, List[str]]

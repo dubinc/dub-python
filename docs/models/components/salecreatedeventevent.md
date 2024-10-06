@@ -1,8 +1,8 @@
-# WebhookEvent2Event
+# SaleCreatedEventEvent
 
 
 ## Values
 
 | Name           | Value          |
 | -------------- | -------------- |
-| `LINK_CLICKED` | link.clicked   |
+| `SALE_CREATED` | sale.created   |

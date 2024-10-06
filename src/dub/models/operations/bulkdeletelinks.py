@@ -4,8 +4,8 @@ from __future__ import annotations
 from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 import pydantic
-from typing import List, TypedDict
-from typing_extensions import Annotated
+from typing import List
+from typing_extensions import Annotated, TypedDict
 
 
 class BulkDeleteLinksRequestTypedDict(TypedDict):

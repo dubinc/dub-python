@@ -5,8 +5,8 @@ from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
-from typing import Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Level(str, Enum):
@@ -21,6 +21,8 @@ class Level(str, Enum):
 class GetQRCodeRequestTypedDict(TypedDict):
     url: str
     r"""The URL to generate a QR code for."""
+    logo: NotRequired[str]
+    r"""The logo to include in the QR code. Can only be used with a paid plan on Dub.co."""
     size: NotRequired[float]
     r"""The size of the QR code in pixels. Defaults to `600` if not provided."""
     level: NotRequired[Level]
@@ -29,6 +31,8 @@ class GetQRCodeRequestTypedDict(TypedDict):
     r"""The foreground color of the QR code in hex format. Defaults to `#000000` if not provided."""
     bg_color: NotRequired[str]
     r"""The background color of the QR code in hex format. Defaults to `#ffffff` if not provided."""
+    hide_logo: NotRequired[bool]
+    r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub.co."""
     include_margin: NotRequired[bool]
     r"""Whether to include a margin around the QR code. Defaults to `false` if not provided."""
 
@@ -38,6 +42,12 @@ class GetQRCodeRequest(BaseModel):
         str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]
     r"""The URL to generate a QR code for."""
+
+    logo: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The logo to include in the QR code. Can only be used with a paid plan on Dub.co."""
 
     size: Annotated[
         Optional[float],
@@ -64,6 +74,13 @@ class GetQRCodeRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "#FFFFFF"
     r"""The background color of the QR code in hex format. Defaults to `#ffffff` if not provided."""
+
+    hide_logo: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="hideLogo"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = True
+    r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub.co."""
 
     include_margin: Annotated[
         Optional[bool],

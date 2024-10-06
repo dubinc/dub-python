@@ -5,8 +5,8 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict, Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import Any, Dict, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentProcessor(str, Enum):

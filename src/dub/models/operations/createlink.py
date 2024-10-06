@@ -5,8 +5,8 @@ from dub.models.components import linkgeotargeting as components_linkgeotargetin
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional, TypedDict, Union
-from typing_extensions import Annotated, NotRequired
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 TagIdsTypedDict = Union[str, List[str]]

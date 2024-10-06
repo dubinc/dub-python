@@ -3,8 +3,7 @@
 from __future__ import annotations
 from dub.types import BaseModel
 from dub.utils import FieldMetadata, SecurityMetadata
-from typing import TypedDict
-from typing_extensions import Annotated
+from typing_extensions import Annotated, TypedDict
 
 
 class SecurityTypedDict(TypedDict):

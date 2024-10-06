@@ -5,8 +5,8 @@ from dub.types import BaseModel
 from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 from enum import Enum
 import pydantic
-from typing import Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateTagColor(str, Enum):

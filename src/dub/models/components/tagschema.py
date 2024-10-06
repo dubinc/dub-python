@@ -3,7 +3,7 @@
 from __future__ import annotations
 from dub.types import BaseModel
 from enum import Enum
-from typing import TypedDict
+from typing_extensions import TypedDict
 
 
 class Color(str, Enum):

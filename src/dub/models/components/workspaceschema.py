@@ -5,8 +5,8 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, List, Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Plan(str, Enum):

@@ -6,8 +6,8 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class SaleEventEvent(str, Enum):

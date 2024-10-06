@@ -4,8 +4,8 @@ from __future__ import annotations
 from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TrackCustomerRequestBodyTypedDict(TypedDict):

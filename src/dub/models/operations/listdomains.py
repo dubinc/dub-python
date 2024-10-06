@@ -5,8 +5,8 @@ from dub.models.components import domainschema as components_domainschema
 from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 import pydantic
-from typing import Callable, List, Optional, TypedDict
-from typing_extensions import Annotated, NotRequired
+from typing import Callable, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ListDomainsRequestTypedDict(TypedDict):

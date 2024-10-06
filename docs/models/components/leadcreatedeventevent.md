@@ -1,8 +1,8 @@
-# Event2
+# LeadCreatedEventEvent
 
 
 ## Values
 
 | Name           | Value          |
 | -------------- | -------------- |
-| `LINK_UPDATED` | link.updated   |
+| `LEAD_CREATED` | lead.created   |

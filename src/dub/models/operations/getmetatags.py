@@ -4,8 +4,7 @@ from __future__ import annotations
 from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
 from pydantic import model_serializer
-from typing import TypedDict
-from typing_extensions import Annotated
+from typing_extensions import Annotated, TypedDict
 
 
 class GetMetatagsRequestTypedDict(TypedDict):
