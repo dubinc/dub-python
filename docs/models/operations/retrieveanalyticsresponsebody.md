@@ -17,6 +17,12 @@ value: components.AnalyticsCount = /* values here */
 value: List[components.AnalyticsTimeseries] = /* values here */
 ```
 
+### `List[components.AnalyticsContinents]`
+
+```python
+value: List[components.AnalyticsContinents] = /* values here */
+```
+
 ### `List[components.AnalyticsCountries]`
 
 ```python
@@ -47,10 +53,22 @@ value: List[components.AnalyticsBrowsers] = /* values here */
 value: List[components.AnalyticsOS] = /* values here */
 ```
 
+### `List[components.AnalyticsTriggers]`
+
+```python
+value: List[components.AnalyticsTriggers] = /* values here */
+```
+
 ### `List[components.AnalyticsReferers]`
 
 ```python
 value: List[components.AnalyticsReferers] = /* values here */
+```
+
+### `List[components.AnalyticsRefererUrls]`
+
+```python
+value: List[components.AnalyticsRefererUrls] = /* values here */
 ```
 
 ### `List[components.AnalyticsTopLinks]`

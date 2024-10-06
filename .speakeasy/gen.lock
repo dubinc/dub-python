@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 5c400b20334e45bb5625715215fcbff4
+  docChecksum: 8620b0f24a0133906ad7b91d73cc1651
   docVersion: 0.0.1
-  speakeasyVersion: 1.409.0
-  generationVersion: 2.429.0
-  releaseVersion: 0.11.0
-  configChecksum: 225e27d4aecc4e4425b209a4455684e2
+  speakeasyVersion: 1.410.0
+  generationVersion: 2.434.1
+  releaseVersion: 0.11.1
+  configChecksum: bbc33a1ef476c1847c01c5d3b73492de
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -43,19 +43,23 @@ generatedFiles:
   - docs/models/components/analyticsbrowsers.md
   - docs/models/components/analyticscities.md
   - docs/models/components/analyticscitiescountry.md
+  - docs/models/components/analyticscontinents.md
   - docs/models/components/analyticscount.md
   - docs/models/components/analyticscountries.md
   - docs/models/components/analyticsdevices.md
   - docs/models/components/analyticsos.md
   - docs/models/components/analyticsreferers.md
+  - docs/models/components/analyticsrefererurls.md
   - docs/models/components/analyticstimeseries.md
   - docs/models/components/analyticstoplinks.md
   - docs/models/components/analyticstopurls.md
+  - docs/models/components/analyticstriggers.md
   - docs/models/components/city.md
   - docs/models/components/click.md
   - docs/models/components/clickevent.md
   - docs/models/components/clickeventgeo.md
   - docs/models/components/color.md
+  - docs/models/components/continent.md
   - docs/models/components/continentcode.md
   - docs/models/components/country.md
   - docs/models/components/countrycode.md
@@ -112,6 +116,7 @@ generatedFiles:
   - docs/models/components/security.md
   - docs/models/components/tagschema.md
   - docs/models/components/three.md
+  - docs/models/components/trigger.md
   - docs/models/components/two.md
   - docs/models/components/users.md
   - docs/models/components/webhookevent.md
@@ -254,14 +259,17 @@ generatedFiles:
   - src/dub/models/components/__init__.py
   - src/dub/models/components/analyticsbrowsers.py
   - src/dub/models/components/analyticscities.py
+  - src/dub/models/components/analyticscontinents.py
   - src/dub/models/components/analyticscount.py
   - src/dub/models/components/analyticscountries.py
   - src/dub/models/components/analyticsdevices.py
   - src/dub/models/components/analyticsos.py
   - src/dub/models/components/analyticsreferers.py
+  - src/dub/models/components/analyticsrefererurls.py
   - src/dub/models/components/analyticstimeseries.py
   - src/dub/models/components/analyticstoplinks.py
   - src/dub/models/components/analyticstopurls.py
+  - src/dub/models/components/analyticstriggers.py
   - src/dub/models/components/clickevent.py
   - src/dub/models/components/continentcode.py
   - src/dub/models/components/countrycode.py
