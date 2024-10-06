@@ -99,6 +99,7 @@ from .listevents import (
     Order,
     QueryParamEvent,
     QueryParamInterval,
+    QueryParamTrigger,
     SortBy,
 )
 from .retrieveanalytics import (
@@ -109,6 +110,7 @@ from .retrieveanalytics import (
     RetrieveAnalyticsRequestTypedDict,
     RetrieveAnalyticsResponseBody,
     RetrieveAnalyticsResponseBodyTypedDict,
+    Trigger,
 )
 from .trackcustomer import (
     TrackCustomerRequestBody,
@@ -258,6 +260,7 @@ __all__ = [
     "QueryParamTagIdsTypedDict",
     "QueryParamTagNames",
     "QueryParamTagNamesTypedDict",
+    "QueryParamTrigger",
     "RequestBody",
     "RequestBodyTypedDict",
     "RetrieveAnalyticsRequest",
@@ -287,6 +290,7 @@ __all__ = [
     "TrackSaleRequestBodyTypedDict",
     "TrackSaleResponseBody",
     "TrackSaleResponseBodyTypedDict",
+    "Trigger",
     "Two",
     "UpdateDomainRequest",
     "UpdateDomainRequestBody",

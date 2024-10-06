@@ -5,27 +5,27 @@ Webhook event schema
 
 ## Supported Types
 
-### `components.One`
+### `components.LinkWebhookEvent`
 
 ```python
-value: components.One = /* values here */
+value: components.LinkWebhookEvent = /* values here */
 ```
 
-### `components.Two`
+### `components.LinkClickedEvent`
 
 ```python
-value: components.Two = /* values here */
+value: components.LinkClickedEvent = /* values here */
 ```
 
-### `components.Three`
+### `components.LeadCreatedEvent`
 
 ```python
-value: components.Three = /* values here */
+value: components.LeadCreatedEvent = /* values here */
 ```
 
-### `components.Four`
+### `components.SaleCreatedEvent`
 
 ```python
-value: components.Four = /* values here */
+value: components.SaleCreatedEvent = /* values here */
 ```
 

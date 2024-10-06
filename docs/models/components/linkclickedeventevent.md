@@ -1,8 +1,8 @@
-# Event1
+# LinkClickedEventEvent
 
 
 ## Values
 
 | Name           | Value          |
 | -------------- | -------------- |
-| `LINK_CREATED` | link.created   |
+| `LINK_CLICKED` | link.clicked   |

@@ -19,12 +19,12 @@ from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
-from typing import List, Optional, TypedDict, Union
-from typing_extensions import Annotated, NotRequired
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Event(str, Enum):
-    r"""The type of event to retrieve analytics for. Defaults to 'clicks'."""
+    r"""The type of event to retrieve analytics for. Defaults to `clicks`."""
 
     CLICKS = "clicks"
     LEADS = "leads"
@@ -33,7 +33,7 @@ class Event(str, Enum):
 
 
 class QueryParamGroupBy(str, Enum):
-    r"""The parameter to group the analytics data points by. Defaults to 'count' if undefined."""
+    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined. Note that `trigger` is deprecated (use `triggers` instead), but kept for backwards compatibility."""
 
     COUNT = "count"
     TIMESERIES = "timeseries"
@@ -43,11 +43,12 @@ class QueryParamGroupBy(str, Enum):
     DEVICES = "devices"
     BROWSERS = "browsers"
     OS = "os"
+    TRIGGER = "trigger"
+    TRIGGERS = "triggers"
     REFERERS = "referers"
     REFERER_URLS = "referer_urls"
     TOP_LINKS = "top_links"
     TOP_URLS = "top_urls"
-    TRIGGER = "trigger"
 
 
 class Interval(str, Enum):
@@ -63,11 +64,18 @@ class Interval(str, Enum):
     ALL_UNFILTERED = "all_unfiltered"
 
 
+class Trigger(str, Enum):
+    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+
+    QR = "qr"
+    LINK = "link"
+
+
 class RetrieveAnalyticsRequestTypedDict(TypedDict):
     event: NotRequired[Event]
-    r"""The type of event to retrieve analytics for. Defaults to 'clicks'."""
+    r"""The type of event to retrieve analytics for. Defaults to `clicks`."""
     group_by: NotRequired[QueryParamGroupBy]
-    r"""The parameter to group the analytics data points by. Defaults to 'count' if undefined."""
+    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined. Note that `trigger` is deprecated (use `triggers` instead), but kept for backwards compatibility."""
     domain: NotRequired[str]
     r"""The domain to filter analytics for."""
     key: NotRequired[str]
@@ -96,6 +104,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The browser to retrieve analytics for."""
     os: NotRequired[str]
     r"""The OS to retrieve analytics for."""
+    trigger: NotRequired[Trigger]
+    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
     referer: NotRequired[str]
     r"""The referer to retrieve analytics for."""
     referer_url: NotRequired[str]
@@ -105,7 +115,7 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     tag_id: NotRequired[str]
     r"""The tag ID to retrieve analytics for."""
     qr: NotRequired[bool]
-    r"""Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
+    r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
 
@@ -115,14 +125,14 @@ class RetrieveAnalyticsRequest(BaseModel):
         Optional[Event],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = Event.CLICKS
-    r"""The type of event to retrieve analytics for. Defaults to 'clicks'."""
+    r"""The type of event to retrieve analytics for. Defaults to `clicks`."""
 
     group_by: Annotated[
         Optional[QueryParamGroupBy],
         pydantic.Field(alias="groupBy"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = QueryParamGroupBy.COUNT
-    r"""The parameter to group the analytics data points by. Defaults to 'count' if undefined."""
+    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined. Note that `trigger` is deprecated (use `triggers` instead), but kept for backwards compatibility."""
 
     domain: Annotated[
         Optional[str],
@@ -210,6 +220,12 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""The OS to retrieve analytics for."""
 
+    trigger: Annotated[
+        Optional[Trigger],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+
     referer: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -240,7 +256,7 @@ class RetrieveAnalyticsRequest(BaseModel):
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
+    r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
 
     root: Annotated[
         Optional[bool],

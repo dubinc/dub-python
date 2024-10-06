@@ -12,8 +12,8 @@ from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
-from typing import List, Optional, TypedDict, Union
-from typing_extensions import Annotated, NotRequired
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class QueryParamEvent(str, Enum):
@@ -34,6 +34,13 @@ class QueryParamInterval(str, Enum):
     YTD = "ytd"
     ONEY = "1y"
     ALL = "all"
+
+
+class QueryParamTrigger(str, Enum):
+    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+
+    QR = "qr"
+    LINK = "link"
 
 
 class Order(str, Enum):
@@ -76,6 +83,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""The browser to retrieve analytics for."""
     os: NotRequired[str]
     r"""The OS to retrieve analytics for."""
+    trigger: NotRequired[QueryParamTrigger]
+    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
     referer: NotRequired[str]
     r"""The referer to retrieve analytics for."""
     referer_url: NotRequired[str]
@@ -85,7 +94,7 @@ class ListEventsRequestTypedDict(TypedDict):
     tag_id: NotRequired[str]
     r"""The tag ID to retrieve analytics for."""
     qr: NotRequired[bool]
-    r"""Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
+    r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
     page: NotRequired[float]
@@ -187,6 +196,12 @@ class ListEventsRequest(BaseModel):
     ] = None
     r"""The OS to retrieve analytics for."""
 
+    trigger: Annotated[
+        Optional[QueryParamTrigger],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+
     referer: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -217,7 +232,7 @@ class ListEventsRequest(BaseModel):
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
+    r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
 
     root: Annotated[
         Optional[bool],

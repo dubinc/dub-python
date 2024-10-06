@@ -1,4 +1,4 @@
-# WebhookEvent3Click
+# LinkClickedEventClick
 
 
 ## Fields
