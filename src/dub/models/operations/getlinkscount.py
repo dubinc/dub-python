@@ -61,7 +61,7 @@ class GetLinksCountRequestTypedDict(TypedDict):
     show_archived: NotRequired[bool]
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
     with_tags: NotRequired[bool]
-    r"""Whether to include tags in the response. Defaults to `false` if not provided."""
+    r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
     group_by: NotRequired[GroupByTypedDict]
     r"""The field to group the links by."""
 
@@ -119,7 +119,7 @@ class GetLinksCountRequest(BaseModel):
         pydantic.Field(alias="withTags"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = True
-    r"""Whether to include tags in the response. Defaults to `false` if not provided."""
+    r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
 
     group_by: Annotated[
         Optional[GroupBy],

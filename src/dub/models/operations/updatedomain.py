@@ -14,6 +14,8 @@ class UpdateDomainRequestBodyTypedDict(TypedDict):
     r"""Name of the domain."""
     expired_url: NotRequired[Nullable[str]]
     r"""Redirect users to a specific URL when any link under this domain has expired."""
+    not_found_url: NotRequired[Nullable[str]]
+    r"""Redirect users to a specific URL when a link under this domain doesn't exist."""
     archived: NotRequired[bool]
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
     placeholder: NotRequired[Nullable[str]]
@@ -29,6 +31,11 @@ class UpdateDomainRequestBody(BaseModel):
     ] = UNSET
     r"""Redirect users to a specific URL when any link under this domain has expired."""
 
+    not_found_url: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="notFoundUrl")
+    ] = UNSET
+    r"""Redirect users to a specific URL when a link under this domain doesn't exist."""
+
     archived: Optional[bool] = False
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
 
@@ -37,8 +44,14 @@ class UpdateDomainRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["slug", "expiredUrl", "archived", "placeholder"]
-        nullable_fields = ["expiredUrl", "placeholder"]
+        optional_fields = [
+            "slug",
+            "expiredUrl",
+            "notFoundUrl",
+            "archived",
+            "placeholder",
+        ]
+        nullable_fields = ["expiredUrl", "notFoundUrl", "placeholder"]
         null_default_fields = []
 
         serialized = handler(self)

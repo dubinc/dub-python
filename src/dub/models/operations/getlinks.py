@@ -50,7 +50,7 @@ class GetLinksRequestTypedDict(TypedDict):
     show_archived: NotRequired[bool]
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
     with_tags: NotRequired[bool]
-    r"""Whether to include tags in the response. Defaults to `false` if not provided."""
+    r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
     sort: NotRequired[Sort]
     r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
     page: NotRequired[float]
@@ -112,7 +112,7 @@ class GetLinksRequest(BaseModel):
         pydantic.Field(alias="withTags"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = True
-    r"""Whether to include tags in the response. Defaults to `false` if not provided."""
+    r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
 
     sort: Annotated[
         Optional[Sort],

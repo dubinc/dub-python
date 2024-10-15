@@ -26,6 +26,7 @@ s = Dub(
 res = s.domains.create(request={
     "slug": "acme.com",
     "expired_url": "https://acme.com/expired",
+    "not_found_url": "https://acme.com/not-found",
     "archived": False,
     "placeholder": "https://dub.co/help/article/what-is-dub",
 })
@@ -132,6 +133,7 @@ s = Dub(
 res = s.domains.update(slug="acme.com", request_body={
     "slug": "acme.com",
     "expired_url": "https://acme.com/expired",
+    "not_found_url": "https://acme.com/not-found",
     "archived": False,
     "placeholder": "https://dub.co/help/article/what-is-dub",
 })

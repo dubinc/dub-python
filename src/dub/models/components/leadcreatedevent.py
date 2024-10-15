@@ -896,6 +896,8 @@ class LeadCreatedEventLinkTypedDict(TypedDict):
     r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tags` instead."""
     tags: Nullable[List[TagSchemaTypedDict]]
     r"""The tags assigned to the short link."""
+    webhook_ids: List[str]
+    r"""The IDs of the webhooks that the short link is associated with."""
     comments: Nullable[str]
     r"""The comments for the short link."""
     short_link: str
@@ -994,6 +996,9 @@ class LeadCreatedEventLink(BaseModel):
 
     tags: Nullable[List[TagSchema]]
     r"""The tags assigned to the short link."""
+
+    webhook_ids: Annotated[List[str], pydantic.Field(alias="webhookIds")]
+    r"""The IDs of the webhooks that the short link is associated with."""
 
     comments: Nullable[str]
     r"""The comments for the short link."""
