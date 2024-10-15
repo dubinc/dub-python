@@ -90,6 +90,8 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
     ref: NotRequired[Nullable[str]]
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
+    webhook_ids: NotRequired[Nullable[List[str]]]
+    r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
 
 class CreateLinkRequestBody(BaseModel):
@@ -203,6 +205,11 @@ class CreateLinkRequestBody(BaseModel):
     ref: OptionalNullable[str] = UNSET
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
+    webhook_ids: Annotated[
+        OptionalNullable[List[str]], pydantic.Field(alias="webhookIds")
+    ] = UNSET
+    r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -237,6 +244,7 @@ class CreateLinkRequestBody(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
+            "webhookIds",
         ]
         nullable_fields = [
             "externalId",
@@ -259,6 +267,7 @@ class CreateLinkRequestBody(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
+            "webhookIds",
         ]
         null_default_fields = []
 
