@@ -37,6 +37,8 @@ class DomainSchemaTypedDict(TypedDict):
     r"""The unique identifier of the domain."""
     slug: str
     r"""The domain name."""
+    placeholder: Nullable[str]
+    r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
     expired_url: Nullable[str]
     r"""The URL to redirect to when a link under this domain has expired."""
     not_found_url: Nullable[str]
@@ -53,8 +55,6 @@ class DomainSchemaTypedDict(TypedDict):
     r"""Whether the domain is the primary domain for the workspace."""
     archived: NotRequired[bool]
     r"""Whether the domain is archived."""
-    placeholder: NotRequired[str]
-    r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
 
 
 class DomainSchema(BaseModel):
@@ -63,6 +63,9 @@ class DomainSchema(BaseModel):
 
     slug: str
     r"""The domain name."""
+
+    placeholder: Nullable[str]
+    r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
     r"""The URL to redirect to when a link under this domain has expired."""
@@ -90,13 +93,15 @@ class DomainSchema(BaseModel):
     archived: Optional[bool] = False
     r"""Whether the domain is archived."""
 
-    placeholder: Optional[str] = "https://dub.co/help/article/what-is-dub"
-    r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["verified", "primary", "archived", "placeholder"]
-        nullable_fields = ["expiredUrl", "notFoundUrl", "registeredDomain"]
+        optional_fields = ["verified", "primary", "archived"]
+        nullable_fields = [
+            "placeholder",
+            "expiredUrl",
+            "notFoundUrl",
+            "registeredDomain",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
