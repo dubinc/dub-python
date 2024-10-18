@@ -65,16 +65,18 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The name of the workspace."""
     slug: str
     r"""The slug of the workspace."""
+    invite_code: Nullable[str]
+    r"""The invite code of the workspace."""
     plan: Plan
     r"""The plan of the workspace."""
     stripe_id: Nullable[str]
     r"""The Stripe ID of the workspace."""
     billing_cycle_start: float
     r"""The date and time when the billing cycle starts for the workspace."""
+    payment_failed_at: Nullable[str]
+    r"""The date and time when the payment failed for the workspace."""
     stripe_connect_id: Nullable[str]
     r"""[BETA]: The Stripe Connect ID of the workspace."""
-    invite_code: Nullable[str]
-    r"""The invite code of the workspace."""
     usage: float
     r"""The usage of the workspace."""
     usage_limit: float
@@ -127,6 +129,9 @@ class WorkspaceSchema(BaseModel):
     slug: str
     r"""The slug of the workspace."""
 
+    invite_code: Annotated[Nullable[str], pydantic.Field(alias="inviteCode")]
+    r"""The invite code of the workspace."""
+
     plan: Plan
     r"""The plan of the workspace."""
 
@@ -136,11 +141,11 @@ class WorkspaceSchema(BaseModel):
     billing_cycle_start: Annotated[float, pydantic.Field(alias="billingCycleStart")]
     r"""The date and time when the billing cycle starts for the workspace."""
 
+    payment_failed_at: Annotated[Nullable[str], pydantic.Field(alias="paymentFailedAt")]
+    r"""The date and time when the payment failed for the workspace."""
+
     stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
     r"""[BETA]: The Stripe Connect ID of the workspace."""
-
-    invite_code: Annotated[Nullable[str], pydantic.Field(alias="inviteCode")]
-    r"""The invite code of the workspace."""
 
     usage: float
     r"""The usage of the workspace."""
@@ -206,9 +211,10 @@ class WorkspaceSchema(BaseModel):
     def serialize_model(self, handler):
         optional_fields = ["logo", "flags"]
         nullable_fields = [
-            "stripeId",
-            "stripeConnectId",
             "inviteCode",
+            "stripeId",
+            "paymentFailedAt",
+            "stripeConnectId",
             "referralLinkId",
             "publishableKey",
             "logo",
