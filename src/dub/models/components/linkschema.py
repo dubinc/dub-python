@@ -823,7 +823,7 @@ class LinkSchemaTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
-    user_id: str
+    user_id: Nullable[str]
     r"""The user ID of the creator of the short link."""
     workspace_id: str
     r"""The workspace ID of the short link."""
@@ -945,7 +945,7 @@ class LinkSchema(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
-    user_id: Annotated[str, pydantic.Field(alias="userId")]
+    user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
     r"""The user ID of the creator of the short link."""
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
@@ -1036,6 +1036,7 @@ class LinkSchema(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "userId",
             "lastClicked",
         ]
         null_default_fields = []
