@@ -44,7 +44,7 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     archived: NotRequired[bool]
     r"""Whether the short link is archived."""
     public_stats: NotRequired[bool]
-    r"""Whether the short link's stats are publicly accessible."""
+    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible."""
     tag_id: NotRequired[Nullable[str]]
     r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tagIds` instead."""
     tag_ids: NotRequired[UpdateLinkTagIdsTypedDict]
@@ -124,8 +124,14 @@ class UpdateLinkRequestBody(BaseModel):
     archived: Optional[bool] = False
     r"""Whether the short link is archived."""
 
-    public_stats: Annotated[Optional[bool], pydantic.Field(alias="publicStats")] = False
-    r"""Whether the short link's stats are publicly accessible."""
+    public_stats: Annotated[
+        Optional[bool],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="publicStats",
+        ),
+    ] = False
+    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible."""
 
     tag_id: Annotated[
         OptionalNullable[str],
