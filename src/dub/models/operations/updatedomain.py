@@ -39,7 +39,7 @@ class UpdateDomainRequestBody(BaseModel):
     archived: Optional[bool] = False
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
 
-    placeholder: OptionalNullable[str] = "https://dub.co/help/article/what-is-dub"
+    placeholder: OptionalNullable[str] = UNSET
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
 
     @model_serializer(mode="wrap")
