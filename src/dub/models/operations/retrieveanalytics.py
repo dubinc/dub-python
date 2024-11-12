@@ -74,6 +74,14 @@ class Trigger(str, Enum):
     LINK = "link"
 
 
+RetrieveAnalyticsQueryParamTagIdsTypedDict = Union[str, List[str]]
+r"""The tag IDs to retrieve analytics for."""
+
+
+RetrieveAnalyticsQueryParamTagIds = Union[str, List[str]]
+r"""The tag IDs to retrieve analytics for."""
+
+
 class RetrieveAnalyticsRequestTypedDict(TypedDict):
     event: NotRequired[Event]
     r"""The type of event to retrieve analytics for. Defaults to `clicks`."""
@@ -116,7 +124,9 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     url: NotRequired[str]
     r"""The URL to retrieve analytics for."""
     tag_id: NotRequired[str]
-    r"""The tag ID to retrieve analytics for."""
+    r"""Deprecated. Use `tagIds` instead. The tag ID to retrieve analytics for."""
+    tag_ids: NotRequired[RetrieveAnalyticsQueryParamTagIdsTypedDict]
+    r"""The tag IDs to retrieve analytics for."""
     qr: NotRequired[bool]
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
@@ -253,7 +263,14 @@ class RetrieveAnalyticsRequest(BaseModel):
         pydantic.Field(alias="tagId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The tag ID to retrieve analytics for."""
+    r"""Deprecated. Use `tagIds` instead. The tag ID to retrieve analytics for."""
+
+    tag_ids: Annotated[
+        Optional[RetrieveAnalyticsQueryParamTagIds],
+        pydantic.Field(alias="tagIds"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The tag IDs to retrieve analytics for."""
 
     qr: Annotated[
         Optional[bool],
