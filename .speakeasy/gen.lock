@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 82aaffb8b85f5d349c96f40e961bfb78
+  docChecksum: 34bf2c8628db0d6fa3a73fc90d888f0c
   docVersion: 0.0.1
-  speakeasyVersion: 1.423.1
-  generationVersion: 2.442.11
-  releaseVersion: 0.13.0
-  configChecksum: 7f5abcca500442bcb4aaa2e40f912ea7
+  speakeasyVersion: 1.438.1
+  generationVersion: 2.457.2
+  releaseVersion: 0.14.0
+  configChecksum: 186b0b0f98309a34f394bf22e58e3b50
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,12 +14,12 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.4
-    core: 5.6.0
+    core: 5.6.4
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     enumUnions: 0.1.0
-    envVarSecurityUsage: 0.3.1
-    errors: 3.0.1
+    envVarSecurityUsage: 0.3.2
+    errors: 3.2.0
     examples: 3.0.0
     flattening: 3.1.0
     globalSecurity: 3.0.2
@@ -34,7 +34,7 @@ features:
     retries: 3.0.2
     sdkHooks: 1.0.0
     tests: 1.6.0
-    unions: 3.0.2
+    unions: 3.0.3
 generatedFiles:
   - .gitattributes
   - .python-version
@@ -185,6 +185,7 @@ generatedFiles:
   - docs/models/operations/level.md
   - docs/models/operations/listdomainsrequest.md
   - docs/models/operations/listdomainsresponse.md
+  - docs/models/operations/listeventsqueryparamtagids.md
   - docs/models/operations/listeventsrequest.md
   - docs/models/operations/listeventsresponsebody.md
   - docs/models/operations/one.md
@@ -197,6 +198,7 @@ generatedFiles:
   - docs/models/operations/queryparamtagnames.md
   - docs/models/operations/queryparamtrigger.md
   - docs/models/operations/requestbody.md
+  - docs/models/operations/retrieveanalyticsqueryparamtagids.md
   - docs/models/operations/retrieveanalyticsrequest.md
   - docs/models/operations/retrieveanalyticsresponsebody.md
   - docs/models/operations/sale.md
@@ -243,7 +245,6 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
-  - scripts/compile.sh
   - scripts/prepare-readme.py
   - scripts/publish.sh
   - src/dub/__init__.py
