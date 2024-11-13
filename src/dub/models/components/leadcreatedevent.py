@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .tagschema import TagSchema, TagSchemaTypedDict
-from dub.types import BaseModel, Nullable, UNSET_SENTINEL
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -16,24 +16,42 @@ class LeadCreatedEventEvent(str, Enum):
 
 class LeadCreatedEventCustomerTypedDict(TypedDict):
     id: str
-    name: Nullable[str]
-    email: Nullable[str]
-    avatar: Nullable[str]
+    r"""The unique identifier of the customer in Dub."""
+    external_id: str
+    r"""Unique identifier for the customer in the client's app."""
+    name: str
+    r"""Name of the customer."""
+    created_at: str
+    r"""The date the customer was created."""
+    email: NotRequired[Nullable[str]]
+    r"""Email of the customer."""
+    avatar: NotRequired[Nullable[str]]
+    r"""Avatar URL of the customer."""
 
 
 class LeadCreatedEventCustomer(BaseModel):
     id: str
+    r"""The unique identifier of the customer in Dub."""
 
-    name: Nullable[str]
+    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    r"""Unique identifier for the customer in the client's app."""
 
-    email: Nullable[str]
+    name: str
+    r"""Name of the customer."""
 
-    avatar: Nullable[str]
+    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+    r"""The date the customer was created."""
+
+    email: OptionalNullable[str] = UNSET
+    r"""Email of the customer."""
+
+    avatar: OptionalNullable[str] = UNSET
+    r"""Avatar URL of the customer."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["name", "email", "avatar"]
+        optional_fields = ["email", "avatar"]
+        nullable_fields = ["email", "avatar"]
         null_default_fields = []
 
         serialized = handler(self)

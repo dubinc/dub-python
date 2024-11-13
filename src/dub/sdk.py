@@ -8,6 +8,7 @@ from .utils.retries import RetryConfig
 from dub import utils
 from dub._hooks import SDKHooks
 from dub.analytics import Analytics
+from dub.customers import Customers
 from dub.domains import Domains
 from dub.events import Events
 from dub.links import Links
@@ -26,13 +27,14 @@ class Dub(BaseSDK):
     r"""Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
 
     links: Links
-    qr_codes: QRCodes
     analytics: Analytics
     events: Events
-    workspaces: Workspaces
     tags: Tags
     domains: Domains
     track: Track
+    customers: Customers
+    workspaces: Workspaces
+    qr_codes: QRCodes
     metatags: Metatags
 
     def __init__(
@@ -115,11 +117,12 @@ class Dub(BaseSDK):
 
     def _init_sdks(self):
         self.links = Links(self.sdk_configuration)
-        self.qr_codes = QRCodes(self.sdk_configuration)
         self.analytics = Analytics(self.sdk_configuration)
         self.events = Events(self.sdk_configuration)
-        self.workspaces = Workspaces(self.sdk_configuration)
         self.tags = Tags(self.sdk_configuration)
         self.domains = Domains(self.sdk_configuration)
         self.track = Track(self.sdk_configuration)
+        self.customers = Customers(self.sdk_configuration)
+        self.workspaces = Workspaces(self.sdk_configuration)
+        self.qr_codes = QRCodes(self.sdk_configuration)
         self.metatags = Metatags(self.sdk_configuration)

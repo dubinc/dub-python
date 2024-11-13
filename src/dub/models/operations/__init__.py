@@ -24,6 +24,12 @@ from .bulkupdatelinks import (
     Data,
     DataTypedDict,
 )
+from .createcustomer import (
+    CreateCustomerRequestBody,
+    CreateCustomerRequestBodyTypedDict,
+    CreateCustomerResponseBody,
+    CreateCustomerResponseBodyTypedDict,
+)
 from .createdomain import CreateDomainRequestBody, CreateDomainRequestBodyTypedDict
 from .createlink import (
     CreateLinkRequestBody,
@@ -34,6 +40,12 @@ from .createlink import (
     TagNamesTypedDict,
 )
 from .createtag import Color, CreateTagRequestBody, CreateTagRequestBodyTypedDict
+from .deletecustomer import (
+    DeleteCustomerRequest,
+    DeleteCustomerRequestTypedDict,
+    DeleteCustomerResponseBody,
+    DeleteCustomerResponseBodyTypedDict,
+)
 from .deletedomain import (
     DeleteDomainRequest,
     DeleteDomainRequestTypedDict,
@@ -52,6 +64,13 @@ from .deletetag import (
     DeleteTagResponseBody,
     DeleteTagResponseBodyTypedDict,
 )
+from .getcustomer import (
+    GetCustomerRequest,
+    GetCustomerRequestTypedDict,
+    GetCustomerResponseBody,
+    GetCustomerResponseBodyTypedDict,
+)
+from .getcustomers import ResponseBody, ResponseBodyTypedDict
 from .getlinkinfo import GetLinkInfoRequest, GetLinkInfoRequestTypedDict
 from .getlinks import (
     GetLinksRequest,
@@ -143,6 +162,14 @@ from .tracksale import (
     TrackSaleResponseBody,
     TrackSaleResponseBodyTypedDict,
 )
+from .updatecustomer import (
+    UpdateCustomerRequest,
+    UpdateCustomerRequestBody,
+    UpdateCustomerRequestBodyTypedDict,
+    UpdateCustomerRequestTypedDict,
+    UpdateCustomerResponseBody,
+    UpdateCustomerResponseBodyTypedDict,
+)
 from .updatedomain import (
     UpdateDomainRequest,
     UpdateDomainRequestBody,
@@ -199,6 +226,10 @@ __all__ = [
     "Click",
     "ClickTypedDict",
     "Color",
+    "CreateCustomerRequestBody",
+    "CreateCustomerRequestBodyTypedDict",
+    "CreateCustomerResponseBody",
+    "CreateCustomerResponseBodyTypedDict",
     "CreateDomainRequestBody",
     "CreateDomainRequestBodyTypedDict",
     "CreateLinkRequestBody",
@@ -209,6 +240,10 @@ __all__ = [
     "CustomerTypedDict",
     "Data",
     "DataTypedDict",
+    "DeleteCustomerRequest",
+    "DeleteCustomerRequestTypedDict",
+    "DeleteCustomerResponseBody",
+    "DeleteCustomerResponseBodyTypedDict",
     "DeleteDomainRequest",
     "DeleteDomainRequestTypedDict",
     "DeleteDomainResponseBody",
@@ -222,6 +257,10 @@ __all__ = [
     "DeleteTagResponseBody",
     "DeleteTagResponseBodyTypedDict",
     "Event",
+    "GetCustomerRequest",
+    "GetCustomerRequestTypedDict",
+    "GetCustomerResponseBody",
+    "GetCustomerResponseBodyTypedDict",
     "GetLinkInfoRequest",
     "GetLinkInfoRequestTypedDict",
     "GetLinksCountQueryParamTagIds",
@@ -269,6 +308,8 @@ __all__ = [
     "QueryParamTrigger",
     "RequestBody",
     "RequestBodyTypedDict",
+    "ResponseBody",
+    "ResponseBodyTypedDict",
     "RetrieveAnalyticsQueryParamTagIds",
     "RetrieveAnalyticsQueryParamTagIdsTypedDict",
     "RetrieveAnalyticsRequest",
@@ -300,6 +341,12 @@ __all__ = [
     "TrackSaleResponseBodyTypedDict",
     "Trigger",
     "Two",
+    "UpdateCustomerRequest",
+    "UpdateCustomerRequestBody",
+    "UpdateCustomerRequestBodyTypedDict",
+    "UpdateCustomerRequestTypedDict",
+    "UpdateCustomerResponseBody",
+    "UpdateCustomerResponseBodyTypedDict",
     "UpdateDomainRequest",
     "UpdateDomainRequestBody",
     "UpdateDomainRequestBodyTypedDict",
