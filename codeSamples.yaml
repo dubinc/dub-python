@@ -28,6 +28,93 @@ actions:
             if res is not None:
                 # handle response
                 pass
+  - target: $["paths"]["/customers"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: getCustomers
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+            res = s.customers.list()
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/customers"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createCustomer
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+            res = s.customers.create()
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/customers/{id}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: deleteCustomer
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+            res = s.customers.delete(id="<id>")
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/customers/{id}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: getCustomer
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+            res = s.customers.get(request={
+                "id": "<id>",
+            })
+
+            if res is not None:
+                # handle response
+                pass
+  - target: $["paths"]["/customers/{id}"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: updateCustomer
+          source: |-
+            from dub import Dub
+
+            s = Dub(
+                token="DUB_API_KEY",
+            )
+
+            res = s.customers.update(id="<id>")
+
+            if res is not None:
+                # handle response
+                pass
   - target: $["paths"]["/domains"]["get"]
     update:
       x-codeSamples:
@@ -471,23 +558,6 @@ actions:
             if res is not None:
                 # handle response
                 pass
-  - target: $["paths"]["/track/customer"]["post"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: trackCustomer
-          source: |-
-            from dub import Dub
-
-            s = Dub(
-                token="DUB_API_KEY",
-            )
-
-            res = s.track.customer()
-
-            if res is not None:
-                # handle response
-                pass
   - target: $["paths"]["/track/lead"]["post"]
     update:
       x-codeSamples:
@@ -503,7 +573,6 @@ actions:
             res = s.track.lead(request={
                 "click_id": "<id>",
                 "event_name": "Sign up",
-                "customer_id": "<id>",
             })
 
             if res is not None:
@@ -523,7 +592,6 @@ actions:
             )
 
             res = s.track.sale(request={
-                "customer_id": "<id>",
                 "amount": 996500,
                 "payment_processor": operations.PaymentProcessor.PADDLE,
                 "event_name": "Purchase",

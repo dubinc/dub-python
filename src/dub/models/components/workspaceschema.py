@@ -76,7 +76,7 @@ class WorkspaceSchemaTypedDict(TypedDict):
     payment_failed_at: Nullable[str]
     r"""The date and time when the payment failed for the workspace."""
     stripe_connect_id: Nullable[str]
-    r"""[BETA]: The Stripe Connect ID of the workspace."""
+    r"""[BETA – Dub Conversions]: The Stripe Connect ID of the workspace."""
     usage: float
     r"""The usage of the workspace."""
     usage_limit: float
@@ -113,6 +113,14 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The domains of the workspace."""
     publishable_key: Nullable[str]
     r"""The publishable key of the workspace."""
+    bank_account_name: Nullable[str]
+    r"""[BETA – Dub Partners]: The name of the connected bank account."""
+    partial_account_number: Nullable[str]
+    r"""[BETA – Dub Partners]: The partial account number of the bank account."""
+    routing_number: Nullable[str]
+    r"""[BETA – Dub Partners]: The routing number of the bank account."""
+    bank_account_verified: bool
+    r"""[BETA – Dub Partners]: Whether the bank account is verified."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -145,7 +153,7 @@ class WorkspaceSchema(BaseModel):
     r"""The date and time when the payment failed for the workspace."""
 
     stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
-    r"""[BETA]: The Stripe Connect ID of the workspace."""
+    r"""[BETA – Dub Conversions]: The Stripe Connect ID of the workspace."""
 
     usage: float
     r"""The usage of the workspace."""
@@ -201,6 +209,20 @@ class WorkspaceSchema(BaseModel):
     publishable_key: Annotated[Nullable[str], pydantic.Field(alias="publishableKey")]
     r"""The publishable key of the workspace."""
 
+    bank_account_name: Annotated[Nullable[str], pydantic.Field(alias="bankAccountName")]
+    r"""[BETA – Dub Partners]: The name of the connected bank account."""
+
+    partial_account_number: Annotated[
+        Nullable[str], pydantic.Field(alias="partialAccountNumber")
+    ]
+    r"""[BETA – Dub Partners]: The partial account number of the bank account."""
+
+    routing_number: Annotated[Nullable[str], pydantic.Field(alias="routingNumber")]
+    r"""[BETA – Dub Partners]: The routing number of the bank account."""
+
+    bank_account_verified: Annotated[bool, pydantic.Field(alias="bankAccountVerified")]
+    r"""[BETA – Dub Partners]: Whether the bank account is verified."""
+
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
 
@@ -217,6 +239,9 @@ class WorkspaceSchema(BaseModel):
             "stripeConnectId",
             "referralLinkId",
             "publishableKey",
+            "bankAccountName",
+            "partialAccountNumber",
+            "routingNumber",
             "logo",
         ]
         null_default_fields = ["logo"]

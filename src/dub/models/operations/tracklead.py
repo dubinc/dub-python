@@ -4,7 +4,7 @@ from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -13,7 +13,9 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""The ID of the click in th Dub. You can read this value from `dub_id` cookie."""
     event_name: str
     r"""The name of the event to track."""
-    customer_id: str
+    external_id: NotRequired[str]
+    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
+    customer_id: NotRequired[Nullable[str]]
     r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
     customer_name: NotRequired[Nullable[str]]
     r"""Name of the customer in the client's app."""
@@ -32,7 +34,16 @@ class TrackLeadRequestBody(BaseModel):
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
     r"""The name of the event to track."""
 
-    customer_id: Annotated[str, pydantic.Field(alias="customerId")]
+    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = ""
+    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
+
+    customer_id: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="customerId",
+        ),
+    ] = None
     r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
 
     customer_name: Annotated[
@@ -56,18 +67,26 @@ class TrackLeadRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "externalId",
+            "customerId",
             "customerName",
             "customerEmail",
             "customerAvatar",
             "metadata",
         ]
         nullable_fields = [
+            "customerId",
             "customerName",
             "customerEmail",
             "customerAvatar",
             "metadata",
         ]
-        null_default_fields = ["customerName", "customerEmail", "customerAvatar"]
+        null_default_fields = [
+            "customerId",
+            "customerName",
+            "customerEmail",
+            "customerAvatar",
+        ]
 
         serialized = handler(self)
 
@@ -103,25 +122,25 @@ class Click(BaseModel):
 
 
 class CustomerTypedDict(TypedDict):
-    id: str
     name: Nullable[str]
     email: Nullable[str]
     avatar: Nullable[str]
+    external_id: Nullable[str]
 
 
 class Customer(BaseModel):
-    id: str
-
     name: Nullable[str]
 
     email: Nullable[str]
 
     avatar: Nullable[str]
+
+    external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
-        nullable_fields = ["name", "email", "avatar"]
+        nullable_fields = ["name", "email", "avatar", "externalId"]
         null_default_fields = []
 
         serialized = handler(self)

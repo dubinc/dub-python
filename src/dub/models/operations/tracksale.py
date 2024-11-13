@@ -18,12 +18,14 @@ class PaymentProcessor(str, Enum):
 
 
 class TrackSaleRequestBodyTypedDict(TypedDict):
-    customer_id: str
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
     amount: int
     r"""The amount of the sale. Should be passed in cents."""
     payment_processor: PaymentProcessor
     r"""The payment processor via which the sale was made."""
+    external_id: NotRequired[str]
+    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
+    customer_id: NotRequired[Nullable[str]]
+    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
     event_name: NotRequired[str]
     r"""The name of the sale event. It can be used to track different types of event for example 'Purchase', 'Upgrade', 'Payment', etc."""
     invoice_id: NotRequired[Nullable[str]]
@@ -35,9 +37,6 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
 
 
 class TrackSaleRequestBody(BaseModel):
-    customer_id: Annotated[str, pydantic.Field(alias="customerId")]
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-
     amount: int
     r"""The amount of the sale. Should be passed in cents."""
 
@@ -45,6 +44,18 @@ class TrackSaleRequestBody(BaseModel):
         PaymentProcessor, pydantic.Field(alias="paymentProcessor")
     ]
     r"""The payment processor via which the sale was made."""
+
+    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = ""
+    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
+
+    customer_id: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="customerId",
+        ),
+    ] = None
+    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
 
     event_name: Annotated[Optional[str], pydantic.Field(alias="eventName")] = "Purchase"
     r"""The name of the sale event. It can be used to track different types of event for example 'Purchase', 'Upgrade', 'Payment', etc."""
@@ -62,9 +73,16 @@ class TrackSaleRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["eventName", "invoiceId", "currency", "metadata"]
-        nullable_fields = ["invoiceId", "metadata"]
-        null_default_fields = ["invoiceId"]
+        optional_fields = [
+            "externalId",
+            "customerId",
+            "eventName",
+            "invoiceId",
+            "currency",
+            "metadata",
+        ]
+        nullable_fields = ["customerId", "invoiceId", "metadata"]
+        null_default_fields = ["customerId", "invoiceId"]
 
         serialized = handler(self)
 
@@ -96,6 +114,7 @@ class TrackSaleCustomerTypedDict(TypedDict):
     name: Nullable[str]
     email: Nullable[str]
     avatar: Nullable[str]
+    external_id: Nullable[str]
 
 
 class TrackSaleCustomer(BaseModel):
@@ -107,10 +126,12 @@ class TrackSaleCustomer(BaseModel):
 
     avatar: Nullable[str]
 
+    external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
-        nullable_fields = ["name", "email", "avatar"]
+        nullable_fields = ["name", "email", "avatar", "externalId"]
         null_default_fields = []
 
         serialized = handler(self)

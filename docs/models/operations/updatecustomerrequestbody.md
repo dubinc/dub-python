@@ -1,0 +1,11 @@
+# UpdateCustomerRequestBody
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `email`                                                                                     | *OptionalNullable[str]*                                                                     | :heavy_minus_sign:                                                                          | Email of the customer in the client's app.                                                  |
+| `name`                                                                                      | *OptionalNullable[str]*                                                                     | :heavy_minus_sign:                                                                          | Name of the customer in the client's app. If not provided, a random name will be generated. |
+| `avatar`                                                                                    | *OptionalNullable[str]*                                                                     | :heavy_minus_sign:                                                                          | Avatar URL of the customer in the client's app.                                             |
+| `external_id`                                                                               | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Unique identifier for the customer in the client's app.                                     |

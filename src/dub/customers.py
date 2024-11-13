@@ -5,29 +5,21 @@ from dub import utils
 from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
-from typing import Any, Optional, Union, cast
-from typing_extensions import deprecated
+from typing import Any, List, Optional, Union, cast
 
 
-class Track(BaseSDK):
-    def lead(
+class Customers(BaseSDK):
+    def list(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.TrackLeadRequestBody,
-                operations.TrackLeadRequestBodyTypedDict,
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.TrackLeadResponseBody]:
-        r"""Track a lead
+    ) -> Optional[List[operations.ResponseBody]]:
+        r"""Get a list of customers
 
-        Track a lead for a short link.
+        Get a list of customers for the authenticated workspace.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -39,28 +31,18 @@ class Track(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[operations.TrackLeadRequestBody]
-            )
-        request = cast(Optional[operations.TrackLeadRequestBody], request)
-
         req = self.build_request(
-            method="POST",
-            path="/track/lead",
+            method="GET",
+            path="/customers",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[operations.TrackLeadRequestBody]
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -74,7 +56,7 @@ class Track(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="trackLead",
+                operation_id="getCustomers",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -98,7 +80,7 @@ class Track(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.TrackLeadResponseBody]
+                http_res.text, Optional[List[operations.ResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -142,24 +124,17 @@ class Track(BaseSDK):
             http_res,
         )
 
-    async def lead_async(
+    async def list_async(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.TrackLeadRequestBody,
-                operations.TrackLeadRequestBodyTypedDict,
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.TrackLeadResponseBody]:
-        r"""Track a lead
+    ) -> Optional[List[operations.ResponseBody]]:
+        r"""Get a list of customers
 
-        Track a lead for a short link.
+        Get a list of customers for the authenticated workspace.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -171,28 +146,18 @@ class Track(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[operations.TrackLeadRequestBody]
-            )
-        request = cast(Optional[operations.TrackLeadRequestBody], request)
-
         req = self.build_request_async(
-            method="POST",
-            path="/track/lead",
+            method="GET",
+            path="/customers",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[operations.TrackLeadRequestBody]
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -206,7 +171,7 @@ class Track(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="trackLead",
+                operation_id="getCustomers",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -230,7 +195,7 @@ class Track(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.TrackLeadResponseBody]
+                http_res.text, Optional[List[operations.ResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -274,22 +239,22 @@ class Track(BaseSDK):
             http_res,
         )
 
-    def sale(
+    def create(
         self,
         *,
         request: Optional[
             Union[
-                operations.TrackSaleRequestBody,
-                operations.TrackSaleRequestBodyTypedDict,
+                operations.CreateCustomerRequestBody,
+                operations.CreateCustomerRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.TrackSaleResponseBody]:
-        r"""Track a sale
+    ) -> Optional[operations.CreateCustomerResponseBody]:
+        r"""Create a customer
 
-        Track a sale for a short link.
+        Create a customer for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -306,13 +271,13 @@ class Track(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[operations.TrackSaleRequestBody]
+                request, Optional[operations.CreateCustomerRequestBody]
             )
-        request = cast(Optional[operations.TrackSaleRequestBody], request)
+        request = cast(Optional[operations.CreateCustomerRequestBody], request)
 
         req = self.build_request(
             method="POST",
-            path="/track/sale",
+            path="/customers",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -323,7 +288,11 @@ class Track(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[operations.TrackSaleRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.CreateCustomerRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -338,7 +307,7 @@ class Track(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="trackSale",
+                operation_id="createCustomer",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -360,9 +329,9 @@ class Track(BaseSDK):
         )
 
         data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.TrackSaleResponseBody]
+                http_res.text, Optional[operations.CreateCustomerResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -406,22 +375,22 @@ class Track(BaseSDK):
             http_res,
         )
 
-    async def sale_async(
+    async def create_async(
         self,
         *,
         request: Optional[
             Union[
-                operations.TrackSaleRequestBody,
-                operations.TrackSaleRequestBodyTypedDict,
+                operations.CreateCustomerRequestBody,
+                operations.CreateCustomerRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.TrackSaleResponseBody]:
-        r"""Track a sale
+    ) -> Optional[operations.CreateCustomerResponseBody]:
+        r"""Create a customer
 
-        Track a sale for a short link.
+        Create a customer for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -438,13 +407,13 @@ class Track(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[operations.TrackSaleRequestBody]
+                request, Optional[operations.CreateCustomerRequestBody]
             )
-        request = cast(Optional[operations.TrackSaleRequestBody], request)
+        request = cast(Optional[operations.CreateCustomerRequestBody], request)
 
         req = self.build_request_async(
             method="POST",
-            path="/track/sale",
+            path="/customers",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -455,7 +424,11 @@ class Track(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[operations.TrackSaleRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[operations.CreateCustomerRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -470,7 +443,7 @@ class Track(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="trackSale",
+                operation_id="createCustomer",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -492,9 +465,9 @@ class Track(BaseSDK):
         )
 
         data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.TrackSaleResponseBody]
+                http_res.text, Optional[operations.CreateCustomerResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -538,25 +511,19 @@ class Track(BaseSDK):
             http_res,
         )
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
-    def customer(
+    def get(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.TrackCustomerRequestBody,
-                operations.TrackCustomerRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.GetCustomerRequest, operations.GetCustomerRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.TrackCustomerResponseBody]:
-        r"""Track a customer
+    ) -> Optional[operations.GetCustomerResponseBody]:
+        r"""Get a customer
 
-        Track a customer for an authenticated workspace.
+        Get a customer by ID for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -572,30 +539,21 @@ class Track(BaseSDK):
             base_url = server_url
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[operations.TrackCustomerRequestBody]
-            )
-        request = cast(Optional[operations.TrackCustomerRequestBody], request)
+            request = utils.unmarshal(request, operations.GetCustomerRequest)
+        request = cast(operations.GetCustomerRequest, request)
 
         req = self.build_request(
-            method="POST",
-            path="/track/customer",
+            method="GET",
+            path="/customers/{id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[operations.TrackCustomerRequestBody],
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -609,7 +567,7 @@ class Track(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="trackCustomer",
+                operation_id="getCustomer",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -633,7 +591,7 @@ class Track(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.TrackCustomerResponseBody]
+                http_res.text, Optional[operations.GetCustomerResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -677,25 +635,19 @@ class Track(BaseSDK):
             http_res,
         )
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
-    async def customer_async(
+    async def get_async(
         self,
         *,
-        request: Optional[
-            Union[
-                operations.TrackCustomerRequestBody,
-                operations.TrackCustomerRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.GetCustomerRequest, operations.GetCustomerRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.TrackCustomerResponseBody]:
-        r"""Track a customer
+    ) -> Optional[operations.GetCustomerResponseBody]:
+        r"""Get a customer
 
-        Track a customer for an authenticated workspace.
+        Get a customer by ID for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -711,30 +663,21 @@ class Track(BaseSDK):
             base_url = server_url
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[operations.TrackCustomerRequestBody]
-            )
-        request = cast(Optional[operations.TrackCustomerRequestBody], request)
+            request = utils.unmarshal(request, operations.GetCustomerRequest)
+        request = cast(operations.GetCustomerRequest, request)
 
         req = self.build_request_async(
-            method="POST",
-            path="/track/customer",
+            method="GET",
+            path="/customers/{id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[operations.TrackCustomerRequestBody],
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -748,7 +691,7 @@ class Track(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="trackCustomer",
+                operation_id="getCustomer",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -772,7 +715,529 @@ class Track(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.TrackCustomerResponseBody]
+                http_res.text, Optional[operations.GetCustomerResponseBody]
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=data)
+        if utils.match_response(http_res, "401", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=data)
+        if utils.match_response(http_res, "403", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=data)
+        if utils.match_response(http_res, "404", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=data)
+        if utils.match_response(http_res, "409", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=data)
+        if utils.match_response(http_res, "410", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
+            raise errors.InviteExpired(data=data)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
+            raise errors.UnprocessableEntity(data=data)
+        if utils.match_response(http_res, "429", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
+            raise errors.RateLimitExceeded(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
+            raise errors.InternalServerError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def update(
+        self,
+        *,
+        id: str,
+        request_body: Optional[
+            Union[
+                operations.UpdateCustomerRequestBody,
+                operations.UpdateCustomerRequestBodyTypedDict,
+            ]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Optional[operations.UpdateCustomerResponseBody]:
+        r"""Update a customer
+
+        Update a customer for the authenticated workspace.
+
+        :param id: The unique identifier of the customer in Dub.
+        :param request_body:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = operations.UpdateCustomerRequest(
+            id=id,
+            request_body=utils.get_pydantic_model(
+                request_body, Optional[operations.UpdateCustomerRequestBody]
+            ),
+        )
+
+        req = self.build_request(
+            method="PATCH",
+            path="/customers/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[operations.UpdateCustomerRequestBody],
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                operation_id="updateCustomer",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.UpdateCustomerResponseBody]
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=data)
+        if utils.match_response(http_res, "401", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=data)
+        if utils.match_response(http_res, "403", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=data)
+        if utils.match_response(http_res, "404", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=data)
+        if utils.match_response(http_res, "409", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=data)
+        if utils.match_response(http_res, "410", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
+            raise errors.InviteExpired(data=data)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
+            raise errors.UnprocessableEntity(data=data)
+        if utils.match_response(http_res, "429", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
+            raise errors.RateLimitExceeded(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
+            raise errors.InternalServerError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def update_async(
+        self,
+        *,
+        id: str,
+        request_body: Optional[
+            Union[
+                operations.UpdateCustomerRequestBody,
+                operations.UpdateCustomerRequestBodyTypedDict,
+            ]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Optional[operations.UpdateCustomerResponseBody]:
+        r"""Update a customer
+
+        Update a customer for the authenticated workspace.
+
+        :param id: The unique identifier of the customer in Dub.
+        :param request_body:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = operations.UpdateCustomerRequest(
+            id=id,
+            request_body=utils.get_pydantic_model(
+                request_body, Optional[operations.UpdateCustomerRequestBody]
+            ),
+        )
+
+        req = self.build_request_async(
+            method="PATCH",
+            path="/customers/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[operations.UpdateCustomerRequestBody],
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                operation_id="updateCustomer",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.UpdateCustomerResponseBody]
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=data)
+        if utils.match_response(http_res, "401", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=data)
+        if utils.match_response(http_res, "403", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=data)
+        if utils.match_response(http_res, "404", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=data)
+        if utils.match_response(http_res, "409", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=data)
+        if utils.match_response(http_res, "410", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
+            raise errors.InviteExpired(data=data)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
+            raise errors.UnprocessableEntity(data=data)
+        if utils.match_response(http_res, "429", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
+            raise errors.RateLimitExceeded(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
+            raise errors.InternalServerError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def delete(
+        self,
+        *,
+        id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Optional[operations.DeleteCustomerResponseBody]:
+        r"""Delete a customer
+
+        Delete a customer from a workspace.
+
+        :param id: The unique identifier of the customer in Dub.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = operations.DeleteCustomerRequest(
+            id=id,
+        )
+
+        req = self.build_request(
+            method="DELETE",
+            path="/customers/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                operation_id="deleteCustomer",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.DeleteCustomerResponseBody]
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=data)
+        if utils.match_response(http_res, "401", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=data)
+        if utils.match_response(http_res, "403", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=data)
+        if utils.match_response(http_res, "404", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=data)
+        if utils.match_response(http_res, "409", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=data)
+        if utils.match_response(http_res, "410", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
+            raise errors.InviteExpired(data=data)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
+            raise errors.UnprocessableEntity(data=data)
+        if utils.match_response(http_res, "429", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
+            raise errors.RateLimitExceeded(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
+            raise errors.InternalServerError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def delete_async(
+        self,
+        *,
+        id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Optional[operations.DeleteCustomerResponseBody]:
+        r"""Delete a customer
+
+        Delete a customer from a workspace.
+
+        :param id: The unique identifier of the customer in Dub.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = operations.DeleteCustomerRequest(
+            id=id,
+        )
+
+        req = self.build_request_async(
+            method="DELETE",
+            path="/customers/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                operation_id="deleteCustomer",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(
+                http_res.text, Optional[operations.DeleteCustomerResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)

@@ -7,7 +7,7 @@
 
 * [lead](#lead) - Track a lead
 * [sale](#sale) - Track a sale
-* [customer](#customer) - Track a customer
+* [~~customer~~](#customer) - Track a customer :warning: **Deprecated**
 
 ## lead
 
@@ -75,9 +75,9 @@ s = Dub(
 )
 
 res = s.track.sale(request={
-    "customer_id": "<value>",
     "amount": 996500,
     "payment_processor": operations.PaymentProcessor.SHOPIFY,
+    "customer_id": "<value>",
     "event_name": "Purchase",
 })
 
@@ -113,9 +113,11 @@ if res is not None:
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## customer
+## ~~customer~~
 
 Track a customer for an authenticated workspace.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
