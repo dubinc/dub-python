@@ -16,9 +16,9 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> Optional[List[operations.ResponseBody]]:
-        r"""Get a list of customers
+        r"""Retrieve a list of customers
 
-        Get a list of customers for the authenticated workspace.
+        Retrieve a list of customers for the authenticated workspace.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -131,9 +131,9 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> Optional[List[operations.ResponseBody]]:
-        r"""Get a list of customers
+        r"""Retrieve a list of customers
 
-        Get a list of customers for the authenticated workspace.
+        Retrieve a list of customers for the authenticated workspace.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -521,9 +521,9 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> Optional[operations.GetCustomerResponseBody]:
-        r"""Get a customer
+        r"""Retrieve a customer
 
-        Get a customer by ID for the authenticated workspace.
+        Retrieve a customer by ID for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -645,9 +645,9 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
     ) -> Optional[operations.GetCustomerResponseBody]:
-        r"""Get a customer
+        r"""Retrieve a customer
 
-        Get a customer by ID for the authenticated workspace.
+        Retrieve a customer by ID for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
