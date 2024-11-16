@@ -55,7 +55,7 @@ class QueryParamGroupBy(str, Enum):
 
 
 class Interval(str, Enum):
-    r"""The interval to retrieve analytics for. Takes precedence over start and end. If undefined, defaults to 24h."""
+    r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
 
     TWENTY_FOURH = "24h"
     SEVEND = "7d"
@@ -96,11 +96,11 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     external_id: NotRequired[str]
     r"""This is the ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
     interval: NotRequired[Interval]
-    r"""The interval to retrieve analytics for. Takes precedence over start and end. If undefined, defaults to 24h."""
+    r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
     start: NotRequired[str]
-    r"""The start date and time when to retrieve analytics from."""
+    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
     end: NotRequired[str]
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     continent: NotRequired[components_continentcode.ContinentCode]
@@ -177,19 +177,19 @@ class RetrieveAnalyticsRequest(BaseModel):
         Optional[Interval],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The interval to retrieve analytics for. Takes precedence over start and end. If undefined, defaults to 24h."""
+    r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
 
     start: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The start date and time when to retrieve analytics from."""
+    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
 
     end: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
 
     timezone: Annotated[
         Optional[str],

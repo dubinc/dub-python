@@ -74,9 +74,9 @@ class ListEventsRequestTypedDict(TypedDict):
     interval: NotRequired[QueryParamInterval]
     r"""The interval to retrieve events for. Takes precedence over start and end. If undefined, defaults to 24h."""
     start: NotRequired[str]
-    r"""The start date and time when to retrieve analytics from."""
+    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
     end: NotRequired[str]
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     continent: NotRequired[components_continentcode.ContinentCode]
@@ -156,13 +156,13 @@ class ListEventsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The start date and time when to retrieve analytics from."""
+    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
 
     end: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
 
     timezone: Annotated[
         Optional[str],
