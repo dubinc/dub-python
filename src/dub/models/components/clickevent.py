@@ -875,6 +875,8 @@ class LinkTypedDict(TypedDict):
     updated_at: str
     project_id: str
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
+    program_id: Nullable[str]
+    r"""The ID of the program the short link is associated with."""
     track_conversion: NotRequired[bool]
     archived: NotRequired[bool]
     proxy: NotRequired[bool]
@@ -997,6 +999,9 @@ class Link(BaseModel):
     ]
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
 
+    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
+    r"""The ID of the program the short link is associated with."""
+
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
     ] = None
@@ -1058,6 +1063,7 @@ class Link(BaseModel):
             "utm_term",
             "utm_content",
             "userId",
+            "programId",
         ]
         null_default_fields = []
 

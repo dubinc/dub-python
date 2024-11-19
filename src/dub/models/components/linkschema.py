@@ -835,6 +835,8 @@ class LinkSchemaTypedDict(TypedDict):
     r"""The date and time when the short link was last updated."""
     project_id: str
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
+    program_id: Nullable[str]
+    r"""The ID of the program the short link is associated with."""
     track_conversion: NotRequired[bool]
     r"""[BETA] Whether to track conversions for the short link."""
     archived: NotRequired[bool]
@@ -969,6 +971,9 @@ class LinkSchema(BaseModel):
     ]
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
 
+    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
+    r"""The ID of the program the short link is associated with."""
+
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
     ] = False
@@ -1038,6 +1043,7 @@ class LinkSchema(BaseModel):
             "utm_content",
             "userId",
             "lastClicked",
+            "programId",
         ]
         null_default_fields = []
 
