@@ -893,7 +893,6 @@ class LeadCreatedEventLinkTypedDict(TypedDict):
     r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
     expires_at: str
     expired_url: Nullable[str]
-    r"""The URL to redirect to when the short link has expired."""
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     title: Nullable[str]
@@ -979,7 +978,6 @@ class LeadCreatedEventLink(BaseModel):
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
-    r"""The URL to redirect to when the short link has expired."""
 
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
