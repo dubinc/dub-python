@@ -33,8 +33,10 @@ class GetQRCodeRequestTypedDict(TypedDict):
     r"""The background color of the QR code in hex format. Defaults to `#ffffff` if not provided."""
     hide_logo: NotRequired[bool]
     r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub.co."""
+    margin: NotRequired[float]
+    r"""The size of the margin around the QR code. Defaults to 2 if not provided."""
     include_margin: NotRequired[bool]
-    r"""Whether to include a margin around the QR code. Defaults to `false` if not provided."""
+    r"""DEPRECATED: Margin is included by default. Use the `margin` prop to customize the margin size."""
 
 
 class GetQRCodeRequest(BaseModel):
@@ -82,9 +84,15 @@ class GetQRCodeRequest(BaseModel):
     ] = True
     r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub.co."""
 
+    margin: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 2
+    r"""The size of the margin around the QR code. Defaults to 2 if not provided."""
+
     include_margin: Annotated[
         Optional[bool],
         pydantic.Field(alias="includeMargin"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = True
-    r"""Whether to include a margin around the QR code. Defaults to `false` if not provided."""
+    r"""DEPRECATED: Margin is included by default. Use the `margin` prop to customize the margin size."""
