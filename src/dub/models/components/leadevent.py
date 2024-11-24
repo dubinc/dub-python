@@ -17,9 +17,10 @@ class LeadEventEvent(str, Enum):
 class LeadEventClickTypedDict(TypedDict):
     id: str
     url: str
-    continent: str
     country: str
     city: str
+    region: str
+    continent: str
     device: str
     browser: str
     os: str
@@ -34,11 +35,13 @@ class LeadEventClick(BaseModel):
 
     url: str
 
-    continent: str
-
     country: str
 
     city: str
+
+    region: str
+
+    continent: str
 
     device: str
 

@@ -41,6 +41,7 @@ class QueryParamGroupBy(str, Enum):
     COUNT = "count"
     TIMESERIES = "timeseries"
     CONTINENTS = "continents"
+    REGIONS = "regions"
     COUNTRIES = "countries"
     CITIES = "cities"
     DEVICES = "devices"
@@ -103,12 +104,14 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
-    continent: NotRequired[components_continentcode.ContinentCode]
-    r"""The continent to retrieve analytics for."""
     country: NotRequired[components_countrycode.CountryCode]
     r"""The country to retrieve analytics for."""
     city: NotRequired[str]
     r"""The city to retrieve analytics for."""
+    region: NotRequired[str]
+    r"""The ISO 3166-2 region code to retrieve analytics for."""
+    continent: NotRequired[components_continentcode.ContinentCode]
+    r"""The continent to retrieve analytics for."""
     device: NotRequired[str]
     r"""The device to retrieve analytics for."""
     browser: NotRequired[str]
@@ -197,12 +200,6 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = "UTC"
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
 
-    continent: Annotated[
-        Optional[components_continentcode.ContinentCode],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The continent to retrieve analytics for."""
-
     country: Annotated[
         Optional[components_countrycode.CountryCode],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -214,6 +211,18 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The city to retrieve analytics for."""
+
+    region: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ISO 3166-2 region code to retrieve analytics for."""
+
+    continent: Annotated[
+        Optional[components_continentcode.ContinentCode],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The continent to retrieve analytics for."""
 
     device: Annotated[
         Optional[str],

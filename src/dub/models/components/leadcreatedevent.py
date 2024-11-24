@@ -82,9 +82,10 @@ class LeadCreatedEventCustomer(BaseModel):
 class LeadCreatedEventClickTypedDict(TypedDict):
     id: str
     url: str
-    continent: str
     country: str
     city: str
+    region: str
+    continent: str
     device: str
     browser: str
     os: str
@@ -99,11 +100,13 @@ class LeadCreatedEventClick(BaseModel):
 
     url: str
 
-    continent: str
-
     country: str
 
     city: str
+
+    region: str
+
+    continent: str
 
     device: str
 
