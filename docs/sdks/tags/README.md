@@ -19,15 +19,14 @@ Create a new tag for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.tags.create()
 
-res = s.tags.create()
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -66,15 +65,14 @@ Retrieve a list of tags for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.tags.list()
 
-res = s.tags.list()
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -112,15 +110,14 @@ Update a tag in the workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.tags.update(id="<id>")
 
-res = s.tags.update(id="<id>")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -160,15 +157,14 @@ Delete a tag from the workspace. All existing links will still work, but they wi
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.tags.delete(id="<id>")
 
-res = s.tags.delete(id="<id>")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

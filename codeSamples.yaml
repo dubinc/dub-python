@@ -11,23 +11,22 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.analytics.retrieve(request={
+                    "timezone": "America/New_York",
+                    "city": "New York",
+                    "device": "Desktop",
+                    "browser": "Chrome",
+                    "os": "Windows",
+                    "referer": "google.com",
+                    "referer_url": "https://dub.co/blog",
+                })
 
-            res = s.analytics.retrieve(request={
-                "timezone": "America/New_York",
-                "city": "New York",
-                "device": "Desktop",
-                "browser": "Chrome",
-                "os": "Windows",
-                "referer": "google.com",
-                "referer_url": "https://dub.co/blog",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/customers"]["get"]
     update:
       x-codeSamples:
@@ -36,15 +35,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.customers.list()
 
-            res = s.customers.list()
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/customers"]["post"]
     update:
       x-codeSamples:
@@ -53,15 +51,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.customers.create()
 
-            res = s.customers.create()
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/customers/{id}"]["delete"]
     update:
       x-codeSamples:
@@ -70,15 +67,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.customers.delete(id="<id>")
 
-            res = s.customers.delete(id="<id>")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/customers/{id}"]["get"]
     update:
       x-codeSamples:
@@ -87,17 +83,16 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.customers.get(request={
+                    "id": "<id>",
+                })
 
-            res = s.customers.get(request={
-                "id": "<id>",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/customers/{id}"]["patch"]
     update:
       x-codeSamples:
@@ -106,15 +101,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.customers.update(id="<id>")
 
-            res = s.customers.update(id="<id>")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/domains"]["get"]
     update:
       x-codeSamples:
@@ -123,22 +117,21 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.domains.list(request={
+                    "page": 1,
+                    "page_size": 50,
+                })
 
-            res = s.domains.list(request={
-                "page": 1,
-                "page_size": 50,
-            })
+                if res is not None:
+                    while True:
+                        # handle items
 
-            if res is not None:
-                while True:
-                    # handle items
-
-                    res = res.next()
-                    if res is None:
-                        break
+                        res = res.next()
+                        if res is None:
+                            break
   - target: $["paths"]["/domains"]["post"]
     update:
       x-codeSamples:
@@ -147,21 +140,20 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.domains.create(request={
+                    "slug": "acme.com",
+                    "expired_url": "https://acme.com/expired",
+                    "not_found_url": "https://acme.com/not-found",
+                    "archived": False,
+                    "placeholder": "https://dub.co/help/article/what-is-dub",
+                })
 
-            res = s.domains.create(request={
-                "slug": "acme.com",
-                "expired_url": "https://acme.com/expired",
-                "not_found_url": "https://acme.com/not-found",
-                "archived": False,
-                "placeholder": "https://dub.co/help/article/what-is-dub",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/domains/{slug}"]["delete"]
     update:
       x-codeSamples:
@@ -170,15 +162,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.domains.delete(slug="acme.com")
 
-            res = s.domains.delete(slug="acme.com")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/domains/{slug}"]["patch"]
     update:
       x-codeSamples:
@@ -187,21 +178,20 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.domains.update(slug="acme.com", request_body={
+                    "slug": "acme.com",
+                    "expired_url": "https://acme.com/expired",
+                    "not_found_url": "https://acme.com/not-found",
+                    "archived": False,
+                    "placeholder": "https://dub.co/help/article/what-is-dub",
+                })
 
-            res = s.domains.update(slug="acme.com", request_body={
-                "slug": "acme.com",
-                "expired_url": "https://acme.com/expired",
-                "not_found_url": "https://acme.com/not-found",
-                "archived": False,
-                "placeholder": "https://dub.co/help/article/what-is-dub",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/events"]["get"]
     update:
       x-codeSamples:
@@ -210,23 +200,22 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.events.list(request={
+                    "timezone": "America/New_York",
+                    "city": "New York",
+                    "device": "Desktop",
+                    "browser": "Chrome",
+                    "os": "Windows",
+                    "referer": "google.com",
+                    "referer_url": "https://dub.co/blog",
+                })
 
-            res = s.events.list(request={
-                "timezone": "America/New_York",
-                "city": "New York",
-                "device": "Desktop",
-                "browser": "Chrome",
-                "os": "Windows",
-                "referer": "google.com",
-                "referer_url": "https://dub.co/blog",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links"]["get"]
     update:
       x-codeSamples:
@@ -235,22 +224,21 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.list(request={
+                    "page": 1,
+                    "page_size": 50,
+                })
 
-            res = s.links.list(request={
-                "page": 1,
-                "page_size": 50,
-            })
+                if res is not None:
+                    while True:
+                        # handle items
 
-            if res is not None:
-                while True:
-                    # handle items
-
-                    res = res.next()
-                    if res is None:
-                        break
+                        res = res.next()
+                        if res is None:
+                            break
   - target: $["paths"]["/links"]["post"]
     update:
       x-codeSamples:
@@ -259,21 +247,20 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.create(request={
+                    "url": "https://google.com",
+                    "external_id": "123456",
+                    "tag_ids": [
+                        "clux0rgak00011...",
+                    ],
+                })
 
-            res = s.links.create(request={
-                "url": "https://google.com",
-                "external_id": "123456",
-                "tag_ids": [
-                    "clux0rgak00011...",
-                ],
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/bulk"]["delete"]
     update:
       x-codeSamples:
@@ -282,20 +269,19 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.delete_many(request={
+                    "link_ids": [
+                        "clux0rgak00011...",
+                        "clux0rgak00022...",
+                    ],
+                })
 
-            res = s.links.delete_many(request={
-                "link_ids": [
-                    "clux0rgak00011...",
-                    "clux0rgak00022...",
-                ],
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/bulk"]["patch"]
     update:
       x-codeSamples:
@@ -304,22 +290,21 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.update_many(request={
+                    "data": {
+                        "url": "https://google.com",
+                        "tag_ids": [
+                            "clux0rgak00011...",
+                        ],
+                    },
+                })
 
-            res = s.links.update_many(request={
-                "data": {
-                    "url": "https://google.com",
-                    "tag_ids": [
-                        "clux0rgak00011...",
-                    ],
-                },
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/bulk"]["post"]
     update:
       x-codeSamples:
@@ -328,30 +313,29 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.create_many(request=[
+                    {
+                        "url": "https://google.com",
+                        "external_id": "123456",
+                        "tag_ids": [
+                            "clux0rgak00011...",
+                        ],
+                    },
+                    {
+                        "url": "https://google.com",
+                        "external_id": "123456",
+                        "tag_ids": [
+                            "clux0rgak00011...",
+                        ],
+                    },
+                ])
 
-            res = s.links.create_many(request=[
-                {
-                    "url": "https://google.com",
-                    "external_id": "123456",
-                    "tag_ids": [
-                        "clux0rgak00011...",
-                    ],
-                },
-                {
-                    "url": "https://google.com",
-                    "external_id": "123456",
-                    "tag_ids": [
-                        "clux0rgak00011...",
-                    ],
-                },
-            ])
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/count"]["get"]
     update:
       x-codeSamples:
@@ -360,15 +344,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.count(request={})
 
-            res = s.links.count(request={})
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/info"]["get"]
     update:
       x-codeSamples:
@@ -377,18 +360,17 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.get(request={
+                    "link_id": "clux0rgak00011...",
+                    "external_id": "123456",
+                })
 
-            res = s.links.get(request={
-                "link_id": "clux0rgak00011...",
-                "external_id": "123456",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/upsert"]["put"]
     update:
       x-codeSamples:
@@ -397,21 +379,20 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.upsert(request={
+                    "url": "https://google.com",
+                    "external_id": "123456",
+                    "tag_ids": [
+                        "clux0rgak00011...",
+                    ],
+                })
 
-            res = s.links.upsert(request={
-                "url": "https://google.com",
-                "external_id": "123456",
-                "tag_ids": [
-                    "clux0rgak00011...",
-                ],
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/{linkId}"]["delete"]
     update:
       x-codeSamples:
@@ -420,15 +401,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.delete(link_id="<id>")
 
-            res = s.links.delete(link_id="<id>")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/links/{linkId}"]["patch"]
     update:
       x-codeSamples:
@@ -437,21 +417,20 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.links.update(link_id="<id>", request_body={
+                    "url": "https://google.com",
+                    "external_id": "123456",
+                    "tag_ids": [
+                        "clux0rgak00011...",
+                    ],
+                })
 
-            res = s.links.update(link_id="<id>", request_body={
-                "url": "https://google.com",
-                "external_id": "123456",
-                "tag_ids": [
-                    "clux0rgak00011...",
-                ],
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/metatags"]["get"]
     update:
       x-codeSamples:
@@ -460,17 +439,16 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.metatags.get(request={
+                    "url": "https://dub.co",
+                })
 
-            res = s.metatags.get(request={
-                "url": "https://dub.co",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/qr"]["get"]
     update:
       x-codeSamples:
@@ -479,17 +457,16 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.qr_codes.get(request={
+                    "url": "https://normal-making.name",
+                })
 
-            res = s.qr_codes.get(request={
-                "url": "https://normal-making.name",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/tags"]["get"]
     update:
       x-codeSamples:
@@ -498,15 +475,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.tags.list()
 
-            res = s.tags.list()
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/tags"]["post"]
     update:
       x-codeSamples:
@@ -515,15 +491,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.tags.create()
 
-            res = s.tags.create()
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/tags/{id}"]["delete"]
     update:
       x-codeSamples:
@@ -532,15 +507,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.tags.delete(id="<id>")
 
-            res = s.tags.delete(id="<id>")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/tags/{id}"]["patch"]
     update:
       x-codeSamples:
@@ -549,15 +523,14 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.tags.update(id="<id>")
 
-            res = s.tags.update(id="<id>")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/track/lead"]["post"]
     update:
       x-codeSamples:
@@ -566,18 +539,17 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.track.lead(request={
+                    "click_id": "<id>",
+                    "event_name": "Sign up",
+                })
 
-            res = s.track.lead(request={
-                "click_id": "<id>",
-                "event_name": "Sign up",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/track/sale"]["post"]
     update:
       x-codeSamples:
@@ -587,19 +559,18 @@ actions:
             from dub import Dub
             from dub.models import operations
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.track.sale(request={
+                    "amount": 996500,
+                    "payment_processor": operations.PaymentProcessor.PADDLE,
+                    "event_name": "Purchase",
+                })
 
-            res = s.track.sale(request={
-                "amount": 996500,
-                "payment_processor": operations.PaymentProcessor.PADDLE,
-                "event_name": "Purchase",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/workspaces/{idOrSlug}"]["get"]
     update:
       x-codeSamples:
@@ -608,17 +579,16 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.workspaces.get(request={
+                    "id_or_slug": "<value>",
+                })
 
-            res = s.workspaces.get(request={
-                "id_or_slug": "<value>",
-            })
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/workspaces/{idOrSlug}"]["patch"]
     update:
       x-codeSamples:
@@ -627,12 +597,11 @@ actions:
           source: |-
             from dub import Dub
 
-            s = Dub(
+            with Dub(
                 token="DUB_API_KEY",
-            )
+            ) as s:
+                res = s.workspaces.update(id_or_slug="<value>")
 
-            res = s.workspaces.update(id_or_slug="<value>")
-
-            if res is not None:
-                # handle response
-                pass
+                if res is not None:
+                    # handle response
+                    pass

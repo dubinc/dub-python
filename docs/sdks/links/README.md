@@ -25,21 +25,20 @@ Create a new link for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -78,22 +77,21 @@ Retrieve a paginated list of links for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.list(request={
+        "page": 1,
+        "page_size": 50,
+    })
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
-})
+    if res is not None:
+        while True:
+            # handle items
 
-if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+            res = res.next()
+            if res is None:
+                break
 
 ```
 
@@ -132,15 +130,14 @@ Retrieve the number of links for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.count(request={})
 
-res = s.links.count(request={})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -179,18 +176,17 @@ Retrieve the info for a link.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.get(request={
+        "link_id": "clux0rgak00011...",
+        "external_id": "123456",
+    })
 
-res = s.links.get(request={
-    "link_id": "clux0rgak00011...",
-    "external_id": "123456",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -229,21 +225,20 @@ Update a link for the authenticated workspace. If there's no change, returns it 
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.update(link_id="<value>", request_body={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.update(link_id="<value>", request_body={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -283,15 +278,14 @@ Delete a link for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.delete(link_id="<value>")
 
-res = s.links.delete(link_id="<value>")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -330,23 +324,22 @@ Bulk create up to 100 links for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create_many(request=[
+        {
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        },
+    ])
 
-res = s.links.create_many(request=[
-    {
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
-    },
-])
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -385,25 +378,24 @@ Bulk update up to 100 links with the same data for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
-
-res = s.links.update_many(request={
-    "data": {
-        "url": "https://google.com",
-        "tag_ids": [
-            "clux0rgak00011...",
+) as s:
+    res = s.links.update_many(request={
+        "data": {
+            "url": "https://google.com",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        },
+        "link_ids": [
+            "<value>",
         ],
-    },
-    "link_ids": [
-        "<value>",
-    ],
-})
+    })
 
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -442,20 +434,19 @@ Bulk delete up to 100 links for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.delete_many(request={
+        "link_ids": [
+            "clux0rgak00011...",
+            "clux0rgak00022...",
+        ],
+    })
 
-res = s.links.delete_many(request={
-    "link_ids": [
-        "clux0rgak00011...",
-        "clux0rgak00022...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -494,21 +485,20 @@ Upsert a link for the authenticated workspace by its URL. If a link with the sam
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.upsert(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.upsert(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

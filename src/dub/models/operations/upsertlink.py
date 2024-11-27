@@ -6,22 +6,26 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-UpsertLinkTagIdsTypedDict = Union[str, List[str]]
+UpsertLinkTagIdsTypedDict = TypeAliasType(
+    "UpsertLinkTagIdsTypedDict", Union[str, List[str]]
+)
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-UpsertLinkTagIds = Union[str, List[str]]
+UpsertLinkTagIds = TypeAliasType("UpsertLinkTagIds", Union[str, List[str]])
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-UpsertLinkTagNamesTypedDict = Union[str, List[str]]
+UpsertLinkTagNamesTypedDict = TypeAliasType(
+    "UpsertLinkTagNamesTypedDict", Union[str, List[str]]
+)
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-UpsertLinkTagNames = Union[str, List[str]]
+UpsertLinkTagNames = TypeAliasType("UpsertLinkTagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 

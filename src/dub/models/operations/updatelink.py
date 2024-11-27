@@ -7,22 +7,26 @@ from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-UpdateLinkTagIdsTypedDict = Union[str, List[str]]
+UpdateLinkTagIdsTypedDict = TypeAliasType(
+    "UpdateLinkTagIdsTypedDict", Union[str, List[str]]
+)
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-UpdateLinkTagIds = Union[str, List[str]]
+UpdateLinkTagIds = TypeAliasType("UpdateLinkTagIds", Union[str, List[str]])
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-UpdateLinkTagNamesTypedDict = Union[str, List[str]]
+UpdateLinkTagNamesTypedDict = TypeAliasType(
+    "UpdateLinkTagNamesTypedDict", Union[str, List[str]]
+)
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-UpdateLinkTagNames = Union[str, List[str]]
+UpdateLinkTagNames = TypeAliasType("UpdateLinkTagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 

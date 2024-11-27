@@ -18,19 +18,18 @@ Track a lead for a short link.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.track.lead(request={
+        "click_id": "<value>",
+        "event_name": "Sign up",
+        "customer_id": "<value>",
+    })
 
-res = s.track.lead(request={
-    "click_id": "<value>",
-    "event_name": "Sign up",
-    "customer_id": "<value>",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -70,20 +69,19 @@ Track a sale for a short link.
 from dub import Dub
 from dub.models import operations
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.track.sale(request={
+        "amount": 996500,
+        "payment_processor": operations.PaymentProcessor.SHOPIFY,
+        "customer_id": "<value>",
+        "event_name": "Purchase",
+    })
 
-res = s.track.sale(request={
-    "amount": 996500,
-    "payment_processor": operations.PaymentProcessor.SHOPIFY,
-    "customer_id": "<value>",
-    "event_name": "Purchase",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -124,15 +122,14 @@ Track a customer for an authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.track.customer()
 
-res = s.track.customer()
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

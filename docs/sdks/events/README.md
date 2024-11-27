@@ -16,23 +16,22 @@ Retrieve a paginated list of events for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.events.list(request={
+        "timezone": "America/New_York",
+        "city": "New York",
+        "device": "Desktop",
+        "browser": "Chrome",
+        "os": "Windows",
+        "referer": "google.com",
+        "referer_url": "https://dub.co/blog",
+    })
 
-res = s.events.list(request={
-    "timezone": "America/New_York",
-    "city": "New York",
-    "device": "Desktop",
-    "browser": "Chrome",
-    "os": "Windows",
-    "referer": "google.com",
-    "referer_url": "https://dub.co/blog",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

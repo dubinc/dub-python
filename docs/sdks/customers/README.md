@@ -20,15 +20,14 @@ Retrieve a list of customers for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.customers.list()
 
-res = s.customers.list()
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -66,15 +65,14 @@ Create a customer for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.customers.create()
 
-res = s.customers.create()
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -113,17 +111,16 @@ Retrieve a customer by ID for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.customers.get(request={
+        "id": "<id>",
+    })
 
-res = s.customers.get(request={
-    "id": "<id>",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -162,15 +159,14 @@ Update a customer for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.customers.update(id="<id>")
 
-res = s.customers.update(id="<id>")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -210,15 +206,14 @@ Delete a customer from a workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.customers.delete(id="<id>")
 
-res = s.customers.delete(id="<id>")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

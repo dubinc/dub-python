@@ -19,21 +19,20 @@ Create a domain for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.domains.create(request={
+        "slug": "acme.com",
+        "expired_url": "https://acme.com/expired",
+        "not_found_url": "https://acme.com/not-found",
+        "archived": False,
+        "placeholder": "https://dub.co/help/article/what-is-dub",
+    })
 
-res = s.domains.create(request={
-    "slug": "acme.com",
-    "expired_url": "https://acme.com/expired",
-    "not_found_url": "https://acme.com/not-found",
-    "archived": False,
-    "placeholder": "https://dub.co/help/article/what-is-dub",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -72,22 +71,21 @@ Retrieve a list of domains associated with the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.domains.list(request={
+        "page": 1,
+        "page_size": 50,
+    })
 
-res = s.domains.list(request={
-    "page": 1,
-    "page_size": 50,
-})
+    if res is not None:
+        while True:
+            # handle items
 
-if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+            res = res.next()
+            if res is None:
+                break
 
 ```
 
@@ -126,21 +124,20 @@ Update a domain for the authenticated workspace.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.domains.update(slug="acme.com", request_body={
+        "slug": "acme.com",
+        "expired_url": "https://acme.com/expired",
+        "not_found_url": "https://acme.com/not-found",
+        "archived": False,
+        "placeholder": "https://dub.co/help/article/what-is-dub",
+    })
 
-res = s.domains.update(slug="acme.com", request_body={
-    "slug": "acme.com",
-    "expired_url": "https://acme.com/expired",
-    "not_found_url": "https://acme.com/not-found",
-    "archived": False,
-    "placeholder": "https://dub.co/help/article/what-is-dub",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -180,15 +177,14 @@ Delete a domain from a workspace. It cannot be undone. This will also delete all
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.domains.delete(slug="acme.com")
 
-res = s.domains.delete(slug="acme.com")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

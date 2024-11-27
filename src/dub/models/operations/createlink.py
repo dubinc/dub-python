@@ -6,22 +6,22 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-TagIdsTypedDict = Union[str, List[str]]
+TagIdsTypedDict = TypeAliasType("TagIdsTypedDict", Union[str, List[str]])
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-TagIds = Union[str, List[str]]
+TagIds = TypeAliasType("TagIds", Union[str, List[str]])
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-TagNamesTypedDict = Union[str, List[str]]
+TagNamesTypedDict = TypeAliasType("TagNamesTypedDict", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-TagNames = Union[str, List[str]]
+TagNames = TypeAliasType("TagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 

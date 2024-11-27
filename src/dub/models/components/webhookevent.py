@@ -6,18 +6,23 @@ from .linkclickedevent import LinkClickedEvent, LinkClickedEventTypedDict
 from .linkwebhookevent import LinkWebhookEvent, LinkWebhookEventTypedDict
 from .salecreatedevent import SaleCreatedEvent, SaleCreatedEventTypedDict
 from typing import Union
+from typing_extensions import TypeAliasType
 
 
-WebhookEventTypedDict = Union[
-    LinkWebhookEventTypedDict,
-    LinkClickedEventTypedDict,
-    LeadCreatedEventTypedDict,
-    SaleCreatedEventTypedDict,
-]
+WebhookEventTypedDict = TypeAliasType(
+    "WebhookEventTypedDict",
+    Union[
+        LinkWebhookEventTypedDict,
+        LinkClickedEventTypedDict,
+        LeadCreatedEventTypedDict,
+        SaleCreatedEventTypedDict,
+    ],
+)
 r"""Webhook event schema"""
 
 
-WebhookEvent = Union[
-    LinkWebhookEvent, LinkClickedEvent, LeadCreatedEvent, SaleCreatedEvent
-]
+WebhookEvent = TypeAliasType(
+    "WebhookEvent",
+    Union[LinkWebhookEvent, LinkClickedEvent, LeadCreatedEvent, SaleCreatedEvent],
+)
 r"""Webhook event schema"""

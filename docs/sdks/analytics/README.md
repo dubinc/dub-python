@@ -16,23 +16,22 @@ Retrieve analytics for a link, a domain, or the authenticated workspace. The res
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.analytics.retrieve(request={
+        "timezone": "America/New_York",
+        "city": "New York",
+        "device": "Desktop",
+        "browser": "Chrome",
+        "os": "Windows",
+        "referer": "google.com",
+        "referer_url": "https://dub.co/blog",
+    })
 
-res = s.analytics.retrieve(request={
-    "timezone": "America/New_York",
-    "city": "New York",
-    "device": "Desktop",
-    "browser": "Chrome",
-    "os": "Windows",
-    "referer": "google.com",
-    "referer_url": "https://dub.co/blog",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
