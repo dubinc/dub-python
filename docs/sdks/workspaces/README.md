@@ -17,17 +17,16 @@ Retrieve a workspace for the authenticated user.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.workspaces.get(request={
+        "id_or_slug": "<value>",
+    })
 
-res = s.workspaces.get(request={
-    "id_or_slug": "<value>",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -66,15 +65,14 @@ Update a workspace by ID or slug.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.workspaces.update(id_or_slug="<value>")
 
-res = s.workspaces.update(id_or_slug="<value>")
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 

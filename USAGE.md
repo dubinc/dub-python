@@ -3,21 +3,20 @@
 # Synchronous Example
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 ```
 
 </br>
@@ -29,19 +28,20 @@ import asyncio
 from dub import Dub
 
 async def main():
-    s = Dub(
+    async with Dub(
         token="DUB_API_KEY",
-    )
-    res = await s.links.create_async(request={
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
-    })
-    if res is not None:
-        # handle response
-        pass
+    ) as s:
+        res = await s.links.create_async(request={
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        })
+
+        if res is not None:
+            # handle response
+            pass
 
 asyncio.run(main())
 ```
@@ -50,21 +50,20 @@ asyncio.run(main())
 # Synchronous Example
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.upsert(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.upsert(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 ```
 
 </br>
@@ -76,19 +75,20 @@ import asyncio
 from dub import Dub
 
 async def main():
-    s = Dub(
+    async with Dub(
         token="DUB_API_KEY",
-    )
-    res = await s.links.upsert_async(request={
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
-    })
-    if res is not None:
-        # handle response
-        pass
+    ) as s:
+        res = await s.links.upsert_async(request={
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        })
+
+        if res is not None:
+            # handle response
+            pass
 
 asyncio.run(main())
 ```

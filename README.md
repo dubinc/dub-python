@@ -64,21 +64,20 @@ poetry add dub
 # Synchronous Example
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 ```
 
 </br>
@@ -90,19 +89,20 @@ import asyncio
 from dub import Dub
 
 async def main():
-    s = Dub(
+    async with Dub(
         token="DUB_API_KEY",
-    )
-    res = await s.links.create_async(request={
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
-    })
-    if res is not None:
-        # handle response
-        pass
+    ) as s:
+        res = await s.links.create_async(request={
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        })
+
+        if res is not None:
+            # handle response
+            pass
 
 asyncio.run(main())
 ```
@@ -113,21 +113,20 @@ asyncio.run(main())
 # Synchronous Example
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.upsert(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.upsert(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 ```
 
 </br>
@@ -139,19 +138,20 @@ import asyncio
 from dub import Dub
 
 async def main():
-    s = Dub(
+    async with Dub(
         token="DUB_API_KEY",
-    )
-    res = await s.links.upsert_async(request={
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
-    })
-    if res is not None:
-        # handle response
-        pass
+    ) as s:
+        res = await s.links.upsert_async(request={
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        })
+
+        if res is not None:
+            # handle response
+            pass
 
 asyncio.run(main())
 ```
@@ -264,54 +264,53 @@ When custom error responses are specified for an operation, the SDK may also rai
 from dub import Dub
 from dub.models import errors
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = None
+    try:
+        res = s.links.create(request={
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        })
 
-res = None
-try:
-    res = s.links.create(request={
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
-    })
+        if res is not None:
+            # handle response
+            pass
 
-    if res is not None:
-        # handle response
-        pass
-
-except errors.BadRequest as e:
-    # handle e.data: errors.BadRequestData
-    raise(e)
-except errors.Unauthorized as e:
-    # handle e.data: errors.UnauthorizedData
-    raise(e)
-except errors.Forbidden as e:
-    # handle e.data: errors.ForbiddenData
-    raise(e)
-except errors.NotFound as e:
-    # handle e.data: errors.NotFoundData
-    raise(e)
-except errors.Conflict as e:
-    # handle e.data: errors.ConflictData
-    raise(e)
-except errors.InviteExpired as e:
-    # handle e.data: errors.InviteExpiredData
-    raise(e)
-except errors.UnprocessableEntity as e:
-    # handle e.data: errors.UnprocessableEntityData
-    raise(e)
-except errors.RateLimitExceeded as e:
-    # handle e.data: errors.RateLimitExceededData
-    raise(e)
-except errors.InternalServerError as e:
-    # handle e.data: errors.InternalServerErrorData
-    raise(e)
-except errors.SDKError as e:
-    # handle exception
-    raise(e)
+    except errors.BadRequest as e:
+        # handle e.data: errors.BadRequestData
+        raise(e)
+    except errors.Unauthorized as e:
+        # handle e.data: errors.UnauthorizedData
+        raise(e)
+    except errors.Forbidden as e:
+        # handle e.data: errors.ForbiddenData
+        raise(e)
+    except errors.NotFound as e:
+        # handle e.data: errors.NotFoundData
+        raise(e)
+    except errors.Conflict as e:
+        # handle e.data: errors.ConflictData
+        raise(e)
+    except errors.InviteExpired as e:
+        # handle e.data: errors.InviteExpiredData
+        raise(e)
+    except errors.UnprocessableEntity as e:
+        # handle e.data: errors.UnprocessableEntityData
+        raise(e)
+    except errors.RateLimitExceeded as e:
+        # handle e.data: errors.RateLimitExceededData
+        raise(e)
+    except errors.InternalServerError as e:
+        # handle e.data: errors.InternalServerErrorData
+        raise(e)
+    except errors.SDKError as e:
+        # handle exception
+        raise(e)
 ```
 <!-- End Error Handling [errors] -->
 
@@ -324,22 +323,21 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     server_url="https://api.dub.co",
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 <!-- End Server Selection [server] -->
@@ -440,21 +438,20 @@ To authenticate with the API the `token` parameter must be set when initializing
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 <!-- End Authentication [security] -->
@@ -469,22 +466,21 @@ To change the default retry strategy for a single API call, simply provide a `Re
 from dub import Dub
 from dub.utils import BackoffStrategy, RetryConfig
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    },
+        RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-},
-    RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
@@ -493,22 +489,21 @@ If you'd like to override the default retry strategy for all operations that sup
 from dub import Dub
 from dub.utils import BackoffStrategy, RetryConfig
 
-s = Dub(
+with Dub(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.create(request={
+        "url": "https://google.com",
+        "external_id": "123456",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
+    })
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 <!-- End Retries [retries] -->
@@ -524,22 +519,21 @@ Here's an example of one such pagination call:
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.links.list(request={
+        "page": 1,
+        "page_size": 50,
+    })
 
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
-})
+    if res is not None:
+        while True:
+            # handle items
 
-if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
+            res = res.next()
+            if res is None:
+                break
 
 ```
 <!-- End Pagination [pagination] -->

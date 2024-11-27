@@ -23,7 +23,7 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class Event(str, Enum):
@@ -75,11 +75,15 @@ class Trigger(str, Enum):
     LINK = "link"
 
 
-RetrieveAnalyticsQueryParamTagIdsTypedDict = Union[str, List[str]]
+RetrieveAnalyticsQueryParamTagIdsTypedDict = TypeAliasType(
+    "RetrieveAnalyticsQueryParamTagIdsTypedDict", Union[str, List[str]]
+)
 r"""The tag IDs to retrieve analytics for."""
 
 
-RetrieveAnalyticsQueryParamTagIds = Union[str, List[str]]
+RetrieveAnalyticsQueryParamTagIds = TypeAliasType(
+    "RetrieveAnalyticsQueryParamTagIds", Union[str, List[str]]
+)
 r"""The tag IDs to retrieve analytics for."""
 
 
@@ -294,37 +298,43 @@ class RetrieveAnalyticsRequest(BaseModel):
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
 
 
-RetrieveAnalyticsResponseBodyTypedDict = Union[
-    components_analyticscount.AnalyticsCountTypedDict,
-    List[components_analyticstimeseries.AnalyticsTimeseriesTypedDict],
-    List[components_analyticscontinents.AnalyticsContinentsTypedDict],
-    List[components_analyticscountries.AnalyticsCountriesTypedDict],
-    List[components_analyticscities.AnalyticsCitiesTypedDict],
-    List[components_analyticsdevices.AnalyticsDevicesTypedDict],
-    List[components_analyticsbrowsers.AnalyticsBrowsersTypedDict],
-    List[components_analyticsos.AnalyticsOSTypedDict],
-    List[components_analyticstriggers.AnalyticsTriggersTypedDict],
-    List[components_analyticsreferers.AnalyticsReferersTypedDict],
-    List[components_analyticsrefererurls.AnalyticsRefererUrlsTypedDict],
-    List[components_analyticstoplinks.AnalyticsTopLinksTypedDict],
-    List[components_analyticstopurls.AnalyticsTopUrlsTypedDict],
-]
+RetrieveAnalyticsResponseBodyTypedDict = TypeAliasType(
+    "RetrieveAnalyticsResponseBodyTypedDict",
+    Union[
+        components_analyticscount.AnalyticsCountTypedDict,
+        List[components_analyticstimeseries.AnalyticsTimeseriesTypedDict],
+        List[components_analyticscontinents.AnalyticsContinentsTypedDict],
+        List[components_analyticscountries.AnalyticsCountriesTypedDict],
+        List[components_analyticscities.AnalyticsCitiesTypedDict],
+        List[components_analyticsdevices.AnalyticsDevicesTypedDict],
+        List[components_analyticsbrowsers.AnalyticsBrowsersTypedDict],
+        List[components_analyticsos.AnalyticsOSTypedDict],
+        List[components_analyticstriggers.AnalyticsTriggersTypedDict],
+        List[components_analyticsreferers.AnalyticsReferersTypedDict],
+        List[components_analyticsrefererurls.AnalyticsRefererUrlsTypedDict],
+        List[components_analyticstoplinks.AnalyticsTopLinksTypedDict],
+        List[components_analyticstopurls.AnalyticsTopUrlsTypedDict],
+    ],
+)
 r"""Analytics data"""
 
 
-RetrieveAnalyticsResponseBody = Union[
-    components_analyticscount.AnalyticsCount,
-    List[components_analyticstimeseries.AnalyticsTimeseries],
-    List[components_analyticscontinents.AnalyticsContinents],
-    List[components_analyticscountries.AnalyticsCountries],
-    List[components_analyticscities.AnalyticsCities],
-    List[components_analyticsdevices.AnalyticsDevices],
-    List[components_analyticsbrowsers.AnalyticsBrowsers],
-    List[components_analyticsos.AnalyticsOS],
-    List[components_analyticstriggers.AnalyticsTriggers],
-    List[components_analyticsreferers.AnalyticsReferers],
-    List[components_analyticsrefererurls.AnalyticsRefererUrls],
-    List[components_analyticstoplinks.AnalyticsTopLinks],
-    List[components_analyticstopurls.AnalyticsTopUrls],
-]
+RetrieveAnalyticsResponseBody = TypeAliasType(
+    "RetrieveAnalyticsResponseBody",
+    Union[
+        components_analyticscount.AnalyticsCount,
+        List[components_analyticstimeseries.AnalyticsTimeseries],
+        List[components_analyticscontinents.AnalyticsContinents],
+        List[components_analyticscountries.AnalyticsCountries],
+        List[components_analyticscities.AnalyticsCities],
+        List[components_analyticsdevices.AnalyticsDevices],
+        List[components_analyticsbrowsers.AnalyticsBrowsers],
+        List[components_analyticsos.AnalyticsOS],
+        List[components_analyticstriggers.AnalyticsTriggers],
+        List[components_analyticsreferers.AnalyticsReferers],
+        List[components_analyticsrefererurls.AnalyticsRefererUrls],
+        List[components_analyticstoplinks.AnalyticsTopLinks],
+        List[components_analyticstopurls.AnalyticsTopUrls],
+    ],
+)
 r"""Analytics data"""

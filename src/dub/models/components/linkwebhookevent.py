@@ -7,7 +7,7 @@ from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class Three(str, Enum):
@@ -22,10 +22,12 @@ class One(str, Enum):
     LINK_CREATED = "link.created"
 
 
-LinkWebhookEventEventTypedDict = Union[One, Two, Three]
+LinkWebhookEventEventTypedDict = TypeAliasType(
+    "LinkWebhookEventEventTypedDict", Union[One, Two, Three]
+)
 
 
-LinkWebhookEventEvent = Union[One, Two, Three]
+LinkWebhookEventEvent = TypeAliasType("LinkWebhookEventEvent", Union[One, Two, Three])
 
 
 class LinkWebhookEventGeoTypedDict(TypedDict):

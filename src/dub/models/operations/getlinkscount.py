@@ -6,22 +6,30 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-GetLinksCountQueryParamTagIdsTypedDict = Union[str, List[str]]
+GetLinksCountQueryParamTagIdsTypedDict = TypeAliasType(
+    "GetLinksCountQueryParamTagIdsTypedDict", Union[str, List[str]]
+)
 r"""The tag IDs to filter the links by."""
 
 
-GetLinksCountQueryParamTagIds = Union[str, List[str]]
+GetLinksCountQueryParamTagIds = TypeAliasType(
+    "GetLinksCountQueryParamTagIds", Union[str, List[str]]
+)
 r"""The tag IDs to filter the links by."""
 
 
-GetLinksCountQueryParamTagNamesTypedDict = Union[str, List[str]]
+GetLinksCountQueryParamTagNamesTypedDict = TypeAliasType(
+    "GetLinksCountQueryParamTagNamesTypedDict", Union[str, List[str]]
+)
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-GetLinksCountQueryParamTagNames = Union[str, List[str]]
+GetLinksCountQueryParamTagNames = TypeAliasType(
+    "GetLinksCountQueryParamTagNames", Union[str, List[str]]
+)
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
@@ -37,11 +45,11 @@ class One(str, Enum):
     DOMAIN = "domain"
 
 
-GroupByTypedDict = Union[One, Two, Three]
+GroupByTypedDict = TypeAliasType("GroupByTypedDict", Union[One, Two, Three])
 r"""The field to group the links by."""
 
 
-GroupBy = Union[One, Two, Three]
+GroupBy = TypeAliasType("GroupBy", Union[One, Two, Three])
 r"""The field to group the links by."""
 
 

@@ -13,7 +13,7 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class QueryParamEvent(str, Enum):
@@ -43,11 +43,15 @@ class QueryParamTrigger(str, Enum):
     LINK = "link"
 
 
-ListEventsQueryParamTagIdsTypedDict = Union[str, List[str]]
+ListEventsQueryParamTagIdsTypedDict = TypeAliasType(
+    "ListEventsQueryParamTagIdsTypedDict", Union[str, List[str]]
+)
 r"""The tag IDs to retrieve analytics for."""
 
 
-ListEventsQueryParamTagIds = Union[str, List[str]]
+ListEventsQueryParamTagIds = TypeAliasType(
+    "ListEventsQueryParamTagIds", Union[str, List[str]]
+)
 r"""The tag IDs to retrieve analytics for."""
 
 
@@ -287,17 +291,23 @@ class ListEventsRequest(BaseModel):
     ] = SortBy.TIMESTAMP
 
 
-ListEventsResponseBodyTypedDict = Union[
-    List[components_clickevent.ClickEventTypedDict],
-    List[components_leadevent.LeadEventTypedDict],
-    List[components_saleevent.SaleEventTypedDict],
-]
+ListEventsResponseBodyTypedDict = TypeAliasType(
+    "ListEventsResponseBodyTypedDict",
+    Union[
+        List[components_clickevent.ClickEventTypedDict],
+        List[components_leadevent.LeadEventTypedDict],
+        List[components_saleevent.SaleEventTypedDict],
+    ],
+)
 r"""A list of events"""
 
 
-ListEventsResponseBody = Union[
-    List[components_clickevent.ClickEvent],
-    List[components_leadevent.LeadEvent],
-    List[components_saleevent.SaleEvent],
-]
+ListEventsResponseBody = TypeAliasType(
+    "ListEventsResponseBody",
+    Union[
+        List[components_clickevent.ClickEvent],
+        List[components_leadevent.LeadEvent],
+        List[components_saleevent.SaleEvent],
+    ],
+)
 r"""A list of events"""

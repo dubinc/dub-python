@@ -7,22 +7,26 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from typing import Callable, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-QueryParamTagIdsTypedDict = Union[str, List[str]]
+QueryParamTagIdsTypedDict = TypeAliasType(
+    "QueryParamTagIdsTypedDict", Union[str, List[str]]
+)
 r"""The tag IDs to filter the links by."""
 
 
-QueryParamTagIds = Union[str, List[str]]
+QueryParamTagIds = TypeAliasType("QueryParamTagIds", Union[str, List[str]])
 r"""The tag IDs to filter the links by."""
 
 
-QueryParamTagNamesTypedDict = Union[str, List[str]]
+QueryParamTagNamesTypedDict = TypeAliasType(
+    "QueryParamTagNamesTypedDict", Union[str, List[str]]
+)
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-QueryParamTagNames = Union[str, List[str]]
+QueryParamTagNames = TypeAliasType("QueryParamTagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 

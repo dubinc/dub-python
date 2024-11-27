@@ -16,17 +16,16 @@ Retrieve the metatags for a URL.
 ```python
 from dub import Dub
 
-s = Dub(
+with Dub(
     token="DUB_API_KEY",
-)
+) as s:
+    res = s.metatags.get(request={
+        "url": "https://dub.co",
+    })
 
-res = s.metatags.get(request={
-    "url": "https://dub.co",
-})
-
-if res is not None:
-    # handle response
-    pass
+    if res is not None:
+        # handle response
+        pass
 
 ```
 
