@@ -19,18 +19,21 @@ Dub.co API: Dub is link management infrastructure for companies to create market
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Retries](#retries)
+  * [Pagination](#pagination)
+  * [Debugging](#debugging)
+  * [IDE Support](#ide-support)
+* [Development](#development)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [IDE Support](#ide-support)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Pagination](#pagination)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -182,6 +185,10 @@ asyncio.run(main())
 * [update](docs/sdks/domains/README.md#update) - Update a domain
 * [delete](docs/sdks/domains/README.md#delete) - Delete a domain
 
+
+### [embed_tokens](docs/sdks/embedtokens/README.md)
+
+* [create](docs/sdks/embedtokens/README.md#create) - Create a new embed token
 
 ### [events](docs/sdks/events/README.md)
 

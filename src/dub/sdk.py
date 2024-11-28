@@ -10,6 +10,7 @@ from dub._hooks import SDKHooks
 from dub.analytics import Analytics
 from dub.customers import Customers
 from dub.domains import Domains
+from dub.embed_tokens import EmbedTokens
 from dub.events import Events
 from dub.links import Links
 from dub.metatags import Metatags
@@ -34,6 +35,7 @@ class Dub(BaseSDK):
     track: Track
     customers: Customers
     workspaces: Workspaces
+    embed_tokens: EmbedTokens
     qr_codes: QRCodes
     metatags: Metatags
 
@@ -124,6 +126,7 @@ class Dub(BaseSDK):
         self.track = Track(self.sdk_configuration)
         self.customers = Customers(self.sdk_configuration)
         self.workspaces = Workspaces(self.sdk_configuration)
+        self.embed_tokens = EmbedTokens(self.sdk_configuration)
         self.qr_codes = QRCodes(self.sdk_configuration)
         self.metatags = Metatags(self.sdk_configuration)
 

@@ -31,6 +31,12 @@ from .createcustomer import (
     CreateCustomerResponseBodyTypedDict,
 )
 from .createdomain import CreateDomainRequestBody, CreateDomainRequestBodyTypedDict
+from .createembedtoken import (
+    CreateEmbedTokenRequestBody,
+    CreateEmbedTokenRequestBodyTypedDict,
+    CreateEmbedTokenResponseBody,
+    CreateEmbedTokenResponseBodyTypedDict,
+)
 from .createlink import (
     CreateLinkRequestBody,
     CreateLinkRequestBodyTypedDict,
@@ -232,6 +238,10 @@ __all__ = [
     "CreateCustomerResponseBodyTypedDict",
     "CreateDomainRequestBody",
     "CreateDomainRequestBodyTypedDict",
+    "CreateEmbedTokenRequestBody",
+    "CreateEmbedTokenRequestBodyTypedDict",
+    "CreateEmbedTokenResponseBody",
+    "CreateEmbedTokenResponseBodyTypedDict",
     "CreateLinkRequestBody",
     "CreateLinkRequestBodyTypedDict",
     "CreateTagRequestBody",
