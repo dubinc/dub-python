@@ -531,6 +531,22 @@ actions:
                 if res is not None:
                     # handle response
                     pass
+  - target: $["paths"]["/tokens/embed"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createEmbedToken
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as s:
+                res = s.embed_tokens.create()
+
+                if res is not None:
+                    # handle response
+                    pass
   - target: $["paths"]["/track/lead"]["post"]
     update:
       x-codeSamples:
