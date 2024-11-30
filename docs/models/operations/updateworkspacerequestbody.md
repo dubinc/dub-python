@@ -7,3 +7,4 @@
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `name`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `slug`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `logo`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |

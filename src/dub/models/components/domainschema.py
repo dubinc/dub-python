@@ -43,6 +43,8 @@ class DomainSchemaTypedDict(TypedDict):
     r"""The URL to redirect to when a link under this domain has expired."""
     not_found_url: Nullable[str]
     r"""The URL to redirect to when a link under this domain doesn't exist."""
+    logo: Nullable[str]
+    r"""The logo of the domain."""
     created_at: str
     r"""The date the domain was created."""
     updated_at: str
@@ -73,6 +75,9 @@ class DomainSchema(BaseModel):
     not_found_url: Annotated[Nullable[str], pydantic.Field(alias="notFoundUrl")]
     r"""The URL to redirect to when a link under this domain doesn't exist."""
 
+    logo: Nullable[str]
+    r"""The logo of the domain."""
+
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the domain was created."""
 
@@ -100,6 +105,7 @@ class DomainSchema(BaseModel):
             "placeholder",
             "expiredUrl",
             "notFoundUrl",
+            "logo",
             "registeredDomain",
         ]
         null_default_fields = []
