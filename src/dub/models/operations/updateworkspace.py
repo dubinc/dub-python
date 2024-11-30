@@ -11,12 +11,15 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class UpdateWorkspaceRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     slug: NotRequired[str]
+    logo: NotRequired[str]
 
 
 class UpdateWorkspaceRequestBody(BaseModel):
     name: Optional[str] = None
 
     slug: Optional[str] = None
+
+    logo: Optional[str] = None
 
 
 class UpdateWorkspaceRequestTypedDict(TypedDict):

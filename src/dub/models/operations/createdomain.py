@@ -19,6 +19,8 @@ class CreateDomainRequestBodyTypedDict(TypedDict):
     r"""Whether to archive this domain. `false` will unarchive a previously archived domain."""
     placeholder: NotRequired[Nullable[str]]
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
+    logo: NotRequired[Nullable[str]]
+    r"""The logo of the domain."""
 
 
 class CreateDomainRequestBody(BaseModel):
@@ -41,10 +43,19 @@ class CreateDomainRequestBody(BaseModel):
     placeholder: OptionalNullable[str] = UNSET
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
 
+    logo: OptionalNullable[str] = UNSET
+    r"""The logo of the domain."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["expiredUrl", "notFoundUrl", "archived", "placeholder"]
-        nullable_fields = ["expiredUrl", "notFoundUrl", "placeholder"]
+        optional_fields = [
+            "expiredUrl",
+            "notFoundUrl",
+            "archived",
+            "placeholder",
+            "logo",
+        ]
+        nullable_fields = ["expiredUrl", "notFoundUrl", "placeholder", "logo"]
         null_default_fields = []
 
         serialized = handler(self)
