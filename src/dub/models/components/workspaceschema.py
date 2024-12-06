@@ -99,8 +99,6 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The AI usage of the workspace."""
     ai_limit: float
     r"""The AI limit of the workspace."""
-    referral_link_id: Nullable[str]
-    r"""The ID of the referral link of the workspace."""
     conversion_enabled: bool
     r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     dot_link_claimed: bool
@@ -188,9 +186,6 @@ class WorkspaceSchema(BaseModel):
     ai_limit: Annotated[float, pydantic.Field(alias="aiLimit")]
     r"""The AI limit of the workspace."""
 
-    referral_link_id: Annotated[Nullable[str], pydantic.Field(alias="referralLinkId")]
-    r"""The ID of the referral link of the workspace."""
-
     conversion_enabled: Annotated[bool, pydantic.Field(alias="conversionEnabled")]
     r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
 
@@ -237,7 +232,6 @@ class WorkspaceSchema(BaseModel):
             "stripeId",
             "paymentFailedAt",
             "stripeConnectId",
-            "referralLinkId",
             "publishableKey",
             "bankAccountName",
             "partialAccountNumber",
