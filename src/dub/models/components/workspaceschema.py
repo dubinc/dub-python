@@ -109,8 +109,6 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The role of the authenticated user in the workspace."""
     domains: List[DomainsTypedDict]
     r"""The domains of the workspace."""
-    publishable_key: Nullable[str]
-    r"""The publishable key of the workspace."""
     bank_account_name: Nullable[str]
     r"""[BETA – Dub Partners]: The name of the connected bank account."""
     partial_account_number: Nullable[str]
@@ -201,9 +199,6 @@ class WorkspaceSchema(BaseModel):
     domains: List[Domains]
     r"""The domains of the workspace."""
 
-    publishable_key: Annotated[Nullable[str], pydantic.Field(alias="publishableKey")]
-    r"""The publishable key of the workspace."""
-
     bank_account_name: Annotated[Nullable[str], pydantic.Field(alias="bankAccountName")]
     r"""[BETA – Dub Partners]: The name of the connected bank account."""
 
@@ -232,7 +227,6 @@ class WorkspaceSchema(BaseModel):
             "stripeId",
             "paymentFailedAt",
             "stripeConnectId",
-            "publishableKey",
             "bankAccountName",
             "partialAccountNumber",
             "routingNumber",
