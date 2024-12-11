@@ -18,8 +18,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.qr_codes.get(request={
+) as dub:
+    res = dub.qr_codes.get(request={
         "url": "https://brief-micronutrient.org",
     })
 

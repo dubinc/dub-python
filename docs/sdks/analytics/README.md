@@ -18,8 +18,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.analytics.retrieve(request={
+) as dub:
+    res = dub.analytics.retrieve(request={
         "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",

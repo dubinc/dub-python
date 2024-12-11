@@ -18,8 +18,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.events.list(request={
+) as dub:
+    res = dub.events.list(request={
         "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",

@@ -18,8 +18,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.embed_tokens.create()
+) as dub:
+    res = dub.embed_tokens.create()
 
     if res is not None:
         # handle response

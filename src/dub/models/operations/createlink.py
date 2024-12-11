@@ -38,8 +38,6 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     track_conversion: NotRequired[bool]
     r"""Whether to track conversions for the short link."""
-    identifier: NotRequired[Nullable[str]]
-    r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
     archived: NotRequired[bool]
     r"""Whether the short link is archived."""
     public_stats: NotRequired[bool]
@@ -118,9 +116,6 @@ class CreateLinkRequestBody(BaseModel):
         Optional[bool], pydantic.Field(alias="trackConversion")
     ] = False
     r"""Whether to track conversions for the short link."""
-
-    identifier: OptionalNullable[str] = UNSET
-    r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
 
     archived: Optional[bool] = False
     r"""Whether the short link is archived."""
@@ -231,7 +226,6 @@ class CreateLinkRequestBody(BaseModel):
             "externalId",
             "prefix",
             "trackConversion",
-            "identifier",
             "archived",
             "publicStats",
             "tagId",
@@ -262,7 +256,6 @@ class CreateLinkRequestBody(BaseModel):
         ]
         nullable_fields = [
             "externalId",
-            "identifier",
             "tagId",
             "comments",
             "expiresAt",
