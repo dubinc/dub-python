@@ -21,8 +21,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.tags.create()
+) as dub:
+    res = dub.tags.create()
 
     if res is not None:
         # handle response
@@ -67,8 +67,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.tags.list()
+) as dub:
+    res = dub.tags.list()
 
     if res is not None:
         # handle response
@@ -112,8 +112,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.tags.update(id="<id>")
+) as dub:
+    res = dub.tags.update(id="<id>")
 
     if res is not None:
         # handle response
@@ -159,8 +159,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.tags.delete(id="<id>")
+) as dub:
+    res = dub.tags.delete(id="<id>")
 
     if res is not None:
         # handle response

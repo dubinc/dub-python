@@ -20,8 +20,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.track.lead(request={
+) as dub:
+    res = dub.track.lead(request={
         "click_id": "<value>",
         "event_name": "Sign up",
         "customer_id": "<value>",
@@ -71,8 +71,8 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.track.sale(request={
+) as dub:
+    res = dub.track.sale(request={
         "amount": 996500,
         "payment_processor": operations.PaymentProcessor.SHOPIFY,
         "customer_id": "<value>",
@@ -124,8 +124,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.track.customer()
+) as dub:
+    res = dub.track.customer()
 
     if res is not None:
         # handle response

@@ -13,8 +13,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.analytics.retrieve(request={
+            ) as dub:
+                res = dub.analytics.retrieve(request={
                     "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
@@ -37,8 +37,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.customers.list()
+            ) as dub:
+                res = dub.customers.list()
 
                 if res is not None:
                     # handle response
@@ -53,8 +53,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.customers.create()
+            ) as dub:
+                res = dub.customers.create()
 
                 if res is not None:
                     # handle response
@@ -69,8 +69,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.customers.delete(id="<id>")
+            ) as dub:
+                res = dub.customers.delete(id="<id>")
 
                 if res is not None:
                     # handle response
@@ -85,8 +85,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.customers.get(request={
+            ) as dub:
+                res = dub.customers.get(request={
                     "id": "<id>",
                 })
 
@@ -103,8 +103,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.customers.update(id="<id>")
+            ) as dub:
+                res = dub.customers.update(id="<id>")
 
                 if res is not None:
                     # handle response
@@ -119,8 +119,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.domains.list(request={
+            ) as dub:
+                res = dub.domains.list(request={
                     "page": 1,
                     "page_size": 50,
                 })
@@ -142,8 +142,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.domains.create(request={
+            ) as dub:
+                res = dub.domains.create(request={
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
@@ -164,8 +164,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.domains.delete(slug="acme.com")
+            ) as dub:
+                res = dub.domains.delete(slug="acme.com")
 
                 if res is not None:
                     # handle response
@@ -180,8 +180,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.domains.update(slug="acme.com", request_body={
+            ) as dub:
+                res = dub.domains.update(slug="acme.com", request_body={
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
@@ -202,8 +202,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.events.list(request={
+            ) as dub:
+                res = dub.events.list(request={
                     "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
@@ -226,8 +226,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.list(request={
+            ) as dub:
+                res = dub.links.list(request={
                     "page": 1,
                     "page_size": 50,
                 })
@@ -249,8 +249,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.create(request={
+            ) as dub:
+                res = dub.links.create(request={
                     "url": "https://google.com",
                     "external_id": "123456",
                     "tag_ids": [
@@ -271,8 +271,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.delete_many(request={
+            ) as dub:
+                res = dub.links.delete_many(request={
                     "link_ids": [
                         "clux0rgak00011...",
                         "clux0rgak00022...",
@@ -292,8 +292,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.update_many(request={
+            ) as dub:
+                res = dub.links.update_many(request={
                     "data": {
                         "url": "https://google.com",
                         "tag_ids": [
@@ -315,8 +315,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.create_many(request=[
+            ) as dub:
+                res = dub.links.create_many(request=[
                     {
                         "url": "https://google.com",
                         "external_id": "123456",
@@ -346,8 +346,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.count(request={})
+            ) as dub:
+                res = dub.links.count(request={})
 
                 if res is not None:
                     # handle response
@@ -362,8 +362,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.get(request={
+            ) as dub:
+                res = dub.links.get(request={
                     "link_id": "clux0rgak00011...",
                     "external_id": "123456",
                 })
@@ -381,8 +381,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.upsert(request={
+            ) as dub:
+                res = dub.links.upsert(request={
                     "url": "https://google.com",
                     "external_id": "123456",
                     "tag_ids": [
@@ -403,8 +403,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.delete(link_id="<id>")
+            ) as dub:
+                res = dub.links.delete(link_id="<id>")
 
                 if res is not None:
                     # handle response
@@ -419,8 +419,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.links.update(link_id="<id>", request_body={
+            ) as dub:
+                res = dub.links.update(link_id="<id>", request_body={
                     "url": "https://google.com",
                     "external_id": "123456",
                     "tag_ids": [
@@ -441,8 +441,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.metatags.get(request={
+            ) as dub:
+                res = dub.metatags.get(request={
                     "url": "https://dub.co",
                 })
 
@@ -459,8 +459,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.qr_codes.get(request={
+            ) as dub:
+                res = dub.qr_codes.get(request={
                     "url": "https://normal-making.name",
                 })
 
@@ -477,8 +477,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.tags.list()
+            ) as dub:
+                res = dub.tags.list()
 
                 if res is not None:
                     # handle response
@@ -493,8 +493,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.tags.create()
+            ) as dub:
+                res = dub.tags.create()
 
                 if res is not None:
                     # handle response
@@ -509,8 +509,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.tags.delete(id="<id>")
+            ) as dub:
+                res = dub.tags.delete(id="<id>")
 
                 if res is not None:
                     # handle response
@@ -525,8 +525,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.tags.update(id="<id>")
+            ) as dub:
+                res = dub.tags.update(id="<id>")
 
                 if res is not None:
                     # handle response
@@ -541,8 +541,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.embed_tokens.create()
+            ) as dub:
+                res = dub.embed_tokens.create()
 
                 if res is not None:
                     # handle response
@@ -557,8 +557,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.track.lead(request={
+            ) as dub:
+                res = dub.track.lead(request={
                     "click_id": "<id>",
                     "event_name": "Sign up",
                 })
@@ -577,8 +577,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.track.sale(request={
+            ) as dub:
+                res = dub.track.sale(request={
                     "amount": 996500,
                     "payment_processor": operations.PaymentProcessor.PADDLE,
                     "event_name": "Purchase",
@@ -597,8 +597,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.workspaces.get(request={
+            ) as dub:
+                res = dub.workspaces.get(request={
                     "id_or_slug": "<value>",
                 })
 
@@ -615,8 +615,8 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as s:
-                res = s.workspaces.update(id_or_slug="<value>")
+            ) as dub:
+                res = dub.workspaces.update(id_or_slug="<value>")
 
                 if res is not None:
                     # handle response

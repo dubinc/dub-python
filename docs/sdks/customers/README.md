@@ -22,8 +22,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.customers.list()
+) as dub:
+    res = dub.customers.list()
 
     if res is not None:
         # handle response
@@ -67,8 +67,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.customers.create()
+) as dub:
+    res = dub.customers.create()
 
     if res is not None:
         # handle response
@@ -113,8 +113,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.customers.get(request={
+) as dub:
+    res = dub.customers.get(request={
         "id": "<id>",
     })
 
@@ -161,8 +161,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.customers.update(id="<id>")
+) as dub:
+    res = dub.customers.update(id="<id>")
 
     if res is not None:
         # handle response
@@ -208,8 +208,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.customers.delete(id="<id>")
+) as dub:
+    res = dub.customers.delete(id="<id>")
 
     if res is not None:
         # handle response

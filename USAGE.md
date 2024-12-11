@@ -5,8 +5,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.links.create(request={
+) as dub:
+    res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -30,8 +30,8 @@ from dub import Dub
 async def main():
     async with Dub(
         token="DUB_API_KEY",
-    ) as s:
-        res = await s.links.create_async(request={
+    ) as dub:
+        res = await dub.links.create_async(request={
             "url": "https://google.com",
             "external_id": "123456",
             "tag_ids": [
@@ -52,8 +52,8 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as s:
-    res = s.links.upsert(request={
+) as dub:
+    res = dub.links.upsert(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -77,8 +77,8 @@ from dub import Dub
 async def main():
     async with Dub(
         token="DUB_API_KEY",
-    ) as s:
-        res = await s.links.upsert_async(request={
+    ) as dub:
+        res = await dub.links.upsert_async(request={
             "url": "https://google.com",
             "external_id": "123456",
             "tag_ids": [

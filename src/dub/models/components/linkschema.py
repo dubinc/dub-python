@@ -779,8 +779,6 @@ class LinkSchemaTypedDict(TypedDict):
     r"""The destination URL of the short link."""
     external_id: Nullable[str]
     r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
-    identifier: Nullable[str]
-    r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
     expires_at: Nullable[str]
     r"""The date and time when the short link will expire in ISO-8601 format."""
     expired_url: Nullable[str]
@@ -874,9 +872,6 @@ class LinkSchema(BaseModel):
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
-
-    identifier: Nullable[str]
-    r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
 
     expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
     r"""The date and time when the short link will expire in ISO-8601 format."""
@@ -1022,7 +1017,6 @@ class LinkSchema(BaseModel):
         ]
         nullable_fields = [
             "externalId",
-            "identifier",
             "expiresAt",
             "expiredUrl",
             "password",

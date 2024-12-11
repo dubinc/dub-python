@@ -3,7 +3,7 @@
 import importlib.metadata
 
 __title__: str = "dub"
-__version__: str = "0.15.4"
+__version__: str = "0.15.5"
 
 try:
     if __package__ is not None:

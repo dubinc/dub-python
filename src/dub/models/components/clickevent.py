@@ -827,8 +827,6 @@ class LinkTypedDict(TypedDict):
     url: str
     external_id: Nullable[str]
     r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
-    identifier: Nullable[str]
-    r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
     expires_at: str
     expired_url: Nullable[str]
     password: Nullable[str]
@@ -909,9 +907,6 @@ class Link(BaseModel):
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
-
-    identifier: Nullable[str]
-    r"""The identifier of the short link that is unique across your workspace. If set, it can be used to identify your short link for client-side click tracking."""
 
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
@@ -1045,7 +1040,6 @@ class Link(BaseModel):
         ]
         nullable_fields = [
             "externalId",
-            "identifier",
             "expiredUrl",
             "password",
             "title",
