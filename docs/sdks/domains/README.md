@@ -22,6 +22,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.domains.create(request={
         "slug": "acme.com",
         "expired_url": "https://acme.com/expired",
@@ -30,9 +31,10 @@ with Dub(
         "placeholder": "https://dub.co/help/article/what-is-dub",
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
@@ -74,18 +76,16 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.domains.list(request={
         "page": 1,
         "page_size": 50,
     })
 
-    if res is not None:
-        while True:
-            # handle items
+    while res is not None:
+        # Handle items
 
-            res = res.next()
-            if res is None:
-                break
+        res = res.next()
 
 ```
 
@@ -127,6 +127,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.domains.update(slug="acme.com", request_body={
         "slug": "acme.com",
         "expired_url": "https://acme.com/expired",
@@ -135,9 +136,10 @@ with Dub(
         "placeholder": "https://dub.co/help/article/what-is-dub",
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
@@ -180,11 +182,13 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.domains.delete(slug="acme.com")
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 

@@ -19,6 +19,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.events.list(request={
         "timezone": "America/New_York",
         "city": "New York",
@@ -29,9 +30,10 @@ with Dub(
         "referer_url": "https://dub.co/blog",
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
