@@ -5,7 +5,7 @@ from dub import utils
 from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
-from typing import Any, List, Optional, Union, cast
+from typing import Any, List, Mapping, Optional, Union, cast
 
 
 class Customers(BaseSDK):
@@ -15,6 +15,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[List[operations.ResponseBody]]:
         r"""Retrieve a list of customers
 
@@ -23,6 +24,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -42,6 +44,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -130,6 +133,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[List[operations.ResponseBody]]:
         r"""Retrieve a list of customers
 
@@ -138,6 +142,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -157,6 +162,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -251,6 +257,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.CreateCustomerResponseBody]:
         r"""Create a customer
 
@@ -260,6 +267,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -286,6 +294,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
@@ -387,6 +396,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.CreateCustomerResponseBody]:
         r"""Create a customer
 
@@ -396,6 +406,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -422,6 +433,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
@@ -520,6 +532,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.GetCustomerResponseBody]:
         r"""Retrieve a customer
 
@@ -529,6 +542,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -553,6 +567,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -644,6 +659,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.GetCustomerResponseBody]:
         r"""Retrieve a customer
 
@@ -653,6 +669,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -677,6 +694,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -772,6 +790,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.UpdateCustomerResponseBody]:
         r"""Update a customer
 
@@ -782,6 +801,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -809,6 +829,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -911,6 +932,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.UpdateCustomerResponseBody]:
         r"""Update a customer
 
@@ -921,6 +943,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -948,6 +971,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -1044,6 +1068,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.DeleteCustomerResponseBody]:
         r"""Delete a customer
 
@@ -1053,6 +1078,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -1077,6 +1103,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
@@ -1166,6 +1193,7 @@ class Customers(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.DeleteCustomerResponseBody]:
         r"""Delete a customer
 
@@ -1175,6 +1203,7 @@ class Customers(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -1199,6 +1228,7 @@ class Customers(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )

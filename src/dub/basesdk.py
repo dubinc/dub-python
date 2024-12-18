@@ -6,7 +6,7 @@ from dub._hooks import AfterErrorContext, AfterSuccessContext, BeforeRequestCont
 from dub.models import errors
 from dub.utils import RetryConfig, SerializedRequestBody, get_body_content
 import httpx
-from typing import Callable, List, Optional, Tuple
+from typing import Callable, List, Mapping, Optional, Tuple
 from urllib.parse import parse_qs, urlparse
 
 
@@ -46,6 +46,7 @@ class BaseSDK:
             Callable[[], Optional[SerializedRequestBody]]
         ] = None,
         url_override: Optional[str] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> httpx.Request:
         client = self.sdk_configuration.async_client
         return self.build_request_with_client(
@@ -65,6 +66,7 @@ class BaseSDK:
             timeout_ms,
             get_serialized_body,
             url_override,
+            http_headers,
         )
 
     def build_request(
@@ -86,6 +88,7 @@ class BaseSDK:
             Callable[[], Optional[SerializedRequestBody]]
         ] = None,
         url_override: Optional[str] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> httpx.Request:
         client = self.sdk_configuration.client
         return self.build_request_with_client(
@@ -105,6 +108,7 @@ class BaseSDK:
             timeout_ms,
             get_serialized_body,
             url_override,
+            http_headers,
         )
 
     def build_request_with_client(
@@ -127,6 +131,7 @@ class BaseSDK:
             Callable[[], Optional[SerializedRequestBody]]
         ] = None,
         url_override: Optional[str] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> httpx.Request:
         query_params = {}
 
@@ -181,6 +186,10 @@ class BaseSDK:
             )
         ):
             headers["content-type"] = serialized_request_body.media_type
+
+        if http_headers is not None:
+            for header, value in http_headers.items():
+                headers[header] = value
 
         timeout = timeout_ms / 1000 if timeout_ms is not None else None
 

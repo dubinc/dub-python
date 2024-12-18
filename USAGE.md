@@ -6,6 +6,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -14,9 +15,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -31,6 +33,7 @@ async def main():
     async with Dub(
         token="DUB_API_KEY",
     ) as dub:
+
         res = await dub.links.create_async(request={
             "url": "https://google.com",
             "external_id": "123456",
@@ -39,9 +42,10 @@ async def main():
             ],
         })
 
-        if res is not None:
-            # handle response
-            pass
+        assert res is not None
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -53,6 +57,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.upsert(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -61,9 +66,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -78,6 +84,7 @@ async def main():
     async with Dub(
         token="DUB_API_KEY",
     ) as dub:
+
         res = await dub.links.upsert_async(request={
             "url": "https://google.com",
             "external_id": "123456",
@@ -86,9 +93,10 @@ async def main():
             ],
         })
 
-        if res is not None:
-            # handle response
-            pass
+        assert res is not None
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```

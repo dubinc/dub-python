@@ -22,11 +22,13 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.tags.create()
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
@@ -68,11 +70,13 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.tags.list()
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
@@ -113,11 +117,13 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.tags.update(id="<id>")
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
@@ -160,11 +166,13 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.tags.delete(id="<id>")
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 

@@ -70,6 +70,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -78,9 +79,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -95,6 +97,7 @@ async def main():
     async with Dub(
         token="DUB_API_KEY",
     ) as dub:
+
         res = await dub.links.create_async(request={
             "url": "https://google.com",
             "external_id": "123456",
@@ -103,9 +106,10 @@ async def main():
             ],
         })
 
-        if res is not None:
-            # handle response
-            pass
+        assert res is not None
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -119,6 +123,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.upsert(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -127,9 +132,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -144,6 +150,7 @@ async def main():
     async with Dub(
         token="DUB_API_KEY",
     ) as dub:
+
         res = await dub.links.upsert_async(request={
             "url": "https://google.com",
             "external_id": "123456",
@@ -152,9 +159,10 @@ async def main():
             ],
         })
 
-        if res is not None:
-            # handle response
-            pass
+        assert res is not None
+
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -276,6 +284,7 @@ with Dub(
 ) as dub:
     res = None
     try:
+
         res = dub.links.create(request={
             "url": "https://google.com",
             "external_id": "123456",
@@ -284,9 +293,10 @@ with Dub(
             ],
         })
 
-        if res is not None:
-            # handle response
-            pass
+        assert res is not None
+
+        # Handle response
+        print(res)
 
     except errors.BadRequest as e:
         # handle e.data: errors.BadRequestData
@@ -334,6 +344,7 @@ with Dub(
     server_url="https://api.dub.co",
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -342,9 +353,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->
@@ -448,6 +460,7 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -456,9 +469,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->
@@ -476,6 +490,7 @@ from dub.utils import BackoffStrategy, RetryConfig
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -485,9 +500,10 @@ with Dub(
     },
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 
@@ -500,6 +516,7 @@ with Dub(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
@@ -508,9 +525,10 @@ with Dub(
         ],
     })
 
-    if res is not None:
-        # handle response
-        pass
+    assert res is not None
+
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -529,18 +547,16 @@ from dub import Dub
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
+
     res = dub.links.list(request={
         "page": 1,
         "page_size": 50,
     })
 
-    if res is not None:
-        while True:
-            # handle items
+    while res is not None:
+        # Handle items
 
-            res = res.next()
-            if res is None:
-                break
+        res = res.next()
 
 ```
 <!-- End Pagination [pagination] -->

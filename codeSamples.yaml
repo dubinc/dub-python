@@ -14,6 +14,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.analytics.retrieve(request={
                     "timezone": "America/New_York",
                     "city": "New York",
@@ -24,9 +25,10 @@ actions:
                     "referer_url": "https://dub.co/blog",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/customers"]["get"]
     update:
       x-codeSamples:
@@ -38,11 +40,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.customers.list()
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/customers"]["post"]
     update:
       x-codeSamples:
@@ -54,11 +58,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.customers.create()
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/customers/{id}"]["delete"]
     update:
       x-codeSamples:
@@ -70,11 +76,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.customers.delete(id="<id>")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/customers/{id}"]["get"]
     update:
       x-codeSamples:
@@ -86,13 +94,15 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.customers.get(request={
                     "id": "<id>",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/customers/{id}"]["patch"]
     update:
       x-codeSamples:
@@ -104,11 +114,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.customers.update(id="<id>")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/domains"]["get"]
     update:
       x-codeSamples:
@@ -120,18 +132,16 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.domains.list(request={
                     "page": 1,
                     "page_size": 50,
                 })
 
-                if res is not None:
-                    while True:
-                        # handle items
+                while res is not None:
+                    # Handle items
 
-                        res = res.next()
-                        if res is None:
-                            break
+                    res = res.next()
   - target: $["paths"]["/domains"]["post"]
     update:
       x-codeSamples:
@@ -143,6 +153,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.domains.create(request={
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
@@ -151,9 +162,10 @@ actions:
                     "placeholder": "https://dub.co/help/article/what-is-dub",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/domains/{slug}"]["delete"]
     update:
       x-codeSamples:
@@ -165,11 +177,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.domains.delete(slug="acme.com")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/domains/{slug}"]["patch"]
     update:
       x-codeSamples:
@@ -181,6 +195,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.domains.update(slug="acme.com", request_body={
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
@@ -189,9 +204,10 @@ actions:
                     "placeholder": "https://dub.co/help/article/what-is-dub",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/events"]["get"]
     update:
       x-codeSamples:
@@ -203,6 +219,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.events.list(request={
                     "timezone": "America/New_York",
                     "city": "New York",
@@ -213,9 +230,10 @@ actions:
                     "referer_url": "https://dub.co/blog",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links"]["get"]
     update:
       x-codeSamples:
@@ -227,18 +245,16 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.list(request={
                     "page": 1,
                     "page_size": 50,
                 })
 
-                if res is not None:
-                    while True:
-                        # handle items
+                while res is not None:
+                    # Handle items
 
-                        res = res.next()
-                        if res is None:
-                            break
+                    res = res.next()
   - target: $["paths"]["/links"]["post"]
     update:
       x-codeSamples:
@@ -250,6 +266,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.create(request={
                     "url": "https://google.com",
                     "external_id": "123456",
@@ -258,9 +275,10 @@ actions:
                     ],
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/bulk"]["delete"]
     update:
       x-codeSamples:
@@ -272,6 +290,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.delete_many(request={
                     "link_ids": [
                         "clux0rgak00011...",
@@ -279,9 +298,10 @@ actions:
                     ],
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/bulk"]["patch"]
     update:
       x-codeSamples:
@@ -293,6 +313,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.update_many(request={
                     "data": {
                         "url": "https://google.com",
@@ -302,9 +323,10 @@ actions:
                     },
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/bulk"]["post"]
     update:
       x-codeSamples:
@@ -316,6 +338,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.create_many(request=[
                     {
                         "url": "https://google.com",
@@ -333,9 +356,10 @@ actions:
                     },
                 ])
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/count"]["get"]
     update:
       x-codeSamples:
@@ -347,11 +371,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.count(request={})
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/info"]["get"]
     update:
       x-codeSamples:
@@ -363,14 +389,16 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.get(request={
                     "link_id": "clux0rgak00011...",
                     "external_id": "123456",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/upsert"]["put"]
     update:
       x-codeSamples:
@@ -382,6 +410,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.upsert(request={
                     "url": "https://google.com",
                     "external_id": "123456",
@@ -390,9 +419,10 @@ actions:
                     ],
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/{linkId}"]["delete"]
     update:
       x-codeSamples:
@@ -404,11 +434,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.delete(link_id="<id>")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links/{linkId}"]["patch"]
     update:
       x-codeSamples:
@@ -420,6 +452,7 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.links.update(link_id="<id>", request_body={
                     "url": "https://google.com",
                     "external_id": "123456",
@@ -428,9 +461,10 @@ actions:
                     ],
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/metatags"]["get"]
     update:
       x-codeSamples:
@@ -442,13 +476,15 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.metatags.get(request={
                     "url": "https://dub.co",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/qr"]["get"]
     update:
       x-codeSamples:
@@ -460,13 +496,15 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.qr_codes.get(request={
                     "url": "https://normal-making.name",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/tags"]["get"]
     update:
       x-codeSamples:
@@ -478,11 +516,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.tags.list()
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/tags"]["post"]
     update:
       x-codeSamples:
@@ -494,11 +534,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.tags.create()
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/tags/{id}"]["delete"]
     update:
       x-codeSamples:
@@ -510,11 +552,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.tags.delete(id="<id>")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/tags/{id}"]["patch"]
     update:
       x-codeSamples:
@@ -526,11 +570,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.tags.update(id="<id>")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/tokens/embed"]["post"]
     update:
       x-codeSamples:
@@ -542,11 +588,13 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.embed_tokens.create()
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/track/lead"]["post"]
     update:
       x-codeSamples:
@@ -558,14 +606,16 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.track.lead(request={
                     "click_id": "<id>",
                     "event_name": "Sign up",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/track/sale"]["post"]
     update:
       x-codeSamples:
@@ -578,15 +628,17 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.track.sale(request={
                     "amount": 996500,
                     "payment_processor": operations.PaymentProcessor.PADDLE,
                     "event_name": "Purchase",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/workspaces/{idOrSlug}"]["get"]
     update:
       x-codeSamples:
@@ -598,13 +650,15 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.workspaces.get(request={
                     "id_or_slug": "<value>",
                 })
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/workspaces/{idOrSlug}"]["patch"]
     update:
       x-codeSamples:
@@ -616,8 +670,10 @@ actions:
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
+
                 res = dub.workspaces.update(id_or_slug="<value>")
 
-                if res is not None:
-                    # handle response
-                    pass
+                assert res is not None
+
+                # Handle response
+                print(res)
