@@ -105,6 +105,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
     dot_link_claimed: bool
     r"""Whether the workspace has claimed a free .link domain. (dub.link/free)"""
+    partners_enabled: bool
+    r"""Whether the workspace has Dub Partners enabled."""
     created_at: str
     r"""The date and time when the workspace was created."""
     users: List[UsersTypedDict]
@@ -186,6 +188,9 @@ class WorkspaceSchema(BaseModel):
 
     dot_link_claimed: Annotated[bool, pydantic.Field(alias="dotLinkClaimed")]
     r"""Whether the workspace has claimed a free .link domain. (dub.link/free)"""
+
+    partners_enabled: Annotated[bool, pydantic.Field(alias="partnersEnabled")]
+    r"""Whether the workspace has Dub Partners enabled."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date and time when the workspace was created."""
