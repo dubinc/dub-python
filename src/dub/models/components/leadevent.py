@@ -1100,6 +1100,8 @@ class CustomerTypedDict(TypedDict):
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
     r"""Avatar URL of the customer."""
+    country: NotRequired[Nullable[str]]
+    r"""Country of the customer."""
 
 
 class Customer(BaseModel):
@@ -1121,10 +1123,13 @@ class Customer(BaseModel):
     avatar: OptionalNullable[str] = UNSET
     r"""Avatar URL of the customer."""
 
+    country: OptionalNullable[str] = UNSET
+    r"""Country of the customer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar"]
-        nullable_fields = ["email", "avatar"]
+        optional_fields = ["email", "avatar", "country"]
+        nullable_fields = ["email", "avatar", "country"]
         null_default_fields = []
 
         serialized = handler(self)

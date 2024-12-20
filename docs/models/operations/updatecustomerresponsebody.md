@@ -13,3 +13,4 @@ The customer was updated.
 | `created_at`                                            | *str*                                                   | :heavy_check_mark:                                      | The date the customer was created.                      |
 | `email`                                                 | *OptionalNullable[str]*                                 | :heavy_minus_sign:                                      | Email of the customer.                                  |
 | `avatar`                                                | *OptionalNullable[str]*                                 | :heavy_minus_sign:                                      | Avatar URL of the customer.                             |
+| `country`                                               | *OptionalNullable[str]*                                 | :heavy_minus_sign:                                      | Country of the customer.                                |
