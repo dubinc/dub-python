@@ -141,12 +141,6 @@ from .retrieveanalytics import (
     RetrieveAnalyticsResponseBodyTypedDict,
     Trigger,
 )
-from .trackcustomer import (
-    TrackCustomerRequestBody,
-    TrackCustomerRequestBodyTypedDict,
-    TrackCustomerResponseBody,
-    TrackCustomerResponseBodyTypedDict,
-)
 from .tracklead import (
     Click,
     ClickTypedDict,
@@ -335,10 +329,6 @@ __all__ = [
     "TagNames",
     "TagNamesTypedDict",
     "Three",
-    "TrackCustomerRequestBody",
-    "TrackCustomerRequestBodyTypedDict",
-    "TrackCustomerResponseBody",
-    "TrackCustomerResponseBodyTypedDict",
     "TrackLeadRequestBody",
     "TrackLeadRequestBodyTypedDict",
     "TrackLeadResponseBody",
