@@ -62,6 +62,66 @@ class CreateCustomerRequestBody(BaseModel):
         return m
 
 
+class CreateCustomerLinkTypedDict(TypedDict):
+    id: str
+    r"""The unique ID of the short link."""
+    domain: str
+    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+    key: str
+    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+    short_link: str
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+    program_id: Nullable[str]
+    r"""The ID of the program the short link is associated with."""
+
+
+class CreateCustomerLink(BaseModel):
+    id: str
+    r"""The unique ID of the short link."""
+
+    domain: str
+    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+
+    key: str
+    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+
+    short_link: Annotated[str, pydantic.Field(alias="shortLink")]
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+
+    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
+    r"""The ID of the program the short link is associated with."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["programId"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class CreateCustomerResponseBodyTypedDict(TypedDict):
     r"""The customer was created."""
 
@@ -77,6 +137,9 @@ class CreateCustomerResponseBodyTypedDict(TypedDict):
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
     r"""Avatar URL of the customer."""
+    country: NotRequired[Nullable[str]]
+    r"""Country of the customer."""
+    link: NotRequired[Nullable[CreateCustomerLinkTypedDict]]
 
 
 class CreateCustomerResponseBody(BaseModel):
@@ -100,10 +163,15 @@ class CreateCustomerResponseBody(BaseModel):
     avatar: OptionalNullable[str] = UNSET
     r"""Avatar URL of the customer."""
 
+    country: OptionalNullable[str] = UNSET
+    r"""Country of the customer."""
+
+    link: OptionalNullable[CreateCustomerLink] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar"]
-        nullable_fields = ["email", "avatar"]
+        optional_fields = ["email", "avatar", "country", "link"]
+        nullable_fields = ["email", "avatar", "country", "link"]
         null_default_fields = []
 
         serialized = handler(self)

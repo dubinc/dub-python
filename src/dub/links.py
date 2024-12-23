@@ -356,7 +356,7 @@ class Links(BaseSDK):
 
         def next_func() -> Optional[operations.GetLinksResponse]:
             body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
-            page = request.page if not request.page is None else 0
+            page = request.page if not request.page is None else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -364,7 +364,7 @@ class Links(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 0
+            limit = request.page_size if not request.page_size is None else 100
             if len(results[0]) < limit:
                 return None
 
@@ -515,7 +515,7 @@ class Links(BaseSDK):
 
         def next_func() -> Optional[operations.GetLinksResponse]:
             body = utils.unmarshal_json(http_res.text, Dict[Any, Any])
-            page = request.page if not request.page is None else 0
+            page = request.page if not request.page is None else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -523,7 +523,7 @@ class Links(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 0
+            limit = request.page_size if not request.page_size is None else 100
             if len(results[0]) < limit:
                 return None
 
