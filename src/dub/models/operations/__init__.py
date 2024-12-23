@@ -25,6 +25,8 @@ from .bulkupdatelinks import (
     DataTypedDict,
 )
 from .createcustomer import (
+    CreateCustomerLink,
+    CreateCustomerLinkTypedDict,
     CreateCustomerRequestBody,
     CreateCustomerRequestBodyTypedDict,
     CreateCustomerResponseBody,
@@ -71,12 +73,14 @@ from .deletetag import (
     DeleteTagResponseBodyTypedDict,
 )
 from .getcustomer import (
+    GetCustomerLink,
+    GetCustomerLinkTypedDict,
     GetCustomerRequest,
     GetCustomerRequestTypedDict,
     GetCustomerResponseBody,
     GetCustomerResponseBodyTypedDict,
 )
-from .getcustomers import ResponseBody, ResponseBodyTypedDict
+from .getcustomers import Link, LinkTypedDict, ResponseBody, ResponseBodyTypedDict
 from .getlinkinfo import GetLinkInfoRequest, GetLinkInfoRequestTypedDict
 from .getlinks import (
     GetLinksRequest,
@@ -141,12 +145,6 @@ from .retrieveanalytics import (
     RetrieveAnalyticsResponseBodyTypedDict,
     Trigger,
 )
-from .trackcustomer import (
-    TrackCustomerRequestBody,
-    TrackCustomerRequestBodyTypedDict,
-    TrackCustomerResponseBody,
-    TrackCustomerResponseBodyTypedDict,
-)
 from .tracklead import (
     Click,
     ClickTypedDict,
@@ -169,6 +167,8 @@ from .tracksale import (
     TrackSaleResponseBodyTypedDict,
 )
 from .updatecustomer import (
+    UpdateCustomerLink,
+    UpdateCustomerLinkTypedDict,
     UpdateCustomerRequest,
     UpdateCustomerRequestBody,
     UpdateCustomerRequestBodyTypedDict,
@@ -232,6 +232,8 @@ __all__ = [
     "Click",
     "ClickTypedDict",
     "Color",
+    "CreateCustomerLink",
+    "CreateCustomerLinkTypedDict",
     "CreateCustomerRequestBody",
     "CreateCustomerRequestBodyTypedDict",
     "CreateCustomerResponseBody",
@@ -267,6 +269,8 @@ __all__ = [
     "DeleteTagResponseBody",
     "DeleteTagResponseBodyTypedDict",
     "Event",
+    "GetCustomerLink",
+    "GetCustomerLinkTypedDict",
     "GetCustomerRequest",
     "GetCustomerRequestTypedDict",
     "GetCustomerResponseBody",
@@ -295,6 +299,8 @@ __all__ = [
     "GroupByTypedDict",
     "Interval",
     "Level",
+    "Link",
+    "LinkTypedDict",
     "ListDomainsRequest",
     "ListDomainsRequestTypedDict",
     "ListDomainsResponse",
@@ -335,10 +341,6 @@ __all__ = [
     "TagNames",
     "TagNamesTypedDict",
     "Three",
-    "TrackCustomerRequestBody",
-    "TrackCustomerRequestBodyTypedDict",
-    "TrackCustomerResponseBody",
-    "TrackCustomerResponseBodyTypedDict",
     "TrackLeadRequestBody",
     "TrackLeadRequestBodyTypedDict",
     "TrackLeadResponseBody",
@@ -351,6 +353,8 @@ __all__ = [
     "TrackSaleResponseBodyTypedDict",
     "Trigger",
     "Two",
+    "UpdateCustomerLink",
+    "UpdateCustomerLinkTypedDict",
     "UpdateCustomerRequest",
     "UpdateCustomerRequestBody",
     "UpdateCustomerRequestBodyTypedDict",

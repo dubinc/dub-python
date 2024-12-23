@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 91f8a271509d1f385478a60c83339f25
+  docChecksum: 8242eb9b26c7e6790d67cbbd98b96b1b
   docVersion: 0.0.1
-  speakeasyVersion: 1.456.1
-  generationVersion: 2.481.0
-  releaseVersion: 0.16.1
-  configChecksum: e0ce90a422c12b5d266656adafb2b509
+  speakeasyVersion: 1.459.2
+  generationVersion: 2.483.1
+  releaseVersion: 0.16.2
+  configChecksum: d8955632466b1c6edc279253c07023d4
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -29,7 +29,7 @@ features:
     includes: 3.0.0
     nameOverrides: 3.0.0
     nullables: 1.0.0
-    pagination: 3.0.1
+    pagination: 3.0.2
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
@@ -73,11 +73,13 @@ generatedFiles:
   - docs/models/components/leadcreatedeventclick.md
   - docs/models/components/leadcreatedeventcustomer.md
   - docs/models/components/leadcreatedeventdata.md
+  - docs/models/components/leadcreatedeventdatalink.md
   - docs/models/components/leadcreatedeventevent.md
   - docs/models/components/leadcreatedeventgeo.md
   - docs/models/components/leadcreatedeventlink.md
   - docs/models/components/leadevent.md
   - docs/models/components/leadeventclick.md
+  - docs/models/components/leadeventcustomerlink.md
   - docs/models/components/leadeventevent.md
   - docs/models/components/leadeventgeo.md
   - docs/models/components/leadeventlink.md
@@ -103,6 +105,7 @@ generatedFiles:
   - docs/models/components/salecreatedeventclick.md
   - docs/models/components/salecreatedeventcustomer.md
   - docs/models/components/salecreatedeventdata.md
+  - docs/models/components/salecreatedeventdatalink.md
   - docs/models/components/salecreatedeventevent.md
   - docs/models/components/salecreatedeventgeo.md
   - docs/models/components/salecreatedeventlink.md
@@ -110,6 +113,7 @@ generatedFiles:
   - docs/models/components/saleevent.md
   - docs/models/components/saleeventclick.md
   - docs/models/components/saleeventcustomer.md
+  - docs/models/components/saleeventcustomerlink.md
   - docs/models/components/saleeventevent.md
   - docs/models/components/saleeventgeo.md
   - docs/models/components/saleeventlink.md
@@ -157,6 +161,7 @@ generatedFiles:
   - docs/models/operations/bulkupdatelinkstagnames.md
   - docs/models/operations/click.md
   - docs/models/operations/color.md
+  - docs/models/operations/createcustomerlink.md
   - docs/models/operations/createcustomerrequestbody.md
   - docs/models/operations/createcustomerresponsebody.md
   - docs/models/operations/createdomainrequestbody.md
@@ -175,6 +180,7 @@ generatedFiles:
   - docs/models/operations/deletetagrequest.md
   - docs/models/operations/deletetagresponsebody.md
   - docs/models/operations/event.md
+  - docs/models/operations/getcustomerlink.md
   - docs/models/operations/getcustomerrequest.md
   - docs/models/operations/getcustomerresponsebody.md
   - docs/models/operations/getlinkinforequest.md
@@ -190,6 +196,7 @@ generatedFiles:
   - docs/models/operations/groupby.md
   - docs/models/operations/interval.md
   - docs/models/operations/level.md
+  - docs/models/operations/link.md
   - docs/models/operations/listdomainsrequest.md
   - docs/models/operations/listdomainsresponse.md
   - docs/models/operations/listeventsqueryparamtagids.md
@@ -215,8 +222,6 @@ generatedFiles:
   - docs/models/operations/tagids.md
   - docs/models/operations/tagnames.md
   - docs/models/operations/three.md
-  - docs/models/operations/trackcustomerrequestbody.md
-  - docs/models/operations/trackcustomerresponsebody.md
   - docs/models/operations/trackleadrequestbody.md
   - docs/models/operations/trackleadresponsebody.md
   - docs/models/operations/tracksalecustomer.md
@@ -224,6 +229,7 @@ generatedFiles:
   - docs/models/operations/tracksaleresponsebody.md
   - docs/models/operations/trigger.md
   - docs/models/operations/two.md
+  - docs/models/operations/updatecustomerlink.md
   - docs/models/operations/updatecustomerrequest.md
   - docs/models/operations/updatecustomerrequestbody.md
   - docs/models/operations/updatecustomerresponsebody.md
@@ -339,7 +345,6 @@ generatedFiles:
   - src/dub/models/operations/listdomains.py
   - src/dub/models/operations/listevents.py
   - src/dub/models/operations/retrieveanalytics.py
-  - src/dub/models/operations/trackcustomer.py
   - src/dub/models/operations/tracklead.py
   - src/dub/models/operations/tracksale.py
   - src/dub/models/operations/updatecustomer.py
