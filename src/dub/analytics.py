@@ -43,7 +43,7 @@ class Analytics(BaseSDK):
             request = utils.unmarshal(request, operations.RetrieveAnalyticsRequest)
         request = cast(operations.RetrieveAnalyticsRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/analytics",
             base_url=base_url,
@@ -171,7 +171,7 @@ class Analytics(BaseSDK):
             request = utils.unmarshal(request, operations.RetrieveAnalyticsRequest)
         request = cast(operations.RetrieveAnalyticsRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/analytics",
             base_url=base_url,

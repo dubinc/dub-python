@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -122,6 +123,119 @@ class CreateCustomerLink(BaseModel):
         return m
 
 
+class CreateCustomerPartnerTypedDict(TypedDict):
+    id: str
+    name: str
+    email: str
+    image: NotRequired[Nullable[str]]
+
+
+class CreateCustomerPartner(BaseModel):
+    id: str
+
+    name: str
+
+    email: str
+
+    image: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["image"]
+        nullable_fields = ["image"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+class CreateCustomerType(str, Enum):
+    PERCENTAGE = "percentage"
+    FLAT = "flat"
+
+
+class CreateCustomerInterval(str, Enum):
+    MONTH = "month"
+    YEAR = "year"
+
+
+class CreateCustomerDiscountTypedDict(TypedDict):
+    id: str
+    coupon_id: Nullable[str]
+    coupon_test_id: Nullable[str]
+    amount: float
+    type: CreateCustomerType
+    duration: Nullable[float]
+    interval: Nullable[CreateCustomerInterval]
+
+
+class CreateCustomerDiscount(BaseModel):
+    id: str
+
+    coupon_id: Annotated[Nullable[str], pydantic.Field(alias="couponId")]
+
+    coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
+
+    amount: float
+
+    type: CreateCustomerType
+
+    duration: Nullable[float]
+
+    interval: Nullable[CreateCustomerInterval]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["couponId", "couponTestId", "duration", "interval"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class CreateCustomerResponseBodyTypedDict(TypedDict):
     r"""The customer was created."""
 
@@ -140,6 +254,8 @@ class CreateCustomerResponseBodyTypedDict(TypedDict):
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
     link: NotRequired[Nullable[CreateCustomerLinkTypedDict]]
+    partner: NotRequired[Nullable[CreateCustomerPartnerTypedDict]]
+    discount: NotRequired[Nullable[CreateCustomerDiscountTypedDict]]
 
 
 class CreateCustomerResponseBody(BaseModel):
@@ -168,10 +284,14 @@ class CreateCustomerResponseBody(BaseModel):
 
     link: OptionalNullable[CreateCustomerLink] = UNSET
 
+    partner: OptionalNullable[CreateCustomerPartner] = UNSET
+
+    discount: OptionalNullable[CreateCustomerDiscount] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar", "country", "link"]
-        nullable_fields = ["email", "avatar", "country", "link"]
+        optional_fields = ["email", "avatar", "country", "link", "partner", "discount"]
+        nullable_fields = ["email", "avatar", "country", "link", "partner", "discount"]
         null_default_fields = []
 
         serialized = handler(self)

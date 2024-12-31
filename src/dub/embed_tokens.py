@@ -47,7 +47,7 @@ class EmbedTokens(BaseSDK):
             )
         request = cast(Optional[operations.CreateEmbedTokenRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/tokens/embed",
             base_url=base_url,
@@ -186,7 +186,7 @@ class EmbedTokens(BaseSDK):
             )
         request = cast(Optional[operations.CreateEmbedTokenRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/tokens/embed",
             base_url=base_url,
