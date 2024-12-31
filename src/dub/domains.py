@@ -48,7 +48,7 @@ class Domains(BaseSDK):
             )
         request = cast(Optional[operations.CreateDomainRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/domains",
             base_url=base_url,
@@ -187,7 +187,7 @@ class Domains(BaseSDK):
             )
         request = cast(Optional[operations.CreateDomainRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/domains",
             base_url=base_url,
@@ -321,7 +321,7 @@ class Domains(BaseSDK):
             request = utils.unmarshal(request, operations.ListDomainsRequest)
         request = cast(operations.ListDomainsRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/domains",
             base_url=base_url,
@@ -475,7 +475,7 @@ class Domains(BaseSDK):
             request = utils.unmarshal(request, operations.ListDomainsRequest)
         request = cast(operations.ListDomainsRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/domains",
             base_url=base_url,
@@ -637,7 +637,7 @@ class Domains(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/domains/{slug}",
             base_url=base_url,
@@ -779,7 +779,7 @@ class Domains(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/domains/{slug}",
             base_url=base_url,
@@ -911,7 +911,7 @@ class Domains(BaseSDK):
             slug=slug,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/domains/{slug}",
             base_url=base_url,
@@ -1036,7 +1036,7 @@ class Domains(BaseSDK):
             slug=slug,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/domains/{slug}",
             base_url=base_url,

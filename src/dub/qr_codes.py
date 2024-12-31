@@ -42,7 +42,7 @@ class QRCodes(BaseSDK):
             request = utils.unmarshal(request, operations.GetQRCodeRequest)
         request = cast(operations.GetQRCodeRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/qr",
             base_url=base_url,
@@ -167,7 +167,7 @@ class QRCodes(BaseSDK):
             request = utils.unmarshal(request, operations.GetQRCodeRequest)
         request = cast(operations.GetQRCodeRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/qr",
             base_url=base_url,

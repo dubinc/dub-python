@@ -33,7 +33,7 @@ class Customers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/customers",
             base_url=base_url,
@@ -151,7 +151,7 @@ class Customers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/customers",
             base_url=base_url,
@@ -283,7 +283,7 @@ class Customers(BaseSDK):
             )
         request = cast(Optional[operations.CreateCustomerRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/customers",
             base_url=base_url,
@@ -422,7 +422,7 @@ class Customers(BaseSDK):
             )
         request = cast(Optional[operations.CreateCustomerRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/customers",
             base_url=base_url,
@@ -556,7 +556,7 @@ class Customers(BaseSDK):
             request = utils.unmarshal(request, operations.GetCustomerRequest)
         request = cast(operations.GetCustomerRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/customers/{id}",
             base_url=base_url,
@@ -683,7 +683,7 @@ class Customers(BaseSDK):
             request = utils.unmarshal(request, operations.GetCustomerRequest)
         request = cast(operations.GetCustomerRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/customers/{id}",
             base_url=base_url,
@@ -818,7 +818,7 @@ class Customers(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/customers/{id}",
             base_url=base_url,
@@ -960,7 +960,7 @@ class Customers(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/customers/{id}",
             base_url=base_url,
@@ -1092,7 +1092,7 @@ class Customers(BaseSDK):
             id=id,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/customers/{id}",
             base_url=base_url,
@@ -1217,7 +1217,7 @@ class Customers(BaseSDK):
             id=id,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/customers/{id}",
             base_url=base_url,

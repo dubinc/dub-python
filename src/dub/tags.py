@@ -47,7 +47,7 @@ class Tags(BaseSDK):
             )
         request = cast(Optional[operations.CreateTagRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/tags",
             base_url=base_url,
@@ -180,7 +180,7 @@ class Tags(BaseSDK):
             )
         request = cast(Optional[operations.CreateTagRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/tags",
             base_url=base_url,
@@ -299,7 +299,7 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/tags",
             base_url=base_url,
@@ -417,7 +417,7 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/tags",
             base_url=base_url,
@@ -552,7 +552,7 @@ class Tags(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/tags/{id}",
             base_url=base_url,
@@ -692,7 +692,7 @@ class Tags(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/tags/{id}",
             base_url=base_url,
@@ -822,7 +822,7 @@ class Tags(BaseSDK):
             id=id,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/tags/{id}",
             base_url=base_url,
@@ -947,7 +947,7 @@ class Tags(BaseSDK):
             id=id,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/tags/{id}",
             base_url=base_url,

@@ -42,7 +42,7 @@ class Metatags(BaseSDK):
             request = utils.unmarshal(request, operations.GetMetatagsRequest)
         request = cast(operations.GetMetatagsRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/metatags",
             base_url=base_url,
@@ -129,7 +129,7 @@ class Metatags(BaseSDK):
             request = utils.unmarshal(request, operations.GetMetatagsRequest)
         request = cast(operations.GetMetatagsRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/metatags",
             base_url=base_url,

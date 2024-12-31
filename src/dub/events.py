@@ -42,7 +42,7 @@ class Events(BaseSDK):
             request = utils.unmarshal(request, operations.ListEventsRequest)
         request = cast(operations.ListEventsRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/events",
             base_url=base_url,
@@ -169,7 +169,7 @@ class Events(BaseSDK):
             request = utils.unmarshal(request, operations.ListEventsRequest)
         request = cast(operations.ListEventsRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/events",
             base_url=base_url,

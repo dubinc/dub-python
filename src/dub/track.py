@@ -47,7 +47,7 @@ class Track(BaseSDK):
             )
         request = cast(Optional[operations.TrackLeadRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/track/lead",
             base_url=base_url,
@@ -182,7 +182,7 @@ class Track(BaseSDK):
             )
         request = cast(Optional[operations.TrackLeadRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/track/lead",
             base_url=base_url,
@@ -317,7 +317,7 @@ class Track(BaseSDK):
             )
         request = cast(Optional[operations.TrackSaleRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/track/sale",
             base_url=base_url,
@@ -452,7 +452,7 @@ class Track(BaseSDK):
             )
         request = cast(Optional[operations.TrackSaleRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/track/sale",
             base_url=base_url,

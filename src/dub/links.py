@@ -48,7 +48,7 @@ class Links(BaseSDK):
             )
         request = cast(Optional[operations.CreateLinkRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/links",
             base_url=base_url,
@@ -181,7 +181,7 @@ class Links(BaseSDK):
             )
         request = cast(Optional[operations.CreateLinkRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/links",
             base_url=base_url,
@@ -307,7 +307,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.GetLinksRequest)
         request = cast(operations.GetLinksRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/links",
             base_url=base_url,
@@ -466,7 +466,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.GetLinksRequest)
         request = cast(operations.GetLinksRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/links",
             base_url=base_url,
@@ -627,7 +627,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.GetLinksCountRequest)
         request = cast(operations.GetLinksCountRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/links/count",
             base_url=base_url,
@@ -752,7 +752,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.GetLinksCountRequest)
         request = cast(operations.GetLinksCountRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/links/count",
             base_url=base_url,
@@ -877,7 +877,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.GetLinkInfoRequest)
         request = cast(operations.GetLinkInfoRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/links/info",
             base_url=base_url,
@@ -1002,7 +1002,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.GetLinkInfoRequest)
         request = cast(operations.GetLinkInfoRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/links/info",
             base_url=base_url,
@@ -1135,7 +1135,7 @@ class Links(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/links/{linkId}",
             base_url=base_url,
@@ -1275,7 +1275,7 @@ class Links(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/links/{linkId}",
             base_url=base_url,
@@ -1405,7 +1405,7 @@ class Links(BaseSDK):
             link_id=link_id,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/links/{linkId}",
             base_url=base_url,
@@ -1530,7 +1530,7 @@ class Links(BaseSDK):
             link_id=link_id,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/links/{linkId}",
             base_url=base_url,
@@ -1657,7 +1657,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, Optional[List[operations.RequestBody]])
         request = cast(Optional[List[operations.RequestBody]], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/links/bulk",
             base_url=base_url,
@@ -1787,7 +1787,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, Optional[List[operations.RequestBody]])
         request = cast(Optional[List[operations.RequestBody]], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/links/bulk",
             base_url=base_url,
@@ -1922,7 +1922,7 @@ class Links(BaseSDK):
             )
         request = cast(Optional[operations.BulkUpdateLinksRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/links/bulk",
             base_url=base_url,
@@ -2061,7 +2061,7 @@ class Links(BaseSDK):
             )
         request = cast(Optional[operations.BulkUpdateLinksRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/links/bulk",
             base_url=base_url,
@@ -2196,7 +2196,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.BulkDeleteLinksRequest)
         request = cast(operations.BulkDeleteLinksRequest, request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/links/bulk",
             base_url=base_url,
@@ -2324,7 +2324,7 @@ class Links(BaseSDK):
             request = utils.unmarshal(request, operations.BulkDeleteLinksRequest)
         request = cast(operations.BulkDeleteLinksRequest, request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/links/bulk",
             base_url=base_url,
@@ -2456,7 +2456,7 @@ class Links(BaseSDK):
             )
         request = cast(Optional[operations.UpsertLinkRequestBody], request)
 
-        req = self.build_request(
+        req = self._build_request(
             method="PUT",
             path="/links/upsert",
             base_url=base_url,
@@ -2589,7 +2589,7 @@ class Links(BaseSDK):
             )
         request = cast(Optional[operations.UpsertLinkRequestBody], request)
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PUT",
             path="/links/upsert",
             base_url=base_url,
