@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: b6c3f376c48f7905069b63adb30d9d19
+  docChecksum: e904bd8a77ea57b3ba18586e860e5b93
   docVersion: 0.0.1
-  speakeasyVersion: 1.460.3
-  generationVersion: 2.484.0
-  releaseVersion: 0.16.3
-  configChecksum: 25323d43279783ca3108708c89587334
+  speakeasyVersion: 1.462.2
+  generationVersion: 2.486.1
+  releaseVersion: 0.16.4
+  configChecksum: de41910ec02473113491cf80224c2f93
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -16,7 +16,7 @@ features:
     constsAndDefaults: 1.0.5
     core: 5.7.4
     defaultEnabledRetries: 0.2.0
-    deprecations: 3.0.0
+    deprecations: 3.0.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     errors: 3.2.0
@@ -208,6 +208,7 @@ generatedFiles:
   - docs/models/operations/getcustomerrequest.md
   - docs/models/operations/getcustomerresponsebody.md
   - docs/models/operations/getcustomersinterval.md
+  - docs/models/operations/getcustomersrequest.md
   - docs/models/operations/getcustomertype.md
   - docs/models/operations/getlinkinforequest.md
   - docs/models/operations/getlinkscountqueryparamtagids.md
@@ -1145,6 +1146,7 @@ examples:
       parameters:
         path:
           id: "<id>"
+        query: {}
       responses:
         "200":
           application/json: {"id": "<id>", "externalId": "<id>", "name": "<value>", "createdAt": "<value>"}
@@ -1171,6 +1173,7 @@ examples:
       parameters:
         path:
           id: "<id>"
+        query: {}
       responses:
         "200":
           application/json: {"id": "<id>", "externalId": "<id>", "name": "<value>", "createdAt": "<value>"}

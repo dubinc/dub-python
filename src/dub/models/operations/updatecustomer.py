@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
+from dub.utils import (
+    FieldMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+    RequestMetadata,
+)
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -68,6 +73,8 @@ class UpdateCustomerRequestBody(BaseModel):
 class UpdateCustomerRequestTypedDict(TypedDict):
     id: str
     r"""The unique identifier of the customer in Dub."""
+    include_expanded_fields: NotRequired[bool]
+    r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
     request_body: NotRequired[UpdateCustomerRequestBodyTypedDict]
 
 
@@ -76,6 +83,13 @@ class UpdateCustomerRequest(BaseModel):
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""The unique identifier of the customer in Dub."""
+
+    include_expanded_fields: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="includeExpandedFields"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
 
     request_body: Annotated[
         Optional[UpdateCustomerRequestBody],
