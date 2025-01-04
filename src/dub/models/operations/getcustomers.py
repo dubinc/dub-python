@@ -2,10 +2,43 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class GetCustomersRequestTypedDict(TypedDict):
+    email: NotRequired[str]
+    r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string."""
+    external_id: NotRequired[str]
+    r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string."""
+    include_expanded_fields: NotRequired[bool]
+    r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
+
+
+class GetCustomersRequest(BaseModel):
+    email: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string."""
+
+    external_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="externalId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string."""
+
+    include_expanded_fields: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="includeExpandedFields"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
 
 
 class LinkTypedDict(TypedDict):

@@ -12,6 +12,9 @@ class Customers(BaseSDK):
     def list(
         self,
         *,
+        request: Union[
+            operations.GetCustomersRequest, operations.GetCustomersRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -21,6 +24,7 @@ class Customers(BaseSDK):
 
         Retrieve a list of customers for the authenticated workspace.
 
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -33,12 +37,17 @@ class Customers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.GetCustomersRequest)
+        request = cast(operations.GetCustomersRequest, request)
+
         req = self._build_request(
             method="GET",
             path="/customers",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -130,6 +139,9 @@ class Customers(BaseSDK):
     async def list_async(
         self,
         *,
+        request: Union[
+            operations.GetCustomersRequest, operations.GetCustomersRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -139,6 +151,7 @@ class Customers(BaseSDK):
 
         Retrieve a list of customers for the authenticated workspace.
 
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -151,12 +164,17 @@ class Customers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.GetCustomersRequest)
+        request = cast(operations.GetCustomersRequest, request)
+
         req = self._build_request_async(
             method="GET",
             path="/customers",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -780,13 +798,9 @@ class Customers(BaseSDK):
     def update(
         self,
         *,
-        id: str,
-        request_body: Optional[
-            Union[
-                operations.UpdateCustomerRequestBody,
-                operations.UpdateCustomerRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.UpdateCustomerRequest, operations.UpdateCustomerRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -796,8 +810,7 @@ class Customers(BaseSDK):
 
         Update a customer for the authenticated workspace.
 
-        :param id: The unique identifier of the customer in Dub.
-        :param request_body:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -811,12 +824,9 @@ class Customers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.UpdateCustomerRequest(
-            id=id,
-            request_body=utils.get_pydantic_model(
-                request_body, Optional[operations.UpdateCustomerRequestBody]
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.UpdateCustomerRequest)
+        request = cast(operations.UpdateCustomerRequest, request)
 
         req = self._build_request(
             method="PATCH",
@@ -922,13 +932,9 @@ class Customers(BaseSDK):
     async def update_async(
         self,
         *,
-        id: str,
-        request_body: Optional[
-            Union[
-                operations.UpdateCustomerRequestBody,
-                operations.UpdateCustomerRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            operations.UpdateCustomerRequest, operations.UpdateCustomerRequestTypedDict
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -938,8 +944,7 @@ class Customers(BaseSDK):
 
         Update a customer for the authenticated workspace.
 
-        :param id: The unique identifier of the customer in Dub.
-        :param request_body:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -953,12 +958,9 @@ class Customers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.UpdateCustomerRequest(
-            id=id,
-            request_body=utils.get_pydantic_model(
-                request_body, Optional[operations.UpdateCustomerRequestBody]
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.UpdateCustomerRequest)
+        request = cast(operations.UpdateCustomerRequest, request)
 
         req = self._build_request_async(
             method="PATCH",
