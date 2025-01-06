@@ -41,7 +41,7 @@ actions:
                 token="DUB_API_KEY",
             ) as dub:
 
-                res = dub.customers.list()
+                res = dub.customers.list(request={})
 
                 assert res is not None
 
@@ -115,7 +115,9 @@ actions:
                 token="DUB_API_KEY",
             ) as dub:
 
-                res = dub.customers.update(id="<id>")
+                res = dub.customers.update(request={
+                    "id": "<id>",
+                })
 
                 assert res is not None
 
