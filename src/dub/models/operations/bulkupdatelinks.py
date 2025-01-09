@@ -34,6 +34,8 @@ r"""The unique name of the tags assigned to the short link (case insensitive).""
 class DataTypedDict(TypedDict):
     url: NotRequired[str]
     r"""The destination URL of the short link."""
+    tenant_id: NotRequired[Nullable[str]]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     track_conversion: NotRequired[bool]
     r"""Whether to track conversions for the short link."""
     archived: NotRequired[bool]
@@ -95,6 +97,11 @@ class DataTypedDict(TypedDict):
 class Data(BaseModel):
     url: Optional[str] = None
     r"""The destination URL of the short link."""
+
+    tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
+        UNSET
+    )
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
 
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
@@ -210,6 +217,7 @@ class Data(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "url",
+            "tenantId",
             "trackConversion",
             "archived",
             "publicStats",
@@ -240,6 +248,7 @@ class Data(BaseModel):
             "webhookIds",
         ]
         nullable_fields = [
+            "tenantId",
             "tagId",
             "comments",
             "expiresAt",

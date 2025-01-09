@@ -826,7 +826,9 @@ class LeadEventLinkTypedDict(TypedDict):
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     url: str
     external_id: Nullable[str]
-    r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    tenant_id: Nullable[str]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     expires_at: str
     expired_url: Nullable[str]
     password: Nullable[str]
@@ -906,7 +908,10 @@ class LeadEventLink(BaseModel):
     url: str
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
-    r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+
+    tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
 
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
@@ -1040,6 +1045,7 @@ class LeadEventLink(BaseModel):
         ]
         nullable_fields = [
             "externalId",
+            "tenantId",
             "expiredUrl",
             "password",
             "title",
