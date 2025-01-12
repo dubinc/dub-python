@@ -362,7 +362,7 @@ with Dub(
 
 ### Response
 
-**[List[components.LinkSchema]](../../models/.md)**
+**[List[operations.ResponseBody]](../../models/.md)**
 
 ### Errors
 

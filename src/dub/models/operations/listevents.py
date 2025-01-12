@@ -13,7 +13,13 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import (
+    Annotated,
+    NotRequired,
+    TypeAliasType,
+    TypedDict,
+    deprecated,
+)
 
 
 class QueryParamEvent(str, Enum):
@@ -55,13 +61,27 @@ ListEventsQueryParamTagIds = TypeAliasType(
 r"""The tag IDs to retrieve analytics for."""
 
 
-class Order(str, Enum):
+class QueryParamSortOrder(str, Enum):
+    r"""The sort order. The default is `desc`."""
+
     ASC = "asc"
     DESC = "desc"
 
 
-class SortBy(str, Enum):
+class QueryParamSortBy(str, Enum):
+    r"""The field to sort the events by. The default is `timestamp`."""
+
     TIMESTAMP = "timestamp"
+
+
+@deprecated(
+    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+)
+class Order(str, Enum):
+    r"""DEPRECATED. Use `sortOrder` instead."""
+
+    ASC = "asc"
+    DESC = "desc"
 
 
 class ListEventsRequestTypedDict(TypedDict):
@@ -115,8 +135,12 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
     page: NotRequired[float]
     limit: NotRequired[float]
+    sort_order: NotRequired[QueryParamSortOrder]
+    r"""The sort order. The default is `desc`."""
+    sort_by: NotRequired[QueryParamSortBy]
+    r"""The field to sort the events by. The default is `timestamp`."""
     order: NotRequired[Order]
-    sort_by: NotRequired[SortBy]
+    r"""DEPRECATED. Use `sortOrder` instead."""
 
 
 class ListEventsRequest(BaseModel):
@@ -279,16 +303,25 @@ class ListEventsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 100
 
+    sort_order: Annotated[
+        Optional[QueryParamSortOrder],
+        pydantic.Field(alias="sortOrder"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = QueryParamSortOrder.DESC
+    r"""The sort order. The default is `desc`."""
+
+    sort_by: Annotated[
+        Optional[QueryParamSortBy],
+        pydantic.Field(alias="sortBy"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = QueryParamSortBy.TIMESTAMP
+    r"""The field to sort the events by. The default is `timestamp`."""
+
     order: Annotated[
         Optional[Order],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = Order.DESC
-
-    sort_by: Annotated[
-        Optional[SortBy],
-        pydantic.Field(alias="sortBy"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = SortBy.TIMESTAMP
+    r"""DEPRECATED. Use `sortOrder` instead."""
 
 
 ListEventsResponseBodyTypedDict = TypeAliasType(

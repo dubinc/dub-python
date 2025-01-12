@@ -376,8 +376,11 @@ class Links(BaseSDK):
                     tag_names=request.tag_names,
                     search=request.search,
                     user_id=request.user_id,
+                    tenant_id=request.tenant_id,
                     show_archived=request.show_archived,
                     with_tags=request.with_tags,
+                    sort_by=request.sort_by,
+                    sort_order=request.sort_order,
                     sort=request.sort,
                     page=next_page,
                     page_size=request.page_size,
@@ -535,8 +538,11 @@ class Links(BaseSDK):
                     tag_names=request.tag_names,
                     search=request.search,
                     user_id=request.user_id,
+                    tenant_id=request.tenant_id,
                     show_archived=request.show_archived,
                     with_tags=request.with_tags,
+                    sort_by=request.sort_by,
+                    sort_order=request.sort_order,
                     sort=request.sort,
                     page=next_page,
                     page_size=request.page_size,
@@ -1634,7 +1640,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[components.LinkSchema]]:
+    ) -> Optional[List[operations.ResponseBody]]:
         r"""Bulk create links
 
         Bulk create up to 100 links for the authenticated workspace.
@@ -1710,7 +1716,7 @@ class Links(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[List[components.LinkSchema]]
+                http_res.text, Optional[List[operations.ResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -1764,7 +1770,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[components.LinkSchema]]:
+    ) -> Optional[List[operations.ResponseBody]]:
         r"""Bulk create links
 
         Bulk create up to 100 links for the authenticated workspace.
@@ -1840,7 +1846,7 @@ class Links(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[List[components.LinkSchema]]
+                http_res.text, Optional[List[operations.ResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)

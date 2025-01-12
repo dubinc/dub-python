@@ -214,7 +214,7 @@ class Discount(BaseModel):
         return m
 
 
-class ResponseBodyTypedDict(TypedDict):
+class GetCustomersResponseBodyTypedDict(TypedDict):
     id: str
     r"""The unique identifier of the customer in Dub."""
     external_id: str
@@ -234,7 +234,7 @@ class ResponseBodyTypedDict(TypedDict):
     discount: NotRequired[Nullable[DiscountTypedDict]]
 
 
-class ResponseBody(BaseModel):
+class GetCustomersResponseBody(BaseModel):
     id: str
     r"""The unique identifier of the customer in Dub."""
 

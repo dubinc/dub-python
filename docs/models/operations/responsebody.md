@@ -1,17 +1,17 @@
 # ResponseBody
 
 
-## Fields
+## Supported Types
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `id`                                                                         | *str*                                                                        | :heavy_check_mark:                                                           | The unique identifier of the customer in Dub.                                |
-| `external_id`                                                                | *str*                                                                        | :heavy_check_mark:                                                           | Unique identifier for the customer in the client's app.                      |
-| `name`                                                                       | *str*                                                                        | :heavy_check_mark:                                                           | Name of the customer.                                                        |
-| `created_at`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | The date the customer was created.                                           |
-| `email`                                                                      | *OptionalNullable[str]*                                                      | :heavy_minus_sign:                                                           | Email of the customer.                                                       |
-| `avatar`                                                                     | *OptionalNullable[str]*                                                      | :heavy_minus_sign:                                                           | Avatar URL of the customer.                                                  |
-| `country`                                                                    | *OptionalNullable[str]*                                                      | :heavy_minus_sign:                                                           | Country of the customer.                                                     |
-| `link`                                                                       | [OptionalNullable[operations.Link]](../../models/operations/link.md)         | :heavy_minus_sign:                                                           | N/A                                                                          |
-| `partner`                                                                    | [OptionalNullable[operations.Partner]](../../models/operations/partner.md)   | :heavy_minus_sign:                                                           | N/A                                                                          |
-| `discount`                                                                   | [OptionalNullable[operations.Discount]](../../models/operations/discount.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+### `components.LinkSchema`
+
+```python
+value: components.LinkSchema = /* values here */
+```
+
+### `components.LinkErrorSchema`
+
+```python
+value: components.LinkErrorSchema = /* values here */
+```
+

@@ -42,7 +42,7 @@ with Dub(
 
 ### Response
 
-**[List[operations.ResponseBody]](../../models/.md)**
+**[List[operations.GetCustomersResponseBody]](../../models/.md)**
 
 ### Errors
 

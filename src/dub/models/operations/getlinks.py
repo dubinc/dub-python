@@ -7,7 +7,13 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from typing import Callable, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import (
+    Annotated,
+    NotRequired,
+    TypeAliasType,
+    TypedDict,
+    deprecated,
+)
 
 
 QueryParamTagIdsTypedDict = TypeAliasType(
@@ -30,11 +36,31 @@ QueryParamTagNames = TypeAliasType("QueryParamTagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-class Sort(str, Enum):
-    r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
+class SortBy(str, Enum):
+    r"""The field to sort the links by. The default is `createdAt`."""
 
     CREATED_AT = "createdAt"
     CLICKS = "clicks"
+    SALE_AMOUNT = "saleAmount"
+    LAST_CLICKED = "lastClicked"
+
+
+class SortOrder(str, Enum):
+    r"""The sort order. The default is `desc`."""
+
+    ASC = "asc"
+    DESC = "desc"
+
+
+@deprecated(
+    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+)
+class Sort(str, Enum):
+    r"""DEPRECATED. Use `sortBy` instead."""
+
+    CREATED_AT = "createdAt"
+    CLICKS = "clicks"
+    SALE_AMOUNT = "saleAmount"
     LAST_CLICKED = "lastClicked"
 
 
@@ -51,12 +77,18 @@ class GetLinksRequestTypedDict(TypedDict):
     r"""The search term to filter the links by. The search term will be matched against the short link slug and the destination url."""
     user_id: NotRequired[str]
     r"""The user ID to filter the links by."""
+    tenant_id: NotRequired[str]
+    r"""The ID of the tenant that created the link inside your system. If set, will only return links for the specified tenant."""
     show_archived: NotRequired[bool]
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
     with_tags: NotRequired[bool]
     r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
+    sort_by: NotRequired[SortBy]
+    r"""The field to sort the links by. The default is `createdAt`."""
+    sort_order: NotRequired[SortOrder]
+    r"""The sort order. The default is `desc`."""
     sort: NotRequired[Sort]
-    r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
+    r"""DEPRECATED. Use `sortBy` instead."""
     page: NotRequired[float]
     r"""The page number for pagination."""
     page_size: NotRequired[float]
@@ -104,6 +136,13 @@ class GetLinksRequest(BaseModel):
     ] = None
     r"""The user ID to filter the links by."""
 
+    tenant_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tenantId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the tenant that created the link inside your system. If set, will only return links for the specified tenant."""
+
     show_archived: Annotated[
         Optional[bool],
         pydantic.Field(alias="showArchived"),
@@ -118,11 +157,25 @@ class GetLinksRequest(BaseModel):
     ] = True
     r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
 
+    sort_by: Annotated[
+        Optional[SortBy],
+        pydantic.Field(alias="sortBy"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = SortBy.CREATED_AT
+    r"""The field to sort the links by. The default is `createdAt`."""
+
+    sort_order: Annotated[
+        Optional[SortOrder],
+        pydantic.Field(alias="sortOrder"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = SortOrder.DESC
+    r"""The sort order. The default is `desc`."""
+
     sort: Annotated[
         Optional[Sort],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = Sort.CREATED_AT
-    r"""The field to sort the links by. The default is `createdAt`, and sort order is always descending."""
+    r"""DEPRECATED. Use `sortBy` instead."""
 
     page: Annotated[
         Optional[float],

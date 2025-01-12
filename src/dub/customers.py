@@ -19,7 +19,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.ResponseBody]]:
+    ) -> Optional[List[operations.GetCustomersResponseBody]]:
         r"""Retrieve a list of customers
 
         Retrieve a list of customers for the authenticated workspace.
@@ -92,7 +92,7 @@ class Customers(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[List[operations.ResponseBody]]
+                http_res.text, Optional[List[operations.GetCustomersResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -146,7 +146,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.ResponseBody]]:
+    ) -> Optional[List[operations.GetCustomersResponseBody]]:
         r"""Retrieve a list of customers
 
         Retrieve a list of customers for the authenticated workspace.
@@ -219,7 +219,7 @@ class Customers(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[List[operations.ResponseBody]]
+                http_res.text, Optional[List[operations.GetCustomersResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)

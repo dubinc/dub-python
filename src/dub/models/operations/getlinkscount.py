@@ -66,6 +66,8 @@ class GetLinksCountRequestTypedDict(TypedDict):
     r"""The search term to filter the links by. The search term will be matched against the short link slug and the destination url."""
     user_id: NotRequired[str]
     r"""The user ID to filter the links by."""
+    tenant_id: NotRequired[str]
+    r"""The ID of the tenant that created the link inside your system. If set, will only return links for the specified tenant."""
     show_archived: NotRequired[bool]
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
     with_tags: NotRequired[bool]
@@ -114,6 +116,13 @@ class GetLinksCountRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The user ID to filter the links by."""
+
+    tenant_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tenantId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the tenant that created the link inside your system. If set, will only return links for the specified tenant."""
 
     show_archived: Annotated[
         Optional[bool],
