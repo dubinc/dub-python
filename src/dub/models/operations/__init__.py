@@ -7,6 +7,8 @@ from .bulkcreatelinks import (
     BulkCreateLinksTagNamesTypedDict,
     RequestBody,
     RequestBodyTypedDict,
+    ResponseBody,
+    ResponseBodyTypedDict,
 )
 from .bulkdeletelinks import (
     BulkDeleteLinksRequest,
@@ -98,12 +100,12 @@ from .getcustomers import (
     GetCustomersInterval,
     GetCustomersRequest,
     GetCustomersRequestTypedDict,
+    GetCustomersResponseBody,
+    GetCustomersResponseBodyTypedDict,
     Link,
     LinkTypedDict,
     Partner,
     PartnerTypedDict,
-    ResponseBody,
-    ResponseBodyTypedDict,
     Type,
 )
 from .getlinkinfo import GetLinkInfoRequest, GetLinkInfoRequestTypedDict
@@ -117,6 +119,8 @@ from .getlinks import (
     QueryParamTagNames,
     QueryParamTagNamesTypedDict,
     Sort,
+    SortBy,
+    SortOrder,
 )
 from .getlinkscount import (
     GetLinksCountQueryParamTagIds,
@@ -155,8 +159,9 @@ from .listevents import (
     Order,
     QueryParamEvent,
     QueryParamInterval,
+    QueryParamSortBy,
+    QueryParamSortOrder,
     QueryParamTrigger,
-    SortBy,
 )
 from .retrieveanalytics import (
     Event,
@@ -323,6 +328,8 @@ __all__ = [
     "GetCustomersInterval",
     "GetCustomersRequest",
     "GetCustomersRequestTypedDict",
+    "GetCustomersResponseBody",
+    "GetCustomersResponseBodyTypedDict",
     "GetLinkInfoRequest",
     "GetLinkInfoRequestTypedDict",
     "GetLinksCountQueryParamTagIds",
@@ -367,6 +374,8 @@ __all__ = [
     "QueryParamEvent",
     "QueryParamGroupBy",
     "QueryParamInterval",
+    "QueryParamSortBy",
+    "QueryParamSortOrder",
     "QueryParamTagIds",
     "QueryParamTagIdsTypedDict",
     "QueryParamTagNames",
@@ -386,6 +395,7 @@ __all__ = [
     "SaleTypedDict",
     "Sort",
     "SortBy",
+    "SortOrder",
     "TagIds",
     "TagIdsTypedDict",
     "TagNames",

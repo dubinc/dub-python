@@ -798,7 +798,9 @@ class DataTypedDict(TypedDict):
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     url: str
     external_id: Nullable[str]
-    r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    tenant_id: Nullable[str]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     expires_at: str
     expired_url: Nullable[str]
     password: Nullable[str]
@@ -858,11 +860,11 @@ class DataTypedDict(TypedDict):
     clicks: NotRequired[float]
     r"""The number of clicks on the short link."""
     leads: NotRequired[float]
-    r"""[BETA]: The number of leads the short links has generated."""
+    r"""The number of leads the short links has generated."""
     sales: NotRequired[float]
-    r"""[BETA]: The number of sales the short links has generated."""
+    r"""The number of sales the short links has generated."""
     sale_amount: NotRequired[float]
-    r"""[BETA]: The total dollar amount of sales the short links has generated (in cents)."""
+    r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
 class Data(BaseModel):
@@ -878,7 +880,10 @@ class Data(BaseModel):
     url: str
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
-    r"""This is the ID of the link in your database that is unique across your workspace. If set, it can be used to identify the link in future API requests. Must be prefixed with 'ext_' when passed as a query parameter."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+
+    tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
 
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
@@ -988,13 +993,13 @@ class Data(BaseModel):
     r"""The number of clicks on the short link."""
 
     leads: Optional[float] = 0
-    r"""[BETA]: The number of leads the short links has generated."""
+    r"""The number of leads the short links has generated."""
 
     sales: Optional[float] = 0
-    r"""[BETA]: The number of sales the short links has generated."""
+    r"""The number of sales the short links has generated."""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""[BETA]: The total dollar amount of sales the short links has generated (in cents)."""
+    r"""The total dollar amount of sales the short links has generated (in cents)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -1012,6 +1017,7 @@ class Data(BaseModel):
         ]
         nullable_fields = [
             "externalId",
+            "tenantId",
             "expiredUrl",
             "password",
             "title",

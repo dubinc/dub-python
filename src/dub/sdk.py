@@ -81,7 +81,8 @@ class Dub(BaseSDK):
 
         security: Any = None
         if callable(token):
-            security = lambda: components.Security(token=token())  # pylint: disable=unnecessary-lambda-assignment
+            # pylint: disable=unnecessary-lambda-assignment
+            security = lambda: components.Security(token=token())
         else:
             security = components.Security(token=token)
 

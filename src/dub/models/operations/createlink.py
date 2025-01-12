@@ -33,7 +33,9 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     external_id: NotRequired[Nullable[str]]
-    r"""This is the ID of the link in your database. If set, it can be used to identify the link in the future. Must be prefixed with `ext_` when passed as a query parameter."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    tenant_id: NotRequired[Nullable[str]]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     prefix: NotRequired[str]
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     track_conversion: NotRequired[bool]
@@ -107,7 +109,12 @@ class CreateLinkRequestBody(BaseModel):
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
-    r"""This is the ID of the link in your database. If set, it can be used to identify the link in the future. Must be prefixed with `ext_` when passed as a query parameter."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+
+    tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
+        UNSET
+    )
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
 
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
@@ -224,6 +231,7 @@ class CreateLinkRequestBody(BaseModel):
             "domain",
             "key",
             "externalId",
+            "tenantId",
             "prefix",
             "trackConversion",
             "archived",
@@ -256,6 +264,7 @@ class CreateLinkRequestBody(BaseModel):
         ]
         nullable_fields = [
             "externalId",
+            "tenantId",
             "tagId",
             "comments",
             "expiresAt",

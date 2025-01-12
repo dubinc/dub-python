@@ -102,6 +102,7 @@ from .linkclickedevent import (
     LinkClickedEventLinkTypedDict,
     LinkClickedEventTypedDict,
 )
+from .linkerrorschema import Code, LinkErrorSchema, LinkErrorSchemaTypedDict
 from .linkgeotargeting import LinkGeoTargeting, LinkGeoTargetingTypedDict
 from .linkschema import Geo, GeoTypedDict, LinkSchema, LinkSchemaTypedDict
 from .linkwebhookevent import (
@@ -215,6 +216,7 @@ __all__ = [
     "ClickEventGeoTypedDict",
     "ClickEventTypedDict",
     "ClickTypedDict",
+    "Code",
     "Color",
     "Continent",
     "ContinentCode",
@@ -278,6 +280,8 @@ __all__ = [
     "LinkClickedEventLink",
     "LinkClickedEventLinkTypedDict",
     "LinkClickedEventTypedDict",
+    "LinkErrorSchema",
+    "LinkErrorSchemaTypedDict",
     "LinkGeoTargeting",
     "LinkGeoTargetingTypedDict",
     "LinkSchema",
