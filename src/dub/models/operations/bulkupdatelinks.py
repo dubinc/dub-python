@@ -37,11 +37,11 @@ class DataTypedDict(TypedDict):
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     track_conversion: NotRequired[bool]
-    r"""Whether to track conversions for the short link."""
+    r"""Whether to track conversions for the short link. Defaults to `false` if not provided."""
     archived: NotRequired[bool]
-    r"""Whether the short link is archived."""
+    r"""Whether the short link is archived. Defaults to `false` if not provided."""
     public_stats: NotRequired[bool]
-    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible."""
+    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
     tag_id: NotRequired[Nullable[str]]
     r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tagIds` instead."""
     tag_ids: NotRequired[BulkUpdateLinksTagIdsTypedDict]
@@ -57,7 +57,7 @@ class DataTypedDict(TypedDict):
     password: NotRequired[Nullable[str]]
     r"""The password required to access the destination URL of the short link."""
     proxy: NotRequired[bool]
-    r"""Whether the short link uses Custom Social Media Cards feature."""
+    r"""Whether the short link uses Custom Social Media Cards feature. Defaults to `false` if not provided."""
     title: NotRequired[Nullable[str]]
     r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     description: NotRequired[Nullable[str]]
@@ -67,7 +67,7 @@ class DataTypedDict(TypedDict):
     video: NotRequired[Nullable[str]]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     rewrite: NotRequired[bool]
-    r"""Whether the short link uses link cloaking."""
+    r"""Whether the short link uses link cloaking. Defaults to `false` if not provided."""
     ios: NotRequired[Nullable[str]]
     r"""The iOS destination URL for the short link for iOS device targeting."""
     android: NotRequired[Nullable[str]]
@@ -105,11 +105,11 @@ class Data(BaseModel):
 
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
-    ] = False
-    r"""Whether to track conversions for the short link."""
+    ] = None
+    r"""Whether to track conversions for the short link. Defaults to `false` if not provided."""
 
-    archived: Optional[bool] = False
-    r"""Whether the short link is archived."""
+    archived: Optional[bool] = None
+    r"""Whether the short link is archived. Defaults to `false` if not provided."""
 
     public_stats: Annotated[
         Optional[bool],
@@ -117,8 +117,8 @@ class Data(BaseModel):
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
             alias="publicStats",
         ),
-    ] = False
-    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible."""
+    ] = None
+    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
 
     tag_id: Annotated[
         OptionalNullable[str],
@@ -155,8 +155,8 @@ class Data(BaseModel):
     password: OptionalNullable[str] = UNSET
     r"""The password required to access the destination URL of the short link."""
 
-    proxy: Optional[bool] = False
-    r"""Whether the short link uses Custom Social Media Cards feature."""
+    proxy: Optional[bool] = None
+    r"""Whether the short link uses Custom Social Media Cards feature. Defaults to `false` if not provided."""
 
     title: OptionalNullable[str] = UNSET
     r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
@@ -170,8 +170,8 @@ class Data(BaseModel):
     video: OptionalNullable[str] = UNSET
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
 
-    rewrite: Optional[bool] = False
-    r"""Whether the short link uses link cloaking."""
+    rewrite: Optional[bool] = None
+    r"""Whether the short link uses link cloaking. Defaults to `false` if not provided."""
 
     ios: OptionalNullable[str] = UNSET
     r"""The iOS destination URL for the short link for iOS device targeting."""
@@ -182,7 +182,7 @@ class Data(BaseModel):
     geo: OptionalNullable[components_linkgeotargeting.LinkGeoTargeting] = UNSET
     r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
 
-    do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = False
+    do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = None
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
 
     utm_source: OptionalNullable[str] = UNSET
