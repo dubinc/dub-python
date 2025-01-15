@@ -250,6 +250,7 @@ from .upsertlink import (
     UpsertLinkTagNamesTypedDict,
 )
 
+
 __all__ = [
     "BulkCreateLinksTagIds",
     "BulkCreateLinksTagIdsTypedDict",

@@ -181,6 +181,7 @@ from .workspaceschema import (
     WorkspaceSchemaTypedDict,
 )
 
+
 __all__ = [
     "AnalyticsBrowsers",
     "AnalyticsBrowsersTypedDict",

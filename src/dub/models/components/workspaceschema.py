@@ -5,7 +5,7 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -102,7 +102,7 @@ class WorkspaceSchemaTypedDict(TypedDict):
     ai_limit: float
     r"""The AI limit of the workspace."""
     conversion_enabled: bool
-    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
+    r"""Whether the workspace has conversion tracking enabled automatically for new links (d.to/conversions)."""
     dot_link_claimed: bool
     r"""Whether the workspace has claimed a free .link domain. (dub.link/free)"""
     partners_enabled: bool
@@ -113,6 +113,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The role of the authenticated user in the workspace."""
     domains: List[DomainsTypedDict]
     r"""The domains of the workspace."""
+    store: Nullable[Dict[str, Any]]
+    r"""The miscellaneous key-value store of the workspace."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -184,7 +186,7 @@ class WorkspaceSchema(BaseModel):
     r"""The AI limit of the workspace."""
 
     conversion_enabled: Annotated[bool, pydantic.Field(alias="conversionEnabled")]
-    r"""Whether the workspace has conversion tracking enabled (d.to/conversions)."""
+    r"""Whether the workspace has conversion tracking enabled automatically for new links (d.to/conversions)."""
 
     dot_link_claimed: Annotated[bool, pydantic.Field(alias="dotLinkClaimed")]
     r"""Whether the workspace has claimed a free .link domain. (dub.link/free)"""
@@ -201,6 +203,9 @@ class WorkspaceSchema(BaseModel):
     domains: List[Domains]
     r"""The domains of the workspace."""
 
+    store: Nullable[Dict[str, Any]]
+    r"""The miscellaneous key-value store of the workspace."""
+
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
 
@@ -216,6 +221,7 @@ class WorkspaceSchema(BaseModel):
             "paymentFailedAt",
             "stripeConnectId",
             "payoutMethodId",
+            "store",
             "logo",
         ]
         null_default_fields = ["logo"]

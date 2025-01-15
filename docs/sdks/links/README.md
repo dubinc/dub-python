@@ -337,13 +337,7 @@ with Dub(
 ) as dub:
 
     res = dub.links.create_many(request=[
-        {
-            "url": "https://google.com",
-            "external_id": "123456",
-            "tag_ids": [
-                "clux0rgak00011...",
-            ],
-        },
+
     ])
 
     assert res is not None
@@ -400,7 +394,7 @@ with Dub(
             ],
         },
         "link_ids": [
-            "<value>",
+
         ],
     })
 

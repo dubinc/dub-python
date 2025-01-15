@@ -59,6 +59,7 @@ from .unprocessableentity import (
     UnprocessableEntityErrorTypedDict,
 )
 
+
 __all__ = [
     "BadRequest",
     "BadRequestData",

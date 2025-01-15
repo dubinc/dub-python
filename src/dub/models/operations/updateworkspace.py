@@ -12,6 +12,7 @@ class UpdateWorkspaceRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     slug: NotRequired[str]
     logo: NotRequired[str]
+    conversion_enabled: NotRequired[bool]
 
 
 class UpdateWorkspaceRequestBody(BaseModel):
@@ -20,6 +21,10 @@ class UpdateWorkspaceRequestBody(BaseModel):
     slug: Optional[str] = None
 
     logo: Optional[str] = None
+
+    conversion_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="conversionEnabled")
+    ] = None
 
 
 class UpdateWorkspaceRequestTypedDict(TypedDict):
