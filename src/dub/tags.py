@@ -127,7 +127,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -260,7 +265,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -278,6 +288,7 @@ class Tags(BaseSDK):
     def list(
         self,
         *,
+        request: Union[operations.GetTagsRequest, operations.GetTagsRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -287,6 +298,7 @@ class Tags(BaseSDK):
 
         Retrieve a list of tags for the authenticated workspace.
 
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -299,12 +311,17 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.GetTagsRequest)
+        request = cast(operations.GetTagsRequest, request)
+
         req = self._build_request(
             method="GET",
             path="/tags",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -378,7 +395,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -396,6 +418,7 @@ class Tags(BaseSDK):
     async def list_async(
         self,
         *,
+        request: Union[operations.GetTagsRequest, operations.GetTagsRequestTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -405,6 +428,7 @@ class Tags(BaseSDK):
 
         Retrieve a list of tags for the authenticated workspace.
 
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -417,12 +441,17 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.GetTagsRequest)
+        request = cast(operations.GetTagsRequest, request)
+
         req = self._build_request_async(
             method="GET",
             path="/tags",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -496,7 +525,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -636,7 +670,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -776,7 +815,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -901,7 +945,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1026,7 +1075,12 @@ class Tags(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
