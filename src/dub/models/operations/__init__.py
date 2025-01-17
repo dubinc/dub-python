@@ -142,6 +142,14 @@ from .getmetatags import (
     GetMetatagsResponseBodyTypedDict,
 )
 from .getqrcode import GetQRCodeRequest, GetQRCodeRequestTypedDict, Level
+from .gettags import (
+    GetTagsQueryParamSortBy,
+    GetTagsQueryParamSortOrder,
+    GetTagsRequest,
+    GetTagsRequestTypedDict,
+    Ids,
+    IdsTypedDict,
+)
 from .getworkspace import GetWorkspaceRequest, GetWorkspaceRequestTypedDict
 from .listdomains import (
     ListDomainsRequest,
@@ -349,10 +357,16 @@ __all__ = [
     "GetMetatagsResponseBodyTypedDict",
     "GetQRCodeRequest",
     "GetQRCodeRequestTypedDict",
+    "GetTagsQueryParamSortBy",
+    "GetTagsQueryParamSortOrder",
+    "GetTagsRequest",
+    "GetTagsRequestTypedDict",
     "GetWorkspaceRequest",
     "GetWorkspaceRequestTypedDict",
     "GroupBy",
     "GroupByTypedDict",
+    "Ids",
+    "IdsTypedDict",
     "Interval",
     "Level",
     "Link",

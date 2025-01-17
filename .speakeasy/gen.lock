@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 810d019618d329428080463b7bf165c7
+  docChecksum: c7226fc27f4fb4b6c492bc7d8bb0ce6d
   docVersion: 0.0.1
-  speakeasyVersion: 1.468.6
-  generationVersion: 2.493.13
-  releaseVersion: 0.17.2
-  configChecksum: 27829e9e655969641d4494982fa8a837
+  speakeasyVersion: 1.468.9
+  generationVersion: 2.493.21
+  releaseVersion: 0.17.3
+  configChecksum: 57196fc5b5b758adf94f83e6e5eee8ba
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.10.1
+    core: 5.10.2
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     enumUnions: 0.1.0
@@ -221,8 +221,12 @@ generatedFiles:
   - docs/models/operations/getmetatagsrequest.md
   - docs/models/operations/getmetatagsresponsebody.md
   - docs/models/operations/getqrcoderequest.md
+  - docs/models/operations/gettagsqueryparamsortby.md
+  - docs/models/operations/gettagsqueryparamsortorder.md
+  - docs/models/operations/gettagsrequest.md
   - docs/models/operations/getworkspacerequest.md
   - docs/models/operations/groupby.md
+  - docs/models/operations/ids.md
   - docs/models/operations/interval.md
   - docs/models/operations/level.md
   - docs/models/operations/link.md
@@ -380,6 +384,7 @@ generatedFiles:
   - src/dub/models/operations/getlinkscount.py
   - src/dub/models/operations/getmetatags.py
   - src/dub/models/operations/getqrcode.py
+  - src/dub/models/operations/gettags.py
   - src/dub/models/operations/getworkspace.py
   - src/dub/models/operations/listdomains.py
   - src/dub/models/operations/listevents.py
@@ -818,6 +823,10 @@ examples:
           application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
   getTags:
     speakeasy-default-get-tags:
+      parameters:
+        query:
+          page: 1
+          pageSize: 50
       responses:
         "200":
           application/json: []

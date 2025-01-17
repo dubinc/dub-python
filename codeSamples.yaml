@@ -519,7 +519,10 @@ actions:
                 token="DUB_API_KEY",
             ) as dub:
 
-                res = dub.tags.list()
+                res = dub.tags.list(request={
+                    "page": 1,
+                    "page_size": 50,
+                })
 
                 assert res is not None
 
