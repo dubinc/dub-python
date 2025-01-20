@@ -78,6 +78,7 @@ with Dub(
 ) as dub:
 
     res = dub.domains.list(request={
+        "archived": True,
         "page": 1,
         "page_size": 50,
     })

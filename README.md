@@ -181,7 +181,7 @@ asyncio.run(main())
 ### [customers](docs/sdks/customers/README.md)
 
 * [list](docs/sdks/customers/README.md#list) - Retrieve a list of customers
-* [create](docs/sdks/customers/README.md#create) - Create a customer
+* [~~create~~](docs/sdks/customers/README.md#create) - Create a customer :warning: **Deprecated**
 * [get](docs/sdks/customers/README.md#get) - Retrieve a customer
 * [update](docs/sdks/customers/README.md#update) - Update a customer
 * [delete](docs/sdks/customers/README.md#delete) - Delete a customer
@@ -542,12 +542,17 @@ return value of `Next` is `None`, then there are no more pages to be fetched.
 Here's an example of one such pagination call:
 ```python
 from dub import Dub
+from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
     res = dub.links.list(request={
+        "show_archived": True,
+        "with_tags": True,
+        "sort_by": operations.SortBy.CREATED_AT,
+        "sort_order": operations.SortOrder.DESC,
         "page": 1,
         "page_size": 50,
     })

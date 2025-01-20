@@ -10,12 +10,15 @@ actions:
           label: retrieveAnalytics
           source: |-
             from dub import Dub
+            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
 
                 res = dub.analytics.retrieve(request={
+                    "event": operations.Event.CLICKS,
+                    "group_by": operations.QueryParamGroupBy.COUNT,
                     "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
@@ -42,24 +45,6 @@ actions:
             ) as dub:
 
                 res = dub.customers.list(request={})
-
-                assert res is not None
-
-                # Handle response
-                print(res)
-  - target: $["paths"]["/customers"]["post"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: createCustomer
-          source: |-
-            from dub import Dub
-
-            with Dub(
-                token="DUB_API_KEY",
-            ) as dub:
-
-                res = dub.customers.create()
 
                 assert res is not None
 
@@ -136,6 +121,7 @@ actions:
             ) as dub:
 
                 res = dub.domains.list(request={
+                    "archived": True,
                     "page": 1,
                     "page_size": 50,
                 })
@@ -217,12 +203,15 @@ actions:
           label: listEvents
           source: |-
             from dub import Dub
+            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
 
                 res = dub.events.list(request={
+                    "event": operations.QueryParamEvent.CLICKS,
+                    "interval": operations.QueryParamInterval.TWENTY_FOURH,
                     "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
@@ -230,6 +219,10 @@ actions:
                     "os": "Windows",
                     "referer": "google.com",
                     "referer_url": "https://dub.co/blog",
+                    "page": 1,
+                    "limit": 100,
+                    "sort_order": operations.QueryParamSortOrder.DESC,
+                    "sort_by": operations.QueryParamSortBy.TIMESTAMP,
                 })
 
                 assert res is not None
@@ -243,12 +236,17 @@ actions:
           label: getLinks
           source: |-
             from dub import Dub
+            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
 
                 res = dub.links.list(request={
+                    "show_archived": True,
+                    "with_tags": True,
+                    "sort_by": operations.SortBy.CREATED_AT,
+                    "sort_order": operations.SortOrder.DESC,
                     "page": 1,
                     "page_size": 50,
                 })
@@ -374,7 +372,10 @@ actions:
                 token="DUB_API_KEY",
             ) as dub:
 
-                res = dub.links.count(request={})
+                res = dub.links.count(request={
+                    "show_archived": True,
+                    "with_tags": True,
+                })
 
                 assert res is not None
 
@@ -494,6 +495,7 @@ actions:
           label: getQRCode
           source: |-
             from dub import Dub
+            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
@@ -501,6 +503,13 @@ actions:
 
                 res = dub.qr_codes.get(request={
                     "url": "https://normal-making.name",
+                    "size": 600,
+                    "level": operations.Level.L,
+                    "fg_color": "#000000",
+                    "bg_color": "#FFFFFF",
+                    "hide_logo": True,
+                    "margin": 2,
+                    "include_margin": True,
                 })
 
                 assert res is not None
@@ -514,12 +523,15 @@ actions:
           label: getTags
           source: |-
             from dub import Dub
+            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as dub:
 
                 res = dub.tags.list(request={
+                    "sort_by": operations.GetTagsQueryParamSortBy.NAME,
+                    "sort_order": operations.GetTagsQueryParamSortOrder.ASC,
                     "page": 1,
                     "page_size": 50,
                 })
@@ -615,6 +627,11 @@ actions:
                 res = dub.track.lead(request={
                     "click_id": "<id>",
                     "event_name": "Sign up",
+                    "external_id": "",
+                    "customer_id": None,
+                    "customer_name": None,
+                    "customer_email": None,
+                    "customer_avatar": None,
                 })
 
                 assert res is not None
@@ -635,9 +652,13 @@ actions:
             ) as dub:
 
                 res = dub.track.sale(request={
+                    "external_id": "",
+                    "customer_id": None,
                     "amount": 996500,
                     "payment_processor": operations.PaymentProcessor.PADDLE,
                     "event_name": "Purchase",
+                    "invoice_id": None,
+                    "currency": "usd",
                 })
 
                 assert res is not None

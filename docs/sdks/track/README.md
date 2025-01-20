@@ -22,9 +22,13 @@ with Dub(
 ) as dub:
 
     res = dub.track.lead(request={
-        "click_id": "<value>",
+        "click_id": "<id>",
         "event_name": "Sign up",
-        "customer_id": "<value>",
+        "external_id": "",
+        "customer_id": None,
+        "customer_name": None,
+        "customer_email": None,
+        "customer_avatar": None,
     })
 
     assert res is not None
@@ -76,9 +80,12 @@ with Dub(
 
     res = dub.track.sale(request={
         "amount": 996500,
-        "payment_processor": operations.PaymentProcessor.SHOPIFY,
-        "customer_id": "<value>",
+        "payment_processor": operations.PaymentProcessor.PADDLE,
+        "external_id": "",
+        "customer_id": None,
         "event_name": "Purchase",
+        "invoice_id": None,
+        "currency": "usd",
     })
 
     assert res is not None
