@@ -15,12 +15,15 @@ Retrieve analytics for a link, a domain, or the authenticated workspace. The res
 
 ```python
 from dub import Dub
+from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
     res = dub.analytics.retrieve(request={
+        "event": operations.Event.CLICKS,
+        "group_by": operations.QueryParamGroupBy.COUNT,
         "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",

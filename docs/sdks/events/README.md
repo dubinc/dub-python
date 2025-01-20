@@ -15,12 +15,15 @@ Retrieve a paginated list of events for the authenticated workspace.
 
 ```python
 from dub import Dub
+from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
     res = dub.events.list(request={
+        "event": operations.QueryParamEvent.CLICKS,
+        "interval": operations.QueryParamInterval.TWENTY_FOURH,
         "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",
@@ -28,6 +31,10 @@ with Dub(
         "os": "Windows",
         "referer": "google.com",
         "referer_url": "https://dub.co/blog",
+        "page": 1,
+        "limit": 100,
+        "sort_order": operations.QueryParamSortOrder.DESC,
+        "sort_by": operations.QueryParamSortBy.TIMESTAMP,
     })
 
     assert res is not None

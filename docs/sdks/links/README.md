@@ -78,12 +78,17 @@ Retrieve a paginated list of links for the authenticated workspace.
 
 ```python
 from dub import Dub
+from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
     res = dub.links.list(request={
+        "show_archived": True,
+        "with_tags": True,
+        "sort_by": operations.SortBy.CREATED_AT,
+        "sort_order": operations.SortOrder.DESC,
         "page": 1,
         "page_size": 50,
     })
@@ -134,7 +139,10 @@ with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
-    res = dub.links.count(request={})
+    res = dub.links.count(request={
+        "show_archived": True,
+        "with_tags": True,
+    })
 
     assert res is not None
 
@@ -233,7 +241,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
-    res = dub.links.update(link_id="<value>", request_body={
+    res = dub.links.update(link_id="<id>", request_body={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -288,7 +296,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as dub:
 
-    res = dub.links.delete(link_id="<value>")
+    res = dub.links.delete(link_id="<id>")
 
     assert res is not None
 
@@ -337,7 +345,20 @@ with Dub(
 ) as dub:
 
     res = dub.links.create_many(request=[
-
+        {
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        },
+        {
+            "url": "https://google.com",
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        },
     ])
 
     assert res is not None
@@ -393,9 +414,6 @@ with Dub(
                 "clux0rgak00011...",
             ],
         },
-        "link_ids": [
-
-        ],
     })
 
     assert res is not None

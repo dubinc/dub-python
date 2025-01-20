@@ -6,6 +6,7 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 from typing import Any, List, Mapping, Optional, Union, cast
+from typing_extensions import deprecated
 
 
 class Customers(BaseSDK):
@@ -273,6 +274,9 @@ class Customers(BaseSDK):
             http_res,
         )
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -289,7 +293,7 @@ class Customers(BaseSDK):
     ) -> Optional[operations.CreateCustomerResponseBody]:
         r"""Create a customer
 
-        Create a customer for the authenticated workspace.
+        [Deprecated]: Customer creation can only be done via tracking a lead event. Use the /track/lead endpoint instead.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -417,6 +421,9 @@ class Customers(BaseSDK):
             http_res,
         )
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -433,7 +440,7 @@ class Customers(BaseSDK):
     ) -> Optional[operations.CreateCustomerResponseBody]:
         r"""Create a customer
 
-        Create a customer for the authenticated workspace.
+        [Deprecated]: Customer creation can only be done via tracking a lead event. Use the /track/lead endpoint instead.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
