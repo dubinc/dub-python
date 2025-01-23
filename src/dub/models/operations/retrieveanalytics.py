@@ -18,10 +18,11 @@ from dub.models.components import (
     continentcode as components_continentcode,
     countrycode as components_countrycode,
 )
-from dub.types import BaseModel
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -36,7 +37,7 @@ class Event(str, Enum):
 
 
 class QueryParamGroupBy(str, Enum):
-    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined. Note that `trigger` is deprecated (use `triggers` instead), but kept for backwards compatibility."""
+    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined."""
 
     COUNT = "count"
     TIMESERIES = "timeseries"
@@ -53,6 +54,11 @@ class QueryParamGroupBy(str, Enum):
     REFERER_URLS = "referer_urls"
     TOP_LINKS = "top_links"
     TOP_URLS = "top_urls"
+    UTM_SOURCES = "utm_sources"
+    UTM_MEDIUMS = "utm_mediums"
+    UTM_CAMPAIGNS = "utm_campaigns"
+    UTM_TERMS = "utm_terms"
+    UTM_CONTENTS = "utm_contents"
 
 
 class Interval(str, Enum):
@@ -91,7 +97,7 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     event: NotRequired[Event]
     r"""The type of event to retrieve analytics for. Defaults to `clicks`."""
     group_by: NotRequired[QueryParamGroupBy]
-    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined. Note that `trigger` is deprecated (use `triggers` instead), but kept for backwards compatibility."""
+    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined."""
     domain: NotRequired[str]
     r"""The domain to filter analytics for."""
     key: NotRequired[str]
@@ -138,6 +144,16 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
+    utm_source: NotRequired[Nullable[str]]
+    r"""The UTM source of the short link."""
+    utm_medium: NotRequired[Nullable[str]]
+    r"""The UTM medium of the short link."""
+    utm_campaign: NotRequired[Nullable[str]]
+    r"""The UTM campaign of the short link."""
+    utm_term: NotRequired[Nullable[str]]
+    r"""The UTM term of the short link."""
+    utm_content: NotRequired[Nullable[str]]
+    r"""The UTM content of the short link."""
 
 
 class RetrieveAnalyticsRequest(BaseModel):
@@ -152,7 +168,7 @@ class RetrieveAnalyticsRequest(BaseModel):
         pydantic.Field(alias="groupBy"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = QueryParamGroupBy.COUNT
-    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined. Note that `trigger` is deprecated (use `triggers` instead), but kept for backwards compatibility."""
+    r"""The parameter to group the analytics data points by. Defaults to `count` if undefined."""
 
     domain: Annotated[
         Optional[str],
@@ -296,6 +312,103 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
+
+    utm_source: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM source of the short link."""
+
+    utm_medium: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM medium of the short link."""
+
+    utm_campaign: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM campaign of the short link."""
+
+    utm_term: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM term of the short link."""
+
+    utm_content: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM content of the short link."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "event",
+            "groupBy",
+            "domain",
+            "key",
+            "linkId",
+            "externalId",
+            "interval",
+            "start",
+            "end",
+            "timezone",
+            "country",
+            "city",
+            "region",
+            "continent",
+            "device",
+            "browser",
+            "os",
+            "trigger",
+            "referer",
+            "refererUrl",
+            "url",
+            "tagId",
+            "tagIds",
+            "qr",
+            "root",
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content",
+        ]
+        nullable_fields = [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content",
+        ]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 RetrieveAnalyticsResponseBodyTypedDict = TypeAliasType(

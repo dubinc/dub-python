@@ -8,10 +8,11 @@ from dub.models.components import (
     leadevent as components_leadevent,
     saleevent as components_saleevent,
 )
-from dub.types import BaseModel
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import (
     Annotated,
@@ -133,6 +134,16 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
+    utm_source: NotRequired[Nullable[str]]
+    r"""The UTM source of the short link."""
+    utm_medium: NotRequired[Nullable[str]]
+    r"""The UTM medium of the short link."""
+    utm_campaign: NotRequired[Nullable[str]]
+    r"""The UTM campaign of the short link."""
+    utm_term: NotRequired[Nullable[str]]
+    r"""The UTM term of the short link."""
+    utm_content: NotRequired[Nullable[str]]
+    r"""The UTM content of the short link."""
     page: NotRequired[float]
     limit: NotRequired[float]
     sort_order: NotRequired[QueryParamSortOrder]
@@ -293,6 +304,36 @@ class ListEventsRequest(BaseModel):
     ] = None
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
 
+    utm_source: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM source of the short link."""
+
+    utm_medium: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM medium of the short link."""
+
+    utm_campaign: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM campaign of the short link."""
+
+    utm_term: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM term of the short link."""
+
+    utm_content: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The UTM content of the short link."""
+
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -322,6 +363,77 @@ class ListEventsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = Order.DESC
     r"""DEPRECATED. Use `sortOrder` instead."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "event",
+            "domain",
+            "key",
+            "linkId",
+            "externalId",
+            "interval",
+            "start",
+            "end",
+            "timezone",
+            "country",
+            "city",
+            "region",
+            "continent",
+            "device",
+            "browser",
+            "os",
+            "trigger",
+            "referer",
+            "refererUrl",
+            "url",
+            "tagId",
+            "tagIds",
+            "qr",
+            "root",
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content",
+            "page",
+            "limit",
+            "sortOrder",
+            "sortBy",
+            "order",
+        ]
+        nullable_fields = [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content",
+        ]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 ListEventsResponseBodyTypedDict = TypeAliasType(
