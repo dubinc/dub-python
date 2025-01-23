@@ -77,8 +77,6 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The date and time when the payment failed for the workspace."""
     stripe_connect_id: Nullable[str]
     r"""The Stripe Connect ID of the workspace."""
-    payout_method_id: Nullable[str]
-    r"""[BETA – Dub Partners]: The ID of the payment method for partner payouts."""
     usage: float
     r"""The usage of the workspace."""
     usage_limit: float
@@ -149,9 +147,6 @@ class WorkspaceSchema(BaseModel):
     stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
     r"""The Stripe Connect ID of the workspace."""
 
-    payout_method_id: Annotated[Nullable[str], pydantic.Field(alias="payoutMethodId")]
-    r"""[BETA – Dub Partners]: The ID of the payment method for partner payouts."""
-
     usage: float
     r"""The usage of the workspace."""
 
@@ -220,7 +215,6 @@ class WorkspaceSchema(BaseModel):
             "stripeId",
             "paymentFailedAt",
             "stripeConnectId",
-            "payoutMethodId",
             "store",
             "logo",
         ]
