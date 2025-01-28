@@ -29,6 +29,7 @@ Dub.co API: Dub is link management infrastructure for companies to create market
   * [Authentication](#authentication)
   * [Retries](#retries)
   * [Pagination](#pagination)
+  * [Resource Management](#resource-management)
   * [Debugging](#debugging)
   * [IDE Support](#ide-support)
 * [Development](#development)
@@ -38,6 +39,11 @@ Dub.co API: Dub is link management infrastructure for companies to create market
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
 The SDK can be installed with either *pip* or *poetry* package managers.
 
@@ -218,6 +224,10 @@ asyncio.run(main())
 ### [metatags](docs/sdks/metatags/README.md)
 
 * [get](docs/sdks/metatags/README.md#get) - Retrieve the metatags for a URL
+
+### [partners](docs/sdks/partners/README.md)
+
+* [create](docs/sdks/partners/README.md#create) - Create a new partner
 
 ### [qr_codes](docs/sdks/qrcodes/README.md)
 
@@ -564,6 +574,31 @@ with Dub(
 
 ```
 <!-- End Pagination [pagination] -->
+
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Dub` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from dub import Dub
+def main():
+    with Dub(
+        token="DUB_API_KEY",
+    ) as dub:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with Dub(
+        token="DUB_API_KEY",
+    ) as dub:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging

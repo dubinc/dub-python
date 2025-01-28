@@ -488,6 +488,24 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createPartner
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as dub:
+
+                res = dub.partners.create()
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/qr"]["get"]
     update:
       x-codeSamples:
