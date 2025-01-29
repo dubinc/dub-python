@@ -113,6 +113,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The domains of the workspace."""
     store: Nullable[Dict[str, Any]]
     r"""The miscellaneous key-value store of the workspace."""
+    allowed_hostnames: Nullable[List[str]]
+    r"""Specifies hostnames permitted for client-side click tracking."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -201,6 +203,11 @@ class WorkspaceSchema(BaseModel):
     store: Nullable[Dict[str, Any]]
     r"""The miscellaneous key-value store of the workspace."""
 
+    allowed_hostnames: Annotated[
+        Nullable[List[str]], pydantic.Field(alias="allowedHostnames")
+    ]
+    r"""Specifies hostnames permitted for client-side click tracking."""
+
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
 
@@ -216,6 +223,7 @@ class WorkspaceSchema(BaseModel):
             "paymentFailedAt",
             "stripeConnectId",
             "store",
+            "allowedHostnames",
             "logo",
         ]
         null_default_fields = ["logo"]

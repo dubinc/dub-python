@@ -14,9 +14,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.analytics.retrieve(request={
+                res = d_client.analytics.retrieve(request={
                     "event": operations.Event.CLICKS,
                     "group_by": operations.QueryParamGroupBy.COUNT,
                     "timezone": "America/New_York",
@@ -42,9 +42,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.customers.list(request={})
+                res = d_client.customers.list(request={})
 
                 assert res is not None
 
@@ -60,9 +60,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.customers.delete(id="<id>")
+                res = d_client.customers.delete(id="<id>")
 
                 assert res is not None
 
@@ -78,9 +78,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.customers.get(request={
+                res = d_client.customers.get(request={
                     "id": "<id>",
                 })
 
@@ -98,9 +98,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.customers.update(request={
+                res = d_client.customers.update(request={
                     "id": "<id>",
                 })
 
@@ -118,9 +118,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.domains.list(request={
+                res = d_client.domains.list(request={
                     "archived": True,
                     "page": 1,
                     "page_size": 50,
@@ -140,9 +140,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.domains.create(request={
+                res = d_client.domains.create(request={
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
@@ -164,9 +164,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.domains.delete(slug="acme.com")
+                res = d_client.domains.delete(slug="acme.com")
 
                 assert res is not None
 
@@ -182,9 +182,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.domains.update(slug="acme.com", request_body={
+                res = d_client.domains.update(slug="acme.com", request_body={
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
@@ -207,9 +207,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.events.list(request={
+                res = d_client.events.list(request={
                     "event": operations.QueryParamEvent.CLICKS,
                     "interval": operations.QueryParamInterval.TWENTY_FOURH,
                     "timezone": "America/New_York",
@@ -240,9 +240,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.list(request={
+                res = d_client.links.list(request={
                     "show_archived": True,
                     "with_tags": True,
                     "sort_by": operations.SortBy.CREATED_AT,
@@ -265,9 +265,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.create(request={
+                res = d_client.links.create(request={
                     "url": "https://google.com",
                     "external_id": "123456",
                     "tag_ids": [
@@ -289,9 +289,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.delete_many(request={
+                res = d_client.links.delete_many(request={
                     "link_ids": [
                         "clux0rgak00011...",
                         "clux0rgak00022...",
@@ -312,9 +312,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.update_many(request={
+                res = d_client.links.update_many(request={
                     "data": {
                         "url": "https://google.com",
                         "tag_ids": [
@@ -337,9 +337,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.create_many(request=[
+                res = d_client.links.create_many(request=[
                     {
                         "url": "https://google.com",
                         "external_id": "123456",
@@ -370,9 +370,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.count(request={
+                res = d_client.links.count(request={
                     "show_archived": True,
                     "with_tags": True,
                 })
@@ -391,9 +391,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.get(request={
+                res = d_client.links.get(request={
                     "link_id": "clux0rgak00011...",
                     "external_id": "123456",
                 })
@@ -412,9 +412,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.upsert(request={
+                res = d_client.links.upsert(request={
                     "url": "https://google.com",
                     "external_id": "123456",
                     "tag_ids": [
@@ -436,9 +436,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.delete(link_id="<id>")
+                res = d_client.links.delete(link_id="<id>")
 
                 assert res is not None
 
@@ -454,9 +454,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.links.update(link_id="<id>", request_body={
+                res = d_client.links.update(link_id="<id>", request_body={
                     "url": "https://google.com",
                     "external_id": "123456",
                     "tag_ids": [
@@ -478,9 +478,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.metatags.get(request={
+                res = d_client.metatags.get(request={
                     "url": "https://dub.co",
                 })
 
@@ -498,9 +498,20 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.partners.create()
+                res = d_client.partners.create(request={
+                    "program_id": "<id>",
+                    "name": "<value>",
+                    "email": "Loyal79@yahoo.com",
+                    "username": "Aaliyah_Borer",
+                    "link_props": {
+                        "external_id": "123456",
+                        "tag_ids": [
+                            "clux0rgak00011...",
+                        ],
+                    },
+                })
 
                 assert res is not None
 
@@ -517,9 +528,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.qr_codes.get(request={
+                res = d_client.qr_codes.get(request={
                     "url": "https://normal-making.name",
                     "size": 600,
                     "level": operations.Level.L,
@@ -545,9 +556,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.tags.list(request={
+                res = d_client.tags.list(request={
                     "sort_by": operations.GetTagsQueryParamSortBy.NAME,
                     "sort_order": operations.GetTagsQueryParamSortOrder.ASC,
                     "page": 1,
@@ -568,9 +579,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.tags.create()
+                res = d_client.tags.create()
 
                 assert res is not None
 
@@ -586,9 +597,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.tags.delete(id="<id>")
+                res = d_client.tags.delete(id="<id>")
 
                 assert res is not None
 
@@ -604,9 +615,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.tags.update(id="<id>")
+                res = d_client.tags.update(id="<id>")
 
                 assert res is not None
 
@@ -622,9 +633,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.embed_tokens.create()
+                res = d_client.embed_tokens.create()
 
                 assert res is not None
 
@@ -640,9 +651,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.track.lead(request={
+                res = d_client.track.lead(request={
                     "click_id": "<id>",
                     "event_name": "Sign up",
                     "external_id": "",
@@ -667,9 +678,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.track.sale(request={
+                res = d_client.track.sale(request={
                     "external_id": "",
                     "customer_id": None,
                     "amount": 996500,
@@ -693,9 +704,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.workspaces.get(request={
+                res = d_client.workspaces.get(request={
                     "id_or_slug": "<value>",
                 })
 
@@ -713,9 +724,9 @@ actions:
 
             with Dub(
                 token="DUB_API_KEY",
-            ) as dub:
+            ) as d_client:
 
-                res = dub.workspaces.update(id_or_slug="<value>")
+                res = d_client.workspaces.update(id_or_slug="<value>")
 
                 assert res is not None
 

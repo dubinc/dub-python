@@ -19,9 +19,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.track.lead(request={
+    res = d_client.track.lead(request={
         "click_id": "<id>",
         "event_name": "Sign up",
         "external_id": "",
@@ -76,9 +76,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.track.sale(request={
+    res = d_client.track.sale(request={
         "amount": 996500,
         "payment_processor": operations.PaymentProcessor.PADDLE,
         "external_id": "",

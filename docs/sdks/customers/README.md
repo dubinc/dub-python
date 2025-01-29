@@ -22,9 +22,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.customers.list(request={})
+    res = d_client.customers.list(request={})
 
     assert res is not None
 
@@ -72,9 +72,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.customers.create()
+    res = d_client.customers.create()
 
     assert res is not None
 
@@ -120,9 +120,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.customers.get(request={
+    res = d_client.customers.get(request={
         "id": "<id>",
     })
 
@@ -170,9 +170,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.customers.update(request={
+    res = d_client.customers.update(request={
         "id": "<id>",
     })
 
@@ -220,9 +220,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.customers.delete(id="<id>")
+    res = d_client.customers.delete(id="<id>")
 
     assert res is not None
 

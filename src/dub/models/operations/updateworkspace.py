@@ -4,7 +4,7 @@ from __future__ import annotations
 from dub.types import BaseModel
 from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -13,6 +13,7 @@ class UpdateWorkspaceRequestBodyTypedDict(TypedDict):
     slug: NotRequired[str]
     logo: NotRequired[str]
     conversion_enabled: NotRequired[bool]
+    allowed_hostnames: NotRequired[List[str]]
 
 
 class UpdateWorkspaceRequestBody(BaseModel):
@@ -24,6 +25,10 @@ class UpdateWorkspaceRequestBody(BaseModel):
 
     conversion_enabled: Annotated[
         Optional[bool], pydantic.Field(alias="conversionEnabled")
+    ] = None
+
+    allowed_hostnames: Annotated[
+        Optional[List[str]], pydantic.Field(alias="allowedHostnames")
     ] = None
 
 
