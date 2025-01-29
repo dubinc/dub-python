@@ -5,8 +5,8 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class Country(str, Enum):
@@ -264,6 +264,247 @@ class Country(str, Enum):
     XK = "XK"
 
 
+CreatePartnerTagIdsTypedDict = TypeAliasType(
+    "CreatePartnerTagIdsTypedDict", Union[str, List[str]]
+)
+r"""The unique IDs of the tags assigned to the short link."""
+
+
+CreatePartnerTagIds = TypeAliasType("CreatePartnerTagIds", Union[str, List[str]])
+r"""The unique IDs of the tags assigned to the short link."""
+
+
+CreatePartnerTagNamesTypedDict = TypeAliasType(
+    "CreatePartnerTagNamesTypedDict", Union[str, List[str]]
+)
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
+CreatePartnerTagNames = TypeAliasType("CreatePartnerTagNames", Union[str, List[str]])
+r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+
+class LinkPropsTypedDict(TypedDict):
+    r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
+
+    external_id: NotRequired[Nullable[str]]
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    tenant_id: NotRequired[Nullable[str]]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    prefix: NotRequired[str]
+    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
+    archived: NotRequired[bool]
+    r"""Whether the short link is archived. Defaults to `false` if not provided."""
+    tag_ids: NotRequired[CreatePartnerTagIdsTypedDict]
+    r"""The unique IDs of the tags assigned to the short link."""
+    tag_names: NotRequired[CreatePartnerTagNamesTypedDict]
+    r"""The unique name of the tags assigned to the short link (case insensitive)."""
+    comments: NotRequired[Nullable[str]]
+    r"""The comments for the short link."""
+    expires_at: NotRequired[Nullable[str]]
+    r"""The date and time when the short link will expire at."""
+    expired_url: NotRequired[Nullable[str]]
+    r"""The URL to redirect to when the short link has expired."""
+    password: NotRequired[Nullable[str]]
+    r"""The password required to access the destination URL of the short link."""
+    proxy: NotRequired[bool]
+    r"""Whether the short link uses Custom Social Media Cards feature. Defaults to `false` if not provided."""
+    title: NotRequired[Nullable[str]]
+    r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    description: NotRequired[Nullable[str]]
+    r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    image: NotRequired[Nullable[str]]
+    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    video: NotRequired[Nullable[str]]
+    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    rewrite: NotRequired[bool]
+    r"""Whether the short link uses link cloaking. Defaults to `false` if not provided."""
+    ios: NotRequired[Nullable[str]]
+    r"""The iOS destination URL for the short link for iOS device targeting."""
+    android: NotRequired[Nullable[str]]
+    r"""The Android destination URL for the short link for Android device targeting."""
+    do_index: NotRequired[bool]
+    r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
+    utm_source: NotRequired[Nullable[str]]
+    r"""The UTM source of the short link. If set, this will populate or override the UTM source in the destination URL."""
+    utm_medium: NotRequired[Nullable[str]]
+    r"""The UTM medium of the short link. If set, this will populate or override the UTM medium in the destination URL."""
+    utm_campaign: NotRequired[Nullable[str]]
+    r"""The UTM campaign of the short link. If set, this will populate or override the UTM campaign in the destination URL."""
+    utm_term: NotRequired[Nullable[str]]
+    r"""The UTM term of the short link. If set, this will populate or override the UTM term in the destination URL."""
+    utm_content: NotRequired[Nullable[str]]
+    r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
+    ref: NotRequired[Nullable[str]]
+    r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
+
+
+class LinkProps(BaseModel):
+    r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
+
+    external_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="externalId")
+    ] = UNSET
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+
+    tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
+        UNSET
+    )
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+
+    prefix: Optional[str] = None
+    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
+
+    archived: Optional[bool] = None
+    r"""Whether the short link is archived. Defaults to `false` if not provided."""
+
+    tag_ids: Annotated[
+        Optional[CreatePartnerTagIds], pydantic.Field(alias="tagIds")
+    ] = None
+    r"""The unique IDs of the tags assigned to the short link."""
+
+    tag_names: Annotated[
+        Optional[CreatePartnerTagNames], pydantic.Field(alias="tagNames")
+    ] = None
+    r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+    comments: OptionalNullable[str] = UNSET
+    r"""The comments for the short link."""
+
+    expires_at: Annotated[OptionalNullable[str], pydantic.Field(alias="expiresAt")] = (
+        UNSET
+    )
+    r"""The date and time when the short link will expire at."""
+
+    expired_url: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="expiredUrl")
+    ] = UNSET
+    r"""The URL to redirect to when the short link has expired."""
+
+    password: OptionalNullable[str] = UNSET
+    r"""The password required to access the destination URL of the short link."""
+
+    proxy: Optional[bool] = None
+    r"""Whether the short link uses Custom Social Media Cards feature. Defaults to `false` if not provided."""
+
+    title: OptionalNullable[str] = UNSET
+    r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+
+    description: OptionalNullable[str] = UNSET
+    r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+
+    image: OptionalNullable[str] = UNSET
+    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+
+    video: OptionalNullable[str] = UNSET
+    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+
+    rewrite: Optional[bool] = None
+    r"""Whether the short link uses link cloaking. Defaults to `false` if not provided."""
+
+    ios: OptionalNullable[str] = UNSET
+    r"""The iOS destination URL for the short link for iOS device targeting."""
+
+    android: OptionalNullable[str] = UNSET
+    r"""The Android destination URL for the short link for Android device targeting."""
+
+    do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = None
+    r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
+
+    utm_source: OptionalNullable[str] = UNSET
+    r"""The UTM source of the short link. If set, this will populate or override the UTM source in the destination URL."""
+
+    utm_medium: OptionalNullable[str] = UNSET
+    r"""The UTM medium of the short link. If set, this will populate or override the UTM medium in the destination URL."""
+
+    utm_campaign: OptionalNullable[str] = UNSET
+    r"""The UTM campaign of the short link. If set, this will populate or override the UTM campaign in the destination URL."""
+
+    utm_term: OptionalNullable[str] = UNSET
+    r"""The UTM term of the short link. If set, this will populate or override the UTM term in the destination URL."""
+
+    utm_content: OptionalNullable[str] = UNSET
+    r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
+
+    ref: OptionalNullable[str] = UNSET
+    r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "externalId",
+            "tenantId",
+            "prefix",
+            "archived",
+            "tagIds",
+            "tagNames",
+            "comments",
+            "expiresAt",
+            "expiredUrl",
+            "password",
+            "proxy",
+            "title",
+            "description",
+            "image",
+            "video",
+            "rewrite",
+            "ios",
+            "android",
+            "doIndex",
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content",
+            "ref",
+        ]
+        nullable_fields = [
+            "externalId",
+            "tenantId",
+            "comments",
+            "expiresAt",
+            "expiredUrl",
+            "password",
+            "title",
+            "description",
+            "image",
+            "video",
+            "ios",
+            "android",
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content",
+            "ref",
+        ]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class CreatePartnerRequestBodyTypedDict(TypedDict):
     program_id: str
     r"""The ID of the program to create a partner for."""
@@ -279,6 +520,8 @@ class CreatePartnerRequestBodyTypedDict(TypedDict):
     r"""Country where the partner is based."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
+    link_props: NotRequired[LinkPropsTypedDict]
+    r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
 
 class CreatePartnerRequestBody(BaseModel):
@@ -303,9 +546,12 @@ class CreatePartnerRequestBody(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""A brief description of the partner and their background."""
 
+    link_props: Annotated[Optional[LinkProps], pydantic.Field(alias="linkProps")] = None
+    r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["image", "country", "description"]
+        optional_fields = ["image", "country", "description", "linkProps"]
         nullable_fields = ["image", "country", "description"]
         null_default_fields = []
 

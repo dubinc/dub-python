@@ -19,9 +19,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.analytics.retrieve(request={
+    res = d_client.analytics.retrieve(request={
         "event": operations.Event.CLICKS,
         "group_by": operations.QueryParamGroupBy.COUNT,
         "timezone": "America/New_York",

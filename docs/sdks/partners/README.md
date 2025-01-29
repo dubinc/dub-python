@@ -18,9 +18,20 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.partners.create()
+    res = d_client.partners.create(request={
+        "program_id": "<id>",
+        "name": "<value>",
+        "email": "Loyal79@yahoo.com",
+        "username": "Aaliyah_Borer",
+        "link_props": {
+            "external_id": "123456",
+            "tag_ids": [
+                "clux0rgak00011...",
+            ],
+        },
+    })
 
     assert res is not None
 

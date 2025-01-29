@@ -18,9 +18,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.metatags.get(request={
+    res = d_client.metatags.get(request={
         "url": "https://dub.co",
     })
 

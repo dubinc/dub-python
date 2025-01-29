@@ -27,9 +27,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create(request={
+    res = d_client.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -82,9 +82,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.list(request={
+    res = d_client.links.list(request={
         "show_archived": True,
         "with_tags": True,
         "sort_by": operations.SortBy.CREATED_AT,
@@ -137,9 +137,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.count(request={
+    res = d_client.links.count(request={
         "show_archived": True,
         "with_tags": True,
     })
@@ -188,9 +188,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.get(request={
+    res = d_client.links.get(request={
         "link_id": "clux0rgak00011...",
         "external_id": "123456",
     })
@@ -239,9 +239,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.update(link_id="<id>", request_body={
+    res = d_client.links.update(link_id="<id>", request_body={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -294,9 +294,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.delete(link_id="<id>")
+    res = d_client.links.delete(link_id="<id>")
 
     assert res is not None
 
@@ -342,9 +342,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create_many(request=[
+    res = d_client.links.create_many(request=[
         {
             "url": "https://google.com",
             "external_id": "123456",
@@ -405,9 +405,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.update_many(request={
+    res = d_client.links.update_many(request={
         "data": {
             "url": "https://google.com",
             "tag_ids": [
@@ -460,9 +460,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.delete_many(request={
+    res = d_client.links.delete_many(request={
         "link_ids": [
             "clux0rgak00011...",
             "clux0rgak00022...",
@@ -513,9 +513,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.upsert(request={
+    res = d_client.links.upsert(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [

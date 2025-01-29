@@ -21,9 +21,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.tags.create()
+    res = d_client.tags.create()
 
     assert res is not None
 
@@ -70,9 +70,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.tags.list(request={
+    res = d_client.tags.list(request={
         "sort_by": operations.GetTagsQueryParamSortBy.NAME,
         "sort_order": operations.GetTagsQueryParamSortOrder.ASC,
         "page": 1,
@@ -123,9 +123,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.tags.update(id="<id>")
+    res = d_client.tags.update(id="<id>")
 
     assert res is not None
 
@@ -172,9 +172,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.tags.delete(id="<id>")
+    res = d_client.tags.delete(id="<id>")
 
     assert res is not None
 

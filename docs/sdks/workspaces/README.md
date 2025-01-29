@@ -19,9 +19,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.workspaces.get(request={
+    res = d_client.workspaces.get(request={
         "id_or_slug": "<value>",
     })
 
@@ -69,9 +69,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.workspaces.update(id_or_slug="<value>")
+    res = d_client.workspaces.update(id_or_slug="<value>")
 
     assert res is not None
 

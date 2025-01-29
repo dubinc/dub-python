@@ -21,9 +21,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.domains.create(request={
+    res = d_client.domains.create(request={
         "slug": "acme.com",
         "expired_url": "https://acme.com/expired",
         "not_found_url": "https://acme.com/not-found",
@@ -75,9 +75,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.domains.list(request={
+    res = d_client.domains.list(request={
         "archived": True,
         "page": 1,
         "page_size": 50,
@@ -127,9 +127,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.domains.update(slug="acme.com", request_body={
+    res = d_client.domains.update(slug="acme.com", request_body={
         "slug": "acme.com",
         "expired_url": "https://acme.com/expired",
         "not_found_url": "https://acme.com/not-found",
@@ -182,9 +182,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.domains.delete(slug="acme.com")
+    res = d_client.domains.delete(slug="acme.com")
 
     assert res is not None
 

@@ -19,9 +19,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.events.list(request={
+    res = d_client.events.list(request={
         "event": operations.QueryParamEvent.CLICKS,
         "interval": operations.QueryParamInterval.TWENTY_FOURH,
         "timezone": "America/New_York",

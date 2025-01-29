@@ -75,9 +75,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create(request={
+    res = d_client.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -102,9 +102,9 @@ from dub import Dub
 async def main():
     async with Dub(
         token="DUB_API_KEY",
-    ) as dub:
+    ) as d_client:
 
-        res = await dub.links.create_async(request={
+        res = await d_client.links.create_async(request={
             "url": "https://google.com",
             "external_id": "123456",
             "tag_ids": [
@@ -128,9 +128,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.upsert(request={
+    res = d_client.links.upsert(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -155,9 +155,9 @@ from dub import Dub
 async def main():
     async with Dub(
         token="DUB_API_KEY",
-    ) as dub:
+    ) as d_client:
 
-        res = await dub.links.upsert_async(request={
+        res = await d_client.links.upsert_async(request={
             "url": "https://google.com",
             "external_id": "123456",
             "tag_ids": [
@@ -290,11 +290,11 @@ from dub.models import errors
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
     res = None
     try:
 
-        res = dub.links.create(request={
+        res = d_client.links.create(request={
             "url": "https://google.com",
             "external_id": "123456",
             "tag_ids": [
@@ -352,9 +352,9 @@ from dub import Dub
 with Dub(
     server_url="https://api.dub.co",
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create(request={
+    res = d_client.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -468,9 +468,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create(request={
+    res = d_client.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -498,9 +498,9 @@ from dub.utils import BackoffStrategy, RetryConfig
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create(request={
+    res = d_client.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -524,9 +524,9 @@ from dub.utils import BackoffStrategy, RetryConfig
 with Dub(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.create(request={
+    res = d_client.links.create(request={
         "url": "https://google.com",
         "external_id": "123456",
         "tag_ids": [
@@ -556,9 +556,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.links.list(request={
+    res = d_client.links.list(request={
         "show_archived": True,
         "with_tags": True,
         "sort_by": operations.SortBy.CREATED_AT,
@@ -587,7 +587,7 @@ from dub import Dub
 def main():
     with Dub(
         token="DUB_API_KEY",
-    ) as dub:
+    ) as d_client:
         # Rest of application here...
 
 
@@ -595,7 +595,7 @@ def main():
 async def amain():
     async with Dub(
         token="DUB_API_KEY",
-    ) as dub:
+    ) as d_client:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->

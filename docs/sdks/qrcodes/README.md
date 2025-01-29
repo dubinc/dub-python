@@ -19,9 +19,9 @@ from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.qr_codes.get(request={
+    res = d_client.qr_codes.get(request={
         "url": "https://normal-making.name",
         "size": 600,
         "level": operations.Level.L,

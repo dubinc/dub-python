@@ -18,9 +18,9 @@ from dub import Dub
 
 with Dub(
     token="DUB_API_KEY",
-) as dub:
+) as d_client:
 
-    res = dub.embed_tokens.create()
+    res = d_client.embed_tokens.create()
 
     assert res is not None
 
