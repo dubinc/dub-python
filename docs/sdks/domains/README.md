@@ -27,7 +27,6 @@ with Dub(
         "slug": "acme.com",
         "expired_url": "https://acme.com/expired",
         "not_found_url": "https://acme.com/not-found",
-        "archived": False,
         "placeholder": "https://dub.co/help/article/what-is-dub",
     })
 
@@ -77,11 +76,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.domains.list(request={
-        "archived": True,
-        "page": 1,
-        "page_size": 50,
-    })
+    res = d_client.domains.list(request={})
 
     while res is not None:
         # Handle items
@@ -133,7 +128,6 @@ with Dub(
         "slug": "acme.com",
         "expired_url": "https://acme.com/expired",
         "not_found_url": "https://acme.com/not-found",
-        "archived": False,
         "placeholder": "https://dub.co/help/article/what-is-dub",
     })
 

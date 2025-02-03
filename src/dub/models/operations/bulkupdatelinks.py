@@ -36,6 +36,10 @@ class DataTypedDict(TypedDict):
     r"""The destination URL of the short link."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    program_id: NotRequired[Nullable[str]]
+    r"""The ID of the program the short link is associated with."""
+    partner_id: NotRequired[Nullable[str]]
+    r"""The ID of the partner the short link is associated with."""
     track_conversion: NotRequired[bool]
     r"""Whether to track conversions for the short link. Defaults to `false` if not provided."""
     archived: NotRequired[bool]
@@ -88,8 +92,6 @@ class DataTypedDict(TypedDict):
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
     ref: NotRequired[Nullable[str]]
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
-    program_id: NotRequired[Nullable[str]]
-    r"""The ID of the program the short link is associated with."""
     webhook_ids: NotRequired[Nullable[List[str]]]
     r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
@@ -102,6 +104,16 @@ class Data(BaseModel):
         UNSET
     )
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+
+    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
+        UNSET
+    )
+    r"""The ID of the program the short link is associated with."""
+
+    partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
+        UNSET
+    )
+    r"""The ID of the partner the short link is associated with."""
 
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
@@ -203,11 +215,6 @@ class Data(BaseModel):
     ref: OptionalNullable[str] = UNSET
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
-    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
-        UNSET
-    )
-    r"""The ID of the program the short link is associated with."""
-
     webhook_ids: Annotated[
         OptionalNullable[List[str]], pydantic.Field(alias="webhookIds")
     ] = UNSET
@@ -218,6 +225,8 @@ class Data(BaseModel):
         optional_fields = [
             "url",
             "tenantId",
+            "programId",
+            "partnerId",
             "trackConversion",
             "archived",
             "publicStats",
@@ -244,11 +253,12 @@ class Data(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
-            "programId",
             "webhookIds",
         ]
         nullable_fields = [
             "tenantId",
+            "programId",
+            "partnerId",
             "tagId",
             "comments",
             "expiresAt",
@@ -267,7 +277,6 @@ class Data(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
-            "programId",
             "webhookIds",
         ]
         null_default_fields = []

@@ -62,6 +62,37 @@ pip install dub
 ```bash
 poetry add dub
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from dub python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "dub",
+# ]
+# ///
+
+from dub import Dub
+
+sdk = Dub(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -552,20 +583,12 @@ return value of `Next` is `None`, then there are no more pages to be fetched.
 Here's an example of one such pagination call:
 ```python
 from dub import Dub
-from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.links.list(request={
-        "show_archived": True,
-        "with_tags": True,
-        "sort_by": operations.SortBy.CREATED_AT,
-        "sort_order": operations.SortOrder.DESC,
-        "page": 1,
-        "page_size": 50,
-    })
+    res = d_client.links.list(request={})
 
     while res is not None:
         # Handle items

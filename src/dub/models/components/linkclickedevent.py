@@ -829,6 +829,10 @@ class LinkClickedEventLinkTypedDict(TypedDict):
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: Nullable[str]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    program_id: Nullable[str]
+    r"""The ID of the program the short link is associated with."""
+    partner_id: Nullable[str]
+    r"""The ID of the partner the short link is associated with."""
     expires_at: str
     expired_url: Nullable[str]
     password: Nullable[str]
@@ -877,8 +881,6 @@ class LinkClickedEventLinkTypedDict(TypedDict):
     updated_at: str
     project_id: str
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
-    program_id: Nullable[str]
-    r"""The ID of the program the short link is associated with."""
     track_conversion: NotRequired[bool]
     archived: NotRequired[bool]
     proxy: NotRequired[bool]
@@ -912,6 +914,12 @@ class LinkClickedEventLink(BaseModel):
 
     tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+
+    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
+    r"""The ID of the program the short link is associated with."""
+
+    partner_id: Annotated[Nullable[str], pydantic.Field(alias="partnerId")]
+    r"""The ID of the partner the short link is associated with."""
 
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
@@ -1000,9 +1008,6 @@ class LinkClickedEventLink(BaseModel):
     ]
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
 
-    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
-    r"""The ID of the program the short link is associated with."""
-
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
     ] = None
@@ -1046,6 +1051,8 @@ class LinkClickedEventLink(BaseModel):
         nullable_fields = [
             "externalId",
             "tenantId",
+            "programId",
+            "partnerId",
             "expiredUrl",
             "password",
             "title",
@@ -1064,7 +1071,6 @@ class LinkClickedEventLink(BaseModel):
             "utm_term",
             "utm_content",
             "userId",
-            "programId",
         ]
         null_default_fields = []
 

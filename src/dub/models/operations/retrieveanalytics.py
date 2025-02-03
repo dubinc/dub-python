@@ -106,6 +106,12 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The unique ID of the short link on Dub."""
     external_id: NotRequired[str]
     r"""This is the ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
+    tenant_id: NotRequired[str]
+    r"""The ID of the tenant that created the link inside your system."""
+    program_id: NotRequired[str]
+    r"""The ID of the program to retrieve analytics for."""
+    partner_id: NotRequired[str]
+    r"""The ID of the partner to retrieve analytics for."""
     interval: NotRequired[Interval]
     r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
     start: NotRequired[str]
@@ -195,6 +201,27 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""This is the ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
+
+    tenant_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tenantId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the tenant that created the link inside your system."""
+
+    program_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="programId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the program to retrieve analytics for."""
+
+    partner_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="partnerId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the partner to retrieve analytics for."""
 
     interval: Annotated[
         Optional[Interval],
@@ -352,6 +379,9 @@ class RetrieveAnalyticsRequest(BaseModel):
             "key",
             "linkId",
             "externalId",
+            "tenantId",
+            "programId",
+            "partnerId",
             "interval",
             "start",
             "end",
