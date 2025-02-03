@@ -78,20 +78,12 @@ Retrieve a paginated list of links for the authenticated workspace.
 
 ```python
 from dub import Dub
-from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.links.list(request={
-        "show_archived": True,
-        "with_tags": True,
-        "sort_by": operations.SortBy.CREATED_AT,
-        "sort_order": operations.SortOrder.DESC,
-        "page": 1,
-        "page_size": 50,
-    })
+    res = d_client.links.list(request={})
 
     while res is not None:
         # Handle items
@@ -139,10 +131,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.links.count(request={
-        "show_archived": True,
-        "with_tags": True,
-    })
+    res = d_client.links.count(request={})
 
     assert res is not None
 

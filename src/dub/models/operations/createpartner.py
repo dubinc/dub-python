@@ -291,6 +291,8 @@ class LinkPropsTypedDict(TypedDict):
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    partner_id: NotRequired[Nullable[str]]
+    r"""The ID of the partner the short link is associated with."""
     prefix: NotRequired[str]
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     archived: NotRequired[bool]
@@ -351,6 +353,11 @@ class LinkProps(BaseModel):
         UNSET
     )
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+
+    partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
+        UNSET
+    )
+    r"""The ID of the partner the short link is associated with."""
 
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
@@ -434,6 +441,7 @@ class LinkProps(BaseModel):
         optional_fields = [
             "externalId",
             "tenantId",
+            "partnerId",
             "prefix",
             "archived",
             "tagIds",
@@ -461,6 +469,7 @@ class LinkProps(BaseModel):
         nullable_fields = [
             "externalId",
             "tenantId",
+            "partnerId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -520,6 +529,8 @@ class CreatePartnerRequestBodyTypedDict(TypedDict):
     r"""Country where the partner is based."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
+    tenant_id: NotRequired[str]
+    r"""The ID of the partner in your system."""
     link_props: NotRequired[LinkPropsTypedDict]
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
@@ -546,12 +557,15 @@ class CreatePartnerRequestBody(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""A brief description of the partner and their background."""
 
+    tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None
+    r"""The ID of the partner in your system."""
+
     link_props: Annotated[Optional[LinkProps], pydantic.Field(alias="linkProps")] = None
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["image", "country", "description", "linkProps"]
+        optional_fields = ["image", "country", "description", "tenantId", "linkProps"]
         nullable_fields = ["image", "country", "description"]
         null_default_fields = []
 
@@ -586,15 +600,15 @@ class Status(str, Enum):
     REJECTED = "rejected"
 
 
-class CreatePartnerLinkTypedDict(TypedDict):
+class LinksTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
-    short_link: str
-    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
     domain: str
     r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
     key: str
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+    short_link: str
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
     url: str
     r"""The destination URL of the short link."""
     clicks: NotRequired[float]
@@ -607,18 +621,18 @@ class CreatePartnerLinkTypedDict(TypedDict):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class CreatePartnerLink(BaseModel):
+class Links(BaseModel):
     id: str
     r"""The unique ID of the short link."""
-
-    short_link: Annotated[str, pydantic.Field(alias="shortLink")]
-    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
 
     domain: str
     r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
 
     key: str
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+
+    short_link: Annotated[str, pydantic.Field(alias="shortLink")]
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
 
     url: str
     r"""The destination URL of the short link."""
@@ -716,11 +730,15 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     created_at: str
     updated_at: str
     status: Status
-    link: Nullable[CreatePartnerLinkTypedDict]
+    links: Nullable[List[LinksTypedDict]]
     commission_amount: Nullable[float]
-    earnings: float
     coupon_id: NotRequired[Nullable[str]]
     discount: NotRequired[Nullable[CreatePartnerDiscountTypedDict]]
+    earnings: NotRequired[float]
+    clicks: NotRequired[float]
+    leads: NotRequired[float]
+    sales: NotRequired[float]
+    sales_amount: NotRequired[float]
 
 
 class CreatePartnerResponseBody(BaseModel):
@@ -748,13 +766,11 @@ class CreatePartnerResponseBody(BaseModel):
 
     status: Status
 
-    link: Nullable[CreatePartnerLink]
+    links: Nullable[List[Links]]
 
     commission_amount: Annotated[
         Nullable[float], pydantic.Field(alias="commissionAmount")
     ]
-
-    earnings: float
 
     coupon_id: Annotated[OptionalNullable[str], pydantic.Field(alias="couponId")] = (
         UNSET
@@ -762,15 +778,33 @@ class CreatePartnerResponseBody(BaseModel):
 
     discount: OptionalNullable[CreatePartnerDiscount] = UNSET
 
+    earnings: Optional[float] = 0
+
+    clicks: Optional[float] = 0
+
+    leads: Optional[float] = 0
+
+    sales: Optional[float] = 0
+
+    sales_amount: Annotated[Optional[float], pydantic.Field(alias="salesAmount")] = 0
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["couponId", "discount"]
+        optional_fields = [
+            "couponId",
+            "discount",
+            "earnings",
+            "clicks",
+            "leads",
+            "sales",
+            "salesAmount",
+        ]
         nullable_fields = [
             "email",
             "image",
             "bio",
             "stripeConnectId",
-            "link",
+            "links",
             "commissionAmount",
             "couponId",
             "discount",

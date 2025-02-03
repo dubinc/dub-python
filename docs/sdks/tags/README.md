@@ -66,18 +66,12 @@ Retrieve a list of tags for the authenticated workspace.
 
 ```python
 from dub import Dub
-from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.tags.list(request={
-        "sort_by": operations.GetTagsQueryParamSortBy.NAME,
-        "sort_order": operations.GetTagsQueryParamSortOrder.ASC,
-        "page": 1,
-        "page_size": 50,
-    })
+    res = d_client.tags.list(request={})
 
     assert res is not None
 

@@ -15,7 +15,6 @@ Retrieve a QR code for a link.
 
 ```python
 from dub import Dub
-from dub.models import operations
 
 with Dub(
     token="DUB_API_KEY",
@@ -23,13 +22,6 @@ with Dub(
 
     res = d_client.qr_codes.get(request={
         "url": "https://normal-making.name",
-        "size": 600,
-        "level": operations.Level.L,
-        "fg_color": "#000000",
-        "bg_color": "#FFFFFF",
-        "hide_logo": True,
-        "margin": 2,
-        "include_margin": True,
     })
 
     assert res is not None

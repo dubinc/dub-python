@@ -97,36 +97,44 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.TagSchema])
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
@@ -235,36 +243,44 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.TagSchema])
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
@@ -363,38 +379,46 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, Optional[List[components.TagSchema]]
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
@@ -493,38 +517,46 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, Optional[List[components.TagSchema]]
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
@@ -640,36 +672,44 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.TagSchema])
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
@@ -785,36 +825,44 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[components.TagSchema])
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
@@ -913,38 +961,46 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, Optional[operations.DeleteTagResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
@@ -1043,38 +1099,46 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, Optional[operations.DeleteTagResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=response_data)
         if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=response_data)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=response_data)
         if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InviteExpiredData
+            )
+            raise errors.InviteExpired(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UnprocessableEntityData
+            )
+            raise errors.UnprocessableEntity(data=response_data)
         if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RateLimitExceededData
+            )
+            raise errors.RateLimitExceeded(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.InternalServerErrorData
+            )
+            raise errors.InternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(

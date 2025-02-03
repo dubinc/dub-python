@@ -36,6 +36,10 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    program_id: NotRequired[Nullable[str]]
+    r"""The ID of the program the short link is associated with."""
+    partner_id: NotRequired[Nullable[str]]
+    r"""The ID of the partner the short link is associated with."""
     prefix: NotRequired[str]
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     track_conversion: NotRequired[bool]
@@ -90,8 +94,6 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
     ref: NotRequired[Nullable[str]]
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
-    program_id: NotRequired[Nullable[str]]
-    r"""The ID of the program the short link is associated with."""
     webhook_ids: NotRequired[Nullable[List[str]]]
     r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
@@ -115,6 +117,16 @@ class CreateLinkRequestBody(BaseModel):
         UNSET
     )
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+
+    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
+        UNSET
+    )
+    r"""The ID of the program the short link is associated with."""
+
+    partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
+        UNSET
+    )
+    r"""The ID of the partner the short link is associated with."""
 
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
@@ -215,11 +227,6 @@ class CreateLinkRequestBody(BaseModel):
     ref: OptionalNullable[str] = UNSET
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
-    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
-        UNSET
-    )
-    r"""The ID of the program the short link is associated with."""
-
     webhook_ids: Annotated[
         OptionalNullable[List[str]], pydantic.Field(alias="webhookIds")
     ] = UNSET
@@ -232,6 +239,8 @@ class CreateLinkRequestBody(BaseModel):
             "key",
             "externalId",
             "tenantId",
+            "programId",
+            "partnerId",
             "prefix",
             "trackConversion",
             "archived",
@@ -259,12 +268,13 @@ class CreateLinkRequestBody(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
-            "programId",
             "webhookIds",
         ]
         nullable_fields = [
             "externalId",
             "tenantId",
+            "programId",
+            "partnerId",
             "tagId",
             "comments",
             "expiresAt",
@@ -283,7 +293,6 @@ class CreateLinkRequestBody(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
-            "programId",
             "webhookIds",
         ]
         null_default_fields = []

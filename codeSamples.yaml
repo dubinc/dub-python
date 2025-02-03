@@ -10,16 +10,12 @@ actions:
           label: retrieveAnalytics
           source: |-
             from dub import Dub
-            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
 
                 res = d_client.analytics.retrieve(request={
-                    "event": operations.Event.CLICKS,
-                    "group_by": operations.QueryParamGroupBy.COUNT,
-                    "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
                     "browser": "Chrome",
@@ -120,11 +116,7 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.domains.list(request={
-                    "archived": True,
-                    "page": 1,
-                    "page_size": 50,
-                })
+                res = d_client.domains.list(request={})
 
                 while res is not None:
                     # Handle items
@@ -146,7 +138,6 @@ actions:
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
-                    "archived": False,
                     "placeholder": "https://dub.co/help/article/what-is-dub",
                 })
 
@@ -188,7 +179,6 @@ actions:
                     "slug": "acme.com",
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
-                    "archived": False,
                     "placeholder": "https://dub.co/help/article/what-is-dub",
                 })
 
@@ -203,26 +193,18 @@ actions:
           label: listEvents
           source: |-
             from dub import Dub
-            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
 
                 res = d_client.events.list(request={
-                    "event": operations.QueryParamEvent.CLICKS,
-                    "interval": operations.QueryParamInterval.TWENTY_FOURH,
-                    "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
                     "browser": "Chrome",
                     "os": "Windows",
                     "referer": "google.com",
                     "referer_url": "https://dub.co/blog",
-                    "page": 1,
-                    "limit": 100,
-                    "sort_order": operations.QueryParamSortOrder.DESC,
-                    "sort_by": operations.QueryParamSortBy.TIMESTAMP,
                 })
 
                 assert res is not None
@@ -236,20 +218,12 @@ actions:
           label: getLinks
           source: |-
             from dub import Dub
-            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.links.list(request={
-                    "show_archived": True,
-                    "with_tags": True,
-                    "sort_by": operations.SortBy.CREATED_AT,
-                    "sort_order": operations.SortOrder.DESC,
-                    "page": 1,
-                    "page_size": 50,
-                })
+                res = d_client.links.list(request={})
 
                 while res is not None:
                     # Handle items
@@ -372,10 +346,7 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.links.count(request={
-                    "show_archived": True,
-                    "with_tags": True,
-                })
+                res = d_client.links.count(request={})
 
                 assert res is not None
 
@@ -524,7 +495,6 @@ actions:
           label: getQRCode
           source: |-
             from dub import Dub
-            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
@@ -532,13 +502,6 @@ actions:
 
                 res = d_client.qr_codes.get(request={
                     "url": "https://normal-making.name",
-                    "size": 600,
-                    "level": operations.Level.L,
-                    "fg_color": "#000000",
-                    "bg_color": "#FFFFFF",
-                    "hide_logo": True,
-                    "margin": 2,
-                    "include_margin": True,
                 })
 
                 assert res is not None
@@ -552,18 +515,12 @@ actions:
           label: getTags
           source: |-
             from dub import Dub
-            from dub.models import operations
 
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.tags.list(request={
-                    "sort_by": operations.GetTagsQueryParamSortBy.NAME,
-                    "sort_order": operations.GetTagsQueryParamSortOrder.ASC,
-                    "page": 1,
-                    "page_size": 50,
-                })
+                res = d_client.tags.list(request={})
 
                 assert res is not None
 
@@ -656,11 +613,6 @@ actions:
                 res = d_client.track.lead(request={
                     "click_id": "<id>",
                     "event_name": "Sign up",
-                    "external_id": "",
-                    "customer_id": None,
-                    "customer_name": None,
-                    "customer_email": None,
-                    "customer_avatar": None,
                 })
 
                 assert res is not None
@@ -681,13 +633,8 @@ actions:
             ) as d_client:
 
                 res = d_client.track.sale(request={
-                    "external_id": "",
-                    "customer_id": None,
                     "amount": 996500,
                     "payment_processor": operations.PaymentProcessor.PADDLE,
-                    "event_name": "Purchase",
-                    "invoice_id": None,
-                    "currency": "usd",
                 })
 
                 assert res is not None
