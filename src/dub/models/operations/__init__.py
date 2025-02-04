@@ -75,6 +75,16 @@ from .createpartner import (
     LinksTypedDict,
     Status,
 )
+from .createpartnerlink import (
+    CreatePartnerLinkLinkProps,
+    CreatePartnerLinkLinkPropsTypedDict,
+    CreatePartnerLinkRequestBody,
+    CreatePartnerLinkRequestBodyTypedDict,
+    CreatePartnerLinkTagIds,
+    CreatePartnerLinkTagIdsTypedDict,
+    CreatePartnerLinkTagNames,
+    CreatePartnerLinkTagNamesTypedDict,
+)
 from .createtag import Color, CreateTagRequestBody, CreateTagRequestBodyTypedDict
 from .deletecustomer import (
     DeleteCustomerRequest,
@@ -321,6 +331,14 @@ __all__ = [
     "CreatePartnerDiscount",
     "CreatePartnerDiscountTypedDict",
     "CreatePartnerInterval",
+    "CreatePartnerLinkLinkProps",
+    "CreatePartnerLinkLinkPropsTypedDict",
+    "CreatePartnerLinkRequestBody",
+    "CreatePartnerLinkRequestBodyTypedDict",
+    "CreatePartnerLinkTagIds",
+    "CreatePartnerLinkTagIdsTypedDict",
+    "CreatePartnerLinkTagNames",
+    "CreatePartnerLinkTagNamesTypedDict",
     "CreatePartnerRequestBody",
     "CreatePartnerRequestBodyTypedDict",
     "CreatePartnerResponseBody",
