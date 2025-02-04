@@ -488,6 +488,33 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners/links"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createPartnerLink
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.create_link(request={
+                    "program_id": "<id>",
+                    "url": "https://necessary-brief.name",
+                    "link_props": {
+                        "external_id": "123456",
+                        "tag_ids": [
+                            "clux0rgak00011...",
+                        ],
+                    },
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/qr"]["get"]
     update:
       x-codeSamples:
