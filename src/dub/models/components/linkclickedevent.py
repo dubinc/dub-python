@@ -16,6 +16,7 @@ class LinkClickedEventEvent(str, Enum):
 
 class LinkClickedEventClickTypedDict(TypedDict):
     id: str
+    timestamp: str
     url: str
     country: str
     city: str
@@ -32,6 +33,8 @@ class LinkClickedEventClickTypedDict(TypedDict):
 
 class LinkClickedEventClick(BaseModel):
     id: str
+
+    timestamp: str
 
     url: str
 
