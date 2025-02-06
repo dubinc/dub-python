@@ -16,6 +16,7 @@ class Event(str, Enum):
 
 class ClickTypedDict(TypedDict):
     id: str
+    timestamp: str
     url: str
     country: str
     city: str
@@ -32,6 +33,8 @@ class ClickTypedDict(TypedDict):
 
 class Click(BaseModel):
     id: str
+
+    timestamp: str
 
     url: str
 

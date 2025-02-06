@@ -16,6 +16,7 @@ class LeadEventEvent(str, Enum):
 
 class LeadEventClickTypedDict(TypedDict):
     id: str
+    timestamp: str
     url: str
     country: str
     city: str
@@ -32,6 +33,8 @@ class LeadEventClickTypedDict(TypedDict):
 
 class LeadEventClick(BaseModel):
     id: str
+
+    timestamp: str
 
     url: str
 

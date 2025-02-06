@@ -1057,6 +1057,7 @@ class SaleEventLink(BaseModel):
 
 class SaleEventClickTypedDict(TypedDict):
     id: str
+    timestamp: str
     url: str
     country: str
     city: str
@@ -1073,6 +1074,8 @@ class SaleEventClickTypedDict(TypedDict):
 
 class SaleEventClick(BaseModel):
     id: str
+
+    timestamp: str
 
     url: str
 

@@ -268,6 +268,7 @@ class LeadCreatedEventCustomer(BaseModel):
 
 class LeadCreatedEventClickTypedDict(TypedDict):
     id: str
+    timestamp: str
     url: str
     country: str
     city: str
@@ -284,6 +285,8 @@ class LeadCreatedEventClickTypedDict(TypedDict):
 
 class LeadCreatedEventClick(BaseModel):
     id: str
+
+    timestamp: str
 
     url: str
 
