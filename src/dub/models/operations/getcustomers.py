@@ -216,7 +216,7 @@ class Discount(BaseModel):
 
 class GetCustomersResponseBodyTypedDict(TypedDict):
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
     external_id: str
     r"""Unique identifier for the customer in the client's app."""
     name: str
@@ -236,7 +236,7 @@ class GetCustomersResponseBodyTypedDict(TypedDict):
 
 class GetCustomersResponseBody(BaseModel):
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""Unique identifier for the customer in the client's app."""

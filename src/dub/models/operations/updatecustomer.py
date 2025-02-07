@@ -72,7 +72,7 @@ class UpdateCustomerRequestBody(BaseModel):
 
 class UpdateCustomerRequestTypedDict(TypedDict):
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
     include_expanded_fields: NotRequired[bool]
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
     request_body: NotRequired[UpdateCustomerRequestBodyTypedDict]
@@ -82,7 +82,7 @@ class UpdateCustomerRequest(BaseModel):
     id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
     include_expanded_fields: Annotated[
         Optional[bool],
@@ -274,7 +274,7 @@ class UpdateCustomerResponseBodyTypedDict(TypedDict):
     r"""The customer was updated."""
 
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
     external_id: str
     r"""Unique identifier for the customer in the client's app."""
     name: str
@@ -296,7 +296,7 @@ class UpdateCustomerResponseBody(BaseModel):
     r"""The customer was updated."""
 
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""Unique identifier for the customer in the client's app."""
