@@ -1187,7 +1187,7 @@ class Customers(BaseSDK):
 
         Delete a customer from a workspace.
 
-        :param id: The unique identifier of the customer in Dub.
+        :param id: The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1325,7 +1325,7 @@ class Customers(BaseSDK):
 
         Delete a customer from a workspace.
 
-        :param id: The unique identifier of the customer in Dub.
+        :param id: The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

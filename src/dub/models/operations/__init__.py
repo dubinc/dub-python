@@ -287,6 +287,16 @@ from .upsertlink import (
     UpsertLinkTagNames,
     UpsertLinkTagNamesTypedDict,
 )
+from .upsertpartnerlink import (
+    UpsertPartnerLinkLinkProps,
+    UpsertPartnerLinkLinkPropsTypedDict,
+    UpsertPartnerLinkRequestBody,
+    UpsertPartnerLinkRequestBodyTypedDict,
+    UpsertPartnerLinkTagIds,
+    UpsertPartnerLinkTagIdsTypedDict,
+    UpsertPartnerLinkTagNames,
+    UpsertPartnerLinkTagNamesTypedDict,
+)
 
 
 __all__ = [
@@ -526,4 +536,12 @@ __all__ = [
     "UpsertLinkTagIdsTypedDict",
     "UpsertLinkTagNames",
     "UpsertLinkTagNamesTypedDict",
+    "UpsertPartnerLinkLinkProps",
+    "UpsertPartnerLinkLinkPropsTypedDict",
+    "UpsertPartnerLinkRequestBody",
+    "UpsertPartnerLinkRequestBodyTypedDict",
+    "UpsertPartnerLinkTagIds",
+    "UpsertPartnerLinkTagIdsTypedDict",
+    "UpsertPartnerLinkTagNames",
+    "UpsertPartnerLinkTagNamesTypedDict",
 ]

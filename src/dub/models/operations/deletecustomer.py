@@ -8,25 +8,25 @@ from typing_extensions import Annotated, TypedDict
 
 class DeleteCustomerRequestTypedDict(TypedDict):
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
 
 class DeleteCustomerRequest(BaseModel):
     id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
 
 class DeleteCustomerResponseBodyTypedDict(TypedDict):
     r"""The customer was deleted."""
 
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
 
 class DeleteCustomerResponseBody(BaseModel):
     r"""The customer was deleted."""
 
     id: str
-    r"""The unique identifier of the customer in Dub."""
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
