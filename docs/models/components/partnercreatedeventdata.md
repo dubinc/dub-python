@@ -1,0 +1,23 @@
+# PartnerCreatedEventData
+
+
+## Fields
+
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `id`                                                       | *str*                                                      | :heavy_check_mark:                                         | N/A                                                        |
+| `name`                                                     | *str*                                                      | :heavy_check_mark:                                         | N/A                                                        |
+| `email`                                                    | *Nullable[str]*                                            | :heavy_check_mark:                                         | N/A                                                        |
+| `image`                                                    | *Nullable[str]*                                            | :heavy_check_mark:                                         | N/A                                                        |
+| `country`                                                  | *str*                                                      | :heavy_check_mark:                                         | N/A                                                        |
+| `created_at`                                               | *str*                                                      | :heavy_check_mark:                                         | N/A                                                        |
+| `status`                                                   | [components.Status](../../models/components/status.md)     | :heavy_check_mark:                                         | N/A                                                        |
+| `program_id`                                               | *str*                                                      | :heavy_check_mark:                                         | N/A                                                        |
+| `tenant_id`                                                | *Nullable[str]*                                            | :heavy_check_mark:                                         | N/A                                                        |
+| `links`                                                    | List[[components.Links](../../models/components/links.md)] | :heavy_check_mark:                                         | N/A                                                        |
+| `description`                                              | *OptionalNullable[str]*                                    | :heavy_minus_sign:                                         | N/A                                                        |
+| `clicks`                                                   | *Optional[float]*                                          | :heavy_minus_sign:                                         | N/A                                                        |
+| `leads`                                                    | *Optional[float]*                                          | :heavy_minus_sign:                                         | N/A                                                        |
+| `sales`                                                    | *Optional[float]*                                          | :heavy_minus_sign:                                         | N/A                                                        |
+| `sale_amount`                                              | *Optional[float]*                                          | :heavy_minus_sign:                                         | N/A                                                        |
+| `earnings`                                                 | *Optional[float]*                                          | :heavy_minus_sign:                                         | N/A                                                        |

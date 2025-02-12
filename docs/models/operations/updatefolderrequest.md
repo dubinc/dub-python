@@ -1,0 +1,9 @@
+# UpdateFolderRequest
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `id`                                                                                               | *str*                                                                                              | :heavy_check_mark:                                                                                 | The ID of the folder to update.                                                                    |
+| `request_body`                                                                                     | [Optional[operations.UpdateFolderRequestBody]](../../models/operations/updatefolderrequestbody.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

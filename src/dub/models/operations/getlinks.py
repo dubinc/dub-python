@@ -73,6 +73,8 @@ class GetLinksRequestTypedDict(TypedDict):
     r"""The tag IDs to filter the links by."""
     tag_names: NotRequired[QueryParamTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+    folder_id: NotRequired[str]
+    r"""The folder ID to filter the links by."""
     search: NotRequired[str]
     r"""The search term to filter the links by. The search term will be matched against the short link slug and the destination url."""
     user_id: NotRequired[str]
@@ -122,6 +124,13 @@ class GetLinksRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+    folder_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="folderId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The folder ID to filter the links by."""
 
     search: Annotated[
         Optional[str],

@@ -49,6 +49,8 @@ class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
     r"""The unique IDs of the tags assigned to the short link."""
     tag_names: NotRequired[UpsertPartnerLinkTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+    folder_id: NotRequired[Nullable[str]]
+    r"""The unique ID existing folder to assign the short link to."""
     comments: NotRequired[Nullable[str]]
     r"""The comments for the short link."""
     expires_at: NotRequired[Nullable[str]]
@@ -123,6 +125,11 @@ class UpsertPartnerLinkLinkProps(BaseModel):
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
+    folder_id: Annotated[OptionalNullable[str], pydantic.Field(alias="folderId")] = (
+        UNSET
+    )
+    r"""The unique ID existing folder to assign the short link to."""
+
     comments: OptionalNullable[str] = UNSET
     r"""The comments for the short link."""
 
@@ -194,6 +201,7 @@ class UpsertPartnerLinkLinkProps(BaseModel):
             "archived",
             "tagIds",
             "tagNames",
+            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -218,6 +226,7 @@ class UpsertPartnerLinkLinkProps(BaseModel):
             "externalId",
             "tenantId",
             "partnerId",
+            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -265,12 +274,12 @@ class UpsertPartnerLinkLinkProps(BaseModel):
 class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
     program_id: str
     r"""The ID of the program that the partner is enrolled in."""
-    url: str
-    r"""The URL to shorten. Will throw an error if the domain doesn't match the program's default URL domain."""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
+    url: NotRequired[Nullable[str]]
+    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     link_props: NotRequired[UpsertPartnerLinkLinkPropsTypedDict]
@@ -280,9 +289,6 @@ class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
 class UpsertPartnerLinkRequestBody(BaseModel):
     program_id: Annotated[str, pydantic.Field(alias="programId")]
     r"""The ID of the program that the partner is enrolled in."""
-
-    url: str
-    r"""The URL to shorten. Will throw an error if the domain doesn't match the program's default URL domain."""
 
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET
@@ -294,6 +300,9 @@ class UpsertPartnerLinkRequestBody(BaseModel):
     )
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
 
+    url: OptionalNullable[str] = UNSET
+    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
+
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
 
@@ -304,8 +313,8 @@ class UpsertPartnerLinkRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["partnerId", "tenantId", "key", "linkProps"]
-        nullable_fields = ["partnerId", "tenantId"]
+        optional_fields = ["partnerId", "tenantId", "url", "key", "linkProps"]
+        nullable_fields = ["partnerId", "tenantId", "url"]
         null_default_fields = []
 
         serialized = handler(self)

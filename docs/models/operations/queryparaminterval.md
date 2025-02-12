@@ -11,6 +11,8 @@ The interval to retrieve events for. Takes precedence over start and end. If und
 | `SEVEND`       | 7d             |
 | `THIRTYD`      | 30d            |
 | `NINETYD`      | 90d            |
-| `YTD`          | ytd            |
 | `ONEY`         | 1y             |
+| `MTD`          | mtd            |
+| `QTD`          | qtd            |
+| `YTD`          | ytd            |
 | `ALL`          | all            |

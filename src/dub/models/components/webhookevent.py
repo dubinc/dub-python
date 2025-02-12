@@ -4,6 +4,7 @@ from __future__ import annotations
 from .leadcreatedevent import LeadCreatedEvent, LeadCreatedEventTypedDict
 from .linkclickedevent import LinkClickedEvent, LinkClickedEventTypedDict
 from .linkwebhookevent import LinkWebhookEvent, LinkWebhookEventTypedDict
+from .partnercreatedevent import PartnerCreatedEvent, PartnerCreatedEventTypedDict
 from .salecreatedevent import SaleCreatedEvent, SaleCreatedEventTypedDict
 from typing import Union
 from typing_extensions import TypeAliasType
@@ -16,6 +17,7 @@ WebhookEventTypedDict = TypeAliasType(
         LinkClickedEventTypedDict,
         LeadCreatedEventTypedDict,
         SaleCreatedEventTypedDict,
+        PartnerCreatedEventTypedDict,
     ],
 )
 r"""Webhook event schema"""
@@ -23,6 +25,12 @@ r"""Webhook event schema"""
 
 WebhookEvent = TypeAliasType(
     "WebhookEvent",
-    Union[LinkWebhookEvent, LinkClickedEvent, LeadCreatedEvent, SaleCreatedEvent],
+    Union[
+        LinkWebhookEvent,
+        LinkClickedEvent,
+        LeadCreatedEvent,
+        SaleCreatedEvent,
+        PartnerCreatedEvent,
+    ],
 )
 r"""Webhook event schema"""

@@ -12,6 +12,7 @@ from dub.customers import Customers
 from dub.domains import Domains
 from dub.embed_tokens import EmbedTokens
 from dub.events import Events
+from dub.folders import Folders
 from dub.links import Links
 from dub.metatags import Metatags
 from dub.models import components
@@ -33,6 +34,7 @@ class Dub(BaseSDK):
     analytics: Analytics
     events: Events
     tags: Tags
+    folders: Folders
     domains: Domains
     track: Track
     customers: Customers
@@ -134,6 +136,7 @@ class Dub(BaseSDK):
         self.analytics = Analytics(self.sdk_configuration)
         self.events = Events(self.sdk_configuration)
         self.tags = Tags(self.sdk_configuration)
+        self.folders = Folders(self.sdk_configuration)
         self.domains = Domains(self.sdk_configuration)
         self.track = Track(self.sdk_configuration)
         self.customers = Customers(self.sdk_configuration)

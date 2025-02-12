@@ -45,6 +45,7 @@ from .domainschema import (
     RegisteredDomain,
     RegisteredDomainTypedDict,
 )
+from .folderschema import AccessLevel, FolderSchema, FolderSchemaTypedDict
 from .leadcreatedevent import (
     LeadCreatedEvent,
     LeadCreatedEventClick,
@@ -118,6 +119,25 @@ from .linkwebhookevent import (
     Three,
     Two,
 )
+from .partneranalyticscount import PartnerAnalyticsCount, PartnerAnalyticsCountTypedDict
+from .partneranalyticstimeseries import (
+    PartnerAnalyticsTimeseries,
+    PartnerAnalyticsTimeseriesTypedDict,
+)
+from .partneranalyticstoplinks import (
+    PartnerAnalyticsTopLinks,
+    PartnerAnalyticsTopLinksTypedDict,
+)
+from .partnercreatedevent import (
+    Links,
+    LinksTypedDict,
+    PartnerCreatedEvent,
+    PartnerCreatedEventData,
+    PartnerCreatedEventDataTypedDict,
+    PartnerCreatedEventEvent,
+    PartnerCreatedEventTypedDict,
+    Status,
+)
 from .salecreatedevent import (
     SaleCreatedEvent,
     SaleCreatedEventClick,
@@ -183,6 +203,7 @@ from .workspaceschema import (
 
 
 __all__ = [
+    "AccessLevel",
     "AnalyticsBrowsers",
     "AnalyticsBrowsersTypedDict",
     "AnalyticsCities",
@@ -234,6 +255,8 @@ __all__ = [
     "Domains",
     "DomainsTypedDict",
     "Event",
+    "FolderSchema",
+    "FolderSchemaTypedDict",
     "Geo",
     "GeoTypedDict",
     "Interval",
@@ -294,8 +317,21 @@ __all__ = [
     "LinkWebhookEventGeo",
     "LinkWebhookEventGeoTypedDict",
     "LinkWebhookEventTypedDict",
+    "Links",
+    "LinksTypedDict",
     "One",
     "Partner",
+    "PartnerAnalyticsCount",
+    "PartnerAnalyticsCountTypedDict",
+    "PartnerAnalyticsTimeseries",
+    "PartnerAnalyticsTimeseriesTypedDict",
+    "PartnerAnalyticsTopLinks",
+    "PartnerAnalyticsTopLinksTypedDict",
+    "PartnerCreatedEvent",
+    "PartnerCreatedEventData",
+    "PartnerCreatedEventDataTypedDict",
+    "PartnerCreatedEventEvent",
+    "PartnerCreatedEventTypedDict",
     "PartnerTypedDict",
     "PaymentProcessor",
     "Plan",
@@ -348,6 +384,7 @@ __all__ = [
     "SaleTypedDict",
     "Security",
     "SecurityTypedDict",
+    "Status",
     "TagSchema",
     "TagSchemaTypedDict",
     "Three",

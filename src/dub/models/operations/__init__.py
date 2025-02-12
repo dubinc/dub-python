@@ -47,6 +47,11 @@ from .createembedtoken import (
     CreateEmbedTokenResponseBody,
     CreateEmbedTokenResponseBodyTypedDict,
 )
+from .createfolder import (
+    AccessLevel,
+    CreateFolderRequestBody,
+    CreateFolderRequestBodyTypedDict,
+)
 from .createlink import (
     CreateLinkRequestBody,
     CreateLinkRequestBodyTypedDict,
@@ -57,9 +62,6 @@ from .createlink import (
 )
 from .createpartner import (
     Country,
-    CreatePartnerDiscount,
-    CreatePartnerDiscountTypedDict,
-    CreatePartnerInterval,
     CreatePartnerRequestBody,
     CreatePartnerRequestBodyTypedDict,
     CreatePartnerResponseBody,
@@ -68,7 +70,6 @@ from .createpartner import (
     CreatePartnerTagIdsTypedDict,
     CreatePartnerTagNames,
     CreatePartnerTagNamesTypedDict,
-    CreatePartnerType,
     LinkProps,
     LinkPropsTypedDict,
     Links,
@@ -97,6 +98,12 @@ from .deletedomain import (
     DeleteDomainRequestTypedDict,
     DeleteDomainResponseBody,
     DeleteDomainResponseBodyTypedDict,
+)
+from .deletefolder import (
+    DeleteFolderRequest,
+    DeleteFolderRequestTypedDict,
+    DeleteFolderResponseBody,
+    DeleteFolderResponseBodyTypedDict,
 )
 from .deletelink import (
     DeleteLinkRequest,
@@ -153,6 +160,7 @@ from .getlinks import (
     SortOrder,
 )
 from .getlinkscount import (
+    Four,
     GetLinksCountQueryParamTagIds,
     GetLinksCountQueryParamTagIdsTypedDict,
     GetLinksCountQueryParamTagNames,
@@ -201,6 +209,7 @@ from .listevents import (
     QueryParamSortOrder,
     QueryParamTrigger,
 )
+from .listfolders import ListFoldersRequest, ListFoldersRequestTypedDict
 from .retrieveanalytics import (
     Event,
     Interval,
@@ -212,6 +221,14 @@ from .retrieveanalytics import (
     RetrieveAnalyticsResponseBody,
     RetrieveAnalyticsResponseBodyTypedDict,
     Trigger,
+)
+from .retrievepartneranalytics import (
+    RetrievePartnerAnalyticsQueryParamGroupBy,
+    RetrievePartnerAnalyticsQueryParamInterval,
+    RetrievePartnerAnalyticsRequest,
+    RetrievePartnerAnalyticsRequestTypedDict,
+    RetrievePartnerAnalyticsResponseBody,
+    RetrievePartnerAnalyticsResponseBodyTypedDict,
 )
 from .tracklead import (
     Click,
@@ -255,6 +272,13 @@ from .updatedomain import (
     UpdateDomainRequestBody,
     UpdateDomainRequestBodyTypedDict,
     UpdateDomainRequestTypedDict,
+)
+from .updatefolder import (
+    UpdateFolderAccessLevel,
+    UpdateFolderRequest,
+    UpdateFolderRequestBody,
+    UpdateFolderRequestBodyTypedDict,
+    UpdateFolderRequestTypedDict,
 )
 from .updatelink import (
     UpdateLinkRequest,
@@ -300,6 +324,7 @@ from .upsertpartnerlink import (
 
 
 __all__ = [
+    "AccessLevel",
     "BulkCreateLinksTagIds",
     "BulkCreateLinksTagIdsTypedDict",
     "BulkCreateLinksTagNames",
@@ -336,11 +361,10 @@ __all__ = [
     "CreateEmbedTokenRequestBodyTypedDict",
     "CreateEmbedTokenResponseBody",
     "CreateEmbedTokenResponseBodyTypedDict",
+    "CreateFolderRequestBody",
+    "CreateFolderRequestBodyTypedDict",
     "CreateLinkRequestBody",
     "CreateLinkRequestBodyTypedDict",
-    "CreatePartnerDiscount",
-    "CreatePartnerDiscountTypedDict",
-    "CreatePartnerInterval",
     "CreatePartnerLinkLinkProps",
     "CreatePartnerLinkLinkPropsTypedDict",
     "CreatePartnerLinkRequestBody",
@@ -357,7 +381,6 @@ __all__ = [
     "CreatePartnerTagIdsTypedDict",
     "CreatePartnerTagNames",
     "CreatePartnerTagNamesTypedDict",
-    "CreatePartnerType",
     "CreateTagRequestBody",
     "CreateTagRequestBodyTypedDict",
     "Customer",
@@ -372,6 +395,10 @@ __all__ = [
     "DeleteDomainRequestTypedDict",
     "DeleteDomainResponseBody",
     "DeleteDomainResponseBodyTypedDict",
+    "DeleteFolderRequest",
+    "DeleteFolderRequestTypedDict",
+    "DeleteFolderResponseBody",
+    "DeleteFolderResponseBodyTypedDict",
     "DeleteLinkRequest",
     "DeleteLinkRequestTypedDict",
     "DeleteLinkResponseBody",
@@ -383,6 +410,7 @@ __all__ = [
     "Discount",
     "DiscountTypedDict",
     "Event",
+    "Four",
     "GetCustomerDiscount",
     "GetCustomerDiscountTypedDict",
     "GetCustomerInterval",
@@ -446,6 +474,8 @@ __all__ = [
     "ListEventsRequestTypedDict",
     "ListEventsResponseBody",
     "ListEventsResponseBodyTypedDict",
+    "ListFoldersRequest",
+    "ListFoldersRequestTypedDict",
     "One",
     "Order",
     "Partner",
@@ -471,6 +501,12 @@ __all__ = [
     "RetrieveAnalyticsRequestTypedDict",
     "RetrieveAnalyticsResponseBody",
     "RetrieveAnalyticsResponseBodyTypedDict",
+    "RetrievePartnerAnalyticsQueryParamGroupBy",
+    "RetrievePartnerAnalyticsQueryParamInterval",
+    "RetrievePartnerAnalyticsRequest",
+    "RetrievePartnerAnalyticsRequestTypedDict",
+    "RetrievePartnerAnalyticsResponseBody",
+    "RetrievePartnerAnalyticsResponseBodyTypedDict",
     "Sale",
     "SaleTypedDict",
     "Sort",
@@ -513,6 +549,11 @@ __all__ = [
     "UpdateDomainRequestBody",
     "UpdateDomainRequestBodyTypedDict",
     "UpdateDomainRequestTypedDict",
+    "UpdateFolderAccessLevel",
+    "UpdateFolderRequest",
+    "UpdateFolderRequestBody",
+    "UpdateFolderRequestBodyTypedDict",
+    "UpdateFolderRequestTypedDict",
     "UpdateLinkRequest",
     "UpdateLinkRequestBody",
     "UpdateLinkRequestBodyTypedDict",
