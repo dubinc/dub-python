@@ -59,6 +59,8 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""The unique IDs of the tags assigned to the short link."""
     tag_names: NotRequired[UpdateLinkTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+    folder_id: NotRequired[Nullable[str]]
+    r"""The unique ID existing folder to assign the short link to."""
     comments: NotRequired[Nullable[str]]
     r"""The comments for the short link."""
     expires_at: NotRequired[Nullable[str]]
@@ -172,6 +174,11 @@ class UpdateLinkRequestBody(BaseModel):
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
+    folder_id: Annotated[OptionalNullable[str], pydantic.Field(alias="folderId")] = (
+        UNSET
+    )
+    r"""The unique ID existing folder to assign the short link to."""
+
     comments: OptionalNullable[str] = UNSET
     r"""The comments for the short link."""
 
@@ -258,6 +265,7 @@ class UpdateLinkRequestBody(BaseModel):
             "tagId",
             "tagIds",
             "tagNames",
+            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -286,6 +294,7 @@ class UpdateLinkRequestBody(BaseModel):
             "programId",
             "partnerId",
             "tagId",
+            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",

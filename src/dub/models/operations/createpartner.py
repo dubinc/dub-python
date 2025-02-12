@@ -301,6 +301,8 @@ class LinkPropsTypedDict(TypedDict):
     r"""The unique IDs of the tags assigned to the short link."""
     tag_names: NotRequired[CreatePartnerTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+    folder_id: NotRequired[Nullable[str]]
+    r"""The unique ID existing folder to assign the short link to."""
     comments: NotRequired[Nullable[str]]
     r"""The comments for the short link."""
     expires_at: NotRequired[Nullable[str]]
@@ -375,6 +377,11 @@ class LinkProps(BaseModel):
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
+    folder_id: Annotated[OptionalNullable[str], pydantic.Field(alias="folderId")] = (
+        UNSET
+    )
+    r"""The unique ID existing folder to assign the short link to."""
+
     comments: OptionalNullable[str] = UNSET
     r"""The comments for the short link."""
 
@@ -446,6 +453,7 @@ class LinkProps(BaseModel):
             "archived",
             "tagIds",
             "tagNames",
+            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -470,6 +478,7 @@ class LinkProps(BaseModel):
             "externalId",
             "tenantId",
             "partnerId",
+            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -650,72 +659,6 @@ class Links(BaseModel):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class CreatePartnerType(str, Enum):
-    PERCENTAGE = "percentage"
-    FLAT = "flat"
-
-
-class CreatePartnerInterval(str, Enum):
-    MONTH = "month"
-    YEAR = "year"
-
-
-class CreatePartnerDiscountTypedDict(TypedDict):
-    id: str
-    coupon_id: Nullable[str]
-    coupon_test_id: Nullable[str]
-    amount: float
-    type: CreatePartnerType
-    duration: Nullable[float]
-    interval: Nullable[CreatePartnerInterval]
-
-
-class CreatePartnerDiscount(BaseModel):
-    id: str
-
-    coupon_id: Annotated[Nullable[str], pydantic.Field(alias="couponId")]
-
-    coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
-
-    amount: float
-
-    type: CreatePartnerType
-
-    duration: Nullable[float]
-
-    interval: Nullable[CreatePartnerInterval]
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["couponId", "couponTestId", "duration", "interval"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in self.model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
 class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The created partner"""
 
@@ -724,21 +667,17 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     email: Nullable[str]
     image: Nullable[str]
     country: str
-    bio: Nullable[str]
-    stripe_connect_id: Nullable[str]
-    payouts_enabled: bool
     created_at: str
-    updated_at: str
     status: Status
+    program_id: str
+    tenant_id: Nullable[str]
     links: Nullable[List[LinksTypedDict]]
-    commission_amount: Nullable[float]
-    coupon_id: NotRequired[Nullable[str]]
-    discount: NotRequired[Nullable[CreatePartnerDiscountTypedDict]]
-    earnings: NotRequired[float]
+    description: NotRequired[Nullable[str]]
     clicks: NotRequired[float]
     leads: NotRequired[float]
     sales: NotRequired[float]
-    sales_amount: NotRequired[float]
+    sale_amount: NotRequired[float]
+    earnings: NotRequired[float]
 
 
 class CreatePartnerResponseBody(BaseModel):
@@ -754,31 +693,17 @@ class CreatePartnerResponseBody(BaseModel):
 
     country: str
 
-    bio: Nullable[str]
-
-    stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
-
-    payouts_enabled: Annotated[bool, pydantic.Field(alias="payoutsEnabled")]
-
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
-
-    updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
     status: Status
 
+    program_id: Annotated[str, pydantic.Field(alias="programId")]
+
+    tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
+
     links: Nullable[List[Links]]
 
-    commission_amount: Annotated[
-        Nullable[float], pydantic.Field(alias="commissionAmount")
-    ]
-
-    coupon_id: Annotated[OptionalNullable[str], pydantic.Field(alias="couponId")] = (
-        UNSET
-    )
-
-    discount: OptionalNullable[CreatePartnerDiscount] = UNSET
-
-    earnings: Optional[float] = 0
+    description: OptionalNullable[str] = UNSET
 
     clicks: Optional[float] = 0
 
@@ -786,29 +711,21 @@ class CreatePartnerResponseBody(BaseModel):
 
     sales: Optional[float] = 0
 
-    sales_amount: Annotated[Optional[float], pydantic.Field(alias="salesAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+
+    earnings: Optional[float] = 0
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "couponId",
-            "discount",
-            "earnings",
+            "description",
             "clicks",
             "leads",
             "sales",
-            "salesAmount",
+            "saleAmount",
+            "earnings",
         ]
-        nullable_fields = [
-            "email",
-            "image",
-            "bio",
-            "stripeConnectId",
-            "links",
-            "commissionAmount",
-            "couponId",
-            "discount",
-        ]
+        nullable_fields = ["email", "image", "tenantId", "links", "description"]
         null_default_fields = []
 
         serialized = handler(self)

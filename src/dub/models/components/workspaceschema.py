@@ -93,6 +93,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The domains limit of the workspace."""
     tags_limit: float
     r"""The tags limit of the workspace."""
+    folders_limit: float
+    r"""The folders limit of the workspace."""
     users_limit: float
     r"""The users limit of the workspace."""
     ai_usage: float
@@ -172,6 +174,9 @@ class WorkspaceSchema(BaseModel):
 
     tags_limit: Annotated[float, pydantic.Field(alias="tagsLimit")]
     r"""The tags limit of the workspace."""
+
+    folders_limit: Annotated[float, pydantic.Field(alias="foldersLimit")]
+    r"""The folders limit of the workspace."""
 
     users_limit: Annotated[float, pydantic.Field(alias="usersLimit")]
     r"""The users limit of the workspace."""

@@ -1,0 +1,9 @@
+# UpdateFolderRequestBody
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                     | *Optional[str]*                                                                                            | :heavy_minus_sign:                                                                                         | The name of the folder.                                                                                    |
+| `access_level`                                                                                             | [OptionalNullable[operations.UpdateFolderAccessLevel]](../../models/operations/updatefolderaccesslevel.md) | :heavy_minus_sign:                                                                                         | The access level of the folder within the workspace.                                                       |

@@ -29,3 +29,9 @@ value: components.LeadCreatedEvent = /* values here */
 value: components.SaleCreatedEvent = /* values here */
 ```
 
+### `components.PartnerCreatedEvent`
+
+```python
+value: components.PartnerCreatedEvent = /* values here */
+```
+

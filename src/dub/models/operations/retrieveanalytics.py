@@ -68,8 +68,10 @@ class Interval(str, Enum):
     SEVEND = "7d"
     THIRTYD = "30d"
     NINETYD = "90d"
-    YTD = "ytd"
     ONEY = "1y"
+    MTD = "mtd"
+    QTD = "qtd"
+    YTD = "ytd"
     ALL = "all"
     ALL_UNFILTERED = "all_unfiltered"
 
@@ -146,6 +148,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""Deprecated. Use `tagIds` instead. The tag ID to retrieve analytics for."""
     tag_ids: NotRequired[RetrieveAnalyticsQueryParamTagIdsTypedDict]
     r"""The tag IDs to retrieve analytics for."""
+    folder_id: NotRequired[str]
+    r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
     qr: NotRequired[bool]
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
@@ -328,6 +332,13 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""The tag IDs to retrieve analytics for."""
 
+    folder_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="folderId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
+
     qr: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -399,6 +410,7 @@ class RetrieveAnalyticsRequest(BaseModel):
             "url",
             "tagId",
             "tagIds",
+            "folderId",
             "qr",
             "root",
             "utm_source",

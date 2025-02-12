@@ -211,6 +211,78 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/folders"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listFolders
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.folders.list(request={})
+
+                assert res is not None
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/folders"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createFolder
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.folders.create()
+
+                assert res is not None
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/folders/{id}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: deleteFolder
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.folders.delete(id="<id>")
+
+                assert res is not None
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/folders/{id}"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: updateFolder
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.folders.update(id="<id>")
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/links"]["get"]
     update:
       x-codeSamples:
@@ -488,6 +560,26 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners/analytics"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: retrievePartnerAnalytics
+          source: |-
+            from dub import Dub
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.analytics(request={
+                    "program_id": "<id>",
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/partners/links"]["post"]
     update:
       x-codeSamples:
@@ -502,7 +594,6 @@ actions:
 
                 res = d_client.partners.create_link(request={
                     "program_id": "<id>",
-                    "url": "https://necessary-brief.name",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [
@@ -529,7 +620,6 @@ actions:
 
                 res = d_client.partners.upsert_link(request={
                     "program_id": "<id>",
-                    "url": "https://unsteady-lobster.com/",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [

@@ -33,6 +33,10 @@ GetLinksCountQueryParamTagNames = TypeAliasType(
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
+class Four(str, Enum):
+    FOLDER_ID = "folderId"
+
+
 class Three(str, Enum):
     USER_ID = "userId"
 
@@ -45,11 +49,11 @@ class One(str, Enum):
     DOMAIN = "domain"
 
 
-GroupByTypedDict = TypeAliasType("GroupByTypedDict", Union[One, Two, Three])
+GroupByTypedDict = TypeAliasType("GroupByTypedDict", Union[One, Two, Three, Four])
 r"""The field to group the links by."""
 
 
-GroupBy = TypeAliasType("GroupBy", Union[One, Two, Three])
+GroupBy = TypeAliasType("GroupBy", Union[One, Two, Three, Four])
 r"""The field to group the links by."""
 
 
@@ -62,6 +66,8 @@ class GetLinksCountRequestTypedDict(TypedDict):
     r"""The tag IDs to filter the links by."""
     tag_names: NotRequired[GetLinksCountQueryParamTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+    folder_id: NotRequired[str]
+    r"""The folder ID to filter the links by."""
     search: NotRequired[str]
     r"""The search term to filter the links by. The search term will be matched against the short link slug and the destination url."""
     user_id: NotRequired[str]
@@ -103,6 +109,13 @@ class GetLinksCountRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
+
+    folder_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="folderId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The folder ID to filter the links by."""
 
     search: Annotated[
         Optional[str],

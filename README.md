@@ -239,6 +239,13 @@ asyncio.run(main())
 
 * [list](docs/sdks/events/README.md#list) - Retrieve a list of events
 
+### [folders](docs/sdks/folders/README.md)
+
+* [create](docs/sdks/folders/README.md#create) - Create a new folder
+* [list](docs/sdks/folders/README.md#list) - Retrieve a list of folders
+* [update](docs/sdks/folders/README.md#update) - Update a folder
+* [delete](docs/sdks/folders/README.md#delete) - Delete a folder
+
 ### [links](docs/sdks/links/README.md)
 
 * [create](docs/sdks/links/README.md#create) - Create a new link
@@ -261,6 +268,7 @@ asyncio.run(main())
 * [create](docs/sdks/partners/README.md#create) - Create a new partner
 * [create_link](docs/sdks/partners/README.md#create_link) - Create a link for a partner
 * [upsert_link](docs/sdks/partners/README.md#upsert_link) - Upsert a link for a partner
+* [analytics](docs/sdks/partners/README.md#analytics) - Retrieve analytics for a partner
 
 ### [qr_codes](docs/sdks/qrcodes/README.md)
 
