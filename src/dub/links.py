@@ -77,6 +77,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -223,6 +224,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -359,6 +361,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -535,6 +538,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -713,6 +717,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getLinksCount",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -851,6 +856,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getLinksCount",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -989,6 +995,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getLinkInfo",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1127,6 +1134,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getLinkInfo",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1280,6 +1288,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1433,6 +1442,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1569,6 +1579,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1707,6 +1718,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1850,6 +1862,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="bulkCreateLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1993,6 +2006,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="bulkCreateLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -2145,6 +2159,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="bulkUpdateLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -2297,6 +2312,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="bulkUpdateLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -2438,6 +2454,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="bulkDeleteLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -2579,6 +2596,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="bulkDeleteLinks",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -2727,6 +2745,7 @@ class Links(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="upsertLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -2873,6 +2892,7 @@ class Links(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="upsertLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,

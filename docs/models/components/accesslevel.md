@@ -7,5 +7,5 @@ The access level of the folder within the workspace.
 
 | Name    | Value   |
 | ------- | ------- |
-| `READ`  | read    |
 | `WRITE` | write   |
+| `READ`  | read    |
