@@ -667,6 +667,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     email: Nullable[str]
     image: Nullable[str]
     country: str
+    payouts_enabled: bool
     created_at: str
     status: Status
     program_id: str
@@ -692,6 +693,8 @@ class CreatePartnerResponseBody(BaseModel):
     image: Nullable[str]
 
     country: str
+
+    payouts_enabled: Annotated[bool, pydantic.Field(alias="payoutsEnabled")]
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 

@@ -12,8 +12,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class AccessLevel(str, Enum):
     r"""The access level of the folder within the workspace."""
 
-    READ = "read"
     WRITE = "write"
+    READ = "read"
 
 
 class FolderSchemaTypedDict(TypedDict):

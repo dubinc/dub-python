@@ -81,6 +81,7 @@ class Domains(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createDomain",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -233,6 +234,7 @@ class Domains(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createDomain",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -373,6 +375,7 @@ class Domains(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listDomains",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -540,6 +543,7 @@ class Domains(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listDomains",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -722,6 +726,7 @@ class Domains(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateDomain",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -877,6 +882,7 @@ class Domains(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateDomain",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1015,6 +1021,7 @@ class Domains(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteDomain",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1153,6 +1160,7 @@ class Domains(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteDomain",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,

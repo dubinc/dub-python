@@ -13,8 +13,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class UpdateFolderAccessLevel(str, Enum):
     r"""The access level of the folder within the workspace."""
 
-    READ = "read"
     WRITE = "write"
+    READ = "read"
 
 
 class UpdateFolderRequestBodyTypedDict(TypedDict):

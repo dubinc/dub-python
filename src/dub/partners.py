@@ -80,6 +80,7 @@ class Partners(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createPartner",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -232,6 +233,7 @@ class Partners(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createPartner",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -384,6 +386,7 @@ class Partners(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createPartnerLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -534,6 +537,7 @@ class Partners(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createPartnerLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -684,6 +688,7 @@ class Partners(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="upsertPartnerLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -834,6 +839,7 @@ class Partners(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="upsertPartnerLink",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -975,6 +981,7 @@ class Partners(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="retrievePartnerAnalytics",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
@@ -1118,6 +1125,7 @@ class Partners(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="retrievePartnerAnalytics",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
