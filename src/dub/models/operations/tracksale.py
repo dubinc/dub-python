@@ -34,6 +34,8 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
     r"""The currency of the sale. Accepts ISO 4217 currency codes."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the sale event."""
+    lead_event_name: NotRequired[Nullable[str]]
+    r"""The name of the lead event that occurred before the sale."""
 
 
 class TrackSaleRequestBody(BaseModel):
@@ -71,6 +73,11 @@ class TrackSaleRequestBody(BaseModel):
     metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional metadata to be stored with the sale event."""
 
+    lead_event_name: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="leadEventName")
+    ] = None
+    r"""The name of the lead event that occurred before the sale."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -80,9 +87,10 @@ class TrackSaleRequestBody(BaseModel):
             "invoiceId",
             "currency",
             "metadata",
+            "leadEventName",
         ]
-        nullable_fields = ["customerId", "invoiceId", "metadata"]
-        null_default_fields = ["customerId", "invoiceId"]
+        nullable_fields = ["customerId", "invoiceId", "metadata", "leadEventName"]
+        null_default_fields = ["customerId", "invoiceId", "leadEventName"]
 
         serialized = handler(self)
 
