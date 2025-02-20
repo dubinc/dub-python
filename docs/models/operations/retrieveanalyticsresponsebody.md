@@ -29,6 +29,12 @@ value: List[components.AnalyticsContinents] = /* values here */
 value: List[components.AnalyticsCountries] = /* values here */
 ```
 
+### `List[components.AnalyticsRegions]`
+
+```python
+value: List[components.AnalyticsRegions] = /* values here */
+```
+
 ### `List[components.AnalyticsCities]`
 
 ```python

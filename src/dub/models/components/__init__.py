@@ -4,6 +4,7 @@ from .analyticsbrowsers import AnalyticsBrowsers, AnalyticsBrowsersTypedDict
 from .analyticscities import (
     AnalyticsCities,
     AnalyticsCitiesCountry,
+    AnalyticsCitiesRegion,
     AnalyticsCitiesTypedDict,
 )
 from .analyticscontinents import (
@@ -17,11 +18,18 @@ from .analyticscountries import (
     AnalyticsCountriesTypedDict,
     City,
     Country,
+    Region,
 )
 from .analyticsdevices import AnalyticsDevices, AnalyticsDevicesTypedDict
 from .analyticsos import AnalyticsOS, AnalyticsOSTypedDict
 from .analyticsreferers import AnalyticsReferers, AnalyticsReferersTypedDict
 from .analyticsrefererurls import AnalyticsRefererUrls, AnalyticsRefererUrlsTypedDict
+from .analyticsregions import (
+    AnalyticsRegions,
+    AnalyticsRegionsCity,
+    AnalyticsRegionsCountry,
+    AnalyticsRegionsTypedDict,
+)
 from .analyticstimeseries import AnalyticsTimeseries, AnalyticsTimeseriesTypedDict
 from .analyticstoplinks import AnalyticsTopLinks, AnalyticsTopLinksTypedDict
 from .analyticstopurls import AnalyticsTopUrls, AnalyticsTopUrlsTypedDict
@@ -208,6 +216,7 @@ __all__ = [
     "AnalyticsBrowsersTypedDict",
     "AnalyticsCities",
     "AnalyticsCitiesCountry",
+    "AnalyticsCitiesRegion",
     "AnalyticsCitiesTypedDict",
     "AnalyticsContinents",
     "AnalyticsContinentsTypedDict",
@@ -223,6 +232,10 @@ __all__ = [
     "AnalyticsRefererUrlsTypedDict",
     "AnalyticsReferers",
     "AnalyticsReferersTypedDict",
+    "AnalyticsRegions",
+    "AnalyticsRegionsCity",
+    "AnalyticsRegionsCountry",
+    "AnalyticsRegionsTypedDict",
     "AnalyticsTimeseries",
     "AnalyticsTimeseriesTypedDict",
     "AnalyticsTopLinks",
@@ -335,6 +348,7 @@ __all__ = [
     "PartnerTypedDict",
     "PaymentProcessor",
     "Plan",
+    "Region",
     "RegisteredDomain",
     "RegisteredDomainTypedDict",
     "Role",
