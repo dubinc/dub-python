@@ -10,9 +10,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class TrackLeadRequestBodyTypedDict(TypedDict):
     click_id: str
-    r"""The ID of the click in th Dub. You can read this value from `dub_id` cookie."""
+    r"""The ID of the click in Dub. You can read this value from `dub_id` cookie."""
     event_name: str
-    r"""The name of the event to track."""
+    r"""The name of the lead event to track."""
+    event_quantity: NotRequired[Nullable[float]]
+    r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
     external_id: NotRequired[str]
     r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
     customer_id: NotRequired[Nullable[str]]
@@ -29,10 +31,15 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
 
 class TrackLeadRequestBody(BaseModel):
     click_id: Annotated[str, pydantic.Field(alias="clickId")]
-    r"""The ID of the click in th Dub. You can read this value from `dub_id` cookie."""
+    r"""The ID of the click in Dub. You can read this value from `dub_id` cookie."""
 
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
-    r"""The name of the event to track."""
+    r"""The name of the lead event to track."""
+
+    event_quantity: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="eventQuantity")
+    ] = UNSET
+    r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
 
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = ""
     r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
@@ -67,6 +74,7 @@ class TrackLeadRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "eventQuantity",
             "externalId",
             "customerId",
             "customerName",
@@ -75,6 +83,7 @@ class TrackLeadRequestBody(BaseModel):
             "metadata",
         ]
         nullable_fields = [
+            "eventQuantity",
             "customerId",
             "customerName",
             "customerEmail",

@@ -8,8 +8,8 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class Country(str, Enum):
-    r"""The 2-letter ISO 3166-1 country code for the country associated with the location of the user. Learn more: https://d.to/geo"""
+class AnalyticsRegionsCountry(str, Enum):
+    r"""The 2-letter country code of the region: https://d.to/geo"""
 
     AF = "AF"
     AL = "AL"
@@ -263,45 +263,43 @@ class Country(str, Enum):
     XK = "XK"
 
 
-class Region(str, Enum):
+class AnalyticsRegionsCity(str, Enum):
     WILDCARD_ = "*"
 
 
-class City(str, Enum):
-    WILDCARD_ = "*"
-
-
-class AnalyticsCountriesTypedDict(TypedDict):
-    country: Country
-    r"""The 2-letter ISO 3166-1 country code for the country associated with the location of the user. Learn more: https://d.to/geo"""
-    region: NotRequired[Region]
-    city: NotRequired[City]
+class AnalyticsRegionsTypedDict(TypedDict):
+    country: AnalyticsRegionsCountry
+    r"""The 2-letter country code of the region: https://d.to/geo"""
+    region: str
+    r"""The 2-letter ISO 3166-2 region code representing the region associated with the location of the user."""
+    city: NotRequired[AnalyticsRegionsCity]
     clicks: NotRequired[float]
-    r"""The number of clicks from this country"""
+    r"""The number of clicks from this region"""
     leads: NotRequired[float]
-    r"""The number of leads from this country"""
+    r"""The number of leads from this region"""
     sales: NotRequired[float]
-    r"""The number of sales from this country"""
+    r"""The number of sales from this region"""
     sale_amount: NotRequired[float]
-    r"""The total amount of sales from this country, in cents"""
+    r"""The total amount of sales from this region, in cents"""
 
 
-class AnalyticsCountries(BaseModel):
-    country: Country
-    r"""The 2-letter ISO 3166-1 country code for the country associated with the location of the user. Learn more: https://d.to/geo"""
+class AnalyticsRegions(BaseModel):
+    country: AnalyticsRegionsCountry
+    r"""The 2-letter country code of the region: https://d.to/geo"""
 
-    region: Optional[Region] = Region.WILDCARD_
+    region: str
+    r"""The 2-letter ISO 3166-2 region code representing the region associated with the location of the user."""
 
-    city: Optional[City] = City.WILDCARD_
+    city: Optional[AnalyticsRegionsCity] = AnalyticsRegionsCity.WILDCARD_
 
     clicks: Optional[float] = 0
-    r"""The number of clicks from this country"""
+    r"""The number of clicks from this region"""
 
     leads: Optional[float] = 0
-    r"""The number of leads from this country"""
+    r"""The number of leads from this region"""
 
     sales: Optional[float] = 0
-    r"""The number of sales from this country"""
+    r"""The number of sales from this region"""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
-    r"""The total amount of sales from this country, in cents"""
+    r"""The total amount of sales from this region, in cents"""
