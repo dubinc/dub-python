@@ -35,7 +35,7 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the sale event."""
     lead_event_name: NotRequired[Nullable[str]]
-    r"""The name of the lead event that occurred before the sale."""
+    r"""The name of the lead event that occurred before the sale (case-sensitive)."""
 
 
 class TrackSaleRequestBody(BaseModel):
@@ -76,7 +76,7 @@ class TrackSaleRequestBody(BaseModel):
     lead_event_name: Annotated[
         OptionalNullable[str], pydantic.Field(alias="leadEventName")
     ] = None
-    r"""The name of the lead event that occurred before the sale."""
+    r"""The name of the lead event that occurred before the sale (case-sensitive)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
