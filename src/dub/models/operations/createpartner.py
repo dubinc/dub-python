@@ -666,7 +666,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     name: str
     email: Nullable[str]
     image: Nullable[str]
-    country: str
+    country: Nullable[str]
     payouts_enabled: bool
     created_at: str
     status: Status
@@ -692,7 +692,7 @@ class CreatePartnerResponseBody(BaseModel):
 
     image: Nullable[str]
 
-    country: str
+    country: Nullable[str]
 
     payouts_enabled: Annotated[bool, pydantic.Field(alias="payoutsEnabled")]
 
@@ -728,7 +728,14 @@ class CreatePartnerResponseBody(BaseModel):
             "saleAmount",
             "earnings",
         ]
-        nullable_fields = ["email", "image", "tenantId", "links", "description"]
+        nullable_fields = [
+            "email",
+            "image",
+            "country",
+            "tenantId",
+            "links",
+            "description",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

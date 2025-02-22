@@ -74,7 +74,7 @@ class PartnerCreatedEventDataTypedDict(TypedDict):
     name: str
     email: Nullable[str]
     image: Nullable[str]
-    country: str
+    country: Nullable[str]
     payouts_enabled: bool
     created_at: str
     status: Status
@@ -98,7 +98,7 @@ class PartnerCreatedEventData(BaseModel):
 
     image: Nullable[str]
 
-    country: str
+    country: Nullable[str]
 
     payouts_enabled: Annotated[bool, pydantic.Field(alias="payoutsEnabled")]
 
@@ -134,7 +134,14 @@ class PartnerCreatedEventData(BaseModel):
             "saleAmount",
             "earnings",
         ]
-        nullable_fields = ["email", "image", "tenantId", "links", "description"]
+        nullable_fields = [
+            "email",
+            "image",
+            "country",
+            "tenantId",
+            "links",
+            "description",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
