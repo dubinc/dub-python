@@ -21,6 +21,10 @@ class CreateDomainRequestBodyTypedDict(TypedDict):
     r"""Provide context to your teammates in the link creation modal by showing them an example of a link to be shortened."""
     logo: NotRequired[Nullable[str]]
     r"""The logo of the domain."""
+    asset_links: NotRequired[Nullable[str]]
+    r"""assetLinks.json configuration file (for deep link support on Android)."""
+    apple_app_site_association: NotRequired[Nullable[str]]
+    r"""apple-app-site-association configuration file (for deep link support on iOS)."""
 
 
 class CreateDomainRequestBody(BaseModel):
@@ -46,6 +50,16 @@ class CreateDomainRequestBody(BaseModel):
     logo: OptionalNullable[str] = UNSET
     r"""The logo of the domain."""
 
+    asset_links: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="assetLinks")
+    ] = UNSET
+    r"""assetLinks.json configuration file (for deep link support on Android)."""
+
+    apple_app_site_association: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="appleAppSiteAssociation")
+    ] = UNSET
+    r"""apple-app-site-association configuration file (for deep link support on iOS)."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -54,8 +68,17 @@ class CreateDomainRequestBody(BaseModel):
             "archived",
             "placeholder",
             "logo",
+            "assetLinks",
+            "appleAppSiteAssociation",
         ]
-        nullable_fields = ["expiredUrl", "notFoundUrl", "placeholder", "logo"]
+        nullable_fields = [
+            "expiredUrl",
+            "notFoundUrl",
+            "placeholder",
+            "logo",
+            "assetLinks",
+            "appleAppSiteAssociation",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
