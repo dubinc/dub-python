@@ -679,6 +679,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     sales: NotRequired[float]
     sale_amount: NotRequired[float]
     earnings: NotRequired[float]
+    application_id: NotRequired[Nullable[str]]
 
 
 class CreatePartnerResponseBody(BaseModel):
@@ -718,6 +719,10 @@ class CreatePartnerResponseBody(BaseModel):
 
     earnings: Optional[float] = 0
 
+    application_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="applicationId")
+    ] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -727,6 +732,7 @@ class CreatePartnerResponseBody(BaseModel):
             "sales",
             "saleAmount",
             "earnings",
+            "applicationId",
         ]
         nullable_fields = [
             "email",
@@ -735,6 +741,7 @@ class CreatePartnerResponseBody(BaseModel):
             "tenantId",
             "links",
             "description",
+            "applicationId",
         ]
         null_default_fields = []
 
