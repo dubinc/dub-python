@@ -282,6 +282,8 @@ class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
     r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+    comments: NotRequired[Nullable[str]]
+    r"""The comments for the short link."""
     link_props: NotRequired[UpsertPartnerLinkLinkPropsTypedDict]
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
@@ -306,6 +308,9 @@ class UpsertPartnerLinkRequestBody(BaseModel):
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
 
+    comments: OptionalNullable[str] = UNSET
+    r"""The comments for the short link."""
+
     link_props: Annotated[
         Optional[UpsertPartnerLinkLinkProps], pydantic.Field(alias="linkProps")
     ] = None
@@ -313,8 +318,15 @@ class UpsertPartnerLinkRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["partnerId", "tenantId", "url", "key", "linkProps"]
-        nullable_fields = ["partnerId", "tenantId", "url"]
+        optional_fields = [
+            "partnerId",
+            "tenantId",
+            "url",
+            "key",
+            "comments",
+            "linkProps",
+        ]
+        nullable_fields = ["partnerId", "tenantId", "url", "comments"]
         null_default_fields = []
 
         serialized = handler(self)
