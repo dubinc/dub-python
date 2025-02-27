@@ -11,6 +11,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -36,6 +37,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -54,6 +56,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -71,6 +74,7 @@ actions:
           label: getCustomer
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -92,6 +96,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -112,6 +117,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -129,6 +135,7 @@ actions:
           label: createDomain
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -153,6 +160,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -170,6 +178,7 @@ actions:
           label: updateDomain
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -193,6 +202,7 @@ actions:
           label: listEvents
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -219,6 +229,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -236,6 +247,7 @@ actions:
           label: createFolder
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -255,6 +267,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -272,6 +285,7 @@ actions:
           label: updateFolder
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -291,6 +305,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -308,6 +323,7 @@ actions:
           label: createLink
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -333,6 +349,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -355,6 +372,7 @@ actions:
           label: bulkUpdateLinks
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -380,6 +398,7 @@ actions:
           label: bulkCreateLinks
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -414,6 +433,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -431,6 +451,7 @@ actions:
           label: getLinkInfo
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -452,6 +473,7 @@ actions:
           label: upsertLink
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -477,6 +499,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -494,6 +517,7 @@ actions:
           label: updateLink
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -519,6 +543,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -538,6 +563,7 @@ actions:
           label: createPartner
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -568,6 +594,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -587,6 +614,7 @@ actions:
           label: createPartnerLink
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -614,6 +642,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -640,6 +669,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -660,6 +690,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -677,6 +708,7 @@ actions:
           label: createTag
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -696,6 +728,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -713,6 +746,7 @@ actions:
           label: updateTag
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -732,6 +766,7 @@ actions:
           source: |-
             from dub import Dub
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
@@ -749,6 +784,7 @@ actions:
           label: trackLead
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -772,13 +808,14 @@ actions:
             from dub import Dub
             from dub.models import operations
 
+
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
 
                 res = d_client.track.sale(request={
                     "amount": 996500,
-                    "payment_processor": operations.PaymentProcessor.PADDLE,
+                    "payment_processor": operations.PaymentProcessor.CUSTOM,
                 })
 
                 assert res is not None
@@ -792,6 +829,7 @@ actions:
           label: getWorkspace
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",
@@ -812,6 +850,7 @@ actions:
           label: updateWorkspace
           source: |-
             from dub import Dub
+
 
             with Dub(
                 token="DUB_API_KEY",

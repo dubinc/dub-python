@@ -19,6 +19,7 @@ Create a domain for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -72,6 +73,7 @@ Retrieve a list of domains associated with the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -119,6 +121,7 @@ Update a domain for the authenticated workspace.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -173,6 +176,7 @@ Delete a domain from a workspace. It cannot be undone. This will also delete all
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",

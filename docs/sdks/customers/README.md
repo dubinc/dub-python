@@ -20,6 +20,7 @@ Retrieve a list of customers for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -70,6 +71,7 @@ with Dub(
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -117,6 +119,7 @@ Retrieve a customer by ID for the authenticated workspace.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -168,6 +171,7 @@ Update a customer for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -217,6 +221,7 @@ Delete a customer from a workspace.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",

@@ -1365,7 +1365,9 @@ class PaymentProcessor(str, Enum):
 
     STRIPE = "stripe"
     SHOPIFY = "shopify"
+    POLAR = "polar"
     PADDLE = "paddle"
+    CUSTOM = "custom"
 
 
 class SaleTypedDict(TypedDict):
@@ -1374,7 +1376,7 @@ class SaleTypedDict(TypedDict):
     payment_processor: PaymentProcessor
     r"""The payment processor via which the sale was made."""
     invoice_id: NotRequired[Nullable[str]]
-    r"""The invoice ID of the sale."""
+    r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
 
 
 class Sale(BaseModel):
@@ -1389,7 +1391,7 @@ class Sale(BaseModel):
     invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
         None
     )
-    r"""The invoice ID of the sale."""
+    r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

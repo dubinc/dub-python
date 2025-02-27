@@ -25,6 +25,7 @@ Create a new link for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -79,6 +80,7 @@ Retrieve a paginated list of links for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -127,6 +129,7 @@ Retrieve the number of links for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -174,6 +177,7 @@ Retrieve the info for a link.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -225,6 +229,7 @@ Update a link for the authenticated workspace. If there's no change, returns it 
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -281,6 +286,7 @@ Delete a link for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -328,6 +334,7 @@ Bulk create up to 100 links for the authenticated workspace.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -392,6 +399,7 @@ Bulk update up to 100 links with the same data for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -447,6 +455,7 @@ Bulk delete up to 100 links for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -499,6 +508,7 @@ Upsert a link for the authenticated workspace by its URL. If a link with the sam
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",

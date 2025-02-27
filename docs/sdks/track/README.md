@@ -17,6 +17,7 @@ Track a lead for a short link.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -68,6 +69,7 @@ Track a sale for a short link.
 ```python
 from dub import Dub
 from dub.models import operations
+
 
 with Dub(
     token="DUB_API_KEY",

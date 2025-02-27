@@ -16,6 +16,7 @@ Retrieve analytics for a link, a domain, or the authenticated workspace. The res
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:

@@ -3,6 +3,7 @@
 # Synchronous Example
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -30,6 +31,7 @@ import asyncio
 from dub import Dub
 
 async def main():
+
     async with Dub(
         token="DUB_API_KEY",
     ) as d_client:
@@ -53,6 +55,7 @@ asyncio.run(main())
 ```python
 # Synchronous Example
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -81,6 +84,7 @@ import asyncio
 from dub import Dub
 
 async def main():
+
     async with Dub(
         token="DUB_API_KEY",
     ) as d_client:

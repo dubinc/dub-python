@@ -104,6 +104,7 @@ Once that is saved to a file, you can run it with `uv run script.py` where
 # Synchronous Example
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -131,6 +132,7 @@ import asyncio
 from dub import Dub
 
 async def main():
+
     async with Dub(
         token="DUB_API_KEY",
     ) as d_client:
@@ -156,6 +158,7 @@ asyncio.run(main())
 ```python
 # Synchronous Example
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -184,6 +187,7 @@ import asyncio
 from dub import Dub
 
 async def main():
+
     async with Dub(
         token="DUB_API_KEY",
     ) as d_client:
@@ -329,6 +333,7 @@ When custom error responses are specified for an operation, the SDK may also rai
 from dub import Dub
 from dub.models import errors
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -389,6 +394,7 @@ with Dub(
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from dub import Dub
+
 
 with Dub(
     server_url="https://api.dub.co",
@@ -507,6 +513,7 @@ To authenticate with the API the `token` parameter must be set when initializing
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -537,6 +544,7 @@ To change the default retry strategy for a single API call, simply provide a `Re
 from dub import Dub
 from dub.utils import BackoffStrategy, RetryConfig
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -561,6 +569,7 @@ If you'd like to override the default retry strategy for all operations that sup
 ```python
 from dub import Dub
 from dub.utils import BackoffStrategy, RetryConfig
+
 
 with Dub(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
@@ -594,6 +603,7 @@ Here's an example of one such pagination call:
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -618,6 +628,7 @@ The `Dub` class implements the context manager protocol and registers a finalize
 ```python
 from dub import Dub
 def main():
+
     with Dub(
         token="DUB_API_KEY",
     ) as d_client:
@@ -626,6 +637,7 @@ def main():
 
 # Or when using async:
 async def amain():
+
     async with Dub(
         token="DUB_API_KEY",
     ) as d_client:

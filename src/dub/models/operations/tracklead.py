@@ -2,10 +2,18 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class Mode(str, Enum):
+    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
+
+    ASYNC = "async"
+    WAIT = "wait"
 
 
 class TrackLeadRequestBodyTypedDict(TypedDict):
@@ -27,6 +35,8 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""Avatar of the customer in the client's app."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the lead event"""
+    mode: NotRequired[Mode]
+    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
 
 
 class TrackLeadRequestBody(BaseModel):
@@ -71,6 +81,9 @@ class TrackLeadRequestBody(BaseModel):
     metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional metadata to be stored with the lead event"""
 
+    mode: Optional[Mode] = Mode.ASYNC
+    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -81,6 +94,7 @@ class TrackLeadRequestBody(BaseModel):
             "customerEmail",
             "customerAvatar",
             "metadata",
+            "mode",
         ]
         nullable_fields = [
             "eventQuantity",
