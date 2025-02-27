@@ -19,6 +19,7 @@ Create a new partner for a program. If partner exists, automatically enrolls the
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -78,6 +79,7 @@ Create a new link for a partner that is enrolled in your program.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -135,6 +137,7 @@ Upsert a link for a partner that is enrolled in your program. If a link with the
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -191,6 +194,7 @@ Retrieve analytics for a partner within a program. The response type vary based 
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",

@@ -16,6 +16,7 @@ Retrieve a paginated list of events for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:

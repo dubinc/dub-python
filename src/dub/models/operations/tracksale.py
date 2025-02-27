@@ -14,7 +14,9 @@ class PaymentProcessor(str, Enum):
 
     STRIPE = "stripe"
     SHOPIFY = "shopify"
+    POLAR = "polar"
     PADDLE = "paddle"
+    CUSTOM = "custom"
 
 
 class TrackSaleRequestBodyTypedDict(TypedDict):
@@ -29,7 +31,7 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
     event_name: NotRequired[str]
     r"""The name of the sale event. It can be used to track different types of event for example 'Purchase', 'Upgrade', 'Payment', etc."""
     invoice_id: NotRequired[Nullable[str]]
-    r"""The invoice ID of the sale."""
+    r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
     currency: NotRequired[str]
     r"""The currency of the sale. Accepts ISO 4217 currency codes."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
@@ -65,7 +67,7 @@ class TrackSaleRequestBody(BaseModel):
     invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
         None
     )
-    r"""The invoice ID of the sale."""
+    r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
 
     currency: Optional[str] = "usd"
     r"""The currency of the sale. Accepts ISO 4217 currency codes."""

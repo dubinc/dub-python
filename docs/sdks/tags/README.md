@@ -19,6 +19,7 @@ Create a new tag for the authenticated workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -66,6 +67,7 @@ Retrieve a list of tags for the authenticated workspace.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",
@@ -115,6 +117,7 @@ Update a tag in the workspace.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -163,6 +166,7 @@ Delete a tag from the workspace. All existing links will still work, but they wi
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",

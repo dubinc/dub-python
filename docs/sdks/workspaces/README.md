@@ -17,6 +17,7 @@ Retrieve a workspace for the authenticated user.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
@@ -66,6 +67,7 @@ Update a workspace by ID or slug.
 
 ```python
 from dub import Dub
+
 
 with Dub(
     token="DUB_API_KEY",

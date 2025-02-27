@@ -16,6 +16,7 @@ Retrieve the metatags for a URL.
 ```python
 from dub import Dub
 
+
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
