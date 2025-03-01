@@ -114,7 +114,7 @@ class GetLinksRequest(BaseModel):
     tag_ids: Annotated[
         Optional[QueryParamTagIds],
         pydantic.Field(alias="tagIds"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""The tag IDs to filter the links by."""
 
