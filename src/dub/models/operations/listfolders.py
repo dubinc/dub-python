@@ -3,6 +3,7 @@
 from __future__ import annotations
 from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
+import pydantic
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -10,6 +11,12 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ListFoldersRequestTypedDict(TypedDict):
     search: NotRequired[str]
     r"""The search term to filter the folders by."""
+    include_link_count: NotRequired[bool]
+    r"""Whether to include the link count in the response."""
+    page: NotRequired[float]
+    r"""The page number for pagination."""
+    page_size: NotRequired[float]
+    r"""The number of items per page."""
 
 
 class ListFoldersRequest(BaseModel):
@@ -18,3 +25,23 @@ class ListFoldersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The search term to filter the folders by."""
+
+    include_link_count: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="includeLinkCount"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Whether to include the link count in the response."""
+
+    page: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""The page number for pagination."""
+
+    page_size: Annotated[
+        Optional[float],
+        pydantic.Field(alias="pageSize"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 50
+    r"""The number of items per page."""
