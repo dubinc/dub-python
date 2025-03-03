@@ -53,7 +53,7 @@ from .domainschema import (
     RegisteredDomain,
     RegisteredDomainTypedDict,
 )
-from .folderschema import AccessLevel, FolderSchema, FolderSchemaTypedDict
+from .folderschema import AccessLevel, FolderSchema, FolderSchemaTypedDict, Type
 from .leadcreatedevent import (
     LeadCreatedEvent,
     LeadCreatedEventClick,
@@ -93,10 +93,10 @@ from .leadevent import (
     LeadEventGeoTypedDict,
     LeadEventLink,
     LeadEventLinkTypedDict,
+    LeadEventType,
     LeadEventTypedDict,
     Partner,
     PartnerTypedDict,
-    Type,
 )
 from .linkclickedevent import (
     LinkClickedEvent,
@@ -304,6 +304,7 @@ __all__ = [
     "LeadEventGeoTypedDict",
     "LeadEventLink",
     "LeadEventLinkTypedDict",
+    "LeadEventType",
     "LeadEventTypedDict",
     "Link",
     "LinkClickedEvent",

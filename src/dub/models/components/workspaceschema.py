@@ -77,6 +77,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The date and time when the payment failed for the workspace."""
     stripe_connect_id: Nullable[str]
     r"""The Stripe Connect ID of the workspace."""
+    total_links: float
+    r"""The total number of links in the workspace."""
     usage: float
     r"""The usage of the workspace."""
     usage_limit: float
@@ -152,6 +154,9 @@ class WorkspaceSchema(BaseModel):
 
     stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
     r"""The Stripe Connect ID of the workspace."""
+
+    total_links: Annotated[float, pydantic.Field(alias="totalLinks")]
+    r"""The total number of links in the workspace."""
 
     usage: float
     r"""The usage of the workspace."""
