@@ -9,6 +9,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class Type(str, Enum):
+    DEFAULT = "default"
+    MEGA = "mega"
+
+
 class AccessLevel(str, Enum):
     r"""The access level of the folder within the workspace."""
 
@@ -21,6 +26,7 @@ class FolderSchemaTypedDict(TypedDict):
     r"""The unique ID of the folder."""
     name: str
     r"""The name of the folder."""
+    type: Type
     created_at: str
     r"""The date the folder was created."""
     updated_at: str
@@ -37,6 +43,8 @@ class FolderSchema(BaseModel):
 
     name: str
     r"""The name of the folder."""
+
+    type: Type
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the folder was created."""

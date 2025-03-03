@@ -1215,7 +1215,7 @@ class Partner(BaseModel):
         return m
 
 
-class Type(str, Enum):
+class LeadEventType(str, Enum):
     PERCENTAGE = "percentage"
     FLAT = "flat"
 
@@ -1230,7 +1230,7 @@ class DiscountTypedDict(TypedDict):
     coupon_id: Nullable[str]
     coupon_test_id: Nullable[str]
     amount: float
-    type: Type
+    type: LeadEventType
     duration: Nullable[float]
     interval: Nullable[Interval]
 
@@ -1244,7 +1244,7 @@ class Discount(BaseModel):
 
     amount: float
 
-    type: Type
+    type: LeadEventType
 
     duration: Nullable[float]
 
