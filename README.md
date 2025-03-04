@@ -273,6 +273,7 @@ asyncio.run(main())
 * [create_link](docs/sdks/partners/README.md#create_link) - Create a link for a partner
 * [upsert_link](docs/sdks/partners/README.md#upsert_link) - Upsert a link for a partner
 * [analytics](docs/sdks/partners/README.md#analytics) - Retrieve analytics for a partner
+* [update_sale](docs/sdks/partners/README.md#update_sale) - Update a sale for a partner.
 
 ### [qr_codes](docs/sdks/qrcodes/README.md)
 

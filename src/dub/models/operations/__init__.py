@@ -291,6 +291,13 @@ from .updatelink import (
     UpdateLinkTagNames,
     UpdateLinkTagNamesTypedDict,
 )
+from .updatepartnersale import (
+    UpdatePartnerSaleRequestBody,
+    UpdatePartnerSaleRequestBodyTypedDict,
+    UpdatePartnerSaleResponseBody,
+    UpdatePartnerSaleResponseBodyTypedDict,
+    UpdatePartnerSaleStatus,
+)
 from .updatetag import (
     UpdateTagColor,
     UpdateTagRequest,
@@ -564,6 +571,11 @@ __all__ = [
     "UpdateLinkTagIdsTypedDict",
     "UpdateLinkTagNames",
     "UpdateLinkTagNamesTypedDict",
+    "UpdatePartnerSaleRequestBody",
+    "UpdatePartnerSaleRequestBodyTypedDict",
+    "UpdatePartnerSaleResponseBody",
+    "UpdatePartnerSaleResponseBodyTypedDict",
+    "UpdatePartnerSaleStatus",
     "UpdateTagColor",
     "UpdateTagRequest",
     "UpdateTagRequestBody",
