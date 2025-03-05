@@ -39,8 +39,6 @@ class CreatePartnerLinkLinkPropsTypedDict(TypedDict):
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
-    partner_id: NotRequired[Nullable[str]]
-    r"""The ID of the partner the short link is associated with."""
     prefix: NotRequired[str]
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     archived: NotRequired[bool]
@@ -103,11 +101,6 @@ class CreatePartnerLinkLinkProps(BaseModel):
         UNSET
     )
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
-
-    partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
-        UNSET
-    )
-    r"""The ID of the partner the short link is associated with."""
 
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
@@ -196,7 +189,6 @@ class CreatePartnerLinkLinkProps(BaseModel):
         optional_fields = [
             "externalId",
             "tenantId",
-            "partnerId",
             "prefix",
             "archived",
             "tagIds",
@@ -225,7 +217,6 @@ class CreatePartnerLinkLinkProps(BaseModel):
         nullable_fields = [
             "externalId",
             "tenantId",
-            "partnerId",
             "folderId",
             "comments",
             "expiresAt",

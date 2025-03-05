@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new embed token
+* [referrals](#referrals) - Create a new referrals embed token
 
-## create
+## referrals
 
-Create a new embed token for the referral link.
+Create a new referrals embed token for the given partner/tenant.
 
 ### Example Usage
 
@@ -21,7 +21,19 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.embed_tokens.create()
+    res = d_client.embed_tokens.referrals(request={
+        "program_id": "<id>",
+        "partner": {
+            "name": "<value>",
+            "email": "Florencio98@hotmail.com",
+            "link_props": {
+                "external_id": "123456",
+                "tag_ids": [
+                    "clux0rgak00011...",
+                ],
+            },
+        },
+    })
 
     assert res is not None
 
@@ -32,14 +44,14 @@ with Dub(
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `request`                                                                                        | [operations.CreateEmbedTokenRequestBody](../../models/operations/createembedtokenrequestbody.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `retries`                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                 | :heavy_minus_sign:                                                                               | Configuration to override the default retry behavior of the client.                              |
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                          | [operations.CreateReferralsEmbedTokenRequestBody](../../models/operations/createreferralsembedtokenrequestbody.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| `retries`                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                   | :heavy_minus_sign:                                                                                                 | Configuration to override the default retry behavior of the client.                                                |
 
 ### Response
 
-**[operations.CreateEmbedTokenResponseBody](../../models/operations/createembedtokenresponsebody.md)**
+**[operations.CreateReferralsEmbedTokenResponseBody](../../models/operations/createreferralsembedtokenresponsebody.md)**
 
 ### Errors
 

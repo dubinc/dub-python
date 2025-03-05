@@ -41,12 +41,6 @@ from .createcustomer import (
     CreateCustomerType,
 )
 from .createdomain import CreateDomainRequestBody, CreateDomainRequestBodyTypedDict
-from .createembedtoken import (
-    CreateEmbedTokenRequestBody,
-    CreateEmbedTokenRequestBodyTypedDict,
-    CreateEmbedTokenResponseBody,
-    CreateEmbedTokenResponseBodyTypedDict,
-)
 from .createfolder import (
     AccessLevel,
     CreateFolderRequestBody,
@@ -85,6 +79,21 @@ from .createpartnerlink import (
     CreatePartnerLinkTagIdsTypedDict,
     CreatePartnerLinkTagNames,
     CreatePartnerLinkTagNamesTypedDict,
+)
+from .createreferralsembedtoken import (
+    CreateReferralsEmbedTokenCountry,
+    CreateReferralsEmbedTokenLinkProps,
+    CreateReferralsEmbedTokenLinkPropsTypedDict,
+    CreateReferralsEmbedTokenRequestBody,
+    CreateReferralsEmbedTokenRequestBodyTypedDict,
+    CreateReferralsEmbedTokenResponseBody,
+    CreateReferralsEmbedTokenResponseBodyTypedDict,
+    CreateReferralsEmbedTokenTagIds,
+    CreateReferralsEmbedTokenTagIdsTypedDict,
+    CreateReferralsEmbedTokenTagNames,
+    CreateReferralsEmbedTokenTagNamesTypedDict,
+    Partner,
+    PartnerTypedDict,
 )
 from .createtag import Color, CreateTagRequestBody, CreateTagRequestBodyTypedDict
 from .deletecustomer import (
@@ -135,14 +144,14 @@ from .getcustomers import (
     Discount,
     DiscountTypedDict,
     GetCustomersInterval,
+    GetCustomersPartner,
+    GetCustomersPartnerTypedDict,
     GetCustomersRequest,
     GetCustomersRequestTypedDict,
     GetCustomersResponseBody,
     GetCustomersResponseBodyTypedDict,
     Link,
     LinkTypedDict,
-    Partner,
-    PartnerTypedDict,
     Type,
 )
 from .getlinkinfo import GetLinkInfoRequest, GetLinkInfoRequestTypedDict
@@ -365,10 +374,6 @@ __all__ = [
     "CreateCustomerType",
     "CreateDomainRequestBody",
     "CreateDomainRequestBodyTypedDict",
-    "CreateEmbedTokenRequestBody",
-    "CreateEmbedTokenRequestBodyTypedDict",
-    "CreateEmbedTokenResponseBody",
-    "CreateEmbedTokenResponseBodyTypedDict",
     "CreateFolderRequestBody",
     "CreateFolderRequestBodyTypedDict",
     "CreateLinkRequestBody",
@@ -389,6 +394,17 @@ __all__ = [
     "CreatePartnerTagIdsTypedDict",
     "CreatePartnerTagNames",
     "CreatePartnerTagNamesTypedDict",
+    "CreateReferralsEmbedTokenCountry",
+    "CreateReferralsEmbedTokenLinkProps",
+    "CreateReferralsEmbedTokenLinkPropsTypedDict",
+    "CreateReferralsEmbedTokenRequestBody",
+    "CreateReferralsEmbedTokenRequestBodyTypedDict",
+    "CreateReferralsEmbedTokenResponseBody",
+    "CreateReferralsEmbedTokenResponseBodyTypedDict",
+    "CreateReferralsEmbedTokenTagIds",
+    "CreateReferralsEmbedTokenTagIdsTypedDict",
+    "CreateReferralsEmbedTokenTagNames",
+    "CreateReferralsEmbedTokenTagNamesTypedDict",
     "CreateTagRequestBody",
     "CreateTagRequestBodyTypedDict",
     "Customer",
@@ -432,6 +448,8 @@ __all__ = [
     "GetCustomerResponseBodyTypedDict",
     "GetCustomerType",
     "GetCustomersInterval",
+    "GetCustomersPartner",
+    "GetCustomersPartnerTypedDict",
     "GetCustomersRequest",
     "GetCustomersRequestTypedDict",
     "GetCustomersResponseBody",
