@@ -9,23 +9,23 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class EmbedTokens(BaseSDK):
-    def create(
+    def referrals(
         self,
         *,
         request: Optional[
             Union[
-                operations.CreateEmbedTokenRequestBody,
-                operations.CreateEmbedTokenRequestBodyTypedDict,
+                operations.CreateReferralsEmbedTokenRequestBody,
+                operations.CreateReferralsEmbedTokenRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.CreateEmbedTokenResponseBody]:
-        r"""Create a new embed token
+    ) -> Optional[operations.CreateReferralsEmbedTokenResponseBody]:
+        r"""Create a new referrals embed token
 
-        Create a new embed token for the referral link.
+        Create a new referrals embed token for the given partner/tenant.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -45,13 +45,15 @@ class EmbedTokens(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[operations.CreateEmbedTokenRequestBody]
+                request, Optional[operations.CreateReferralsEmbedTokenRequestBody]
             )
-        request = cast(Optional[operations.CreateEmbedTokenRequestBody], request)
+        request = cast(
+            Optional[operations.CreateReferralsEmbedTokenRequestBody], request
+        )
 
         req = self._build_request(
             method="POST",
-            path="/tokens/embed",
+            path="/tokens/embed/referrals",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -67,7 +69,7 @@ class EmbedTokens(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[operations.CreateEmbedTokenRequestBody],
+                Optional[operations.CreateReferralsEmbedTokenRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -83,7 +85,7 @@ class EmbedTokens(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="createEmbedToken",
+                operation_id="createReferralsEmbedToken",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -107,7 +109,8 @@ class EmbedTokens(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.CreateEmbedTokenResponseBody]
+                http_res.text,
+                Optional[operations.CreateReferralsEmbedTokenResponseBody],
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -164,23 +167,23 @@ class EmbedTokens(BaseSDK):
             http_res,
         )
 
-    async def create_async(
+    async def referrals_async(
         self,
         *,
         request: Optional[
             Union[
-                operations.CreateEmbedTokenRequestBody,
-                operations.CreateEmbedTokenRequestBodyTypedDict,
+                operations.CreateReferralsEmbedTokenRequestBody,
+                operations.CreateReferralsEmbedTokenRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.CreateEmbedTokenResponseBody]:
-        r"""Create a new embed token
+    ) -> Optional[operations.CreateReferralsEmbedTokenResponseBody]:
+        r"""Create a new referrals embed token
 
-        Create a new embed token for the referral link.
+        Create a new referrals embed token for the given partner/tenant.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -200,13 +203,15 @@ class EmbedTokens(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[operations.CreateEmbedTokenRequestBody]
+                request, Optional[operations.CreateReferralsEmbedTokenRequestBody]
             )
-        request = cast(Optional[operations.CreateEmbedTokenRequestBody], request)
+        request = cast(
+            Optional[operations.CreateReferralsEmbedTokenRequestBody], request
+        )
 
         req = self._build_request_async(
             method="POST",
-            path="/tokens/embed",
+            path="/tokens/embed/referrals",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -222,7 +227,7 @@ class EmbedTokens(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[operations.CreateEmbedTokenRequestBody],
+                Optional[operations.CreateReferralsEmbedTokenRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -238,7 +243,7 @@ class EmbedTokens(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="createEmbedToken",
+                operation_id="createReferralsEmbedToken",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -262,7 +267,8 @@ class EmbedTokens(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.CreateEmbedTokenResponseBody]
+                http_res.text,
+                Optional[operations.CreateReferralsEmbedTokenResponseBody],
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)

@@ -2,37 +2,293 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-UpsertPartnerLinkTagIdsTypedDict = TypeAliasType(
-    "UpsertPartnerLinkTagIdsTypedDict", Union[str, List[str]]
+class CreateReferralsEmbedTokenCountry(str, Enum):
+    r"""Country where the partner is based."""
+
+    AF = "AF"
+    AL = "AL"
+    DZ = "DZ"
+    AS = "AS"
+    AD = "AD"
+    AO = "AO"
+    AI = "AI"
+    AQ = "AQ"
+    AG = "AG"
+    AR = "AR"
+    AM = "AM"
+    AW = "AW"
+    AU = "AU"
+    AT = "AT"
+    AZ = "AZ"
+    BS = "BS"
+    BH = "BH"
+    BD = "BD"
+    BB = "BB"
+    BY = "BY"
+    BE = "BE"
+    BZ = "BZ"
+    BJ = "BJ"
+    BM = "BM"
+    BT = "BT"
+    BO = "BO"
+    BA = "BA"
+    BW = "BW"
+    BV = "BV"
+    BR = "BR"
+    IO = "IO"
+    BN = "BN"
+    BG = "BG"
+    BF = "BF"
+    BI = "BI"
+    KH = "KH"
+    CM = "CM"
+    CA = "CA"
+    CV = "CV"
+    KY = "KY"
+    CF = "CF"
+    TD = "TD"
+    CL = "CL"
+    CN = "CN"
+    CX = "CX"
+    CC = "CC"
+    CO = "CO"
+    KM = "KM"
+    CG = "CG"
+    CD = "CD"
+    CK = "CK"
+    CR = "CR"
+    CI = "CI"
+    HR = "HR"
+    CU = "CU"
+    CY = "CY"
+    CZ = "CZ"
+    DK = "DK"
+    DJ = "DJ"
+    DM = "DM"
+    DO = "DO"
+    EC = "EC"
+    EG = "EG"
+    SV = "SV"
+    GQ = "GQ"
+    ER = "ER"
+    EE = "EE"
+    ET = "ET"
+    FK = "FK"
+    FO = "FO"
+    FJ = "FJ"
+    FI = "FI"
+    FR = "FR"
+    GF = "GF"
+    PF = "PF"
+    TF = "TF"
+    GA = "GA"
+    GM = "GM"
+    GE = "GE"
+    DE = "DE"
+    GH = "GH"
+    GI = "GI"
+    GR = "GR"
+    GL = "GL"
+    GD = "GD"
+    GP = "GP"
+    GU = "GU"
+    GT = "GT"
+    GN = "GN"
+    GW = "GW"
+    GY = "GY"
+    HT = "HT"
+    HM = "HM"
+    VA = "VA"
+    HN = "HN"
+    HK = "HK"
+    HU = "HU"
+    IS = "IS"
+    IN = "IN"
+    ID = "ID"
+    IR = "IR"
+    IQ = "IQ"
+    IE = "IE"
+    IL = "IL"
+    IT = "IT"
+    JM = "JM"
+    JP = "JP"
+    JO = "JO"
+    KZ = "KZ"
+    KE = "KE"
+    KI = "KI"
+    KP = "KP"
+    KR = "KR"
+    KW = "KW"
+    KG = "KG"
+    LA = "LA"
+    LV = "LV"
+    LB = "LB"
+    LS = "LS"
+    LR = "LR"
+    LY = "LY"
+    LI = "LI"
+    LT = "LT"
+    LU = "LU"
+    MO = "MO"
+    MG = "MG"
+    MW = "MW"
+    MY = "MY"
+    MV = "MV"
+    ML = "ML"
+    MT = "MT"
+    MH = "MH"
+    MQ = "MQ"
+    MR = "MR"
+    MU = "MU"
+    YT = "YT"
+    MX = "MX"
+    FM = "FM"
+    MD = "MD"
+    MC = "MC"
+    MN = "MN"
+    MS = "MS"
+    MA = "MA"
+    MZ = "MZ"
+    MM = "MM"
+    NA = "NA"
+    NR = "NR"
+    NP = "NP"
+    NL = "NL"
+    NC = "NC"
+    NZ = "NZ"
+    NI = "NI"
+    NE = "NE"
+    NG = "NG"
+    NU = "NU"
+    NF = "NF"
+    MK = "MK"
+    MP = "MP"
+    NO = "NO"
+    OM = "OM"
+    PK = "PK"
+    PW = "PW"
+    PS = "PS"
+    PA = "PA"
+    PG = "PG"
+    PY = "PY"
+    PE = "PE"
+    PH = "PH"
+    PN = "PN"
+    PL = "PL"
+    PT = "PT"
+    PR = "PR"
+    QA = "QA"
+    RE = "RE"
+    RO = "RO"
+    RU = "RU"
+    RW = "RW"
+    SH = "SH"
+    KN = "KN"
+    LC = "LC"
+    PM = "PM"
+    VC = "VC"
+    WS = "WS"
+    SM = "SM"
+    ST = "ST"
+    SA = "SA"
+    SN = "SN"
+    SC = "SC"
+    SL = "SL"
+    SG = "SG"
+    SK = "SK"
+    SI = "SI"
+    SB = "SB"
+    SO = "SO"
+    ZA = "ZA"
+    GS = "GS"
+    ES = "ES"
+    LK = "LK"
+    SD = "SD"
+    SR = "SR"
+    SJ = "SJ"
+    SZ = "SZ"
+    SE = "SE"
+    CH = "CH"
+    SY = "SY"
+    TW = "TW"
+    TJ = "TJ"
+    TZ = "TZ"
+    TH = "TH"
+    TL = "TL"
+    TG = "TG"
+    TK = "TK"
+    TO = "TO"
+    TT = "TT"
+    TN = "TN"
+    TR = "TR"
+    TM = "TM"
+    TC = "TC"
+    TV = "TV"
+    UG = "UG"
+    UA = "UA"
+    AE = "AE"
+    GB = "GB"
+    US = "US"
+    UM = "UM"
+    UY = "UY"
+    UZ = "UZ"
+    VU = "VU"
+    VE = "VE"
+    VN = "VN"
+    VG = "VG"
+    VI = "VI"
+    WF = "WF"
+    EH = "EH"
+    YE = "YE"
+    ZM = "ZM"
+    ZW = "ZW"
+    AX = "AX"
+    BQ = "BQ"
+    CW = "CW"
+    GG = "GG"
+    IM = "IM"
+    JE = "JE"
+    ME = "ME"
+    BL = "BL"
+    MF = "MF"
+    RS = "RS"
+    SX = "SX"
+    SS = "SS"
+    XK = "XK"
+
+
+CreateReferralsEmbedTokenTagIdsTypedDict = TypeAliasType(
+    "CreateReferralsEmbedTokenTagIdsTypedDict", Union[str, List[str]]
 )
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-UpsertPartnerLinkTagIds = TypeAliasType(
-    "UpsertPartnerLinkTagIds", Union[str, List[str]]
+CreateReferralsEmbedTokenTagIds = TypeAliasType(
+    "CreateReferralsEmbedTokenTagIds", Union[str, List[str]]
 )
 r"""The unique IDs of the tags assigned to the short link."""
 
 
-UpsertPartnerLinkTagNamesTypedDict = TypeAliasType(
-    "UpsertPartnerLinkTagNamesTypedDict", Union[str, List[str]]
+CreateReferralsEmbedTokenTagNamesTypedDict = TypeAliasType(
+    "CreateReferralsEmbedTokenTagNamesTypedDict", Union[str, List[str]]
 )
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-UpsertPartnerLinkTagNames = TypeAliasType(
-    "UpsertPartnerLinkTagNames", Union[str, List[str]]
+CreateReferralsEmbedTokenTagNames = TypeAliasType(
+    "CreateReferralsEmbedTokenTagNames", Union[str, List[str]]
 )
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
-class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
+class CreateReferralsEmbedTokenLinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
     external_id: NotRequired[Nullable[str]]
@@ -43,9 +299,9 @@ class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     archived: NotRequired[bool]
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
-    tag_ids: NotRequired[UpsertPartnerLinkTagIdsTypedDict]
+    tag_ids: NotRequired[CreateReferralsEmbedTokenTagIdsTypedDict]
     r"""The unique IDs of the tags assigned to the short link."""
-    tag_names: NotRequired[UpsertPartnerLinkTagNamesTypedDict]
+    tag_names: NotRequired[CreateReferralsEmbedTokenTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
     folder_id: NotRequired[Nullable[str]]
     r"""The unique ID existing folder to assign the short link to."""
@@ -89,7 +345,7 @@ class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
 
-class UpsertPartnerLinkLinkProps(BaseModel):
+class CreateReferralsEmbedTokenLinkProps(BaseModel):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
     external_id: Annotated[
@@ -109,12 +365,12 @@ class UpsertPartnerLinkLinkProps(BaseModel):
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
 
     tag_ids: Annotated[
-        Optional[UpsertPartnerLinkTagIds], pydantic.Field(alias="tagIds")
+        Optional[CreateReferralsEmbedTokenTagIds], pydantic.Field(alias="tagIds")
     ] = None
     r"""The unique IDs of the tags assigned to the short link."""
 
     tag_names: Annotated[
-        Optional[UpsertPartnerLinkTagNames], pydantic.Field(alias="tagNames")
+        Optional[CreateReferralsEmbedTokenTagNames], pydantic.Field(alias="tagNames")
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
@@ -262,62 +518,63 @@ class UpsertPartnerLinkLinkProps(BaseModel):
         return m
 
 
-class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
-    program_id: str
-    r"""The ID of the program that the partner is enrolled in."""
-    partner_id: NotRequired[Nullable[str]]
-    r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
-    tenant_id: NotRequired[Nullable[str]]
-    r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
-    url: NotRequired[Nullable[str]]
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
-    key: NotRequired[str]
-    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
-    comments: NotRequired[Nullable[str]]
-    r"""The comments for the short link."""
-    link_props: NotRequired[UpsertPartnerLinkLinkPropsTypedDict]
+class PartnerTypedDict(TypedDict):
+    name: str
+    r"""Full legal name of the partner."""
+    email: str
+    r"""Email for the partner in your system. Partners will be able to claim their profile by signing up to Dub Partners with this email."""
+    username: NotRequired[Nullable[str]]
+    r"""A unique username for the partner in your system (max 100 characters). This will be used to create a short link for the partner using your program's default domain. If not provided, Dub will try to generate a username from the partner's name or email."""
+    image: NotRequired[Nullable[str]]
+    r"""Avatar image for the partner – if not provided, a default avatar will be used."""
+    country: NotRequired[Nullable[CreateReferralsEmbedTokenCountry]]
+    r"""Country where the partner is based."""
+    description: NotRequired[Nullable[str]]
+    r"""A brief description of the partner and their background."""
+    tenant_id: NotRequired[str]
+    r"""The ID of the partner in your system."""
+    link_props: NotRequired[CreateReferralsEmbedTokenLinkPropsTypedDict]
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
 
-class UpsertPartnerLinkRequestBody(BaseModel):
-    program_id: Annotated[str, pydantic.Field(alias="programId")]
-    r"""The ID of the program that the partner is enrolled in."""
+class Partner(BaseModel):
+    name: str
+    r"""Full legal name of the partner."""
 
-    partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
-        UNSET
-    )
-    r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
+    email: str
+    r"""Email for the partner in your system. Partners will be able to claim their profile by signing up to Dub Partners with this email."""
 
-    tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
-        UNSET
-    )
-    r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
+    username: OptionalNullable[str] = UNSET
+    r"""A unique username for the partner in your system (max 100 characters). This will be used to create a short link for the partner using your program's default domain. If not provided, Dub will try to generate a username from the partner's name or email."""
 
-    url: OptionalNullable[str] = UNSET
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
+    image: OptionalNullable[str] = UNSET
+    r"""Avatar image for the partner – if not provided, a default avatar will be used."""
 
-    key: Optional[str] = None
-    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+    country: OptionalNullable[CreateReferralsEmbedTokenCountry] = UNSET
+    r"""Country where the partner is based."""
 
-    comments: OptionalNullable[str] = UNSET
-    r"""The comments for the short link."""
+    description: OptionalNullable[str] = UNSET
+    r"""A brief description of the partner and their background."""
+
+    tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None
+    r"""The ID of the partner in your system."""
 
     link_props: Annotated[
-        Optional[UpsertPartnerLinkLinkProps], pydantic.Field(alias="linkProps")
+        Optional[CreateReferralsEmbedTokenLinkProps], pydantic.Field(alias="linkProps")
     ] = None
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "partnerId",
+            "username",
+            "image",
+            "country",
+            "description",
             "tenantId",
-            "url",
-            "key",
-            "comments",
             "linkProps",
         ]
-        nullable_fields = ["partnerId", "tenantId", "url", "comments"]
+        nullable_fields = ["username", "image", "country", "description"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -343,3 +600,35 @@ class UpsertPartnerLinkRequestBody(BaseModel):
                 m[k] = val
 
         return m
+
+
+class CreateReferralsEmbedTokenRequestBodyTypedDict(TypedDict):
+    program_id: str
+    partner_id: NotRequired[str]
+    tenant_id: NotRequired[str]
+    partner: NotRequired[PartnerTypedDict]
+
+
+class CreateReferralsEmbedTokenRequestBody(BaseModel):
+    program_id: Annotated[str, pydantic.Field(alias="programId")]
+
+    partner_id: Annotated[Optional[str], pydantic.Field(alias="partnerId")] = None
+
+    tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None
+
+    partner: Optional[Partner] = None
+
+
+class CreateReferralsEmbedTokenResponseBodyTypedDict(TypedDict):
+    r"""The created public embed token."""
+
+    public_token: str
+    expires: str
+
+
+class CreateReferralsEmbedTokenResponseBody(BaseModel):
+    r"""The created public embed token."""
+
+    public_token: Annotated[str, pydantic.Field(alias="publicToken")]
+
+    expires: str

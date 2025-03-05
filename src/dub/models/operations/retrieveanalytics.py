@@ -74,7 +74,6 @@ class Interval(str, Enum):
     QTD = "qtd"
     YTD = "ytd"
     ALL = "all"
-    ALL_UNFILTERED = "all_unfiltered"
 
 
 class Trigger(str, Enum):

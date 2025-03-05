@@ -101,14 +101,14 @@ class Link(BaseModel):
         return m
 
 
-class PartnerTypedDict(TypedDict):
+class GetCustomersPartnerTypedDict(TypedDict):
     id: str
     name: str
     email: str
     image: NotRequired[Nullable[str]]
 
 
-class Partner(BaseModel):
+class GetCustomersPartner(BaseModel):
     id: str
 
     name: str
@@ -230,7 +230,7 @@ class GetCustomersResponseBodyTypedDict(TypedDict):
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
     link: NotRequired[Nullable[LinkTypedDict]]
-    partner: NotRequired[Nullable[PartnerTypedDict]]
+    partner: NotRequired[Nullable[GetCustomersPartnerTypedDict]]
     discount: NotRequired[Nullable[DiscountTypedDict]]
 
 
@@ -258,7 +258,7 @@ class GetCustomersResponseBody(BaseModel):
 
     link: OptionalNullable[Link] = UNSET
 
-    partner: OptionalNullable[Partner] = UNSET
+    partner: OptionalNullable[GetCustomersPartner] = UNSET
 
     discount: OptionalNullable[Discount] = UNSET
 

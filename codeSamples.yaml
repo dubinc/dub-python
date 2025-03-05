@@ -573,7 +573,6 @@ actions:
                     "program_id": "<id>",
                     "name": "<value>",
                     "email": "Loyal79@yahoo.com",
-                    "username": "Aaliyah_Borer",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [
@@ -777,11 +776,11 @@ actions:
 
                 # Handle response
                 print(res)
-  - target: $["paths"]["/tokens/embed"]["post"]
+  - target: $["paths"]["/tokens/embed/referrals"]["post"]
     update:
       x-codeSamples:
         - lang: python
-          label: createEmbedToken
+          label: createReferralsEmbedToken
           source: |-
             from dub import Dub
 
@@ -790,7 +789,19 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.embed_tokens.create()
+                res = d_client.embed_tokens.referrals(request={
+                    "program_id": "<id>",
+                    "partner": {
+                        "name": "<value>",
+                        "email": "Florencio98@hotmail.com",
+                        "link_props": {
+                            "external_id": "123456",
+                            "tag_ids": [
+                                "clux0rgak00011...",
+                            ],
+                        },
+                    },
+                })
 
                 assert res is not None
 
