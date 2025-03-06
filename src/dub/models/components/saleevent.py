@@ -1108,179 +1108,6 @@ class SaleEventClick(BaseModel):
     qr: Optional[bool] = None
 
 
-class SaleEventCustomerLinkTypedDict(TypedDict):
-    id: str
-    r"""The unique ID of the short link."""
-    domain: str
-    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
-    key: str
-    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
-    short_link: str
-    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
-    program_id: Nullable[str]
-    r"""The ID of the program the short link is associated with."""
-
-
-class SaleEventCustomerLink(BaseModel):
-    id: str
-    r"""The unique ID of the short link."""
-
-    domain: str
-    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
-
-    key: str
-    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
-
-    short_link: Annotated[str, pydantic.Field(alias="shortLink")]
-    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
-
-    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
-    r"""The ID of the program the short link is associated with."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["programId"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in self.model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
-class SaleEventPartnerTypedDict(TypedDict):
-    id: str
-    name: str
-    email: str
-    image: NotRequired[Nullable[str]]
-
-
-class SaleEventPartner(BaseModel):
-    id: str
-
-    name: str
-
-    email: str
-
-    image: OptionalNullable[str] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = ["image"]
-        nullable_fields = ["image"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in self.model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
-class SaleEventType(str, Enum):
-    PERCENTAGE = "percentage"
-    FLAT = "flat"
-
-
-class SaleEventInterval(str, Enum):
-    MONTH = "month"
-    YEAR = "year"
-
-
-class SaleEventDiscountTypedDict(TypedDict):
-    id: str
-    coupon_id: Nullable[str]
-    coupon_test_id: Nullable[str]
-    amount: float
-    type: SaleEventType
-    duration: Nullable[float]
-    interval: Nullable[SaleEventInterval]
-
-
-class SaleEventDiscount(BaseModel):
-    id: str
-
-    coupon_id: Annotated[Nullable[str], pydantic.Field(alias="couponId")]
-
-    coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
-
-    amount: float
-
-    type: SaleEventType
-
-    duration: Nullable[float]
-
-    interval: Nullable[SaleEventInterval]
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["couponId", "couponTestId", "duration", "interval"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in self.model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
 class SaleEventCustomerTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
@@ -1296,9 +1123,6 @@ class SaleEventCustomerTypedDict(TypedDict):
     r"""Avatar URL of the customer."""
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
-    link: NotRequired[Nullable[SaleEventCustomerLinkTypedDict]]
-    partner: NotRequired[Nullable[SaleEventPartnerTypedDict]]
-    discount: NotRequired[Nullable[SaleEventDiscountTypedDict]]
 
 
 class SaleEventCustomer(BaseModel):
@@ -1323,16 +1147,10 @@ class SaleEventCustomer(BaseModel):
     country: OptionalNullable[str] = UNSET
     r"""Country of the customer."""
 
-    link: OptionalNullable[SaleEventCustomerLink] = UNSET
-
-    partner: OptionalNullable[SaleEventPartner] = UNSET
-
-    discount: OptionalNullable[SaleEventDiscount] = UNSET
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar", "country", "link", "partner", "discount"]
-        nullable_fields = ["email", "avatar", "country", "link", "partner", "discount"]
+        optional_fields = ["email", "avatar", "country"]
+        nullable_fields = ["email", "avatar", "country"]
         null_default_fields = []
 
         serialized = handler(self)
