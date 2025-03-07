@@ -126,8 +126,8 @@ class CreateCustomerLink(BaseModel):
 class CreateCustomerPartnerTypedDict(TypedDict):
     id: str
     name: str
-    email: str
-    image: NotRequired[Nullable[str]]
+    email: Nullable[str]
+    image: Nullable[str]
 
 
 class CreateCustomerPartner(BaseModel):
@@ -135,14 +135,14 @@ class CreateCustomerPartner(BaseModel):
 
     name: str
 
-    email: str
+    email: Nullable[str]
 
-    image: OptionalNullable[str] = UNSET
+    image: Nullable[str]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["image"]
-        nullable_fields = ["image"]
+        optional_fields = []
+        nullable_fields = ["email", "image"]
         null_default_fields = []
 
         serialized = handler(self)
