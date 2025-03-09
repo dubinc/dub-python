@@ -29,7 +29,6 @@ from .bulkupdatelinks import (
 from .createcustomer import (
     CreateCustomerDiscount,
     CreateCustomerDiscountTypedDict,
-    CreateCustomerInterval,
     CreateCustomerLink,
     CreateCustomerLinkTypedDict,
     CreateCustomerPartner,
@@ -129,7 +128,6 @@ from .deletetag import (
 from .getcustomer import (
     GetCustomerDiscount,
     GetCustomerDiscountTypedDict,
-    GetCustomerInterval,
     GetCustomerLink,
     GetCustomerLinkTypedDict,
     GetCustomerPartner,
@@ -143,7 +141,6 @@ from .getcustomer import (
 from .getcustomers import (
     Discount,
     DiscountTypedDict,
-    GetCustomersInterval,
     GetCustomersPartner,
     GetCustomersPartnerTypedDict,
     GetCustomersRequest,
@@ -264,7 +261,6 @@ from .tracksale import (
 from .updatecustomer import (
     UpdateCustomerDiscount,
     UpdateCustomerDiscountTypedDict,
-    UpdateCustomerInterval,
     UpdateCustomerLink,
     UpdateCustomerLinkTypedDict,
     UpdateCustomerPartner,
@@ -362,7 +358,6 @@ __all__ = [
     "Country",
     "CreateCustomerDiscount",
     "CreateCustomerDiscountTypedDict",
-    "CreateCustomerInterval",
     "CreateCustomerLink",
     "CreateCustomerLinkTypedDict",
     "CreateCustomerPartner",
@@ -437,7 +432,6 @@ __all__ = [
     "Four",
     "GetCustomerDiscount",
     "GetCustomerDiscountTypedDict",
-    "GetCustomerInterval",
     "GetCustomerLink",
     "GetCustomerLinkTypedDict",
     "GetCustomerPartner",
@@ -447,7 +441,6 @@ __all__ = [
     "GetCustomerResponseBody",
     "GetCustomerResponseBodyTypedDict",
     "GetCustomerType",
-    "GetCustomersInterval",
     "GetCustomersPartner",
     "GetCustomersPartnerTypedDict",
     "GetCustomersRequest",
@@ -560,7 +553,6 @@ __all__ = [
     "Type",
     "UpdateCustomerDiscount",
     "UpdateCustomerDiscountTypedDict",
-    "UpdateCustomerInterval",
     "UpdateCustomerLink",
     "UpdateCustomerLinkTypedDict",
     "UpdateCustomerPartner",
