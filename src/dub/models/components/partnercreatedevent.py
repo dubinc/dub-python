@@ -75,7 +75,7 @@ class PartnerCreatedEventDataTypedDict(TypedDict):
     email: Nullable[str]
     image: Nullable[str]
     country: Nullable[str]
-    payouts_enabled: bool
+    payouts_enabled_at: Nullable[str]
     created_at: str
     status: Status
     program_id: str
@@ -101,7 +101,9 @@ class PartnerCreatedEventData(BaseModel):
 
     country: Nullable[str]
 
-    payouts_enabled: Annotated[bool, pydantic.Field(alias="payoutsEnabled")]
+    payouts_enabled_at: Annotated[
+        Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
+    ]
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
@@ -144,6 +146,7 @@ class PartnerCreatedEventData(BaseModel):
             "email",
             "image",
             "country",
+            "payoutsEnabledAt",
             "tenantId",
             "links",
             "description",

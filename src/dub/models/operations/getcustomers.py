@@ -153,40 +153,37 @@ class Type(str, Enum):
     FLAT = "flat"
 
 
-class GetCustomersInterval(str, Enum):
-    MONTH = "month"
-    YEAR = "year"
-
-
 class DiscountTypedDict(TypedDict):
     id: str
-    coupon_id: Nullable[str]
-    coupon_test_id: Nullable[str]
     amount: float
     type: Type
-    duration: Nullable[float]
-    interval: Nullable[GetCustomersInterval]
+    max_duration: Nullable[float]
+    coupon_id: Nullable[str]
+    coupon_test_id: Nullable[str]
+    partners_count: NotRequired[Nullable[float]]
 
 
 class Discount(BaseModel):
     id: str
 
-    coupon_id: Annotated[Nullable[str], pydantic.Field(alias="couponId")]
-
-    coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
-
     amount: float
 
     type: Type
 
-    duration: Nullable[float]
+    max_duration: Annotated[Nullable[float], pydantic.Field(alias="maxDuration")]
 
-    interval: Nullable[GetCustomersInterval]
+    coupon_id: Annotated[Nullable[str], pydantic.Field(alias="couponId")]
+
+    coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
+
+    partners_count: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="partnersCount")
+    ] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["couponId", "couponTestId", "duration", "interval"]
+        optional_fields = ["partnersCount"]
+        nullable_fields = ["maxDuration", "couponId", "couponTestId", "partnersCount"]
         null_default_fields = []
 
         serialized = handler(self)
