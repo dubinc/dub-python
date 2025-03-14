@@ -16,6 +16,8 @@ class UpdatePartnerSaleRequestBodyTypedDict(TypedDict):
     r"""The new absolute amount for the sale."""
     modify_amount: NotRequired[float]
     r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it."""
+    currency: NotRequired[str]
+    r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
 
 
 class UpdatePartnerSaleRequestBody(BaseModel):
@@ -30,6 +32,9 @@ class UpdatePartnerSaleRequestBody(BaseModel):
         None
     )
     r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it."""
+
+    currency: Optional[str] = "usd"
+    r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
 
 
 class UpdatePartnerSaleStatus(str, Enum):
