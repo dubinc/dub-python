@@ -602,9 +602,11 @@ class CreatePartnerRequestBody(BaseModel):
 
 
 class Status(str, Enum):
+    INVITED = "invited"
     APPROVED = "approved"
-    PENDING = "pending"
     REJECTED = "rejected"
+    DECLINED = "declined"
+    PENDING = "pending"
 
 
 class LinksTypedDict(TypedDict):
