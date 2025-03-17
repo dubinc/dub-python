@@ -987,3 +987,13 @@ Based on:
 - [python v0.19.8] .
 ### Releases
 - [PyPI v0.19.8] https://pypi.org/project/dub/0.19.8 - .
+
+## 2025-03-17 00:28:36
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.517.3 (2.548.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.19.9] .
+### Releases
+- [PyPI v0.19.9] https://pypi.org/project/dub/0.19.9 - .
