@@ -44,6 +44,7 @@ class UpdatePartnerSaleStatus(str, Enum):
     REFUNDED = "refunded"
     DUPLICATE = "duplicate"
     FRAUD = "fraud"
+    CANCELED = "canceled"
 
 
 class UpdatePartnerSaleResponseBodyTypedDict(TypedDict):

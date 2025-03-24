@@ -14,11 +14,12 @@ class PartnerCreatedEventEvent(str, Enum):
 
 
 class Status(str, Enum):
-    INVITED = "invited"
+    PENDING = "pending"
     APPROVED = "approved"
     REJECTED = "rejected"
+    INVITED = "invited"
     DECLINED = "declined"
-    PENDING = "pending"
+    BANNED = "banned"
 
 
 class LinksTypedDict(TypedDict):
