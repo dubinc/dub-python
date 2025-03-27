@@ -84,7 +84,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createFolder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -239,7 +239,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createFolder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -382,7 +382,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFolders",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -525,7 +525,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFolders",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -683,7 +683,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateFolder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -841,7 +841,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateFolder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -982,7 +982,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteFolder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1123,7 +1123,7 @@ class Folders(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteFolder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,

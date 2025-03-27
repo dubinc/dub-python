@@ -85,7 +85,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createDomain",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -240,7 +240,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createDomain",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -383,7 +383,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listDomains",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -553,7 +553,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listDomains",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -738,7 +738,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateDomain",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -896,7 +896,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateDomain",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1037,7 +1037,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteDomain",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1178,7 +1178,7 @@ class Domains(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteDomain",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
             request=req,

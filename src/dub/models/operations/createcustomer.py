@@ -182,6 +182,7 @@ class CreateCustomerDiscountTypedDict(TypedDict):
     max_duration: Nullable[float]
     coupon_id: Nullable[str]
     coupon_test_id: Nullable[str]
+    description: NotRequired[Nullable[str]]
     partners_count: NotRequired[Nullable[float]]
 
 
@@ -198,14 +199,22 @@ class CreateCustomerDiscount(BaseModel):
 
     coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
 
+    description: OptionalNullable[str] = UNSET
+
     partners_count: Annotated[
         OptionalNullable[float], pydantic.Field(alias="partnersCount")
     ] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["partnersCount"]
-        nullable_fields = ["maxDuration", "couponId", "couponTestId", "partnersCount"]
+        optional_fields = ["description", "partnersCount"]
+        nullable_fields = [
+            "maxDuration",
+            "couponId",
+            "couponTestId",
+            "description",
+            "partnersCount",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
