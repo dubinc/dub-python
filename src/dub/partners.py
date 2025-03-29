@@ -84,7 +84,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createPartner",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -239,7 +239,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createPartner",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -394,7 +394,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createPartnerLink",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -547,7 +547,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createPartnerLink",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -700,7 +700,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="upsertPartnerLink",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -853,7 +853,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="upsertPartnerLink",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -997,7 +997,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="retrievePartnerAnalytics",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1143,7 +1143,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="retrievePartnerAnalytics",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1298,7 +1298,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updatePartnerSale",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1453,7 +1453,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updatePartnerSale",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,

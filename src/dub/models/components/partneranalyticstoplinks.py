@@ -25,6 +25,8 @@ class PartnerAnalyticsTopLinksTypedDict(TypedDict):
     r"""The creation timestamp of the short link"""
     comments: NotRequired[Nullable[str]]
     r"""The comments of the short link"""
+    title: NotRequired[Nullable[str]]
+    r"""The custom link preview title (og:title)"""
     clicks: NotRequired[float]
     r"""The number of clicks from this link"""
     leads: NotRequired[float]
@@ -66,6 +68,9 @@ class PartnerAnalyticsTopLinks(BaseModel):
     comments: OptionalNullable[str] = UNSET
     r"""The comments of the short link"""
 
+    title: OptionalNullable[str] = UNSET
+    r"""The custom link preview title (og:title)"""
+
     clicks: Optional[float] = 0
     r"""The number of clicks from this link"""
 
@@ -84,13 +89,14 @@ class PartnerAnalyticsTopLinks(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "comments",
+            "title",
             "clicks",
             "leads",
             "sales",
             "saleAmount",
             "earnings",
         ]
-        nullable_fields = ["comments"]
+        nullable_fields = ["comments", "title"]
         null_default_fields = []
 
         serialized = handler(self)

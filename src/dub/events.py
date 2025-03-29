@@ -72,7 +72,7 @@ class Events(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listEvents",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -215,7 +215,7 @@ class Events(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listEvents",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
