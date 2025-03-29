@@ -80,7 +80,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createTag",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -229,7 +229,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createTag",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -368,7 +368,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getTags",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -509,7 +509,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getTags",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -667,7 +667,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateTag",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -823,7 +823,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateTag",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -962,7 +962,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteTag",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1103,7 +1103,7 @@ class Tags(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteTag",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,

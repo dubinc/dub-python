@@ -73,7 +73,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getCustomers",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -216,7 +216,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getCustomers",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -374,7 +374,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -532,7 +532,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -675,7 +675,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -818,7 +818,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -968,7 +968,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1118,7 +1118,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1259,7 +1259,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -1400,7 +1400,7 @@ class Customers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteCustomer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,

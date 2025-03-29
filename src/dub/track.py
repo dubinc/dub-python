@@ -80,7 +80,7 @@ class Track(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="trackLead",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -231,7 +231,7 @@ class Track(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="trackLead",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -382,7 +382,7 @@ class Track(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="trackSale",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
@@ -533,7 +533,7 @@ class Track(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="trackSale",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
