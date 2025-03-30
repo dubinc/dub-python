@@ -606,6 +606,27 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners/links"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: retrieveLinks
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.retrieve_links(request={
+                    "program_id": "<id>",
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/partners/links"]["post"]
     update:
       x-codeSamples:
