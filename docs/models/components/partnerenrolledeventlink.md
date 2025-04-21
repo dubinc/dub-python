@@ -1,4 +1,4 @@
-# RetrieveLinksResponseBody
+# PartnerEnrolledEventLink
 
 
 ## Fields

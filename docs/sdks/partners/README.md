@@ -182,7 +182,7 @@ with Dub(
 
 ### Response
 
-**[List[operations.RetrieveLinksResponseBody]](../../models/.md)**
+**[List[operations.Link]](../../models/.md)**
 
 ### Errors
 

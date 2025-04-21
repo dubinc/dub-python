@@ -22,7 +22,7 @@ class Status(str, Enum):
     BANNED = "banned"
 
 
-class LinksTypedDict(TypedDict):
+class PartnerEnrolledEventLinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
     domain: str
@@ -43,7 +43,7 @@ class LinksTypedDict(TypedDict):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class Links(BaseModel):
+class PartnerEnrolledEventLink(BaseModel):
     id: str
     r"""The unique ID of the short link."""
 
@@ -83,7 +83,7 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     status: Status
     program_id: str
     tenant_id: Nullable[str]
-    links: Nullable[List[LinksTypedDict]]
+    links: Nullable[List[PartnerEnrolledEventLinkTypedDict]]
     description: NotRequired[Nullable[str]]
     clicks: NotRequired[float]
     leads: NotRequired[float]
@@ -116,7 +116,7 @@ class PartnerEnrolledEventData(BaseModel):
 
     tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
 
-    links: Nullable[List[Links]]
+    links: Nullable[List[PartnerEnrolledEventLink]]
 
     description: OptionalNullable[str] = UNSET
 

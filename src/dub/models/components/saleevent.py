@@ -792,6 +792,7 @@ class SaleEventLinkTypedDict(TypedDict):
     key: str
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     url: str
+    track_conversion: bool
     external_id: Nullable[str]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: Nullable[str]
@@ -800,10 +801,12 @@ class SaleEventLinkTypedDict(TypedDict):
     r"""The ID of the program the short link is associated with."""
     partner_id: Nullable[str]
     r"""The ID of the partner the short link is associated with."""
+    archived: bool
     expires_at: str
     expired_url: Nullable[str]
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
+    proxy: bool
     title: Nullable[str]
     r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     description: Nullable[str]
@@ -812,12 +815,15 @@ class SaleEventLinkTypedDict(TypedDict):
     r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    rewrite: bool
+    do_index: bool
     ios: Nullable[str]
     r"""The iOS destination URL for the short link for iOS device targeting."""
     android: Nullable[str]
     r"""The Android destination URL for the short link for Android device targeting."""
     geo: Nullable[SaleEventGeoTypedDict]
     r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`. Learn more: https://d.to/geo"""
+    public_stats: bool
     tag_id: Nullable[str]
     r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tags` instead."""
     tags: Nullable[List[TagSchemaTypedDict]]
@@ -852,12 +858,6 @@ class SaleEventLinkTypedDict(TypedDict):
     updated_at: str
     project_id: str
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
-    track_conversion: NotRequired[bool]
-    archived: NotRequired[bool]
-    proxy: NotRequired[bool]
-    rewrite: NotRequired[bool]
-    do_index: NotRequired[bool]
-    public_stats: NotRequired[bool]
     test_variants: NotRequired[Nullable[List[SaleEventTestVariantsTypedDict]]]
     r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
     clicks: NotRequired[float]
@@ -882,6 +882,8 @@ class SaleEventLink(BaseModel):
 
     url: str
 
+    track_conversion: Annotated[bool, pydantic.Field(alias="trackConversion")]
+
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
 
@@ -894,12 +896,16 @@ class SaleEventLink(BaseModel):
     partner_id: Annotated[Nullable[str], pydantic.Field(alias="partnerId")]
     r"""The ID of the partner the short link is associated with."""
 
+    archived: bool
+
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
 
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
+
+    proxy: bool
 
     title: Nullable[str]
     r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
@@ -913,6 +919,10 @@ class SaleEventLink(BaseModel):
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
 
+    rewrite: bool
+
+    do_index: Annotated[bool, pydantic.Field(alias="doIndex")]
+
     ios: Nullable[str]
     r"""The iOS destination URL for the short link for iOS device targeting."""
 
@@ -921,6 +931,8 @@ class SaleEventLink(BaseModel):
 
     geo: Nullable[SaleEventGeo]
     r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`. Learn more: https://d.to/geo"""
+
+    public_stats: Annotated[bool, pydantic.Field(alias="publicStats")]
 
     tag_id: Annotated[
         Nullable[str],
@@ -988,20 +1000,6 @@ class SaleEventLink(BaseModel):
     ]
     r"""The project ID of the short link. This field is deprecated – use `workspaceId` instead."""
 
-    track_conversion: Annotated[
-        Optional[bool], pydantic.Field(alias="trackConversion")
-    ] = None
-
-    archived: Optional[bool] = None
-
-    proxy: Optional[bool] = None
-
-    rewrite: Optional[bool] = None
-
-    do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = None
-
-    public_stats: Annotated[Optional[bool], pydantic.Field(alias="publicStats")] = None
-
     test_variants: Annotated[
         OptionalNullable[List[SaleEventTestVariants]],
         pydantic.Field(alias="testVariants"),
@@ -1022,19 +1020,7 @@ class SaleEventLink(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "trackConversion",
-            "archived",
-            "proxy",
-            "rewrite",
-            "doIndex",
-            "publicStats",
-            "testVariants",
-            "clicks",
-            "leads",
-            "sales",
-            "saleAmount",
-        ]
+        optional_fields = ["testVariants", "clicks", "leads", "sales", "saleAmount"]
         nullable_fields = [
             "externalId",
             "tenantId",
@@ -1103,8 +1089,8 @@ class SaleEventClickTypedDict(TypedDict):
     os: str
     referer: str
     referer_url: str
+    qr: bool
     ip: str
-    qr: NotRequired[bool]
 
 
 class SaleEventClick(BaseModel):
@@ -1132,9 +1118,9 @@ class SaleEventClick(BaseModel):
 
     referer_url: Annotated[str, pydantic.Field(alias="refererUrl")]
 
-    ip: str
+    qr: bool
 
-    qr: Optional[bool] = None
+    ip: str
 
 
 class SaleEventCustomerTypedDict(TypedDict):
@@ -1273,6 +1259,7 @@ class Sale(BaseModel):
 
 class SaleEventTypedDict(TypedDict):
     event: SaleEventEvent
+    timestamp: str
     event_id: str
     event_name: str
     link: SaleEventLinkTypedDict
@@ -1312,11 +1299,12 @@ class SaleEventTypedDict(TypedDict):
     r"""Deprecated. Use `click.qr` instead."""
     ip: str
     r"""Deprecated. Use `click.ip` instead."""
-    timestamp: NotRequired[str]
 
 
 class SaleEvent(BaseModel):
     event: SaleEventEvent
+
+    timestamp: str
 
     event_id: Annotated[str, pydantic.Field(alias="eventId")]
 
@@ -1455,5 +1443,3 @@ class SaleEvent(BaseModel):
         ),
     ]
     r"""Deprecated. Use `click.ip` instead."""
-
-    timestamp: Optional[str] = None

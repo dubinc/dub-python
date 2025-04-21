@@ -34,7 +34,7 @@ class RetrieveLinksRequest(BaseModel):
     ] = None
 
 
-class RetrieveLinksResponseBodyTypedDict(TypedDict):
+class LinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
     domain: str
@@ -55,7 +55,7 @@ class RetrieveLinksResponseBodyTypedDict(TypedDict):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class RetrieveLinksResponseBody(BaseModel):
+class Link(BaseModel):
     id: str
     r"""The unique ID of the short link."""
 
