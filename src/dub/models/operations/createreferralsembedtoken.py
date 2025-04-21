@@ -288,6 +288,17 @@ CreateReferralsEmbedTokenTagNames = TypeAliasType(
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
+class CreateReferralsEmbedTokenTestVariantsTypedDict(TypedDict):
+    url: str
+    percentage: float
+
+
+class CreateReferralsEmbedTokenTestVariants(BaseModel):
+    url: str
+
+    percentage: float
+
+
 class CreateReferralsEmbedTokenLinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
@@ -343,6 +354,14 @@ class CreateReferralsEmbedTokenLinkPropsTypedDict(TypedDict):
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
     ref: NotRequired[Nullable[str]]
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
+    test_variants: NotRequired[
+        Nullable[List[CreateReferralsEmbedTokenTestVariantsTypedDict]]
+    ]
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+    test_started_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests started."""
+    test_completed_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests were or will be completed."""
 
 
 class CreateReferralsEmbedTokenLinkProps(BaseModel):
@@ -440,6 +459,22 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
     ref: OptionalNullable[str] = UNSET
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
+    test_variants: Annotated[
+        OptionalNullable[List[CreateReferralsEmbedTokenTestVariants]],
+        pydantic.Field(alias="testVariants"),
+    ] = UNSET
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+
+    test_started_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testStartedAt")
+    ] = UNSET
+    r"""The date and time when the tests started."""
+
+    test_completed_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testCompletedAt")
+    ] = UNSET
+    r"""The date and time when the tests were or will be completed."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -469,6 +504,9 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
         ]
         nullable_fields = [
             "externalId",
@@ -490,6 +528,9 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
         ]
         null_default_fields = []
 
@@ -497,7 +538,7 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -581,7 +622,7 @@ class Partner(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

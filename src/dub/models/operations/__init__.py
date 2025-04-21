@@ -5,6 +5,8 @@ from .bulkcreatelinks import (
     BulkCreateLinksTagIdsTypedDict,
     BulkCreateLinksTagNames,
     BulkCreateLinksTagNamesTypedDict,
+    BulkCreateLinksTestVariants,
+    BulkCreateLinksTestVariantsTypedDict,
     RequestBody,
     RequestBodyTypedDict,
     ResponseBody,
@@ -23,6 +25,8 @@ from .bulkupdatelinks import (
     BulkUpdateLinksTagIdsTypedDict,
     BulkUpdateLinksTagNames,
     BulkUpdateLinksTagNamesTypedDict,
+    BulkUpdateLinksTestVariants,
+    BulkUpdateLinksTestVariantsTypedDict,
     Data,
     DataTypedDict,
 )
@@ -52,6 +56,8 @@ from .createlink import (
     TagIdsTypedDict,
     TagNames,
     TagNamesTypedDict,
+    TestVariants,
+    TestVariantsTypedDict,
 )
 from .createpartner import (
     Country,
@@ -63,6 +69,8 @@ from .createpartner import (
     CreatePartnerTagIdsTypedDict,
     CreatePartnerTagNames,
     CreatePartnerTagNamesTypedDict,
+    CreatePartnerTestVariants,
+    CreatePartnerTestVariantsTypedDict,
     LinkProps,
     LinkPropsTypedDict,
     Links,
@@ -78,6 +86,8 @@ from .createpartnerlink import (
     CreatePartnerLinkTagIdsTypedDict,
     CreatePartnerLinkTagNames,
     CreatePartnerLinkTagNamesTypedDict,
+    CreatePartnerLinkTestVariants,
+    CreatePartnerLinkTestVariantsTypedDict,
 )
 from .createreferralsembedtoken import (
     CreateReferralsEmbedTokenCountry,
@@ -91,6 +101,8 @@ from .createreferralsembedtoken import (
     CreateReferralsEmbedTokenTagIdsTypedDict,
     CreateReferralsEmbedTokenTagNames,
     CreateReferralsEmbedTokenTagNamesTypedDict,
+    CreateReferralsEmbedTokenTestVariants,
+    CreateReferralsEmbedTokenTestVariantsTypedDict,
     Partner,
     PartnerTypedDict,
 )
@@ -147,9 +159,9 @@ from .getcustomers import (
     GetCustomersRequestTypedDict,
     GetCustomersResponseBody,
     GetCustomersResponseBodyTypedDict,
+    GetCustomersType,
     Link,
     LinkTypedDict,
-    Type,
 )
 from .getlinkinfo import GetLinkInfoRequest, GetLinkInfoRequestTypedDict
 from .getlinks import (
@@ -178,12 +190,6 @@ from .getlinkscount import (
     One,
     Three,
     Two,
-)
-from .getmetatags import (
-    GetMetatagsRequest,
-    GetMetatagsRequestTypedDict,
-    GetMetatagsResponseBody,
-    GetMetatagsResponseBodyTypedDict,
 )
 from .getqrcode import GetQRCodeRequest, GetQRCodeRequestTypedDict, Level
 from .gettags import (
@@ -301,8 +307,11 @@ from .updatelink import (
     UpdateLinkTagIdsTypedDict,
     UpdateLinkTagNames,
     UpdateLinkTagNamesTypedDict,
+    UpdateLinkTestVariants,
+    UpdateLinkTestVariantsTypedDict,
 )
 from .updatepartnersale import (
+    Type,
     UpdatePartnerSaleRequestBody,
     UpdatePartnerSaleRequestBodyTypedDict,
     UpdatePartnerSaleResponseBody,
@@ -329,6 +338,8 @@ from .upsertlink import (
     UpsertLinkTagIdsTypedDict,
     UpsertLinkTagNames,
     UpsertLinkTagNamesTypedDict,
+    UpsertLinkTestVariants,
+    UpsertLinkTestVariantsTypedDict,
 )
 from .upsertpartnerlink import (
     UpsertPartnerLinkLinkProps,
@@ -339,6 +350,8 @@ from .upsertpartnerlink import (
     UpsertPartnerLinkTagIdsTypedDict,
     UpsertPartnerLinkTagNames,
     UpsertPartnerLinkTagNamesTypedDict,
+    UpsertPartnerLinkTestVariants,
+    UpsertPartnerLinkTestVariantsTypedDict,
 )
 
 
@@ -348,6 +361,8 @@ __all__ = [
     "BulkCreateLinksTagIdsTypedDict",
     "BulkCreateLinksTagNames",
     "BulkCreateLinksTagNamesTypedDict",
+    "BulkCreateLinksTestVariants",
+    "BulkCreateLinksTestVariantsTypedDict",
     "BulkDeleteLinksRequest",
     "BulkDeleteLinksRequestTypedDict",
     "BulkDeleteLinksResponseBody",
@@ -358,6 +373,8 @@ __all__ = [
     "BulkUpdateLinksTagIdsTypedDict",
     "BulkUpdateLinksTagNames",
     "BulkUpdateLinksTagNamesTypedDict",
+    "BulkUpdateLinksTestVariants",
+    "BulkUpdateLinksTestVariantsTypedDict",
     "Click",
     "ClickTypedDict",
     "Color",
@@ -387,6 +404,8 @@ __all__ = [
     "CreatePartnerLinkTagIdsTypedDict",
     "CreatePartnerLinkTagNames",
     "CreatePartnerLinkTagNamesTypedDict",
+    "CreatePartnerLinkTestVariants",
+    "CreatePartnerLinkTestVariantsTypedDict",
     "CreatePartnerRequestBody",
     "CreatePartnerRequestBodyTypedDict",
     "CreatePartnerResponseBody",
@@ -395,6 +414,8 @@ __all__ = [
     "CreatePartnerTagIdsTypedDict",
     "CreatePartnerTagNames",
     "CreatePartnerTagNamesTypedDict",
+    "CreatePartnerTestVariants",
+    "CreatePartnerTestVariantsTypedDict",
     "CreateReferralsEmbedTokenCountry",
     "CreateReferralsEmbedTokenLinkProps",
     "CreateReferralsEmbedTokenLinkPropsTypedDict",
@@ -406,6 +427,8 @@ __all__ = [
     "CreateReferralsEmbedTokenTagIdsTypedDict",
     "CreateReferralsEmbedTokenTagNames",
     "CreateReferralsEmbedTokenTagNamesTypedDict",
+    "CreateReferralsEmbedTokenTestVariants",
+    "CreateReferralsEmbedTokenTestVariantsTypedDict",
     "CreateTagRequestBody",
     "CreateTagRequestBodyTypedDict",
     "Customer",
@@ -453,6 +476,7 @@ __all__ = [
     "GetCustomersRequestTypedDict",
     "GetCustomersResponseBody",
     "GetCustomersResponseBodyTypedDict",
+    "GetCustomersType",
     "GetLinkInfoRequest",
     "GetLinkInfoRequestTypedDict",
     "GetLinksCountQueryParamTagIds",
@@ -465,10 +489,6 @@ __all__ = [
     "GetLinksRequestTypedDict",
     "GetLinksResponse",
     "GetLinksResponseTypedDict",
-    "GetMetatagsRequest",
-    "GetMetatagsRequestTypedDict",
-    "GetMetatagsResponseBody",
-    "GetMetatagsResponseBodyTypedDict",
     "GetQRCodeRequest",
     "GetQRCodeRequestTypedDict",
     "GetTagsQueryParamSortBy",
@@ -547,6 +567,8 @@ __all__ = [
     "TagIdsTypedDict",
     "TagNames",
     "TagNamesTypedDict",
+    "TestVariants",
+    "TestVariantsTypedDict",
     "Three",
     "TrackLeadRequestBody",
     "TrackLeadRequestBodyTypedDict",
@@ -591,6 +613,8 @@ __all__ = [
     "UpdateLinkTagIdsTypedDict",
     "UpdateLinkTagNames",
     "UpdateLinkTagNamesTypedDict",
+    "UpdateLinkTestVariants",
+    "UpdateLinkTestVariantsTypedDict",
     "UpdatePartnerSaleRequestBody",
     "UpdatePartnerSaleRequestBodyTypedDict",
     "UpdatePartnerSaleResponseBody",
@@ -611,6 +635,8 @@ __all__ = [
     "UpsertLinkTagIdsTypedDict",
     "UpsertLinkTagNames",
     "UpsertLinkTagNamesTypedDict",
+    "UpsertLinkTestVariants",
+    "UpsertLinkTestVariantsTypedDict",
     "UpsertPartnerLinkLinkProps",
     "UpsertPartnerLinkLinkPropsTypedDict",
     "UpsertPartnerLinkRequestBody",
@@ -619,4 +645,6 @@ __all__ = [
     "UpsertPartnerLinkTagIdsTypedDict",
     "UpsertPartnerLinkTagNames",
     "UpsertPartnerLinkTagNamesTypedDict",
+    "UpsertPartnerLinkTestVariants",
+    "UpsertPartnerLinkTestVariantsTypedDict",
 ]

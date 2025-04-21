@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .tagschema import TagSchema, TagSchemaTypedDict
-from dub.types import BaseModel, Nullable, UNSET_SENTINEL
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -768,6 +768,21 @@ class Geo(BaseModel):
     xk: Annotated[Optional[str], pydantic.Field(alias="XK")] = None
 
 
+class TestVariantsTypedDict(TypedDict):
+    __test__ = False  # pyright: ignore[reportGeneralTypeIssues]
+
+    url: str
+    percentage: float
+
+
+class TestVariants(BaseModel):
+    __test__ = False
+
+    url: str
+
+    percentage: float
+
+
 class LinkSchemaTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
@@ -792,11 +807,11 @@ class LinkSchemaTypedDict(TypedDict):
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     title: Nullable[str]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     description: Nullable[str]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     image: Nullable[str]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     ios: Nullable[str]
@@ -853,6 +868,12 @@ class LinkSchemaTypedDict(TypedDict):
     r"""Whether to allow search engines to index the short link."""
     public_stats: NotRequired[bool]
     r"""Whether the short link's stats are publicly accessible."""
+    test_variants: NotRequired[Nullable[List[TestVariantsTypedDict]]]
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+    test_started_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests started."""
+    test_completed_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests were or will be completed."""
     clicks: NotRequired[float]
     r"""The number of clicks on the short link."""
     leads: NotRequired[float]
@@ -898,13 +919,13 @@ class LinkSchema(BaseModel):
     r"""The password required to access the destination URL of the short link."""
 
     title: Nullable[str]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     description: Nullable[str]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     image: Nullable[str]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
@@ -1004,6 +1025,21 @@ class LinkSchema(BaseModel):
     public_stats: Annotated[Optional[bool], pydantic.Field(alias="publicStats")] = False
     r"""Whether the short link's stats are publicly accessible."""
 
+    test_variants: Annotated[
+        OptionalNullable[List[TestVariants]], pydantic.Field(alias="testVariants")
+    ] = UNSET
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+
+    test_started_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testStartedAt")
+    ] = UNSET
+    r"""The date and time when the tests started."""
+
+    test_completed_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testCompletedAt")
+    ] = UNSET
+    r"""The date and time when the tests were or will be completed."""
+
     clicks: Optional[float] = 0
     r"""The number of clicks on the short link."""
 
@@ -1025,6 +1061,9 @@ class LinkSchema(BaseModel):
             "rewrite",
             "doIndex",
             "publicStats",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
             "clicks",
             "leads",
             "sales",
@@ -1054,6 +1093,9 @@ class LinkSchema(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
             "userId",
             "lastClicked",
         ]
@@ -1063,7 +1105,7 @@ class LinkSchema(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

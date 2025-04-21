@@ -42,7 +42,7 @@ class CreateCustomerRequestBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -102,7 +102,7 @@ class CreateCustomerLink(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -149,7 +149,7 @@ class CreateCustomerPartner(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -210,9 +210,9 @@ class CreateCustomerDiscount(BaseModel):
         optional_fields = ["description", "partnersCount"]
         nullable_fields = [
             "maxDuration",
+            "description",
             "couponId",
             "couponTestId",
-            "description",
             "partnersCount",
         ]
         null_default_fields = []
@@ -221,7 +221,7 @@ class CreateCustomerDiscount(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -260,6 +260,7 @@ class CreateCustomerResponseBodyTypedDict(TypedDict):
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
     link: NotRequired[Nullable[CreateCustomerLinkTypedDict]]
+    program_id: NotRequired[Nullable[str]]
     partner: NotRequired[Nullable[CreateCustomerPartnerTypedDict]]
     discount: NotRequired[Nullable[CreateCustomerDiscountTypedDict]]
 
@@ -290,21 +291,41 @@ class CreateCustomerResponseBody(BaseModel):
 
     link: OptionalNullable[CreateCustomerLink] = UNSET
 
+    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
+        UNSET
+    )
+
     partner: OptionalNullable[CreateCustomerPartner] = UNSET
 
     discount: OptionalNullable[CreateCustomerDiscount] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar", "country", "link", "partner", "discount"]
-        nullable_fields = ["email", "avatar", "country", "link", "partner", "discount"]
+        optional_fields = [
+            "email",
+            "avatar",
+            "country",
+            "link",
+            "programId",
+            "partner",
+            "discount",
+        ]
+        nullable_fields = [
+            "email",
+            "avatar",
+            "country",
+            "link",
+            "programId",
+            "partner",
+            "discount",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

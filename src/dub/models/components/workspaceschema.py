@@ -53,7 +53,7 @@ class Users(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -269,13 +269,13 @@ class WorkspaceSchema(BaseModel):
     def serialize_model(self, handler):
         optional_fields = ["logo", "flags"]
         nullable_fields = [
+            "logo",
             "inviteCode",
             "stripeId",
             "paymentFailedAt",
             "stripeConnectId",
             "store",
             "allowedHostnames",
-            "logo",
         ]
         null_default_fields = ["logo"]
 
@@ -283,7 +283,7 @@ class WorkspaceSchema(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

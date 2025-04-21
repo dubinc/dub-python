@@ -114,6 +114,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The ID of the program to retrieve analytics for."""
     partner_id: NotRequired[str]
     r"""The ID of the partner to retrieve analytics for."""
+    customer_id: NotRequired[str]
+    r"""The ID of the customer to retrieve analytics for."""
     interval: NotRequired[Interval]
     r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
     start: NotRequired[str]
@@ -226,6 +228,13 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The ID of the partner to retrieve analytics for."""
+
+    customer_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="customerId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the customer to retrieve analytics for."""
 
     interval: Annotated[
         Optional[Interval],
@@ -393,6 +402,7 @@ class RetrieveAnalyticsRequest(BaseModel):
             "tenantId",
             "programId",
             "partnerId",
+            "customerId",
             "interval",
             "start",
             "end",
@@ -432,7 +442,7 @@ class RetrieveAnalyticsRequest(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

@@ -20,49 +20,38 @@ class PaymentProcessor(str, Enum):
 
 
 class TrackSaleRequestBodyTypedDict(TypedDict):
+    external_id: str
+    r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
     amount: int
-    r"""The amount of the sale. Should be passed in cents."""
+    r"""The amount of the sale in cents."""
     payment_processor: PaymentProcessor
     r"""The payment processor via which the sale was made."""
-    external_id: NotRequired[str]
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-    customer_id: NotRequired[Nullable[str]]
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
     event_name: NotRequired[str]
-    r"""The name of the sale event. It can be used to track different types of event for example 'Purchase', 'Upgrade', 'Payment', etc."""
+    r"""The name of the sale event."""
     invoice_id: NotRequired[Nullable[str]]
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
     currency: NotRequired[str]
     r"""The currency of the sale. Accepts ISO 4217 currency codes."""
-    metadata: NotRequired[Nullable[Dict[str, Any]]]
-    r"""Additional metadata to be stored with the sale event."""
     lead_event_name: NotRequired[Nullable[str]]
     r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event, which is the default behavior)."""
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters."""
 
 
 class TrackSaleRequestBody(BaseModel):
+    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
+
     amount: int
-    r"""The amount of the sale. Should be passed in cents."""
+    r"""The amount of the sale in cents."""
 
     payment_processor: Annotated[
         PaymentProcessor, pydantic.Field(alias="paymentProcessor")
     ]
     r"""The payment processor via which the sale was made."""
 
-    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = ""
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-
-    customer_id: Annotated[
-        OptionalNullable[str],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
-            alias="customerId",
-        ),
-    ] = None
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-
     event_name: Annotated[Optional[str], pydantic.Field(alias="eventName")] = "Purchase"
-    r"""The name of the sale event. It can be used to track different types of event for example 'Purchase', 'Upgrade', 'Payment', etc."""
+    r"""The name of the sale event."""
 
     invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
         None
@@ -72,33 +61,31 @@ class TrackSaleRequestBody(BaseModel):
     currency: Optional[str] = "usd"
     r"""The currency of the sale. Accepts ISO 4217 currency codes."""
 
-    metadata: OptionalNullable[Dict[str, Any]] = UNSET
-    r"""Additional metadata to be stored with the sale event."""
-
     lead_event_name: Annotated[
         OptionalNullable[str], pydantic.Field(alias="leadEventName")
     ] = None
     r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event, which is the default behavior)."""
 
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "externalId",
-            "customerId",
             "eventName",
             "invoiceId",
             "currency",
-            "metadata",
             "leadEventName",
+            "metadata",
         ]
-        nullable_fields = ["customerId", "invoiceId", "metadata", "leadEventName"]
-        null_default_fields = ["customerId", "invoiceId", "leadEventName"]
+        nullable_fields = ["invoiceId", "leadEventName", "metadata"]
+        null_default_fields = ["invoiceId", "leadEventName"]
 
         serialized = handler(self)
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -148,7 +135,7 @@ class TrackSaleCustomer(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -198,7 +185,7 @@ class Sale(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -246,7 +233,7 @@ class TrackSaleResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

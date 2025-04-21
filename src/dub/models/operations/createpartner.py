@@ -284,6 +284,17 @@ CreatePartnerTagNames = TypeAliasType("CreatePartnerTagNames", Union[str, List[s
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
+class CreatePartnerTestVariantsTypedDict(TypedDict):
+    url: str
+    percentage: float
+
+
+class CreatePartnerTestVariants(BaseModel):
+    url: str
+
+    percentage: float
+
+
 class LinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
@@ -339,6 +350,12 @@ class LinkPropsTypedDict(TypedDict):
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
     ref: NotRequired[Nullable[str]]
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
+    test_variants: NotRequired[Nullable[List[CreatePartnerTestVariantsTypedDict]]]
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+    test_started_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests started."""
+    test_completed_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests were or will be completed."""
 
 
 class LinkProps(BaseModel):
@@ -436,6 +453,22 @@ class LinkProps(BaseModel):
     ref: OptionalNullable[str] = UNSET
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
+    test_variants: Annotated[
+        OptionalNullable[List[CreatePartnerTestVariants]],
+        pydantic.Field(alias="testVariants"),
+    ] = UNSET
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+
+    test_started_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testStartedAt")
+    ] = UNSET
+    r"""The date and time when the tests started."""
+
+    test_completed_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testCompletedAt")
+    ] = UNSET
+    r"""The date and time when the tests were or will be completed."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -465,6 +498,9 @@ class LinkProps(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
         ]
         nullable_fields = [
             "externalId",
@@ -486,6 +522,9 @@ class LinkProps(BaseModel):
             "utm_term",
             "utm_content",
             "ref",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
         ]
         null_default_fields = []
 
@@ -493,7 +532,7 @@ class LinkProps(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -580,7 +619,7 @@ class CreatePartnerRequestBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -740,11 +779,11 @@ class CreatePartnerResponseBody(BaseModel):
         nullable_fields = [
             "email",
             "image",
+            "description",
             "country",
             "payoutsEnabledAt",
             "tenantId",
             "links",
-            "description",
             "applicationId",
         ]
         null_default_fields = []
@@ -753,7 +792,7 @@ class CreatePartnerResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

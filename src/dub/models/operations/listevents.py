@@ -104,6 +104,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""The ID of the program to retrieve analytics for."""
     partner_id: NotRequired[str]
     r"""The ID of the partner to retrieve analytics for."""
+    customer_id: NotRequired[str]
+    r"""The ID of the customer to retrieve analytics for."""
     interval: NotRequired[QueryParamInterval]
     r"""The interval to retrieve events for. Takes precedence over start and end. If undefined, defaults to 24h."""
     start: NotRequired[str]
@@ -217,6 +219,13 @@ class ListEventsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The ID of the partner to retrieve analytics for."""
+
+    customer_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="customerId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The ID of the customer to retrieve analytics for."""
 
     interval: Annotated[
         Optional[QueryParamInterval],
@@ -413,6 +422,7 @@ class ListEventsRequest(BaseModel):
             "tenantId",
             "programId",
             "partnerId",
+            "customerId",
             "interval",
             "start",
             "end",
@@ -457,7 +467,7 @@ class ListEventsRequest(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

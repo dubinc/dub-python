@@ -18,104 +18,85 @@ class Mode(str, Enum):
 
 class TrackLeadRequestBodyTypedDict(TypedDict):
     click_id: str
-    r"""The ID of the click in Dub. You can read this value from `dub_id` cookie."""
+    r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie."""
     event_name: str
-    r"""The name of the lead event to track."""
+    r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
+    external_id: str
+    r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
     event_quantity: NotRequired[Nullable[float]]
     r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
-    external_id: NotRequired[str]
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-    customer_id: NotRequired[Nullable[str]]
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
     customer_name: NotRequired[Nullable[str]]
-    r"""Name of the customer in the client's app."""
+    r"""The name of the customer. If not passed, a random name will be generated (e.g. “Big Red Caribou”)."""
     customer_email: NotRequired[Nullable[str]]
-    r"""Email of the customer in the client's app."""
+    r"""The email address of the customer."""
     customer_avatar: NotRequired[Nullable[str]]
-    r"""Avatar of the customer in the client's app."""
-    metadata: NotRequired[Nullable[Dict[str, Any]]]
-    r"""Additional metadata to be stored with the lead event"""
+    r"""The avatar URL of the customer."""
     mode: NotRequired[Mode]
     r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
 
 
 class TrackLeadRequestBody(BaseModel):
     click_id: Annotated[str, pydantic.Field(alias="clickId")]
-    r"""The ID of the click in Dub. You can read this value from `dub_id` cookie."""
+    r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie."""
 
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
-    r"""The name of the lead event to track."""
+    r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
+
+    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
 
     event_quantity: Annotated[
         OptionalNullable[float], pydantic.Field(alias="eventQuantity")
     ] = UNSET
     r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
 
-    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = ""
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-
-    customer_id: Annotated[
-        OptionalNullable[str],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
-            alias="customerId",
-        ),
-    ] = None
-    r"""This is the unique identifier for the customer in the client's app. This is used to track the customer's journey."""
-
     customer_name: Annotated[
         OptionalNullable[str], pydantic.Field(alias="customerName")
     ] = None
-    r"""Name of the customer in the client's app."""
+    r"""The name of the customer. If not passed, a random name will be generated (e.g. “Big Red Caribou”)."""
 
     customer_email: Annotated[
         OptionalNullable[str], pydantic.Field(alias="customerEmail")
     ] = None
-    r"""Email of the customer in the client's app."""
+    r"""The email address of the customer."""
 
     customer_avatar: Annotated[
         OptionalNullable[str], pydantic.Field(alias="customerAvatar")
     ] = None
-    r"""Avatar of the customer in the client's app."""
-
-    metadata: OptionalNullable[Dict[str, Any]] = UNSET
-    r"""Additional metadata to be stored with the lead event"""
+    r"""The avatar URL of the customer."""
 
     mode: Optional[Mode] = Mode.ASYNC
     r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
+
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
             "eventQuantity",
-            "externalId",
-            "customerId",
             "customerName",
             "customerEmail",
             "customerAvatar",
-            "metadata",
             "mode",
+            "metadata",
         ]
         nullable_fields = [
             "eventQuantity",
-            "customerId",
             "customerName",
             "customerEmail",
             "customerAvatar",
             "metadata",
         ]
-        null_default_fields = [
-            "customerId",
-            "customerName",
-            "customerEmail",
-            "customerAvatar",
-        ]
+        null_default_fields = ["customerName", "customerEmail", "customerAvatar"]
 
         serialized = handler(self)
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -170,7 +151,7 @@ class Customer(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

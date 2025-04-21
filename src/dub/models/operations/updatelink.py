@@ -30,6 +30,17 @@ UpdateLinkTagNames = TypeAliasType("UpdateLinkTagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
 
 
+class UpdateLinkTestVariantsTypedDict(TypedDict):
+    url: str
+    percentage: float
+
+
+class UpdateLinkTestVariants(BaseModel):
+    url: str
+
+    percentage: float
+
+
 class UpdateLinkRequestBodyTypedDict(TypedDict):
     url: NotRequired[str]
     r"""The destination URL of the short link."""
@@ -103,6 +114,12 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
     webhook_ids: NotRequired[Nullable[List[str]]]
     r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
+    test_variants: NotRequired[Nullable[List[UpdateLinkTestVariantsTypedDict]]]
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+    test_started_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests started."""
+    test_completed_at: NotRequired[Nullable[str]]
+    r"""The date and time when the tests were or will be completed."""
 
 
 class UpdateLinkRequestBody(BaseModel):
@@ -248,6 +265,22 @@ class UpdateLinkRequestBody(BaseModel):
     ] = UNSET
     r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
+    test_variants: Annotated[
+        OptionalNullable[List[UpdateLinkTestVariants]],
+        pydantic.Field(alias="testVariants"),
+    ] = UNSET
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+
+    test_started_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testStartedAt")
+    ] = UNSET
+    r"""The date and time when the tests started."""
+
+    test_completed_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="testCompletedAt")
+    ] = UNSET
+    r"""The date and time when the tests were or will be completed."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -287,6 +320,9 @@ class UpdateLinkRequestBody(BaseModel):
             "utm_content",
             "ref",
             "webhookIds",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
         ]
         nullable_fields = [
             "externalId",
@@ -313,6 +349,9 @@ class UpdateLinkRequestBody(BaseModel):
             "utm_content",
             "ref",
             "webhookIds",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
         ]
         null_default_fields = []
 
@@ -320,7 +359,7 @@ class UpdateLinkRequestBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

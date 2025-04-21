@@ -335,6 +335,16 @@ actions:
                     "tag_ids": [
                         "clux0rgak00011...",
                     ],
+                    "test_variants": [
+                        {
+                            "url": "https://example.com/variant-1",
+                            "percentage": 50,
+                        },
+                        {
+                            "url": "https://example.com/variant-2",
+                            "percentage": 50,
+                        },
+                    ],
                 })
 
                 assert res is not None
@@ -384,6 +394,16 @@ actions:
                         "tag_ids": [
                             "clux0rgak00011...",
                         ],
+                        "test_variants": [
+                            {
+                                "url": "https://example.com/variant-1",
+                                "percentage": 50,
+                            },
+                            {
+                                "url": "https://example.com/variant-2",
+                                "percentage": 50,
+                            },
+                        ],
                     },
                 })
 
@@ -411,12 +431,32 @@ actions:
                         "tag_ids": [
                             "clux0rgak00011...",
                         ],
+                        "test_variants": [
+                            {
+                                "url": "https://example.com/variant-1",
+                                "percentage": 50,
+                            },
+                            {
+                                "url": "https://example.com/variant-2",
+                                "percentage": 50,
+                            },
+                        ],
                     },
                     {
                         "url": "https://google.com",
                         "external_id": "123456",
                         "tag_ids": [
                             "clux0rgak00011...",
+                        ],
+                        "test_variants": [
+                            {
+                                "url": "https://example.com/variant-1",
+                                "percentage": 50,
+                            },
+                            {
+                                "url": "https://example.com/variant-2",
+                                "percentage": 50,
+                            },
                         ],
                     },
                 ])
@@ -485,6 +525,16 @@ actions:
                     "tag_ids": [
                         "clux0rgak00011...",
                     ],
+                    "test_variants": [
+                        {
+                            "url": "https://example.com/variant-1",
+                            "percentage": 50,
+                        },
+                        {
+                            "url": "https://example.com/variant-2",
+                            "percentage": 50,
+                        },
+                    ],
                 })
 
                 assert res is not None
@@ -529,27 +579,16 @@ actions:
                     "tag_ids": [
                         "clux0rgak00011...",
                     ],
-                })
-
-                assert res is not None
-
-                # Handle response
-                print(res)
-  - target: $["paths"]["/metatags"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: getMetatags
-          source: |-
-            from dub import Dub
-
-
-            with Dub(
-                token="DUB_API_KEY",
-            ) as d_client:
-
-                res = d_client.metatags.get(request={
-                    "url": "https://dub.co",
+                    "test_variants": [
+                        {
+                            "url": "https://example.com/variant-1",
+                            "percentage": 50,
+                        },
+                        {
+                            "url": "https://example.com/variant-2",
+                            "percentage": 50,
+                        },
+                    ],
                 })
 
                 assert res is not None
@@ -577,6 +616,16 @@ actions:
                         "external_id": "123456",
                         "tag_ids": [
                             "clux0rgak00011...",
+                        ],
+                        "test_variants": [
+                            {
+                                "url": "https://example.com/variant-1",
+                                "percentage": 50,
+                            },
+                            {
+                                "url": "https://example.com/variant-2",
+                                "percentage": 50,
+                            },
                         ],
                     },
                 })
@@ -647,6 +696,16 @@ actions:
                         "tag_ids": [
                             "clux0rgak00011...",
                         ],
+                        "test_variants": [
+                            {
+                                "url": "https://example.com/variant-1",
+                                "percentage": 50,
+                            },
+                            {
+                                "url": "https://example.com/variant-2",
+                                "percentage": 50,
+                            },
+                        ],
                     },
                 })
 
@@ -673,6 +732,16 @@ actions:
                         "external_id": "123456",
                         "tag_ids": [
                             "clux0rgak00011...",
+                        ],
+                        "test_variants": [
+                            {
+                                "url": "https://example.com/variant-1",
+                                "percentage": 50,
+                            },
+                            {
+                                "url": "https://example.com/variant-2",
+                                "percentage": 50,
+                            },
                         ],
                     },
                 })
@@ -820,6 +889,16 @@ actions:
                             "tag_ids": [
                                 "clux0rgak00011...",
                             ],
+                            "test_variants": [
+                                {
+                                    "url": "https://example.com/variant-1",
+                                    "percentage": 50,
+                                },
+                                {
+                                    "url": "https://example.com/variant-2",
+                                    "percentage": 50,
+                                },
+                            ],
                         },
                     },
                 })
@@ -844,6 +923,7 @@ actions:
                 res = d_client.track.lead(request={
                     "click_id": "<id>",
                     "event_name": "Sign up",
+                    "external_id": "<id>",
                 })
 
                 assert res is not None
@@ -865,6 +945,7 @@ actions:
             ) as d_client:
 
                 res = d_client.track.sale(request={
+                    "external_id": "<id>",
                     "amount": 996500,
                     "payment_processor": operations.PaymentProcessor.CUSTOM,
                 })

@@ -14,6 +14,16 @@ with Dub(
         "tag_ids": [
             "clux0rgak00011...",
         ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
+        ],
     })
 
     assert res is not None
@@ -42,6 +52,16 @@ async def main():
             "tag_ids": [
                 "clux0rgak00011...",
             ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
+            ],
         })
 
         assert res is not None
@@ -66,6 +86,16 @@ with Dub(
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
+        ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
         ],
     })
 
@@ -94,6 +124,16 @@ async def main():
             "external_id": "123456",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         })
 

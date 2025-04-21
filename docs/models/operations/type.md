@@ -3,7 +3,8 @@
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `PERCENTAGE` | percentage   |
-| `FLAT`       | flat         |
+| Name    | Value   |
+| ------- | ------- |
+| `CLICK` | click   |
+| `LEAD`  | lead    |
+| `SALE`  | sale    |
