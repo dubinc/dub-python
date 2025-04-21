@@ -31,6 +31,16 @@ with Dub(
                 "tag_ids": [
                     "clux0rgak00011...",
                 ],
+                "test_variants": [
+                    {
+                        "url": "https://example.com/variant-1",
+                        "percentage": 50,
+                    },
+                    {
+                        "url": "https://example.com/variant-2",
+                        "percentage": 50,
+                    },
+                ],
             },
         },
     })

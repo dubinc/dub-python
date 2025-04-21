@@ -36,6 +36,16 @@ with Dub(
         "tag_ids": [
             "clux0rgak00011...",
         ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
+        ],
     })
 
     assert res is not None
@@ -241,6 +251,16 @@ with Dub(
         "tag_ids": [
             "clux0rgak00011...",
         ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
+        ],
     })
 
     assert res is not None
@@ -347,12 +367,32 @@ with Dub(
             "tag_ids": [
                 "clux0rgak00011...",
             ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
+            ],
         },
         {
             "url": "https://google.com",
             "external_id": "123456",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         },
     ])
@@ -409,6 +449,16 @@ with Dub(
             "url": "https://google.com",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         },
     })
@@ -519,6 +569,16 @@ with Dub(
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
+        ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
         ],
     })
 

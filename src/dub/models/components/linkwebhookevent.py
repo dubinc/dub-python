@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .tagschema import TagSchema, TagSchemaTypedDict
-from dub.types import BaseModel, Nullable, UNSET_SENTINEL
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -789,6 +789,17 @@ class LinkWebhookEventGeo(BaseModel):
     xk: Annotated[Optional[str], pydantic.Field(alias="XK")] = None
 
 
+class LinkWebhookEventTestVariantsTypedDict(TypedDict):
+    url: str
+    percentage: float
+
+
+class LinkWebhookEventTestVariants(BaseModel):
+    url: str
+
+    percentage: float
+
+
 class DataTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
@@ -810,11 +821,11 @@ class DataTypedDict(TypedDict):
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     title: Nullable[str]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     description: Nullable[str]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     image: Nullable[str]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     ios: Nullable[str]
@@ -847,6 +858,8 @@ class DataTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
+    test_started_at: Nullable[str]
+    test_completed_at: Nullable[str]
     user_id: Nullable[str]
     workspace_id: str
     r"""The workspace ID of the short link."""
@@ -861,6 +874,8 @@ class DataTypedDict(TypedDict):
     rewrite: NotRequired[bool]
     do_index: NotRequired[bool]
     public_stats: NotRequired[bool]
+    test_variants: NotRequired[Nullable[List[LinkWebhookEventTestVariantsTypedDict]]]
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
     clicks: NotRequired[float]
     r"""The number of clicks on the short link."""
     leads: NotRequired[float]
@@ -903,13 +918,13 @@ class Data(BaseModel):
     r"""The password required to access the destination URL of the short link."""
 
     title: Nullable[str]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     description: Nullable[str]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     image: Nullable[str]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
@@ -965,6 +980,10 @@ class Data(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
+    test_started_at: Annotated[Nullable[str], pydantic.Field(alias="testStartedAt")]
+
+    test_completed_at: Annotated[Nullable[str], pydantic.Field(alias="testCompletedAt")]
+
     user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
@@ -999,6 +1018,12 @@ class Data(BaseModel):
 
     public_stats: Annotated[Optional[bool], pydantic.Field(alias="publicStats")] = None
 
+    test_variants: Annotated[
+        OptionalNullable[List[LinkWebhookEventTestVariants]],
+        pydantic.Field(alias="testVariants"),
+    ] = UNSET
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+
     clicks: Optional[float] = 0
     r"""The number of clicks on the short link."""
 
@@ -1020,6 +1045,7 @@ class Data(BaseModel):
             "rewrite",
             "doIndex",
             "publicStats",
+            "testVariants",
             "clicks",
             "leads",
             "sales",
@@ -1048,6 +1074,9 @@ class Data(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
             "userId",
         ]
         null_default_fields = []
@@ -1056,7 +1085,7 @@ class Data(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

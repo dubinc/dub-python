@@ -14,7 +14,6 @@ from dub.embed_tokens import EmbedTokens
 from dub.events import Events
 from dub.folders import Folders
 from dub.links import Links
-from dub.metatags import Metatags
 from dub.models import components
 from dub.partners import Partners
 from dub.qr_codes import QRCodes
@@ -42,7 +41,6 @@ class Dub(BaseSDK):
     workspaces: Workspaces
     embed_tokens: EmbedTokens
     qr_codes: QRCodes
-    metatags: Metatags
 
     def __init__(
         self,
@@ -152,7 +150,6 @@ class Dub(BaseSDK):
         self.workspaces = Workspaces(self.sdk_configuration)
         self.embed_tokens = EmbedTokens(self.sdk_configuration)
         self.qr_codes = QRCodes(self.sdk_configuration)
-        self.metatags = Metatags(self.sdk_configuration)
 
     def __enter__(self):
         return self

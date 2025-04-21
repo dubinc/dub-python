@@ -115,6 +115,16 @@ with Dub(
         "tag_ids": [
             "clux0rgak00011...",
         ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
+        ],
     })
 
     assert res is not None
@@ -143,6 +153,16 @@ async def main():
             "tag_ids": [
                 "clux0rgak00011...",
             ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
+            ],
         })
 
         assert res is not None
@@ -169,6 +189,16 @@ with Dub(
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
+        ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
         ],
     })
 
@@ -197,6 +227,16 @@ async def main():
             "external_id": "123456",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         })
 
@@ -262,10 +302,6 @@ asyncio.run(main())
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [delete_many](docs/sdks/links/README.md#delete_many) - Bulk delete links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
-
-### [metatags](docs/sdks/metatags/README.md)
-
-* [get](docs/sdks/metatags/README.md#get) - Retrieve the metatags for a URL
 
 ### [partners](docs/sdks/partners/README.md)
 
@@ -348,6 +384,16 @@ with Dub(
             "tag_ids": [
                 "clux0rgak00011...",
             ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
+            ],
         })
 
         assert res is not None
@@ -408,6 +454,16 @@ with Dub(
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
+        ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
         ],
     })
 
@@ -526,6 +582,16 @@ with Dub(
         "tag_ids": [
             "clux0rgak00011...",
         ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
+        ],
     })
 
     assert res is not None
@@ -557,6 +623,16 @@ with Dub(
         "tag_ids": [
             "clux0rgak00011...",
         ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
+        ],
     },
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
@@ -583,6 +659,16 @@ with Dub(
         "external_id": "123456",
         "tag_ids": [
             "clux0rgak00011...",
+        ],
+        "test_variants": [
+            {
+                "url": "https://example.com/variant-1",
+                "percentage": 50,
+            },
+            {
+                "url": "https://example.com/variant-2",
+                "percentage": 50,
+            },
         ],
     })
 

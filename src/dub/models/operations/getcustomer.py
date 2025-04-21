@@ -70,7 +70,7 @@ class GetCustomerLink(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -117,7 +117,7 @@ class GetCustomerPartner(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -178,9 +178,9 @@ class GetCustomerDiscount(BaseModel):
         optional_fields = ["description", "partnersCount"]
         nullable_fields = [
             "maxDuration",
+            "description",
             "couponId",
             "couponTestId",
-            "description",
             "partnersCount",
         ]
         null_default_fields = []
@@ -189,7 +189,7 @@ class GetCustomerDiscount(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -228,6 +228,7 @@ class GetCustomerResponseBodyTypedDict(TypedDict):
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
     link: NotRequired[Nullable[GetCustomerLinkTypedDict]]
+    program_id: NotRequired[Nullable[str]]
     partner: NotRequired[Nullable[GetCustomerPartnerTypedDict]]
     discount: NotRequired[Nullable[GetCustomerDiscountTypedDict]]
 
@@ -258,21 +259,41 @@ class GetCustomerResponseBody(BaseModel):
 
     link: OptionalNullable[GetCustomerLink] = UNSET
 
+    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
+        UNSET
+    )
+
     partner: OptionalNullable[GetCustomerPartner] = UNSET
 
     discount: OptionalNullable[GetCustomerDiscount] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar", "country", "link", "partner", "discount"]
-        nullable_fields = ["email", "avatar", "country", "link", "partner", "discount"]
+        optional_fields = [
+            "email",
+            "avatar",
+            "country",
+            "link",
+            "programId",
+            "partner",
+            "discount",
+        ]
+        nullable_fields = [
+            "email",
+            "avatar",
+            "country",
+            "link",
+            "programId",
+            "partner",
+            "discount",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

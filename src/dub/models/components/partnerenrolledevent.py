@@ -9,8 +9,8 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PartnerCreatedEventEvent(str, Enum):
-    PARTNER_CREATED = "partner.created"
+class PartnerEnrolledEventEvent(str, Enum):
+    PARTNER_ENROLLED = "partner.enrolled"
 
 
 class Status(str, Enum):
@@ -72,7 +72,7 @@ class Links(BaseModel):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class PartnerCreatedEventDataTypedDict(TypedDict):
+class PartnerEnrolledEventDataTypedDict(TypedDict):
     id: str
     name: str
     email: Nullable[str]
@@ -93,7 +93,7 @@ class PartnerCreatedEventDataTypedDict(TypedDict):
     application_id: NotRequired[Nullable[str]]
 
 
-class PartnerCreatedEventData(BaseModel):
+class PartnerEnrolledEventData(BaseModel):
     id: str
 
     name: str
@@ -148,11 +148,11 @@ class PartnerCreatedEventData(BaseModel):
         nullable_fields = [
             "email",
             "image",
+            "description",
             "country",
             "payoutsEnabledAt",
             "tenantId",
             "links",
-            "description",
             "applicationId",
         ]
         null_default_fields = []
@@ -161,7 +161,7 @@ class PartnerCreatedEventData(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -182,22 +182,22 @@ class PartnerCreatedEventData(BaseModel):
         return m
 
 
-class PartnerCreatedEventTypedDict(TypedDict):
-    r"""Triggered when a partner is created."""
+class PartnerEnrolledEventTypedDict(TypedDict):
+    r"""Triggered when a partner is enrolled."""
 
     id: str
-    event: PartnerCreatedEventEvent
+    event: PartnerEnrolledEventEvent
     created_at: str
-    data: PartnerCreatedEventDataTypedDict
+    data: PartnerEnrolledEventDataTypedDict
 
 
-class PartnerCreatedEvent(BaseModel):
-    r"""Triggered when a partner is created."""
+class PartnerEnrolledEvent(BaseModel):
+    r"""Triggered when a partner is enrolled."""
 
     id: str
 
-    event: PartnerCreatedEventEvent
+    event: PartnerEnrolledEventEvent
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    data: PartnerCreatedEventData
+    data: PartnerEnrolledEventData

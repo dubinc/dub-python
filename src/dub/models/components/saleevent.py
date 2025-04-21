@@ -773,6 +773,17 @@ class SaleEventGeo(BaseModel):
     xk: Annotated[Optional[str], pydantic.Field(alias="XK")] = None
 
 
+class SaleEventTestVariantsTypedDict(TypedDict):
+    url: str
+    percentage: float
+
+
+class SaleEventTestVariants(BaseModel):
+    url: str
+
+    percentage: float
+
+
 class SaleEventLinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
@@ -794,11 +805,11 @@ class SaleEventLinkTypedDict(TypedDict):
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     title: Nullable[str]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     description: Nullable[str]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     image: Nullable[str]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     ios: Nullable[str]
@@ -831,6 +842,8 @@ class SaleEventLinkTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
+    test_started_at: Nullable[str]
+    test_completed_at: Nullable[str]
     user_id: Nullable[str]
     workspace_id: str
     r"""The workspace ID of the short link."""
@@ -845,6 +858,8 @@ class SaleEventLinkTypedDict(TypedDict):
     rewrite: NotRequired[bool]
     do_index: NotRequired[bool]
     public_stats: NotRequired[bool]
+    test_variants: NotRequired[Nullable[List[SaleEventTestVariantsTypedDict]]]
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
     clicks: NotRequired[float]
     r"""The number of clicks on the short link."""
     leads: NotRequired[float]
@@ -887,13 +902,13 @@ class SaleEventLink(BaseModel):
     r"""The password required to access the destination URL of the short link."""
 
     title: Nullable[str]
-    r"""The title of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     description: Nullable[str]
-    r"""The description of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     image: Nullable[str]
-    r"""The image of the short link generated via `api.dub.co/metatags`. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
 
     video: Nullable[str]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
@@ -949,6 +964,10 @@ class SaleEventLink(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
+    test_started_at: Annotated[Nullable[str], pydantic.Field(alias="testStartedAt")]
+
+    test_completed_at: Annotated[Nullable[str], pydantic.Field(alias="testCompletedAt")]
+
     user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
@@ -983,6 +1002,12 @@ class SaleEventLink(BaseModel):
 
     public_stats: Annotated[Optional[bool], pydantic.Field(alias="publicStats")] = None
 
+    test_variants: Annotated[
+        OptionalNullable[List[SaleEventTestVariants]],
+        pydantic.Field(alias="testVariants"),
+    ] = UNSET
+    r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
+
     clicks: Optional[float] = 0
     r"""The number of clicks on the short link."""
 
@@ -1004,6 +1029,7 @@ class SaleEventLink(BaseModel):
             "rewrite",
             "doIndex",
             "publicStats",
+            "testVariants",
             "clicks",
             "leads",
             "sales",
@@ -1032,6 +1058,9 @@ class SaleEventLink(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "testVariants",
+            "testStartedAt",
+            "testCompletedAt",
             "userId",
         ]
         null_default_fields = []
@@ -1040,7 +1069,7 @@ class SaleEventLink(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1157,7 +1186,7 @@ class SaleEventCustomer(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1190,7 +1219,7 @@ class PaymentProcessor(str, Enum):
 
 class SaleTypedDict(TypedDict):
     amount: int
-    r"""The amount of the sale. Should be passed in cents."""
+    r"""The amount of the sale in cents."""
     payment_processor: PaymentProcessor
     r"""The payment processor via which the sale was made."""
     invoice_id: NotRequired[Nullable[str]]
@@ -1199,7 +1228,7 @@ class SaleTypedDict(TypedDict):
 
 class Sale(BaseModel):
     amount: int
-    r"""The amount of the sale. Should be passed in cents."""
+    r"""The amount of the sale in cents."""
 
     payment_processor: Annotated[
         PaymentProcessor, pydantic.Field(alias="paymentProcessor")
@@ -1221,7 +1250,7 @@ class Sale(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1256,6 +1285,7 @@ class SaleEventTypedDict(TypedDict):
     r"""Deprecated. Use `sale.invoiceId` instead."""
     payment_processor: str
     r"""Deprecated. Use `sale.paymentProcessor` instead."""
+    metadata: str
     click_id: str
     r"""Deprecated. Use `click.id` instead."""
     link_id: str
@@ -1319,6 +1349,8 @@ class SaleEvent(BaseModel):
 
     payment_processor: str
     r"""Deprecated. Use `sale.paymentProcessor` instead."""
+
+    metadata: str
 
     click_id: Annotated[
         str,

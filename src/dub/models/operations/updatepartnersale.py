@@ -37,6 +37,12 @@ class UpdatePartnerSaleRequestBody(BaseModel):
     r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
 
 
+class Type(str, Enum):
+    CLICK = "click"
+    LEAD = "lead"
+    SALE = "sale"
+
+
 class UpdatePartnerSaleStatus(str, Enum):
     PENDING = "pending"
     PROCESSED = "processed"
@@ -57,6 +63,7 @@ class UpdatePartnerSaleResponseBodyTypedDict(TypedDict):
     status: UpdatePartnerSaleStatus
     created_at: str
     updated_at: str
+    type: NotRequired[Type]
     invoice_id: NotRequired[Nullable[str]]
 
 
@@ -77,13 +84,15 @@ class UpdatePartnerSaleResponseBody(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
+    type: Optional[Type] = None
+
     invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
         UNSET
     )
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["invoiceId"]
+        optional_fields = ["type", "invoiceId"]
         nullable_fields = ["invoiceId"]
         null_default_fields = []
 
@@ -91,7 +100,7 @@ class UpdatePartnerSaleResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

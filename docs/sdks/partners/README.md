@@ -30,11 +30,20 @@ with Dub(
         "program_id": "<id>",
         "name": "<value>",
         "email": "Loyal79@yahoo.com",
-        "username": "Aaliyah_Borer",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         },
     })
@@ -88,11 +97,20 @@ with Dub(
 
     res = d_client.partners.create_link(request={
         "program_id": "<id>",
-        "url": "https://necessary-brief.name",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         },
     })
@@ -197,11 +215,20 @@ with Dub(
 
     res = d_client.partners.upsert_link(request={
         "program_id": "<id>",
-        "url": "https://unsteady-lobster.com/",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [
                 "clux0rgak00011...",
+            ],
+            "test_variants": [
+                {
+                    "url": "https://example.com/variant-1",
+                    "percentage": 50,
+                },
+                {
+                    "url": "https://example.com/variant-2",
+                    "percentage": 50,
+                },
             ],
         },
     })

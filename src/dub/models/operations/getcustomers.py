@@ -80,7 +80,7 @@ class Link(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -127,7 +127,7 @@ class GetCustomersPartner(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -148,7 +148,7 @@ class GetCustomersPartner(BaseModel):
         return m
 
 
-class Type(str, Enum):
+class GetCustomersType(str, Enum):
     PERCENTAGE = "percentage"
     FLAT = "flat"
 
@@ -156,7 +156,7 @@ class Type(str, Enum):
 class DiscountTypedDict(TypedDict):
     id: str
     amount: float
-    type: Type
+    type: GetCustomersType
     max_duration: Nullable[float]
     coupon_id: Nullable[str]
     coupon_test_id: Nullable[str]
@@ -169,7 +169,7 @@ class Discount(BaseModel):
 
     amount: float
 
-    type: Type
+    type: GetCustomersType
 
     max_duration: Annotated[Nullable[float], pydantic.Field(alias="maxDuration")]
 
@@ -188,9 +188,9 @@ class Discount(BaseModel):
         optional_fields = ["description", "partnersCount"]
         nullable_fields = [
             "maxDuration",
+            "description",
             "couponId",
             "couponTestId",
-            "description",
             "partnersCount",
         ]
         null_default_fields = []
@@ -199,7 +199,7 @@ class Discount(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -236,6 +236,7 @@ class GetCustomersResponseBodyTypedDict(TypedDict):
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
     link: NotRequired[Nullable[LinkTypedDict]]
+    program_id: NotRequired[Nullable[str]]
     partner: NotRequired[Nullable[GetCustomersPartnerTypedDict]]
     discount: NotRequired[Nullable[DiscountTypedDict]]
 
@@ -264,21 +265,41 @@ class GetCustomersResponseBody(BaseModel):
 
     link: OptionalNullable[Link] = UNSET
 
+    program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
+        UNSET
+    )
+
     partner: OptionalNullable[GetCustomersPartner] = UNSET
 
     discount: OptionalNullable[Discount] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar", "country", "link", "partner", "discount"]
-        nullable_fields = ["email", "avatar", "country", "link", "partner", "discount"]
+        optional_fields = [
+            "email",
+            "avatar",
+            "country",
+            "link",
+            "programId",
+            "partner",
+            "discount",
+        ]
+        nullable_fields = [
+            "email",
+            "avatar",
+            "country",
+            "link",
+            "programId",
+            "partner",
+            "discount",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
