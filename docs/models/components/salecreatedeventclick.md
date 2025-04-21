@@ -17,5 +17,5 @@
 | `os`               | *str*              | :heavy_check_mark: | N/A                |
 | `referer`          | *str*              | :heavy_check_mark: | N/A                |
 | `referer_url`      | *str*              | :heavy_check_mark: | N/A                |
-| `qr`               | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
+| `qr`               | *bool*             | :heavy_check_mark: | N/A                |
 | `ip`               | *str*              | :heavy_check_mark: | N/A                |

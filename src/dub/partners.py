@@ -635,7 +635,7 @@ class Partners(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.RetrieveLinksResponseBody]]:
+    ) -> Optional[List[operations.Link]]:
         r"""Retrieve a partner's links.
 
         Retrieve a partner's links by their partner ID or tenant ID.
@@ -710,9 +710,7 @@ class Partners(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, Optional[List[operations.RetrieveLinksResponseBody]]
-            )
+            return utils.unmarshal_json(http_res.text, Optional[List[operations.Link]])
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=response_data)
@@ -778,7 +776,7 @@ class Partners(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.RetrieveLinksResponseBody]]:
+    ) -> Optional[List[operations.Link]]:
         r"""Retrieve a partner's links.
 
         Retrieve a partner's links by their partner ID or tenant ID.
@@ -853,9 +851,7 @@ class Partners(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, Optional[List[operations.RetrieveLinksResponseBody]]
-            )
+            return utils.unmarshal_json(http_res.text, Optional[List[operations.Link]])
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
             raise errors.BadRequest(data=response_data)

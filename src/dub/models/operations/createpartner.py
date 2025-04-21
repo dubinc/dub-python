@@ -649,7 +649,7 @@ class Status(str, Enum):
     BANNED = "banned"
 
 
-class LinksTypedDict(TypedDict):
+class CreatePartnerLinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
     domain: str
@@ -670,7 +670,7 @@ class LinksTypedDict(TypedDict):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class Links(BaseModel):
+class CreatePartnerLink(BaseModel):
     id: str
     r"""The unique ID of the short link."""
 
@@ -712,7 +712,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     status: Status
     program_id: str
     tenant_id: Nullable[str]
-    links: Nullable[List[LinksTypedDict]]
+    links: Nullable[List[CreatePartnerLinkTypedDict]]
     description: NotRequired[Nullable[str]]
     clicks: NotRequired[float]
     leads: NotRequired[float]
@@ -747,7 +747,7 @@ class CreatePartnerResponseBody(BaseModel):
 
     tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
 
-    links: Nullable[List[Links]]
+    links: Nullable[List[CreatePartnerLink]]
 
     description: OptionalNullable[str] = UNSET
 

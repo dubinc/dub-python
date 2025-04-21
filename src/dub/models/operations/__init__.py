@@ -61,6 +61,8 @@ from .createlink import (
 )
 from .createpartner import (
     Country,
+    CreatePartnerLink,
+    CreatePartnerLinkTypedDict,
     CreatePartnerRequestBody,
     CreatePartnerRequestBodyTypedDict,
     CreatePartnerResponseBody,
@@ -73,8 +75,6 @@ from .createpartner import (
     CreatePartnerTestVariantsTypedDict,
     LinkProps,
     LinkPropsTypedDict,
-    Links,
-    LinksTypedDict,
     Status,
 )
 from .createpartnerlink import (
@@ -153,6 +153,8 @@ from .getcustomer import (
 from .getcustomers import (
     Discount,
     DiscountTypedDict,
+    GetCustomersLink,
+    GetCustomersLinkTypedDict,
     GetCustomersPartner,
     GetCustomersPartnerTypedDict,
     GetCustomersRequest,
@@ -160,8 +162,6 @@ from .getcustomers import (
     GetCustomersResponseBody,
     GetCustomersResponseBodyTypedDict,
     GetCustomersType,
-    Link,
-    LinkTypedDict,
 )
 from .getlinkinfo import GetLinkInfoRequest, GetLinkInfoRequestTypedDict
 from .getlinks import (
@@ -235,10 +235,10 @@ from .retrieveanalytics import (
     Trigger,
 )
 from .retrievelinks import (
+    Link,
+    LinkTypedDict,
     RetrieveLinksRequest,
     RetrieveLinksRequestTypedDict,
-    RetrieveLinksResponseBody,
-    RetrieveLinksResponseBodyTypedDict,
 )
 from .retrievepartneranalytics import (
     RetrievePartnerAnalyticsQueryParamGroupBy,
@@ -396,6 +396,7 @@ __all__ = [
     "CreateFolderRequestBodyTypedDict",
     "CreateLinkRequestBody",
     "CreateLinkRequestBodyTypedDict",
+    "CreatePartnerLink",
     "CreatePartnerLinkLinkProps",
     "CreatePartnerLinkLinkPropsTypedDict",
     "CreatePartnerLinkRequestBody",
@@ -406,6 +407,7 @@ __all__ = [
     "CreatePartnerLinkTagNamesTypedDict",
     "CreatePartnerLinkTestVariants",
     "CreatePartnerLinkTestVariantsTypedDict",
+    "CreatePartnerLinkTypedDict",
     "CreatePartnerRequestBody",
     "CreatePartnerRequestBodyTypedDict",
     "CreatePartnerResponseBody",
@@ -470,6 +472,8 @@ __all__ = [
     "GetCustomerResponseBody",
     "GetCustomerResponseBodyTypedDict",
     "GetCustomerType",
+    "GetCustomersLink",
+    "GetCustomersLinkTypedDict",
     "GetCustomersPartner",
     "GetCustomersPartnerTypedDict",
     "GetCustomersRequest",
@@ -507,8 +511,6 @@ __all__ = [
     "LinkProps",
     "LinkPropsTypedDict",
     "LinkTypedDict",
-    "Links",
-    "LinksTypedDict",
     "ListDomainsRequest",
     "ListDomainsRequestTypedDict",
     "ListDomainsResponse",
@@ -549,8 +551,6 @@ __all__ = [
     "RetrieveAnalyticsResponseBodyTypedDict",
     "RetrieveLinksRequest",
     "RetrieveLinksRequestTypedDict",
-    "RetrieveLinksResponseBody",
-    "RetrieveLinksResponseBodyTypedDict",
     "RetrievePartnerAnalyticsQueryParamGroupBy",
     "RetrievePartnerAnalyticsQueryParamInterval",
     "RetrievePartnerAnalyticsRequest",

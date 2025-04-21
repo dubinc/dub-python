@@ -41,7 +41,7 @@ class GetCustomersRequest(BaseModel):
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
 
 
-class LinkTypedDict(TypedDict):
+class GetCustomersLinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
     domain: str
@@ -54,7 +54,7 @@ class LinkTypedDict(TypedDict):
     r"""The ID of the program the short link is associated with."""
 
 
-class Link(BaseModel):
+class GetCustomersLink(BaseModel):
     id: str
     r"""The unique ID of the short link."""
 
@@ -235,7 +235,7 @@ class GetCustomersResponseBodyTypedDict(TypedDict):
     r"""Avatar URL of the customer."""
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
-    link: NotRequired[Nullable[LinkTypedDict]]
+    link: NotRequired[Nullable[GetCustomersLinkTypedDict]]
     program_id: NotRequired[Nullable[str]]
     partner: NotRequired[Nullable[GetCustomersPartnerTypedDict]]
     discount: NotRequired[Nullable[DiscountTypedDict]]
@@ -263,7 +263,7 @@ class GetCustomersResponseBody(BaseModel):
     country: OptionalNullable[str] = UNSET
     r"""Country of the customer."""
 
-    link: OptionalNullable[Link] = UNSET
+    link: OptionalNullable[GetCustomersLink] = UNSET
 
     program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
         UNSET
