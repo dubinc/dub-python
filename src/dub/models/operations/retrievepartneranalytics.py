@@ -46,9 +46,9 @@ class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
     interval: NotRequired[RetrievePartnerAnalyticsQueryParamInterval]
     r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
     start: NotRequired[str]
-    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
+    r"""The start date and time when to retrieve analytics from. If set, takes precedence over `interval`."""
     end: NotRequired[str]
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. If set along with `start`, takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     group_by: NotRequired[RetrievePartnerAnalyticsQueryParamGroupBy]
@@ -87,13 +87,13 @@ class RetrievePartnerAnalyticsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
+    r"""The start date and time when to retrieve analytics from. If set, takes precedence over `interval`."""
 
     end: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. If set along with `start`, takes precedence over `interval`."""
 
     timezone: Annotated[
         Optional[str],

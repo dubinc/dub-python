@@ -32,7 +32,7 @@ class QueryParamEvent(str, Enum):
 
 
 class QueryParamInterval(str, Enum):
-    r"""The interval to retrieve events for. Takes precedence over start and end. If undefined, defaults to 24h."""
+    r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
 
     TWENTY_FOURH = "24h"
     SEVEND = "7d"
@@ -107,11 +107,11 @@ class ListEventsRequestTypedDict(TypedDict):
     customer_id: NotRequired[str]
     r"""The ID of the customer to retrieve analytics for."""
     interval: NotRequired[QueryParamInterval]
-    r"""The interval to retrieve events for. Takes precedence over start and end. If undefined, defaults to 24h."""
+    r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
     start: NotRequired[str]
-    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
+    r"""The start date and time when to retrieve analytics from. If set, takes precedence over `interval`."""
     end: NotRequired[str]
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. If set along with `start`, takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     country: NotRequired[components_countrycode.CountryCode]
@@ -230,20 +230,20 @@ class ListEventsRequest(BaseModel):
     interval: Annotated[
         Optional[QueryParamInterval],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = QueryParamInterval.TWENTY_FOURH
-    r"""The interval to retrieve events for. Takes precedence over start and end. If undefined, defaults to 24h."""
+    ] = None
+    r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
 
     start: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The start date and time when to retrieve analytics from. Takes precedence over `interval`."""
+    r"""The start date and time when to retrieve analytics from. If set, takes precedence over `interval`."""
 
     end: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. Takes precedence over `interval`."""
+    r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. If set along with `start`, takes precedence over `interval`."""
 
     timezone: Annotated[
         Optional[str],
