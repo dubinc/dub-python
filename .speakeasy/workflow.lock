@@ -1,21 +1,21 @@
-speakeasyVersion: 1.535.1
+speakeasyVersion: 1.537.0
 sources:
     dub:
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:a1c6cf18abc320b960eab8ea7ed9dc6f02748cf0313855baf584ad9385f47f85
-        sourceBlobDigest: sha256:10bb34509583c6c0a946404410c83379d8b0be942f108dfd85ca26b56a90d945
+        sourceRevisionDigest: sha256:c48b18823c61b496dbb10853b06d1cdc946ebfa4830a226db09deee52ebc7fab
+        sourceBlobDigest: sha256:378a17b3a0fbc91945f8512d0190cb96aadb8eff4cebc3d9d7e1f0d912ee03b3
         tags:
             - latest
-            - speakeasy-sdk-regen-1745205022
+            - speakeasy-sdk-regen-1745333842
             - 0.0.1
 targets:
     my-first-target:
         source: dub
         sourceNamespace: dub
-        sourceRevisionDigest: sha256:a1c6cf18abc320b960eab8ea7ed9dc6f02748cf0313855baf584ad9385f47f85
-        sourceBlobDigest: sha256:10bb34509583c6c0a946404410c83379d8b0be942f108dfd85ca26b56a90d945
+        sourceRevisionDigest: sha256:c48b18823c61b496dbb10853b06d1cdc946ebfa4830a226db09deee52ebc7fab
+        sourceBlobDigest: sha256:378a17b3a0fbc91945f8512d0190cb96aadb8eff4cebc3d9d7e1f0d912ee03b3
         codeSamplesNamespace: code-samples-python-my-first-target
-        codeSamplesRevisionDigest: sha256:da778fbd507d0e7deef4a0725aa96d257341fe5d78b2eed9b8c02bdcf324a45e
+        codeSamplesRevisionDigest: sha256:de67290df359cd41cac33dac669a067c07090714da1acc4df9e66130393b2b5e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
