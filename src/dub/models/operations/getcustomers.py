@@ -12,11 +12,17 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class GetCustomersRequestTypedDict(TypedDict):
     email: NotRequired[str]
-    r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string."""
+    r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string. Takes precedence over `externalId`."""
     external_id: NotRequired[str]
-    r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string."""
+    r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string. Takes precedence over `search`."""
+    search: NotRequired[str]
+    r"""A search query to filter customers by email, externalId, or name. If `email` or `externalId` is provided, this will be ignored."""
     include_expanded_fields: NotRequired[bool]
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
+    page: NotRequired[float]
+    r"""The page number for pagination."""
+    page_size: NotRequired[float]
+    r"""The number of items per page."""
 
 
 class GetCustomersRequest(BaseModel):
@@ -24,14 +30,20 @@ class GetCustomersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string."""
+    r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string. Takes precedence over `externalId`."""
 
     external_id: Annotated[
         Optional[str],
         pydantic.Field(alias="externalId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string."""
+    r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string. Takes precedence over `search`."""
+
+    search: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A search query to filter customers by email, externalId, or name. If `email` or `externalId` is provided, this will be ignored."""
 
     include_expanded_fields: Annotated[
         Optional[bool],
@@ -39,6 +51,19 @@ class GetCustomersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
+
+    page: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""The page number for pagination."""
+
+    page_size: Annotated[
+        Optional[float],
+        pydantic.Field(alias="pageSize"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 100
+    r"""The number of items per page."""
 
 
 class GetCustomersLinkTypedDict(TypedDict):
