@@ -263,16 +263,13 @@ class AnalyticsCitiesCountry(str, Enum):
     XK = "XK"
 
 
-class AnalyticsCitiesRegion(str, Enum):
-    WILDCARD_ = "*"
-
-
 class AnalyticsCitiesTypedDict(TypedDict):
     country: AnalyticsCitiesCountry
     r"""The 2-letter country code of the city: https://d.to/geo"""
+    region: str
+    r"""The 2-letter ISO 3166-2 region code representing the region associated with the location of the user."""
     city: str
     r"""The name of the city"""
-    region: NotRequired[AnalyticsCitiesRegion]
     clicks: NotRequired[float]
     r"""The number of clicks from this city"""
     leads: NotRequired[float]
@@ -287,10 +284,11 @@ class AnalyticsCities(BaseModel):
     country: AnalyticsCitiesCountry
     r"""The 2-letter country code of the city: https://d.to/geo"""
 
+    region: str
+    r"""The 2-letter ISO 3166-2 region code representing the region associated with the location of the user."""
+
     city: str
     r"""The name of the city"""
-
-    region: Optional[AnalyticsCitiesRegion] = AnalyticsCitiesRegion.WILDCARD_
 
     clicks: Optional[float] = 0
     r"""The number of clicks from this city"""

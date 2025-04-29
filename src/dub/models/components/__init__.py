@@ -4,7 +4,6 @@ from .analyticsbrowsers import AnalyticsBrowsers, AnalyticsBrowsersTypedDict
 from .analyticscities import (
     AnalyticsCities,
     AnalyticsCitiesCountry,
-    AnalyticsCitiesRegion,
     AnalyticsCitiesTypedDict,
 )
 from .analyticscontinents import (
@@ -205,7 +204,6 @@ __all__ = [
     "AnalyticsBrowsersTypedDict",
     "AnalyticsCities",
     "AnalyticsCitiesCountry",
-    "AnalyticsCitiesRegion",
     "AnalyticsCitiesTypedDict",
     "AnalyticsContinents",
     "AnalyticsContinentsTypedDict",
