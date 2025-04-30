@@ -14,7 +14,7 @@ Learn more about the Dub.co Python SDK in the [official documentation](https://d
 <!-- Start Summary [summary] -->
 ## Summary
 
-Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs.
+Dub API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->

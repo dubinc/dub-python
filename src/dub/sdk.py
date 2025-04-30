@@ -27,7 +27,7 @@ import weakref
 
 
 class Dub(BaseSDK):
-    r"""Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
+    r"""Dub API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
 
     links: Links
     analytics: Analytics
