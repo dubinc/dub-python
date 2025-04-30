@@ -22,7 +22,7 @@ class GetQRCodeRequestTypedDict(TypedDict):
     url: str
     r"""The URL to generate a QR code for."""
     logo: NotRequired[str]
-    r"""The logo to include in the QR code. Can only be used with a paid plan on Dub.co."""
+    r"""The logo to include in the QR code. Can only be used with a paid plan on Dub."""
     size: NotRequired[float]
     r"""The size of the QR code in pixels. Defaults to `600` if not provided."""
     level: NotRequired[Level]
@@ -32,7 +32,7 @@ class GetQRCodeRequestTypedDict(TypedDict):
     bg_color: NotRequired[str]
     r"""The background color of the QR code in hex format. Defaults to `#ffffff` if not provided."""
     hide_logo: NotRequired[bool]
-    r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub.co."""
+    r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub."""
     margin: NotRequired[float]
     r"""The size of the margin around the QR code. Defaults to 2 if not provided."""
     include_margin: NotRequired[bool]
@@ -49,7 +49,7 @@ class GetQRCodeRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The logo to include in the QR code. Can only be used with a paid plan on Dub.co."""
+    r"""The logo to include in the QR code. Can only be used with a paid plan on Dub."""
 
     size: Annotated[
         Optional[float],
@@ -82,7 +82,7 @@ class GetQRCodeRequest(BaseModel):
         pydantic.Field(alias="hideLogo"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = True
-    r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub.co."""
+    r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub."""
 
     margin: Annotated[
         Optional[float],
