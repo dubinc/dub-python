@@ -1272,7 +1272,6 @@ class SaleEventTypedDict(TypedDict):
     r"""Deprecated. Use `sale.invoiceId` instead."""
     payment_processor: str
     r"""Deprecated. Use `sale.paymentProcessor` instead."""
-    metadata: str
     click_id: str
     r"""Deprecated. Use `click.id` instead."""
     link_id: str
@@ -1337,8 +1336,6 @@ class SaleEvent(BaseModel):
 
     payment_processor: str
     r"""Deprecated. Use `sale.paymentProcessor` instead."""
-
-    metadata: str
 
     click_id: Annotated[
         str,

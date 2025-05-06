@@ -24,9 +24,9 @@ class Links(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[components.LinkSchema]:
-        r"""Create a new link
+        r"""Create a link
 
-        Create a new link for the authenticated workspace.
+        Create a link for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -173,9 +173,9 @@ class Links(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[components.LinkSchema]:
-        r"""Create a new link
+        r"""Create a link
 
-        Create a new link for the authenticated workspace.
+        Create a link for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method

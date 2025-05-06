@@ -87,7 +87,6 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     description: NotRequired[Nullable[str]]
     r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     image: NotRequired[Nullable[str]]
-    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     video: NotRequired[Nullable[str]]
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
     rewrite: NotRequired[bool]
@@ -222,7 +221,6 @@ class UpdateLinkRequestBody(BaseModel):
     r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
 
     image: OptionalNullable[str] = UNSET
-    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
 
     video: OptionalNullable[str] = UNSET
     r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
