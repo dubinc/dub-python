@@ -277,7 +277,7 @@ asyncio.run(main())
 
 ### [embed_tokens](docs/sdks/embedtokens/README.md)
 
-* [referrals](docs/sdks/embedtokens/README.md#referrals) - Create a new referrals embed token
+* [referrals](docs/sdks/embedtokens/README.md#referrals) - Create a referrals embed token
 
 ### [events](docs/sdks/events/README.md)
 
@@ -285,14 +285,14 @@ asyncio.run(main())
 
 ### [folders](docs/sdks/folders/README.md)
 
-* [create](docs/sdks/folders/README.md#create) - Create a new folder
+* [create](docs/sdks/folders/README.md#create) - Create a folder
 * [list](docs/sdks/folders/README.md#list) - Retrieve a list of folders
 * [update](docs/sdks/folders/README.md#update) - Update a folder
 * [delete](docs/sdks/folders/README.md#delete) - Delete a folder
 
 ### [links](docs/sdks/links/README.md)
 
-* [create](docs/sdks/links/README.md#create) - Create a new link
+* [create](docs/sdks/links/README.md#create) - Create a link
 * [list](docs/sdks/links/README.md#list) - Retrieve a list of links
 * [count](docs/sdks/links/README.md#count) - Retrieve links count
 * [get](docs/sdks/links/README.md#get) - Retrieve a link
@@ -305,7 +305,7 @@ asyncio.run(main())
 
 ### [partners](docs/sdks/partners/README.md)
 
-* [create](docs/sdks/partners/README.md#create) - Create a new partner
+* [create](docs/sdks/partners/README.md#create) - Create a partner
 * [create_link](docs/sdks/partners/README.md#create_link) - Create a link for a partner
 * [retrieve_links](docs/sdks/partners/README.md#retrieve_links) - Retrieve a partner's links.
 * [upsert_link](docs/sdks/partners/README.md#upsert_link) - Upsert a link for a partner
@@ -318,7 +318,7 @@ asyncio.run(main())
 
 ### [tags](docs/sdks/tags/README.md)
 
-* [create](docs/sdks/tags/README.md#create) - Create a new tag
+* [create](docs/sdks/tags/README.md#create) - Create a tag
 * [list](docs/sdks/tags/README.md#list) - Retrieve a list of tags
 * [update](docs/sdks/tags/README.md#update) - Update a tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete a tag

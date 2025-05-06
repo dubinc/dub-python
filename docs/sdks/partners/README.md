@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new partner
+* [create](#create) - Create a partner
 * [create_link](#create_link) - Create a link for a partner
 * [retrieve_links](#retrieve_links) - Retrieve a partner's links.
 * [upsert_link](#upsert_link) - Upsert a link for a partner
@@ -14,7 +14,7 @@
 
 ## create
 
-Create a new partner for a program. If partner exists, automatically enrolls them.
+Create a partner for a program. If partner exists, automatically enrolls them.
 
 ### Example Usage
 
@@ -83,7 +83,7 @@ with Dub(
 
 ## create_link
 
-Create a new link for a partner that is enrolled in your program.
+Create a link for a partner that is enrolled in your program.
 
 ### Example Usage
 

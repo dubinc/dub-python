@@ -78,6 +78,8 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     email: Nullable[str]
     image: Nullable[str]
     country: Nullable[str]
+    paypal_email: Nullable[str]
+    stripe_connect_id: Nullable[str]
     payouts_enabled_at: Nullable[str]
     created_at: str
     status: Status
@@ -103,6 +105,10 @@ class PartnerEnrolledEventData(BaseModel):
     image: Nullable[str]
 
     country: Nullable[str]
+
+    paypal_email: Annotated[Nullable[str], pydantic.Field(alias="paypalEmail")]
+
+    stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
 
     payouts_enabled_at: Annotated[
         Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
@@ -150,6 +156,8 @@ class PartnerEnrolledEventData(BaseModel):
             "image",
             "description",
             "country",
+            "paypalEmail",
+            "stripeConnectId",
             "payoutsEnabledAt",
             "tenantId",
             "links",

@@ -23,9 +23,9 @@ class Folders(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[components.FolderSchema]:
-        r"""Create a new folder
+        r"""Create a folder
 
-        Create a new folder for the authenticated workspace.
+        Create a folder for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -178,9 +178,9 @@ class Folders(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[components.FolderSchema]:
-        r"""Create a new folder
+        r"""Create a folder
 
-        Create a new folder for the authenticated workspace.
+        Create a folder for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method

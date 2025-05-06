@@ -23,9 +23,9 @@ class EmbedTokens(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.CreateReferralsEmbedTokenResponseBody]:
-        r"""Create a new referrals embed token
+        r"""Create a referrals embed token
 
-        Create a new referrals embed token for the given partner/tenant.
+        Create a referrals embed token for the given partner/tenant.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -181,9 +181,9 @@ class EmbedTokens(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.CreateReferralsEmbedTokenResponseBody]:
-        r"""Create a new referrals embed token
+        r"""Create a referrals embed token
 
-        Create a new referrals embed token for the given partner/tenant.
+        Create a referrals embed token for the given partner/tenant.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method

@@ -23,9 +23,9 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[components.TagSchema]:
-        r"""Create a new tag
+        r"""Create a tag
 
-        Create a new tag for the authenticated workspace.
+        Create a tag for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -172,9 +172,9 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[components.TagSchema]:
-        r"""Create a new tag
+        r"""Create a tag
 
-        Create a new tag for the authenticated workspace.
+        Create a tag for the authenticated workspace.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method

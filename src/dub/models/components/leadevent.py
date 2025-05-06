@@ -1198,7 +1198,6 @@ class LeadEventTypedDict(TypedDict):
     timestamp: str
     event_id: str
     event_name: str
-    metadata: str
     click: LeadEventClickTypedDict
     link: LeadEventLinkTypedDict
     customer: CustomerTypedDict
@@ -1238,8 +1237,6 @@ class LeadEvent(BaseModel):
     event_id: Annotated[str, pydantic.Field(alias="eventId")]
 
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
-
-    metadata: str
 
     click: LeadEventClick
 

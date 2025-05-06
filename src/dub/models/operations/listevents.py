@@ -9,10 +9,10 @@ from dub.models.components import (
     saleevent as components_saleevent,
 )
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from dub.utils import FieldMetadata, QueryParamMetadata
+from dub.utils import FieldMetadata, QueryParamMetadata, get_discriminator
 from enum import Enum
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import List, Optional, Union
 from typing_extensions import (
     Annotated,
@@ -491,20 +491,18 @@ class ListEventsRequest(BaseModel):
 ListEventsResponseBodyTypedDict = TypeAliasType(
     "ListEventsResponseBodyTypedDict",
     Union[
-        List[components_clickevent.ClickEventTypedDict],
-        List[components_leadevent.LeadEventTypedDict],
-        List[components_saleevent.SaleEventTypedDict],
+        components_clickevent.ClickEventTypedDict,
+        components_leadevent.LeadEventTypedDict,
+        components_saleevent.SaleEventTypedDict,
     ],
 )
-r"""A list of events"""
 
 
-ListEventsResponseBody = TypeAliasType(
-    "ListEventsResponseBody",
+ListEventsResponseBody = Annotated[
     Union[
-        List[components_clickevent.ClickEvent],
-        List[components_leadevent.LeadEvent],
-        List[components_saleevent.SaleEvent],
+        Annotated[components_clickevent.ClickEvent, Tag("click")],
+        Annotated[components_leadevent.LeadEvent, Tag("lead")],
+        Annotated[components_saleevent.SaleEvent, Tag("sale")],
     ],
-)
-r"""A list of events"""
+    Discriminator(lambda m: get_discriminator(m, "event", "event")),
+]

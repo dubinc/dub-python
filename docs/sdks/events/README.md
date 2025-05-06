@@ -48,7 +48,7 @@ with Dub(
 
 ### Response
 
-**[operations.ListEventsResponseBody](../../models/operations/listeventsresponsebody.md)**
+**[List[operations.ListEventsResponseBody]](../../models/.md)**
 
 ### Errors
 

@@ -1,25 +1,23 @@
 # ListEventsResponseBody
 
-A list of events
-
 
 ## Supported Types
 
-### `List[components.ClickEvent]`
+### `components.ClickEvent`
 
 ```python
-value: List[components.ClickEvent] = /* values here */
+value: components.ClickEvent = /* values here */
 ```
 
-### `List[components.LeadEvent]`
+### `components.LeadEvent`
 
 ```python
-value: List[components.LeadEvent] = /* values here */
+value: components.LeadEvent = /* values here */
 ```
 
-### `List[components.SaleEvent]`
+### `components.SaleEvent`
 
 ```python
-value: List[components.SaleEvent] = /* values here */
+value: components.SaleEvent = /* values here */
 ```
 

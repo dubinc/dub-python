@@ -5,7 +5,7 @@ from dub import utils
 from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, List, Mapping, Optional, Union, cast
 
 
 class Events(BaseSDK):
@@ -19,7 +19,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.ListEventsResponseBody]:
+    ) -> Optional[List[operations.ListEventsResponseBody]]:
         r"""Retrieve a list of events
 
         Retrieve a paginated list of events for the authenticated workspace.
@@ -95,7 +95,7 @@ class Events(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.ListEventsResponseBody]
+                http_res.text, Optional[List[operations.ListEventsResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -162,7 +162,7 @@ class Events(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.ListEventsResponseBody]:
+    ) -> Optional[List[operations.ListEventsResponseBody]]:
         r"""Retrieve a list of events
 
         Retrieve a paginated list of events for the authenticated workspace.
@@ -238,7 +238,7 @@ class Events(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[operations.ListEventsResponseBody]
+                http_res.text, Optional[List[operations.ListEventsResponseBody]]
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
