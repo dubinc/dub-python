@@ -1138,6 +1138,10 @@ class CustomerTypedDict(TypedDict):
     r"""Avatar URL of the customer."""
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
+    sales: NotRequired[Nullable[float]]
+    r"""Total number of sales for the customer."""
+    sale_amount: NotRequired[Nullable[float]]
+    r"""Total amount of sales for the customer."""
 
 
 class Customer(BaseModel):
@@ -1162,10 +1166,18 @@ class Customer(BaseModel):
     country: OptionalNullable[str] = UNSET
     r"""Country of the customer."""
 
+    sales: OptionalNullable[float] = UNSET
+    r"""Total number of sales for the customer."""
+
+    sale_amount: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="saleAmount")
+    ] = UNSET
+    r"""Total amount of sales for the customer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "avatar", "country"]
-        nullable_fields = ["email", "avatar", "country"]
+        optional_fields = ["email", "avatar", "country", "sales", "saleAmount"]
+        nullable_fields = ["email", "avatar", "country", "sales", "saleAmount"]
         null_default_fields = []
 
         serialized = handler(self)

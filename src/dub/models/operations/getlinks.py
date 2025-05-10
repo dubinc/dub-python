@@ -114,14 +114,14 @@ class GetLinksRequest(BaseModel):
     tag_ids: Annotated[
         Optional[QueryParamTagIds],
         pydantic.Field(alias="tagIds"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""The tag IDs to filter the links by."""
 
     tag_names: Annotated[
         Optional[QueryParamTagNames],
         pydantic.Field(alias="tagNames"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
 

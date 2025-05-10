@@ -10,6 +10,20 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class GetCustomersQueryParamSortBy(str, Enum):
+    r"""The field to sort the customers by. The default is `createdAt`."""
+
+    CREATED_AT = "createdAt"
+    SALE_AMOUNT = "saleAmount"
+
+
+class GetCustomersQueryParamSortOrder(str, Enum):
+    r"""The sort order. The default is `desc`."""
+
+    ASC = "asc"
+    DESC = "desc"
+
+
 class GetCustomersRequestTypedDict(TypedDict):
     email: NotRequired[str]
     r"""A case-sensitive filter on the list based on the customer's `email` field. The value must be a string. Takes precedence over `externalId`."""
@@ -17,8 +31,16 @@ class GetCustomersRequestTypedDict(TypedDict):
     r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string. Takes precedence over `search`."""
     search: NotRequired[str]
     r"""A search query to filter customers by email, externalId, or name. If `email` or `externalId` is provided, this will be ignored."""
+    country: NotRequired[str]
+    r"""A filter on the list based on the customer's `country` field."""
+    link_id: NotRequired[str]
+    r"""A filter on the list based on the customer's `linkId` field (the referral link ID)."""
     include_expanded_fields: NotRequired[bool]
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
+    sort_by: NotRequired[GetCustomersQueryParamSortBy]
+    r"""The field to sort the customers by. The default is `createdAt`."""
+    sort_order: NotRequired[GetCustomersQueryParamSortOrder]
+    r"""The sort order. The default is `desc`."""
     page: NotRequired[float]
     r"""The page number for pagination."""
     page_size: NotRequired[float]
@@ -45,12 +67,39 @@ class GetCustomersRequest(BaseModel):
     ] = None
     r"""A search query to filter customers by email, externalId, or name. If `email` or `externalId` is provided, this will be ignored."""
 
+    country: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A filter on the list based on the customer's `country` field."""
+
+    link_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="linkId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A filter on the list based on the customer's `linkId` field (the referral link ID)."""
+
     include_expanded_fields: Annotated[
         Optional[bool],
         pydantic.Field(alias="includeExpandedFields"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
+
+    sort_by: Annotated[
+        Optional[GetCustomersQueryParamSortBy],
+        pydantic.Field(alias="sortBy"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = GetCustomersQueryParamSortBy.CREATED_AT
+    r"""The field to sort the customers by. The default is `createdAt`."""
+
+    sort_order: Annotated[
+        Optional[GetCustomersQueryParamSortOrder],
+        pydantic.Field(alias="sortOrder"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = GetCustomersQueryParamSortOrder.DESC
+    r"""The sort order. The default is `desc`."""
 
     page: Annotated[
         Optional[float],
@@ -75,6 +124,8 @@ class GetCustomersLinkTypedDict(TypedDict):
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     short_link: str
     r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+    url: str
+    r"""The destination URL of the short link."""
     program_id: Nullable[str]
     r"""The ID of the program the short link is associated with."""
 
@@ -91,6 +142,9 @@ class GetCustomersLink(BaseModel):
 
     short_link: Annotated[str, pydantic.Field(alias="shortLink")]
     r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+
+    url: str
+    r"""The destination URL of the short link."""
 
     program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
     r"""The ID of the program the short link is associated with."""
@@ -260,6 +314,10 @@ class GetCustomersResponseBodyTypedDict(TypedDict):
     r"""Avatar URL of the customer."""
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
+    sales: NotRequired[Nullable[float]]
+    r"""Total number of sales for the customer."""
+    sale_amount: NotRequired[Nullable[float]]
+    r"""Total amount of sales for the customer."""
     link: NotRequired[Nullable[GetCustomersLinkTypedDict]]
     program_id: NotRequired[Nullable[str]]
     partner: NotRequired[Nullable[GetCustomersPartnerTypedDict]]
@@ -288,6 +346,14 @@ class GetCustomersResponseBody(BaseModel):
     country: OptionalNullable[str] = UNSET
     r"""Country of the customer."""
 
+    sales: OptionalNullable[float] = UNSET
+    r"""Total number of sales for the customer."""
+
+    sale_amount: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="saleAmount")
+    ] = UNSET
+    r"""Total amount of sales for the customer."""
+
     link: OptionalNullable[GetCustomersLink] = UNSET
 
     program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
@@ -304,6 +370,8 @@ class GetCustomersResponseBody(BaseModel):
             "email",
             "avatar",
             "country",
+            "sales",
+            "saleAmount",
             "link",
             "programId",
             "partner",
@@ -313,6 +381,8 @@ class GetCustomersResponseBody(BaseModel):
             "email",
             "avatar",
             "country",
+            "sales",
+            "saleAmount",
             "link",
             "programId",
             "partner",

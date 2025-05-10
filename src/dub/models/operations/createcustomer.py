@@ -72,6 +72,8 @@ class CreateCustomerLinkTypedDict(TypedDict):
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     short_link: str
     r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+    url: str
+    r"""The destination URL of the short link."""
     program_id: Nullable[str]
     r"""The ID of the program the short link is associated with."""
 
@@ -88,6 +90,9 @@ class CreateCustomerLink(BaseModel):
 
     short_link: Annotated[str, pydantic.Field(alias="shortLink")]
     r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+
+    url: str
+    r"""The destination URL of the short link."""
 
     program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
     r"""The ID of the program the short link is associated with."""
@@ -259,6 +264,10 @@ class CreateCustomerResponseBodyTypedDict(TypedDict):
     r"""Avatar URL of the customer."""
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
+    sales: NotRequired[Nullable[float]]
+    r"""Total number of sales for the customer."""
+    sale_amount: NotRequired[Nullable[float]]
+    r"""Total amount of sales for the customer."""
     link: NotRequired[Nullable[CreateCustomerLinkTypedDict]]
     program_id: NotRequired[Nullable[str]]
     partner: NotRequired[Nullable[CreateCustomerPartnerTypedDict]]
@@ -289,6 +298,14 @@ class CreateCustomerResponseBody(BaseModel):
     country: OptionalNullable[str] = UNSET
     r"""Country of the customer."""
 
+    sales: OptionalNullable[float] = UNSET
+    r"""Total number of sales for the customer."""
+
+    sale_amount: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="saleAmount")
+    ] = UNSET
+    r"""Total amount of sales for the customer."""
+
     link: OptionalNullable[CreateCustomerLink] = UNSET
 
     program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
@@ -305,6 +322,8 @@ class CreateCustomerResponseBody(BaseModel):
             "email",
             "avatar",
             "country",
+            "sales",
+            "saleAmount",
             "link",
             "programId",
             "partner",
@@ -314,6 +333,8 @@ class CreateCustomerResponseBody(BaseModel):
             "email",
             "avatar",
             "country",
+            "sales",
+            "saleAmount",
             "link",
             "programId",
             "partner",
