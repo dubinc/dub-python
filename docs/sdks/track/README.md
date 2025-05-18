@@ -78,8 +78,8 @@ with Dub(
 
     res = d_client.track.sale(request={
         "external_id": "<id>",
-        "amount": 996500,
-        "payment_processor": operations.PaymentProcessor.CUSTOM,
+        "amount": 594903,
+        "payment_processor": operations.PaymentProcessor.POLAR,
     })
 
     assert res is not None

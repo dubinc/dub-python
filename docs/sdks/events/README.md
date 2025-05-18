@@ -15,7 +15,6 @@ Retrieve a paginated list of events for the authenticated workspace.
 
 ```python
 from dub import Dub
-from dub.models import operations
 
 
 with Dub(
@@ -23,7 +22,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.events.list(request={
-        "interval": operations.QueryParamInterval.TWENTY_FOURH,
         "city": "New York",
         "device": "Desktop",
         "browser": "Chrome",

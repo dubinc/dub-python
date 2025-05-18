@@ -29,7 +29,7 @@ with Dub(
     res = d_client.partners.create(request={
         "program_id": "<id>",
         "name": "<value>",
-        "email": "Loyal79@yahoo.com",
+        "email": "Summer50@yahoo.com",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [

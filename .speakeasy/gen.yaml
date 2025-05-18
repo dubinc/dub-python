@@ -16,7 +16,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
 python:
-  version: 0.23.1
+  version: 0.24.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -44,9 +44,11 @@ python:
   inputModelSuffix: input
   maxMethodParams: 0
   methodArguments: require-security-and-request
+  moduleName: ""
   outputModelSuffix: output
   packageName: dub
   projectUrls: {}
+  pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
   templateVersion: v2

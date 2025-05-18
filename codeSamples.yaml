@@ -611,7 +611,7 @@ actions:
                 res = d_client.partners.create(request={
                     "program_id": "<id>",
                     "name": "<value>",
-                    "email": "Loyal79@yahoo.com",
+                    "email": "Summer50@yahoo.com",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [
@@ -783,7 +783,7 @@ actions:
             ) as d_client:
 
                 res = d_client.qr_codes.get(request={
-                    "url": "https://normal-making.name",
+                    "url": "https://needy-newsstand.biz/",
                 })
 
                 assert res is not None
@@ -883,7 +883,7 @@ actions:
                     "program_id": "<id>",
                     "partner": {
                         "name": "<value>",
-                        "email": "Florencio98@hotmail.com",
+                        "email": "Letha_Wuckert2@yahoo.com",
                         "link_props": {
                             "external_id": "123456",
                             "tag_ids": [
@@ -946,8 +946,8 @@ actions:
 
                 res = d_client.track.sale(request={
                     "external_id": "<id>",
-                    "amount": 996500,
-                    "payment_processor": operations.PaymentProcessor.CUSTOM,
+                    "amount": 594903,
+                    "payment_processor": operations.PaymentProcessor.POLAR,
                 })
 
                 assert res is not None
