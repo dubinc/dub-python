@@ -25,7 +25,7 @@ with Dub(
         "program_id": "<id>",
         "partner": {
             "name": "<value>",
-            "email": "Florencio98@hotmail.com",
+            "email": "Letha_Wuckert2@yahoo.com",
             "link_props": {
                 "external_id": "123456",
                 "tag_ids": [

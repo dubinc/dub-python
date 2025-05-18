@@ -130,19 +130,27 @@ class CreateCustomerLink(BaseModel):
 
 class CreateCustomerPartnerTypedDict(TypedDict):
     id: str
+    r"""The partner's unique ID on Dub."""
     name: str
+    r"""The partner's full legal name."""
     email: Nullable[str]
+    r"""The partner's email address. Should be a unique value across Dub."""
     image: Nullable[str]
+    r"""The partner's avatar image."""
 
 
 class CreateCustomerPartner(BaseModel):
     id: str
+    r"""The partner's unique ID on Dub."""
 
     name: str
+    r"""The partner's full legal name."""
 
     email: Nullable[str]
+    r"""The partner's email address. Should be a unique value across Dub."""
 
     image: Nullable[str]
+    r"""The partner's avatar image."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

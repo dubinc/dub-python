@@ -22,7 +22,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.qr_codes.get(request={
-        "url": "https://normal-making.name",
+        "url": "https://needy-newsstand.biz/",
     })
 
     assert res is not None
