@@ -29,6 +29,46 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/commissions"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listCommissions
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.commissions.list(request={})
+
+                assert res is not None
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/commissions/{id}"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: updateCommission
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.commissions.update(request={
+                    "id": "cm_1JVR7XRCSR0EDBAF39FZ4PMYE",
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/customers"]["get"]
     update:
       x-codeSamples:
@@ -745,25 +785,6 @@ actions:
                         ],
                     },
                 })
-
-                assert res is not None
-
-                # Handle response
-                print(res)
-  - target: $["paths"]["/partners/sales"]["patch"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: updatePartnerSale
-          source: |-
-            from dub import Dub
-
-
-            with Dub(
-                token="DUB_API_KEY",
-            ) as d_client:
-
-                res = d_client.partners.update_sale()
 
                 assert res is not None
 

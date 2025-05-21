@@ -640,7 +640,7 @@ class CreatePartnerRequestBody(BaseModel):
         return m
 
 
-class Status(str, Enum):
+class CreatePartnerStatus(str, Enum):
     r"""The status of the partner's enrollment in the program."""
 
     PENDING = "pending"
@@ -734,7 +734,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The date when the partner enabled payouts."""
     created_at: str
     r"""The date when the partner was created on Dub."""
-    status: Status
+    status: CreatePartnerStatus
     r"""The status of the partner's enrollment in the program."""
     program_id: str
     r"""The program's unique ID on Dub."""
@@ -808,7 +808,7 @@ class CreatePartnerResponseBody(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date when the partner was created on Dub."""
 
-    status: Status
+    status: CreatePartnerStatus
     r"""The status of the partner's enrollment in the program."""
 
     program_id: Annotated[str, pydantic.Field(alias="programId")]
