@@ -7,42 +7,60 @@ from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 from dub import utils
 from dub._hooks import SDKHooks
-from dub.analytics import Analytics
-from dub.commissions import Commissions
-from dub.customers import Customers
-from dub.domains import Domains
-from dub.embed_tokens import EmbedTokens
-from dub.events import Events
-from dub.folders import Folders
-from dub.links import Links
 from dub.models import components
-from dub.partners import Partners
-from dub.qr_codes import QRCodes
-from dub.tags import Tags
-from dub.track import Track
 from dub.types import OptionalNullable, UNSET
-from dub.workspaces import Workspaces
 import httpx
-from typing import Any, Callable, Dict, Optional, Union, cast
+import importlib
+from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
+
+if TYPE_CHECKING:
+    from dub.analytics import Analytics
+    from dub.commissions import Commissions
+    from dub.customers import Customers
+    from dub.domains import Domains
+    from dub.embed_tokens import EmbedTokens
+    from dub.events import Events
+    from dub.folders import Folders
+    from dub.links import Links
+    from dub.partners import Partners
+    from dub.qr_codes import QRCodes
+    from dub.tags import Tags
+    from dub.track import Track
+    from dub.workspaces import Workspaces
 
 
 class Dub(BaseSDK):
     r"""Dub API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
 
-    links: Links
-    analytics: Analytics
-    events: Events
-    tags: Tags
-    folders: Folders
-    domains: Domains
-    track: Track
-    customers: Customers
-    partners: Partners
-    commissions: Commissions
-    workspaces: Workspaces
-    embed_tokens: EmbedTokens
-    qr_codes: QRCodes
+    links: "Links"
+    analytics: "Analytics"
+    events: "Events"
+    tags: "Tags"
+    folders: "Folders"
+    domains: "Domains"
+    track: "Track"
+    customers: "Customers"
+    partners: "Partners"
+    commissions: "Commissions"
+    workspaces: "Workspaces"
+    embed_tokens: "EmbedTokens"
+    qr_codes: "QRCodes"
+    _sub_sdk_map = {
+        "links": ("dub.links", "Links"),
+        "analytics": ("dub.analytics", "Analytics"),
+        "events": ("dub.events", "Events"),
+        "tags": ("dub.tags", "Tags"),
+        "folders": ("dub.folders", "Folders"),
+        "domains": ("dub.domains", "Domains"),
+        "track": ("dub.track", "Track"),
+        "customers": ("dub.customers", "Customers"),
+        "partners": ("dub.partners", "Partners"),
+        "commissions": ("dub.commissions", "Commissions"),
+        "workspaces": ("dub.workspaces", "Workspaces"),
+        "embed_tokens": ("dub.embed_tokens", "EmbedTokens"),
+        "qr_codes": ("dub.qr_codes", "QRCodes"),
+    }
 
     def __init__(
         self,
@@ -137,22 +155,32 @@ class Dub(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
-        self._init_sdks()
+    def __getattr__(self, name: str):
+        if name in self._sub_sdk_map:
+            module_path, class_name = self._sub_sdk_map[name]
+            try:
+                module = importlib.import_module(module_path)
+                klass = getattr(module, class_name)
+                instance = klass(self.sdk_configuration)
+                setattr(self, name, instance)
+                return instance
+            except ImportError as e:
+                raise AttributeError(
+                    f"Failed to import module {module_path} for attribute {name}: {e}"
+                ) from e
+            except AttributeError as e:
+                raise AttributeError(
+                    f"Failed to find class {class_name} in module {module_path} for attribute {name}: {e}"
+                ) from e
 
-    def _init_sdks(self):
-        self.links = Links(self.sdk_configuration)
-        self.analytics = Analytics(self.sdk_configuration)
-        self.events = Events(self.sdk_configuration)
-        self.tags = Tags(self.sdk_configuration)
-        self.folders = Folders(self.sdk_configuration)
-        self.domains = Domains(self.sdk_configuration)
-        self.track = Track(self.sdk_configuration)
-        self.customers = Customers(self.sdk_configuration)
-        self.partners = Partners(self.sdk_configuration)
-        self.commissions = Commissions(self.sdk_configuration)
-        self.workspaces = Workspaces(self.sdk_configuration)
-        self.embed_tokens = EmbedTokens(self.sdk_configuration)
-        self.qr_codes = QRCodes(self.sdk_configuration)
+        raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
+        )
+
+    def __dir__(self):
+        default_attrs = list(super().__dir__())
+        lazy_attrs = list(self._sub_sdk_map.keys())
+        return sorted(list(set(default_attrs + lazy_attrs)))
 
     def __enter__(self):
         return self
