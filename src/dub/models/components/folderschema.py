@@ -5,7 +5,6 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -33,8 +32,6 @@ class FolderSchemaTypedDict(TypedDict):
     r"""The date the folder was updated."""
     access_level: NotRequired[Nullable[AccessLevel]]
     r"""The access level of the folder within the workspace."""
-    link_count: NotRequired[float]
-    r"""The number of links in the folder."""
 
 
 class FolderSchema(BaseModel):
@@ -57,12 +54,9 @@ class FolderSchema(BaseModel):
     ] = None
     r"""The access level of the folder within the workspace."""
 
-    link_count: Annotated[Optional[float], pydantic.Field(alias="linkCount")] = 0
-    r"""The number of links in the folder."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["accessLevel", "linkCount"]
+        optional_fields = ["accessLevel"]
         nullable_fields = ["accessLevel"]
         null_default_fields = ["accessLevel"]
 
