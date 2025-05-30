@@ -82,6 +82,7 @@ class Folders(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createFolder",
                 oauth2_scopes=[],
@@ -237,6 +238,7 @@ class Folders(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createFolder",
                 oauth2_scopes=[],
@@ -380,6 +382,7 @@ class Folders(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listFolders",
                 oauth2_scopes=[],
@@ -523,6 +526,7 @@ class Folders(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listFolders",
                 oauth2_scopes=[],
@@ -681,6 +685,7 @@ class Folders(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateFolder",
                 oauth2_scopes=[],
@@ -839,6 +844,7 @@ class Folders(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateFolder",
                 oauth2_scopes=[],
@@ -980,6 +986,7 @@ class Folders(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="deleteFolder",
                 oauth2_scopes=[],
@@ -1121,6 +1128,7 @@ class Folders(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="deleteFolder",
                 oauth2_scopes=[],
