@@ -53,6 +53,7 @@ class QueryParamGroupBy(str, Enum):
     TRIGGERS = "triggers"
     REFERERS = "referers"
     REFERER_URLS = "referer_urls"
+    TOP_PARTNERS = "top_partners"
     TOP_LINKS = "top_links"
     TOP_URLS = "top_urls"
     UTM_SOURCES = "utm_sources"
