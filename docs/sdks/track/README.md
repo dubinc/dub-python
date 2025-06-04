@@ -80,6 +80,8 @@ with Dub(
         "external_id": "<id>",
         "amount": 594903,
         "payment_processor": operations.PaymentProcessor.POLAR,
+        "event_name": "Invoice paid",
+        "lead_event_name": "Cloned template 1481267",
     })
 
     assert res is not None

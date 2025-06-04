@@ -9,6 +9,8 @@
 * [list](#list) - Retrieve a list of domains
 * [update](#update) - Update a domain
 * [delete](#delete) - Delete a domain
+* [register](#register) - Register a domain
+* [check_status](#check_status) - Check the availability of one or more domains
 
 ## create
 
@@ -201,6 +203,108 @@ with Dub(
 ### Response
 
 **[operations.DeleteDomainResponseBody](../../models/operations/deletedomainresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## register
+
+Register a domain for the authenticated workspace. Only available for Enterprise Plans.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.domains.register(request={
+        "domain": "acme.link",
+    })
+
+    assert res is not None
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `request`                                                                                    | [operations.RegisterDomainRequestBody](../../models/operations/registerdomainrequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
+
+### Response
+
+**[operations.RegisterDomainResponseBody](../../models/operations/registerdomainresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## check_status
+
+Check if a domain name is available for purchase. You can check multiple domains at once.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.domains.check_status(request={
+        "domains": "<value>",
+    })
+
+    assert res is not None
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `request`                                                                                  | [operations.CheckDomainStatusRequest](../../models/operations/checkdomainstatusrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
+
+### Response
+
+**[List[operations.CheckDomainStatusResponseBody]](../../models/.md)**
 
 ### Errors
 

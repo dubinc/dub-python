@@ -280,6 +280,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.analytics(request={
+        "timezone": "America/New_York",
         "program_id": "<id>",
     })
 

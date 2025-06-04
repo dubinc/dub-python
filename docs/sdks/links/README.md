@@ -95,7 +95,9 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.links.list(request={})
+    res = d_client.links.list(request={
+        "page_size": 50,
+    })
 
     while res is not None:
         # Handle items

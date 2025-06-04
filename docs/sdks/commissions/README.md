@@ -22,7 +22,9 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.commissions.list(request={})
+    res = d_client.commissions.list(request={
+        "page_size": 50,
+    })
 
     assert res is not None
 

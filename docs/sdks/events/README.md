@@ -22,6 +22,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.events.list(request={
+        "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",
         "browser": "Chrome",
