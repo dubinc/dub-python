@@ -34,6 +34,14 @@ if TYPE_CHECKING:
         Data,
         DataTypedDict,
     )
+    from .checkdomainstatus import (
+        CheckDomainStatusRequest,
+        CheckDomainStatusRequestTypedDict,
+        CheckDomainStatusResponseBody,
+        CheckDomainStatusResponseBodyTypedDict,
+        Domains,
+        DomainsTypedDict,
+    )
     from .createcustomer import (
         CreateCustomerDiscount,
         CreateCustomerDiscountTypedDict,
@@ -241,6 +249,12 @@ if TYPE_CHECKING:
         QueryParamTrigger,
     )
     from .listfolders import ListFoldersRequest, ListFoldersRequestTypedDict
+    from .registerdomain import (
+        RegisterDomainRequestBody,
+        RegisterDomainRequestBodyTypedDict,
+        RegisterDomainResponseBody,
+        RegisterDomainResponseBodyTypedDict,
+    )
     from .retrieveanalytics import (
         Event,
         Interval,
@@ -396,6 +410,10 @@ __all__ = [
     "BulkUpdateLinksTagNamesTypedDict",
     "BulkUpdateLinksTestVariants",
     "BulkUpdateLinksTestVariantsTypedDict",
+    "CheckDomainStatusRequest",
+    "CheckDomainStatusRequestTypedDict",
+    "CheckDomainStatusResponseBody",
+    "CheckDomainStatusResponseBodyTypedDict",
     "Click",
     "ClickTypedDict",
     "Color",
@@ -481,6 +499,8 @@ __all__ = [
     "DeleteTagResponseBodyTypedDict",
     "Discount",
     "DiscountTypedDict",
+    "Domains",
+    "DomainsTypedDict",
     "Event",
     "Four",
     "GetCustomerDiscount",
@@ -573,6 +593,10 @@ __all__ = [
     "QueryParamTagNames",
     "QueryParamTagNamesTypedDict",
     "QueryParamTrigger",
+    "RegisterDomainRequestBody",
+    "RegisterDomainRequestBodyTypedDict",
+    "RegisterDomainResponseBody",
+    "RegisterDomainResponseBodyTypedDict",
     "RequestBody",
     "RequestBodyTypedDict",
     "ResponseBody",
@@ -711,6 +735,12 @@ _dynamic_imports: dict[str, str] = {
     "BulkUpdateLinksTestVariantsTypedDict": ".bulkupdatelinks",
     "Data": ".bulkupdatelinks",
     "DataTypedDict": ".bulkupdatelinks",
+    "CheckDomainStatusRequest": ".checkdomainstatus",
+    "CheckDomainStatusRequestTypedDict": ".checkdomainstatus",
+    "CheckDomainStatusResponseBody": ".checkdomainstatus",
+    "CheckDomainStatusResponseBodyTypedDict": ".checkdomainstatus",
+    "Domains": ".checkdomainstatus",
+    "DomainsTypedDict": ".checkdomainstatus",
     "CreateCustomerDiscount": ".createcustomer",
     "CreateCustomerDiscountTypedDict": ".createcustomer",
     "CreateCustomerLink": ".createcustomer",
@@ -888,6 +918,10 @@ _dynamic_imports: dict[str, str] = {
     "QueryParamTrigger": ".listevents",
     "ListFoldersRequest": ".listfolders",
     "ListFoldersRequestTypedDict": ".listfolders",
+    "RegisterDomainRequestBody": ".registerdomain",
+    "RegisterDomainRequestBodyTypedDict": ".registerdomain",
+    "RegisterDomainResponseBody": ".registerdomain",
+    "RegisterDomainResponseBodyTypedDict": ".registerdomain",
     "Event": ".retrieveanalytics",
     "Interval": ".retrieveanalytics",
     "QueryParamGroupBy": ".retrieveanalytics",

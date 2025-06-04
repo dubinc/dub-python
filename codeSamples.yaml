@@ -17,6 +17,7 @@ actions:
             ) as d_client:
 
                 res = d_client.analytics.retrieve(request={
+                    "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
                     "browser": "Chrome",
@@ -42,7 +43,9 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.commissions.list(request={})
+                res = d_client.commissions.list(request={
+                    "page_size": 50,
+                })
 
                 assert res is not None
 
@@ -82,7 +85,9 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.customers.list(request={})
+                res = d_client.customers.list(request={
+                    "page_size": 50,
+                })
 
                 assert res is not None
 
@@ -162,7 +167,9 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.domains.list(request={})
+                res = d_client.domains.list(request={
+                    "archived": True,
+                })
 
                 while res is not None:
                     # Handle items
@@ -186,6 +193,48 @@ actions:
                     "expired_url": "https://acme.com/expired",
                     "not_found_url": "https://acme.com/not-found",
                     "placeholder": "https://dub.co/help/article/what-is-dub",
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/domains/register"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: registerDomain
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.domains.register(request={
+                    "domain": "acme.link",
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/domains/status"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: checkDomainStatus
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.domains.check_status(request={
+                    "domains": "<value>",
                 })
 
                 assert res is not None
@@ -249,6 +298,7 @@ actions:
             ) as d_client:
 
                 res = d_client.events.list(request={
+                    "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
                     "browser": "Chrome",
@@ -350,7 +400,11 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.links.list(request={})
+                res = d_client.links.list(request={
+                    "show_archived": False,
+                    "with_tags": True,
+                    "page_size": 50,
+                })
 
                 while res is not None:
                     # Handle items
@@ -482,23 +536,6 @@ actions:
                             },
                         ],
                     },
-                    {
-                        "url": "https://google.com",
-                        "external_id": "123456",
-                        "tag_ids": [
-                            "clux0rgak00011...",
-                        ],
-                        "test_variants": [
-                            {
-                                "url": "https://example.com/variant-1",
-                                "percentage": 50,
-                            },
-                            {
-                                "url": "https://example.com/variant-2",
-                                "percentage": 50,
-                            },
-                        ],
-                    },
                 ])
 
                 assert res is not None
@@ -518,7 +555,10 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.links.count(request={})
+                res = d_client.links.count(request={
+                    "show_archived": False,
+                    "with_tags": False,
+                })
 
                 assert res is not None
 
@@ -688,6 +728,7 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.analytics(request={
+                    "timezone": "America/New_York",
                     "program_id": "<id>",
                 })
 
@@ -805,6 +846,8 @@ actions:
 
                 res = d_client.qr_codes.get(request={
                     "url": "https://needy-newsstand.biz/",
+                    "hide_logo": True,
+                    "include_margin": False,
                 })
 
                 assert res is not None
@@ -824,7 +867,9 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.tags.list(request={})
+                res = d_client.tags.list(request={
+                    "page_size": 50,
+                })
 
                 assert res is not None
 
@@ -969,6 +1014,8 @@ actions:
                     "external_id": "<id>",
                     "amount": 594903,
                     "payment_processor": operations.PaymentProcessor.POLAR,
+                    "event_name": "Invoice paid",
+                    "lead_event_name": "Cloned template 1481267",
                 })
 
                 assert res is not None

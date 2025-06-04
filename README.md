@@ -278,6 +278,8 @@ asyncio.run(main())
 * [list](docs/sdks/domains/README.md#list) - Retrieve a list of domains
 * [update](docs/sdks/domains/README.md#update) - Update a domain
 * [delete](docs/sdks/domains/README.md#delete) - Delete a domain
+* [register](docs/sdks/domains/README.md#register) - Register a domain
+* [check_status](docs/sdks/domains/README.md#check_status) - Check the availability of one or more domains
 
 
 ### [embed_tokens](docs/sdks/embedtokens/README.md)
@@ -700,7 +702,9 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.links.list(request={})
+    res = d_client.links.list(request={
+        "page_size": 50,
+    })
 
     while res is not None:
         # Handle items
