@@ -123,10 +123,10 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The links usage of the workspace."""
     links_limit: float
     r"""The links limit of the workspace."""
-    sales_usage: float
-    r"""The dollar amount of tracked revenue in the current billing cycle (in cents)."""
-    sales_limit: float
-    r"""The limit of tracked revenue in the current billing cycle (in cents)."""
+    payouts_usage: float
+    r"""The dollar amount of partner payouts processed in the current billing cycle (in cents)."""
+    payouts_limit: float
+    r"""The max dollar amount of partner payouts that can be processed within a billing cycle (in cents)."""
     domains_limit: float
     r"""The domains limit of the workspace."""
     tags_limit: float
@@ -206,11 +206,11 @@ class WorkspaceSchema(BaseModel):
     links_limit: Annotated[float, pydantic.Field(alias="linksLimit")]
     r"""The links limit of the workspace."""
 
-    sales_usage: Annotated[float, pydantic.Field(alias="salesUsage")]
-    r"""The dollar amount of tracked revenue in the current billing cycle (in cents)."""
+    payouts_usage: Annotated[float, pydantic.Field(alias="payoutsUsage")]
+    r"""The dollar amount of partner payouts processed in the current billing cycle (in cents)."""
 
-    sales_limit: Annotated[float, pydantic.Field(alias="salesLimit")]
-    r"""The limit of tracked revenue in the current billing cycle (in cents)."""
+    payouts_limit: Annotated[float, pydantic.Field(alias="payoutsLimit")]
+    r"""The max dollar amount of partner payouts that can be processed within a billing cycle (in cents)."""
 
     domains_limit: Annotated[float, pydantic.Field(alias="domainsLimit")]
     r"""The domains limit of the workspace."""
