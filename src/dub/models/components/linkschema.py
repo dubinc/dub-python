@@ -807,13 +807,13 @@ class LinkSchemaTypedDict(TypedDict):
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     title: Nullable[str]
-    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Link Previews if `proxy` is true."""
     description: Nullable[str]
-    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Link Previews if `proxy` is true."""
     image: Nullable[str]
-    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Link Previews if `proxy` is true."""
     video: Nullable[str]
-    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview video (og:video). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
     ios: Nullable[str]
     r"""The iOS destination URL for the short link for iOS device targeting."""
     android: Nullable[str]
@@ -861,7 +861,7 @@ class LinkSchemaTypedDict(TypedDict):
     archived: NotRequired[bool]
     r"""Whether the short link is archived."""
     proxy: NotRequired[bool]
-    r"""Whether the short link uses Custom Social Media Cards feature."""
+    r"""Whether the short link uses Custom Link Previews feature."""
     rewrite: NotRequired[bool]
     r"""Whether the short link uses link cloaking."""
     do_index: NotRequired[bool]
@@ -919,16 +919,16 @@ class LinkSchema(BaseModel):
     r"""The password required to access the destination URL of the short link."""
 
     title: Nullable[str]
-    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Link Previews if `proxy` is true."""
 
     description: Nullable[str]
-    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Link Previews if `proxy` is true."""
 
     image: Nullable[str]
-    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Link Previews if `proxy` is true."""
 
     video: Nullable[str]
-    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview video (og:video). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
 
     ios: Nullable[str]
     r"""The iOS destination URL for the short link for iOS device targeting."""
@@ -1014,7 +1014,7 @@ class LinkSchema(BaseModel):
     r"""Whether the short link is archived."""
 
     proxy: Optional[bool] = False
-    r"""Whether the short link uses Custom Social Media Cards feature."""
+    r"""Whether the short link uses Custom Link Previews feature."""
 
     rewrite: Optional[bool] = False
     r"""Whether the short link uses link cloaking."""

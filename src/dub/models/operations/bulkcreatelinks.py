@@ -86,15 +86,15 @@ class RequestBodyTypedDict(TypedDict):
     password: NotRequired[Nullable[str]]
     r"""The password required to access the destination URL of the short link."""
     proxy: NotRequired[bool]
-    r"""Whether the short link uses Custom Social Media Cards feature. Defaults to `false` if not provided."""
+    r"""Whether the short link uses Custom Link Previews feature. Defaults to `false` if not provided."""
     title: NotRequired[Nullable[str]]
-    r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview title (og:title). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
     description: NotRequired[Nullable[str]]
-    r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview description (og:description). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
     image: NotRequired[Nullable[str]]
-    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview image (og:image). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
     video: NotRequired[Nullable[str]]
-    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview video (og:video). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
     rewrite: NotRequired[bool]
     r"""Whether the short link uses link cloaking. Defaults to `false` if not provided."""
     ios: NotRequired[Nullable[str]]
@@ -218,19 +218,19 @@ class RequestBody(BaseModel):
     r"""The password required to access the destination URL of the short link."""
 
     proxy: Optional[bool] = None
-    r"""Whether the short link uses Custom Social Media Cards feature. Defaults to `false` if not provided."""
+    r"""Whether the short link uses Custom Link Previews feature. Defaults to `false` if not provided."""
 
     title: OptionalNullable[str] = UNSET
-    r"""The custom link preview title (og:title). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview title (og:title). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
 
     description: OptionalNullable[str] = UNSET
-    r"""The custom link preview description (og:description). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview description (og:description). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
 
     image: OptionalNullable[str] = UNSET
-    r"""The custom link preview image (og:image). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview image (og:image). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
 
     video: OptionalNullable[str] = UNSET
-    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview video (og:video). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
 
     rewrite: Optional[bool] = None
     r"""Whether the short link uses link cloaking. Defaults to `false` if not provided."""
