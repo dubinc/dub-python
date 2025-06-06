@@ -855,13 +855,13 @@ class LinkClickedEventLinkTypedDict(TypedDict):
     r"""The password required to access the destination URL of the short link."""
     proxy: bool
     title: Nullable[str]
-    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Link Previews if `proxy` is true."""
     description: Nullable[str]
-    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Link Previews if `proxy` is true."""
     image: Nullable[str]
-    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Link Previews if `proxy` is true."""
     video: Nullable[str]
-    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview video (og:video). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
     rewrite: bool
     do_index: bool
     ios: Nullable[str]
@@ -955,16 +955,16 @@ class LinkClickedEventLink(BaseModel):
     proxy: bool
 
     title: Nullable[str]
-    r"""The title of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The title of the short link. Will be used for Custom Link Previews if `proxy` is true."""
 
     description: Nullable[str]
-    r"""The description of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The description of the short link. Will be used for Custom Link Previews if `proxy` is true."""
 
     image: Nullable[str]
-    r"""The image of the short link. Will be used for Custom Social Media Cards if `proxy` is true."""
+    r"""The image of the short link. Will be used for Custom Link Previews if `proxy` is true."""
 
     video: Nullable[str]
-    r"""The custom link preview video (og:video). Will be used for Custom Social Media Cards if `proxy` is true. Learn more: https://d.to/og"""
+    r"""The custom link preview video (og:video). Will be used for Custom Link Previews if `proxy` is true. Learn more: https://d.to/og"""
 
     rewrite: bool
 
