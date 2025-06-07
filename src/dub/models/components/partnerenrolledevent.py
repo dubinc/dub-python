@@ -22,6 +22,7 @@ class Status(str, Enum):
     INVITED = "invited"
     DECLINED = "declined"
     BANNED = "banned"
+    ARCHIVED = "archived"
 
 
 class PartnerEnrolledEventLinkTypedDict(TypedDict):

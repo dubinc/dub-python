@@ -649,6 +649,7 @@ class CreatePartnerStatus(str, Enum):
     INVITED = "invited"
     DECLINED = "declined"
     BANNED = "banned"
+    ARCHIVED = "archived"
 
 
 class CreatePartnerLinkTypedDict(TypedDict):

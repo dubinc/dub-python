@@ -104,11 +104,11 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     domain: NotRequired[str]
     r"""The domain to filter analytics for."""
     key: NotRequired[str]
-    r"""The short link slug."""
+    r"""The slug of the short link to retrieve analytics for. Must be used along with the corresponding `domain` of the short link to fetch analytics for a specific short link."""
     link_id: NotRequired[str]
-    r"""The unique ID of the short link on Dub."""
+    r"""The unique ID of the short link on Dub to retrieve analytics for."""
     external_id: NotRequired[str]
-    r"""This is the ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
+    r"""The ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
     tenant_id: NotRequired[str]
     r"""The ID of the tenant that created the link inside your system."""
     program_id: NotRequired[str]
@@ -193,21 +193,21 @@ class RetrieveAnalyticsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The short link slug."""
+    r"""The slug of the short link to retrieve analytics for. Must be used along with the corresponding `domain` of the short link to fetch analytics for a specific short link."""
 
     link_id: Annotated[
         Optional[str],
         pydantic.Field(alias="linkId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The unique ID of the short link on Dub."""
+    r"""The unique ID of the short link on Dub to retrieve analytics for."""
 
     external_id: Annotated[
         Optional[str],
         pydantic.Field(alias="externalId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""This is the ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
+    r"""The ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
 
     tenant_id: Annotated[
         Optional[str],
