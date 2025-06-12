@@ -68,6 +68,7 @@ class UpdateCommissionType(str, Enum):
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
+    CUSTOM = "custom"
 
 
 class UpdateCommissionStatus(str, Enum):
