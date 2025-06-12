@@ -14,6 +14,7 @@ class Type(str, Enum):
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
+    CUSTOM = "custom"
 
 
 class QueryParamStatus(str, Enum):
@@ -174,6 +175,7 @@ class ListCommissionsType(str, Enum):
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
+    CUSTOM = "custom"
 
 
 class ListCommissionsStatus(str, Enum):
