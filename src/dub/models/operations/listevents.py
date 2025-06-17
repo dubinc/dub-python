@@ -71,7 +71,7 @@ class QueryParamSortOrder(str, Enum):
     DESC = "desc"
 
 
-class QueryParamSortBy(str, Enum):
+class ListEventsQueryParamSortBy(str, Enum):
     r"""The field to sort the events by. The default is `timestamp`."""
 
     TIMESTAMP = "timestamp"
@@ -160,7 +160,7 @@ class ListEventsRequestTypedDict(TypedDict):
     limit: NotRequired[float]
     sort_order: NotRequired[QueryParamSortOrder]
     r"""The sort order. The default is `desc`."""
-    sort_by: NotRequired[QueryParamSortBy]
+    sort_by: NotRequired[ListEventsQueryParamSortBy]
     r"""The field to sort the events by. The default is `timestamp`."""
     order: NotRequired[Order]
     r"""DEPRECATED. Use `sortOrder` instead."""
@@ -399,10 +399,10 @@ class ListEventsRequest(BaseModel):
     r"""The sort order. The default is `desc`."""
 
     sort_by: Annotated[
-        Optional[QueryParamSortBy],
+        Optional[ListEventsQueryParamSortBy],
         pydantic.Field(alias="sortBy"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = QueryParamSortBy.TIMESTAMP
+    ] = ListEventsQueryParamSortBy.TIMESTAMP
     r"""The field to sort the events by. The default is `timestamp`."""
 
     order: Annotated[
