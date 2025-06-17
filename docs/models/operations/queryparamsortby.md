@@ -1,10 +1,10 @@
 # QueryParamSortBy
 
+The field to sort the events by. The default is `timestamp`.
+
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `CLICKS` | clicks   |
-| `LEADS`  | leads    |
-| `SALES`  | sales    |
+| Name        | Value       |
+| ----------- | ----------- |
+| `TIMESTAMP` | timestamp   |
