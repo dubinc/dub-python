@@ -96,12 +96,6 @@ RetrieveAnalyticsQueryParamTagIds = TypeAliasType(
 r"""The tag IDs to retrieve analytics for."""
 
 
-class QueryParamSortBy(str, Enum):
-    CLICKS = "clicks"
-    LEADS = "leads"
-    SALES = "sales"
-
-
 class RetrieveAnalyticsRequestTypedDict(TypedDict):
     event: NotRequired[Event]
     r"""The type of event to retrieve analytics for. Defaults to `clicks`."""
@@ -163,7 +157,6 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
-    sort_by: NotRequired[QueryParamSortBy]
     utm_source: NotRequired[Nullable[str]]
     r"""The UTM source of the short link."""
     utm_medium: NotRequired[Nullable[str]]
@@ -368,12 +361,6 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
 
-    sort_by: Annotated[
-        Optional[QueryParamSortBy],
-        pydantic.Field(alias="sortBy"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-
     utm_source: Annotated[
         OptionalNullable[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -437,7 +424,6 @@ class RetrieveAnalyticsRequest(BaseModel):
             "folderId",
             "qr",
             "root",
-            "sortBy",
             "utm_source",
             "utm_medium",
             "utm_campaign",
