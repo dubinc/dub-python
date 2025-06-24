@@ -56,8 +56,6 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""The ID of the program the short link is associated with."""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner the short link is associated with."""
-    prefix: NotRequired[str]
-    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     track_conversion: NotRequired[bool]
     r"""Whether to track conversions for the short link. Defaults to `false` if not provided."""
     archived: NotRequired[bool]
@@ -150,9 +148,6 @@ class UpdateLinkRequestBody(BaseModel):
         UNSET
     )
     r"""The ID of the partner the short link is associated with."""
-
-    prefix: Optional[str] = None
-    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
 
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")
@@ -289,7 +284,6 @@ class UpdateLinkRequestBody(BaseModel):
             "tenantId",
             "programId",
             "partnerId",
-            "prefix",
             "trackConversion",
             "archived",
             "publicStats",
