@@ -689,7 +689,6 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.create(request={
-                    "program_id": "<id>",
                     "name": "<value>",
                     "email": "Summer50@yahoo.com",
                     "link_props": {
@@ -729,7 +728,6 @@ actions:
 
                 res = d_client.partners.analytics(request={
                     "timezone": "America/New_York",
-                    "program_id": "<id>",
                 })
 
                 assert res is not None
@@ -771,7 +769,6 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.create_link(request={
-                    "program_id": "<id>",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [
@@ -808,7 +805,6 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.upsert_link(request={
-                    "program_id": "<id>",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [
@@ -946,7 +942,6 @@ actions:
             ) as d_client:
 
                 res = d_client.embed_tokens.referrals(request={
-                    "program_id": "<id>",
                     "partner": {
                         "name": "<value>",
                         "email": "Letha_Wuckert2@yahoo.com",

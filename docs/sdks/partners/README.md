@@ -26,7 +26,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.create(request={
-        "program_id": "<id>",
         "name": "<value>",
         "email": "Summer50@yahoo.com",
         "link_props": {
@@ -95,7 +94,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.create_link(request={
-        "program_id": "<id>",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [
@@ -213,7 +211,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.upsert_link(request={
-        "program_id": "<id>",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [
@@ -281,7 +278,6 @@ with Dub(
 
     res = d_client.partners.analytics(request={
         "timezone": "America/New_York",
-        "program_id": "<id>",
     })
 
     assert res is not None

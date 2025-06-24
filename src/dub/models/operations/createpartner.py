@@ -560,8 +560,6 @@ class LinkProps(BaseModel):
 
 
 class CreatePartnerRequestBodyTypedDict(TypedDict):
-    program_id: str
-    r"""The ID of the program to create a partner for."""
     name: str
     r"""Full legal name of the partner."""
     email: str
@@ -581,9 +579,6 @@ class CreatePartnerRequestBodyTypedDict(TypedDict):
 
 
 class CreatePartnerRequestBody(BaseModel):
-    program_id: Annotated[str, pydantic.Field(alias="programId")]
-    r"""The ID of the program to create a partner for."""
-
     name: str
     r"""Full legal name of the partner."""
 

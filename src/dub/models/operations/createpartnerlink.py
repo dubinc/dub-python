@@ -308,8 +308,6 @@ class CreatePartnerLinkLinkProps(BaseModel):
 
 
 class CreatePartnerLinkRequestBodyTypedDict(TypedDict):
-    program_id: str
-    r"""The ID of the program that the partner is enrolled in."""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
     tenant_id: NotRequired[Nullable[str]]
@@ -325,9 +323,6 @@ class CreatePartnerLinkRequestBodyTypedDict(TypedDict):
 
 
 class CreatePartnerLinkRequestBody(BaseModel):
-    program_id: Annotated[str, pydantic.Field(alias="programId")]
-    r"""The ID of the program that the partner is enrolled in."""
-
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET
     )

@@ -650,15 +650,12 @@ class Partner(BaseModel):
 
 
 class CreateReferralsEmbedTokenRequestBodyTypedDict(TypedDict):
-    program_id: str
     partner_id: NotRequired[str]
     tenant_id: NotRequired[str]
     partner: NotRequired[PartnerTypedDict]
 
 
 class CreateReferralsEmbedTokenRequestBody(BaseModel):
-    program_id: Annotated[str, pydantic.Field(alias="programId")]
-
     partner_id: Annotated[Optional[str], pydantic.Field(alias="partnerId")] = None
 
     tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None

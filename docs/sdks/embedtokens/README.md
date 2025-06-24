@@ -22,7 +22,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.embed_tokens.referrals(request={
-        "program_id": "<id>",
         "partner": {
             "name": "<value>",
             "email": "Letha_Wuckert2@yahoo.com",
