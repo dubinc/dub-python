@@ -37,8 +37,6 @@ class RetrievePartnerAnalyticsQueryParamGroupBy(str, Enum):
 
 
 class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
-    program_id: str
-    r"""The ID of the program to retrieve analytics for."""
     partner_id: NotRequired[str]
     r"""The ID of the partner to retrieve analytics for."""
     tenant_id: NotRequired[str]
@@ -56,13 +54,6 @@ class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
 
 
 class RetrievePartnerAnalyticsRequest(BaseModel):
-    program_id: Annotated[
-        str,
-        pydantic.Field(alias="programId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ]
-    r"""The ID of the program to retrieve analytics for."""
-
     partner_id: Annotated[
         Optional[str],
         pydantic.Field(alias="partnerId"),

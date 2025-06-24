@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 976fde5fbd0d7a5d7f2a966688263b3b
+  docChecksum: f8994c15ae5d35c909e4e55fbc9fbea8
   docVersion: 0.0.1
-  speakeasyVersion: 1.568.1
-  generationVersion: 2.634.1
-  releaseVersion: 0.26.10
-  configChecksum: 6b6b6e51de2c5946b69dc0a2d7d1f141
+  speakeasyVersion: 1.568.2
+  generationVersion: 2.634.2
+  releaseVersion: 0.26.11
+  configChecksum: dd259e44cf16a1cd10ef0f752ff8d2da
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -1347,7 +1347,7 @@ examples:
   createPartner:
     speakeasy-default-create-partner:
       requestBody:
-        application/json: {"programId": "<id>", "name": "<value>", "email": "Summer50@yahoo.com", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
+        application/json: {"name": "<value>", "email": "Summer50@yahoo.com", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
       responses:
         "201":
           application/json: {"id": "<id>", "name": "<value>", "email": "Jan9@yahoo.com", "image": "https://loremflickr.com/2599/3934?lock=3607054824535492", "country": "Equatorial Guinea", "website": "<value>", "youtube": "<value>", "twitter": "<value>", "linkedin": "<value>", "instagram": "<value>", "tiktok": "<value>", "paypalEmail": "<value>", "stripeConnectId": "<id>", "payoutsEnabledAt": "<value>", "createdAt": "1736363459872", "status": "banned", "programId": "<id>", "tenantId": "<id>", "links": [], "clicks": 0, "leads": 0, "sales": 0, "saleAmount": 0, "totalCommissions": 0, "netRevenue": 0, "earnings": 0}
@@ -1372,7 +1372,7 @@ examples:
   createPartnerLink:
     speakeasy-default-create-partner-link:
       requestBody:
-        application/json: {"programId": "<id>", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
+        application/json: {"linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
       responses:
         "201":
           application/json: {"id": "<id>", "domain": "ripe-bracelet.net", "key": "<key>", "url": "https://puzzled-stitcher.com/", "trackConversion": false, "externalId": "<id>", "tenantId": "<id>", "programId": "<id>", "partnerId": "<id>", "archived": false, "expiresAt": "1775198095521", "expiredUrl": "https://primary-hierarchy.net/", "password": "M2Ki4IaRbY9E_1X", "proxy": false, "title": "<value>", "description": "midst even towards twine who clean", "image": "https://picsum.photos/seed/tVHWs/534/419", "video": "https://loremflickr.com/2267/2957?lock=6340786422048007", "rewrite": false, "doIndex": false, "ios": "<value>", "android": "<id>", "geo": {}, "publicStats": false, "tagId": "<id>", "tags": [{"id": "<id>", "name": "<value>", "color": "blue"}], "folderId": "<id>", "webhookIds": ["<value 1>", "<value 2>"], "comments": "ectoderm besides an exalt ack fork", "shortLink": "https://mindless-shadowbox.biz/", "qrCode": "https://shallow-government.name/", "utm_source": "<value>", "utm_medium": "<value>", "utm_campaign": "<value>", "utm_term": "<value>", "utm_content": "<value>", "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}], "userId": "<id>", "workspaceId": "<id>", "clicks": 0, "lastClicked": "<value>", "leads": 0, "sales": 0, "saleAmount": 0, "createdAt": "1723241119923", "updatedAt": "1747599189334", "projectId": "<id>"}
@@ -1423,7 +1423,7 @@ examples:
   upsertPartnerLink:
     speakeasy-default-upsert-partner-link:
       requestBody:
-        application/json: {"programId": "<id>", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
+        application/json: {"linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
       responses:
         "200":
           application/json: {"id": "<id>", "domain": "inborn-backbone.info", "key": "<key>", "url": "https://trusty-birdcage.org", "trackConversion": false, "externalId": "<id>", "tenantId": "<id>", "programId": "<id>", "partnerId": "<id>", "archived": false, "expiresAt": "1757127216280", "expiredUrl": "https://small-wallaby.org/", "password": "cQ1Zi2EybwesHSo", "proxy": false, "title": "<value>", "description": "noisily once questioningly scornful", "image": "https://picsum.photos/seed/1kknS5/2573/3049", "video": "https://picsum.videos/seed/kln3aGTvg/1432/1228", "rewrite": false, "doIndex": false, "ios": "<value>", "android": "<id>", "geo": {}, "publicStats": false, "tagId": "<id>", "tags": [{"id": "<id>", "name": "<value>", "color": "green"}], "folderId": "<id>", "webhookIds": ["<value 1>", "<value 2>", "<value 3>"], "comments": "ha where bakeware dispense ouch who phew gown etch right incidentally overcharge clone actual wash gently premise", "shortLink": "https://hot-marten.biz/", "qrCode": "https://boring-cosset.org", "utm_source": "<value>", "utm_medium": "<value>", "utm_campaign": "<value>", "utm_term": "<value>", "utm_content": "<value>", "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}], "userId": "<id>", "workspaceId": "<id>", "clicks": 0, "lastClicked": "<value>", "leads": 0, "sales": 0, "saleAmount": 0, "createdAt": "1740078665647", "updatedAt": "1747597582277", "projectId": "<id>"}
@@ -1551,7 +1551,7 @@ examples:
   createReferralsEmbedToken:
     speakeasy-default-create-referrals-embed-token:
       requestBody:
-        application/json: {"programId": "<id>", "partner": {"name": "<value>", "email": "Letha_Wuckert2@yahoo.com", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}}
+        application/json: {"partner": {"name": "<value>", "email": "Letha_Wuckert2@yahoo.com", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}}
       responses:
         "201":
           application/json: {"publicToken": "<value>", "expires": "<value>"}
