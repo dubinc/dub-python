@@ -47,6 +47,8 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+    key_length: NotRequired[float]
+    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
     external_id: NotRequired[Nullable[str]]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
@@ -130,6 +132,9 @@ class CreateLinkRequestBody(BaseModel):
 
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+
+    key_length: Annotated[Optional[float], pydantic.Field(alias="keyLength")] = None
+    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
 
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
@@ -280,6 +285,7 @@ class CreateLinkRequestBody(BaseModel):
         optional_fields = [
             "domain",
             "key",
+            "keyLength",
             "externalId",
             "tenantId",
             "programId",

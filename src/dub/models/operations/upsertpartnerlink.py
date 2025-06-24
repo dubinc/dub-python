@@ -46,6 +46,8 @@ class UpsertPartnerLinkTestVariants(BaseModel):
 class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
+    key_length: NotRequired[float]
+    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
     external_id: NotRequired[Nullable[str]]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
@@ -108,6 +110,9 @@ class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
 
 class UpsertPartnerLinkLinkProps(BaseModel):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
+
+    key_length: Annotated[Optional[float], pydantic.Field(alias="keyLength")] = None
+    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
 
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
@@ -220,6 +225,7 @@ class UpsertPartnerLinkLinkProps(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "keyLength",
             "externalId",
             "tenantId",
             "prefix",

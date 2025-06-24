@@ -94,6 +94,7 @@ class UpdateCommissionResponseBodyTypedDict(TypedDict):
     updated_at: str
     type: NotRequired[UpdateCommissionType]
     invoice_id: NotRequired[Nullable[str]]
+    description: NotRequired[Nullable[str]]
 
 
 class UpdateCommissionResponseBody(BaseModel):
@@ -120,10 +121,12 @@ class UpdateCommissionResponseBody(BaseModel):
         UNSET
     )
 
+    description: OptionalNullable[str] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["type", "invoiceId"]
-        nullable_fields = ["invoiceId"]
+        optional_fields = ["type", "invoiceId", "description"]
+        nullable_fields = ["invoiceId", "description"]
         null_default_fields = []
 
         serialized = handler(self)
