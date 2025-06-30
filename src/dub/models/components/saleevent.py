@@ -1217,7 +1217,7 @@ class PaymentProcessor(str, Enum):
 
 class SaleTypedDict(TypedDict):
     amount: int
-    r"""The amount of the sale in cents."""
+    r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
     payment_processor: PaymentProcessor
     r"""The payment processor via which the sale was made."""
     invoice_id: NotRequired[Nullable[str]]
@@ -1226,7 +1226,7 @@ class SaleTypedDict(TypedDict):
 
 class Sale(BaseModel):
     amount: int
-    r"""The amount of the sale in cents."""
+    r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
 
     payment_processor: Annotated[
         PaymentProcessor, pydantic.Field(alias="paymentProcessor")
