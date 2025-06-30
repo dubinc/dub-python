@@ -26,7 +26,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.create(request={
-        "name": "<value>",
         "email": "Summer50@yahoo.com",
         "link_props": {
             "external_id": "123456",

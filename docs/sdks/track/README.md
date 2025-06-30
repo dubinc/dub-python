@@ -79,8 +79,8 @@ with Dub(
     res = d_client.track.sale(request={
         "external_id": "<id>",
         "amount": 594903,
-        "payment_processor": operations.PaymentProcessor.POLAR,
         "event_name": "Invoice paid",
+        "payment_processor": operations.PaymentProcessor.POLAR,
         "lead_event_name": "Cloned template 1481267",
     })
 

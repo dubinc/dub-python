@@ -23,7 +23,6 @@ with Dub(
 
     res = d_client.embed_tokens.referrals(request={
         "partner": {
-            "name": "<value>",
             "email": "Letha_Wuckert2@yahoo.com",
             "link_props": {
                 "external_id": "123456",
