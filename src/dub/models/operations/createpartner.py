@@ -10,7 +10,7 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class Country(str, Enum):
-    r"""Country where the partner is based."""
+    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
 
     AF = "AF"
     AL = "AL"
@@ -560,45 +560,45 @@ class LinkProps(BaseModel):
 
 
 class CreatePartnerRequestBodyTypedDict(TypedDict):
-    name: str
-    r"""Full legal name of the partner."""
     email: str
-    r"""Email for the partner in your system. Partners will be able to claim their profile by signing up to Dub Partners with this email."""
+    r"""The partner's email address. Partners will be able to claim their profile by signing up at `partners.dub.co` with this email."""
+    name: NotRequired[Nullable[str]]
+    r"""The partner's full name. If undefined, the partner's email will be used in lieu of their name (e.g. `john@acme.com`)"""
     username: NotRequired[Nullable[str]]
-    r"""A unique username for the partner in your system (max 100 characters). This will be used to create a short link for the partner using your program's default domain. If not provided, Dub will try to generate a username from the partner's name or email."""
+    r"""The partner's unique username in your system (max 100 characters). This will be used to create a short link for the partner using your program's default domain. If not provided, Dub will try to generate a username from the partner's name or email."""
     image: NotRequired[Nullable[str]]
-    r"""Avatar image for the partner – if not provided, a default avatar will be used."""
-    country: NotRequired[Nullable[Country]]
-    r"""Country where the partner is based."""
-    description: NotRequired[Nullable[str]]
-    r"""A brief description of the partner and their background."""
+    r"""The partner's avatar image. If not provided, a default avatar will be used."""
     tenant_id: NotRequired[str]
-    r"""The ID of the partner in your system."""
+    r"""The partner's unique ID in your system. Useful for retrieving the partner's links and stats later on. If not provided, the partner will be created as a standalone partner."""
+    country: NotRequired[Nullable[Country]]
+    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
+    description: NotRequired[Nullable[str]]
+    r"""A brief description of the partner and their background. Max 5,000 characters."""
     link_props: NotRequired[LinkPropsTypedDict]
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
 
 class CreatePartnerRequestBody(BaseModel):
-    name: str
-    r"""Full legal name of the partner."""
-
     email: str
-    r"""Email for the partner in your system. Partners will be able to claim their profile by signing up to Dub Partners with this email."""
+    r"""The partner's email address. Partners will be able to claim their profile by signing up at `partners.dub.co` with this email."""
+
+    name: OptionalNullable[str] = UNSET
+    r"""The partner's full name. If undefined, the partner's email will be used in lieu of their name (e.g. `john@acme.com`)"""
 
     username: OptionalNullable[str] = UNSET
-    r"""A unique username for the partner in your system (max 100 characters). This will be used to create a short link for the partner using your program's default domain. If not provided, Dub will try to generate a username from the partner's name or email."""
+    r"""The partner's unique username in your system (max 100 characters). This will be used to create a short link for the partner using your program's default domain. If not provided, Dub will try to generate a username from the partner's name or email."""
 
     image: OptionalNullable[str] = UNSET
-    r"""Avatar image for the partner – if not provided, a default avatar will be used."""
-
-    country: OptionalNullable[Country] = UNSET
-    r"""Country where the partner is based."""
-
-    description: OptionalNullable[str] = UNSET
-    r"""A brief description of the partner and their background."""
+    r"""The partner's avatar image. If not provided, a default avatar will be used."""
 
     tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None
-    r"""The ID of the partner in your system."""
+    r"""The partner's unique ID in your system. Useful for retrieving the partner's links and stats later on. If not provided, the partner will be created as a standalone partner."""
+
+    country: OptionalNullable[Country] = UNSET
+    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
+
+    description: OptionalNullable[str] = UNSET
+    r"""A brief description of the partner and their background. Max 5,000 characters."""
 
     link_props: Annotated[Optional[LinkProps], pydantic.Field(alias="linkProps")] = None
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
@@ -606,14 +606,15 @@ class CreatePartnerRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "name",
             "username",
             "image",
+            "tenantId",
             "country",
             "description",
-            "tenantId",
             "linkProps",
         ]
-        nullable_fields = ["username", "image", "country", "description"]
+        nullable_fields = ["name", "username", "image", "country", "description"]
         null_default_fields = []
 
         serialized = handler(self)

@@ -127,6 +127,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The dollar amount of partner payouts processed in the current billing cycle (in cents)."""
     payouts_limit: float
     r"""The max dollar amount of partner payouts that can be processed within a billing cycle (in cents)."""
+    payout_fee: float
+    r"""The processing fee (in decimals) for partner payouts. For card payments, an additional 0.03 is added to the fee. Learn more: https://d.to/payouts"""
     domains_limit: float
     r"""The domains limit of the workspace."""
     tags_limit: float
@@ -211,6 +213,9 @@ class WorkspaceSchema(BaseModel):
 
     payouts_limit: Annotated[float, pydantic.Field(alias="payoutsLimit")]
     r"""The max dollar amount of partner payouts that can be processed within a billing cycle (in cents)."""
+
+    payout_fee: Annotated[float, pydantic.Field(alias="payoutFee")]
+    r"""The processing fee (in decimals) for partner payouts. For card payments, an additional 0.03 is added to the fee. Learn more: https://d.to/payouts"""
 
     domains_limit: Annotated[float, pydantic.Field(alias="domainsLimit")]
     r"""The domains limit of the workspace."""

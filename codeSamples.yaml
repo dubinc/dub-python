@@ -689,7 +689,6 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.create(request={
-                    "name": "<value>",
                     "email": "Summer50@yahoo.com",
                     "link_props": {
                         "external_id": "123456",
@@ -747,9 +746,7 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.partners.retrieve_links(request={
-                    "program_id": "<id>",
-                })
+                res = d_client.partners.retrieve_links(request={})
 
                 assert res is not None
 
@@ -943,7 +940,6 @@ actions:
 
                 res = d_client.embed_tokens.referrals(request={
                     "partner": {
-                        "name": "<value>",
                         "email": "Letha_Wuckert2@yahoo.com",
                         "link_props": {
                             "external_id": "123456",
@@ -1008,8 +1004,8 @@ actions:
                 res = d_client.track.sale(request={
                     "external_id": "<id>",
                     "amount": 594903,
-                    "payment_processor": operations.PaymentProcessor.POLAR,
                     "event_name": "Invoice paid",
+                    "payment_processor": operations.PaymentProcessor.POLAR,
                     "lead_event_name": "Cloned template 1481267",
                 })
 

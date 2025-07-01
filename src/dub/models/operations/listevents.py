@@ -115,7 +115,7 @@ class ListEventsRequestTypedDict(TypedDict):
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     country: NotRequired[components_countrycode.CountryCode]
-    r"""The country to retrieve analytics for."""
+    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
     city: NotRequired[str]
     r"""The city to retrieve analytics for."""
     region: NotRequired[str]
@@ -255,7 +255,7 @@ class ListEventsRequest(BaseModel):
         Optional[components_countrycode.CountryCode],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The country to retrieve analytics for."""
+    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
 
     city: Annotated[
         Optional[str],

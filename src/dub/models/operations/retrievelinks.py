@@ -9,18 +9,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class RetrieveLinksRequestTypedDict(TypedDict):
-    program_id: str
     partner_id: NotRequired[str]
     tenant_id: NotRequired[str]
 
 
 class RetrieveLinksRequest(BaseModel):
-    program_id: Annotated[
-        str,
-        pydantic.Field(alias="programId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ]
-
     partner_id: Annotated[
         Optional[str],
         pydantic.Field(alias="partnerId"),
