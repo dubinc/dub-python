@@ -26,7 +26,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.create(request={
-        "name": "<value>",
         "email": "Summer50@yahoo.com",
         "link_props": {
             "external_id": "123456",
@@ -159,9 +158,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.partners.retrieve_links(request={
-        "program_id": "<id>",
-    })
+    res = d_client.partners.retrieve_links(request={})
 
     assert res is not None
 

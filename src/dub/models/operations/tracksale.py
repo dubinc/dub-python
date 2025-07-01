@@ -23,19 +23,19 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
     external_id: str
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
     amount: int
-    r"""The amount of the sale in cents."""
+    r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
     payment_processor: PaymentProcessor
     r"""The payment processor via which the sale was made."""
+    currency: NotRequired[str]
+    r"""The currency of the sale. Accepts ISO 4217 currency codes. Sales will be automatically converted and stored as USD at the latest exchange rates. Learn more: https://d.to/currency"""
     event_name: NotRequired[str]
-    r"""The name of the sale event."""
+    r"""The name of the sale event. Recommended format: `Invoice paid` or `Subscription created`."""
     invoice_id: NotRequired[Nullable[str]]
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
-    currency: NotRequired[str]
-    r"""The currency of the sale. Accepts ISO 4217 currency codes."""
     lead_event_name: NotRequired[Nullable[str]]
-    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event, which is the default behavior)."""
+    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event for a link-customer combination, which is the default behavior)."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
-    r"""Additional metadata to be stored with the sale event. Max 10,000 characters."""
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
 
 
 class TrackSaleRequestBody(BaseModel):
@@ -43,38 +43,38 @@ class TrackSaleRequestBody(BaseModel):
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
 
     amount: int
-    r"""The amount of the sale in cents."""
+    r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
 
     payment_processor: Annotated[
         PaymentProcessor, pydantic.Field(alias="paymentProcessor")
     ]
     r"""The payment processor via which the sale was made."""
 
+    currency: Optional[str] = "usd"
+    r"""The currency of the sale. Accepts ISO 4217 currency codes. Sales will be automatically converted and stored as USD at the latest exchange rates. Learn more: https://d.to/currency"""
+
     event_name: Annotated[Optional[str], pydantic.Field(alias="eventName")] = "Purchase"
-    r"""The name of the sale event."""
+    r"""The name of the sale event. Recommended format: `Invoice paid` or `Subscription created`."""
 
     invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
         None
     )
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
 
-    currency: Optional[str] = "usd"
-    r"""The currency of the sale. Accepts ISO 4217 currency codes."""
-
     lead_event_name: Annotated[
         OptionalNullable[str], pydantic.Field(alias="leadEventName")
     ] = None
-    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event, which is the default behavior)."""
+    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event for a link-customer combination, which is the default behavior)."""
 
     metadata: OptionalNullable[Dict[str, Any]] = UNSET
-    r"""Additional metadata to be stored with the sale event. Max 10,000 characters."""
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "currency",
             "eventName",
             "invoiceId",
-            "currency",
             "leadEventName",
             "metadata",
         ]

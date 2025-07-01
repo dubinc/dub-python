@@ -23,14 +23,14 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
     external_id: str
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
-    event_quantity: NotRequired[Nullable[float]]
-    r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
     customer_name: NotRequired[Nullable[str]]
     r"""The name of the customer. If not passed, a random name will be generated (e.g. “Big Red Caribou”)."""
     customer_email: NotRequired[Nullable[str]]
     r"""The email address of the customer."""
     customer_avatar: NotRequired[Nullable[str]]
     r"""The avatar URL of the customer."""
+    event_quantity: NotRequired[Nullable[float]]
+    r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
     mode: NotRequired[Mode]
     r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
@@ -47,11 +47,6 @@ class TrackLeadRequestBody(BaseModel):
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
 
-    event_quantity: Annotated[
-        OptionalNullable[float], pydantic.Field(alias="eventQuantity")
-    ] = UNSET
-    r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
-
     customer_name: Annotated[
         OptionalNullable[str], pydantic.Field(alias="customerName")
     ] = None
@@ -67,6 +62,11 @@ class TrackLeadRequestBody(BaseModel):
     ] = None
     r"""The avatar URL of the customer."""
 
+    event_quantity: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="eventQuantity")
+    ] = UNSET
+    r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
+
     mode: Optional[Mode] = Mode.ASYNC
     r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
 
@@ -76,18 +76,18 @@ class TrackLeadRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "eventQuantity",
             "customerName",
             "customerEmail",
             "customerAvatar",
+            "eventQuantity",
             "mode",
             "metadata",
         ]
         nullable_fields = [
-            "eventQuantity",
             "customerName",
             "customerEmail",
             "customerAvatar",
+            "eventQuantity",
             "metadata",
         ]
         null_default_fields = ["customerName", "customerEmail", "customerAvatar"]
