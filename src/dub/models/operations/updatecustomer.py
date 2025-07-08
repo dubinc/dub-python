@@ -229,6 +229,7 @@ class UpdateCustomerDiscountTypedDict(TypedDict):
     max_duration: Nullable[float]
     coupon_id: Nullable[str]
     coupon_test_id: Nullable[str]
+    default: bool
     description: NotRequired[Nullable[str]]
     partners_count: NotRequired[Nullable[float]]
 
@@ -245,6 +246,8 @@ class UpdateCustomerDiscount(BaseModel):
     coupon_id: Annotated[Nullable[str], pydantic.Field(alias="couponId")]
 
     coupon_test_id: Annotated[Nullable[str], pydantic.Field(alias="couponTestId")]
+
+    default: bool
 
     description: OptionalNullable[str] = UNSET
 
