@@ -345,34 +345,18 @@ asyncio.run(main())
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
+[`DubError`](./src/dub/models/errors/duberror.py) is the base class for all HTTP error responses. It has the following properties:
 
-By default, an API error will raise a errors.SDKError exception, which has the following properties:
-
-| Property        | Type             | Description           |
-|-----------------|------------------|-----------------------|
-| `.status_code`  | *int*            | The HTTP status code  |
-| `.message`      | *str*            | The error message     |
-| `.raw_response` | *httpx.Response* | The raw HTTP response |
-| `.body`         | *str*            | The response content  |
-
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `create_async` method may raise the following exceptions:
-
-| Error Type                 | Status Code | Content Type     |
-| -------------------------- | ----------- | ---------------- |
-| errors.BadRequest          | 400         | application/json |
-| errors.Unauthorized        | 401         | application/json |
-| errors.Forbidden           | 403         | application/json |
-| errors.NotFound            | 404         | application/json |
-| errors.Conflict            | 409         | application/json |
-| errors.InviteExpired       | 410         | application/json |
-| errors.UnprocessableEntity | 422         | application/json |
-| errors.RateLimitExceeded   | 429         | application/json |
-| errors.InternalServerError | 500         | application/json |
-| errors.SDKError            | 4XX, 5XX    | \*/\*            |
+| Property           | Type             | Description                                                                             |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `err.message`      | `str`            | Error message                                                                           |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
-
 ```python
 from dub import Dub
 from dub.models import errors
@@ -407,37 +391,47 @@ with Dub(
         # Handle response
         print(res)
 
-    except errors.BadRequest as e:
-        # handle e.data: errors.BadRequestData
-        raise(e)
-    except errors.Unauthorized as e:
-        # handle e.data: errors.UnauthorizedData
-        raise(e)
-    except errors.Forbidden as e:
-        # handle e.data: errors.ForbiddenData
-        raise(e)
-    except errors.NotFound as e:
-        # handle e.data: errors.NotFoundData
-        raise(e)
-    except errors.Conflict as e:
-        # handle e.data: errors.ConflictData
-        raise(e)
-    except errors.InviteExpired as e:
-        # handle e.data: errors.InviteExpiredData
-        raise(e)
-    except errors.UnprocessableEntity as e:
-        # handle e.data: errors.UnprocessableEntityData
-        raise(e)
-    except errors.RateLimitExceeded as e:
-        # handle e.data: errors.RateLimitExceededData
-        raise(e)
-    except errors.InternalServerError as e:
-        # handle e.data: errors.InternalServerErrorData
-        raise(e)
-    except errors.SDKError as e:
-        # handle exception
-        raise(e)
+
+    except errors.DubError as e:
+        # The base class for HTTP error responses
+        print(e.message)
+        print(e.status_code)
+        print(e.body)
+        print(e.headers)
+        print(e.raw_response)
+
+        # Depending on the method different errors may be thrown
+        if isinstance(e, errors.BadRequest):
+            print(e.data.error)  # errors.Error
 ```
+
+### Error Classes
+**Primary errors:**
+* [`DubError`](./src/dub/models/errors/duberror.py): The base class for HTTP error responses.
+  * [`BadRequest`](./src/dub/models/errors/badrequest.py): The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). Status code `400`.
+  * [`Unauthorized`](./src/dub/models/errors/unauthorized.py): Although the HTTP standard specifies "unauthorized", semantically this response means "unauthenticated". That is, the client must authenticate itself to get the requested response. Status code `401`.
+  * [`Forbidden`](./src/dub/models/errors/forbidden.py): The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server. Status code `403`.
+  * [`NotFound`](./src/dub/models/errors/notfound.py): The server cannot find the requested resource. Status code `404`.
+  * [`Conflict`](./src/dub/models/errors/conflict.py): This response is sent when a request conflicts with the current state of the server. Status code `409`.
+  * [`InviteExpired`](./src/dub/models/errors/inviteexpired.py): This response is sent when the requested content has been permanently deleted from server, with no forwarding address. Status code `410`.
+  * [`UnprocessableEntity`](./src/dub/models/errors/unprocessableentity.py): The request was well-formed but was unable to be followed due to semantic errors. Status code `422`.
+  * [`RateLimitExceeded`](./src/dub/models/errors/ratelimitexceeded.py): The user has sent too many requests in a given amount of time ("rate limiting"). Status code `429`.
+  * [`InternalServerError`](./src/dub/models/errors/internalservererror.py): The server has encountered a situation it does not know how to handle. Status code `500`.
+
+<details><summary>Less common errors (5)</summary>
+
+<br />
+
+**Network errors:**
+* [`httpx.RequestError`](https://www.python-httpx.org/exceptions/#httpx.RequestError): Base class for request errors.
+    * [`httpx.ConnectError`](https://www.python-httpx.org/exceptions/#httpx.ConnectError): HTTP client was unable to make a request to a server.
+    * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
+
+
+**Inherit from [`DubError`](./src/dub/models/errors/duberror.py)**:
+* [`ResponseValidationError`](./src/dub/models/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+
+</details>
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

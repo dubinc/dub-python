@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 9cde19fee10d246922e255635d90eec7
+  docChecksum: 6e45f3521cae083a495cc5102bf01725
   docVersion: 0.0.1
-  speakeasyVersion: 1.573.0
-  generationVersion: 2.644.1
-  releaseVersion: 0.26.12
-  configChecksum: 6d4f0378a532891ca0223c42c66380ef
+  speakeasyVersion: 1.576.1
+  generationVersion: 2.651.2
+  releaseVersion: 0.27.0
+  configChecksum: 92441ba18ee67373019981a25171b2d0
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,12 +14,12 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.3
+    core: 5.19.4
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
-    errors: 3.2.0
+    errors: 3.3.0
     examples: 3.0.1
     flattening: 3.1.1
     globalSecurity: 3.0.3
@@ -428,11 +428,14 @@ generatedFiles:
   - src/dub/models/errors/__init__.py
   - src/dub/models/errors/badrequest.py
   - src/dub/models/errors/conflict.py
+  - src/dub/models/errors/duberror.py
   - src/dub/models/errors/forbidden.py
   - src/dub/models/errors/internalservererror.py
   - src/dub/models/errors/inviteexpired.py
+  - src/dub/models/errors/no_response_error.py
   - src/dub/models/errors/notfound.py
   - src/dub/models/errors/ratelimitexceeded.py
+  - src/dub/models/errors/responsevalidationerror.py
   - src/dub/models/errors/sdkerror.py
   - src/dub/models/errors/unauthorized.py
   - src/dub/models/errors/unprocessableentity.py
