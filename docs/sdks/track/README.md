@@ -25,7 +25,7 @@ with Dub(
     res = d_client.track.lead(request={
         "click_id": "<id>",
         "event_name": "Sign up",
-        "external_id": "<id>",
+        "customer_external_id": "<id>",
     })
 
     assert res is not None
@@ -77,7 +77,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.track.sale(request={
-        "external_id": "<id>",
+        "customer_external_id": "<id>",
         "amount": 594903,
         "event_name": "Invoice paid",
         "payment_processor": operations.PaymentProcessor.POLAR,

@@ -5,6 +5,7 @@ from dub import utils
 from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
+from dub.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union, cast
 
 
@@ -95,47 +96,39 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json_response(
+            return unmarshal_json_response(
                 Optional[List[operations.ListEventsResponseBody]], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.BadRequestData, http_res
-            )
+            response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.UnauthorizedData, http_res
-            )
+            response_data = unmarshal_json_response(errors.UnauthorizedData, http_res)
             raise errors.Unauthorized(response_data, http_res)
         if utils.match_response(http_res, "403", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.ForbiddenData, http_res
-            )
+            response_data = unmarshal_json_response(errors.ForbiddenData, http_res)
             raise errors.Forbidden(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json_response(errors.NotFoundData, http_res)
+            response_data = unmarshal_json_response(errors.NotFoundData, http_res)
             raise errors.NotFound(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(errors.ConflictData, http_res)
+            response_data = unmarshal_json_response(errors.ConflictData, http_res)
             raise errors.Conflict(response_data, http_res)
         if utils.match_response(http_res, "410", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.InviteExpiredData, http_res
-            )
+            response_data = unmarshal_json_response(errors.InviteExpiredData, http_res)
             raise errors.InviteExpired(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UnprocessableEntityData, http_res
             )
             raise errors.UnprocessableEntity(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RateLimitExceededData, http_res
             )
             raise errors.RateLimitExceeded(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.InternalServerErrorData, http_res
             )
             raise errors.InternalServerError(response_data, http_res)
@@ -234,47 +227,39 @@ class Events(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json_response(
+            return unmarshal_json_response(
                 Optional[List[operations.ListEventsResponseBody]], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.BadRequestData, http_res
-            )
+            response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.UnauthorizedData, http_res
-            )
+            response_data = unmarshal_json_response(errors.UnauthorizedData, http_res)
             raise errors.Unauthorized(response_data, http_res)
         if utils.match_response(http_res, "403", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.ForbiddenData, http_res
-            )
+            response_data = unmarshal_json_response(errors.ForbiddenData, http_res)
             raise errors.Forbidden(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json_response(errors.NotFoundData, http_res)
+            response_data = unmarshal_json_response(errors.NotFoundData, http_res)
             raise errors.NotFound(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(errors.ConflictData, http_res)
+            response_data = unmarshal_json_response(errors.ConflictData, http_res)
             raise errors.Conflict(response_data, http_res)
         if utils.match_response(http_res, "410", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.InviteExpiredData, http_res
-            )
+            response_data = unmarshal_json_response(errors.InviteExpiredData, http_res)
             raise errors.InviteExpired(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UnprocessableEntityData, http_res
             )
             raise errors.UnprocessableEntity(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RateLimitExceededData, http_res
             )
             raise errors.RateLimitExceeded(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.InternalServerErrorData, http_res
             )
             raise errors.InternalServerError(response_data, http_res)

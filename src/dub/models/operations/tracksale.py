@@ -20,7 +20,7 @@ class PaymentProcessor(str, Enum):
 
 
 class TrackSaleRequestBodyTypedDict(TypedDict):
-    external_id: str
+    customer_external_id: str
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
     amount: int
     r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
@@ -39,7 +39,7 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
 
 
 class TrackSaleRequestBody(BaseModel):
-    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    customer_external_id: Annotated[str, pydantic.Field(alias="customerExternalId")]
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
 
     amount: int

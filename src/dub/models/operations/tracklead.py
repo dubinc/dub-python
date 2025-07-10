@@ -21,7 +21,7 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie."""
     event_name: str
     r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
-    external_id: str
+    customer_external_id: str
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
     customer_name: NotRequired[Nullable[str]]
     r"""The name of the customer. If not passed, a random name will be generated (e.g. “Big Red Caribou”)."""
@@ -44,7 +44,7 @@ class TrackLeadRequestBody(BaseModel):
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
     r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
 
-    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    customer_external_id: Annotated[str, pydantic.Field(alias="customerExternalId")]
     r"""The unique ID of the customer in your system. Will be used to identify and attribute all future events to this customer."""
 
     customer_name: Annotated[

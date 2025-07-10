@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 6e45f3521cae083a495cc5102bf01725
+  docChecksum: aa92a2d401a7d3e37140aef2558f04b3
   docVersion: 0.0.1
-  speakeasyVersion: 1.576.1
-  generationVersion: 2.651.2
-  releaseVersion: 0.27.0
-  configChecksum: 92441ba18ee67373019981a25171b2d0
+  speakeasyVersion: 1.580.2
+  generationVersion: 2.656.5
+  releaseVersion: 0.27.1
+  configChecksum: ab7c9f9992df74d0fe2b94d441526f06
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -19,8 +19,8 @@ features:
     deprecations: 3.0.2
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
-    errors: 3.3.0
-    examples: 3.0.1
+    errors: 3.3.1
+    examples: 3.0.2
     flattening: 3.1.1
     globalSecurity: 3.0.3
     globalSecurityCallbacks: 1.0.0
@@ -36,7 +36,6 @@ features:
     unions: 3.0.4
 generatedFiles:
   - .gitattributes
-  - .python-version
   - .vscode/settings.json
   - USAGE.md
   - docs/models/components/accesslevel.md
@@ -507,6 +506,7 @@ generatedFiles:
   - src/dub/utils/retries.py
   - src/dub/utils/security.py
   - src/dub/utils/serializers.py
+  - src/dub/utils/unmarshal_json_response.py
   - src/dub/utils/url.py
   - src/dub/utils/values.py
   - src/dub/workspaces.py
@@ -1165,7 +1165,7 @@ examples:
   trackLead:
     speakeasy-default-track-lead:
       requestBody:
-        application/json: {"clickId": "<id>", "eventName": "Sign up", "externalId": "<id>", "customerName": null, "customerEmail": null, "customerAvatar": null, "mode": "async"}
+        application/json: {"clickId": "<id>", "eventName": "Sign up", "customerExternalId": "<id>", "customerName": null, "customerEmail": null, "customerAvatar": null, "mode": "async"}
       responses:
         "200":
           application/json: {"click": {"id": "<id>"}, "customer": {"name": "<value>", "email": "Beaulah.Hamill78@gmail.com", "avatar": "https://picsum.photos/seed/4p2vQu6/2339/955", "externalId": "<id>"}}
@@ -1190,7 +1190,7 @@ examples:
   trackSale:
     speakeasy-default-track-sale:
       requestBody:
-        application/json: {"externalId": "<id>", "amount": 594903, "currency": "usd", "eventName": "Invoice paid", "paymentProcessor": "polar", "invoiceId": null, "leadEventName": "Cloned template 1481267"}
+        application/json: {"customerExternalId": "<id>", "amount": 594903, "currency": "usd", "eventName": "Invoice paid", "paymentProcessor": "polar", "invoiceId": null, "leadEventName": "Cloned template 1481267"}
       responses:
         "200":
           application/json: {"eventName": "<value>", "customer": {"id": "<id>", "name": "<value>", "email": "Jettie.Hirthe97@yahoo.com", "avatar": "https://loremflickr.com/2112/1585?lock=96959249386723", "externalId": "<id>"}, "sale": {"amount": 67.63, "currency": "Pula", "paymentProcessor": "<value>", "invoiceId": "<id>", "metadata": {"key": "<value>"}}}
