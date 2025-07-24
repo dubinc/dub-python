@@ -13,6 +13,8 @@ class Trigger(str, Enum):
 
     QR = "qr"
     LINK = "link"
+    PAGEVIEW = "pageview"
+    DEEPLINK = "deeplink"
 
 
 class AnalyticsTriggersTypedDict(TypedDict):

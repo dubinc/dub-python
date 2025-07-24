@@ -313,6 +313,7 @@ asyncio.run(main())
 ### [partners](docs/sdks/partners/README.md)
 
 * [create](docs/sdks/partners/README.md#create) - Create a partner
+* [list](docs/sdks/partners/README.md#list) - List all partners
 * [create_link](docs/sdks/partners/README.md#create_link) - Create a link for a partner
 * [retrieve_links](docs/sdks/partners/README.md#retrieve_links) - Retrieve a partner's links.
 * [upsert_link](docs/sdks/partners/README.md#upsert_link) - Upsert a link for a partner

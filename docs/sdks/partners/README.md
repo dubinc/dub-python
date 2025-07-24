@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [create](#create) - Create a partner
+* [list](#list) - List all partners
 * [create_link](#create_link) - Create a link for a partner
 * [retrieve_links](#retrieve_links) - Retrieve a partner's links.
 * [upsert_link](#upsert_link) - Upsert a link for a partner
@@ -62,6 +63,63 @@ with Dub(
 ### Response
 
 **[operations.CreatePartnerResponseBody](../../models/operations/createpartnerresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## list
+
+List all partners for a partner program.
+
+### Example Usage
+
+```python
+from dub import Dub
+from dub.models import operations
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.partners.list(request={
+        "status": operations.ListPartnersQueryParamStatus.APPROVED,
+        "country": "US",
+        "tenant_id": "1K0NM7HCN944PEMZ3CQPH43H8",
+        "include_expanded_fields": False,
+        "search": "john",
+        "page_size": 50,
+    })
+
+    assert res is not None
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `request`                                                                        | [operations.ListPartnersRequest](../../models/operations/listpartnersrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
+
+### Response
+
+**[List[operations.ListPartnersResponseBody]](../../models/.md)**
 
 ### Errors
 

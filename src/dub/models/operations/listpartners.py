@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -9,11 +10,120 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PartnerEnrolledEventEvent(str, Enum):
-    PARTNER_ENROLLED = "partner.enrolled"
+class ListPartnersQueryParamStatus(str, Enum):
+    r"""A filter on the list based on the partner's `status` field."""
+
+    PENDING = "pending"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    INVITED = "invited"
+    DECLINED = "declined"
+    BANNED = "banned"
+    ARCHIVED = "archived"
 
 
-class Status(str, Enum):
+class ListPartnersQueryParamSortBy(str, Enum):
+    r"""The field to sort the partners by. The default is `saleAmount`."""
+
+    CREATED_AT = "createdAt"
+    CLICKS = "clicks"
+    LEADS = "leads"
+    SALES = "sales"
+    SALE_AMOUNT = "saleAmount"
+    COMMISSIONS = "commissions"
+    NET_REVENUE = "netRevenue"
+
+
+class ListPartnersQueryParamSortOrder(str, Enum):
+    r"""The sort order. The default is `desc`."""
+
+    ASC = "asc"
+    DESC = "desc"
+
+
+class ListPartnersRequestTypedDict(TypedDict):
+    status: NotRequired[ListPartnersQueryParamStatus]
+    r"""A filter on the list based on the partner's `status` field."""
+    country: NotRequired[str]
+    r"""A filter on the list based on the partner's `country` field."""
+    sort_by: NotRequired[ListPartnersQueryParamSortBy]
+    r"""The field to sort the partners by. The default is `saleAmount`."""
+    sort_order: NotRequired[ListPartnersQueryParamSortOrder]
+    r"""The sort order. The default is `desc`."""
+    tenant_id: NotRequired[str]
+    r"""A case-sensitive filter on the list based on the partner's `tenantId` field. The value must be a string. Takes precedence over `search`."""
+    include_expanded_fields: NotRequired[bool]
+    r"""Whether to include stats fields on the partner (`clicks`, `leads`, `sales`, `saleAmount`, `commissions`, `netRevenue`). If false, those fields will be returned as 0."""
+    search: NotRequired[str]
+    r"""A search query to filter partners by name, email, or tenantId."""
+    page: NotRequired[float]
+    r"""The page number for pagination."""
+    page_size: NotRequired[float]
+    r"""The number of items per page."""
+
+
+class ListPartnersRequest(BaseModel):
+    status: Annotated[
+        Optional[ListPartnersQueryParamStatus],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A filter on the list based on the partner's `status` field."""
+
+    country: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A filter on the list based on the partner's `country` field."""
+
+    sort_by: Annotated[
+        Optional[ListPartnersQueryParamSortBy],
+        pydantic.Field(alias="sortBy"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = ListPartnersQueryParamSortBy.SALE_AMOUNT
+    r"""The field to sort the partners by. The default is `saleAmount`."""
+
+    sort_order: Annotated[
+        Optional[ListPartnersQueryParamSortOrder],
+        pydantic.Field(alias="sortOrder"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = ListPartnersQueryParamSortOrder.DESC
+    r"""The sort order. The default is `desc`."""
+
+    tenant_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tenantId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A case-sensitive filter on the list based on the partner's `tenantId` field. The value must be a string. Takes precedence over `search`."""
+
+    include_expanded_fields: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="includeExpandedFields"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Whether to include stats fields on the partner (`clicks`, `leads`, `sales`, `saleAmount`, `commissions`, `netRevenue`). If false, those fields will be returned as 0."""
+
+    search: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A search query to filter partners by name, email, or tenantId."""
+
+    page: Annotated[
+        Optional[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""The page number for pagination."""
+
+    page_size: Annotated[
+        Optional[float],
+        pydantic.Field(alias="pageSize"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 100
+    r"""The number of items per page."""
+
+
+class ListPartnersStatus(str, Enum):
     r"""The status of the partner's enrollment in the program."""
 
     PENDING = "pending"
@@ -25,7 +135,7 @@ class Status(str, Enum):
     ARCHIVED = "archived"
 
 
-class PartnerEnrolledEventLinkTypedDict(TypedDict):
+class ListPartnersLinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
     domain: str
@@ -46,7 +156,7 @@ class PartnerEnrolledEventLinkTypedDict(TypedDict):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class PartnerEnrolledEventLink(BaseModel):
+class ListPartnersLink(BaseModel):
     id: str
     r"""The unique ID of the short link."""
 
@@ -75,7 +185,7 @@ class PartnerEnrolledEventLink(BaseModel):
     r"""The total dollar amount of sales the short links has generated (in cents)."""
 
 
-class BannedReason(str, Enum):
+class ListPartnersBannedReason(str, Enum):
     r"""If the partner was banned from the program, this is the reason for the ban."""
 
     TOS_VIOLATION = "tos_violation"
@@ -86,7 +196,7 @@ class BannedReason(str, Enum):
     BRAND_ABUSE = "brand_abuse"
 
 
-class PartnerEnrolledEventDataTypedDict(TypedDict):
+class ListPartnersResponseBodyTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -110,9 +220,9 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     program_id: str
     r"""The program's unique ID on Dub."""
     created_at: str
-    status: Status
+    status: ListPartnersStatus
     r"""The status of the partner's enrollment in the program."""
-    links: Nullable[List[PartnerEnrolledEventLinkTypedDict]]
+    links: Nullable[List[ListPartnersLinkTypedDict]]
     r"""The partner's referral links in this program."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
@@ -126,7 +236,7 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     r"""If the partner submitted an application to join the program, this is the ID of the application."""
     banned_at: NotRequired[Nullable[str]]
     r"""If the partner was banned from the program, this is the date of the ban."""
-    banned_reason: NotRequired[Nullable[BannedReason]]
+    banned_reason: NotRequired[Nullable[ListPartnersBannedReason]]
     r"""If the partner was banned from the program, this is the reason for the ban."""
     clicks: NotRequired[float]
     r"""The total number of clicks on the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
@@ -161,7 +271,7 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     tiktok_verified_at: NotRequired[Nullable[str]]
 
 
-class PartnerEnrolledEventData(BaseModel):
+class ListPartnersResponseBody(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -199,10 +309,10 @@ class PartnerEnrolledEventData(BaseModel):
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    status: Status
+    status: ListPartnersStatus
     r"""The status of the partner's enrollment in the program."""
 
-    links: Nullable[List[PartnerEnrolledEventLink]]
+    links: Nullable[List[ListPartnersLink]]
     r"""The partner's referral links in this program."""
 
     description: OptionalNullable[str] = UNSET
@@ -240,7 +350,7 @@ class PartnerEnrolledEventData(BaseModel):
     r"""If the partner was banned from the program, this is the date of the ban."""
 
     banned_reason: Annotated[
-        OptionalNullable[BannedReason], pydantic.Field(alias="bannedReason")
+        OptionalNullable[ListPartnersBannedReason], pydantic.Field(alias="bannedReason")
     ] = UNSET
     r"""If the partner was banned from the program, this is the reason for the ban."""
 
@@ -404,24 +514,3 @@ class PartnerEnrolledEventData(BaseModel):
                 m[k] = val
 
         return m
-
-
-class PartnerEnrolledEventTypedDict(TypedDict):
-    r"""Triggered when a partner is enrolled."""
-
-    id: str
-    event: PartnerEnrolledEventEvent
-    created_at: str
-    data: PartnerEnrolledEventDataTypedDict
-
-
-class PartnerEnrolledEvent(BaseModel):
-    r"""Triggered when a partner is enrolled."""
-
-    id: str
-
-    event: PartnerEnrolledEventEvent
-
-    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
-
-    data: PartnerEnrolledEventData

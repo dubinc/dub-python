@@ -82,6 +82,8 @@ class Trigger(str, Enum):
 
     QR = "qr"
     LINK = "link"
+    PAGEVIEW = "pageview"
+    DEEPLINK = "deeplink"
 
 
 RetrieveAnalyticsQueryParamTagIdsTypedDict = TypeAliasType(
@@ -94,6 +96,13 @@ RetrieveAnalyticsQueryParamTagIds = TypeAliasType(
     "RetrieveAnalyticsQueryParamTagIds", Union[str, List[str]]
 )
 r"""The tag IDs to retrieve analytics for."""
+
+
+class SaleType(str, Enum):
+    r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
+
+    NEW = "new"
+    RECURRING = "recurring"
 
 
 class RetrieveAnalyticsRequestTypedDict(TypedDict):
@@ -157,6 +166,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
+    sale_type: NotRequired[SaleType]
+    r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
     utm_source: NotRequired[Nullable[str]]
     r"""The UTM source of the short link."""
     utm_medium: NotRequired[Nullable[str]]
@@ -361,6 +372,13 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
 
+    sale_type: Annotated[
+        Optional[SaleType],
+        pydantic.Field(alias="saleType"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
+
     utm_source: Annotated[
         OptionalNullable[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -424,6 +442,7 @@ class RetrieveAnalyticsRequest(BaseModel):
             "folderId",
             "qr",
             "root",
+            "saleType",
             "utm_source",
             "utm_medium",
             "utm_campaign",

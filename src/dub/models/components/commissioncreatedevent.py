@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -10,16 +9,18 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class Type(str, Enum):
+class CommissionCreatedEventEvent(str, Enum):
+    COMMISSION_CREATED = "commission.created"
+
+
+class CommissionCreatedEventType(str, Enum):
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
     CUSTOM = "custom"
 
 
-class QueryParamStatus(str, Enum):
-    r"""Filter the list of commissions by their corresponding status."""
-
+class CommissionCreatedEventStatus(str, Enum):
     PENDING = "pending"
     PROCESSED = "processed"
     PAID = "paid"
@@ -29,166 +30,7 @@ class QueryParamStatus(str, Enum):
     CANCELED = "canceled"
 
 
-class ListCommissionsQueryParamSortBy(str, Enum):
-    r"""The field to sort the list of commissions by."""
-
-    CREATED_AT = "createdAt"
-    AMOUNT = "amount"
-
-
-class ListCommissionsQueryParamSortOrder(str, Enum):
-    r"""The sort order for the list of commissions."""
-
-    ASC = "asc"
-    DESC = "desc"
-
-
-class ListCommissionsQueryParamInterval(str, Enum):
-    r"""The interval to retrieve commissions for."""
-
-    TWENTY_FOURH = "24h"
-    SEVEND = "7d"
-    THIRTYD = "30d"
-    NINETYD = "90d"
-    ONEY = "1y"
-    MTD = "mtd"
-    QTD = "qtd"
-    YTD = "ytd"
-    ALL = "all"
-
-
-class ListCommissionsRequestTypedDict(TypedDict):
-    type: NotRequired[Type]
-    customer_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated customer."""
-    payout_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated payout."""
-    partner_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner."""
-    invoice_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
-    status: NotRequired[QueryParamStatus]
-    r"""Filter the list of commissions by their corresponding status."""
-    sort_by: NotRequired[ListCommissionsQueryParamSortBy]
-    r"""The field to sort the list of commissions by."""
-    sort_order: NotRequired[ListCommissionsQueryParamSortOrder]
-    r"""The sort order for the list of commissions."""
-    interval: NotRequired[ListCommissionsQueryParamInterval]
-    r"""The interval to retrieve commissions for."""
-    start: NotRequired[str]
-    r"""The start date of the date range to filter the commissions by."""
-    end: NotRequired[str]
-    r"""The end date of the date range to filter the commissions by."""
-    page: NotRequired[float]
-    r"""The page number for pagination."""
-    page_size: NotRequired[float]
-    r"""The number of items per page."""
-
-
-class ListCommissionsRequest(BaseModel):
-    type: Annotated[
-        Optional[Type],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-
-    customer_id: Annotated[
-        Optional[str],
-        pydantic.Field(alias="customerId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Filter the list of commissions by the associated customer."""
-
-    payout_id: Annotated[
-        Optional[str],
-        pydantic.Field(alias="payoutId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Filter the list of commissions by the associated payout."""
-
-    partner_id: Annotated[
-        Optional[str],
-        pydantic.Field(alias="partnerId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Filter the list of commissions by the associated partner."""
-
-    invoice_id: Annotated[
-        Optional[str],
-        pydantic.Field(alias="invoiceId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
-
-    status: Annotated[
-        Optional[QueryParamStatus],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Filter the list of commissions by their corresponding status."""
-
-    sort_by: Annotated[
-        Optional[ListCommissionsQueryParamSortBy],
-        pydantic.Field(alias="sortBy"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = ListCommissionsQueryParamSortBy.CREATED_AT
-    r"""The field to sort the list of commissions by."""
-
-    sort_order: Annotated[
-        Optional[ListCommissionsQueryParamSortOrder],
-        pydantic.Field(alias="sortOrder"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = ListCommissionsQueryParamSortOrder.DESC
-    r"""The sort order for the list of commissions."""
-
-    interval: Annotated[
-        Optional[ListCommissionsQueryParamInterval],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = ListCommissionsQueryParamInterval.ALL
-    r"""The interval to retrieve commissions for."""
-
-    start: Annotated[
-        Optional[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The start date of the date range to filter the commissions by."""
-
-    end: Annotated[
-        Optional[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The end date of the date range to filter the commissions by."""
-
-    page: Annotated[
-        Optional[float],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 1
-    r"""The page number for pagination."""
-
-    page_size: Annotated[
-        Optional[float],
-        pydantic.Field(alias="pageSize"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 100
-    r"""The number of items per page."""
-
-
-class ListCommissionsType(str, Enum):
-    CLICK = "click"
-    LEAD = "lead"
-    SALE = "sale"
-    CUSTOM = "custom"
-
-
-class ListCommissionsStatus(str, Enum):
-    PENDING = "pending"
-    PROCESSED = "processed"
-    PAID = "paid"
-    REFUNDED = "refunded"
-    DUPLICATE = "duplicate"
-    FRAUD = "fraud"
-    CANCELED = "canceled"
-
-
-class ListCommissionsPartnerTypedDict(TypedDict):
+class PartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -203,7 +45,7 @@ class ListCommissionsPartnerTypedDict(TypedDict):
     r"""The partner's country (required for tax purposes)."""
 
 
-class ListCommissionsPartner(BaseModel):
+class Partner(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -255,7 +97,7 @@ class ListCommissionsPartner(BaseModel):
         return m
 
 
-class ListCommissionsCustomerTypedDict(TypedDict):
+class CommissionCreatedEventCustomerTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
     external_id: str
@@ -276,7 +118,7 @@ class ListCommissionsCustomerTypedDict(TypedDict):
     r"""Total amount of sales for the customer."""
 
 
-class ListCommissionsCustomer(BaseModel):
+class CommissionCreatedEventCustomer(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
@@ -337,26 +179,26 @@ class ListCommissionsCustomer(BaseModel):
         return m
 
 
-class ListCommissionsResponseBodyTypedDict(TypedDict):
+class CommissionCreatedEventDataTypedDict(TypedDict):
     id: str
     r"""The commission's unique ID on Dub."""
     amount: float
     earnings: float
     currency: str
-    status: ListCommissionsStatus
+    status: CommissionCreatedEventStatus
     invoice_id: Nullable[str]
     description: Nullable[str]
     quantity: float
     created_at: str
     updated_at: str
-    partner: ListCommissionsPartnerTypedDict
-    type: NotRequired[ListCommissionsType]
+    partner: PartnerTypedDict
+    type: NotRequired[CommissionCreatedEventType]
     user_id: NotRequired[Nullable[str]]
     r"""The user who created the manual commission."""
-    customer: NotRequired[Nullable[ListCommissionsCustomerTypedDict]]
+    customer: NotRequired[Nullable[CommissionCreatedEventCustomerTypedDict]]
 
 
-class ListCommissionsResponseBody(BaseModel):
+class CommissionCreatedEventData(BaseModel):
     id: str
     r"""The commission's unique ID on Dub."""
 
@@ -366,7 +208,7 @@ class ListCommissionsResponseBody(BaseModel):
 
     currency: str
 
-    status: ListCommissionsStatus
+    status: CommissionCreatedEventStatus
 
     invoice_id: Annotated[Nullable[str], pydantic.Field(alias="invoiceId")]
 
@@ -378,14 +220,14 @@ class ListCommissionsResponseBody(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
-    partner: ListCommissionsPartner
+    partner: Partner
 
-    type: Optional[ListCommissionsType] = None
+    type: Optional[CommissionCreatedEventType] = None
 
     user_id: Annotated[OptionalNullable[str], pydantic.Field(alias="userId")] = UNSET
     r"""The user who created the manual commission."""
 
-    customer: OptionalNullable[ListCommissionsCustomer] = UNSET
+    customer: OptionalNullable[CommissionCreatedEventCustomer] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -416,3 +258,24 @@ class ListCommissionsResponseBody(BaseModel):
                 m[k] = val
 
         return m
+
+
+class CommissionCreatedEventTypedDict(TypedDict):
+    r"""Triggered when a commission is created for a partner."""
+
+    id: str
+    event: CommissionCreatedEventEvent
+    created_at: str
+    data: CommissionCreatedEventDataTypedDict
+
+
+class CommissionCreatedEvent(BaseModel):
+    r"""Triggered when a commission is created for a partner."""
+
+    id: str
+
+    event: CommissionCreatedEventEvent
+
+    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+
+    data: CommissionCreatedEventData
