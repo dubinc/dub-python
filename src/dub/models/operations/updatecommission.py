@@ -81,6 +81,155 @@ class UpdateCommissionStatus(str, Enum):
     CANCELED = "canceled"
 
 
+class UpdateCommissionPartnerTypedDict(TypedDict):
+    id: str
+    r"""The partner's unique ID on Dub."""
+    name: str
+    r"""The partner's full legal name."""
+    email: Nullable[str]
+    r"""The partner's email address. Should be a unique value across Dub."""
+    image: Nullable[str]
+    r"""The partner's avatar image."""
+    payouts_enabled_at: Nullable[str]
+    r"""The date when the partner enabled payouts."""
+    country: Nullable[str]
+    r"""The partner's country (required for tax purposes)."""
+
+
+class UpdateCommissionPartner(BaseModel):
+    id: str
+    r"""The partner's unique ID on Dub."""
+
+    name: str
+    r"""The partner's full legal name."""
+
+    email: Nullable[str]
+    r"""The partner's email address. Should be a unique value across Dub."""
+
+    image: Nullable[str]
+    r"""The partner's avatar image."""
+
+    payouts_enabled_at: Annotated[
+        Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
+    ]
+    r"""The date when the partner enabled payouts."""
+
+    country: Nullable[str]
+    r"""The partner's country (required for tax purposes)."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["email", "image", "payoutsEnabledAt", "country"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+class UpdateCommissionCustomerTypedDict(TypedDict):
+    id: str
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
+    external_id: str
+    r"""Unique identifier for the customer in the client's app."""
+    name: str
+    r"""Name of the customer."""
+    created_at: str
+    r"""The date the customer was created."""
+    email: NotRequired[Nullable[str]]
+    r"""Email of the customer."""
+    avatar: NotRequired[Nullable[str]]
+    r"""Avatar URL of the customer."""
+    country: NotRequired[Nullable[str]]
+    r"""Country of the customer."""
+    sales: NotRequired[Nullable[float]]
+    r"""Total number of sales for the customer."""
+    sale_amount: NotRequired[Nullable[float]]
+    r"""Total amount of sales for the customer."""
+
+
+class UpdateCommissionCustomer(BaseModel):
+    id: str
+    r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
+
+    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    r"""Unique identifier for the customer in the client's app."""
+
+    name: str
+    r"""Name of the customer."""
+
+    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+    r"""The date the customer was created."""
+
+    email: OptionalNullable[str] = UNSET
+    r"""Email of the customer."""
+
+    avatar: OptionalNullable[str] = UNSET
+    r"""Avatar URL of the customer."""
+
+    country: OptionalNullable[str] = UNSET
+    r"""Country of the customer."""
+
+    sales: OptionalNullable[float] = UNSET
+    r"""Total number of sales for the customer."""
+
+    sale_amount: Annotated[
+        OptionalNullable[float], pydantic.Field(alias="saleAmount")
+    ] = UNSET
+    r"""Total amount of sales for the customer."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["email", "avatar", "country", "sales", "saleAmount"]
+        nullable_fields = ["email", "avatar", "country", "sales", "saleAmount"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class UpdateCommissionResponseBodyTypedDict(TypedDict):
     r"""The updated commission."""
 
@@ -90,11 +239,16 @@ class UpdateCommissionResponseBodyTypedDict(TypedDict):
     earnings: float
     currency: str
     status: UpdateCommissionStatus
+    invoice_id: Nullable[str]
+    description: Nullable[str]
+    quantity: float
     created_at: str
     updated_at: str
+    partner: UpdateCommissionPartnerTypedDict
     type: NotRequired[UpdateCommissionType]
-    invoice_id: NotRequired[Nullable[str]]
-    description: NotRequired[Nullable[str]]
+    user_id: NotRequired[Nullable[str]]
+    r"""The user who created the manual commission."""
+    customer: NotRequired[Nullable[UpdateCommissionCustomerTypedDict]]
 
 
 class UpdateCommissionResponseBody(BaseModel):
@@ -111,22 +265,29 @@ class UpdateCommissionResponseBody(BaseModel):
 
     status: UpdateCommissionStatus
 
+    invoice_id: Annotated[Nullable[str], pydantic.Field(alias="invoiceId")]
+
+    description: Nullable[str]
+
+    quantity: float
+
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
+    partner: UpdateCommissionPartner
+
     type: Optional[UpdateCommissionType] = None
 
-    invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
-        UNSET
-    )
+    user_id: Annotated[OptionalNullable[str], pydantic.Field(alias="userId")] = UNSET
+    r"""The user who created the manual commission."""
 
-    description: OptionalNullable[str] = UNSET
+    customer: OptionalNullable[UpdateCommissionCustomer] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["type", "invoiceId", "description"]
-        nullable_fields = ["invoiceId", "description"]
+        optional_fields = ["type", "userId", "customer"]
+        nullable_fields = ["invoiceId", "description", "userId", "customer"]
         null_default_fields = []
 
         serialized = handler(self)

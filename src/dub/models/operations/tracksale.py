@@ -16,6 +16,7 @@ class PaymentProcessor(str, Enum):
     SHOPIFY = "shopify"
     POLAR = "polar"
     PADDLE = "paddle"
+    REVENUECAT = "revenuecat"
     CUSTOM = "custom"
 
 

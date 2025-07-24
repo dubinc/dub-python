@@ -675,6 +675,33 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listPartners
+          source: |-
+            from dub import Dub
+            from dub.models import operations
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.list(request={
+                    "status": operations.ListPartnersQueryParamStatus.APPROVED,
+                    "country": "US",
+                    "tenant_id": "1K0NM7HCN944PEMZ3CQPH43H8",
+                    "include_expanded_fields": False,
+                    "search": "john",
+                    "page_size": 50,
+                })
+
+                assert res is not None
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/partners"]["post"]
     update:
       x-codeSamples:
@@ -1005,7 +1032,7 @@ actions:
                     "customer_external_id": "<id>",
                     "amount": 594903,
                     "event_name": "Invoice paid",
-                    "payment_processor": operations.PaymentProcessor.POLAR,
+                    "payment_processor": operations.PaymentProcessor.PADDLE,
                     "lead_event_name": "Cloned template 1481267",
                 })
 

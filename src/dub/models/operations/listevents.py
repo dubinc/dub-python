@@ -50,6 +50,8 @@ class QueryParamTrigger(str, Enum):
 
     QR = "qr"
     LINK = "link"
+    PAGEVIEW = "pageview"
+    DEEPLINK = "deeplink"
 
 
 ListEventsQueryParamTagIdsTypedDict = TypeAliasType(
@@ -62,6 +64,13 @@ ListEventsQueryParamTagIds = TypeAliasType(
     "ListEventsQueryParamTagIds", Union[str, List[str]]
 )
 r"""The tag IDs to retrieve analytics for."""
+
+
+class QueryParamSaleType(str, Enum):
+    r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
+
+    NEW = "new"
+    RECURRING = "recurring"
 
 
 class QueryParamSortOrder(str, Enum):
@@ -146,6 +155,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
+    sale_type: NotRequired[QueryParamSaleType]
+    r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
     utm_source: NotRequired[Nullable[str]]
     r"""The UTM source of the short link."""
     utm_medium: NotRequired[Nullable[str]]
@@ -351,6 +362,13 @@ class ListEventsRequest(BaseModel):
     ] = None
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
 
+    sale_type: Annotated[
+        Optional[QueryParamSaleType],
+        pydantic.Field(alias="saleType"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
+
     utm_source: Annotated[
         OptionalNullable[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -443,6 +461,7 @@ class ListEventsRequest(BaseModel):
             "folderId",
             "qr",
             "root",
+            "saleType",
             "utm_source",
             "utm_medium",
             "utm_campaign",
