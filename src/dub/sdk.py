@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 
 
 class Dub(BaseSDK):
-    r"""Dub API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs."""
+    r"""Dub API: Dub is the modern link attribution platform for short links, conversion tracking, and affiliate programs."""
 
     links: "Links"
     analytics: "Analytics"
