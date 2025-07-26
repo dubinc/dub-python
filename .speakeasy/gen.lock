@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 494d7ee95fc8861b5282eb69a2752b95
+  docChecksum: 0d82086b2a39ca29e65f13649dd236e9
   docVersion: 0.0.1
-  speakeasyVersion: 1.587.1
-  generationVersion: 2.662.0
-  releaseVersion: 0.27.2
-  configChecksum: 637dd0bc1bd11dddf449f17ba2c3e180
+  speakeasyVersion: 1.590.0
+  generationVersion: 2.666.0
+  releaseVersion: 0.27.3
+  configChecksum: fc0bd55c00e03a5725dc68c361f07f9b
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
