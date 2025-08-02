@@ -13,6 +13,7 @@ Retrieve a paginated list of events for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listEvents" method="get" path="/events" -->
 ```python
 from dub import Dub
 

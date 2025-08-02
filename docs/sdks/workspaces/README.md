@@ -14,6 +14,7 @@ Retrieve a workspace for the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getWorkspace" method="get" path="/workspaces/{idOrSlug}" -->
 ```python
 from dub import Dub
 
@@ -65,6 +66,7 @@ Update a workspace by ID or slug.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateWorkspace" method="patch" path="/workspaces/{idOrSlug}" -->
 ```python
 from dub import Dub
 

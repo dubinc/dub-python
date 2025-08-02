@@ -14,6 +14,7 @@ Track a lead for a short link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="trackLead" method="post" path="/track/lead" -->
 ```python
 from dub import Dub
 
@@ -67,6 +68,7 @@ Track a sale for a short link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="trackSale" method="post" path="/track/sale" -->
 ```python
 from dub import Dub
 from dub.models import operations

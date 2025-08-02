@@ -18,6 +18,7 @@ Create a partner for a program. If partner exists, automatically enrolls them.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createPartner" method="post" path="/partners" -->
 ```python
 from dub import Dub
 
@@ -85,6 +86,7 @@ List all partners for a partner program.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listPartners" method="get" path="/partners" -->
 ```python
 from dub import Dub
 from dub.models import operations
@@ -142,6 +144,7 @@ Create a link for a partner that is enrolled in your program.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createPartnerLink" method="post" path="/partners/links" -->
 ```python
 from dub import Dub
 
@@ -208,6 +211,7 @@ Retrieve a partner's links by their partner ID or tenant ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="retrieveLinks" method="get" path="/partners/links" -->
 ```python
 from dub import Dub
 
@@ -257,6 +261,7 @@ Upsert a link for a partner that is enrolled in your program. If a link with the
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="upsertPartnerLink" method="put" path="/partners/links/upsert" -->
 ```python
 from dub import Dub
 
@@ -323,6 +328,7 @@ Retrieve analytics for a partner within a program. The response type vary based 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="retrievePartnerAnalytics" method="get" path="/partners/analytics" -->
 ```python
 from dub import Dub
 

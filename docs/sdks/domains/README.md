@@ -18,6 +18,7 @@ Create a domain for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createDomain" method="post" path="/domains" -->
 ```python
 from dub import Dub
 
@@ -72,6 +73,7 @@ Retrieve a list of domains associated with the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listDomains" method="get" path="/domains" -->
 ```python
 from dub import Dub
 
@@ -121,6 +123,7 @@ Update a domain for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateDomain" method="patch" path="/domains/{slug}" -->
 ```python
 from dub import Dub
 
@@ -176,6 +179,7 @@ Delete a domain from a workspace. It cannot be undone. This will also delete all
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteDomain" method="delete" path="/domains/{slug}" -->
 ```python
 from dub import Dub
 
@@ -225,6 +229,7 @@ Register a domain for the authenticated workspace. Only available for Enterprise
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="registerDomain" method="post" path="/domains/register" -->
 ```python
 from dub import Dub
 
@@ -276,6 +281,7 @@ Check if a domain name is available for purchase. You can check multiple domains
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="checkDomainStatus" method="get" path="/domains/status" -->
 ```python
 from dub import Dub
 

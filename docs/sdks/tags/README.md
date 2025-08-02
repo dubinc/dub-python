@@ -16,6 +16,7 @@ Create a tag for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createTag" method="post" path="/tags" -->
 ```python
 from dub import Dub
 
@@ -65,6 +66,7 @@ Retrieve a list of tags for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getTags" method="get" path="/tags" -->
 ```python
 from dub import Dub
 
@@ -116,6 +118,7 @@ Update a tag in the workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateTag" method="patch" path="/tags/{id}" -->
 ```python
 from dub import Dub
 
@@ -166,6 +169,7 @@ Delete a tag from the workspace. All existing links will still work, but they wi
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteTag" method="delete" path="/tags/{id}" -->
 ```python
 from dub import Dub
 

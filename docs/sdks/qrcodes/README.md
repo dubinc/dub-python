@@ -13,6 +13,7 @@ Retrieve a QR code for a link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getQRCode" method="get" path="/qr" -->
 ```python
 from dub import Dub
 

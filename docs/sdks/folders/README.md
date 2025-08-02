@@ -16,6 +16,7 @@ Create a folder for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createFolder" method="post" path="/folders" -->
 ```python
 from dub import Dub
 
@@ -65,6 +66,7 @@ Retrieve a list of folders for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listFolders" method="get" path="/folders" -->
 ```python
 from dub import Dub
 
@@ -114,6 +116,7 @@ Update a folder in the workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateFolder" method="patch" path="/folders/{id}" -->
 ```python
 from dub import Dub
 
@@ -164,6 +167,7 @@ Delete a folder from the workspace. All existing links will still work, but they
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteFolder" method="delete" path="/folders/{id}" -->
 ```python
 from dub import Dub
 
