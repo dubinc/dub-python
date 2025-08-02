@@ -22,6 +22,7 @@ Create a link for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createLink" method="post" path="/links" -->
 ```python
 from dub import Dub
 
@@ -87,6 +88,7 @@ Retrieve a paginated list of links for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getLinks" method="get" path="/links" -->
 ```python
 from dub import Dub
 
@@ -138,6 +140,7 @@ Retrieve the number of links for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getLinksCount" method="get" path="/links/count" -->
 ```python
 from dub import Dub
 
@@ -187,6 +190,7 @@ Retrieve the info for a link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getLinkInfo" method="get" path="/links/info" -->
 ```python
 from dub import Dub
 
@@ -239,6 +243,7 @@ Update a link for the authenticated workspace. If there's no change, returns it 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateLink" method="patch" path="/links/{linkId}" -->
 ```python
 from dub import Dub
 
@@ -305,6 +310,7 @@ Delete a link for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteLink" method="delete" path="/links/{linkId}" -->
 ```python
 from dub import Dub
 
@@ -354,6 +360,7 @@ Bulk create up to 100 links for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="bulkCreateLinks" method="post" path="/links/bulk" -->
 ```python
 from dub import Dub
 
@@ -438,6 +445,7 @@ Bulk update up to 100 links with the same data for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="bulkUpdateLinks" method="patch" path="/links/bulk" -->
 ```python
 from dub import Dub
 
@@ -504,6 +512,7 @@ Bulk delete up to 100 links for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="bulkDeleteLinks" method="delete" path="/links/bulk" -->
 ```python
 from dub import Dub
 
@@ -558,6 +567,7 @@ Upsert a link for the authenticated workspace by its URL. If a link with the sam
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="upsertLink" method="put" path="/links/upsert" -->
 ```python
 from dub import Dub
 

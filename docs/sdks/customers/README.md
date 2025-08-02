@@ -17,6 +17,7 @@ Retrieve a list of customers for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getCustomers" method="get" path="/customers" -->
 ```python
 from dub import Dub
 
@@ -70,6 +71,7 @@ with Dub(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createCustomer" method="post" path="/customers" -->
 ```python
 from dub import Dub
 
@@ -119,6 +121,7 @@ Retrieve a customer by ID for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getCustomer" method="get" path="/customers/{id}" -->
 ```python
 from dub import Dub
 
@@ -170,6 +173,7 @@ Update a customer for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateCustomer" method="patch" path="/customers/{id}" -->
 ```python
 from dub import Dub
 
@@ -221,6 +225,7 @@ Delete a customer from a workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteCustomer" method="delete" path="/customers/{id}" -->
 ```python
 from dub import Dub
 

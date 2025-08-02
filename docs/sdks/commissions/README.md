@@ -14,6 +14,7 @@ Retrieve a list of commissions for a program.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listCommissions" method="get" path="/commissions" -->
 ```python
 from dub import Dub
 
@@ -65,6 +66,7 @@ Update an existing commission amount. This is useful for handling refunds (parti
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateCommission" method="patch" path="/commissions/{id}" -->
 ```python
 from dub import Dub
 
