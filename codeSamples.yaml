@@ -24,6 +24,7 @@ actions:
                     "os": "Windows",
                     "referer": "google.com",
                     "referer_url": "https://dub.co/blog",
+                    "query": "metadata['key']:'value'",
                 })
 
                 assert res is not None
@@ -305,6 +306,7 @@ actions:
                     "os": "Windows",
                     "referer": "google.com",
                     "referer_url": "https://dub.co/blog",
+                    "query": "metadata['key']:'value'",
                 })
 
                 assert res is not None

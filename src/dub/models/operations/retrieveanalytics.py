@@ -78,7 +78,7 @@ class Interval(str, Enum):
 
 
 class Trigger(str, Enum):
-    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+    r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
 
     QR = "qr"
     LINK = "link"
@@ -149,25 +149,27 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     os: NotRequired[str]
     r"""The OS to retrieve analytics for."""
     trigger: NotRequired[Trigger]
-    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+    r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
     referer: NotRequired[str]
     r"""The referer to retrieve analytics for."""
     referer_url: NotRequired[str]
     r"""The full referer URL to retrieve analytics for."""
     url: NotRequired[str]
     r"""The URL to retrieve analytics for."""
-    tag_id: NotRequired[str]
-    r"""Deprecated. Use `tagIds` instead. The tag ID to retrieve analytics for."""
     tag_ids: NotRequired[RetrieveAnalyticsQueryParamTagIdsTypedDict]
     r"""The tag IDs to retrieve analytics for."""
     folder_id: NotRequired[str]
     r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
-    qr: NotRequired[bool]
-    r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
     sale_type: NotRequired[SaleType]
     r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
+    query: NotRequired[str]
+    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
+    tag_id: NotRequired[str]
+    r"""Deprecated: Use `tagIds` instead. The tag ID to retrieve analytics for."""
+    qr: NotRequired[bool]
+    r"""Deprecated: Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     utm_source: NotRequired[Nullable[str]]
     r"""The UTM source of the short link."""
     utm_medium: NotRequired[Nullable[str]]
@@ -318,7 +320,7 @@ class RetrieveAnalyticsRequest(BaseModel):
         Optional[Trigger],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The trigger to retrieve analytics for. If undefined, return both QR and link clicks."""
+    r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
 
     referer: Annotated[
         Optional[str],
@@ -339,13 +341,6 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""The URL to retrieve analytics for."""
 
-    tag_id: Annotated[
-        Optional[str],
-        pydantic.Field(alias="tagId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Deprecated. Use `tagIds` instead. The tag ID to retrieve analytics for."""
-
     tag_ids: Annotated[
         Optional[RetrieveAnalyticsQueryParamTagIds],
         pydantic.Field(alias="tagIds"),
@@ -360,12 +355,6 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
 
-    qr: Annotated[
-        Optional[bool],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Deprecated. Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
-
     root: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -378,6 +367,25 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
+
+    query: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
+
+    tag_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tagId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Deprecated: Use `tagIds` instead. The tag ID to retrieve analytics for."""
+
+    qr: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Deprecated: Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
 
     utm_source: Annotated[
         OptionalNullable[str],
@@ -437,12 +445,13 @@ class RetrieveAnalyticsRequest(BaseModel):
             "referer",
             "refererUrl",
             "url",
-            "tagId",
             "tagIds",
             "folderId",
-            "qr",
             "root",
             "saleType",
+            "query",
+            "tagId",
+            "qr",
             "utm_source",
             "utm_medium",
             "utm_campaign",

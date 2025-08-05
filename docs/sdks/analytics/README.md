@@ -13,6 +13,7 @@ Retrieve analytics for a link, a domain, or the authenticated workspace. The res
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="retrieveAnalytics" method="get" path="/analytics" -->
 ```python
 from dub import Dub
 
@@ -29,6 +30,7 @@ with Dub(
         "os": "Windows",
         "referer": "google.com",
         "referer_url": "https://dub.co/blog",
+        "query": "metadata['key']:'value'",
     })
 
     assert res is not None
