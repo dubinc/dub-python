@@ -68,7 +68,7 @@ class GetLinksRequestTypedDict(TypedDict):
     domain: NotRequired[str]
     r"""The domain to filter the links by. E.g. `ac.me`. If not provided, all links for the workspace will be returned."""
     tag_id: NotRequired[str]
-    r"""Deprecated. Use `tagIds` instead. The tag ID to filter the links by."""
+    r"""Deprecated: Use `tagIds` instead. The tag ID to filter the links by."""
     tag_ids: NotRequired[QueryParamTagIdsTypedDict]
     r"""The tag IDs to filter the links by."""
     tag_names: NotRequired[QueryParamTagNamesTypedDict]
@@ -109,7 +109,7 @@ class GetLinksRequest(BaseModel):
         pydantic.Field(alias="tagId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Deprecated. Use `tagIds` instead. The tag ID to filter the links by."""
+    r"""Deprecated: Use `tagIds` instead. The tag ID to filter the links by."""
 
     tag_ids: Annotated[
         Optional[QueryParamTagIds],

@@ -60,10 +60,6 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""Whether to track conversions for the short link. Defaults to `false` if not provided."""
     archived: NotRequired[bool]
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
-    public_stats: NotRequired[bool]
-    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
-    tag_id: NotRequired[Nullable[str]]
-    r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tagIds` instead."""
     tag_ids: NotRequired[UpdateLinkTagIdsTypedDict]
     r"""The unique IDs of the tags assigned to the short link."""
     tag_names: NotRequired[UpdateLinkTagNamesTypedDict]
@@ -117,6 +113,10 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""The date and time when the tests started."""
     test_completed_at: NotRequired[Nullable[str]]
     r"""The date and time when the tests were or will be completed."""
+    public_stats: NotRequired[bool]
+    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
+    tag_id: NotRequired[Nullable[str]]
+    r"""Deprecated: Use `tagIds` instead. The unique ID of the tag assigned to the short link."""
 
 
 class UpdateLinkRequestBody(BaseModel):
@@ -156,24 +156,6 @@ class UpdateLinkRequestBody(BaseModel):
 
     archived: Optional[bool] = None
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
-
-    public_stats: Annotated[
-        Optional[bool],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
-            alias="publicStats",
-        ),
-    ] = None
-    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
-
-    tag_id: Annotated[
-        OptionalNullable[str],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
-            alias="tagId",
-        ),
-    ] = UNSET
-    r"""The unique ID of the tag assigned to the short link. This field is deprecated – use `tagIds` instead."""
 
     tag_ids: Annotated[Optional[UpdateLinkTagIds], pydantic.Field(alias="tagIds")] = (
         None
@@ -274,6 +256,24 @@ class UpdateLinkRequestBody(BaseModel):
     ] = UNSET
     r"""The date and time when the tests were or will be completed."""
 
+    public_stats: Annotated[
+        Optional[bool],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="publicStats",
+        ),
+    ] = None
+    r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
+
+    tag_id: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="tagId",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `tagIds` instead. The unique ID of the tag assigned to the short link."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -286,8 +286,6 @@ class UpdateLinkRequestBody(BaseModel):
             "partnerId",
             "trackConversion",
             "archived",
-            "publicStats",
-            "tagId",
             "tagIds",
             "tagNames",
             "folderId",
@@ -315,13 +313,14 @@ class UpdateLinkRequestBody(BaseModel):
             "testVariants",
             "testStartedAt",
             "testCompletedAt",
+            "publicStats",
+            "tagId",
         ]
         nullable_fields = [
             "externalId",
             "tenantId",
             "programId",
             "partnerId",
-            "tagId",
             "folderId",
             "comments",
             "expiresAt",
@@ -344,6 +343,7 @@ class UpdateLinkRequestBody(BaseModel):
             "testVariants",
             "testStartedAt",
             "testCompletedAt",
+            "tagId",
         ]
         null_default_fields = []
 

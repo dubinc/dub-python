@@ -13,6 +13,7 @@ Retrieve a paginated list of events for the authenticated workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listEvents" method="get" path="/events" -->
 ```python
 from dub import Dub
 
@@ -29,6 +30,7 @@ with Dub(
         "os": "Windows",
         "referer": "google.com",
         "referer_url": "https://dub.co/blog",
+        "query": "metadata['key']:'value'",
     })
 
     assert res is not None
