@@ -14,8 +14,8 @@ class Color(str, Enum):
     GREEN = "green"
     BLUE = "blue"
     PURPLE = "purple"
-    PINK = "pink"
     BROWN = "brown"
+    PINK = "pink"
 
 
 class TagSchemaTypedDict(TypedDict):

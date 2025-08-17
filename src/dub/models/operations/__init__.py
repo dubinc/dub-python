@@ -74,7 +74,6 @@ if TYPE_CHECKING:
     )
     from .createpartner import (
         BannedReason,
-        Country,
         CreatePartnerLink,
         CreatePartnerLinkTypedDict,
         CreatePartnerRequestBody,
@@ -104,7 +103,6 @@ if TYPE_CHECKING:
         CreatePartnerLinkTestVariantsTypedDict,
     )
     from .createreferralsembedtoken import (
-        CreateReferralsEmbedTokenCountry,
         CreateReferralsEmbedTokenLinkProps,
         CreateReferralsEmbedTokenLinkPropsTypedDict,
         CreateReferralsEmbedTokenRequestBody,
@@ -443,7 +441,6 @@ __all__ = [
     "Click",
     "ClickTypedDict",
     "Color",
-    "Country",
     "CreateCustomerDiscount",
     "CreateCustomerDiscountTypedDict",
     "CreateCustomerLink",
@@ -484,7 +481,6 @@ __all__ = [
     "CreatePartnerTagNamesTypedDict",
     "CreatePartnerTestVariants",
     "CreatePartnerTestVariantsTypedDict",
-    "CreateReferralsEmbedTokenCountry",
     "CreateReferralsEmbedTokenLinkProps",
     "CreateReferralsEmbedTokenLinkPropsTypedDict",
     "CreateReferralsEmbedTokenRequestBody",
@@ -813,7 +809,6 @@ _dynamic_imports: dict[str, str] = {
     "TestVariants": ".createlink",
     "TestVariantsTypedDict": ".createlink",
     "BannedReason": ".createpartner",
-    "Country": ".createpartner",
     "CreatePartnerLink": ".createpartner",
     "CreatePartnerLinkTypedDict": ".createpartner",
     "CreatePartnerRequestBody": ".createpartner",
@@ -839,7 +834,6 @@ _dynamic_imports: dict[str, str] = {
     "CreatePartnerLinkTagNamesTypedDict": ".createpartnerlink",
     "CreatePartnerLinkTestVariants": ".createpartnerlink",
     "CreatePartnerLinkTestVariantsTypedDict": ".createpartnerlink",
-    "CreateReferralsEmbedTokenCountry": ".createreferralsembedtoken",
     "CreateReferralsEmbedTokenLinkProps": ".createreferralsembedtoken",
     "CreateReferralsEmbedTokenLinkPropsTypedDict": ".createreferralsembedtoken",
     "CreateReferralsEmbedTokenRequestBody": ".createreferralsembedtoken",
