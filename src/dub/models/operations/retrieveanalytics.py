@@ -17,7 +17,6 @@ from dub.models.components import (
     analyticstopurls as components_analyticstopurls,
     analyticstriggers as components_analyticstriggers,
     continentcode as components_continentcode,
-    countrycode as components_countrycode,
 )
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
@@ -134,8 +133,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. If set along with `start`, takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
-    country: NotRequired[components_countrycode.CountryCode]
-    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
+    country: NotRequired[str]
+    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
     city: NotRequired[str]
     r"""The city to retrieve analytics for."""
     region: NotRequired[str]
@@ -275,10 +274,10 @@ class RetrieveAnalyticsRequest(BaseModel):
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
 
     country: Annotated[
-        Optional[components_countrycode.CountryCode],
+        Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
+    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
 
     city: Annotated[
         Optional[str],

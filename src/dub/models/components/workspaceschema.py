@@ -137,6 +137,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The folders usage of the workspace."""
     folders_limit: float
     r"""The folders limit of the workspace."""
+    groups_limit: float
+    r"""The groups limit of the workspace."""
     users_limit: float
     r"""The users limit of the workspace."""
     ai_usage: float
@@ -147,8 +149,6 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""Whether the workspace has conversion tracking enabled automatically for new links (d.to/conversions)."""
     dot_link_claimed: bool
     r"""Whether the workspace has claimed a free .link domain. (dub.link/free)"""
-    partners_enabled: bool
-    r"""Whether the workspace has Dub Partners enabled."""
     created_at: str
     r"""The date and time when the workspace was created."""
     users: List[UsersTypedDict]
@@ -229,6 +229,9 @@ class WorkspaceSchema(BaseModel):
     folders_limit: Annotated[float, pydantic.Field(alias="foldersLimit")]
     r"""The folders limit of the workspace."""
 
+    groups_limit: Annotated[float, pydantic.Field(alias="groupsLimit")]
+    r"""The groups limit of the workspace."""
+
     users_limit: Annotated[float, pydantic.Field(alias="usersLimit")]
     r"""The users limit of the workspace."""
 
@@ -243,9 +246,6 @@ class WorkspaceSchema(BaseModel):
 
     dot_link_claimed: Annotated[bool, pydantic.Field(alias="dotLinkClaimed")]
     r"""Whether the workspace has claimed a free .link domain. (dub.link/free)"""
-
-    partners_enabled: Annotated[bool, pydantic.Field(alias="partnersEnabled")]
-    r"""Whether the workspace has Dub Partners enabled."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date and time when the workspace was created."""

@@ -1,6 +1,6 @@
 # Color
 
-The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, pink, brown.
+The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown.
 
 
 ## Values
@@ -12,5 +12,5 @@ The color of the tag. If not provided, a random color will be used from the list
 | `GREEN`  | green    |
 | `BLUE`   | blue     |
 | `PURPLE` | purple   |
-| `PINK`   | pink     |
 | `BROWN`  | brown    |
+| `PINK`   | pink     |

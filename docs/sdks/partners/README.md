@@ -339,6 +339,7 @@ with Dub(
 
     res = d_client.partners.analytics(request={
         "timezone": "America/New_York",
+        "query": "metadata['key']:'value'",
     })
 
     assert res is not None

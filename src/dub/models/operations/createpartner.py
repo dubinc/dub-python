@@ -9,261 +9,6 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class Country(str, Enum):
-    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
-
-    AF = "AF"
-    AL = "AL"
-    DZ = "DZ"
-    AS = "AS"
-    AD = "AD"
-    AO = "AO"
-    AI = "AI"
-    AQ = "AQ"
-    AG = "AG"
-    AR = "AR"
-    AM = "AM"
-    AW = "AW"
-    AU = "AU"
-    AT = "AT"
-    AZ = "AZ"
-    BS = "BS"
-    BH = "BH"
-    BD = "BD"
-    BB = "BB"
-    BY = "BY"
-    BE = "BE"
-    BZ = "BZ"
-    BJ = "BJ"
-    BM = "BM"
-    BT = "BT"
-    BO = "BO"
-    BA = "BA"
-    BW = "BW"
-    BV = "BV"
-    BR = "BR"
-    IO = "IO"
-    BN = "BN"
-    BG = "BG"
-    BF = "BF"
-    BI = "BI"
-    KH = "KH"
-    CM = "CM"
-    CA = "CA"
-    CV = "CV"
-    KY = "KY"
-    CF = "CF"
-    TD = "TD"
-    CL = "CL"
-    CN = "CN"
-    CX = "CX"
-    CC = "CC"
-    CO = "CO"
-    KM = "KM"
-    CG = "CG"
-    CD = "CD"
-    CK = "CK"
-    CR = "CR"
-    CI = "CI"
-    HR = "HR"
-    CU = "CU"
-    CY = "CY"
-    CZ = "CZ"
-    DK = "DK"
-    DJ = "DJ"
-    DM = "DM"
-    DO = "DO"
-    EC = "EC"
-    EG = "EG"
-    SV = "SV"
-    GQ = "GQ"
-    ER = "ER"
-    EE = "EE"
-    ET = "ET"
-    FK = "FK"
-    FO = "FO"
-    FJ = "FJ"
-    FI = "FI"
-    FR = "FR"
-    GF = "GF"
-    PF = "PF"
-    TF = "TF"
-    GA = "GA"
-    GM = "GM"
-    GE = "GE"
-    DE = "DE"
-    GH = "GH"
-    GI = "GI"
-    GR = "GR"
-    GL = "GL"
-    GD = "GD"
-    GP = "GP"
-    GU = "GU"
-    GT = "GT"
-    GN = "GN"
-    GW = "GW"
-    GY = "GY"
-    HT = "HT"
-    HM = "HM"
-    VA = "VA"
-    HN = "HN"
-    HK = "HK"
-    HU = "HU"
-    IS = "IS"
-    IN = "IN"
-    ID = "ID"
-    IR = "IR"
-    IQ = "IQ"
-    IE = "IE"
-    IL = "IL"
-    IT = "IT"
-    JM = "JM"
-    JP = "JP"
-    JO = "JO"
-    KZ = "KZ"
-    KE = "KE"
-    KI = "KI"
-    KP = "KP"
-    KR = "KR"
-    KW = "KW"
-    KG = "KG"
-    LA = "LA"
-    LV = "LV"
-    LB = "LB"
-    LS = "LS"
-    LR = "LR"
-    LY = "LY"
-    LI = "LI"
-    LT = "LT"
-    LU = "LU"
-    MO = "MO"
-    MG = "MG"
-    MW = "MW"
-    MY = "MY"
-    MV = "MV"
-    ML = "ML"
-    MT = "MT"
-    MH = "MH"
-    MQ = "MQ"
-    MR = "MR"
-    MU = "MU"
-    YT = "YT"
-    MX = "MX"
-    FM = "FM"
-    MD = "MD"
-    MC = "MC"
-    MN = "MN"
-    MS = "MS"
-    MA = "MA"
-    MZ = "MZ"
-    MM = "MM"
-    NA = "NA"
-    NR = "NR"
-    NP = "NP"
-    NL = "NL"
-    NC = "NC"
-    NZ = "NZ"
-    NI = "NI"
-    NE = "NE"
-    NG = "NG"
-    NU = "NU"
-    NF = "NF"
-    MK = "MK"
-    MP = "MP"
-    NO = "NO"
-    OM = "OM"
-    PK = "PK"
-    PW = "PW"
-    PS = "PS"
-    PA = "PA"
-    PG = "PG"
-    PY = "PY"
-    PE = "PE"
-    PH = "PH"
-    PN = "PN"
-    PL = "PL"
-    PT = "PT"
-    PR = "PR"
-    QA = "QA"
-    RE = "RE"
-    RO = "RO"
-    RU = "RU"
-    RW = "RW"
-    SH = "SH"
-    KN = "KN"
-    LC = "LC"
-    PM = "PM"
-    VC = "VC"
-    WS = "WS"
-    SM = "SM"
-    ST = "ST"
-    SA = "SA"
-    SN = "SN"
-    SC = "SC"
-    SL = "SL"
-    SG = "SG"
-    SK = "SK"
-    SI = "SI"
-    SB = "SB"
-    SO = "SO"
-    ZA = "ZA"
-    GS = "GS"
-    ES = "ES"
-    LK = "LK"
-    SD = "SD"
-    SR = "SR"
-    SJ = "SJ"
-    SZ = "SZ"
-    SE = "SE"
-    CH = "CH"
-    SY = "SY"
-    TW = "TW"
-    TJ = "TJ"
-    TZ = "TZ"
-    TH = "TH"
-    TL = "TL"
-    TG = "TG"
-    TK = "TK"
-    TO = "TO"
-    TT = "TT"
-    TN = "TN"
-    TR = "TR"
-    TM = "TM"
-    TC = "TC"
-    TV = "TV"
-    UG = "UG"
-    UA = "UA"
-    AE = "AE"
-    GB = "GB"
-    US = "US"
-    UM = "UM"
-    UY = "UY"
-    UZ = "UZ"
-    VU = "VU"
-    VE = "VE"
-    VN = "VN"
-    VG = "VG"
-    VI = "VI"
-    WF = "WF"
-    EH = "EH"
-    YE = "YE"
-    ZM = "ZM"
-    ZW = "ZW"
-    AX = "AX"
-    BQ = "BQ"
-    CW = "CW"
-    GG = "GG"
-    IM = "IM"
-    JE = "JE"
-    ME = "ME"
-    BL = "BL"
-    MF = "MF"
-    RS = "RS"
-    SX = "SX"
-    SS = "SS"
-    XK = "XK"
-
-
 CreatePartnerTagIdsTypedDict = TypeAliasType(
     "CreatePartnerTagIdsTypedDict", Union[str, List[str]]
 )
@@ -570,8 +315,10 @@ class CreatePartnerRequestBodyTypedDict(TypedDict):
     r"""The partner's avatar image. If not provided, a default avatar will be used."""
     tenant_id: NotRequired[str]
     r"""The partner's unique ID in your system. Useful for retrieving the partner's links and stats later on. If not provided, the partner will be created as a standalone partner."""
-    country: NotRequired[Nullable[Country]]
-    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
+    group_id: NotRequired[str]
+    r"""The group ID to add the partner to. If not provided, the partner will be added to the default group."""
+    country: NotRequired[Nullable[str]]
+    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background. Max 5,000 characters."""
     link_props: NotRequired[LinkPropsTypedDict]
@@ -594,8 +341,11 @@ class CreatePartnerRequestBody(BaseModel):
     tenant_id: Annotated[Optional[str], pydantic.Field(alias="tenantId")] = None
     r"""The partner's unique ID in your system. Useful for retrieving the partner's links and stats later on. If not provided, the partner will be created as a standalone partner."""
 
-    country: OptionalNullable[Country] = UNSET
-    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. Learn more: https://d.to/geo"""
+    group_id: Annotated[Optional[str], pydantic.Field(alias="groupId")] = None
+    r"""The group ID to add the partner to. If not provided, the partner will be added to the default group."""
+
+    country: OptionalNullable[str] = UNSET
+    r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
 
     description: OptionalNullable[str] = UNSET
     r"""A brief description of the partner and their background. Max 5,000 characters."""
@@ -610,6 +360,7 @@ class CreatePartnerRequestBody(BaseModel):
             "username",
             "image",
             "tenantId",
+            "groupId",
             "country",
             "description",
             "linkProps",
@@ -734,12 +485,12 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The partner's Stripe Connect ID (for receiving payouts via Stripe)."""
     payouts_enabled_at: Nullable[str]
     r"""The date when the partner enabled payouts."""
+    program_id: str
+    r"""The program's unique ID on Dub."""
     partner_id: str
     r"""The partner's unique ID on Dub."""
     tenant_id: Nullable[str]
     r"""The partner's unique ID within your database. Can be useful for associating the partner with a user in your database and retrieving/update their data in the future."""
-    program_id: str
-    r"""The program's unique ID on Dub."""
     created_at: str
     status: CreatePartnerStatus
     r"""The status of the partner's enrollment in the program."""
@@ -747,6 +498,8 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The partner's referral links in this program."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
+    group_id: NotRequired[Nullable[str]]
+    r"""The partner's group ID on Dub."""
     total_commissions: NotRequired[float]
     r"""The total commissions paid to the partner for their referrals. Defaults to 0 if `includeExpandedFields` is false."""
     click_reward_id: NotRequired[Nullable[str]]
@@ -763,8 +516,10 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The total number of clicks on the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
     leads: NotRequired[float]
     r"""The total number of leads generated by the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
+    conversions: NotRequired[float]
+    r"""The total number of leads that converted to paying customers. Defaults to 0 if `includeExpandedFields` is false."""
     sales: NotRequired[float]
-    r"""The total number of sales generated by the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
+    r"""The total number of sales generated by the partner's links (includes recurring sales). Defaults to 0 if `includeExpandedFields` is false."""
     sale_amount: NotRequired[float]
     r"""The total amount of sales (in cents) generated by the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
     net_revenue: NotRequired[float]
@@ -821,14 +576,14 @@ class CreatePartnerResponseBody(BaseModel):
     ]
     r"""The date when the partner enabled payouts."""
 
+    program_id: Annotated[str, pydantic.Field(alias="programId")]
+    r"""The program's unique ID on Dub."""
+
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
     r"""The partner's unique ID on Dub."""
 
     tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
     r"""The partner's unique ID within your database. Can be useful for associating the partner with a user in your database and retrieving/update their data in the future."""
-
-    program_id: Annotated[str, pydantic.Field(alias="programId")]
-    r"""The program's unique ID on Dub."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
@@ -840,6 +595,9 @@ class CreatePartnerResponseBody(BaseModel):
 
     description: OptionalNullable[str] = UNSET
     r"""A brief description of the partner and their background."""
+
+    group_id: Annotated[OptionalNullable[str], pydantic.Field(alias="groupId")] = UNSET
+    r"""The partner's group ID on Dub."""
 
     total_commissions: Annotated[
         Optional[float], pydantic.Field(alias="totalCommissions")
@@ -883,8 +641,11 @@ class CreatePartnerResponseBody(BaseModel):
     leads: Optional[float] = 0
     r"""The total number of leads generated by the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
 
+    conversions: Optional[float] = 0
+    r"""The total number of leads that converted to paying customers. Defaults to 0 if `includeExpandedFields` is false."""
+
     sales: Optional[float] = 0
-    r"""The total number of sales generated by the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
+    r"""The total number of sales generated by the partner's links (includes recurring sales). Defaults to 0 if `includeExpandedFields` is false."""
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total amount of sales (in cents) generated by the partner's links. Defaults to 0 if `includeExpandedFields` is false."""
@@ -950,6 +711,7 @@ class CreatePartnerResponseBody(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "description",
+            "groupId",
             "totalCommissions",
             "clickRewardId",
             "leadRewardId",
@@ -960,6 +722,7 @@ class CreatePartnerResponseBody(BaseModel):
             "bannedReason",
             "clicks",
             "leads",
+            "conversions",
             "sales",
             "saleAmount",
             "netRevenue",
@@ -987,6 +750,7 @@ class CreatePartnerResponseBody(BaseModel):
             "paypalEmail",
             "stripeConnectId",
             "payoutsEnabledAt",
+            "groupId",
             "tenantId",
             "links",
             "clickRewardId",

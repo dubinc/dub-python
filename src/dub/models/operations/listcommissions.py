@@ -65,6 +65,8 @@ class ListCommissionsRequestTypedDict(TypedDict):
     r"""Filter the list of commissions by the associated payout."""
     partner_id: NotRequired[str]
     r"""Filter the list of commissions by the associated partner."""
+    group_id: NotRequired[str]
+    r"""Filter the list of commissions by the associated partner group."""
     invoice_id: NotRequired[str]
     r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
     status: NotRequired[QueryParamStatus]
@@ -111,6 +113,13 @@ class ListCommissionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter the list of commissions by the associated partner."""
+
+    group_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="groupId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter the list of commissions by the associated partner group."""
 
     invoice_id: Annotated[
         Optional[str],

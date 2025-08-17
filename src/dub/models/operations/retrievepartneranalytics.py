@@ -49,6 +49,8 @@ class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
     r"""The end date and time when to retrieve analytics from. If not provided, defaults to the current date. If set along with `start`, takes precedence over `interval`."""
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
+    query: NotRequired[str]
+    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
     group_by: NotRequired[RetrievePartnerAnalyticsQueryParamGroupBy]
     r"""The parameter to group the analytics data points by. Defaults to `count` if undefined."""
 
@@ -91,6 +93,12 @@ class RetrievePartnerAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "UTC"
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
+
+    query: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
 
     group_by: Annotated[
         Optional[RetrievePartnerAnalyticsQueryParamGroupBy],

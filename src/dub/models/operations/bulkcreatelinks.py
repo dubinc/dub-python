@@ -3,13 +3,12 @@
 from __future__ import annotations
 from dub.models.components import (
     linkerrorschema as components_linkerrorschema,
-    linkgeotargeting as components_linkgeotargeting,
     linkschema as components_linkschema,
 )
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -99,8 +98,8 @@ class RequestBodyTypedDict(TypedDict):
     r"""The iOS destination URL for the short link for iOS device targeting."""
     android: NotRequired[Nullable[str]]
     r"""The Android destination URL for the short link for Android device targeting."""
-    geo: NotRequired[Nullable[components_linkgeotargeting.LinkGeoTargetingTypedDict]]
-    r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
+    geo: NotRequired[Nullable[Dict[str, str]]]
+    r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`. See https://d.to/geo for more information."""
     do_index: NotRequired[bool]
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
     utm_source: NotRequired[Nullable[str]]
@@ -228,8 +227,8 @@ class RequestBody(BaseModel):
     android: OptionalNullable[str] = UNSET
     r"""The Android destination URL for the short link for Android device targeting."""
 
-    geo: OptionalNullable[components_linkgeotargeting.LinkGeoTargeting] = UNSET
-    r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`."""
+    geo: OptionalNullable[Dict[str, str]] = UNSET
+    r"""Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`. See https://d.to/geo for more information."""
 
     do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = None
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
