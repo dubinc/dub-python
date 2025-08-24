@@ -28,29 +28,29 @@ class PaymentProcessor(str, Enum):
 class SaleTypedDict(TypedDict):
     amount: int
     r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
-    payment_processor: PaymentProcessor
-    r"""The payment processor via which the sale was made."""
     invoice_id: NotRequired[Nullable[str]]
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
+    payment_processor: NotRequired[PaymentProcessor]
+    r"""The payment processor via which the sale was made."""
 
 
 class Sale(BaseModel):
     amount: int
     r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1437` JPY). Learn more: https://d.to/currency"""
 
-    payment_processor: Annotated[
-        PaymentProcessor, pydantic.Field(alias="paymentProcessor")
-    ]
-    r"""The payment processor via which the sale was made."""
-
     invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
         None
     )
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
 
+    payment_processor: Annotated[
+        Optional[PaymentProcessor], pydantic.Field(alias="paymentProcessor")
+    ] = PaymentProcessor.CUSTOM
+    r"""The payment processor via which the sale was made."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["invoiceId"]
+        optional_fields = ["invoiceId", "paymentProcessor"]
         nullable_fields = ["invoiceId"]
         null_default_fields = ["invoiceId"]
 

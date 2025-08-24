@@ -1024,7 +1024,6 @@ actions:
           label: trackSale
           source: |-
             from dub import Dub
-            from dub.models import operations
 
 
             with Dub(
@@ -1035,7 +1034,6 @@ actions:
                     "customer_external_id": "<id>",
                     "amount": 594903,
                     "event_name": "Invoice paid",
-                    "payment_processor": operations.PaymentProcessor.PADDLE,
                     "lead_event_name": "Cloned template 1481267",
                 })
 

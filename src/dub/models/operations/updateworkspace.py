@@ -5,7 +5,7 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -14,7 +14,6 @@ class UpdateWorkspaceRequestBodyTypedDict(TypedDict):
     slug: NotRequired[str]
     logo: NotRequired[Nullable[str]]
     conversion_enabled: NotRequired[bool]
-    allowed_hostnames: NotRequired[List[str]]
 
 
 class UpdateWorkspaceRequestBody(BaseModel):
@@ -28,19 +27,9 @@ class UpdateWorkspaceRequestBody(BaseModel):
         Optional[bool], pydantic.Field(alias="conversionEnabled")
     ] = None
 
-    allowed_hostnames: Annotated[
-        Optional[List[str]], pydantic.Field(alias="allowedHostnames")
-    ] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "name",
-            "slug",
-            "logo",
-            "conversionEnabled",
-            "allowedHostnames",
-        ]
+        optional_fields = ["name", "slug", "logo", "conversionEnabled"]
         nullable_fields = ["logo"]
         null_default_fields = []
 
