@@ -71,7 +71,6 @@ Track a sale for a short link.
 <!-- UsageSnippet language="python" operationID="trackSale" method="post" path="/track/sale" -->
 ```python
 from dub import Dub
-from dub.models import operations
 
 
 with Dub(
@@ -82,7 +81,6 @@ with Dub(
         "customer_external_id": "<id>",
         "amount": 594903,
         "event_name": "Invoice paid",
-        "payment_processor": operations.PaymentProcessor.POLAR,
         "lead_event_name": "Cloned template 1481267",
     })
 
