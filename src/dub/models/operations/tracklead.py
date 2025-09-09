@@ -10,15 +10,16 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Mode(str, Enum):
-    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
+    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub; `deferred` will defer the lead event creation to a subsequent request."""
 
     ASYNC = "async"
     WAIT = "wait"
+    DEFERRED = "deferred"
 
 
 class TrackLeadRequestBodyTypedDict(TypedDict):
     click_id: str
-    r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie."""
+    r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie. If an empty string is provided, Dub will try to find an existing customer with the provided `customerExternalId` and use the `clickId` from the customer if found."""
     event_name: str
     r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
     customer_external_id: str
@@ -29,17 +30,17 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""The email address of the customer."""
     customer_avatar: NotRequired[Nullable[str]]
     r"""The avatar URL of the customer."""
+    mode: NotRequired[Mode]
+    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub; `deferred` will defer the lead event creation to a subsequent request."""
     event_quantity: NotRequired[Nullable[float]]
     r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
-    mode: NotRequired[Mode]
-    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
 
 
 class TrackLeadRequestBody(BaseModel):
     click_id: Annotated[str, pydantic.Field(alias="clickId")]
-    r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie."""
+    r"""The unique ID of the click that the lead conversion event is attributed to. You can read this value from `dub_id` cookie. If an empty string is provided, Dub will try to find an existing customer with the provided `customerExternalId` and use the `clickId` from the customer if found."""
 
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
     r"""The name of the lead event to track. Can also be used as a unique identifier to associate a given lead event for a customer for a subsequent sale event (via the `leadEventName` prop in `/track/sale`)."""
@@ -62,13 +63,13 @@ class TrackLeadRequestBody(BaseModel):
     ] = None
     r"""The avatar URL of the customer."""
 
+    mode: Optional[Mode] = Mode.ASYNC
+    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub; `deferred` will defer the lead event creation to a subsequent request."""
+
     event_quantity: Annotated[
         OptionalNullable[float], pydantic.Field(alias="eventQuantity")
     ] = UNSET
     r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
-
-    mode: Optional[Mode] = Mode.ASYNC
-    r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub."""
 
     metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
@@ -79,8 +80,8 @@ class TrackLeadRequestBody(BaseModel):
             "customerName",
             "customerEmail",
             "customerAvatar",
-            "eventQuantity",
             "mode",
+            "eventQuantity",
             "metadata",
         ]
         nullable_fields = [

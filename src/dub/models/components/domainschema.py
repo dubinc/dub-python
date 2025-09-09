@@ -167,9 +167,9 @@ class DomainSchema(BaseModel):
             "placeholder",
             "expiredUrl",
             "notFoundUrl",
+            "logo",
             "assetLinks",
             "appleAppSiteAssociation",
-            "logo",
             "registeredDomain",
         ]
         null_default_fields = ["assetLinks", "appleAppSiteAssociation"]
