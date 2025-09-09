@@ -33,10 +33,18 @@ class TrackSaleRequestBodyTypedDict(TypedDict):
     r"""The payment processor via which the sale was made."""
     invoice_id: NotRequired[Nullable[str]]
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
-    lead_event_name: NotRequired[Nullable[str]]
-    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event for a link-customer combination, which is the default behavior)."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
+    lead_event_name: NotRequired[Nullable[str]]
+    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event for a link-customer combination, which is the default behavior). For sale tracking without a pre-existing lead event, this field can also be used to specify the lead event name."""
+    click_id: NotRequired[Nullable[str]]
+    r"""[For sale tracking without a pre-existing lead event]: The unique ID of the click that the sale conversion event is attributed to. You can read this value from `dub_id` cookie."""
+    customer_name: NotRequired[Nullable[str]]
+    r"""[For sale tracking without a pre-existing lead event]: The name of the customer. If not passed, a random name will be generated (e.g. “Big Red Caribou”)."""
+    customer_email: NotRequired[Nullable[str]]
+    r"""[For sale tracking without a pre-existing lead event]: The email address of the customer."""
+    customer_avatar: NotRequired[Nullable[str]]
+    r"""[For sale tracking without a pre-existing lead event]: The avatar URL of the customer."""
 
 
 class TrackSaleRequestBody(BaseModel):
@@ -62,13 +70,31 @@ class TrackSaleRequestBody(BaseModel):
     )
     r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
 
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
+
     lead_event_name: Annotated[
         OptionalNullable[str], pydantic.Field(alias="leadEventName")
     ] = None
-    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event for a link-customer combination, which is the default behavior)."""
+    r"""The name of the lead event that occurred before the sale (case-sensitive). This is used to associate the sale event with a particular lead event (instead of the latest lead event for a link-customer combination, which is the default behavior). For sale tracking without a pre-existing lead event, this field can also be used to specify the lead event name."""
 
-    metadata: OptionalNullable[Dict[str, Any]] = UNSET
-    r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
+    click_id: Annotated[OptionalNullable[str], pydantic.Field(alias="clickId")] = UNSET
+    r"""[For sale tracking without a pre-existing lead event]: The unique ID of the click that the sale conversion event is attributed to. You can read this value from `dub_id` cookie."""
+
+    customer_name: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customerName")
+    ] = None
+    r"""[For sale tracking without a pre-existing lead event]: The name of the customer. If not passed, a random name will be generated (e.g. “Big Red Caribou”)."""
+
+    customer_email: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customerEmail")
+    ] = None
+    r"""[For sale tracking without a pre-existing lead event]: The email address of the customer."""
+
+    customer_avatar: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customerAvatar")
+    ] = None
+    r"""[For sale tracking without a pre-existing lead event]: The avatar URL of the customer."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -77,11 +103,29 @@ class TrackSaleRequestBody(BaseModel):
             "eventName",
             "paymentProcessor",
             "invoiceId",
-            "leadEventName",
             "metadata",
+            "leadEventName",
+            "clickId",
+            "customerName",
+            "customerEmail",
+            "customerAvatar",
         ]
-        nullable_fields = ["invoiceId", "leadEventName", "metadata"]
-        null_default_fields = ["invoiceId", "leadEventName"]
+        nullable_fields = [
+            "invoiceId",
+            "metadata",
+            "leadEventName",
+            "clickId",
+            "customerName",
+            "customerEmail",
+            "customerAvatar",
+        ]
+        null_default_fields = [
+            "invoiceId",
+            "leadEventName",
+            "customerName",
+            "customerEmail",
+            "customerAvatar",
+        ]
 
         serialized = handler(self)
 
