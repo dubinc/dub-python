@@ -43,6 +43,12 @@ class PartnerTypedDict(TypedDict):
     r"""The date when the partner enabled payouts."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    total_clicks: float
+    total_leads: float
+    total_conversions: float
+    total_sales: float
+    total_sale_amount: float
+    total_commissions: float
 
 
 class Partner(BaseModel):
@@ -65,6 +71,18 @@ class Partner(BaseModel):
 
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+
+    total_clicks: Annotated[float, pydantic.Field(alias="totalClicks")]
+
+    total_leads: Annotated[float, pydantic.Field(alias="totalLeads")]
+
+    total_conversions: Annotated[float, pydantic.Field(alias="totalConversions")]
+
+    total_sales: Annotated[float, pydantic.Field(alias="totalSales")]
+
+    total_sale_amount: Annotated[float, pydantic.Field(alias="totalSaleAmount")]
+
+    total_commissions: Annotated[float, pydantic.Field(alias="totalCommissions")]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
