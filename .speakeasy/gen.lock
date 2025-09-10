@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 8725bc68c6cdd28926345886029513f7
+  docChecksum: 54c12f37004dd851733d9c6060b4addb
   docVersion: 0.0.1
   speakeasyVersion: 1.615.0
   generationVersion: 2.698.0
-  releaseVersion: 0.29.0
-  configChecksum: f5a68dc9f695d0fe1859add05c677020
+  releaseVersion: 0.29.1
+  configChecksum: 7bde62ae7fce2370d9fab35e30ace0b2
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -1204,7 +1204,7 @@ examples:
   trackSale:
     speakeasy-default-track-sale:
       requestBody:
-        application/json: {"customerExternalId": "<id>", "amount": 594903, "currency": "usd", "eventName": "Invoice paid", "paymentProcessor": "custom", "invoiceId": null, "leadEventName": "Cloned template 1481267"}
+        application/json: {"customerExternalId": "<id>", "amount": 594903, "currency": "usd", "eventName": "Invoice paid", "paymentProcessor": "custom", "invoiceId": null, "leadEventName": "Cloned template 1481267", "customerName": null, "customerEmail": null, "customerAvatar": null}
       responses:
         "200":
           application/json: {"eventName": "<value>", "customer": {"id": "<id>", "name": "<value>", "email": "Jettie.Hirthe97@yahoo.com", "avatar": "https://loremflickr.com/2112/1585?lock=96959249386723", "externalId": "<id>"}, "sale": {"amount": 67.63, "currency": "Pula", "paymentProcessor": "<value>", "invoiceId": "<id>", "metadata": {"key": "<value>"}}}
@@ -1764,3 +1764,6 @@ examples:
           application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Python SDK Changes Detected:
+  * `dub.track.sale()`:  `request` **Changed**
