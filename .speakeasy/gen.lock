@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 54c12f37004dd851733d9c6060b4addb
+  docChecksum: ca039d761420ae6bf30481214b90948f
   docVersion: 0.0.1
-  speakeasyVersion: 1.615.0
-  generationVersion: 2.698.0
-  releaseVersion: 0.29.1
-  configChecksum: 7bde62ae7fce2370d9fab35e30ace0b2
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 0.29.2
+  configChecksum: 275db521206f5989f0ee72f5d3c26665
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -19,10 +19,10 @@ features:
     deprecations: 3.0.2
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
-    errors: 3.3.2
+    errors: 3.3.3
     examples: 3.0.2
     flattening: 3.1.1
-    globalSecurity: 3.0.3
+    globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.1
@@ -316,6 +316,7 @@ generatedFiles:
   - docs/models/operations/tagnames.md
   - docs/models/operations/testvariants.md
   - docs/models/operations/three.md
+  - docs/models/operations/trackleadlink.md
   - docs/models/operations/trackleadrequestbody.md
   - docs/models/operations/trackleadresponsebody.md
   - docs/models/operations/tracksalecustomer.md
@@ -1182,7 +1183,7 @@ examples:
         application/json: {"clickId": "<id>", "eventName": "Sign up", "customerExternalId": "<id>", "customerName": null, "customerEmail": null, "customerAvatar": null, "mode": "async"}
       responses:
         "200":
-          application/json: {"click": {"id": "<id>"}, "customer": {"name": "<value>", "email": "Beaulah.Hamill78@gmail.com", "avatar": "https://picsum.photos/seed/4p2vQu6/2339/955", "externalId": "<id>"}}
+          application/json: {"click": {"id": "<id>"}, "link": {"id": "<id>", "domain": "caring-editor.biz", "key": "<key>", "shortLink": "https://spotless-airbus.name/", "url": "https://quarrelsome-incandescence.com/", "partnerId": "<id>", "programId": null, "tenantId": "<id>", "externalId": "<id>"}, "customer": {"name": "<value>", "email": "Beaulah.Hamill78@gmail.com", "avatar": "https://picsum.photos/seed/4p2vQu6/2339/955", "externalId": "<id>"}}
         "400":
           application/json: {"error": {"code": "bad_request", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#bad-request"}}
         "401":
@@ -1766,4 +1767,4 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes Detected:
-  * `dub.track.sale()`:  `request` **Changed**
+  * `dub.track.lead()`:  `response.link` **Added**

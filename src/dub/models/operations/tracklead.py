@@ -126,6 +126,86 @@ class Click(BaseModel):
     id: str
 
 
+class TrackLeadLinkTypedDict(TypedDict):
+    id: str
+    r"""The unique ID of the short link."""
+    domain: str
+    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+    key: str
+    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+    short_link: str
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+    url: str
+    r"""The destination URL of the short link."""
+    partner_id: Nullable[str]
+    r"""The ID of the partner the short link is associated with."""
+    program_id: Nullable[str]
+    r"""The ID of the program the short link is associated with."""
+    tenant_id: Nullable[str]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    external_id: Nullable[str]
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+
+
+class TrackLeadLink(BaseModel):
+    id: str
+    r"""The unique ID of the short link."""
+
+    domain: str
+    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+
+    key: str
+    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+
+    short_link: Annotated[str, pydantic.Field(alias="shortLink")]
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+
+    url: str
+    r"""The destination URL of the short link."""
+
+    partner_id: Annotated[Nullable[str], pydantic.Field(alias="partnerId")]
+    r"""The ID of the partner the short link is associated with."""
+
+    program_id: Annotated[Nullable[str], pydantic.Field(alias="programId")]
+    r"""The ID of the program the short link is associated with."""
+
+    tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+
+    external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["partnerId", "programId", "tenantId", "externalId"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class CustomerTypedDict(TypedDict):
     name: Nullable[str]
     email: Nullable[str]
@@ -177,6 +257,7 @@ class TrackLeadResponseBodyTypedDict(TypedDict):
     r"""A lead was tracked."""
 
     click: ClickTypedDict
+    link: Nullable[TrackLeadLinkTypedDict]
     customer: CustomerTypedDict
 
 
@@ -185,4 +266,36 @@ class TrackLeadResponseBody(BaseModel):
 
     click: Click
 
+    link: Nullable[TrackLeadLink]
+
     customer: Customer
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["link"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
