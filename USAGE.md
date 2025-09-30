@@ -35,6 +35,7 @@ with Dub(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -108,6 +109,7 @@ with Dub(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio

@@ -64,7 +64,9 @@ class ListCommissionsRequestTypedDict(TypedDict):
     payout_id: NotRequired[str]
     r"""Filter the list of commissions by the associated payout."""
     partner_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner."""
+    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`."""
+    tenant_id: NotRequired[str]
+    r"""Filter the list of commissions by the associated partner's `tenantId` (their unique ID within your database)."""
     group_id: NotRequired[str]
     r"""Filter the list of commissions by the associated partner group."""
     invoice_id: NotRequired[str]
@@ -112,7 +114,14 @@ class ListCommissionsRequest(BaseModel):
         pydantic.Field(alias="partnerId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by the associated partner."""
+    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`."""
+
+    tenant_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tenantId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter the list of commissions by the associated partner's `tenantId` (their unique ID within your database)."""
 
     group_id: Annotated[
         Optional[str],

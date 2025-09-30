@@ -179,6 +179,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: NotRequired[Nullable[str]]
     r"""The UTM content of the short link."""
+    ref: NotRequired[Nullable[str]]
+    r"""The ref of the short link."""
 
 
 class RetrieveAnalyticsRequest(BaseModel):
@@ -416,6 +418,12 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = UNSET
     r"""The UTM content of the short link."""
 
+    ref: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The ref of the short link."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -456,6 +464,7 @@ class RetrieveAnalyticsRequest(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "ref",
         ]
         nullable_fields = [
             "utm_source",
@@ -463,6 +472,7 @@ class RetrieveAnalyticsRequest(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "ref",
         ]
         null_default_fields = []
 

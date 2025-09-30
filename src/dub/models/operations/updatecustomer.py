@@ -24,6 +24,8 @@ class UpdateCustomerRequestBodyTypedDict(TypedDict):
     r"""Avatar URL of the customer in the client's app."""
     external_id: NotRequired[str]
     r"""Unique identifier for the customer in the client's app."""
+    stripe_customer_id: NotRequired[Nullable[str]]
+    r"""The customer's Stripe customer ID. Useful for attribution recurring sale events to the partner who referred the customer."""
 
 
 class UpdateCustomerRequestBody(BaseModel):
@@ -39,10 +41,15 @@ class UpdateCustomerRequestBody(BaseModel):
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
     r"""Unique identifier for the customer in the client's app."""
 
+    stripe_customer_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="stripeCustomerId")
+    ] = UNSET
+    r"""The customer's Stripe customer ID. Useful for attribution recurring sale events to the partner who referred the customer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "name", "avatar", "externalId"]
-        nullable_fields = ["email", "name", "avatar"]
+        optional_fields = ["email", "name", "avatar", "externalId", "stripeCustomerId"]
+        nullable_fields = ["email", "name", "avatar", "stripeCustomerId"]
         null_default_fields = []
 
         serialized = handler(self)
