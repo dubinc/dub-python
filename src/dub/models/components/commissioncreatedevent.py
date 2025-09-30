@@ -30,7 +30,7 @@ class CommissionCreatedEventStatus(str, Enum):
     CANCELED = "canceled"
 
 
-class PartnerTypedDict(TypedDict):
+class CommissionCreatedEventPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -51,7 +51,7 @@ class PartnerTypedDict(TypedDict):
     total_commissions: float
 
 
-class Partner(BaseModel):
+class CommissionCreatedEventPartner(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -209,7 +209,7 @@ class CommissionCreatedEventDataTypedDict(TypedDict):
     quantity: float
     created_at: str
     updated_at: str
-    partner: PartnerTypedDict
+    partner: CommissionCreatedEventPartnerTypedDict
     type: NotRequired[CommissionCreatedEventType]
     user_id: NotRequired[Nullable[str]]
     r"""The user who created the manual commission."""
@@ -238,7 +238,7 @@ class CommissionCreatedEventData(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
-    partner: Partner
+    partner: CommissionCreatedEventPartner
 
     type: Optional[CommissionCreatedEventType] = None
 

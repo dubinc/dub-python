@@ -168,6 +168,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: NotRequired[Nullable[str]]
     r"""The UTM content of the short link."""
+    ref: NotRequired[Nullable[str]]
+    r"""The ref of the short link."""
     page: NotRequired[float]
     limit: NotRequired[float]
     sort_order: NotRequired[QueryParamSortOrder]
@@ -406,6 +408,12 @@ class ListEventsRequest(BaseModel):
     ] = UNSET
     r"""The UTM content of the short link."""
 
+    ref: Annotated[
+        OptionalNullable[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""The ref of the short link."""
+
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -475,6 +483,7 @@ class ListEventsRequest(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "ref",
             "page",
             "limit",
             "sortOrder",
@@ -487,6 +496,7 @@ class ListEventsRequest(BaseModel):
             "utm_campaign",
             "utm_term",
             "utm_content",
+            "ref",
         ]
         null_default_fields = []
 

@@ -6,7 +6,7 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -538,12 +538,99 @@ class SaleCreatedEventSale(BaseModel):
         return m
 
 
+class SaleCreatedEventPartnerTypedDict(TypedDict):
+    id: str
+    r"""The partner's unique ID on Dub."""
+    name: str
+    r"""The partner's full legal name."""
+    email: Nullable[str]
+    r"""The partner's email address. Should be a unique value across Dub."""
+    image: Nullable[str]
+    r"""The partner's avatar image."""
+    payouts_enabled_at: Nullable[str]
+    r"""The date when the partner enabled payouts."""
+    country: Nullable[str]
+    r"""The partner's country (required for tax purposes)."""
+    total_clicks: float
+    total_leads: float
+    total_conversions: float
+    total_sales: float
+    total_sale_amount: float
+    total_commissions: float
+
+
+class SaleCreatedEventPartner(BaseModel):
+    id: str
+    r"""The partner's unique ID on Dub."""
+
+    name: str
+    r"""The partner's full legal name."""
+
+    email: Nullable[str]
+    r"""The partner's email address. Should be a unique value across Dub."""
+
+    image: Nullable[str]
+    r"""The partner's avatar image."""
+
+    payouts_enabled_at: Annotated[
+        Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
+    ]
+    r"""The date when the partner enabled payouts."""
+
+    country: Nullable[str]
+    r"""The partner's country (required for tax purposes)."""
+
+    total_clicks: Annotated[float, pydantic.Field(alias="totalClicks")]
+
+    total_leads: Annotated[float, pydantic.Field(alias="totalLeads")]
+
+    total_conversions: Annotated[float, pydantic.Field(alias="totalConversions")]
+
+    total_sales: Annotated[float, pydantic.Field(alias="totalSales")]
+
+    total_sale_amount: Annotated[float, pydantic.Field(alias="totalSaleAmount")]
+
+    total_commissions: Annotated[float, pydantic.Field(alias="totalCommissions")]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["email", "image", "payoutsEnabledAt", "country"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class SaleCreatedEventDataTypedDict(TypedDict):
     event_name: str
     customer: SaleCreatedEventCustomerTypedDict
     click: SaleCreatedEventClickTypedDict
     link: SaleCreatedEventLinkTypedDict
     sale: SaleCreatedEventSaleTypedDict
+    metadata: Nullable[Dict[str, Any]]
+    partner: NotRequired[Nullable[SaleCreatedEventPartnerTypedDict]]
 
 
 class SaleCreatedEventData(BaseModel):
@@ -556,6 +643,40 @@ class SaleCreatedEventData(BaseModel):
     link: SaleCreatedEventLink
 
     sale: SaleCreatedEventSale
+
+    metadata: Nullable[Dict[str, Any]]
+
+    partner: OptionalNullable[SaleCreatedEventPartner] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["partner"]
+        nullable_fields = ["partner", "metadata"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class SaleCreatedEventTypedDict(TypedDict):

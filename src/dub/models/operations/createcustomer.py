@@ -17,6 +17,8 @@ class CreateCustomerRequestBodyTypedDict(TypedDict):
     r"""Name of the customer in the client's app. If not provided, a random name will be generated."""
     avatar: NotRequired[Nullable[str]]
     r"""Avatar URL of the customer in the client's app."""
+    stripe_customer_id: NotRequired[Nullable[str]]
+    r"""The customer's Stripe customer ID. Useful for attribution recurring sale events to the partner who referred the customer."""
 
 
 class CreateCustomerRequestBody(BaseModel):
@@ -32,10 +34,15 @@ class CreateCustomerRequestBody(BaseModel):
     avatar: OptionalNullable[str] = UNSET
     r"""Avatar URL of the customer in the client's app."""
 
+    stripe_customer_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="stripeCustomerId")
+    ] = UNSET
+    r"""The customer's Stripe customer ID. Useful for attribution recurring sale events to the partner who referred the customer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "name", "avatar"]
-        nullable_fields = ["email", "name", "avatar"]
+        optional_fields = ["email", "name", "avatar", "stripeCustomerId"]
+        nullable_fields = ["email", "name", "avatar", "stripeCustomerId"]
         null_default_fields = []
 
         serialized = handler(self)
