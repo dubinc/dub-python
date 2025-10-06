@@ -159,6 +159,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The miscellaneous key-value store of the workspace."""
     allowed_hostnames: Nullable[List[str]]
     r"""Specifies hostnames permitted for client-side click tracking."""
+    sso_email_domain: Nullable[str]
+    sso_enforced_at: Nullable[str]
     logo: NotRequired[Nullable[str]]
     r"""The logo of the workspace."""
     flags: NotRequired[Dict[str, bool]]
@@ -264,6 +266,10 @@ class WorkspaceSchema(BaseModel):
     ]
     r"""Specifies hostnames permitted for client-side click tracking."""
 
+    sso_email_domain: Annotated[Nullable[str], pydantic.Field(alias="ssoEmailDomain")]
+
+    sso_enforced_at: Annotated[Nullable[str], pydantic.Field(alias="ssoEnforcedAt")]
+
     logo: OptionalNullable[str] = None
     r"""The logo of the workspace."""
 
@@ -281,6 +287,8 @@ class WorkspaceSchema(BaseModel):
             "stripeConnectId",
             "store",
             "allowedHostnames",
+            "ssoEmailDomain",
+            "ssoEnforcedAt",
         ]
         null_default_fields = ["logo"]
 

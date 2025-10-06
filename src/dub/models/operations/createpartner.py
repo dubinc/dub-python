@@ -401,6 +401,7 @@ class CreatePartnerStatus(str, Enum):
     REJECTED = "rejected"
     INVITED = "invited"
     DECLINED = "declined"
+    DEACTIVATED = "deactivated"
     BANNED = "banned"
     ARCHIVED = "archived"
 
@@ -472,7 +473,7 @@ class BannedReason(str, Enum):
 
 
 class CreatePartnerResponseBodyTypedDict(TypedDict):
-    r"""The created partner"""
+    r"""The created or updated partner"""
 
     id: str
     r"""The partner's unique ID on Dub."""
@@ -546,7 +547,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
 
 
 class CreatePartnerResponseBody(BaseModel):
-    r"""The created partner"""
+    r"""The created or updated partner"""
 
     id: str
     r"""The partner's unique ID on Dub."""

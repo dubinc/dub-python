@@ -24,9 +24,9 @@ class Partners(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.CreatePartnerResponseBody]:
-        r"""Create a partner
+        r"""Create or update a partner
 
-        Create a partner for a program. If partner exists, automatically enrolls them.
+        Creates or updates a partner record (upsert behavior). If a partner with the same email already exists, their program enrollment will be updated with the provided tenantId. If no existing partner is found, a new partner will be created using the supplied information.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -167,9 +167,9 @@ class Partners(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[operations.CreatePartnerResponseBody]:
-        r"""Create a partner
+        r"""Create or update a partner
 
-        Create a partner for a program. If partner exists, automatically enrolls them.
+        Creates or updates a partner record (upsert behavior). If a partner with the same email already exists, their program enrollment will be updated with the provided tenantId. If no existing partner is found, a new partner will be created using the supplied information.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
