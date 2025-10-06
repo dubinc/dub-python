@@ -21,6 +21,7 @@ class Status(str, Enum):
     REJECTED = "rejected"
     INVITED = "invited"
     DECLINED = "declined"
+    DEACTIVATED = "deactivated"
     BANNED = "banned"
     ARCHIVED = "archived"
 

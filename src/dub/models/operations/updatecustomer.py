@@ -264,9 +264,9 @@ class UpdateCustomerDiscount(BaseModel):
         optional_fields = ["description", "partnersCount"]
         nullable_fields = [
             "maxDuration",
-            "description",
             "couponId",
             "couponTestId",
+            "description",
             "partnersCount",
         ]
         null_default_fields = []
