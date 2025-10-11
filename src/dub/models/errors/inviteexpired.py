@@ -40,7 +40,7 @@ class InviteExpiredData(BaseModel):
     error: InviteExpiredError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class InviteExpired(DubError):
     r"""This response is sent when the requested content has been permanently deleted from server, with no forwarding address."""
 

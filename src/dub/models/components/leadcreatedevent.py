@@ -510,6 +510,7 @@ class PartnerTypedDict(TypedDict):
     total_sales: float
     total_sale_amount: float
     total_commissions: float
+    group_id: NotRequired[Nullable[str]]
 
 
 class Partner(BaseModel):
@@ -545,10 +546,12 @@ class Partner(BaseModel):
 
     total_commissions: Annotated[float, pydantic.Field(alias="totalCommissions")]
 
+    group_id: Annotated[OptionalNullable[str], pydantic.Field(alias="groupId")] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["email", "image", "payoutsEnabledAt", "country"]
+        optional_fields = ["groupId"]
+        nullable_fields = ["email", "image", "payoutsEnabledAt", "country", "groupId"]
         null_default_fields = []
 
         serialized = handler(self)

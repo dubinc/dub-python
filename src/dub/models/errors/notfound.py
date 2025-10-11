@@ -40,7 +40,7 @@ class NotFoundData(BaseModel):
     error: NotFoundError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class NotFound(DubError):
     r"""The server cannot find the requested resource."""
 
