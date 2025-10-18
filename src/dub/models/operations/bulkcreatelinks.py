@@ -49,7 +49,7 @@ class RequestBodyTypedDict(TypedDict):
     url: str
     r"""The destination URL of the short link."""
     domain: NotRequired[str]
-    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+    r"""The domain of the short link (without protocol). If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     key_length: NotRequired[float]
@@ -133,7 +133,7 @@ class RequestBody(BaseModel):
     r"""The destination URL of the short link."""
 
     domain: Optional[str] = None
-    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+    r"""The domain of the short link (without protocol). If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
 
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""

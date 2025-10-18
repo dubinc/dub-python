@@ -40,7 +40,7 @@ class InternalServerErrorData(BaseModel):
     error: InternalServerErrorError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class InternalServerError(DubError):
     r"""The server has encountered a situation it does not know how to handle."""
 

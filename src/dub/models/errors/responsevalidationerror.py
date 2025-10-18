@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from dub.models.errors import DubError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ResponseValidationError(DubError):
     """Error raised when there is a type mismatch between the response data and the expected Pydantic model."""
 

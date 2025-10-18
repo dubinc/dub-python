@@ -40,7 +40,7 @@ class RateLimitExceededData(BaseModel):
     error: RateLimitExceededError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class RateLimitExceeded(DubError):
     r"""The user has sent too many requests in a given amount of time (\"rate limiting\")"""
 
