@@ -25,6 +25,8 @@ class FolderSchemaTypedDict(TypedDict):
     r"""The unique ID of the folder."""
     name: str
     r"""The name of the folder."""
+    description: Nullable[str]
+    r"""The description of the folder."""
     type: Type
     created_at: str
     r"""The date the folder was created."""
@@ -40,6 +42,9 @@ class FolderSchema(BaseModel):
 
     name: str
     r"""The name of the folder."""
+
+    description: Nullable[str]
+    r"""The description of the folder."""
 
     type: Type
 
@@ -57,7 +62,7 @@ class FolderSchema(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["accessLevel"]
-        nullable_fields = ["accessLevel"]
+        nullable_fields = ["description", "accessLevel"]
         null_default_fields = ["accessLevel"]
 
         serialized = handler(self)

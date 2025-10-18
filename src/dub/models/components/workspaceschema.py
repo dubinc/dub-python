@@ -139,6 +139,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The folders limit of the workspace."""
     groups_limit: float
     r"""The groups limit of the workspace."""
+    network_invites_limit: float
+    r"""The weekly network invites limit of the workspace."""
     users_limit: float
     r"""The users limit of the workspace."""
     ai_usage: float
@@ -233,6 +235,9 @@ class WorkspaceSchema(BaseModel):
 
     groups_limit: Annotated[float, pydantic.Field(alias="groupsLimit")]
     r"""The groups limit of the workspace."""
+
+    network_invites_limit: Annotated[float, pydantic.Field(alias="networkInvitesLimit")]
+    r"""The weekly network invites limit of the workspace."""
 
     users_limit: Annotated[float, pydantic.Field(alias="usersLimit")]
     r"""The users limit of the workspace."""
