@@ -40,7 +40,7 @@ class ConflictData(BaseModel):
     error: ConflictError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class Conflict(DubError):
     r"""This response is sent when a request conflicts with the current state of the server."""
 
