@@ -40,7 +40,7 @@ class UnauthorizedData(BaseModel):
     error: UnauthorizedError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class Unauthorized(DubError):
     r"""Although the HTTP standard specifies \"unauthorized\", semantically this response means \"unauthenticated\". That is, the client must authenticate itself to get the requested response."""
 

@@ -43,7 +43,7 @@ with Dub(
 
 ### Response
 
-**[components.TagSchema](../../models/components/tagschema.md)**
+**[components.LinkTagSchema](../../models/components/linktagschema.md)**
 
 ### Errors
 
@@ -95,7 +95,7 @@ with Dub(
 
 ### Response
 
-**[List[components.TagSchema]](../../models/.md)**
+**[List[components.LinkTagSchema]](../../models/.md)**
 
 ### Errors
 
@@ -146,7 +146,7 @@ with Dub(
 
 ### Response
 
-**[components.TagSchema](../../models/components/tagschema.md)**
+**[components.LinkTagSchema](../../models/components/linktagschema.md)**
 
 ### Errors
 

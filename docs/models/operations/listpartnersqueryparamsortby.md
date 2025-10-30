@@ -1,6 +1,6 @@
 # ListPartnersQueryParamSortBy
 
-The field to sort the partners by. The default is `saleAmount`.
+The field to sort the partners by. The default is `totalSaleAmount`.
 
 
 ## Values
@@ -8,10 +8,8 @@ The field to sort the partners by. The default is `saleAmount`.
 | Name                | Value               |
 | ------------------- | ------------------- |
 | `CREATED_AT`        | createdAt           |
-| `CLICKS`            | clicks              |
-| `LEADS`             | leads               |
-| `CONVERSIONS`       | conversions         |
-| `SALES`             | sales               |
-| `SALE_AMOUNT`       | saleAmount          |
+| `TOTAL_CLICKS`      | totalClicks         |
+| `TOTAL_LEADS`       | totalLeads          |
+| `TOTAL_CONVERSIONS` | totalConversions    |
+| `TOTAL_SALE_AMOUNT` | totalSaleAmount     |
 | `TOTAL_COMMISSIONS` | totalCommissions    |
-| `NET_REVENUE`       | netRevenue          |

@@ -122,6 +122,7 @@ if TYPE_CHECKING:
         TestVariants,
         TestVariantsTypedDict,
     )
+    from .linktagschema import Color, LinkTagSchema, LinkTagSchemaTypedDict
     from .linkwebhookevent import (
         LinkWebhookEvent,
         LinkWebhookEventEvent,
@@ -194,7 +195,6 @@ if TYPE_CHECKING:
         SaleTypedDict,
     )
     from .security import Security, SecurityTypedDict
-    from .tagschema import Color, TagSchema, TagSchemaTypedDict
     from .webhookevent import WebhookEvent, WebhookEventTypedDict
     from .workspaceschema import (
         Domains,
@@ -308,6 +308,8 @@ __all__ = [
     "LinkErrorSchemaTypedDict",
     "LinkSchema",
     "LinkSchemaTypedDict",
+    "LinkTagSchema",
+    "LinkTagSchemaTypedDict",
     "LinkTypedDict",
     "LinkWebhookEvent",
     "LinkWebhookEventEvent",
@@ -372,8 +374,6 @@ __all__ = [
     "Security",
     "SecurityTypedDict",
     "Status",
-    "TagSchema",
-    "TagSchemaTypedDict",
     "TestVariants",
     "TestVariantsTypedDict",
     "Three",
@@ -495,6 +495,9 @@ _dynamic_imports: dict[str, str] = {
     "LinkSchemaTypedDict": ".linkschema",
     "TestVariants": ".linkschema",
     "TestVariantsTypedDict": ".linkschema",
+    "Color": ".linktagschema",
+    "LinkTagSchema": ".linktagschema",
+    "LinkTagSchemaTypedDict": ".linktagschema",
     "LinkWebhookEvent": ".linkwebhookevent",
     "LinkWebhookEventEvent": ".linkwebhookevent",
     "LinkWebhookEventEventTypedDict": ".linkwebhookevent",
@@ -554,9 +557,6 @@ _dynamic_imports: dict[str, str] = {
     "SaleTypedDict": ".saleevent",
     "Security": ".security",
     "SecurityTypedDict": ".security",
-    "Color": ".tagschema",
-    "TagSchema": ".tagschema",
-    "TagSchemaTypedDict": ".tagschema",
     "WebhookEvent": ".webhookevent",
     "WebhookEventTypedDict": ".webhookevent",
     "Domains": ".workspaceschema",

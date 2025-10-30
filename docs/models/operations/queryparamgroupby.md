@@ -20,9 +20,12 @@ The parameter to group the analytics data points by. Defaults to `count` if unde
 | `TRIGGERS`      | triggers        |
 | `REFERERS`      | referers        |
 | `REFERER_URLS`  | referer_urls    |
-| `TOP_PARTNERS`  | top_partners    |
+| `TOP_FOLDERS`   | top_folders     |
+| `TOP_LINK_TAGS` | top_link_tags   |
+| `TOP_DOMAINS`   | top_domains     |
 | `TOP_LINKS`     | top_links       |
 | `TOP_URLS`      | top_urls        |
+| `TOP_PARTNERS`  | top_partners    |
 | `UTM_SOURCES`   | utm_sources     |
 | `UTM_MEDIUMS`   | utm_mediums     |
 | `UTM_CAMPAIGNS` | utm_campaigns   |

@@ -291,7 +291,6 @@ asyncio.run(main())
 * [register](docs/sdks/domains/README.md#register) - Register a domain
 * [check_status](docs/sdks/domains/README.md#check_status) - Check the availability of one or more domains
 
-
 ### [embed_tokens](docs/sdks/embedtokens/README.md)
 
 * [referrals](docs/sdks/embedtokens/README.md#referrals) - Create a referrals embed token

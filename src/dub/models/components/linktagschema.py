@@ -18,7 +18,7 @@ class Color(str, Enum):
     PINK = "pink"
 
 
-class TagSchemaTypedDict(TypedDict):
+class LinkTagSchemaTypedDict(TypedDict):
     id: str
     r"""The unique ID of the tag."""
     name: str
@@ -27,7 +27,7 @@ class TagSchemaTypedDict(TypedDict):
     r"""The color of the tag."""
 
 
-class TagSchema(BaseModel):
+class LinkTagSchema(BaseModel):
     id: str
     r"""The unique ID of the tag."""
 
