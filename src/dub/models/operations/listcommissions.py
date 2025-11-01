@@ -83,6 +83,7 @@ class ListCommissionsRequestTypedDict(TypedDict):
     r"""The start date of the date range to filter the commissions by."""
     end: NotRequired[str]
     r"""The end date of the date range to filter the commissions by."""
+    timezone: NotRequired[str]
     page: NotRequired[float]
     r"""The page number for pagination."""
     page_size: NotRequired[float]
@@ -174,6 +175,11 @@ class ListCommissionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The end date of the date range to filter the commissions by."""
+
+    timezone: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
 
     page: Annotated[
         Optional[float],
