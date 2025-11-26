@@ -24,7 +24,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.DomainSchema]:
+    ) -> components.DomainSchema:
         r"""Create a domain
 
         Create a domain for the authenticated workspace.
@@ -109,7 +109,7 @@ class Domains(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(Optional[components.DomainSchema], http_res)
+            return unmarshal_json_response(components.DomainSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -165,7 +165,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.DomainSchema]:
+    ) -> components.DomainSchema:
         r"""Create a domain
 
         Create a domain for the authenticated workspace.
@@ -250,7 +250,7 @@ class Domains(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(Optional[components.DomainSchema], http_res)
+            return unmarshal_json_response(components.DomainSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -404,9 +404,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListDomainsResponse(
-                result=unmarshal_json_response(
-                    Optional[List[components.DomainSchema]], http_res
-                ),
+                result=unmarshal_json_response(List[components.DomainSchema], http_res),
                 next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
@@ -562,9 +560,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListDomainsResponse(
-                result=unmarshal_json_response(
-                    Optional[List[components.DomainSchema]], http_res
-                ),
+                result=unmarshal_json_response(List[components.DomainSchema], http_res),
                 next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
@@ -623,7 +619,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.DomainSchema]:
+    ) -> components.DomainSchema:
         r"""Update a domain
 
         Update a domain for the authenticated workspace.
@@ -710,7 +706,7 @@ class Domains(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.DomainSchema], http_res)
+            return unmarshal_json_response(components.DomainSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -767,7 +763,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.DomainSchema]:
+    ) -> components.DomainSchema:
         r"""Update a domain
 
         Update a domain for the authenticated workspace.
@@ -854,7 +850,7 @@ class Domains(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.DomainSchema], http_res)
+            return unmarshal_json_response(components.DomainSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -905,7 +901,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.DeleteDomainResponseBody]:
+    ) -> operations.DeleteDomainResponseBody:
         r"""Delete a domain
 
         Delete a domain from a workspace. It cannot be undone. This will also delete all the links associated with the domain.
@@ -982,7 +978,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.DeleteDomainResponseBody], http_res
+                operations.DeleteDomainResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -1034,7 +1030,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.DeleteDomainResponseBody]:
+    ) -> operations.DeleteDomainResponseBody:
         r"""Delete a domain
 
         Delete a domain from a workspace. It cannot be undone. This will also delete all the links associated with the domain.
@@ -1111,7 +1107,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.DeleteDomainResponseBody], http_res
+                operations.DeleteDomainResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -1168,7 +1164,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.RegisterDomainResponseBody]:
+    ) -> operations.RegisterDomainResponseBody:
         r"""Register a domain
 
         Register a domain for the authenticated workspace. Only available for Enterprise Plans.
@@ -1254,7 +1250,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.RegisterDomainResponseBody], http_res
+                operations.RegisterDomainResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -1311,7 +1307,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.RegisterDomainResponseBody]:
+    ) -> operations.RegisterDomainResponseBody:
         r"""Register a domain
 
         Register a domain for the authenticated workspace. Only available for Enterprise Plans.
@@ -1397,7 +1393,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.RegisterDomainResponseBody], http_res
+                operations.RegisterDomainResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -1452,7 +1448,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.CheckDomainStatusResponseBody]]:
+    ) -> List[operations.CheckDomainStatusResponseBody]:
         r"""Check the availability of one or more domains
 
         Check if a domain name is available for purchase. You can check multiple domains at once.
@@ -1529,7 +1525,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[List[operations.CheckDomainStatusResponseBody]], http_res
+                List[operations.CheckDomainStatusResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -1584,7 +1580,7 @@ class Domains(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.CheckDomainStatusResponseBody]]:
+    ) -> List[operations.CheckDomainStatusResponseBody]:
         r"""Check the availability of one or more domains
 
         Check if a domain name is available for purchase. You can check multiple domains at once.
@@ -1661,7 +1657,7 @@ class Domains(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[List[operations.CheckDomainStatusResponseBody]], http_res
+                List[operations.CheckDomainStatusResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

@@ -57,7 +57,9 @@ class QueryParamGroupBy(str, Enum):
     TOP_DOMAINS = "top_domains"
     TOP_LINKS = "top_links"
     TOP_URLS = "top_urls"
+    TOP_BASE_URLS = "top_base_urls"
     TOP_PARTNERS = "top_partners"
+    TOP_GROUPS = "top_groups"
     UTM_SOURCES = "utm_sources"
     UTM_MEDIUMS = "utm_mediums"
     UTM_CAMPAIGNS = "utm_campaigns"
@@ -162,6 +164,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The tag IDs to retrieve analytics for."""
     folder_id: NotRequired[str]
     r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
+    group_id: NotRequired[str]
+    r"""The group ID to retrieve analytics for."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
     sale_type: NotRequired[SaleType]
@@ -359,6 +363,13 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
 
+    group_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="groupId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The group ID to retrieve analytics for."""
+
     root: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -457,6 +468,7 @@ class RetrieveAnalyticsRequest(BaseModel):
             "url",
             "tagIds",
             "folderId",
+            "groupId",
             "root",
             "saleType",
             "query",

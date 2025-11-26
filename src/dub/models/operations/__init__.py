@@ -6,6 +6,13 @@ import builtins
 import sys
 
 if TYPE_CHECKING:
+    from .banpartner import (
+        BanPartnerRequestBody,
+        BanPartnerRequestBodyTypedDict,
+        BanPartnerResponseBody,
+        BanPartnerResponseBodyTypedDict,
+        Reason,
+    )
     from .bulkcreatelinks import (
         BulkCreateLinksTagIds,
         BulkCreateLinksTagIdsTypedDict,
@@ -43,19 +50,6 @@ if TYPE_CHECKING:
         CheckDomainStatusResponseBodyTypedDict,
         Domains,
         DomainsTypedDict,
-    )
-    from .createcustomer import (
-        CreateCustomerDiscount,
-        CreateCustomerDiscountTypedDict,
-        CreateCustomerLink,
-        CreateCustomerLinkTypedDict,
-        CreateCustomerPartner,
-        CreateCustomerPartnerTypedDict,
-        CreateCustomerRequestBody,
-        CreateCustomerRequestBodyTypedDict,
-        CreateCustomerResponseBody,
-        CreateCustomerResponseBodyTypedDict,
-        CreateCustomerType,
     )
     from .createdomain import CreateDomainRequestBody, CreateDomainRequestBodyTypedDict
     from .createfolder import (
@@ -418,6 +412,10 @@ if TYPE_CHECKING:
 
 __all__ = [
     "AccessLevel",
+    "BanPartnerRequestBody",
+    "BanPartnerRequestBodyTypedDict",
+    "BanPartnerResponseBody",
+    "BanPartnerResponseBodyTypedDict",
     "BannedReason",
     "BulkCreateLinksTagIds",
     "BulkCreateLinksTagIdsTypedDict",
@@ -444,17 +442,6 @@ __all__ = [
     "Click",
     "ClickTypedDict",
     "Color",
-    "CreateCustomerDiscount",
-    "CreateCustomerDiscountTypedDict",
-    "CreateCustomerLink",
-    "CreateCustomerLinkTypedDict",
-    "CreateCustomerPartner",
-    "CreateCustomerPartnerTypedDict",
-    "CreateCustomerRequestBody",
-    "CreateCustomerRequestBodyTypedDict",
-    "CreateCustomerResponseBody",
-    "CreateCustomerResponseBodyTypedDict",
-    "CreateCustomerType",
     "CreateDomainRequestBody",
     "CreateDomainRequestBodyTypedDict",
     "CreateFolderRequestBody",
@@ -634,6 +621,7 @@ __all__ = [
     "QueryParamTagNames",
     "QueryParamTagNamesTypedDict",
     "QueryParamTrigger",
+    "Reason",
     "RegisterDomainRequestBody",
     "RegisterDomainRequestBodyTypedDict",
     "RegisterDomainResponseBody",
@@ -759,6 +747,11 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "BanPartnerRequestBody": ".banpartner",
+    "BanPartnerRequestBodyTypedDict": ".banpartner",
+    "BanPartnerResponseBody": ".banpartner",
+    "BanPartnerResponseBodyTypedDict": ".banpartner",
+    "Reason": ".banpartner",
     "BulkCreateLinksTagIds": ".bulkcreatelinks",
     "BulkCreateLinksTagIdsTypedDict": ".bulkcreatelinks",
     "BulkCreateLinksTagNames": ".bulkcreatelinks",
@@ -789,17 +782,6 @@ _dynamic_imports: dict[str, str] = {
     "CheckDomainStatusResponseBodyTypedDict": ".checkdomainstatus",
     "Domains": ".checkdomainstatus",
     "DomainsTypedDict": ".checkdomainstatus",
-    "CreateCustomerDiscount": ".createcustomer",
-    "CreateCustomerDiscountTypedDict": ".createcustomer",
-    "CreateCustomerLink": ".createcustomer",
-    "CreateCustomerLinkTypedDict": ".createcustomer",
-    "CreateCustomerPartner": ".createcustomer",
-    "CreateCustomerPartnerTypedDict": ".createcustomer",
-    "CreateCustomerRequestBody": ".createcustomer",
-    "CreateCustomerRequestBodyTypedDict": ".createcustomer",
-    "CreateCustomerResponseBody": ".createcustomer",
-    "CreateCustomerResponseBodyTypedDict": ".createcustomer",
-    "CreateCustomerType": ".createcustomer",
     "CreateDomainRequestBody": ".createdomain",
     "CreateDomainRequestBodyTypedDict": ".createdomain",
     "AccessLevel": ".createfolder",

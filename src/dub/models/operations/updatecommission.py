@@ -94,6 +94,8 @@ class UpdateCommissionPartnerTypedDict(TypedDict):
     r"""The date when the partner enabled payouts."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    group_id: NotRequired[Nullable[str]]
+    r"""The partner's group ID on Dub."""
 
 
 class UpdateCommissionPartner(BaseModel):
@@ -117,10 +119,13 @@ class UpdateCommissionPartner(BaseModel):
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
 
+    group_id: Annotated[OptionalNullable[str], pydantic.Field(alias="groupId")] = UNSET
+    r"""The partner's group ID on Dub."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["email", "image", "payoutsEnabledAt", "country"]
+        optional_fields = ["groupId"]
+        nullable_fields = ["email", "image", "payoutsEnabledAt", "country", "groupId"]
         null_default_fields = []
 
         serialized = handler(self)

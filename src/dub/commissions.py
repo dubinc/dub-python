@@ -21,7 +21,7 @@ class Commissions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.ListCommissionsResponseBody]]:
+    ) -> List[operations.ListCommissionsResponseBody]:
         r"""Get commissions for a program.
 
         Retrieve a list of commissions for a program.
@@ -98,7 +98,7 @@ class Commissions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[List[operations.ListCommissionsResponseBody]], http_res
+                List[operations.ListCommissionsResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -153,7 +153,7 @@ class Commissions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.ListCommissionsResponseBody]]:
+    ) -> List[operations.ListCommissionsResponseBody]:
         r"""Get commissions for a program.
 
         Retrieve a list of commissions for a program.
@@ -230,7 +230,7 @@ class Commissions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[List[operations.ListCommissionsResponseBody]], http_res
+                List[operations.ListCommissionsResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -285,7 +285,7 @@ class Commissions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.UpdateCommissionResponseBody]:
+    ) -> operations.UpdateCommissionResponseBody:
         r"""Update a commission.
 
         Update an existing commission amount. This is useful for handling refunds (partial or full) or fraudulent sales.
@@ -369,7 +369,7 @@ class Commissions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.UpdateCommissionResponseBody], http_res
+                operations.UpdateCommissionResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -424,7 +424,7 @@ class Commissions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.UpdateCommissionResponseBody]:
+    ) -> operations.UpdateCommissionResponseBody:
         r"""Update a commission.
 
         Update an existing commission amount. This is useful for handling refunds (partial or full) or fraudulent sales.
@@ -508,7 +508,7 @@ class Commissions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.UpdateCommissionResponseBody], http_res
+                operations.UpdateCommissionResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

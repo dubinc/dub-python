@@ -83,6 +83,7 @@ class ListCommissionsRequestTypedDict(TypedDict):
     r"""The start date of the date range to filter the commissions by."""
     end: NotRequired[str]
     r"""The end date of the date range to filter the commissions by."""
+    timezone: NotRequired[str]
     page: NotRequired[float]
     r"""The page number for pagination."""
     page_size: NotRequired[float]
@@ -175,6 +176,11 @@ class ListCommissionsRequest(BaseModel):
     ] = None
     r"""The end date of the date range to filter the commissions by."""
 
+    timezone: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -219,6 +225,8 @@ class ListCommissionsPartnerTypedDict(TypedDict):
     r"""The date when the partner enabled payouts."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    group_id: NotRequired[Nullable[str]]
+    r"""The partner's group ID on Dub."""
 
 
 class ListCommissionsPartner(BaseModel):
@@ -242,10 +250,13 @@ class ListCommissionsPartner(BaseModel):
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
 
+    group_id: Annotated[OptionalNullable[str], pydantic.Field(alias="groupId")] = UNSET
+    r"""The partner's group ID on Dub."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["email", "image", "payoutsEnabledAt", "country"]
+        optional_fields = ["groupId"]
+        nullable_fields = ["email", "image", "payoutsEnabledAt", "country", "groupId"]
         null_default_fields = []
 
         serialized = handler(self)

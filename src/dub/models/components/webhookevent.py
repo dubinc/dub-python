@@ -8,6 +8,10 @@ from .commissioncreatedevent import (
 from .leadcreatedevent import LeadCreatedEvent, LeadCreatedEventTypedDict
 from .linkclickedevent import LinkClickedEvent, LinkClickedEventTypedDict
 from .linkwebhookevent import LinkWebhookEvent, LinkWebhookEventTypedDict
+from .partnerapplicationsubmittedevent import (
+    PartnerApplicationSubmittedEvent,
+    PartnerApplicationSubmittedEventTypedDict,
+)
 from .partnerenrolledevent import PartnerEnrolledEvent, PartnerEnrolledEventTypedDict
 from .salecreatedevent import SaleCreatedEvent, SaleCreatedEventTypedDict
 from typing import Union
@@ -22,6 +26,7 @@ WebhookEventTypedDict = TypeAliasType(
         LeadCreatedEventTypedDict,
         SaleCreatedEventTypedDict,
         PartnerEnrolledEventTypedDict,
+        PartnerApplicationSubmittedEventTypedDict,
         CommissionCreatedEventTypedDict,
     ],
 )
@@ -36,6 +41,7 @@ WebhookEvent = TypeAliasType(
         LeadCreatedEvent,
         SaleCreatedEvent,
         PartnerEnrolledEvent,
+        PartnerApplicationSubmittedEvent,
         CommissionCreatedEvent,
     ],
 )

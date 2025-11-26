@@ -35,6 +35,12 @@ value: components.SaleCreatedEvent = /* values here */
 value: components.PartnerEnrolledEvent = /* values here */
 ```
 
+### `components.PartnerApplicationSubmittedEvent`
+
+```python
+value: components.PartnerApplicationSubmittedEvent = /* values here */
+```
+
 ### `components.CommissionCreatedEvent`
 
 ```python

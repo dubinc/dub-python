@@ -33,8 +33,6 @@ with Dub(
         "query": "metadata['key']:'value'",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 

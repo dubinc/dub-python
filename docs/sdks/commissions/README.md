@@ -27,8 +27,6 @@ with Dub(
         "page_size": 50,
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -78,8 +76,6 @@ with Dub(
     res = d_client.commissions.update(request={
         "id": "cm_1JVR7XRCSR0EDBAF39FZ4PMYE",
     })
-
-    assert res is not None
 
     # Handle response
     print(res)

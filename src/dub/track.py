@@ -23,7 +23,7 @@ class Track(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.TrackLeadResponseBody]:
+    ) -> operations.TrackLeadResponseBody:
         r"""Track a lead
 
         Track a lead for a short link.
@@ -104,9 +104,7 @@ class Track(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[operations.TrackLeadResponseBody], http_res
-            )
+            return unmarshal_json_response(operations.TrackLeadResponseBody, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -162,7 +160,7 @@ class Track(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.TrackLeadResponseBody]:
+    ) -> operations.TrackLeadResponseBody:
         r"""Track a lead
 
         Track a lead for a short link.
@@ -243,9 +241,7 @@ class Track(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[operations.TrackLeadResponseBody], http_res
-            )
+            return unmarshal_json_response(operations.TrackLeadResponseBody, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -301,7 +297,7 @@ class Track(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.TrackSaleResponseBody]:
+    ) -> operations.TrackSaleResponseBody:
         r"""Track a sale
 
         Track a sale for a short link.
@@ -382,9 +378,7 @@ class Track(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[operations.TrackSaleResponseBody], http_res
-            )
+            return unmarshal_json_response(operations.TrackSaleResponseBody, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -440,7 +434,7 @@ class Track(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.TrackSaleResponseBody]:
+    ) -> operations.TrackSaleResponseBody:
         r"""Track a sale
 
         Track a sale for a short link.
@@ -521,9 +515,7 @@ class Track(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[operations.TrackSaleResponseBody], http_res
-            )
+            return unmarshal_json_response(operations.TrackSaleResponseBody, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)

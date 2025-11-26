@@ -23,7 +23,7 @@ class EmbedTokens(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.CreateReferralsEmbedTokenResponseBody]:
+    ) -> operations.CreateReferralsEmbedTokenResponseBody:
         r"""Create a referrals embed token
 
         Create a referrals embed token for the given partner/tenant.
@@ -111,7 +111,7 @@ class EmbedTokens(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.CreateReferralsEmbedTokenResponseBody], http_res
+                operations.CreateReferralsEmbedTokenResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -168,7 +168,7 @@ class EmbedTokens(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.CreateReferralsEmbedTokenResponseBody]:
+    ) -> operations.CreateReferralsEmbedTokenResponseBody:
         r"""Create a referrals embed token
 
         Create a referrals embed token for the given partner/tenant.
@@ -256,7 +256,7 @@ class EmbedTokens(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.CreateReferralsEmbedTokenResponseBody], http_res
+                operations.CreateReferralsEmbedTokenResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

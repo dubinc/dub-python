@@ -21,7 +21,7 @@ class Analytics(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.RetrieveAnalyticsResponseBody]:
+    ) -> operations.RetrieveAnalyticsResponseBody:
         r"""Retrieve analytics for a link, a domain, or the authenticated workspace.
 
         Retrieve analytics for a link, a domain, or the authenticated workspace. The response type depends on the `event` and `type` query parameters.
@@ -98,7 +98,7 @@ class Analytics(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.RetrieveAnalyticsResponseBody], http_res
+                operations.RetrieveAnalyticsResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -153,7 +153,7 @@ class Analytics(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.RetrieveAnalyticsResponseBody]:
+    ) -> operations.RetrieveAnalyticsResponseBody:
         r"""Retrieve analytics for a link, a domain, or the authenticated workspace.
 
         Retrieve analytics for a link, a domain, or the authenticated workspace. The response type depends on the `event` and `type` query parameters.
@@ -230,7 +230,7 @@ class Analytics(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.RetrieveAnalyticsResponseBody], http_res
+                operations.RetrieveAnalyticsResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

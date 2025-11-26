@@ -44,8 +44,6 @@ with Dub(
         },
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 

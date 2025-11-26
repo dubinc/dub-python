@@ -27,8 +27,6 @@ with Dub(
 
     res = d_client.folders.create()
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -76,8 +74,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.folders.list(request={})
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -127,8 +123,6 @@ with Dub(
 
     res = d_client.folders.update(id="<id>")
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -177,8 +171,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.folders.delete(id="<id>")
-
-    assert res is not None
 
     # Handle response
     print(res)

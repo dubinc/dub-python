@@ -6,10 +6,11 @@ from dub.models.components import (
     partneranalyticstimeseries as components_partneranalyticstimeseries,
     partneranalyticstoplinks as components_partneranalyticstoplinks,
 )
-from dub.types import BaseModel
+from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -37,10 +38,10 @@ class RetrievePartnerAnalyticsQueryParamGroupBy(str, Enum):
 
 
 class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
-    partner_id: NotRequired[str]
-    r"""The ID of the partner to retrieve analytics for."""
-    tenant_id: NotRequired[str]
-    r"""The ID of the tenant that created the link inside your system."""
+    partner_id: NotRequired[Nullable[str]]
+    r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
+    tenant_id: NotRequired[Nullable[str]]
+    r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
     interval: NotRequired[RetrievePartnerAnalyticsQueryParamInterval]
     r"""The interval to retrieve analytics for. If undefined, defaults to 24h."""
     start: NotRequired[str]
@@ -57,18 +58,18 @@ class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
 
 class RetrievePartnerAnalyticsRequest(BaseModel):
     partner_id: Annotated[
-        Optional[str],
+        OptionalNullable[str],
         pydantic.Field(alias="partnerId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The ID of the partner to retrieve analytics for."""
+    ] = UNSET
+    r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
 
     tenant_id: Annotated[
-        Optional[str],
+        OptionalNullable[str],
         pydantic.Field(alias="tenantId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The ID of the tenant that created the link inside your system."""
+    ] = UNSET
+    r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
 
     interval: Annotated[
         Optional[RetrievePartnerAnalyticsQueryParamInterval],
@@ -106,6 +107,45 @@ class RetrievePartnerAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = RetrievePartnerAnalyticsQueryParamGroupBy.COUNT
     r"""The parameter to group the analytics data points by. Defaults to `count` if undefined."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "partnerId",
+            "tenantId",
+            "interval",
+            "start",
+            "end",
+            "timezone",
+            "query",
+            "groupBy",
+        ]
+        nullable_fields = ["partnerId", "tenantId"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 RetrievePartnerAnalyticsResponseBodyTypedDict = TypeAliasType(

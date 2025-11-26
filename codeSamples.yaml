@@ -27,8 +27,6 @@ actions:
                     "query": "metadata['key']:'value'",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/commissions"]["get"]
@@ -47,8 +45,6 @@ actions:
                 res = d_client.commissions.list(request={
                     "page_size": 50,
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -69,8 +65,6 @@ actions:
                     "id": "cm_1JVR7XRCSR0EDBAF39FZ4PMYE",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/customers"]["get"]
@@ -90,8 +84,6 @@ actions:
                     "page_size": 50,
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/customers/{id}"]["delete"]
@@ -108,8 +100,6 @@ actions:
             ) as d_client:
 
                 res = d_client.customers.delete(id="<id>")
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -130,8 +120,6 @@ actions:
                     "id": "<id>",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/customers/{id}"]["patch"]
@@ -150,8 +138,6 @@ actions:
                 res = d_client.customers.update(request={
                     "id": "<id>",
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -196,8 +182,6 @@ actions:
                     "placeholder": "https://dub.co/help/article/what-is-dub",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/domains/register"]["post"]
@@ -216,8 +200,6 @@ actions:
                 res = d_client.domains.register(request={
                     "domain": "acme.link",
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -238,8 +220,6 @@ actions:
                     "domains": "<value>",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/domains/{slug}"]["delete"]
@@ -256,8 +236,6 @@ actions:
             ) as d_client:
 
                 res = d_client.domains.delete(slug="acme.com")
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -280,8 +258,6 @@ actions:
                     "not_found_url": "https://acme.com/not-found",
                     "placeholder": "https://dub.co/help/article/what-is-dub",
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -309,8 +285,6 @@ actions:
                     "query": "metadata['key']:'value'",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/folders"]["get"]
@@ -327,8 +301,6 @@ actions:
             ) as d_client:
 
                 res = d_client.folders.list(request={})
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -347,8 +319,6 @@ actions:
 
                 res = d_client.folders.create()
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/folders/{id}"]["delete"]
@@ -366,8 +336,6 @@ actions:
 
                 res = d_client.folders.delete(id="<id>")
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/folders/{id}"]["patch"]
@@ -384,8 +352,6 @@ actions:
             ) as d_client:
 
                 res = d_client.folders.update(id="<id>")
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -443,8 +409,6 @@ actions:
                     ],
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/links/bulk"]["delete"]
@@ -466,8 +430,6 @@ actions:
                         "clux0rgak00022...",
                     ],
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -502,8 +464,6 @@ actions:
                         ],
                     },
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -540,8 +500,6 @@ actions:
                     },
                 ])
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/links/count"]["get"]
@@ -562,8 +520,6 @@ actions:
                     "with_tags": False,
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/links/info"]["get"]
@@ -583,8 +539,6 @@ actions:
                     "link_id": "clux0rgak00011...",
                     "external_id": "123456",
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -619,8 +573,6 @@ actions:
                     ],
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/links/{linkId}"]["delete"]
@@ -637,8 +589,6 @@ actions:
             ) as d_client:
 
                 res = d_client.links.delete(link_id="<id>")
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -673,8 +623,6 @@ actions:
                     ],
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/partners"]["get"]
@@ -699,8 +647,6 @@ actions:
                     "search": "john",
                     "page_size": 50,
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -737,8 +683,6 @@ actions:
                     },
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/partners/analytics"]["get"]
@@ -759,7 +703,22 @@ actions:
                     "query": "metadata['key']:'value'",
                 })
 
-                assert res is not None
+                # Handle response
+                print(res)
+  - target: $["paths"]["/partners/ban"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: banPartner
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.ban()
 
                 # Handle response
                 print(res)
@@ -777,8 +736,6 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.retrieve_links(request={})
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -814,8 +771,6 @@ actions:
                     },
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/partners/links/upsert"]["put"]
@@ -850,8 +805,6 @@ actions:
                     },
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/qr"]["get"]
@@ -873,8 +826,6 @@ actions:
                     "include_margin": False,
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/tags"]["get"]
@@ -894,8 +845,6 @@ actions:
                     "page_size": 50,
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/tags"]["post"]
@@ -912,8 +861,6 @@ actions:
             ) as d_client:
 
                 res = d_client.tags.create()
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -932,8 +879,6 @@ actions:
 
                 res = d_client.tags.delete(id="<id>")
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/tags/{id}"]["patch"]
@@ -950,8 +895,6 @@ actions:
             ) as d_client:
 
                 res = d_client.tags.update(id="<id>")
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -990,8 +933,6 @@ actions:
                     },
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/track/lead"]["post"]
@@ -1012,8 +953,6 @@ actions:
                     "event_name": "Sign up",
                     "customer_external_id": "<id>",
                 })
-
-                assert res is not None
 
                 # Handle response
                 print(res)
@@ -1037,8 +976,6 @@ actions:
                     "lead_event_name": "Cloned template 1481267",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/workspaces/{idOrSlug}"]["get"]
@@ -1058,8 +995,6 @@ actions:
                     "id_or_slug": "<value>",
                 })
 
-                assert res is not None
-
                 # Handle response
                 print(res)
   - target: $["paths"]["/workspaces/{idOrSlug}"]["patch"]
@@ -1076,8 +1011,6 @@ actions:
             ) as d_client:
 
                 res = d_client.workspaces.update(id_or_slug="<value>")
-
-                assert res is not None
 
                 # Handle response
                 print(res)

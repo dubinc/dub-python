@@ -25,7 +25,9 @@ The parameter to group the analytics data points by. Defaults to `count` if unde
 | `TOP_DOMAINS`   | top_domains     |
 | `TOP_LINKS`     | top_links       |
 | `TOP_URLS`      | top_urls        |
+| `TOP_BASE_URLS` | top_base_urls   |
 | `TOP_PARTNERS`  | top_partners    |
+| `TOP_GROUPS`    | top_groups      |
 | `UTM_SOURCES`   | utm_sources     |
 | `UTM_MEDIUMS`   | utm_mediums     |
 | `UTM_CAMPAIGNS` | utm_campaigns   |

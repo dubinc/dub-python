@@ -27,8 +27,6 @@ with Dub(
 
     res = d_client.tags.create()
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -79,8 +77,6 @@ with Dub(
         "page_size": 50,
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -128,8 +124,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.tags.update(id="<id>")
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -179,8 +173,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.tags.delete(id="<id>")
-
-    assert res is not None
 
     # Handle response
     print(res)

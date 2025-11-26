@@ -29,8 +29,6 @@ with Dub(
         "customer_external_id": "<id>",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -83,8 +81,6 @@ with Dub(
         "event_name": "Invoice paid",
         "lead_event_name": "Cloned template 1481267",
     })
-
-    assert res is not None
 
     # Handle response
     print(res)
