@@ -26,8 +26,6 @@ with Dub(
         ],
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 ```
@@ -65,8 +63,6 @@ async def main():
             ],
         })
 
-        assert res is not None
-
         # Handle response
         print(res)
 
@@ -99,8 +95,6 @@ with Dub(
             },
         ],
     })
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -138,8 +132,6 @@ async def main():
                 },
             ],
         })
-
-        assert res is not None
 
         # Handle response
         print(res)

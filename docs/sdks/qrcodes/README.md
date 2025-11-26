@@ -26,8 +26,6 @@ with Dub(
         "url": "https://needy-newsstand.biz/",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 

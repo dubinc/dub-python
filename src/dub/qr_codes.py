@@ -20,7 +20,7 @@ class QRCodes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[str]:
+    ) -> str:
         r"""Retrieve a QR code
 
         Retrieve a QR code for a link.
@@ -149,7 +149,7 @@ class QRCodes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[str]:
+    ) -> str:
         r"""Retrieve a QR code
 
         Retrieve a QR code for a link.

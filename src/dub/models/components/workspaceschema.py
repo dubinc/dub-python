@@ -105,6 +105,8 @@ class WorkspaceSchemaTypedDict(TypedDict):
     r"""The invite code of the workspace."""
     plan: Plan
     r"""The plan of the workspace."""
+    plan_tier: Nullable[float]
+    r"""The tier of the workspace's plan."""
     stripe_id: Nullable[str]
     r"""The Stripe ID of the workspace."""
     billing_cycle_start: float
@@ -184,6 +186,9 @@ class WorkspaceSchema(BaseModel):
 
     plan: Plan
     r"""The plan of the workspace."""
+
+    plan_tier: Annotated[Nullable[float], pydantic.Field(alias="planTier")]
+    r"""The tier of the workspace's plan."""
 
     stripe_id: Annotated[Nullable[str], pydantic.Field(alias="stripeId")]
     r"""The Stripe ID of the workspace."""
@@ -287,6 +292,7 @@ class WorkspaceSchema(BaseModel):
         nullable_fields = [
             "logo",
             "inviteCode",
+            "planTier",
             "stripeId",
             "paymentFailedAt",
             "stripeConnectId",

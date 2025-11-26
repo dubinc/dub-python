@@ -24,7 +24,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Create a link
 
         Create a link for the authenticated workspace.
@@ -105,7 +105,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -161,7 +161,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Create a link
 
         Create a link for the authenticated workspace.
@@ -242,7 +242,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -405,9 +405,7 @@ class Links(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetLinksResponse(
-                result=unmarshal_json_response(
-                    Optional[List[components.LinkSchema]], http_res
-                ),
+                result=unmarshal_json_response(List[components.LinkSchema], http_res),
                 next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
@@ -572,9 +570,7 @@ class Links(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetLinksResponse(
-                result=unmarshal_json_response(
-                    Optional[List[components.LinkSchema]], http_res
-                ),
+                result=unmarshal_json_response(List[components.LinkSchema], http_res),
                 next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
@@ -629,7 +625,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[float]:
+    ) -> float:
         r"""Retrieve links count
 
         Retrieve the number of links for the authenticated workspace.
@@ -705,7 +701,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[float], http_res)
+            return unmarshal_json_response(float, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -758,7 +754,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[float]:
+    ) -> float:
         r"""Retrieve links count
 
         Retrieve the number of links for the authenticated workspace.
@@ -834,7 +830,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[float], http_res)
+            return unmarshal_json_response(float, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -887,7 +883,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Retrieve a link
 
         Retrieve the info for a link.
@@ -963,7 +959,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1016,7 +1012,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Retrieve a link
 
         Retrieve the info for a link.
@@ -1092,7 +1088,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1149,7 +1145,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Update a link
 
         Update a link for the authenticated workspace. If there's no change, returns it as it is.
@@ -1236,7 +1232,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1293,7 +1289,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Update a link
 
         Update a link for the authenticated workspace. If there's no change, returns it as it is.
@@ -1380,7 +1376,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1431,7 +1427,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.DeleteLinkResponseBody]:
+    ) -> operations.DeleteLinkResponseBody:
         r"""Delete a link
 
         Delete a link for the authenticated workspace.
@@ -1507,9 +1503,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[operations.DeleteLinkResponseBody], http_res
-            )
+            return unmarshal_json_response(operations.DeleteLinkResponseBody, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1560,7 +1554,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.DeleteLinkResponseBody]:
+    ) -> operations.DeleteLinkResponseBody:
         r"""Delete a link
 
         Delete a link for the authenticated workspace.
@@ -1636,9 +1630,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[operations.DeleteLinkResponseBody], http_res
-            )
+            return unmarshal_json_response(operations.DeleteLinkResponseBody, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1691,7 +1683,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.ResponseBody]]:
+    ) -> List[operations.ResponseBody]:
         r"""Bulk create links
 
         Bulk create up to 100 links for the authenticated workspace.
@@ -1770,9 +1762,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[List[operations.ResponseBody]], http_res
-            )
+            return unmarshal_json_response(List[operations.ResponseBody], http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1825,7 +1815,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[operations.ResponseBody]]:
+    ) -> List[operations.ResponseBody]:
         r"""Bulk create links
 
         Bulk create up to 100 links for the authenticated workspace.
@@ -1904,9 +1894,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[List[operations.ResponseBody]], http_res
-            )
+            return unmarshal_json_response(List[operations.ResponseBody], http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -1962,7 +1950,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[components.LinkSchema]]:
+    ) -> List[components.LinkSchema]:
         r"""Bulk update links
 
         Bulk update up to 100 links with the same data for the authenticated workspace.
@@ -2047,9 +2035,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[List[components.LinkSchema]], http_res
-            )
+            return unmarshal_json_response(List[components.LinkSchema], http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -2105,7 +2091,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[components.LinkSchema]]:
+    ) -> List[components.LinkSchema]:
         r"""Bulk update links
 
         Bulk update up to 100 links with the same data for the authenticated workspace.
@@ -2190,9 +2176,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[List[components.LinkSchema]], http_res
-            )
+            return unmarshal_json_response(List[components.LinkSchema], http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -2246,7 +2230,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.BulkDeleteLinksResponseBody]:
+    ) -> operations.BulkDeleteLinksResponseBody:
         r"""Bulk delete links
 
         Bulk delete up to 100 links for the authenticated workspace.
@@ -2323,7 +2307,7 @@ class Links(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.BulkDeleteLinksResponseBody], http_res
+                operations.BulkDeleteLinksResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -2378,7 +2362,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.BulkDeleteLinksResponseBody]:
+    ) -> operations.BulkDeleteLinksResponseBody:
         r"""Bulk delete links
 
         Bulk delete up to 100 links for the authenticated workspace.
@@ -2455,7 +2439,7 @@ class Links(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.BulkDeleteLinksResponseBody], http_res
+                operations.BulkDeleteLinksResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -2512,7 +2496,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Upsert a link
 
         Upsert a link for the authenticated workspace by its URL. If a link with the same URL already exists, return it (or update it if there are any changes). Otherwise, a new link will be created.
@@ -2593,7 +2577,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -2649,7 +2633,7 @@ class Links(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.LinkSchema]:
+    ) -> components.LinkSchema:
         r"""Upsert a link
 
         Upsert a link for the authenticated workspace by its URL. If a link with the same URL already exists, return it (or update it if there are any changes). Otherwise, a new link will be created.
@@ -2730,7 +2714,7 @@ class Links(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.LinkSchema], http_res)
+            return unmarshal_json_response(components.LinkSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)

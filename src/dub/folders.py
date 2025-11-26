@@ -23,7 +23,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.FolderSchema]:
+    ) -> components.FolderSchema:
         r"""Create a folder
 
         Create a folder for the authenticated workspace.
@@ -108,7 +108,7 @@ class Folders(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(Optional[components.FolderSchema], http_res)
+            return unmarshal_json_response(components.FolderSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -164,7 +164,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.FolderSchema]:
+    ) -> components.FolderSchema:
         r"""Create a folder
 
         Create a folder for the authenticated workspace.
@@ -249,7 +249,7 @@ class Folders(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(Optional[components.FolderSchema], http_res)
+            return unmarshal_json_response(components.FolderSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -302,7 +302,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[components.FolderSchema]]:
+    ) -> List[components.FolderSchema]:
         r"""Retrieve a list of folders
 
         Retrieve a list of folders for the authenticated workspace.
@@ -378,9 +378,7 @@ class Folders(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[List[components.FolderSchema]], http_res
-            )
+            return unmarshal_json_response(List[components.FolderSchema], http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -433,7 +431,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[List[components.FolderSchema]]:
+    ) -> List[components.FolderSchema]:
         r"""Retrieve a list of folders
 
         Retrieve a list of folders for the authenticated workspace.
@@ -509,9 +507,7 @@ class Folders(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[List[components.FolderSchema]], http_res
-            )
+            return unmarshal_json_response(List[components.FolderSchema], http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -568,7 +564,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.FolderSchema]:
+    ) -> components.FolderSchema:
         r"""Update a folder
 
         Update a folder in the workspace.
@@ -655,7 +651,7 @@ class Folders(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.FolderSchema], http_res)
+            return unmarshal_json_response(components.FolderSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -712,7 +708,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.FolderSchema]:
+    ) -> components.FolderSchema:
         r"""Update a folder
 
         Update a folder in the workspace.
@@ -799,7 +795,7 @@ class Folders(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(Optional[components.FolderSchema], http_res)
+            return unmarshal_json_response(components.FolderSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -850,7 +846,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.DeleteFolderResponseBody]:
+    ) -> operations.DeleteFolderResponseBody:
         r"""Delete a folder
 
         Delete a folder from the workspace. All existing links will still work, but they will no longer be associated with this folder.
@@ -927,7 +923,7 @@ class Folders(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.DeleteFolderResponseBody], http_res
+                operations.DeleteFolderResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -979,7 +975,7 @@ class Folders(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.DeleteFolderResponseBody]:
+    ) -> operations.DeleteFolderResponseBody:
         r"""Delete a folder
 
         Delete a folder from the workspace. All existing links will still work, but they will no longer be associated with this folder.
@@ -1056,7 +1052,7 @@ class Folders(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                Optional[operations.DeleteFolderResponseBody], http_res
+                operations.DeleteFolderResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

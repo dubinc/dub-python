@@ -20,7 +20,7 @@ class Workspaces(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.WorkspaceSchema]:
+    ) -> components.WorkspaceSchema:
         r"""Retrieve a workspace
 
         Retrieve a workspace for the authenticated user.
@@ -96,9 +96,7 @@ class Workspaces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[components.WorkspaceSchema], http_res
-            )
+            return unmarshal_json_response(components.WorkspaceSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -151,7 +149,7 @@ class Workspaces(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.WorkspaceSchema]:
+    ) -> components.WorkspaceSchema:
         r"""Retrieve a workspace
 
         Retrieve a workspace for the authenticated user.
@@ -227,9 +225,7 @@ class Workspaces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[components.WorkspaceSchema], http_res
-            )
+            return unmarshal_json_response(components.WorkspaceSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -286,7 +282,7 @@ class Workspaces(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.WorkspaceSchema]:
+    ) -> components.WorkspaceSchema:
         r"""Update a workspace
 
         Update a workspace by ID or slug.
@@ -373,9 +369,7 @@ class Workspaces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[components.WorkspaceSchema], http_res
-            )
+            return unmarshal_json_response(components.WorkspaceSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -432,7 +426,7 @@ class Workspaces(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[components.WorkspaceSchema]:
+    ) -> components.WorkspaceSchema:
         r"""Update a workspace
 
         Update a workspace by ID or slug.
@@ -519,9 +513,7 @@ class Workspaces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                Optional[components.WorkspaceSchema], http_res
-            )
+            return unmarshal_json_response(components.WorkspaceSchema, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)

@@ -34,8 +34,6 @@ with Dub(
         "placeholder": "https://dub.co/help/article/what-is-dub",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -139,8 +137,6 @@ with Dub(
         "placeholder": "https://dub.co/help/article/what-is-dub",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -189,8 +185,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.domains.delete(slug="acme.com")
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -242,8 +236,6 @@ with Dub(
         "domain": "acme.link",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -293,8 +285,6 @@ with Dub(
     res = d_client.domains.check_status(request={
         "domains": "<value>",
     })
-
-    assert res is not None
 
     # Handle response
     print(res)

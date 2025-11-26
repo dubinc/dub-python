@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class AnalyticsTopUrlsTypedDict(TypedDict):
     url: str
-    r"""The destination URL"""
+    r"""The full destination URL (including query parameters)"""
     clicks: NotRequired[float]
     r"""The number of clicks from this URL"""
     leads: NotRequired[float]
@@ -22,7 +22,7 @@ class AnalyticsTopUrlsTypedDict(TypedDict):
 
 class AnalyticsTopUrls(BaseModel):
     url: str
-    r"""The destination URL"""
+    r"""The full destination URL (including query parameters)"""
 
     clicks: Optional[float] = 0
     r"""The number of clicks from this URL"""

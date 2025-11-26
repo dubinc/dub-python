@@ -19,12 +19,13 @@ generation:
     hoistGlobalSecurity: true
   schemas:
     allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 0.32.0
+  version: 0.33.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -54,8 +55,10 @@ python:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
+  inferUnionDiscriminators: true
   inputModelSuffix: input
   legacyPyright: true
+  license: ""
   maxMethodParams: 0
   methodArguments: require-security-and-request
   moduleName: ""

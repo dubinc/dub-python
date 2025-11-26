@@ -45,6 +45,8 @@ class LinkSchemaTypedDict(TypedDict):
     r"""The date and time when the short link will expire in ISO-8601 format."""
     expired_url: Nullable[str]
     r"""The URL to redirect to when the short link has expired."""
+    disabled_at: Nullable[str]
+    r"""The date and time when the short link was disabled. When a short link is disabled, it will redirect to its domain's not found URL, and its stats will be excluded from your overall stats."""
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     title: Nullable[str]
@@ -157,6 +159,9 @@ class LinkSchema(BaseModel):
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
     r"""The URL to redirect to when the short link has expired."""
+
+    disabled_at: Annotated[Nullable[str], pydantic.Field(alias="disabledAt")]
+    r"""The date and time when the short link was disabled. When a short link is disabled, it will redirect to its domain's not found URL, and its stats will be excluded from your overall stats."""
 
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
@@ -323,6 +328,7 @@ class LinkSchema(BaseModel):
             "partnerId",
             "expiresAt",
             "expiredUrl",
+            "disabledAt",
             "password",
             "title",
             "description",

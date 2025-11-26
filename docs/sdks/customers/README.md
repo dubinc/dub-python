@@ -6,7 +6,6 @@
 ### Available Operations
 
 * [list](#list) - Retrieve a list of customers
-* [~~create~~](#create) - Create a customer :warning: **Deprecated**
 * [get](#get) - Retrieve a customer
 * [update](#update) - Update a customer
 * [delete](#delete) - Delete a customer
@@ -30,8 +29,6 @@ with Dub(
         "page_size": 50,
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -47,58 +44,6 @@ with Dub(
 ### Response
 
 **[List[operations.GetCustomersResponseBody]](../../models/.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## ~~create~~
-
-[Deprecated]: Customer creation can only be done via tracking a lead event. Use the /track/lead endpoint instead.
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="createCustomer" method="post" path="/customers" -->
-```python
-from dub import Dub
-
-
-with Dub(
-    token="DUB_API_KEY",
-) as d_client:
-
-    res = d_client.customers.create()
-
-    assert res is not None
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.CreateCustomerRequestBody](../../models/operations/createcustomerrequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
-
-### Response
-
-**[operations.CreateCustomerResponseBody](../../models/operations/createcustomerresponsebody.md)**
 
 ### Errors
 
@@ -133,8 +78,6 @@ with Dub(
     res = d_client.customers.get(request={
         "id": "<id>",
     })
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -186,8 +129,6 @@ with Dub(
         "id": "<id>",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -235,8 +176,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.customers.delete(id="<id>")
-
-    assert res is not None
 
     # Handle response
     print(res)

@@ -27,8 +27,6 @@ with Dub(
         "id_or_slug": "<value>",
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -76,8 +74,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.workspaces.update(id_or_slug="<value>")
-
-    assert res is not None
 
     # Handle response
     print(res)

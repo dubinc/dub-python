@@ -49,8 +49,6 @@ with Dub(
         ],
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -151,8 +149,6 @@ with Dub(
 
     res = d_client.links.count(request={})
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -203,8 +199,6 @@ with Dub(
         "link_id": "clux0rgak00011...",
         "external_id": "123456",
     })
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -270,8 +264,6 @@ with Dub(
         ],
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -320,8 +312,6 @@ with Dub(
 ) as d_client:
 
     res = d_client.links.delete(link_id="<id>")
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -406,8 +396,6 @@ with Dub(
         },
     ])
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -473,8 +461,6 @@ with Dub(
         },
     })
 
-    assert res is not None
-
     # Handle response
     print(res)
 
@@ -527,8 +513,6 @@ with Dub(
             "clux0rgak00022...",
         ],
     })
-
-    assert res is not None
 
     # Handle response
     print(res)
@@ -593,8 +577,6 @@ with Dub(
             },
         ],
     })
-
-    assert res is not None
 
     # Handle response
     print(res)
