@@ -81,7 +81,7 @@ class GetQRCodeRequest(BaseModel):
         Optional[bool],
         pydantic.Field(alias="hideLogo"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = True
+    ] = False
     r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub."""
 
     margin: Annotated[

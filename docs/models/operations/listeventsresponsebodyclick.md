@@ -1,4 +1,4 @@
-# SaleEventClick
+# ListEventsResponseBodyClick
 
 
 ## Fields

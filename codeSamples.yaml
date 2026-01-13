@@ -10,6 +10,7 @@ actions:
           label: retrieveAnalytics
           source: |-
             from dub import Dub
+            from dub.models import operations
 
 
             with Dub(
@@ -17,6 +18,7 @@ actions:
             ) as d_client:
 
                 res = d_client.analytics.retrieve(request={
+                    "event": operations.Event.LEADS,
                     "timezone": "America/New_York",
                     "city": "New York",
                     "device": "Desktop",
@@ -154,9 +156,7 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.domains.list(request={
-                    "archived": True,
-                })
+                res = d_client.domains.list(request={})
 
                 while res is not None:
                     # Handle items
@@ -369,8 +369,6 @@ actions:
             ) as d_client:
 
                 res = d_client.links.list(request={
-                    "show_archived": False,
-                    "with_tags": True,
                     "page_size": 50,
                 })
 
@@ -515,10 +513,7 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.links.count(request={
-                    "show_archived": False,
-                    "with_tags": False,
-                })
+                res = d_client.links.count(request={})
 
                 # Handle response
                 print(res)
@@ -822,8 +817,6 @@ actions:
 
                 res = d_client.qr_codes.get(request={
                     "url": "https://needy-newsstand.biz/",
-                    "hide_logo": True,
-                    "include_margin": False,
                 })
 
                 # Handle response

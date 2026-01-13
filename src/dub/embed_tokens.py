@@ -72,6 +72,7 @@ class EmbedTokens(BaseSDK):
                 "json",
                 Optional[operations.CreateReferralsEmbedTokenRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -217,6 +218,7 @@ class EmbedTokens(BaseSDK):
                 "json",
                 Optional[operations.CreateReferralsEmbedTokenRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

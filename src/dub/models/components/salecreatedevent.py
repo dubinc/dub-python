@@ -492,14 +492,14 @@ class SaleCreatedEventLink(BaseModel):
         return m
 
 
-class SaleCreatedEventSaleTypedDict(TypedDict):
+class SaleTypedDict(TypedDict):
     amount: float
     currency: str
     payment_processor: str
     invoice_id: Nullable[str]
 
 
-class SaleCreatedEventSale(BaseModel):
+class Sale(BaseModel):
     amount: float
 
     currency: str
@@ -632,9 +632,9 @@ class SaleCreatedEventDataTypedDict(TypedDict):
     customer: SaleCreatedEventCustomerTypedDict
     click: SaleCreatedEventClickTypedDict
     link: SaleCreatedEventLinkTypedDict
-    sale: SaleCreatedEventSaleTypedDict
-    metadata: Nullable[Dict[str, Any]]
+    sale: SaleTypedDict
     partner: NotRequired[Nullable[SaleCreatedEventPartnerTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class SaleCreatedEventData(BaseModel):
@@ -646,15 +646,15 @@ class SaleCreatedEventData(BaseModel):
 
     link: SaleCreatedEventLink
 
-    sale: SaleCreatedEventSale
-
-    metadata: Nullable[Dict[str, Any]]
+    sale: Sale
 
     partner: OptionalNullable[SaleCreatedEventPartner] = UNSET
 
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["partner"]
+        optional_fields = ["partner", "metadata"]
         nullable_fields = ["partner", "metadata"]
         null_default_fields = []
 

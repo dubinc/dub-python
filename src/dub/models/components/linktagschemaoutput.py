@@ -6,7 +6,7 @@ from enum import Enum
 from typing_extensions import TypedDict
 
 
-class LinkTagSchemaColor(str, Enum):
+class Color(str, Enum):
     r"""The color of the tag."""
 
     RED = "red"
@@ -18,21 +18,21 @@ class LinkTagSchemaColor(str, Enum):
     PINK = "pink"
 
 
-class LinkTagSchemaTypedDict(TypedDict):
+class LinkTagSchemaOutputTypedDict(TypedDict):
     id: str
     r"""The unique ID of the tag."""
     name: str
     r"""The name of the tag."""
-    color: LinkTagSchemaColor
+    color: Color
     r"""The color of the tag."""
 
 
-class LinkTagSchema(BaseModel):
+class LinkTagSchemaOutput(BaseModel):
     id: str
     r"""The unique ID of the tag."""
 
     name: str
     r"""The name of the tag."""
 
-    color: LinkTagSchemaColor
+    color: Color
     r"""The color of the tag."""

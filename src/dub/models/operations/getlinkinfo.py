@@ -11,7 +11,6 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class GetLinkInfoRequestTypedDict(TypedDict):
     domain: NotRequired[str]
     key: NotRequired[str]
-    r"""The key of the link to retrieve. E.g. for `d.to/github`, the key is `github`."""
     link_id: NotRequired[str]
     r"""The unique ID of the short link."""
     external_id: NotRequired[str]
@@ -28,7 +27,6 @@ class GetLinkInfoRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The key of the link to retrieve. E.g. for `d.to/github`, the key is `github`."""
 
     link_id: Annotated[
         Optional[str],

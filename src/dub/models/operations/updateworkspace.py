@@ -5,14 +5,14 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateWorkspaceRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     slug: NotRequired[str]
-    logo: NotRequired[Nullable[str]]
+    logo: NotRequired[Nullable[Any]]
     conversion_enabled: NotRequired[bool]
 
 
@@ -21,7 +21,7 @@ class UpdateWorkspaceRequestBody(BaseModel):
 
     slug: Optional[str] = None
 
-    logo: OptionalNullable[str] = UNSET
+    logo: OptionalNullable[Any] = UNSET
 
     conversion_enabled: Annotated[
         Optional[bool], pydantic.Field(alias="conversionEnabled")

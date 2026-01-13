@@ -1,4 +1,4 @@
-# SaleEventTestVariants
+# ListEventsResponseBodyEventsTestVariants
 
 
 ## Fields

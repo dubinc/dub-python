@@ -3,21 +3,21 @@
 
 ## Supported Types
 
-### `components.ClickEvent`
+### `operations.ClickEvent`
 
 ```python
-value: components.ClickEvent = /* values here */
+value: operations.ClickEvent = /* values here */
 ```
 
-### `components.LeadEvent`
+### `operations.LeadEvent`
 
 ```python
-value: components.LeadEvent = /* values here */
+value: operations.LeadEvent = /* values here */
 ```
 
-### `components.SaleEvent`
+### `operations.SaleEvent`
 
 ```python
-value: components.SaleEvent = /* values here */
+value: operations.SaleEvent = /* values here */
 ```
 

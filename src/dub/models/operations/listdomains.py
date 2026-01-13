@@ -24,7 +24,7 @@ class ListDomainsRequest(BaseModel):
     archived: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = True
+    ] = False
     r"""Whether to include archived domains in the response. Defaults to `false` if not provided."""
 
     search: Annotated[

@@ -126,7 +126,7 @@ class Click(BaseModel):
     id: str
 
 
-class TrackLeadLinkTypedDict(TypedDict):
+class LinkTypedDict(TypedDict):
     id: str
     r"""The unique ID of the short link."""
     domain: str
@@ -147,7 +147,7 @@ class TrackLeadLinkTypedDict(TypedDict):
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
 
 
-class TrackLeadLink(BaseModel):
+class Link(BaseModel):
     id: str
     r"""The unique ID of the short link."""
 
@@ -257,7 +257,7 @@ class TrackLeadResponseBodyTypedDict(TypedDict):
     r"""A lead was tracked."""
 
     click: ClickTypedDict
-    link: Nullable[TrackLeadLinkTypedDict]
+    link: Nullable[LinkTypedDict]
     customer: CustomerTypedDict
 
 
@@ -266,7 +266,7 @@ class TrackLeadResponseBody(BaseModel):
 
     click: Click
 
-    link: Nullable[TrackLeadLink]
+    link: Nullable[Link]
 
     customer: Customer
 

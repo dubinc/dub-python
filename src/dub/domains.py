@@ -71,6 +71,7 @@ class Domains(BaseSDK):
                 "json",
                 Optional[operations.CreateDomainRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -212,6 +213,7 @@ class Domains(BaseSDK):
                 "json",
                 Optional[operations.CreateDomainRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -341,6 +343,7 @@ class Domains(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -497,6 +500,7 @@ class Domains(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -668,6 +672,7 @@ class Domains(BaseSDK):
                 "json",
                 Optional[operations.UpdateDomainRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -812,6 +817,7 @@ class Domains(BaseSDK):
                 "json",
                 Optional[operations.UpdateDomainRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -939,6 +945,7 @@ class Domains(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1068,6 +1075,7 @@ class Domains(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1211,6 +1219,7 @@ class Domains(BaseSDK):
                 "json",
                 Optional[operations.RegisterDomainRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1354,6 +1363,7 @@ class Domains(BaseSDK):
                 "json",
                 Optional[operations.RegisterDomainRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1486,6 +1496,7 @@ class Domains(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1618,6 +1629,7 @@ class Domains(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

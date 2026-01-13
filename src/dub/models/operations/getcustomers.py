@@ -35,6 +35,10 @@ class GetCustomersRequestTypedDict(TypedDict):
     r"""A filter on the list based on the customer's `country` field."""
     link_id: NotRequired[str]
     r"""A filter on the list based on the customer's `linkId` field (the referral link ID)."""
+    program_id: NotRequired[str]
+    r"""Program ID to filter by."""
+    partner_id: NotRequired[str]
+    r"""Partner ID to filter by."""
     include_expanded_fields: NotRequired[bool]
     r"""Whether to include expanded fields on the customer (`link`, `partner`, `discount`)."""
     sort_by: NotRequired[GetCustomersQueryParamSortBy]
@@ -79,6 +83,20 @@ class GetCustomersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""A filter on the list based on the customer's `linkId` field (the referral link ID)."""
+
+    program_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="programId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Program ID to filter by."""
+
+    partner_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="partnerId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Partner ID to filter by."""
 
     include_expanded_fields: Annotated[
         Optional[bool],
