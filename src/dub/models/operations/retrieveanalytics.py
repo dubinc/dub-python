@@ -16,7 +16,6 @@ from dub.models.components import (
     analyticstoplinks as components_analyticstoplinks,
     analyticstopurls as components_analyticstopurls,
     analyticstriggers as components_analyticstriggers,
-    continentcode as components_continentcode,
 )
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
@@ -79,6 +78,18 @@ class Interval(str, Enum):
     QTD = "qtd"
     YTD = "ytd"
     ALL = "all"
+
+
+class Continent(str, Enum):
+    r"""The continent to retrieve analytics for."""
+
+    AF = "AF"
+    AN = "AN"
+    AS = "AS"
+    EU = "EU"
+    NA = "NA"
+    OC = "OC"
+    SA = "SA"
 
 
 class Trigger(str, Enum):
@@ -144,7 +155,7 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The city to retrieve analytics for."""
     region: NotRequired[str]
     r"""The ISO 3166-2 region code to retrieve analytics for."""
-    continent: NotRequired[components_continentcode.ContinentCode]
+    continent: NotRequired[Continent]
     r"""The continent to retrieve analytics for."""
     device: NotRequired[str]
     r"""The device to retrieve analytics for."""
@@ -155,7 +166,7 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     trigger: NotRequired[Trigger]
     r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
     referer: NotRequired[str]
-    r"""The referer to retrieve analytics for."""
+    r"""The referer hostname to retrieve analytics for."""
     referer_url: NotRequired[str]
     r"""The full referer URL to retrieve analytics for."""
     url: NotRequired[str]
@@ -301,7 +312,7 @@ class RetrieveAnalyticsRequest(BaseModel):
     r"""The ISO 3166-2 region code to retrieve analytics for."""
 
     continent: Annotated[
-        Optional[components_continentcode.ContinentCode],
+        Optional[Continent],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The continent to retrieve analytics for."""
@@ -334,7 +345,7 @@ class RetrieveAnalyticsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The referer to retrieve analytics for."""
+    r"""The referer hostname to retrieve analytics for."""
 
     referer_url: Annotated[
         Optional[str],

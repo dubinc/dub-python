@@ -1,5 +1,4 @@
 # Analytics
-(*analytics*)
 
 ## Overview
 
@@ -16,6 +15,7 @@ Retrieve analytics for a link, a domain, or the authenticated workspace. The res
 <!-- UsageSnippet language="python" operationID="retrieveAnalytics" method="get" path="/analytics" -->
 ```python
 from dub import Dub
+from dub.models import operations
 
 
 with Dub(
@@ -23,6 +23,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.analytics.retrieve(request={
+        "event": operations.Event.LEADS,
         "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",

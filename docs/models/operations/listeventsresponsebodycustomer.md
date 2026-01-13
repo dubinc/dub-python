@@ -1,4 +1,4 @@
-# LeadCreatedEventCustomer
+# ListEventsResponseBodyCustomer
 
 
 ## Fields

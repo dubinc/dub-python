@@ -60,8 +60,6 @@ class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
     r"""The unique IDs of the tags assigned to the short link."""
     tag_names: NotRequired[UpsertPartnerLinkTagNamesTypedDict]
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
-    folder_id: NotRequired[Nullable[str]]
-    r"""The unique ID existing folder to assign the short link to."""
     comments: NotRequired[Nullable[str]]
     r"""The comments for the short link."""
     expires_at: NotRequired[Nullable[str]]
@@ -88,18 +86,6 @@ class UpsertPartnerLinkLinkPropsTypedDict(TypedDict):
     r"""The Android destination URL for the short link for Android device targeting."""
     do_index: NotRequired[bool]
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
-    utm_source: NotRequired[Nullable[str]]
-    r"""The UTM source of the short link. If set, this will populate or override the UTM source in the destination URL."""
-    utm_medium: NotRequired[Nullable[str]]
-    r"""The UTM medium of the short link. If set, this will populate or override the UTM medium in the destination URL."""
-    utm_campaign: NotRequired[Nullable[str]]
-    r"""The UTM campaign of the short link. If set, this will populate or override the UTM campaign in the destination URL."""
-    utm_term: NotRequired[Nullable[str]]
-    r"""The UTM term of the short link. If set, this will populate or override the UTM term in the destination URL."""
-    utm_content: NotRequired[Nullable[str]]
-    r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
-    ref: NotRequired[Nullable[str]]
-    r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
     test_variants: NotRequired[Nullable[List[UpsertPartnerLinkTestVariantsTypedDict]]]
     r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
     test_started_at: NotRequired[Nullable[str]]
@@ -139,11 +125,6 @@ class UpsertPartnerLinkLinkProps(BaseModel):
         Optional[UpsertPartnerLinkTagNames], pydantic.Field(alias="tagNames")
     ] = None
     r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-    folder_id: Annotated[OptionalNullable[str], pydantic.Field(alias="folderId")] = (
-        UNSET
-    )
-    r"""The unique ID existing folder to assign the short link to."""
 
     comments: OptionalNullable[str] = UNSET
     r"""The comments for the short link."""
@@ -188,24 +169,6 @@ class UpsertPartnerLinkLinkProps(BaseModel):
     do_index: Annotated[Optional[bool], pydantic.Field(alias="doIndex")] = None
     r"""Allow search engines to index your short link. Defaults to `false` if not provided. Learn more: https://d.to/noindex"""
 
-    utm_source: OptionalNullable[str] = UNSET
-    r"""The UTM source of the short link. If set, this will populate or override the UTM source in the destination URL."""
-
-    utm_medium: OptionalNullable[str] = UNSET
-    r"""The UTM medium of the short link. If set, this will populate or override the UTM medium in the destination URL."""
-
-    utm_campaign: OptionalNullable[str] = UNSET
-    r"""The UTM campaign of the short link. If set, this will populate or override the UTM campaign in the destination URL."""
-
-    utm_term: OptionalNullable[str] = UNSET
-    r"""The UTM term of the short link. If set, this will populate or override the UTM term in the destination URL."""
-
-    utm_content: OptionalNullable[str] = UNSET
-    r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
-
-    ref: OptionalNullable[str] = UNSET
-    r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
-
     test_variants: Annotated[
         OptionalNullable[List[UpsertPartnerLinkTestVariants]],
         pydantic.Field(alias="testVariants"),
@@ -232,7 +195,6 @@ class UpsertPartnerLinkLinkProps(BaseModel):
             "archived",
             "tagIds",
             "tagNames",
-            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -246,12 +208,6 @@ class UpsertPartnerLinkLinkProps(BaseModel):
             "ios",
             "android",
             "doIndex",
-            "utm_source",
-            "utm_medium",
-            "utm_campaign",
-            "utm_term",
-            "utm_content",
-            "ref",
             "testVariants",
             "testStartedAt",
             "testCompletedAt",
@@ -259,7 +215,6 @@ class UpsertPartnerLinkLinkProps(BaseModel):
         nullable_fields = [
             "externalId",
             "tenantId",
-            "folderId",
             "comments",
             "expiresAt",
             "expiredUrl",
@@ -270,12 +225,6 @@ class UpsertPartnerLinkLinkProps(BaseModel):
             "video",
             "ios",
             "android",
-            "utm_source",
-            "utm_medium",
-            "utm_campaign",
-            "utm_term",
-            "utm_content",
-            "ref",
             "testVariants",
             "testStartedAt",
             "testCompletedAt",

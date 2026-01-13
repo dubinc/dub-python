@@ -23,7 +23,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.LinkTagSchema:
+    ) -> components.LinkTagSchemaOutput:
         r"""Create a tag
 
         Create a tag for the authenticated workspace.
@@ -66,6 +66,7 @@ class Tags(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[operations.CreateTagRequestBody]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -104,7 +105,7 @@ class Tags(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(components.LinkTagSchema, http_res)
+            return unmarshal_json_response(components.LinkTagSchemaOutput, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -160,7 +161,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.LinkTagSchema:
+    ) -> components.LinkTagSchemaOutput:
         r"""Create a tag
 
         Create a tag for the authenticated workspace.
@@ -203,6 +204,7 @@ class Tags(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[operations.CreateTagRequestBody]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -241,7 +243,7 @@ class Tags(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(components.LinkTagSchema, http_res)
+            return unmarshal_json_response(components.LinkTagSchemaOutput, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -292,7 +294,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.LinkTagSchema]:
+    ) -> List[components.LinkTagSchemaOutput]:
         r"""Retrieve a list of tags
 
         Retrieve a list of tags for the authenticated workspace.
@@ -330,6 +332,7 @@ class Tags(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -368,7 +371,9 @@ class Tags(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[components.LinkTagSchema], http_res)
+            return unmarshal_json_response(
+                List[components.LinkTagSchemaOutput], http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -419,7 +424,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.LinkTagSchema]:
+    ) -> List[components.LinkTagSchemaOutput]:
         r"""Retrieve a list of tags
 
         Retrieve a list of tags for the authenticated workspace.
@@ -457,6 +462,7 @@ class Tags(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -495,7 +501,9 @@ class Tags(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[components.LinkTagSchema], http_res)
+            return unmarshal_json_response(
+                List[components.LinkTagSchemaOutput], http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -552,7 +560,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.LinkTagSchema:
+    ) -> components.LinkTagSchemaOutput:
         r"""Update a tag
 
         Update a tag in the workspace.
@@ -601,6 +609,7 @@ class Tags(BaseSDK):
                 "json",
                 Optional[operations.UpdateTagRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -639,7 +648,7 @@ class Tags(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.LinkTagSchema, http_res)
+            return unmarshal_json_response(components.LinkTagSchemaOutput, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -696,7 +705,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.LinkTagSchema:
+    ) -> components.LinkTagSchemaOutput:
         r"""Update a tag
 
         Update a tag in the workspace.
@@ -745,6 +754,7 @@ class Tags(BaseSDK):
                 "json",
                 Optional[operations.UpdateTagRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -783,7 +793,7 @@ class Tags(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.LinkTagSchema, http_res)
+            return unmarshal_json_response(components.LinkTagSchemaOutput, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
             raise errors.BadRequest(response_data, http_res)
@@ -872,6 +882,7 @@ class Tags(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -999,6 +1010,7 @@ class Tags(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

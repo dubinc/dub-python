@@ -17,38 +17,50 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class UpdateCustomerRequestBodyTypedDict(TypedDict):
     email: NotRequired[Nullable[str]]
-    r"""Email of the customer in the client's app."""
+    r"""The customer's email address."""
     name: NotRequired[Nullable[str]]
-    r"""Name of the customer in the client's app. If not provided, a random name will be generated."""
+    r"""The customer's name. If not provided, the email address will be used, and if email is not provided, a random name will be generated."""
     avatar: NotRequired[Nullable[str]]
-    r"""Avatar URL of the customer in the client's app."""
+    r"""The customer's avatar URL. If not provided, a random avatar will be generated."""
     external_id: NotRequired[str]
-    r"""Unique identifier for the customer in the client's app."""
+    r"""The customer's unique identifier your database. This is useful for associating subsequent conversion events from Dub's API to your internal systems."""
     stripe_customer_id: NotRequired[Nullable[str]]
-    r"""The customer's Stripe customer ID. Useful for attribution recurring sale events to the partner who referred the customer."""
+    r"""The customer's Stripe customer ID. This is useful for attributing recurring sale events to the partner who referred the customer."""
+    country: NotRequired[str]
+    r"""The customer's country in ISO 3166-1 alpha-2 format. Updating this field will only affect the customer's country in Dub's system (and has no effect on existing conversion events)."""
 
 
 class UpdateCustomerRequestBody(BaseModel):
     email: OptionalNullable[str] = UNSET
-    r"""Email of the customer in the client's app."""
+    r"""The customer's email address."""
 
     name: OptionalNullable[str] = UNSET
-    r"""Name of the customer in the client's app. If not provided, a random name will be generated."""
+    r"""The customer's name. If not provided, the email address will be used, and if email is not provided, a random name will be generated."""
 
     avatar: OptionalNullable[str] = UNSET
-    r"""Avatar URL of the customer in the client's app."""
+    r"""The customer's avatar URL. If not provided, a random avatar will be generated."""
 
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
-    r"""Unique identifier for the customer in the client's app."""
+    r"""The customer's unique identifier your database. This is useful for associating subsequent conversion events from Dub's API to your internal systems."""
 
     stripe_customer_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="stripeCustomerId")
     ] = UNSET
-    r"""The customer's Stripe customer ID. Useful for attribution recurring sale events to the partner who referred the customer."""
+    r"""The customer's Stripe customer ID. This is useful for attributing recurring sale events to the partner who referred the customer."""
+
+    country: Optional[str] = None
+    r"""The customer's country in ISO 3166-1 alpha-2 format. Updating this field will only affect the customer's country in Dub's system (and has no effect on existing conversion events)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["email", "name", "avatar", "externalId", "stripeCustomerId"]
+        optional_fields = [
+            "email",
+            "name",
+            "avatar",
+            "externalId",
+            "stripeCustomerId",
+            "country",
+        ]
         nullable_fields = ["email", "name", "avatar", "stripeCustomerId"]
         null_default_fields = []
 

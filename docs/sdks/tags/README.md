@@ -1,5 +1,4 @@
 # Tags
-(*tags*)
 
 ## Overview
 
@@ -41,7 +40,7 @@ with Dub(
 
 ### Response
 
-**[components.LinkTagSchema](../../models/components/linktagschema.md)**
+**[components.LinkTagSchemaOutput](../../models/components/linktagschemaoutput.md)**
 
 ### Errors
 
@@ -91,7 +90,7 @@ with Dub(
 
 ### Response
 
-**[List[components.LinkTagSchema]](../../models/.md)**
+**[List[components.LinkTagSchemaOutput]](../../models/.md)**
 
 ### Errors
 
@@ -140,7 +139,7 @@ with Dub(
 
 ### Response
 
-**[components.LinkTagSchema](../../models/components/linktagschema.md)**
+**[components.LinkTagSchemaOutput](../../models/components/linktagschemaoutput.md)**
 
 ### Errors
 

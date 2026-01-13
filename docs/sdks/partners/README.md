@@ -1,5 +1,4 @@
 # Partners
-(*partners*)
 
 ## Overview
 
@@ -231,7 +230,7 @@ with Dub(
 
 ### Response
 
-**[List[operations.Link]](../../models/.md)**
+**[List[operations.RetrieveLinksResponseBody]](../../models/.md)**
 
 ### Errors
 

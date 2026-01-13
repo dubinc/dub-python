@@ -141,14 +141,14 @@ class GetLinksCountRequest(BaseModel):
         Optional[bool],
         pydantic.Field(alias="showArchived"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = True
+    ] = False
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
 
     with_tags: Annotated[
         Optional[bool],
         pydantic.Field(alias="withTags"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = True
+    ] = False
     r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
 
     group_by: Annotated[

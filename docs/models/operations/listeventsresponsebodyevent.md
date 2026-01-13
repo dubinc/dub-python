@@ -1,8 +1,8 @@
-# SaleEventEvent
+# ListEventsResponseBodyEvent
 
 
 ## Values
 
 | Name   | Value  |
 | ------ | ------ |
-| `SALE` | sale   |
+| `LEAD` | lead   |

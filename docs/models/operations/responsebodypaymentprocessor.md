@@ -1,4 +1,4 @@
-# PaymentProcessor
+# ResponseBodyPaymentProcessor
 
 The payment processor via which the sale was made.
 

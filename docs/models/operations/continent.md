@@ -1,4 +1,4 @@
-# ContinentCode
+# Continent
 
 The continent to retrieve analytics for.
 

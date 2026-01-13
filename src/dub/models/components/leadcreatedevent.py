@@ -14,7 +14,7 @@ class LeadCreatedEventEvent(str, Enum):
     LEAD_CREATED = "lead.created"
 
 
-class LeadCreatedEventCustomerTypedDict(TypedDict):
+class CustomerTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
     external_id: str
@@ -35,7 +35,7 @@ class LeadCreatedEventCustomerTypedDict(TypedDict):
     r"""Total amount of sales for the customer."""
 
 
-class LeadCreatedEventCustomer(BaseModel):
+class Customer(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
@@ -582,29 +582,29 @@ class Partner(BaseModel):
 
 class LeadCreatedEventDataTypedDict(TypedDict):
     event_name: str
-    customer: LeadCreatedEventCustomerTypedDict
+    customer: CustomerTypedDict
     click: LeadCreatedEventClickTypedDict
     link: LeadCreatedEventLinkTypedDict
-    metadata: Nullable[Dict[str, Any]]
     partner: NotRequired[Nullable[PartnerTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class LeadCreatedEventData(BaseModel):
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
 
-    customer: LeadCreatedEventCustomer
+    customer: Customer
 
     click: LeadCreatedEventClick
 
     link: LeadCreatedEventLink
 
-    metadata: Nullable[Dict[str, Any]]
-
     partner: OptionalNullable[Partner] = UNSET
+
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["partner"]
+        optional_fields = ["partner", "metadata"]
         nullable_fields = ["partner", "metadata"]
         null_default_fields = []
 

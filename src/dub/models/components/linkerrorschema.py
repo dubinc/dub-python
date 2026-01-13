@@ -3,41 +3,41 @@
 from __future__ import annotations
 from dub.types import BaseModel
 from enum import Enum
-from typing import Any, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Any
+from typing_extensions import TypedDict
 
 
 class Code(str, Enum):
     r"""The error code."""
 
     BAD_REQUEST = "bad_request"
-    NOT_FOUND = "not_found"
-    INTERNAL_SERVER_ERROR = "internal_server_error"
     UNAUTHORIZED = "unauthorized"
     FORBIDDEN = "forbidden"
-    RATE_LIMIT_EXCEEDED = "rate_limit_exceeded"
-    INVITE_EXPIRED = "invite_expired"
-    INVITE_PENDING = "invite_pending"
     EXCEEDED_LIMIT = "exceeded_limit"
+    NOT_FOUND = "not_found"
     CONFLICT = "conflict"
+    INVITE_PENDING = "invite_pending"
+    INVITE_EXPIRED = "invite_expired"
     UNPROCESSABLE_ENTITY = "unprocessable_entity"
+    RATE_LIMIT_EXCEEDED = "rate_limit_exceeded"
+    INTERNAL_SERVER_ERROR = "internal_server_error"
 
 
 class LinkErrorSchemaTypedDict(TypedDict):
+    link: Any
+    r"""The link that caused the error."""
     error: str
     r"""The error message."""
     code: Code
     r"""The error code."""
-    link: NotRequired[Any]
-    r"""The link that caused the error."""
 
 
 class LinkErrorSchema(BaseModel):
+    link: Any
+    r"""The link that caused the error."""
+
     error: str
     r"""The error message."""
 
     code: Code
     r"""The error code."""
-
-    link: Optional[Any] = None
-    r"""The link that caused the error."""
