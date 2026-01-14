@@ -263,6 +263,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.upsert_link(request={
+        "url": "https://bad-intent.org/",
         "link_props": {
             "external_id": "123456",
             "tag_ids": [

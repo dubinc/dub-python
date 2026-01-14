@@ -31,6 +31,66 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/bounties/{bountyId}/submissions"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listBountySubmissions
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.bounties.list_submissions(request={
+                    "bounty_id": "<id>",
+                    "page_size": 50,
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/bounties/{bountyId}/submissions/{submissionId}/approve"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: approveBountySubmission
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.bounties.approve_submission(request={
+                    "bounty_id": "<id>",
+                    "submission_id": "<id>",
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/bounties/{bountyId}/submissions/{submissionId}/reject"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: rejectBountySubmission
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.bounties.reject_submission(request={
+                    "bounty_id": "<id>",
+                    "submission_id": "<id>",
+                })
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/commissions"]["get"]
     update:
       x-codeSamples:
@@ -782,6 +842,7 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.upsert_link(request={
+                    "url": "https://bad-intent.org/",
                     "link_props": {
                         "external_id": "123456",
                         "tag_ids": [
