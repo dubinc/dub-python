@@ -17,6 +17,7 @@ import weakref
 
 if TYPE_CHECKING:
     from dub.analytics import Analytics
+    from dub.bounties import Bounties
     from dub.commissions import Commissions
     from dub.customers import Customers
     from dub.domains import Domains
@@ -47,6 +48,7 @@ class Dub(BaseSDK):
     workspaces: "Workspaces"
     embed_tokens: "EmbedTokens"
     qr_codes: "QRCodes"
+    bounties: "Bounties"
     _sub_sdk_map = {
         "links": ("dub.links", "Links"),
         "analytics": ("dub.analytics", "Analytics"),
@@ -61,6 +63,7 @@ class Dub(BaseSDK):
         "workspaces": ("dub.workspaces", "Workspaces"),
         "embed_tokens": ("dub.embed_tokens", "EmbedTokens"),
         "qr_codes": ("dub.qr_codes", "QRCodes"),
+        "bounties": ("dub.bounties", "Bounties"),
     }
 
     def __init__(

@@ -200,6 +200,31 @@ class CommissionCreatedEventCustomer(BaseModel):
         return m
 
 
+class CommissionCreatedEventLinkTypedDict(TypedDict):
+    id: str
+    r"""The unique ID of the short link."""
+    short_link: str
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+    domain: str
+    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+    key: str
+    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+
+
+class CommissionCreatedEventLink(BaseModel):
+    id: str
+    r"""The unique ID of the short link."""
+
+    short_link: Annotated[str, pydantic.Field(alias="shortLink")]
+    r"""The full URL of the short link, including the https protocol (e.g. `https://dub.sh/try`)."""
+
+    domain: str
+    r"""The domain of the short link. If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
+
+    key: str
+    r"""The short link slug. If not provided, a random 7-character slug will be generated."""
+
+
 class CommissionCreatedEventDataTypedDict(TypedDict):
     id: str
     r"""The commission's unique ID on Dub."""
@@ -213,6 +238,7 @@ class CommissionCreatedEventDataTypedDict(TypedDict):
     created_at: str
     updated_at: str
     partner: CommissionCreatedEventPartnerTypedDict
+    link: Nullable[CommissionCreatedEventLinkTypedDict]
     type: NotRequired[CommissionCreatedEventType]
     user_id: NotRequired[Nullable[str]]
     r"""The user who created the manual commission."""
@@ -243,6 +269,8 @@ class CommissionCreatedEventData(BaseModel):
 
     partner: CommissionCreatedEventPartner
 
+    link: Nullable[CommissionCreatedEventLink]
+
     type: Optional[CommissionCreatedEventType] = None
 
     user_id: Annotated[OptionalNullable[str], pydantic.Field(alias="userId")] = UNSET
@@ -253,7 +281,7 @@ class CommissionCreatedEventData(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["type", "userId", "customer"]
-        nullable_fields = ["invoiceId", "description", "userId", "customer"]
+        nullable_fields = ["invoiceId", "description", "userId", "customer", "link"]
         null_default_fields = []
 
         serialized = handler(self)

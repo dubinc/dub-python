@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 4fe71b8b593ac1efb49346d3604bbe46
+  docChecksum: 1dfd58e77751ca1d1443d50d088508ad
   docVersion: 0.0.1
-  speakeasyVersion: 1.684.1
-  generationVersion: 2.793.2
-  releaseVersion: 0.34.0
-  configChecksum: bc1bd66c58345521af91d43ecee1828e
+  speakeasyVersion: 1.685.0
+  generationVersion: 2.794.1
+  releaseVersion: 0.34.1
+  configChecksum: cc2039b9f0f8c6058bb81ec6acf2b285
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 persistentEdits:
-  generation_id: ece00c23-0b30-418f-877e-66fb1e27a593
-  pristine_commit_hash: b99e91c9c972bc97ebe5b48d7bc6f1dfe32e5de4
-  pristine_tree_hash: d615d693824ffadf85a9cbd2a36d9b783c4e72d3
+  generation_id: 9737042a-5cad-48a1-b2cb-fb53f1856a31
+  pristine_commit_hash: c6d4b4637b33f7d62fa095872967c8ff218111c4
+  pristine_tree_hash: 3f9699b1d6caf37103bd1b38811ced0944f57ca3
 features:
   python:
     additionalDependencies: 1.0.0
@@ -150,12 +150,16 @@ trackedFiles:
     pristine_git_object: 1fe28ade552d3942c101f96930a72f573f0634ef
   docs/models/components/commissioncreatedeventdata.md:
     id: 3354f5392594
-    last_write_checksum: sha1:bccf8ac144909afeca7eaf03c6d847dca286d0dc
-    pristine_git_object: 990258b0d32547e122ee1caa5657f69e0dcc0c4e
+    last_write_checksum: sha1:33a57658a01fbd5d41dea0055c71a75bae0b4d7a
+    pristine_git_object: f7b8c16ae877e656d55382c6d4c1ac1b1751617a
   docs/models/components/commissioncreatedeventevent.md:
     id: 4a349652cc27
     last_write_checksum: sha1:f0a5476120b6d1d23731f5c79373923b78cbddb0
     pristine_git_object: 6402d44910acb2a6f770fe58c9752dad92d7e71f
+  docs/models/components/commissioncreatedeventlink.md:
+    id: 36597d57a393
+    last_write_checksum: sha1:bc8a967170922f44093e911fd1c943529f4e8f9d
+    pristine_git_object: 0940b97d9f74382a9a76e6be2070a4ed0218b9bf
   docs/models/components/commissioncreatedeventpartner.md:
     id: c52c60486c76
     last_write_checksum: sha1:a514d922831c084b3774cc29ffc15488f164bdf1
@@ -528,6 +532,26 @@ trackedFiles:
     id: 4a294fedbfd2
     last_write_checksum: sha1:cc45be6a76d0f0354fe775f256e9955510bf68fe
     pristine_git_object: 6cb6c4e4e589ff16723b8400f602392313b910b0
+  docs/models/operations/approvebountysubmissionfiles.md:
+    id: 0e058522e464
+    last_write_checksum: sha1:b49f4992c68de07667a87573d2215059b13593a8
+    pristine_git_object: 4c007e2ee6643e4a56c892ddb7175c17b2cfcf4c
+  docs/models/operations/approvebountysubmissionrequest.md:
+    id: 24a57cc483cb
+    last_write_checksum: sha1:0394354f82be048dd1c7f9371b91a1f267467038
+    pristine_git_object: 74addd095ab528dd77f37e19aab1a741093bc54c
+  docs/models/operations/approvebountysubmissionrequestbody.md:
+    id: 15a973b62595
+    last_write_checksum: sha1:cdd3de142d7ac7d93b5717ef4202fb90de87da5f
+    pristine_git_object: 29f65217e61d7526ed5183bb1a58abb0ee73d1ea
+  docs/models/operations/approvebountysubmissionresponsebody.md:
+    id: 319a8704a6fe
+    last_write_checksum: sha1:937dd0498ad7032484d986549c5d80796ace1bf9
+    pristine_git_object: 5a645d11d4cf5ec664d6cc7b6fe51ee0c10f9ee8
+  docs/models/operations/approvebountysubmissionstatus.md:
+    id: 8322200a0483
+    last_write_checksum: sha1:c88413bd147c3ee1b829334b42056f1a3b8f417e
+    pristine_git_object: 5cc488fc15457f81dd9fcc3b249e3b5b1352411f
   docs/models/operations/bannedreason.md:
     id: 63e2b4b788c0
     last_write_checksum: sha1:3a5911bfedf75b8b6d49a4a27b37c64700a8e651
@@ -744,6 +768,10 @@ trackedFiles:
     id: 692313a333f0
     last_write_checksum: sha1:bf254f360e05ee06eea67a3961078d3c1657e9d5
     pristine_git_object: 455a40044c01512e8d4db910e497b02d32be6cf0
+  docs/models/operations/files.md:
+    id: c89c08a77981
+    last_write_checksum: sha1:17deb701b4fb051da58ae23bbde61da6ed3537a0
+    pristine_git_object: 299bbe925b60763f6a76a90a8b1a8f7a791dbb74
   docs/models/operations/four.md:
     id: 4297a17a32c9
     last_write_checksum: sha1:b1ab81ce90d5768366ea391b87429337517c85cc
@@ -876,6 +904,30 @@ trackedFiles:
     id: 161455a12c65
     last_write_checksum: sha1:047d2af0d832f89109da098f621ee22d5e7e95b7
     pristine_git_object: ae8393fa123a7f6bc39a30fb8a9055f601fdbe18
+  docs/models/operations/listbountysubmissionsqueryparamsortby.md:
+    id: 1db6f01a0a12
+    last_write_checksum: sha1:962358f4cae9eb22b06dae766a976a9e287186d6
+    pristine_git_object: e35c5cbe9d5e499910afc0786de4ef7fd89a6b77
+  docs/models/operations/listbountysubmissionsqueryparamsortorder.md:
+    id: fd9f9a7cd1d5
+    last_write_checksum: sha1:00f0b03c7e19fa32908d7d5ec858f6c7ce0f112e
+    pristine_git_object: c0b811f3abaab1cc2456e71e7167702d5dd72279
+  docs/models/operations/listbountysubmissionsqueryparamstatus.md:
+    id: 1dfa301d586d
+    last_write_checksum: sha1:c87b97af03b512e84d242828bdc6f09b44e87228
+    pristine_git_object: 80088d5df7bbd61f3f8d3b4342dfe617833fff2d
+  docs/models/operations/listbountysubmissionsrequest.md:
+    id: 7da58a63a48d
+    last_write_checksum: sha1:94e09390e2a7e5bb25909fc5ab62d044f35f591f
+    pristine_git_object: 4096d64ffc714a46d5cb520a749e80a70f5eef44
+  docs/models/operations/listbountysubmissionsresponsebody.md:
+    id: 82e7d60f5d44
+    last_write_checksum: sha1:846560e53229f6ac5c8107a4eb500f2c2d56b87b
+    pristine_git_object: 8e9d20e3dcdbba1f05ffc198a8316c2e829ebf27
+  docs/models/operations/listbountysubmissionsstatus.md:
+    id: 854ef71b7c73
+    last_write_checksum: sha1:f961cb79a54c887ea74df2f2b81c0335b7aeda17
+    pristine_git_object: d624a1579b9e3aafb84ba17fb73d8d8dae6b94af
   docs/models/operations/listcommissionscustomer.md:
     id: 1a5ccf443dee
     last_write_checksum: sha1:ce86ea6395eb184c5bade14e8068c83001d503e9
@@ -1080,6 +1132,30 @@ trackedFiles:
     id: f677bca6a0af
     last_write_checksum: sha1:50c53d9958744e5024a3f53f2dee130fbcefaf46
     pristine_git_object: 53b664bc07de5c307f271c1d6530c4674e98bd97
+  docs/models/operations/rejectbountysubmissionfiles.md:
+    id: d36f7d98bd36
+    last_write_checksum: sha1:ded0e8a09f62ee98a19c9ce15b265d636c51c650
+    pristine_git_object: 674ec286ce8c59d5304bb6f965bfb7ae81f9c54a
+  docs/models/operations/rejectbountysubmissionrequest.md:
+    id: 21ca1e8f0673
+    last_write_checksum: sha1:c50ce1c4c1124c43e3e23d1252fab52c6a07c5ff
+    pristine_git_object: 79f8745d0e68afc19bb356dbfb864bba737d9fc5
+  docs/models/operations/rejectbountysubmissionrequestbody.md:
+    id: 40b56b0a2776
+    last_write_checksum: sha1:a23d84d8b9a4e6165c4e5f40ea72c8c2a18a2df9
+    pristine_git_object: cfc8810f954caf07e23006fd475a4fb29feb5a79
+  docs/models/operations/rejectbountysubmissionresponsebody.md:
+    id: c80cd0172778
+    last_write_checksum: sha1:4fae076e19472ae34f53df2543f58c20445b07c1
+    pristine_git_object: 495cabececd64c3a8ce9fb2eb91628fc308fc65a
+  docs/models/operations/rejectbountysubmissionstatus.md:
+    id: 14acb015a882
+    last_write_checksum: sha1:885b4f0dc15f87e00dd2852bc87634d40a52ba96
+    pristine_git_object: fbe2ca05029cd230864c05d959e1f0e49d672567
+  docs/models/operations/rejectionreason.md:
+    id: 99a67fae384a
+    last_write_checksum: sha1:d88d34b2962b976aa9e76e4b2b1af48f1b4cc20b
+    pristine_git_object: b1f81023d4faa2bb11be050d9a752ec4d4b41d88
   docs/models/operations/requestbody.md:
     id: f78af0833126
     last_write_checksum: sha1:2154702b907d669977ca702d3239f08cf3d6ef16
@@ -1366,8 +1442,8 @@ trackedFiles:
     pristine_git_object: 85427c43293e6823a72b3a8a2c84d7407a0e5763
   docs/models/operations/upsertpartnerlinkrequestbody.md:
     id: c979f5a7d50e
-    last_write_checksum: sha1:c1cf929b069c98d2baceb3c881fe29a2ade1e3be
-    pristine_git_object: 9e7d4742baf5276f14079704803a618e935c4c2b
+    last_write_checksum: sha1:6146b03080bc1ab820fa41951e80473960111b86
+    pristine_git_object: 5c2ae71933a3ba92d8173ccfc5ba20525db0d7ea
   docs/models/operations/upsertpartnerlinktagids.md:
     id: d5cd29a01c90
     last_write_checksum: sha1:0c7c0b6dd53e01d2d4fa443f437c46f506462f6a
@@ -1388,6 +1464,10 @@ trackedFiles:
     id: 4c84abb05030
     last_write_checksum: sha1:3724f293139125113b687671d42a59ba07e49178
     pristine_git_object: 276a125650093a6a93a064cddd4090ac6feb6471
+  docs/sdks/bounties/README.md:
+    id: 013b99daef97
+    last_write_checksum: sha1:5d6aed730aee0c2d13db27441468593e62fb40fe
+    pristine_git_object: 272b5f72be7642fd6bfe71ceb809b70408566c58
   docs/sdks/commissions/README.md:
     id: 12d4eb833558
     last_write_checksum: sha1:402da0c394ecfe85c54f48b3edb0b5aaf3644f9b
@@ -1418,8 +1498,8 @@ trackedFiles:
     pristine_git_object: c588745c3c0fa11912bae381dd932caae4b93512
   docs/sdks/partners/README.md:
     id: 85ac19d13270
-    last_write_checksum: sha1:40986530f73a3105eceb4b7edbd1ed73e43b3ce3
-    pristine_git_object: 6b55410acc662e684db64ed44e8e749f96a09229
+    last_write_checksum: sha1:3b60a0f9a03230e15516f79e2b465d442bb034ce
+    pristine_git_object: 22cec2e81cd7b39fda59c421effadab1d68e402b
   docs/sdks/qrcodes/README.md:
     id: 87ad3800d686
     last_write_checksum: sha1:f4abe84f61dcd299614e76f18d32fe1b49d9501c
@@ -1450,8 +1530,8 @@ trackedFiles:
     pristine_git_object: 99165f10e24129a61ac8d3c5fce526c71f5f559b
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:888106704275761926757582e5cd1dd0c0010bb2
-    pristine_git_object: 0159eaba151de36c202247a35e475e6a3fb6ea9a
+    last_write_checksum: sha1:a02cb1ad79c72cf0e75ed386419c81d520b7c7b0
+    pristine_git_object: fcbb59f69b24f7db39da04c5d57ec473ca03e576
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:98ab0adc36f1ccd31422544b0dd94e008aa47804
@@ -1478,8 +1558,8 @@ trackedFiles:
     pristine_git_object: 350406f1a5b2eabd1ca7e8ea2621fdca5096e0e5
   src/dub/_version.py:
     id: 2e88e1f01047
-    last_write_checksum: sha1:c5a7c079ac3691e4fc7385e4e3e1d070603795be
-    pristine_git_object: 96f6f152d53ebff8acbdbac63fb844f83bf47877
+    last_write_checksum: sha1:45e9dc869e555f6f28e72e5cbd6fdf216bcec7f7
+    pristine_git_object: 30e36a9050f0c107216ab09aa8caa2b42870a1f8
   src/dub/analytics.py:
     id: b7a4fa47e744
     last_write_checksum: sha1:fc568d8b515db82aa4f803714232aaea69d874a0
@@ -1488,6 +1568,10 @@ trackedFiles:
     id: 771ffed1e5c9
     last_write_checksum: sha1:a28571a76c24b8f681214d992915369a375261e4
     pristine_git_object: 2e81641c7895b58539dac7c6ea32aafbdf1adede
+  src/dub/bounties.py:
+    id: a0af23600d93
+    last_write_checksum: sha1:c247f4bf2a158b79d1324cc6f1e92470c0ec5163
+    pristine_git_object: db7aabe7b53dd5f55d17ebca289aef124e5042cb
   src/dub/commissions.py:
     id: 4d162906099e
     last_write_checksum: sha1:adee74f0007f805b1047c4c6a9ad6c686bbd1694
@@ -1526,8 +1610,8 @@ trackedFiles:
     pristine_git_object: 726fc5eb391035492b4bea383d91cb7e23da04d3
   src/dub/models/components/__init__.py:
     id: cfa9c231496c
-    last_write_checksum: sha1:3731e10185663a68dad8a219b8e31795eab38d7a
-    pristine_git_object: a89d494b6fdc1ea03f3accecd0923aa68ac33a06
+    last_write_checksum: sha1:ab4df9b23e9ac06439991df8a6888cd63c5b2f1c
+    pristine_git_object: 6c3f124012b5f8a905132a7eddcad521bb991dcd
   src/dub/models/components/analyticsbrowsers.py:
     id: 2d7aed63032d
     last_write_checksum: sha1:4b939d79e24f1e83e84cb85fde20473416279136
@@ -1586,8 +1670,8 @@ trackedFiles:
     pristine_git_object: 9e74ad00d0718436b8ef90c7b87fa5c1428be0be
   src/dub/models/components/commissioncreatedevent.py:
     id: b2f4948f1e5a
-    last_write_checksum: sha1:6166cc2c41e97c462af7edad23748998bbc94e46
-    pristine_git_object: 82637093d8bde931e8c0a8e5054dcc0c21b09698
+    last_write_checksum: sha1:5042b58fadbbc1d0800d62673797cdbb231a3402
+    pristine_git_object: 994b52694a9c3fcfcc61bde6b23d710179e2bc41
   src/dub/models/components/domainschema.py:
     id: b6034ff0c3c8
     last_write_checksum: sha1:a8f5cf2cf7805675ec6e6bfac4162082542dbe65
@@ -1718,8 +1802,12 @@ trackedFiles:
     pristine_git_object: 89a67bcf8136f1d990fbe4239b1459059f6c4c40
   src/dub/models/operations/__init__.py:
     id: 933db6318765
-    last_write_checksum: sha1:5a4ec9e04c33f25a4652660e57bbcef0a1fa85f4
-    pristine_git_object: 4397f77a5bd15c3910deaf3620420064ba02baf7
+    last_write_checksum: sha1:ccb6aade0098f849308015852eb77ec17287d032
+    pristine_git_object: ba0e96d87a2bc81db1b2412743e3dd2bef4cec98
+  src/dub/models/operations/approvebountysubmission.py:
+    id: bb43baeb1a3f
+    last_write_checksum: sha1:a4391539950e27b513c99ab0f0aab4480a120026
+    pristine_git_object: 9dcb9b05064cf0b8279ce2dfec8f054284a9782b
   src/dub/models/operations/banpartner.py:
     id: 444fc7f56f49
     last_write_checksum: sha1:949564559e3d3e745f24294b635c9705c7ebb750
@@ -1820,6 +1908,10 @@ trackedFiles:
     id: 41390485fd35
     last_write_checksum: sha1:2e78b2cb7fb4d3c720f6557c13781b8b500322fa
     pristine_git_object: 377e56c5f0ea3d2500206a26c7634abf6095267e
+  src/dub/models/operations/listbountysubmissions.py:
+    id: 763262897cc0
+    last_write_checksum: sha1:72984414cd15b54ffee4103d0052a3a5c15a3882
+    pristine_git_object: 5768dacc287211a80d5eafa58dd9dd1e75ea0509
   src/dub/models/operations/listcommissions.py:
     id: 992f4436b681
     last_write_checksum: sha1:1f0f43401563dbc5128aa40ce488cf0f5d9dff36
@@ -1844,6 +1936,10 @@ trackedFiles:
     id: d228522511ae
     last_write_checksum: sha1:3d01a41ba6f020f39d44511a7f8b980322335743
     pristine_git_object: f908723b30f9fdd1245820d08a97dc4fa4b2ecd0
+  src/dub/models/operations/rejectbountysubmission.py:
+    id: 417e94427b88
+    last_write_checksum: sha1:18b1241c89e54f3b4f9166ab0c0899990dcfd5fc
+    pristine_git_object: 52bcbdacd4cf8d29dc18851dc5ccbf9c09822d41
   src/dub/models/operations/retrieveanalytics.py:
     id: d4bcf92cd8c8
     last_write_checksum: sha1:4ed6468b814039e6002376c2bb8a8003c3f25bc4
@@ -1898,8 +1994,8 @@ trackedFiles:
     pristine_git_object: 12c54a8dc57a64650d63e487eb8eebca20c24079
   src/dub/models/operations/upsertpartnerlink.py:
     id: 6eab8b4bb5c5
-    last_write_checksum: sha1:16eeb759d5419af32b31fc98622ab380933baf80
-    pristine_git_object: fec0c482c6cfe9025f07e54859c4806ed9d1e1b6
+    last_write_checksum: sha1:63947e5c3bf2cc30351dd8402f525a06e3a5765f
+    pristine_git_object: 42ffcc5a33562a2a450b39a4b6afd26e48caa303
   src/dub/partners.py:
     id: eb45bbf562e5
     last_write_checksum: sha1:d6a53b3b345c24021ccdda1338514e9369bcd0c8
@@ -1914,8 +2010,8 @@ trackedFiles:
     pristine_git_object: 329cd9ba519f01ea5160751fe26a6db5e25eeccc
   src/dub/sdk.py:
     id: 5d28a0e32a00
-    last_write_checksum: sha1:da5ca4734a5d73e63034066bf6d4432b6eced64b
-    pristine_git_object: b200cf2adecc292341937fee1981e9ea1309affa
+    last_write_checksum: sha1:6cc41ed681d4a4d7a60e169afdeac4e3b85866e7
+    pristine_git_object: fcbcd99f48cac71baee86136ed9d45b7c4c33f4a
   src/dub/sdkconfiguration.py:
     id: fa9f969a69de
     last_write_checksum: sha1:22402c25c87674d65277af59eb3239f2e9744db3
@@ -2923,7 +3019,7 @@ examples:
   upsertPartnerLink:
     speakeasy-default-upsert-partner-link:
       requestBody:
-        application/json: {"linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
+        application/json: {"url": "https://bad-intent.org/", "linkProps": {"externalId": "123456", "tagIds": ["clux0rgak00011..."], "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}]}}
       responses:
         "200":
           application/json: {"id": "<id>", "domain": "inborn-backbone.info", "key": "<key>", "url": "https://trusty-birdcage.org", "trackConversion": false, "externalId": "<id>", "tenantId": "<id>", "programId": "<id>", "partnerId": "<id>", "archived": false, "expiresAt": "1757127216280", "expiredUrl": "https://small-wallaby.org/", "disabledAt": "<value>", "password": "cQ1Zi2EybwesHSo", "proxy": false, "title": "<value>", "description": "noisily once questioningly scornful", "image": "https://picsum.photos/seed/1kknS5/2573/3049", "video": "https://picsum.videos/seed/kln3aGTvg/1432/1228", "rewrite": false, "doIndex": false, "ios": "<value>", "android": "<id>", "geo": {}, "publicStats": false, "tags": [{"id": "<id>", "name": "<value>", "color": "green"}], "folderId": "<id>", "webhookIds": ["<value 1>", "<value 2>", "<value 3>"], "comments": "ha where bakeware dispense ouch who phew gown etch right incidentally overcharge clone actual wash gently premise", "shortLink": "https://hot-marten.biz/", "qrCode": "https://boring-cosset.org", "utm_source": "<value>", "utm_medium": "<value>", "utm_campaign": "<value>", "utm_term": "<value>", "utm_content": "<value>", "testVariants": [{"url": "https://example.com/variant-1", "percentage": 50}, {"url": "https://example.com/variant-2", "percentage": 50}], "userId": "<id>", "workspaceId": "<id>", "clicks": 0, "leads": 0, "conversions": 0, "sales": 0, "saleAmount": 0, "lastClicked": "<value>", "createdAt": "1740078665647", "updatedAt": "1747597582277", "tagId": "<id>", "projectId": "<id>"}
@@ -3272,9 +3368,94 @@ examples:
           application/json: {"error": {"code": "rate_limit_exceeded", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#rate-limit_exceeded"}}
         "500":
           application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
+  listBountySubmissions:
+    speakeasy-default-list-bounty-submissions:
+      parameters:
+        path:
+          bountyId: "<id>"
+        query:
+          sortBy: "completedAt"
+          sortOrder: "asc"
+          page: 1
+          pageSize: 50
+      responses:
+        "200":
+          application/json: [{"id": "<id>", "bountyId": "<id>", "partnerId": "<id>", "description": null, "urls": ["<value 1>", "<value 2>", "<value 3>"], "files": [], "status": "rejected", "performanceCount": 7252.47, "createdAt": "1730788726599", "completedAt": "<value>", "reviewedAt": "<value>", "rejectionReason": "<value>", "rejectionNote": "<value>"}]
+        "400":
+          application/json: {"error": {"code": "bad_request", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#bad-request"}}
+        "401":
+          application/json: {"error": {"code": "unauthorized", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#unauthorized"}}
+        "403":
+          application/json: {"error": {"code": "forbidden", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#forbidden"}}
+        "404":
+          application/json: {"error": {"code": "not_found", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#not-found"}}
+        "409":
+          application/json: {"error": {"code": "conflict", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#conflict"}}
+        "410":
+          application/json: {"error": {"code": "invite_expired", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#invite-expired"}}
+        "422":
+          application/json: {"error": {"code": "unprocessable_entity", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#unprocessable-entity"}}
+        "429":
+          application/json: {"error": {"code": "rate_limit_exceeded", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#rate-limit_exceeded"}}
+        "500":
+          application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
+  approveBountySubmission:
+    speakeasy-default-approve-bounty-submission:
+      parameters:
+        path:
+          bountyId: "<id>"
+          submissionId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "bountyId": "<id>", "partnerId": "<id>", "description": "braid probe where", "urls": [], "files": [], "status": "rejected", "performanceCount": 1758.64, "createdAt": "1734899747469", "completedAt": "<value>", "reviewedAt": "<value>", "rejectionReason": "<value>", "rejectionNote": "<value>"}
+        "400":
+          application/json: {"error": {"code": "bad_request", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#bad-request"}}
+        "401":
+          application/json: {"error": {"code": "unauthorized", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#unauthorized"}}
+        "403":
+          application/json: {"error": {"code": "forbidden", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#forbidden"}}
+        "404":
+          application/json: {"error": {"code": "not_found", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#not-found"}}
+        "409":
+          application/json: {"error": {"code": "conflict", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#conflict"}}
+        "410":
+          application/json: {"error": {"code": "invite_expired", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#invite-expired"}}
+        "422":
+          application/json: {"error": {"code": "unprocessable_entity", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#unprocessable-entity"}}
+        "429":
+          application/json: {"error": {"code": "rate_limit_exceeded", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#rate-limit_exceeded"}}
+        "500":
+          application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
+  rejectBountySubmission:
+    speakeasy-default-reject-bounty-submission:
+      parameters:
+        path:
+          bountyId: "<id>"
+          submissionId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "bountyId": "<id>", "partnerId": "<id>", "description": "concentration blah safely inspection", "urls": ["<value 1>", "<value 2>"], "files": [], "status": "approved", "performanceCount": 6879.81, "createdAt": "1731452499894", "completedAt": "<value>", "reviewedAt": "<value>", "rejectionReason": "<value>", "rejectionNote": "<value>"}
+        "400":
+          application/json: {"error": {"code": "bad_request", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#bad-request"}}
+        "401":
+          application/json: {"error": {"code": "unauthorized", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#unauthorized"}}
+        "403":
+          application/json: {"error": {"code": "forbidden", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#forbidden"}}
+        "404":
+          application/json: {"error": {"code": "not_found", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#not-found"}}
+        "409":
+          application/json: {"error": {"code": "conflict", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#conflict"}}
+        "410":
+          application/json: {"error": {"code": "invite_expired", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#invite-expired"}}
+        "422":
+          application/json: {"error": {"code": "unprocessable_entity", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#unprocessable-entity"}}
+        "429":
+          application/json: {"error": {"code": "rate_limit_exceeded", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#rate-limit_exceeded"}}
+        "500":
+          application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `dub.partners.create()`: \n  *  `request.link_props` **Changed** **Breaking** :warning:\n* `dub.partners.create_link()`: \n  *  `request.link_props` **Changed** **Breaking** :warning:\n* `dub.partners.upsert_link()`: \n  *  `request.link_props` **Changed** **Breaking** :warning:\n* `dub.workspaces.update()`: \n  *  `request_body.logo` **Changed** **Breaking** :warning:\n* `dub.embed_tokens.referrals()`: \n  *  `request.partner.link_props` **Changed** **Breaking** :warning:\n* `dub.links.create_many()`:  `response.[].[link_error_schema].link` **Changed**\n* `dub.analytics.retrieve()`: \n  *  `request.continent` **Changed**\n* `dub.events.list()`: \n  *  `request.continent` **Changed**\n* `dub.customers.list()`:  `request` **Changed**\n* `dub.customers.update()`: \n  *  `request.request_body.country` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `dub.partners.upsert_link()`: \n  *  `request.url` **Changed** **Breaking** :warning:\n* `dub.bounties.list_submissions()`: **Added**\n* `dub.bounties.approve_submission()`: **Added**\n* `dub.bounties.reject_submission()`: **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

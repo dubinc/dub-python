@@ -257,12 +257,12 @@ class UpsertPartnerLinkLinkProps(BaseModel):
 
 
 class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
+    url: str
+    r"""The URL to upsert for. Will throw an error if the domain doesn't match the program's default URL domain."""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
-    url: NotRequired[Nullable[str]]
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     comments: NotRequired[Nullable[str]]
@@ -272,6 +272,9 @@ class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
 
 
 class UpsertPartnerLinkRequestBody(BaseModel):
+    url: str
+    r"""The URL to upsert for. Will throw an error if the domain doesn't match the program's default URL domain."""
+
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET
     )
@@ -281,9 +284,6 @@ class UpsertPartnerLinkRequestBody(BaseModel):
         UNSET
     )
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
-
-    url: OptionalNullable[str] = UNSET
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
 
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
@@ -298,15 +298,8 @@ class UpsertPartnerLinkRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "partnerId",
-            "tenantId",
-            "url",
-            "key",
-            "comments",
-            "linkProps",
-        ]
-        nullable_fields = ["partnerId", "tenantId", "url", "comments"]
+        optional_fields = ["partnerId", "tenantId", "key", "comments", "linkProps"]
+        nullable_fields = ["partnerId", "tenantId", "comments"]
         null_default_fields = []
 
         serialized = handler(self)
