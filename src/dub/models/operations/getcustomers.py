@@ -132,6 +132,37 @@ class GetCustomersRequest(BaseModel):
     ] = 100
     r"""The number of items per page."""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "email",
+                "externalId",
+                "search",
+                "country",
+                "linkId",
+                "programId",
+                "partnerId",
+                "includeExpandedFields",
+                "sortBy",
+                "sortOrder",
+                "page",
+                "pageSize",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class GetCustomersLinkTypedDict(TypedDict):
     id: str
@@ -169,30 +200,14 @@ class GetCustomersLink(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["programId"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
@@ -224,30 +239,14 @@ class GetCustomersPartner(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["email", "image"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
@@ -290,37 +289,28 @@ class Discount(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["description", "partnersCount"]
-        nullable_fields = [
-            "maxDuration",
-            "couponId",
-            "couponTestId",
-            "description",
-            "partnersCount",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["description", "partnersCount"])
+        nullable_fields = set(
+            ["maxDuration", "couponId", "couponTestId", "description", "partnersCount"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -328,16 +318,18 @@ class Discount(BaseModel):
 class GetCustomersResponseBodyTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
-    external_id: str
-    r"""Unique identifier for the customer in the client's app."""
     name: str
     r"""Name of the customer."""
+    external_id: str
+    r"""Unique identifier for the customer in the client's app."""
     created_at: str
     r"""The date the customer was created."""
     email: NotRequired[Nullable[str]]
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
     r"""Avatar URL of the customer."""
+    stripe_customer_id: NotRequired[Nullable[str]]
+    r"""The customer's Stripe customer ID. This is useful for attributing recurring sale events to the partner who referred the customer."""
     country: NotRequired[Nullable[str]]
     r"""Country of the customer."""
     sales: NotRequired[Nullable[float]]
@@ -354,11 +346,11 @@ class GetCustomersResponseBody(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
-    external_id: Annotated[str, pydantic.Field(alias="externalId")]
-    r"""Unique identifier for the customer in the client's app."""
-
     name: str
     r"""Name of the customer."""
+
+    external_id: Annotated[str, pydantic.Field(alias="externalId")]
+    r"""Unique identifier for the customer in the client's app."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the customer was created."""
@@ -368,6 +360,11 @@ class GetCustomersResponseBody(BaseModel):
 
     avatar: OptionalNullable[str] = UNSET
     r"""Avatar URL of the customer."""
+
+    stripe_customer_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="stripeCustomerId")
+    ] = UNSET
+    r"""The customer's Stripe customer ID. This is useful for attributing recurring sale events to the partner who referred the customer."""
 
     country: OptionalNullable[str] = UNSET
     r"""Country of the customer."""
@@ -392,50 +389,51 @@ class GetCustomersResponseBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "email",
-            "avatar",
-            "country",
-            "sales",
-            "saleAmount",
-            "link",
-            "programId",
-            "partner",
-            "discount",
-        ]
-        nullable_fields = [
-            "email",
-            "avatar",
-            "country",
-            "sales",
-            "saleAmount",
-            "link",
-            "programId",
-            "partner",
-            "discount",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "email",
+                "avatar",
+                "stripeCustomerId",
+                "country",
+                "sales",
+                "saleAmount",
+                "link",
+                "programId",
+                "partner",
+                "discount",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "email",
+                "avatar",
+                "stripeCustomerId",
+                "country",
+                "sales",
+                "saleAmount",
+                "link",
+                "programId",
+                "partner",
+                "discount",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
