@@ -184,71 +184,70 @@ class LinkProps(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "keyLength",
-            "externalId",
-            "tenantId",
-            "prefix",
-            "archived",
-            "tagIds",
-            "tagNames",
-            "comments",
-            "expiresAt",
-            "expiredUrl",
-            "password",
-            "proxy",
-            "title",
-            "description",
-            "image",
-            "video",
-            "rewrite",
-            "ios",
-            "android",
-            "doIndex",
-            "testVariants",
-            "testStartedAt",
-            "testCompletedAt",
-        ]
-        nullable_fields = [
-            "externalId",
-            "tenantId",
-            "comments",
-            "expiresAt",
-            "expiredUrl",
-            "password",
-            "title",
-            "description",
-            "image",
-            "video",
-            "ios",
-            "android",
-            "testVariants",
-            "testStartedAt",
-            "testCompletedAt",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "keyLength",
+                "externalId",
+                "tenantId",
+                "prefix",
+                "archived",
+                "tagIds",
+                "tagNames",
+                "comments",
+                "expiresAt",
+                "expiredUrl",
+                "password",
+                "proxy",
+                "title",
+                "description",
+                "image",
+                "video",
+                "rewrite",
+                "ios",
+                "android",
+                "doIndex",
+                "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "externalId",
+                "tenantId",
+                "comments",
+                "expiresAt",
+                "expiredUrl",
+                "password",
+                "title",
+                "description",
+                "image",
+                "video",
+                "ios",
+                "android",
+                "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -304,40 +303,37 @@ class CreatePartnerRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "name",
-            "username",
-            "image",
-            "tenantId",
-            "groupId",
-            "country",
-            "description",
-            "linkProps",
-        ]
-        nullable_fields = ["name", "username", "image", "country", "description"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "name",
+                "username",
+                "image",
+                "tenantId",
+                "groupId",
+                "country",
+                "description",
+                "linkProps",
+            ]
+        )
+        nullable_fields = set(["name", "username", "image", "country", "description"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -408,6 +404,22 @@ class Links(BaseModel):
 
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total dollar value of sales (in cents) generated by the short link."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["clicks", "leads", "conversions", "sales", "saleAmount"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class BannedReason(str, Enum):
@@ -675,91 +687,90 @@ class CreatePartnerResponseBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "description",
-            "groupId",
-            "totalCommissions",
-            "clickRewardId",
-            "leadRewardId",
-            "saleRewardId",
-            "discountId",
-            "applicationId",
-            "bannedAt",
-            "bannedReason",
-            "totalClicks",
-            "totalLeads",
-            "totalConversions",
-            "totalSales",
-            "totalSaleAmount",
-            "netRevenue",
-            "earningsPerClick",
-            "averageLifetimeValue",
-            "clickToLeadRate",
-            "clickToConversionRate",
-            "leadToConversionRate",
-            "returnOnAdSpend",
-            "website",
-            "youtube",
-            "twitter",
-            "linkedin",
-            "instagram",
-            "tiktok",
-        ]
-        nullable_fields = [
-            "companyName",
-            "email",
-            "image",
-            "description",
-            "country",
-            "paypalEmail",
-            "stripeConnectId",
-            "payoutsEnabledAt",
-            "trustedAt",
-            "groupId",
-            "tenantId",
-            "links",
-            "clickRewardId",
-            "leadRewardId",
-            "saleRewardId",
-            "discountId",
-            "applicationId",
-            "bannedAt",
-            "bannedReason",
-            "earningsPerClick",
-            "averageLifetimeValue",
-            "clickToLeadRate",
-            "clickToConversionRate",
-            "leadToConversionRate",
-            "returnOnAdSpend",
-            "website",
-            "youtube",
-            "twitter",
-            "linkedin",
-            "instagram",
-            "tiktok",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "description",
+                "groupId",
+                "totalCommissions",
+                "clickRewardId",
+                "leadRewardId",
+                "saleRewardId",
+                "discountId",
+                "applicationId",
+                "bannedAt",
+                "bannedReason",
+                "totalClicks",
+                "totalLeads",
+                "totalConversions",
+                "totalSales",
+                "totalSaleAmount",
+                "netRevenue",
+                "earningsPerClick",
+                "averageLifetimeValue",
+                "clickToLeadRate",
+                "clickToConversionRate",
+                "leadToConversionRate",
+                "returnOnAdSpend",
+                "website",
+                "youtube",
+                "twitter",
+                "linkedin",
+                "instagram",
+                "tiktok",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "companyName",
+                "email",
+                "image",
+                "description",
+                "country",
+                "paypalEmail",
+                "stripeConnectId",
+                "payoutsEnabledAt",
+                "trustedAt",
+                "groupId",
+                "tenantId",
+                "links",
+                "clickRewardId",
+                "leadRewardId",
+                "saleRewardId",
+                "discountId",
+                "applicationId",
+                "bannedAt",
+                "bannedReason",
+                "earningsPerClick",
+                "averageLifetimeValue",
+                "clickToLeadRate",
+                "clickToConversionRate",
+                "leadToConversionRate",
+                "returnOnAdSpend",
+                "website",
+                "youtube",
+                "twitter",
+                "linkedin",
+                "instagram",
+                "tiktok",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
