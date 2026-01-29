@@ -5,7 +5,9 @@ The role of the authenticated user in the workspace.
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `OWNER`  | owner    |
-| `MEMBER` | member   |
+| Name      | Value     |
+| --------- | --------- |
+| `OWNER`   | owner     |
+| `MEMBER`  | member    |
+| `VIEWER`  | viewer    |
+| `BILLING` | billing   |
