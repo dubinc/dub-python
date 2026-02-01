@@ -3,9 +3,10 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from dub.models.errors import DubError
-from dub.types import BaseModel
+from dub.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
 import httpx
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -34,6 +35,22 @@ class Error(BaseModel):
 
     doc_url: Optional[str] = None
     r"""A link to our documentation with more details about this error code"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["doc_url"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class BadRequestData(BaseModel):

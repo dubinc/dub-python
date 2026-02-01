@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 from dub.models.components import linkschema as components_linkschema
-from dub.types import BaseModel
+from dub.types import BaseModel, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
+from pydantic import model_serializer
 from typing import Callable, List, Optional, Union
 from typing_extensions import (
     Annotated,
@@ -198,6 +199,40 @@ class GetLinksRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 100
     r"""The number of items per page."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "domain",
+                "tagId",
+                "tagIds",
+                "tagNames",
+                "folderId",
+                "search",
+                "userId",
+                "tenantId",
+                "showArchived",
+                "withTags",
+                "sortBy",
+                "sortOrder",
+                "sort",
+                "page",
+                "pageSize",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetLinksResponseTypedDict(TypedDict):
