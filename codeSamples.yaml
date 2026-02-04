@@ -777,6 +777,23 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners/deactivate"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: deactivatePartner
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.deactivate()
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/partners/links"]["get"]
     update:
       x-codeSamples:
@@ -1029,42 +1046,6 @@ actions:
                     "event_name": "Invoice paid",
                     "lead_event_name": "Cloned template 1481267",
                 })
-
-                # Handle response
-                print(res)
-  - target: $["paths"]["/workspaces/{idOrSlug}"]["get"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: getWorkspace
-          source: |-
-            from dub import Dub
-
-
-            with Dub(
-                token="DUB_API_KEY",
-            ) as d_client:
-
-                res = d_client.workspaces.get(request={
-                    "id_or_slug": "<value>",
-                })
-
-                # Handle response
-                print(res)
-  - target: $["paths"]["/workspaces/{idOrSlug}"]["patch"]
-    update:
-      x-codeSamples:
-        - lang: python
-          label: updateWorkspace
-          source: |-
-            from dub import Dub
-
-
-            with Dub(
-                token="DUB_API_KEY",
-            ) as d_client:
-
-                res = d_client.workspaces.update(id_or_slug="<value>")
 
                 # Handle response
                 print(res)

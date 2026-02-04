@@ -1,0 +1,14 @@
+# Fields1
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `key`                                                                      | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `label`                                                                    | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `required`                                                                 | *bool*                                                                     | :heavy_check_mark:                                                         | N/A                                                                        |
+| `locked`                                                                   | *bool*                                                                     | :heavy_check_mark:                                                         | N/A                                                                        |
+| `position`                                                                 | *int*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `type`                                                                     | [operations.FieldsType](../../models/operations/fieldstype.md)             | :heavy_check_mark:                                                         | N/A                                                                        |
+| `constraints`                                                              | [Optional[operations.Constraints]](../../models/operations/constraints.md) | :heavy_minus_sign:                                                         | N/A                                                                        |

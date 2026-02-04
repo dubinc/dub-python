@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from dub.models.components import domainschema as components_domainschema
-from dub.types import BaseModel
+from dub.types import BaseModel, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import Callable, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -45,6 +46,22 @@ class ListDomainsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 50
     r"""The number of items per page."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["archived", "search", "page", "pageSize"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ListDomainsResponseTypedDict(TypedDict):

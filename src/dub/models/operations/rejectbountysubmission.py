@@ -38,10 +38,28 @@ class RejectBountySubmissionRequestBody(BaseModel):
     )
     r"""The note for rejecting the submission."""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["rejectionReason", "rejectionNote"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class RejectBountySubmissionRequestTypedDict(TypedDict):
     bounty_id: str
+    r"""The ID of the bounty"""
     submission_id: str
+    r"""The ID of the bounty submission"""
     request_body: NotRequired[RejectBountySubmissionRequestBodyTypedDict]
 
 
@@ -51,34 +69,60 @@ class RejectBountySubmissionRequest(BaseModel):
         pydantic.Field(alias="bountyId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The ID of the bounty"""
 
     submission_id: Annotated[
         str,
         pydantic.Field(alias="submissionId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The ID of the bounty submission"""
 
     request_body: Annotated[
         Optional[RejectBountySubmissionRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["RequestBody"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class RejectBountySubmissionFilesTypedDict(TypedDict):
     url: str
+    r"""The URL of the uploaded file."""
     file_name: str
+    r"""The original file name."""
     size: float
+    r"""The file size in bytes."""
 
 
 class RejectBountySubmissionFiles(BaseModel):
     url: str
+    r"""The URL of the uploaded file."""
 
     file_name: Annotated[str, pydantic.Field(alias="fileName")]
+    r"""The original file name."""
 
     size: float
+    r"""The file size in bytes."""
 
 
 class RejectBountySubmissionStatus(str, Enum):
+    r"""The status of the submission"""
+
     DRAFT = "draft"
     SUBMITTED = "submitted"
     APPROVED = "approved"
@@ -89,86 +133,87 @@ class RejectBountySubmissionResponseBodyTypedDict(TypedDict):
     r"""The rejected bounty submission."""
 
     id: str
+    r"""The ID of the bounty submission"""
     bounty_id: str
+    r"""The ID of the bounty"""
     partner_id: str
+    r"""The ID of the partner"""
     description: Nullable[str]
+    r"""The description of the submission"""
     urls: Nullable[List[str]]
+    r"""The URLs submitted for the submission"""
     files: Nullable[List[RejectBountySubmissionFilesTypedDict]]
+    r"""The files uploaded for the submission"""
     status: RejectBountySubmissionStatus
+    r"""The status of the submission"""
     performance_count: Nullable[float]
+    r"""The performance count of the submission"""
     created_at: str
+    r"""The date and time the submission was created"""
     completed_at: Nullable[str]
+    r"""The date and time the submission was completed"""
     reviewed_at: Nullable[str]
+    r"""The date and time the submission was reviewed"""
     rejection_reason: Nullable[str]
+    r"""The reason for rejecting the submission"""
     rejection_note: Nullable[str]
+    r"""The note for rejecting the submission"""
 
 
 class RejectBountySubmissionResponseBody(BaseModel):
     r"""The rejected bounty submission."""
 
     id: str
+    r"""The ID of the bounty submission"""
 
     bounty_id: Annotated[str, pydantic.Field(alias="bountyId")]
+    r"""The ID of the bounty"""
 
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
+    r"""The ID of the partner"""
 
     description: Nullable[str]
+    r"""The description of the submission"""
 
     urls: Nullable[List[str]]
+    r"""The URLs submitted for the submission"""
 
     files: Nullable[List[RejectBountySubmissionFiles]]
+    r"""The files uploaded for the submission"""
 
     status: RejectBountySubmissionStatus
+    r"""The status of the submission"""
 
     performance_count: Annotated[
         Nullable[float], pydantic.Field(alias="performanceCount")
     ]
+    r"""The performance count of the submission"""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+    r"""The date and time the submission was created"""
 
     completed_at: Annotated[Nullable[str], pydantic.Field(alias="completedAt")]
+    r"""The date and time the submission was completed"""
 
     reviewed_at: Annotated[Nullable[str], pydantic.Field(alias="reviewedAt")]
+    r"""The date and time the submission was reviewed"""
 
     rejection_reason: Annotated[Nullable[str], pydantic.Field(alias="rejectionReason")]
+    r"""The reason for rejecting the submission"""
 
     rejection_note: Annotated[Nullable[str], pydantic.Field(alias="rejectionNote")]
+    r"""The note for rejecting the submission"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = [
-            "description",
-            "urls",
-            "files",
-            "performanceCount",
-            "completedAt",
-            "reviewedAt",
-            "rejectionReason",
-            "rejectionNote",
-        ]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m

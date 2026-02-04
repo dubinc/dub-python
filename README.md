@@ -84,7 +84,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "dub",
 # ]
@@ -325,6 +325,7 @@ asyncio.run(main())
 * [upsert_link](docs/sdks/partners/README.md#upsert_link) - Upsert a link for a partner
 * [analytics](docs/sdks/partners/README.md#analytics) - Retrieve analytics for a partner
 * [ban](docs/sdks/partners/README.md#ban) - Ban a partner
+* [deactivate](docs/sdks/partners/README.md#deactivate) - Deactivate a partner
 
 ### [QRCodes](docs/sdks/qrcodes/README.md)
 
@@ -341,11 +342,6 @@ asyncio.run(main())
 
 * [lead](docs/sdks/track/README.md#lead) - Track a lead
 * [sale](docs/sdks/track/README.md#sale) - Track a sale
-
-### [Workspaces](docs/sdks/workspaces/README.md)
-
-* [get](docs/sdks/workspaces/README.md#get) - Retrieve a workspace
-* [update](docs/sdks/workspaces/README.md#update) - Update a workspace
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
