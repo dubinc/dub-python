@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from dub.utils import get_discriminator
 from enum import Enum
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -184,71 +185,70 @@ class LinkProps(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "keyLength",
-            "externalId",
-            "tenantId",
-            "prefix",
-            "archived",
-            "tagIds",
-            "tagNames",
-            "comments",
-            "expiresAt",
-            "expiredUrl",
-            "password",
-            "proxy",
-            "title",
-            "description",
-            "image",
-            "video",
-            "rewrite",
-            "ios",
-            "android",
-            "doIndex",
-            "testVariants",
-            "testStartedAt",
-            "testCompletedAt",
-        ]
-        nullable_fields = [
-            "externalId",
-            "tenantId",
-            "comments",
-            "expiresAt",
-            "expiredUrl",
-            "password",
-            "title",
-            "description",
-            "image",
-            "video",
-            "ios",
-            "android",
-            "testVariants",
-            "testStartedAt",
-            "testCompletedAt",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "keyLength",
+                "externalId",
+                "tenantId",
+                "prefix",
+                "archived",
+                "tagIds",
+                "tagNames",
+                "comments",
+                "expiresAt",
+                "expiredUrl",
+                "password",
+                "proxy",
+                "title",
+                "description",
+                "image",
+                "video",
+                "rewrite",
+                "ios",
+                "android",
+                "doIndex",
+                "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "externalId",
+                "tenantId",
+                "comments",
+                "expiresAt",
+                "expiredUrl",
+                "password",
+                "title",
+                "description",
+                "image",
+                "video",
+                "ios",
+                "android",
+                "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -304,40 +304,37 @@ class CreatePartnerRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "name",
-            "username",
-            "image",
-            "tenantId",
-            "groupId",
-            "country",
-            "description",
-            "linkProps",
-        ]
-        nullable_fields = ["name", "username", "image", "country", "description"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "name",
+                "username",
+                "image",
+                "tenantId",
+                "groupId",
+                "country",
+                "description",
+                "linkProps",
+            ]
+        )
+        nullable_fields = set(["name", "username", "image", "country", "description"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -409,6 +406,22 @@ class Links(BaseModel):
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
     r"""The total dollar value of sales (in cents) generated by the short link."""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["clicks", "leads", "conversions", "sales", "saleAmount"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class BannedReason(str, Enum):
     r"""If the partner was banned from the program, this is the reason for the ban."""
@@ -419,6 +432,379 @@ class BannedReason(str, Enum):
     FRAUD = "fraud"
     SPAM = "spam"
     BRAND_ABUSE = "brand_abuse"
+
+
+class CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormDataType(
+    str, Enum
+):
+    PHONE = "phone"
+
+
+class EightTypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormDataType
+
+
+class Eight(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormDataType
+
+
+class CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyType(str, Enum):
+    NUMBER = "number"
+
+
+class SevenTypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyType
+
+
+class Seven(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyType
+
+
+class CreatePartnerFieldsPartnersResponse201ApplicationJSONType(str, Enum):
+    MULTI_SELECT = "multiSelect"
+
+
+class FieldsOptionsTypedDict(TypedDict):
+    label: str
+    value: str
+
+
+class FieldsOptions(BaseModel):
+    label: str
+
+    value: str
+
+
+class SixTypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONType
+    options: List[FieldsOptionsTypedDict]
+
+
+class Six(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONType
+
+    options: List[FieldsOptions]
+
+
+class CreatePartnerFieldsPartnersResponse201Type(str, Enum):
+    DATE = "date"
+
+
+class FiveTypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsPartnersResponse201Type
+
+
+class Five(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsPartnersResponse201Type
+
+
+class CreatePartnerFieldsPartnersResponseType(str, Enum):
+    COUNTRY = "country"
+
+
+class Fields4TypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsPartnersResponseType
+
+
+class Fields4(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsPartnersResponseType
+
+
+class CreatePartnerFieldsPartnersType(str, Enum):
+    SELECT = "select"
+
+
+class OptionsTypedDict(TypedDict):
+    label: str
+    value: str
+
+
+class Options(BaseModel):
+    label: str
+
+    value: str
+
+
+class Fields3TypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsPartnersType
+    options: List[OptionsTypedDict]
+
+
+class Fields3(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsPartnersType
+
+    options: List[Options]
+
+
+class CreatePartnerFieldsType(str, Enum):
+    TEXTAREA = "textarea"
+
+
+class FieldsConstraintsTypedDict(TypedDict):
+    max_length: NotRequired[int]
+
+
+class FieldsConstraints(BaseModel):
+    max_length: Annotated[Optional[int], pydantic.Field(alias="maxLength")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["maxLength"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class Fields2TypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: CreatePartnerFieldsType
+    constraints: NotRequired[FieldsConstraintsTypedDict]
+
+
+class Fields2(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: CreatePartnerFieldsType
+
+    constraints: Optional[FieldsConstraints] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["constraints"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class FieldsType(str, Enum):
+    TEXT = "text"
+
+
+class ConstraintsTypedDict(TypedDict):
+    max_length: NotRequired[int]
+    pattern: NotRequired[str]
+
+
+class Constraints(BaseModel):
+    max_length: Annotated[Optional[int], pydantic.Field(alias="maxLength")] = None
+
+    pattern: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["maxLength", "pattern"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class Fields1TypedDict(TypedDict):
+    key: str
+    label: str
+    required: bool
+    locked: bool
+    position: int
+    type: FieldsType
+    constraints: NotRequired[ConstraintsTypedDict]
+
+
+class Fields1(BaseModel):
+    key: str
+
+    label: str
+
+    required: bool
+
+    locked: bool
+
+    position: int
+
+    type: FieldsType
+
+    constraints: Optional[Constraints] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["constraints"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+FieldsTypedDict = TypeAliasType(
+    "FieldsTypedDict",
+    Union[
+        Fields4TypedDict,
+        FiveTypedDict,
+        SevenTypedDict,
+        EightTypedDict,
+        Fields1TypedDict,
+        Fields2TypedDict,
+        Fields3TypedDict,
+        SixTypedDict,
+    ],
+)
+
+
+Fields = Annotated[
+    Union[
+        Annotated[Fields1, Tag("text")],
+        Annotated[Fields2, Tag("textarea")],
+        Annotated[Fields3, Tag("select")],
+        Annotated[Fields4, Tag("country")],
+        Annotated[Five, Tag("date")],
+        Annotated[Six, Tag("multiSelect")],
+        Annotated[Seven, Tag("number")],
+        Annotated[Eight, Tag("phone")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
+
+
+class ReferralFormDataTypedDict(TypedDict):
+    fields: List[FieldsTypedDict]
+
+
+class ReferralFormData(BaseModel):
+    fields: List[Fields]
 
 
 class CreatePartnerResponseBodyTypedDict(TypedDict):
@@ -471,6 +857,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""If the partner was banned from the program, this is the date of the ban."""
     banned_reason: NotRequired[Nullable[BannedReason]]
     r"""If the partner was banned from the program, this is the reason for the ban."""
+    referral_form_data: NotRequired[Nullable[ReferralFormDataTypedDict]]
     total_clicks: NotRequired[float]
     r"""The total number of clicks on the partner's links"""
     total_leads: NotRequired[float]
@@ -603,6 +990,10 @@ class CreatePartnerResponseBody(BaseModel):
     ] = UNSET
     r"""If the partner was banned from the program, this is the reason for the ban."""
 
+    referral_form_data: Annotated[
+        OptionalNullable[ReferralFormData], pydantic.Field(alias="referralFormData")
+    ] = UNSET
+
     total_clicks: Annotated[Optional[float], pydantic.Field(alias="totalClicks")] = 0
     r"""The total number of clicks on the partner's links"""
 
@@ -675,91 +1066,92 @@ class CreatePartnerResponseBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "description",
-            "groupId",
-            "totalCommissions",
-            "clickRewardId",
-            "leadRewardId",
-            "saleRewardId",
-            "discountId",
-            "applicationId",
-            "bannedAt",
-            "bannedReason",
-            "totalClicks",
-            "totalLeads",
-            "totalConversions",
-            "totalSales",
-            "totalSaleAmount",
-            "netRevenue",
-            "earningsPerClick",
-            "averageLifetimeValue",
-            "clickToLeadRate",
-            "clickToConversionRate",
-            "leadToConversionRate",
-            "returnOnAdSpend",
-            "website",
-            "youtube",
-            "twitter",
-            "linkedin",
-            "instagram",
-            "tiktok",
-        ]
-        nullable_fields = [
-            "companyName",
-            "email",
-            "image",
-            "description",
-            "country",
-            "paypalEmail",
-            "stripeConnectId",
-            "payoutsEnabledAt",
-            "trustedAt",
-            "groupId",
-            "tenantId",
-            "links",
-            "clickRewardId",
-            "leadRewardId",
-            "saleRewardId",
-            "discountId",
-            "applicationId",
-            "bannedAt",
-            "bannedReason",
-            "earningsPerClick",
-            "averageLifetimeValue",
-            "clickToLeadRate",
-            "clickToConversionRate",
-            "leadToConversionRate",
-            "returnOnAdSpend",
-            "website",
-            "youtube",
-            "twitter",
-            "linkedin",
-            "instagram",
-            "tiktok",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "description",
+                "groupId",
+                "totalCommissions",
+                "clickRewardId",
+                "leadRewardId",
+                "saleRewardId",
+                "discountId",
+                "applicationId",
+                "bannedAt",
+                "bannedReason",
+                "referralFormData",
+                "totalClicks",
+                "totalLeads",
+                "totalConversions",
+                "totalSales",
+                "totalSaleAmount",
+                "netRevenue",
+                "earningsPerClick",
+                "averageLifetimeValue",
+                "clickToLeadRate",
+                "clickToConversionRate",
+                "leadToConversionRate",
+                "returnOnAdSpend",
+                "website",
+                "youtube",
+                "twitter",
+                "linkedin",
+                "instagram",
+                "tiktok",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "companyName",
+                "email",
+                "image",
+                "description",
+                "country",
+                "paypalEmail",
+                "stripeConnectId",
+                "payoutsEnabledAt",
+                "trustedAt",
+                "groupId",
+                "tenantId",
+                "links",
+                "clickRewardId",
+                "leadRewardId",
+                "saleRewardId",
+                "discountId",
+                "applicationId",
+                "bannedAt",
+                "bannedReason",
+                "referralFormData",
+                "earningsPerClick",
+                "averageLifetimeValue",
+                "clickToLeadRate",
+                "clickToConversionRate",
+                "leadToConversionRate",
+                "returnOnAdSpend",
+                "website",
+                "youtube",
+                "twitter",
+                "linkedin",
+                "instagram",
+                "tiktok",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

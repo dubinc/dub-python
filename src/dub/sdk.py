@@ -29,7 +29,6 @@ if TYPE_CHECKING:
     from dub.qr_codes import QRCodes
     from dub.tags import Tags
     from dub.track import Track
-    from dub.workspaces import Workspaces
 
 
 class Dub(BaseSDK):
@@ -45,7 +44,6 @@ class Dub(BaseSDK):
     customers: "Customers"
     partners: "Partners"
     commissions: "Commissions"
-    workspaces: "Workspaces"
     embed_tokens: "EmbedTokens"
     qr_codes: "QRCodes"
     bounties: "Bounties"
@@ -60,7 +58,6 @@ class Dub(BaseSDK):
         "customers": ("dub.customers", "Customers"),
         "partners": ("dub.partners", "Partners"),
         "commissions": ("dub.commissions", "Commissions"),
-        "workspaces": ("dub.workspaces", "Workspaces"),
         "embed_tokens": ("dub.embed_tokens", "EmbedTokens"),
         "qr_codes": ("dub.qr_codes", "QRCodes"),
         "bounties": ("dub.bounties", "Bounties"),

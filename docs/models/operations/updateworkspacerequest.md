@@ -1,9 +1,0 @@
-# UpdateWorkspaceRequest
-
-
-## Fields
-
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `id_or_slug`                                                                                             | *str*                                                                                                    | :heavy_check_mark:                                                                                       | The ID or slug of the workspace to update.                                                               |
-| `request_body`                                                                                           | [Optional[operations.UpdateWorkspaceRequestBody]](../../models/operations/updateworkspacerequestbody.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
