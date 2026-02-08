@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: c35c18530a194176ebe59456f71ff3f9
+  docChecksum: de77e4883e59f4bf3144a43856a5b587
   docVersion: 0.0.1
-  speakeasyVersion: 1.703.0
-  generationVersion: 2.803.3
-  releaseVersion: 0.35.0
-  configChecksum: e3030b1019da2e0849b238a7c7d6575f
+  speakeasyVersion: 1.709.0
+  generationVersion: 2.811.4
+  releaseVersion: 0.35.1
+  configChecksum: a5ccb5ea60c571e5d29be49238165c57
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 persistentEdits:
-  generation_id: 45a4caba-db9e-48fa-95a3-6427bd79a7e2
-  pristine_commit_hash: 1d06a08997589a5181675a5a528a8a9287124263
-  pristine_tree_hash: 75f6e7960831a927785c08bc052a85024d35593b
+  generation_id: 1755df0b-f70a-4b4c-9032-d23c02d13d17
+  pristine_commit_hash: 86cfcc8fad59a255755f5411fa8fa7e8b6a1d363
+  pristine_tree_hash: abc24daadc02e5ddbe8728db69852d89282aaf2d
 features:
   python:
     additionalDependencies: 1.0.0
-    constsAndDefaults: 1.0.5
-    core: 6.0.1
+    constsAndDefaults: 1.0.6
+    core: 6.0.4
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     enumUnions: 0.1.0
@@ -26,7 +26,7 @@ features:
     errors: 3.3.5
     examples: 3.0.2
     flattening: 3.1.1
-    globalSecurity: 3.0.4
+    globalSecurity: 3.0.5
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.0
@@ -866,8 +866,8 @@ trackedFiles:
     pristine_git_object: 653d03e99c7db00284afb4920ebaa4e3058b22a9
   docs/models/operations/discount.md:
     id: 6d655f19310a
-    last_write_checksum: sha1:4fecb43f8e2b5054595e1a937381c0482b3dba40
-    pristine_git_object: b6019e70e1d1bd714e2c6ce7f7ef361d43c056f0
+    last_write_checksum: sha1:2de0f78f4972fdf6432ff958666761c2dacdc98d
+    pristine_git_object: d354db067028b8d955b7176d2f1f70c5bd277016
   docs/models/operations/domains.md:
     id: d62ed094e067
     last_write_checksum: sha1:3778bed76386dd9ad86f2b9ca79af6a7c02fa7c8
@@ -942,8 +942,8 @@ trackedFiles:
     pristine_git_object: ca0698deb244736eb150848c9e7890683b4396c3
   docs/models/operations/getcustomerdiscount.md:
     id: 8d1fd93b24a1
-    last_write_checksum: sha1:a48795c8bcd9b6cb11c078fbe7664fe47ed65f8d
-    pristine_git_object: 6e066bec7a95f53f665696b0f75f4cce480d11bb
+    last_write_checksum: sha1:652477a60499d15424f7a075c004359b2dbe2adc
+    pristine_git_object: ec20ecf68b13d161664bc86f7b7f79320e0ce8a9
   docs/models/operations/getcustomerlink.md:
     id: 87cc6ecc2c7e
     last_write_checksum: sha1:b09b77bfbbf23797b7ce65d59031128a50434783
@@ -1582,8 +1582,8 @@ trackedFiles:
     pristine_git_object: 81064c74a757b1eca6028cc276692f7c4670c6c3
   docs/models/operations/updatecustomerdiscount.md:
     id: 03e62b20b568
-    last_write_checksum: sha1:501e28168c6e2de23a4d30d97c1593eafb3a52a4
-    pristine_git_object: af6b00e8c7521886ec647c0b8a530850408ba3bd
+    last_write_checksum: sha1:d11ae3a364bc958b1db13bb5bc448ebc668f7880
+    pristine_git_object: b269fb100301d440a6e8f45c79f17e8d666ac705
   docs/models/operations/updatecustomerlink.md:
     id: 49b7a72095ec
     last_write_checksum: sha1:e2b98dd8a39f7463e6f80147d442c2d70819f92d
@@ -1766,8 +1766,8 @@ trackedFiles:
     pristine_git_object: 9dda4afa264295dbf3b5e10e4fe4a47c648fe07a
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:c38ff798df9cce58bfe094c642cb0988b4b3c8b9
-    pristine_git_object: 5f8ec152ebefe5d32ab70b7f35819d959d613d86
+    last_write_checksum: sha1:ef35e629ff18944f2f3a041d0c82f555ca2ef65c
+    pristine_git_object: 3d61bc63a83847abf15a5b8dbca298d6fcebf4fd
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:98ab0adc36f1ccd31422544b0dd94e008aa47804
@@ -1794,8 +1794,8 @@ trackedFiles:
     pristine_git_object: 350406f1a5b2eabd1ca7e8ea2621fdca5096e0e5
   src/dub/_version.py:
     id: 2e88e1f01047
-    last_write_checksum: sha1:d9a84d2d66e19cb4d31b1b935d86ed5a819fb45a
-    pristine_git_object: 955bf529cd8313ec5b8104bdf627322f1b8f2b3c
+    last_write_checksum: sha1:ab018de6d306fd5e6e3884ac00ff525bc7e78205
+    pristine_git_object: 73ef3a8e5b8521de34aeba8524f08af3d12fec45
   src/dub/analytics.py:
     id: b7a4fa47e744
     last_write_checksum: sha1:fc568d8b515db82aa4f803714232aaea69d874a0
@@ -2114,12 +2114,12 @@ trackedFiles:
     pristine_git_object: 126ae4dfe90bcbcc3237bf03b7b3be842b3c2016
   src/dub/models/operations/getcustomer.py:
     id: 8e172ced27f1
-    last_write_checksum: sha1:13a32b57a8dbb98369c0c1d4be5cb35d4c93d0fc
-    pristine_git_object: cb5ffda0a45e929f5d5b830062fcc95ac8be2f99
+    last_write_checksum: sha1:b0aa298b043ace4094c44c6c09bd207c08861275
+    pristine_git_object: 20b448c5cb8bc141e9854bed7b5a846080c5e08b
   src/dub/models/operations/getcustomers.py:
     id: d9523edc5502
-    last_write_checksum: sha1:c46fa22089c487bf849e472bd664be4b248ef767
-    pristine_git_object: f7a4486e99571c0ac186ee0583785240e9839473
+    last_write_checksum: sha1:3f190bfe3cad912c26e118a06e4ffbc7d2a0e23b
+    pristine_git_object: 00e35001e9fcffa87e50c2c0385626eb909581e3
   src/dub/models/operations/getlinkinfo.py:
     id: 6bff19a3ed50
     last_write_checksum: sha1:aadee36bfa1a75ff3ddf07fc9176b2f19abe08f1
@@ -2198,8 +2198,8 @@ trackedFiles:
     pristine_git_object: f8889c821e2de29bee010dd7265835f745386144
   src/dub/models/operations/updatecustomer.py:
     id: 5487589e4e19
-    last_write_checksum: sha1:d45f8228fe589f6206dbdf96d4be16cf48146b7c
-    pristine_git_object: eed880c7efa3277ace1e9055e7bb4e5563b1ddfa
+    last_write_checksum: sha1:22ab1597c9c730eb18ae8b3fb561c20c32592fbb
+    pristine_git_object: ff1211827797271cd88bfb31dad47dc48610b45b
   src/dub/models/operations/updatedomain.py:
     id: 8426ea3ac23f
     last_write_checksum: sha1:b3857f551478de3636e7d398e999a5918a541384
@@ -2278,8 +2278,8 @@ trackedFiles:
     pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
   src/dub/utils/eventstreaming.py:
     id: c05582daa44c
-    last_write_checksum: sha1:bababae5d54b7efc360db701daa49e18a92c2f3b
-    pristine_git_object: 0969899bfc491e5e408d05643525f347ea95e4fc
+    last_write_checksum: sha1:ffa870a25a7e4e2015bfd7a467ccd3aa1de97f0e
+    pristine_git_object: f2052fc22d9fd6c663ba3dce019fe234ca37108b
   src/dub/utils/forms.py:
     id: 60c675260643
     last_write_checksum: sha1:15fa7e9ab1611e062a9984cf06cb20969713d295
@@ -2310,8 +2310,8 @@ trackedFiles:
     pristine_git_object: 88a91b10cd2076b4a2c6cff2ac6bfaa5e3c5ad13
   src/dub/utils/security.py:
     id: fe008e7f9c9e
-    last_write_checksum: sha1:a17130ace2c0db6394f38dd941ad2b700cc755c8
-    pristine_git_object: 295a3f40031dbb40073ad227fd4a355660f97ab2
+    last_write_checksum: sha1:435dd8b180cefcd733e635b9fa45512da091d9c0
+    pristine_git_object: 17996bd54b8624009802fbbdf30bcb4225b8dfed
   src/dub/utils/serializers.py:
     id: daba26097d20
     last_write_checksum: sha1:ce1d8d7f500a9ccba0aeca5057cee9c271f4dfd7
@@ -3702,7 +3702,11 @@ examples:
           application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `dub.partners.deactivate()`: **Added**\n* `dub.workspaces.get()`: **Removed** **Breaking** ⚠️\n* `dub.workspaces.update()`: **Removed** **Breaking** ⚠️\n* `dub.events.list()`:  `response.[]` **Changed**\n* `dub.customers.list()`: \n  *  `request.sort_by` **Changed**\n  *  `response.[]` **Changed**\n* `dub.customers.get()`:  `response` **Changed**\n* `dub.customers.update()`:  `response` **Changed**\n* `dub.partners.list()`:  `response.[].referral_form_data` **Added**\n* `dub.partners.create()`:  `response.referral_form_data` **Added**\n* `dub.commissions.list()`:  `response.[].customer` **Changed**\n* `dub.commissions.update()`:  `response.customer` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `dub.customers.list()`:  `response.[].discount.auto_provision_enabled_at` **Added**
+  * `dub.customers.get()`:  `response.discount.auto_provision_enabled_at` **Added**
+  * `dub.customers.update()`:  `response.discount.auto_provision_enabled_at` **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
