@@ -35,7 +35,7 @@ class ListBountySubmissionsQueryParamSortOrder(str, Enum):
 
 class ListBountySubmissionsRequestTypedDict(TypedDict):
     bounty_id: str
-    r"""The ID of the bounty"""
+    r"""The unique ID of the bounty on Dub. Can be found in the URL of the bounty page, prefixed with `bnty_`."""
     status: NotRequired[ListBountySubmissionsQueryParamStatus]
     r"""The status of the submissions to list."""
     group_id: NotRequired[str]
@@ -58,7 +58,7 @@ class ListBountySubmissionsRequest(BaseModel):
         pydantic.Field(alias="bountyId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""The ID of the bounty"""
+    r"""The unique ID of the bounty on Dub. Can be found in the URL of the bounty page, prefixed with `bnty_`."""
 
     status: Annotated[
         Optional[ListBountySubmissionsQueryParamStatus],

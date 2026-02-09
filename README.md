@@ -269,7 +269,7 @@ asyncio.run(main())
 
 ### [Commissions](docs/sdks/commissions/README.md)
 
-* [list](docs/sdks/commissions/README.md#list) - Get commissions for a program.
+* [list](docs/sdks/commissions/README.md#list) - List all commissions
 * [update](docs/sdks/commissions/README.md#update) - Update a commission.
 
 ### [Customers](docs/sdks/customers/README.md)
@@ -326,6 +326,10 @@ asyncio.run(main())
 * [analytics](docs/sdks/partners/README.md#analytics) - Retrieve analytics for a partner
 * [ban](docs/sdks/partners/README.md#ban) - Ban a partner
 * [deactivate](docs/sdks/partners/README.md#deactivate) - Deactivate a partner
+
+### [Payouts](docs/sdks/payouts/README.md)
+
+* [list](docs/sdks/payouts/README.md#list) - List all payouts
 
 ### [QRCodes](docs/sdks/qrcodes/README.md)
 

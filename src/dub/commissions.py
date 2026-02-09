@@ -22,9 +22,9 @@ class Commissions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> List[operations.ListCommissionsResponseBody]:
-        r"""Get commissions for a program.
+        r"""List all commissions
 
-        Retrieve a list of commissions for a program.
+        Retrieve a list of commissions for your partner program.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -155,9 +155,9 @@ class Commissions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> List[operations.ListCommissionsResponseBody]:
-        r"""Get commissions for a program.
+        r"""List all commissions
 
-        Retrieve a list of commissions for a program.
+        Retrieve a list of commissions for your partner program.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
