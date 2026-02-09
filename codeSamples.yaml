@@ -880,6 +880,25 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/payouts"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listPayouts
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.payouts.list(request={
+                    "page_size": 50,
+                })
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/qr"]["get"]
     update:
       x-codeSamples:

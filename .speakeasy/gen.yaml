@@ -28,7 +28,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 0.35.0
+  version: 0.35.1
   additionalDependencies:
     dev: {}
     main: {}
@@ -51,6 +51,7 @@ python:
   flattenGlobalSecurity: true
   flattenRequests: false
   flatteningOrder: parameters-first
+  forwardCompatibleEnumsByDefault: false
   imports:
     option: openapi
     paths:

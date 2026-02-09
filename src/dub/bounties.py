@@ -24,7 +24,7 @@ class Bounties(BaseSDK):
     ) -> List[operations.ListBountySubmissionsResponseBody]:
         r"""List bounty submissions
 
-        List all submissions for a specific bounty.
+        List all submissions for a specific bounty in your partner program.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -157,7 +157,7 @@ class Bounties(BaseSDK):
     ) -> List[operations.ListBountySubmissionsResponseBody]:
         r"""List bounty submissions
 
-        List all submissions for a specific bounty.
+        List all submissions for a specific bounty in your partner program.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
