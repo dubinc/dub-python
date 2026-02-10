@@ -6,7 +6,7 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -154,160 +154,23 @@ class ListPayoutsMode(str, Enum):
     EXTERNAL = "external"
 
 
-class ProfileType(str, Enum):
-    r"""The partner's profile type on Dub."""
-
-    INDIVIDUAL = "individual"
-    COMPANY = "company"
-
-
-class InvoiceSettingsTypedDict(TypedDict):
-    r"""The partner's invoice settings."""
-
-    address: NotRequired[Nullable[str]]
-    tax_id: NotRequired[Nullable[str]]
-
-
-class InvoiceSettings(BaseModel):
-    r"""The partner's invoice settings."""
-
-    address: OptionalNullable[str] = UNSET
-
-    tax_id: Annotated[OptionalNullable[str], pydantic.Field(alias="taxId")] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["address", "taxId"])
-        nullable_fields = set(["address", "taxId"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
-
-            if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
-                    m[k] = val
-
-        return m
-
-
-class MonthlyTraffic(str, Enum):
-    r"""The partner's monthly traffic."""
-
-    ZERO_TO_ONE_THOUSAND = "ZeroToOneThousand"
-    ONE_THOUSAND_TO_TEN_THOUSAND = "OneThousandToTenThousand"
-    TEN_THOUSAND_TO_FIFTY_THOUSAND = "TenThousandToFiftyThousand"
-    FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND = "FiftyThousandToOneHundredThousand"
-    ONE_HUNDRED_THOUSAND_PLUS = "OneHundredThousandPlus"
-
-
-class IndustryInterests(str, Enum):
-    SAA_S = "SaaS"
-    DEV_TOOL = "DevTool"
-    AI = "AI"
-    CREATIVE_AND_DESIGN = "Creative_And_Design"
-    PRODUCTIVITY_SOFTWARE = "Productivity_Software"
-    MARKETING = "Marketing"
-    GAMING = "Gaming"
-    FINANCE = "Finance"
-    SALES = "Sales"
-    ECOMMERCE = "Ecommerce"
-    CUSTOMER_SERVICE_AND_SUPPORT = "Customer_Service_And_Support"
-    CONTENT_MANAGEMENT = "Content_Management"
-    HUMAN_RESOURCES = "Human_Resources"
-    SECURITY = "Security"
-    ANALYTICS_AND_DATA = "Analytics_And_Data"
-    SOCIAL_MEDIA = "Social_Media"
-    CONSUMER_TECH = "Consumer_Tech"
-    EDUCATION_AND_LEARNING = "Education_And_Learning"
-    HEALTH_AND_FITNESS = "Health_And_Fitness"
-    FOOD_AND_BEVERAGE = "Food_And_Beverage"
-    TRAVEL_AND_LIFESTYLE = "Travel_And_Lifestyle"
-    ENTERTAINMENT_AND_MEDIA = "Entertainment_And_Media"
-    SPORTS = "Sports"
-    SCIENCE_AND_ENGINEERING = "Science_And_Engineering"
-
-
-class PreferredEarningStructures(str, Enum):
-    REVENUE_SHARE = "Revenue_Share"
-    PER_LEAD = "Per_Lead"
-    PER_SALE = "Per_Sale"
-    PER_CLICK = "Per_Click"
-    ONE_TIME_PAYMENT = "One_Time_Payment"
-
-
-class SalesChannels(str, Enum):
-    BLOGS = "Blogs"
-    COUPONS = "Coupons"
-    DIRECT_RESELLING = "Direct_Reselling"
-    NEWSLETTERS = "Newsletters"
-    SOCIAL_MEDIA = "Social_Media"
-    EVENTS = "Events"
-    COMPANY_REFERRALS = "Company_Referrals"
-
-
 class ListPayoutsPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
     r"""The partner's full legal name."""
-    company_name: Nullable[str]
-    r"""If the partner profile type is a company, this is the partner's legal company name."""
-    profile_type: ProfileType
-    r"""The partner's profile type on Dub."""
     email: Nullable[str]
     r"""The partner's email address. Should be a unique value across Dub."""
     image: Nullable[str]
     r"""The partner's avatar image."""
-    country: Nullable[str]
-    r"""The partner's country (required for tax purposes)."""
-    stripe_connect_id: Nullable[str]
-    r"""The partner's Stripe Connect ID (for receiving payouts via Stripe)."""
-    paypal_email: Nullable[str]
-    r"""The partner's PayPal email (for receiving payouts via PayPal)."""
     payouts_enabled_at: Nullable[str]
     r"""The date when the partner enabled payouts."""
-    invoice_settings: Nullable[InvoiceSettingsTypedDict]
-    r"""The partner's invoice settings."""
-    created_at: str
-    r"""The date when the partner was created on Dub."""
-    discoverable_at: Nullable[str]
-    r"""The date when the partner was added to the partner network."""
-    trusted_at: Nullable[str]
-    r"""The date when the partner received the trusted badge in the partner network."""
+    country: Nullable[str]
+    r"""The partner's country (required for tax purposes)."""
     tenant_id: Nullable[str]
-    description: NotRequired[Nullable[str]]
-    r"""A brief description of the partner and their background."""
-    website: NotRequired[Nullable[str]]
-    r"""The partner's website URL (including the https protocol)."""
-    youtube: NotRequired[Nullable[str]]
-    r"""The partner's YouTube channel username (e.g. `johndoe`)."""
-    twitter: NotRequired[Nullable[str]]
-    r"""The partner's Twitter username (e.g. `johndoe`)."""
-    linkedin: NotRequired[Nullable[str]]
-    r"""The partner's LinkedIn username (e.g. `johndoe`)."""
-    instagram: NotRequired[Nullable[str]]
-    r"""The partner's Instagram username (e.g. `johndoe`)."""
-    tiktok: NotRequired[Nullable[str]]
-    r"""The partner's TikTok username (e.g. `johndoe`)."""
-    monthly_traffic: NotRequired[Nullable[MonthlyTraffic]]
-    r"""The partner's monthly traffic."""
-    industry_interests: NotRequired[List[IndustryInterests]]
-    r"""The partner's industry interests."""
-    preferred_earning_structures: NotRequired[List[PreferredEarningStructures]]
-    r"""The partner's preferred earning structures."""
-    sales_channels: NotRequired[List[SalesChannels]]
-    r"""The partner's sales channels."""
+    r"""The partner's unique ID within your database. Can be useful for associating the partner with a user in your database and retrieving/update their data in the future."""
+    group_id: NotRequired[Nullable[str]]
+    r"""The partner's group ID on Dub."""
 
 
 class ListPayoutsPartner(BaseModel):
@@ -317,129 +180,31 @@ class ListPayoutsPartner(BaseModel):
     name: str
     r"""The partner's full legal name."""
 
-    company_name: Annotated[Nullable[str], pydantic.Field(alias="companyName")]
-    r"""If the partner profile type is a company, this is the partner's legal company name."""
-
-    profile_type: Annotated[ProfileType, pydantic.Field(alias="profileType")]
-    r"""The partner's profile type on Dub."""
-
     email: Nullable[str]
     r"""The partner's email address. Should be a unique value across Dub."""
 
     image: Nullable[str]
     r"""The partner's avatar image."""
 
-    country: Nullable[str]
-    r"""The partner's country (required for tax purposes)."""
-
-    stripe_connect_id: Annotated[Nullable[str], pydantic.Field(alias="stripeConnectId")]
-    r"""The partner's Stripe Connect ID (for receiving payouts via Stripe)."""
-
-    paypal_email: Annotated[Nullable[str], pydantic.Field(alias="paypalEmail")]
-    r"""The partner's PayPal email (for receiving payouts via PayPal)."""
-
     payouts_enabled_at: Annotated[
         Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
     ]
     r"""The date when the partner enabled payouts."""
 
-    invoice_settings: Annotated[
-        Nullable[InvoiceSettings], pydantic.Field(alias="invoiceSettings")
-    ]
-    r"""The partner's invoice settings."""
-
-    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
-    r"""The date when the partner was created on Dub."""
-
-    discoverable_at: Annotated[Nullable[str], pydantic.Field(alias="discoverableAt")]
-    r"""The date when the partner was added to the partner network."""
-
-    trusted_at: Annotated[Nullable[str], pydantic.Field(alias="trustedAt")]
-    r"""The date when the partner received the trusted badge in the partner network."""
+    country: Nullable[str]
+    r"""The partner's country (required for tax purposes)."""
 
     tenant_id: Annotated[Nullable[str], pydantic.Field(alias="tenantId")]
+    r"""The partner's unique ID within your database. Can be useful for associating the partner with a user in your database and retrieving/update their data in the future."""
 
-    description: OptionalNullable[str] = UNSET
-    r"""A brief description of the partner and their background."""
-
-    website: OptionalNullable[str] = UNSET
-    r"""The partner's website URL (including the https protocol)."""
-
-    youtube: OptionalNullable[str] = UNSET
-    r"""The partner's YouTube channel username (e.g. `johndoe`)."""
-
-    twitter: OptionalNullable[str] = UNSET
-    r"""The partner's Twitter username (e.g. `johndoe`)."""
-
-    linkedin: OptionalNullable[str] = UNSET
-    r"""The partner's LinkedIn username (e.g. `johndoe`)."""
-
-    instagram: OptionalNullable[str] = UNSET
-    r"""The partner's Instagram username (e.g. `johndoe`)."""
-
-    tiktok: OptionalNullable[str] = UNSET
-    r"""The partner's TikTok username (e.g. `johndoe`)."""
-
-    monthly_traffic: Annotated[
-        OptionalNullable[MonthlyTraffic], pydantic.Field(alias="monthlyTraffic")
-    ] = UNSET
-    r"""The partner's monthly traffic."""
-
-    industry_interests: Annotated[
-        Optional[List[IndustryInterests]], pydantic.Field(alias="industryInterests")
-    ] = None
-    r"""The partner's industry interests."""
-
-    preferred_earning_structures: Annotated[
-        Optional[List[PreferredEarningStructures]],
-        pydantic.Field(alias="preferredEarningStructures"),
-    ] = None
-    r"""The partner's preferred earning structures."""
-
-    sales_channels: Annotated[
-        Optional[List[SalesChannels]], pydantic.Field(alias="salesChannels")
-    ] = None
-    r"""The partner's sales channels."""
+    group_id: Annotated[OptionalNullable[str], pydantic.Field(alias="groupId")] = UNSET
+    r"""The partner's group ID on Dub."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(
-            [
-                "description",
-                "website",
-                "youtube",
-                "twitter",
-                "linkedin",
-                "instagram",
-                "tiktok",
-                "monthlyTraffic",
-                "industryInterests",
-                "preferredEarningStructures",
-                "salesChannels",
-            ]
-        )
+        optional_fields = set(["groupId"])
         nullable_fields = set(
-            [
-                "companyName",
-                "email",
-                "image",
-                "description",
-                "country",
-                "stripeConnectId",
-                "paypalEmail",
-                "payoutsEnabledAt",
-                "invoiceSettings",
-                "discoverableAt",
-                "trustedAt",
-                "website",
-                "youtube",
-                "twitter",
-                "linkedin",
-                "instagram",
-                "tiktok",
-                "monthlyTraffic",
-                "tenantId",
-            ]
+            ["email", "image", "payoutsEnabledAt", "country", "groupId", "tenantId"]
         )
         serialized = handler(self)
         m = {}
