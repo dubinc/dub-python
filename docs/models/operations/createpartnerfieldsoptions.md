@@ -1,4 +1,4 @@
-# ListPartnersFieldsOptions
+# CreatePartnerFieldsOptions
 
 
 ## Fields

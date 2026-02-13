@@ -1,4 +1,4 @@
-# ListPartnersBannedReason
+# CreatePartnerBannedReason
 
 If the partner was banned from the program, this is the reason for the ban.
 

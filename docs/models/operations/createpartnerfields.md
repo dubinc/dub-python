@@ -1,30 +1,30 @@
-# ListPartnersFields
+# CreatePartnerFields
 
 
 ## Supported Types
 
-### `operations.ListPartnersFields1`
+### `operations.CreatePartnerFields1`
 
 ```python
-value: operations.ListPartnersFields1 = /* values here */
+value: operations.CreatePartnerFields1 = /* values here */
 ```
 
-### `operations.ListPartnersFields2`
+### `operations.CreatePartnerFields2`
 
 ```python
-value: operations.ListPartnersFields2 = /* values here */
+value: operations.CreatePartnerFields2 = /* values here */
 ```
 
-### `operations.ListPartnersFields3`
+### `operations.CreatePartnerFields3`
 
 ```python
-value: operations.ListPartnersFields3 = /* values here */
+value: operations.CreatePartnerFields3 = /* values here */
 ```
 
-### `operations.ListPartnersFields4`
+### `operations.CreatePartnerFields4`
 
 ```python
-value: operations.ListPartnersFields4 = /* values here */
+value: operations.CreatePartnerFields4 = /* values here */
 ```
 
 ### `operations.Fields5`

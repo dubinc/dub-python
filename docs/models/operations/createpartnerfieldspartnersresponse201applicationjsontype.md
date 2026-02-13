@@ -3,6 +3,6 @@
 
 ## Values
 
-| Name           | Value          |
-| -------------- | -------------- |
-| `MULTI_SELECT` | multiSelect    |
+| Name   | Value  |
+| ------ | ------ |
+| `DATE` | date   |

@@ -3,6 +3,6 @@
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `SELECT` | select   |
+| Name      | Value     |
+| --------- | --------- |
+| `COUNTRY` | country   |
