@@ -4,14 +4,70 @@
 
 ### Available Operations
 
-* [create](#create) - Create or update a partner
 * [list](#list) - List all partners
-* [create_link](#create_link) - Create a link for a partner
+* [create](#create) - Create or update a partner
 * [retrieve_links](#retrieve_links) - Retrieve a partner's links.
+* [create_link](#create_link) - Create a link for a partner
 * [upsert_link](#upsert_link) - Upsert a link for a partner
 * [analytics](#analytics) - Retrieve analytics for a partner
 * [ban](#ban) - Ban a partner
 * [deactivate](#deactivate) - Deactivate a partner
+
+## list
+
+List all partners for a partner program.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listPartners" method="get" path="/partners" -->
+```python
+from dub import Dub
+from dub.models import operations
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.partners.list(request={
+        "status": operations.ListPartnersQueryParamStatus.APPROVED,
+        "country": "US",
+        "email": "panic@thedis.co",
+        "tenant_id": "1K0NM7HCN944PEMZ3CQPH43H8",
+        "search": "john",
+        "page_size": 50,
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `request`                                                                        | [operations.ListPartnersRequest](../../models/operations/listpartnersrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
+
+### Response
+
+**[List[operations.ListPartnersResponseBody]](../../models/.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -79,30 +135,22 @@ with Dub(
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## list
+## retrieve_links
 
-List all partners for a partner program.
+Retrieve a partner's links by their partner ID or tenant ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listPartners" method="get" path="/partners" -->
+<!-- UsageSnippet language="python" operationID="retrieveLinks" method="get" path="/partners/links" -->
 ```python
 from dub import Dub
-from dub.models import operations
 
 
 with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.partners.list(request={
-        "status": operations.ListPartnersQueryParamStatus.APPROVED,
-        "country": "US",
-        "email": "panic@thedis.co",
-        "tenant_id": "1K0NM7HCN944PEMZ3CQPH43H8",
-        "search": "john",
-        "page_size": 50,
-    })
+    res = d_client.partners.retrieve_links(request={})
 
     # Handle response
     print(res)
@@ -111,14 +159,14 @@ with Dub(
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `request`                                                                        | [operations.ListPartnersRequest](../../models/operations/listpartnersrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `request`                                                                          | [operations.RetrieveLinksRequest](../../models/operations/retrievelinksrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
 
 ### Response
 
-**[List[operations.ListPartnersResponseBody]](../../models/.md)**
+**[List[operations.RetrieveLinksResponseBody]](../../models/.md)**
 
 ### Errors
 
@@ -184,54 +232,6 @@ with Dub(
 ### Response
 
 **[components.LinkSchema](../../models/components/linkschema.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## retrieve_links
-
-Retrieve a partner's links by their partner ID or tenant ID.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="retrieveLinks" method="get" path="/partners/links" -->
-```python
-from dub import Dub
-
-
-with Dub(
-    token="DUB_API_KEY",
-) as d_client:
-
-    res = d_client.partners.retrieve_links(request={})
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `request`                                                                          | [operations.RetrieveLinksRequest](../../models/operations/retrievelinksrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
-
-### Response
-
-**[List[operations.RetrieveLinksResponseBody]](../../models/.md)**
 
 ### Errors
 

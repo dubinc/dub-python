@@ -4,12 +4,62 @@
 
 ### Available Operations
 
-* [create](#create) - Create a domain
 * [list](#list) - Retrieve a list of domains
-* [update](#update) - Update a domain
+* [create](#create) - Create a domain
 * [delete](#delete) - Delete a domain
+* [update](#update) - Update a domain
 * [register](#register) - Register a domain
 * [check_status](#check_status) - Check the availability of one or more domains
+
+## list
+
+Retrieve a list of domains associated with the authenticated workspace.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listDomains" method="get" path="/domains" -->
+```python
+from dub import Dub
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.domains.list(request={})
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [operations.ListDomainsRequest](../../models/operations/listdomainsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |
+
+### Response
+
+**[operations.ListDomainsResponse](../../models/operations/listdomainsresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -64,13 +114,13 @@ with Dub(
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## list
+## delete
 
-Retrieve a list of domains associated with the authenticated workspace.
+Delete a domain from a workspace. It cannot be undone. This will also delete all the links associated with the domain.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listDomains" method="get" path="/domains" -->
+<!-- UsageSnippet language="python" operationID="deleteDomain" method="delete" path="/domains/{slug}" -->
 ```python
 from dub import Dub
 
@@ -79,25 +129,23 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.domains.list(request={})
+    res = d_client.domains.delete(slug="acme.com")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `request`                                                                      | [operations.ListDomainsRequest](../../models/operations/listdomainsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
-| `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `slug`                                                              | *str*                                                               | :heavy_check_mark:                                                  | The domain name.                                                    | acme.com                                                            |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
-**[operations.ListDomainsResponse](../../models/operations/listdomainsresponse.md)**
+**[operations.DeleteDomainResponseBody](../../models/operations/deletedomainresponsebody.md)**
 
 ### Errors
 
@@ -152,54 +200,6 @@ with Dub(
 ### Response
 
 **[components.DomainSchema](../../models/components/domainschema.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## delete
-
-Delete a domain from a workspace. It cannot be undone. This will also delete all the links associated with the domain.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="deleteDomain" method="delete" path="/domains/{slug}" -->
-```python
-from dub import Dub
-
-
-with Dub(
-    token="DUB_API_KEY",
-) as d_client:
-
-    res = d_client.domains.delete(slug="acme.com")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `slug`                                                              | *str*                                                               | :heavy_check_mark:                                                  | The domain name.                                                    | acme.com                                                            |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
-
-### Response
-
-**[operations.DeleteDomainResponseBody](../../models/operations/deletedomainresponsebody.md)**
 
 ### Errors
 
