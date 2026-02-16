@@ -457,3 +457,17 @@ class GetCustomersResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    GetCustomersLink.model_rebuild()
+except NameError:
+    pass
+try:
+    Discount.model_rebuild()
+except NameError:
+    pass
+try:
+    GetCustomersResponseBody.model_rebuild()
+except NameError:
+    pass

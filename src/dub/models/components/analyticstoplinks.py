@@ -108,3 +108,9 @@ class AnalyticsTopLinks(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsTopLinks.model_rebuild()
+except NameError:
+    pass

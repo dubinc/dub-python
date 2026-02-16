@@ -255,3 +255,21 @@ class TrackSaleResponseBody(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    TrackSaleRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    TrackSaleCustomer.model_rebuild()
+except NameError:
+    pass
+try:
+    Sale.model_rebuild()
+except NameError:
+    pass
+try:
+    TrackSaleResponseBody.model_rebuild()
+except NameError:
+    pass

@@ -87,3 +87,9 @@ class FolderSchema(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FolderSchema.model_rebuild()
+except NameError:
+    pass

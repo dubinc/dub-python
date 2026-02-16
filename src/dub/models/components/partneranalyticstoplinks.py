@@ -111,3 +111,9 @@ class PartnerAnalyticsTopLinks(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PartnerAnalyticsTopLinks.model_rebuild()
+except NameError:
+    pass

@@ -52,3 +52,9 @@ class AnalyticsTimeseries(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsTimeseries.model_rebuild()
+except NameError:
+    pass

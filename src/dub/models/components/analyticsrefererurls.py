@@ -52,3 +52,9 @@ class AnalyticsRefererUrls(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsRefererUrls.model_rebuild()
+except NameError:
+    pass

@@ -52,3 +52,9 @@ class AnalyticsDevices(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsDevices.model_rebuild()
+except NameError:
+    pass

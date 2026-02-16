@@ -360,3 +360,25 @@ class CommissionCreatedEvent(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     data: CommissionCreatedEventData
+
+
+try:
+    CommissionCreatedEventPartner.model_rebuild()
+except NameError:
+    pass
+try:
+    CommissionCreatedEventCustomer.model_rebuild()
+except NameError:
+    pass
+try:
+    CommissionCreatedEventLink.model_rebuild()
+except NameError:
+    pass
+try:
+    CommissionCreatedEventData.model_rebuild()
+except NameError:
+    pass
+try:
+    CommissionCreatedEvent.model_rebuild()
+except NameError:
+    pass

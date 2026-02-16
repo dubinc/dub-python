@@ -63,3 +63,13 @@ class DeactivatePartnerResponseBody(BaseModel):
 
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
     r"""The ID of the deactivated partner."""
+
+
+try:
+    DeactivatePartnerRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    DeactivatePartnerResponseBody.model_rebuild()
+except NameError:
+    pass

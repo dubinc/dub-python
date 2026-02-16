@@ -52,3 +52,9 @@ class AnalyticsBrowsers(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsBrowsers.model_rebuild()
+except NameError:
+    pass

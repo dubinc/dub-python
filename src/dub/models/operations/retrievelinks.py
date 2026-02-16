@@ -126,3 +126,9 @@ class RetrieveLinksResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RetrieveLinksResponseBody.model_rebuild()
+except NameError:
+    pass

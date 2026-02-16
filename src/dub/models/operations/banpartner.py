@@ -76,3 +76,13 @@ class BanPartnerResponseBody(BaseModel):
 
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
     r"""The ID of the banned partner."""
+
+
+try:
+    BanPartnerRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    BanPartnerResponseBody.model_rebuild()
+except NameError:
+    pass

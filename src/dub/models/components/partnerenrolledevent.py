@@ -845,3 +845,25 @@ class PartnerEnrolledEvent(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     data: PartnerEnrolledEventData
+
+
+try:
+    Links.model_rebuild()
+except NameError:
+    pass
+try:
+    FieldsConstraints.model_rebuild()
+except NameError:
+    pass
+try:
+    Constraints.model_rebuild()
+except NameError:
+    pass
+try:
+    PartnerEnrolledEventData.model_rebuild()
+except NameError:
+    pass
+try:
+    PartnerEnrolledEvent.model_rebuild()
+except NameError:
+    pass

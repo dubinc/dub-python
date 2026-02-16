@@ -234,3 +234,17 @@ class PartnerApplicationSubmittedEvent(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     data: PartnerApplicationSubmittedEventData
+
+
+try:
+    PartnerApplicationSubmittedEventPartner.model_rebuild()
+except NameError:
+    pass
+try:
+    PartnerApplicationSubmittedEventData.model_rebuild()
+except NameError:
+    pass
+try:
+    PartnerApplicationSubmittedEvent.model_rebuild()
+except NameError:
+    pass

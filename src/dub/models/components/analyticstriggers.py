@@ -62,3 +62,9 @@ class AnalyticsTriggers(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsTriggers.model_rebuild()
+except NameError:
+    pass

@@ -380,3 +380,9 @@ class UpsertLinkRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpsertLinkRequestBody.model_rebuild()
+except NameError:
+    pass

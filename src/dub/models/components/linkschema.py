@@ -376,3 +376,9 @@ class LinkSchema(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    LinkSchema.model_rebuild()
+except NameError:
+    pass
