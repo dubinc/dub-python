@@ -375,3 +375,9 @@ class CreateLinkRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateLinkRequestBody.model_rebuild()
+except NameError:
+    pass

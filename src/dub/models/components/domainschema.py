@@ -178,3 +178,13 @@ class DomainSchema(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RegisteredDomain.model_rebuild()
+except NameError:
+    pass
+try:
+    DomainSchema.model_rebuild()
+except NameError:
+    pass

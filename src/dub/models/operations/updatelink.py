@@ -402,3 +402,9 @@ class UpdateLinkRequest(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateLinkRequestBody.model_rebuild()
+except NameError:
+    pass

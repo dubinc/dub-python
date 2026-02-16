@@ -386,3 +386,13 @@ class BulkUpdateLinksRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Data.model_rebuild()
+except NameError:
+    pass
+try:
+    BulkUpdateLinksRequestBody.model_rebuild()
+except NameError:
+    pass

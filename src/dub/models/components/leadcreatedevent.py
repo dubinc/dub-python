@@ -669,3 +669,29 @@ class LeadCreatedEvent(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     data: LeadCreatedEventData
+
+
+try:
+    Customer.model_rebuild()
+except NameError:
+    pass
+try:
+    LeadCreatedEventClick.model_rebuild()
+except NameError:
+    pass
+try:
+    LeadCreatedEventLink.model_rebuild()
+except NameError:
+    pass
+try:
+    Partner.model_rebuild()
+except NameError:
+    pass
+try:
+    LeadCreatedEventData.model_rebuild()
+except NameError:
+    pass
+try:
+    LeadCreatedEvent.model_rebuild()
+except NameError:
+    pass

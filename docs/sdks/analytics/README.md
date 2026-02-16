@@ -24,6 +24,7 @@ with Dub(
 
     res = d_client.analytics.retrieve(request={
         "event": operations.Event.LEADS,
+        "domain": "dub.co",
         "timezone": "America/New_York",
         "city": "New York",
         "device": "Desktop",

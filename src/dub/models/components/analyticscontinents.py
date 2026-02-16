@@ -65,3 +65,9 @@ class AnalyticsContinents(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsContinents.model_rebuild()
+except NameError:
+    pass

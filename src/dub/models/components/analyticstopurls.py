@@ -52,3 +52,9 @@ class AnalyticsTopUrls(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsTopUrls.model_rebuild()
+except NameError:
+    pass

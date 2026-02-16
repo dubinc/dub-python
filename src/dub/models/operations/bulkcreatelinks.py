@@ -401,3 +401,9 @@ ResponseBody = TypeAliasType(
     "ResponseBody",
     Union[components_linkerrorschema.LinkErrorSchema, components_linkschema.LinkSchema],
 )
+
+
+try:
+    RequestBody.model_rebuild()
+except NameError:
+    pass

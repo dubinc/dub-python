@@ -247,3 +247,13 @@ class ListBountySubmissionsResponseBody(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    Files.model_rebuild()
+except NameError:
+    pass
+try:
+    ListBountySubmissionsResponseBody.model_rebuild()
+except NameError:
+    pass

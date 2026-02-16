@@ -321,3 +321,13 @@ class CreatePartnerLinkRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreatePartnerLinkLinkProps.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerLinkRequestBody.model_rebuild()
+except NameError:
+    pass
