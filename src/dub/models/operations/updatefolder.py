@@ -100,3 +100,9 @@ class UpdateFolderRequest(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateFolderRequestBody.model_rebuild()
+except NameError:
+    pass

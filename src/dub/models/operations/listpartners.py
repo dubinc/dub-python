@@ -969,3 +969,21 @@ class ListPartnersResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Links.model_rebuild()
+except NameError:
+    pass
+try:
+    FieldsConstraints.model_rebuild()
+except NameError:
+    pass
+try:
+    Constraints.model_rebuild()
+except NameError:
+    pass
+try:
+    ListPartnersResponseBody.model_rebuild()
+except NameError:
+    pass

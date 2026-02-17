@@ -39,39 +39,6 @@ class QueryParamInterval(str, Enum):
     ALL = "all"
 
 
-class QueryParamContinent(str, Enum):
-    r"""The continent to retrieve analytics for."""
-
-    AF = "AF"
-    AN = "AN"
-    AS = "AS"
-    EU = "EU"
-    NA = "NA"
-    OC = "OC"
-    SA = "SA"
-
-
-class QueryParamTrigger(str, Enum):
-    r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
-
-    QR = "qr"
-    LINK = "link"
-    PAGEVIEW = "pageview"
-    DEEPLINK = "deeplink"
-
-
-ListEventsQueryParamTagIdsTypedDict = TypeAliasType(
-    "ListEventsQueryParamTagIdsTypedDict", Union[str, List[str]]
-)
-r"""The tag IDs to retrieve analytics for."""
-
-
-ListEventsQueryParamTagIds = TypeAliasType(
-    "ListEventsQueryParamTagIds", Union[str, List[str]]
-)
-r"""The tag IDs to retrieve analytics for."""
-
-
 class QueryParamSaleType(str, Enum):
     r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
 
@@ -106,19 +73,23 @@ class ListEventsRequestTypedDict(TypedDict):
     event: NotRequired[QueryParamEvent]
     r"""The type of event to retrieve analytics for. Defaults to 'clicks'."""
     domain: NotRequired[str]
-    r"""The domain to filter analytics for."""
+    r"""The domain to filter analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `dub.co`, `dub.co,google.com`, `-spam.com`."""
     key: NotRequired[str]
     r"""The slug of the short link to retrieve analytics for. Must be used along with the corresponding `domain` of the short link to fetch analytics for a specific short link."""
     link_id: NotRequired[str]
-    r"""The unique ID of the short link on Dub to retrieve analytics for."""
+    r"""The unique ID of the link to retrieve analytics for.Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `link_123`, `link_123,link_456`, `-link_789`."""
     external_id: NotRequired[str]
     r"""The ID of the link in the your database. Must be prefixed with 'ext_' when passed as a query parameter."""
     tenant_id: NotRequired[str]
-    r"""The ID of the tenant that created the link inside your system."""
-    program_id: NotRequired[str]
-    r"""The ID of the program to retrieve analytics for."""
+    r"""The ID of the tenant that created the link inside your system. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `tenant_123`, `tenant_123,tenant_456`, `-tenant_789`."""
+    tag_id: NotRequired[str]
+    r"""The tag ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `tag_123`, `tag_123,tag_456`, `-tag_789`."""
+    folder_id: NotRequired[str]
+    r"""The folder ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `folder_123`, `folder_123,folder_456`, `-folder_789`. If not provided, return analytics for all links."""
+    group_id: NotRequired[str]
+    r"""The group ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `grp_123`, `grp_123,grp_456`, `-grp_789`."""
     partner_id: NotRequired[str]
-    r"""The ID of the partner to retrieve analytics for."""
+    r"""The ID of the partner to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `pn_123`, `pn_123,pn_456`, `-pn_789`."""
     customer_id: NotRequired[str]
     r"""The ID of the customer to retrieve analytics for."""
     interval: NotRequired[QueryParamInterval]
@@ -130,55 +101,49 @@ class ListEventsRequestTypedDict(TypedDict):
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     country: NotRequired[str]
-    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
+    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code (see https://d.to/geo). Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `US`, `US,BR,FR`, `-US`."""
     city: NotRequired[str]
-    r"""The city to retrieve analytics for."""
+    r"""The city to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `New York`, `New York,London`, `-New York`."""
     region: NotRequired[str]
-    r"""The ISO 3166-2 region code to retrieve analytics for."""
-    continent: NotRequired[QueryParamContinent]
-    r"""The continent to retrieve analytics for."""
+    r"""The ISO 3166-2 region code to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `NY`, `NY,CA`, `-NY`."""
+    continent: NotRequired[str]
+    r"""The continent to retrieve analytics for. Valid values: AF, AN, AS, EU, NA, OC, SA. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `NA`, `NA,EU`, `-AS`."""
     device: NotRequired[str]
-    r"""The device to retrieve analytics for."""
+    r"""The device to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Desktop`, `Mobile,Tablet`, `-Mobile`."""
     browser: NotRequired[str]
-    r"""The browser to retrieve analytics for."""
+    r"""The browser to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Chrome`, `Chrome,Firefox,Safari`, `-IE`."""
     os: NotRequired[str]
-    r"""The OS to retrieve analytics for."""
-    trigger: NotRequired[QueryParamTrigger]
-    r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
+    r"""The OS to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Windows`, `Mac,Windows,Linux`, `-Windows`."""
+    trigger: NotRequired[str]
+    r"""The trigger to retrieve analytics for. Valid values: qr, link, pageview. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `qr`, `qr,link`, `-qr`. If undefined, returns all trigger types."""
     referer: NotRequired[str]
-    r"""The referer hostname to retrieve analytics for."""
+    r"""The referer hostname to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `google.com`, `google.com,twitter.com`, `-facebook.com`."""
     referer_url: NotRequired[str]
-    r"""The full referer URL to retrieve analytics for."""
+    r"""The full referer URL to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `https://google.com`, `https://google.com,https://twitter.com`, `-https://spam.com`."""
     url: NotRequired[str]
-    r"""The URL to retrieve analytics for."""
-    tag_ids: NotRequired[ListEventsQueryParamTagIdsTypedDict]
-    r"""The tag IDs to retrieve analytics for."""
-    folder_id: NotRequired[str]
-    r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
-    group_id: NotRequired[str]
-    r"""The group ID to retrieve analytics for."""
+    r"""The destination URL to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `https://example.com`, `https://example.com,https://other.com`, `-https://spam.com`."""
+    utm_source: NotRequired[str]
+    r"""The UTM source to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `google`, `google,twitter`, `-spam`."""
+    utm_medium: NotRequired[str]
+    r"""The UTM medium to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `cpc`, `cpc,social`, `-email`."""
+    utm_campaign: NotRequired[str]
+    r"""The UTM campaign to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `summer_sale`, `summer_sale,winter_sale`, `-old_campaign`."""
+    utm_term: NotRequired[str]
+    r"""The UTM term to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`)."""
+    utm_content: NotRequired[str]
+    r"""The UTM content to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`)."""
     root: NotRequired[bool]
     r"""Filter for root domains. If true, filter for domains only. If false, filter for links only. If undefined, return both."""
     sale_type: NotRequired[QueryParamSaleType]
     r"""Filter sales by type: 'new' for first-time purchases, 'recurring' for repeat purchases. If undefined, returns both."""
     query: NotRequired[str]
-    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
-    tag_id: NotRequired[str]
-    r"""Deprecated: Use `tagIds` instead. The tag ID to retrieve analytics for."""
+    r"""Search the events by a custom metadata value. Only available for lead and sale events. Examples: `metadata['key']:'value'`"""
+    program_id: NotRequired[str]
+    r"""Deprecated: This is automatically inferred from your workspace's defaultProgramId. The ID of the program to retrieve analytics for."""
+    tag_ids: NotRequired[str]
+    r"""Deprecated: Use `tagId` instead. The tag IDs to retrieve analytics for."""
     qr: NotRequired[bool]
     r"""Deprecated: Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
-    utm_source: NotRequired[Nullable[str]]
-    r"""The UTM source of the short link."""
-    utm_medium: NotRequired[Nullable[str]]
-    r"""The UTM medium of the short link."""
-    utm_campaign: NotRequired[Nullable[str]]
-    r"""The UTM campaign of the short link."""
-    utm_term: NotRequired[Nullable[str]]
-    r"""The UTM term of the short link."""
-    utm_content: NotRequired[Nullable[str]]
-    r"""The UTM content of the short link."""
-    ref: NotRequired[Nullable[str]]
-    r"""The ref of the short link."""
     page: NotRequired[float]
     limit: NotRequired[float]
     sort_order: NotRequired[QueryParamSortOrder]
@@ -200,7 +165,7 @@ class ListEventsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The domain to filter analytics for."""
+    r"""The domain to filter analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `dub.co`, `dub.co,google.com`, `-spam.com`."""
 
     key: Annotated[
         Optional[str],
@@ -213,7 +178,7 @@ class ListEventsRequest(BaseModel):
         pydantic.Field(alias="linkId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The unique ID of the short link on Dub to retrieve analytics for."""
+    r"""The unique ID of the link to retrieve analytics for.Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `link_123`, `link_123,link_456`, `-link_789`."""
 
     external_id: Annotated[
         Optional[str],
@@ -227,21 +192,35 @@ class ListEventsRequest(BaseModel):
         pydantic.Field(alias="tenantId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The ID of the tenant that created the link inside your system."""
+    r"""The ID of the tenant that created the link inside your system. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `tenant_123`, `tenant_123,tenant_456`, `-tenant_789`."""
 
-    program_id: Annotated[
+    tag_id: Annotated[
         Optional[str],
-        pydantic.Field(alias="programId"),
+        pydantic.Field(alias="tagId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The ID of the program to retrieve analytics for."""
+    r"""The tag ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `tag_123`, `tag_123,tag_456`, `-tag_789`."""
+
+    folder_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="folderId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The folder ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `folder_123`, `folder_123,folder_456`, `-folder_789`. If not provided, return analytics for all links."""
+
+    group_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="groupId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The group ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `grp_123`, `grp_123,grp_456`, `-grp_789`."""
 
     partner_id: Annotated[
         Optional[str],
         pydantic.Field(alias="partnerId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The ID of the partner to retrieve analytics for."""
+    r"""The ID of the partner to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `pn_123`, `pn_123,pn_456`, `-pn_789`."""
 
     customer_id: Annotated[
         Optional[str],
@@ -278,89 +257,98 @@ class ListEventsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
+    r"""The country to retrieve analytics for. Must be passed as a 2-letter ISO 3166-1 country code (see https://d.to/geo). Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `US`, `US,BR,FR`, `-US`."""
 
     city: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The city to retrieve analytics for."""
+    r"""The city to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `New York`, `New York,London`, `-New York`."""
 
     region: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The ISO 3166-2 region code to retrieve analytics for."""
+    r"""The ISO 3166-2 region code to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `NY`, `NY,CA`, `-NY`."""
 
     continent: Annotated[
-        Optional[QueryParamContinent],
+        Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The continent to retrieve analytics for."""
+    r"""The continent to retrieve analytics for. Valid values: AF, AN, AS, EU, NA, OC, SA. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `NA`, `NA,EU`, `-AS`."""
 
     device: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The device to retrieve analytics for."""
+    r"""The device to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Desktop`, `Mobile,Tablet`, `-Mobile`."""
 
     browser: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The browser to retrieve analytics for."""
+    r"""The browser to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Chrome`, `Chrome,Firefox,Safari`, `-IE`."""
 
     os: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The OS to retrieve analytics for."""
+    r"""The OS to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Windows`, `Mac,Windows,Linux`, `-Windows`."""
 
     trigger: Annotated[
-        Optional[QueryParamTrigger],
+        Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The trigger to retrieve analytics for. If undefined, returns all trigger types."""
+    r"""The trigger to retrieve analytics for. Valid values: qr, link, pageview. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `qr`, `qr,link`, `-qr`. If undefined, returns all trigger types."""
 
     referer: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The referer hostname to retrieve analytics for."""
+    r"""The referer hostname to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `google.com`, `google.com,twitter.com`, `-facebook.com`."""
 
     referer_url: Annotated[
         Optional[str],
         pydantic.Field(alias="refererUrl"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The full referer URL to retrieve analytics for."""
+    r"""The full referer URL to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `https://google.com`, `https://google.com,https://twitter.com`, `-https://spam.com`."""
 
     url: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The URL to retrieve analytics for."""
+    r"""The destination URL to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `https://example.com`, `https://example.com,https://other.com`, `-https://spam.com`."""
 
-    tag_ids: Annotated[
-        Optional[ListEventsQueryParamTagIds],
-        pydantic.Field(alias="tagIds"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The tag IDs to retrieve analytics for."""
-
-    folder_id: Annotated[
+    utm_source: Annotated[
         Optional[str],
-        pydantic.Field(alias="folderId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The folder ID to retrieve analytics for. If not provided, return analytics for unsorted links."""
+    r"""The UTM source to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `google`, `google,twitter`, `-spam`."""
 
-    group_id: Annotated[
+    utm_medium: Annotated[
         Optional[str],
-        pydantic.Field(alias="groupId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The group ID to retrieve analytics for."""
+    r"""The UTM medium to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `cpc`, `cpc,social`, `-email`."""
+
+    utm_campaign: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The UTM campaign to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `summer_sale`, `summer_sale,winter_sale`, `-old_campaign`."""
+
+    utm_term: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The UTM term to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`)."""
+
+    utm_content: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The UTM content to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`)."""
 
     root: Annotated[
         Optional[bool],
@@ -379,56 +367,27 @@ class ListEventsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
+    r"""Search the events by a custom metadata value. Only available for lead and sale events. Examples: `metadata['key']:'value'`"""
 
-    tag_id: Annotated[
+    program_id: Annotated[
         Optional[str],
-        pydantic.Field(alias="tagId"),
+        pydantic.Field(alias="programId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Deprecated: Use `tagIds` instead. The tag ID to retrieve analytics for."""
+    r"""Deprecated: This is automatically inferred from your workspace's defaultProgramId. The ID of the program to retrieve analytics for."""
+
+    tag_ids: Annotated[
+        Optional[str],
+        pydantic.Field(alias="tagIds"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Deprecated: Use `tagId` instead. The tag IDs to retrieve analytics for."""
 
     qr: Annotated[
         Optional[bool],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Deprecated: Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
-
-    utm_source: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""The UTM source of the short link."""
-
-    utm_medium: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""The UTM medium of the short link."""
-
-    utm_campaign: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""The UTM campaign of the short link."""
-
-    utm_term: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""The UTM term of the short link."""
-
-    utm_content: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""The UTM content of the short link."""
-
-    ref: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""The ref of the short link."""
 
     page: Annotated[
         Optional[float],
@@ -470,7 +429,9 @@ class ListEventsRequest(BaseModel):
                 "linkId",
                 "externalId",
                 "tenantId",
-                "programId",
+                "tagId",
+                "folderId",
+                "groupId",
                 "partnerId",
                 "customerId",
                 "interval",
@@ -488,35 +449,22 @@ class ListEventsRequest(BaseModel):
                 "referer",
                 "refererUrl",
                 "url",
-                "tagIds",
-                "folderId",
-                "groupId",
-                "root",
-                "saleType",
-                "query",
-                "tagId",
-                "qr",
                 "utm_source",
                 "utm_medium",
                 "utm_campaign",
                 "utm_term",
                 "utm_content",
-                "ref",
+                "root",
+                "saleType",
+                "query",
+                "programId",
+                "tagIds",
+                "qr",
                 "page",
                 "limit",
                 "sortOrder",
                 "sortBy",
                 "order",
-            ]
-        )
-        nullable_fields = set(
-            [
-                "utm_source",
-                "utm_medium",
-                "utm_campaign",
-                "utm_term",
-                "utm_content",
-                "ref",
             ]
         )
         serialized = handler(self)
@@ -525,17 +473,9 @@ class ListEventsRequest(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
 
             if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
+                if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
@@ -2573,3 +2513,49 @@ ListEventsResponseBody = Annotated[
     ],
     Discriminator(lambda m: get_discriminator(m, "event", "event")),
 ]
+
+
+try:
+    ResponseBodySale.model_rebuild()
+except NameError:
+    pass
+try:
+    ListEventsResponseBodyLink.model_rebuild()
+except NameError:
+    pass
+try:
+    ListEventsResponseBodyClick.model_rebuild()
+except NameError:
+    pass
+try:
+    ResponseBodyCustomer.model_rebuild()
+except NameError:
+    pass
+try:
+    SaleEvent.model_rebuild()
+except NameError:
+    pass
+try:
+    ResponseBodyClick.model_rebuild()
+except NameError:
+    pass
+try:
+    ResponseBodyLink.model_rebuild()
+except NameError:
+    pass
+try:
+    ListEventsResponseBodyCustomer.model_rebuild()
+except NameError:
+    pass
+try:
+    LeadEvent.model_rebuild()
+except NameError:
+    pass
+try:
+    ListEventsResponseBodyEventsClick.model_rebuild()
+except NameError:
+    pass
+try:
+    ListEventsResponseBodyEventsLink.model_rebuild()
+except NameError:
+    pass

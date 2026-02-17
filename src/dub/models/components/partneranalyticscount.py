@@ -50,3 +50,9 @@ class PartnerAnalyticsCount(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PartnerAnalyticsCount.model_rebuild()
+except NameError:
+    pass

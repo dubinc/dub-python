@@ -355,3 +355,13 @@ class LinkWebhookEvent(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     data: Data
+
+
+try:
+    Data.model_rebuild()
+except NameError:
+    pass
+try:
+    LinkWebhookEvent.model_rebuild()
+except NameError:
+    pass

@@ -319,3 +319,13 @@ class UpsertPartnerLinkRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpsertPartnerLinkLinkProps.model_rebuild()
+except NameError:
+    pass
+try:
+    UpsertPartnerLinkRequestBody.model_rebuild()
+except NameError:
+    pass

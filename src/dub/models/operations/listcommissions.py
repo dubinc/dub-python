@@ -510,3 +510,17 @@ class ListCommissionsResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ListCommissionsPartner.model_rebuild()
+except NameError:
+    pass
+try:
+    ListCommissionsCustomer.model_rebuild()
+except NameError:
+    pass
+try:
+    ListCommissionsResponseBody.model_rebuild()
+except NameError:
+    pass

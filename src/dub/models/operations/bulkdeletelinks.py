@@ -34,3 +34,9 @@ class BulkDeleteLinksResponseBody(BaseModel):
 
     deleted_count: Annotated[float, pydantic.Field(alias="deletedCount")]
     r"""The number of links deleted."""
+
+
+try:
+    BulkDeleteLinksResponseBody.model_rebuild()
+except NameError:
+    pass

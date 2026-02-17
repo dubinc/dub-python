@@ -47,3 +47,9 @@ class AnalyticsCount(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsCount.model_rebuild()
+except NameError:
+    pass

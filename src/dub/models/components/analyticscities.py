@@ -62,3 +62,9 @@ class AnalyticsCities(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsCities.model_rebuild()
+except NameError:
+    pass

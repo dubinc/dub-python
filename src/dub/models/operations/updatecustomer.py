@@ -417,3 +417,21 @@ class UpdateCustomerResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateCustomerRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateCustomerLink.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateCustomerDiscount.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateCustomerResponseBody.model_rebuild()
+except NameError:
+    pass

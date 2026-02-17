@@ -23,10 +23,12 @@ class AnalyticsTopLinksTypedDict(TypedDict):
     r"""The destination URL of the short link"""
     created_at: str
     r"""The creation timestamp of the short link"""
-    comments: NotRequired[Nullable[str]]
-    r"""The comments of the short link"""
     title: NotRequired[Nullable[str]]
     r"""The custom link preview title (og:title)"""
+    comments: NotRequired[Nullable[str]]
+    r"""The comments of the short link"""
+    partner_id: NotRequired[Nullable[str]]
+    r"""The ID of the partner that the link belongs to (if applicable)"""
     clicks: NotRequired[float]
     r"""The number of clicks from this link"""
     leads: NotRequired[float]
@@ -64,11 +66,16 @@ class AnalyticsTopLinks(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The creation timestamp of the short link"""
 
+    title: OptionalNullable[str] = UNSET
+    r"""The custom link preview title (og:title)"""
+
     comments: OptionalNullable[str] = UNSET
     r"""The comments of the short link"""
 
-    title: OptionalNullable[str] = UNSET
-    r"""The custom link preview title (og:title)"""
+    partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
+        UNSET
+    )
+    r"""The ID of the partner that the link belongs to (if applicable)"""
 
     clicks: Optional[float] = 0
     r"""The number of clicks from this link"""
@@ -85,9 +92,9 @@ class AnalyticsTopLinks(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["comments", "title", "clicks", "leads", "sales", "saleAmount"]
+            ["title", "comments", "partnerId", "clicks", "leads", "sales", "saleAmount"]
         )
-        nullable_fields = set(["comments", "title"])
+        nullable_fields = set(["title", "comments", "partnerId"])
         serialized = handler(self)
         m = {}
 
@@ -108,3 +115,9 @@ class AnalyticsTopLinks(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsTopLinks.model_rebuild()
+except NameError:
+    pass

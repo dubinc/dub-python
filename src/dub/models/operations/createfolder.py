@@ -64,3 +64,9 @@ class CreateFolderRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateFolderRequestBody.model_rebuild()
+except NameError:
+    pass

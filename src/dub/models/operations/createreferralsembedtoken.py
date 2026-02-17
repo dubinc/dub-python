@@ -388,3 +388,21 @@ class CreateReferralsEmbedTokenResponseBody(BaseModel):
     public_token: Annotated[str, pydantic.Field(alias="publicToken")]
 
     expires: str
+
+
+try:
+    CreateReferralsEmbedTokenLinkProps.model_rebuild()
+except NameError:
+    pass
+try:
+    Partner.model_rebuild()
+except NameError:
+    pass
+try:
+    CreateReferralsEmbedTokenRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    CreateReferralsEmbedTokenResponseBody.model_rebuild()
+except NameError:
+    pass

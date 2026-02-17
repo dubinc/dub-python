@@ -1159,3 +1159,29 @@ class CreatePartnerResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    LinkProps.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerLinks.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerFieldsPartnersConstraints.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerFieldsConstraints.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerResponseBody.model_rebuild()
+except NameError:
+    pass

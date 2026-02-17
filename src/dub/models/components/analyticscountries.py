@@ -69,3 +69,9 @@ class AnalyticsCountries(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AnalyticsCountries.model_rebuild()
+except NameError:
+    pass
