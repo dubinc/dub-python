@@ -103,3 +103,9 @@ class CreateDomainRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateDomainRequestBody.model_rebuild()
+except NameError:
+    pass

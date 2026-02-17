@@ -254,3 +254,17 @@ class TrackLeadResponseBody(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    TrackLeadRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    Link.model_rebuild()
+except NameError:
+    pass
+try:
+    Customer.model_rebuild()
+except NameError:
+    pass

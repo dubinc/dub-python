@@ -51,7 +51,7 @@ class RetrievePartnerAnalyticsRequestTypedDict(TypedDict):
     timezone: NotRequired[str]
     r"""The IANA time zone code for aligning timeseries granularity (e.g. America/New_York). Defaults to UTC."""
     query: NotRequired[str]
-    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
+    r"""Search the events by a custom metadata value. Only available for lead and sale events. Examples: `metadata['key']:'value'`"""
     group_by: NotRequired[RetrievePartnerAnalyticsQueryParamGroupBy]
     r"""The parameter to group the analytics data points by. Defaults to `count` if undefined."""
 
@@ -99,7 +99,7 @@ class RetrievePartnerAnalyticsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Search the events by a custom metadata value. Only available for lead and sale events."""
+    r"""Search the events by a custom metadata value. Only available for lead and sale events. Examples: `metadata['key']:'value'`"""
 
     group_by: Annotated[
         Optional[RetrievePartnerAnalyticsQueryParamGroupBy],

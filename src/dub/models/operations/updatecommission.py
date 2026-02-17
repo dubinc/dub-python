@@ -380,3 +380,21 @@ class UpdateCommissionResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateCommissionRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateCommissionPartner.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateCommissionCustomer.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateCommissionResponseBody.model_rebuild()
+except NameError:
+    pass

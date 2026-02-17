@@ -217,3 +217,17 @@ class RejectBountySubmissionResponseBody(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    RejectBountySubmissionRequestBody.model_rebuild()
+except NameError:
+    pass
+try:
+    RejectBountySubmissionFiles.model_rebuild()
+except NameError:
+    pass
+try:
+    RejectBountySubmissionResponseBody.model_rebuild()
+except NameError:
+    pass

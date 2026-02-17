@@ -346,3 +346,13 @@ class ListPayoutsResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ListPayoutsPartner.model_rebuild()
+except NameError:
+    pass
+try:
+    ListPayoutsResponseBody.model_rebuild()
+except NameError:
+    pass

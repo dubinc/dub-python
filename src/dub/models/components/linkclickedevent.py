@@ -427,3 +427,17 @@ class LinkClickedEvent(BaseModel):
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
     data: LinkClickedEventData
+
+
+try:
+    Click.model_rebuild()
+except NameError:
+    pass
+try:
+    Link.model_rebuild()
+except NameError:
+    pass
+try:
+    LinkClickedEvent.model_rebuild()
+except NameError:
+    pass
