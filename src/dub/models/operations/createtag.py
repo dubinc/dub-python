@@ -10,7 +10,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Color(str, Enum):
-    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown."""
+    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown, gray."""
 
     RED = "red"
     YELLOW = "yellow"
@@ -18,6 +18,7 @@ class Color(str, Enum):
     BLUE = "blue"
     PURPLE = "purple"
     BROWN = "brown"
+    GRAY = "gray"
     PINK = "pink"
 
 
@@ -25,7 +26,7 @@ class CreateTagRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the tag to create."""
     color: NotRequired[Color]
-    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown."""
+    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown, gray."""
     tag: NotRequired[str]
     r"""The name of the tag to create."""
 
@@ -35,7 +36,7 @@ class CreateTagRequestBody(BaseModel):
     r"""The name of the tag to create."""
 
     color: Optional[Color] = None
-    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown."""
+    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown, gray."""
 
     tag: Annotated[
         Optional[str],

@@ -11,7 +11,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateTagColor(str, Enum):
-    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown."""
+    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown, gray."""
 
     RED = "red"
     YELLOW = "yellow"
@@ -19,6 +19,7 @@ class UpdateTagColor(str, Enum):
     BLUE = "blue"
     PURPLE = "purple"
     BROWN = "brown"
+    GRAY = "gray"
     PINK = "pink"
 
 
@@ -26,7 +27,7 @@ class UpdateTagRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the tag to create."""
     color: NotRequired[UpdateTagColor]
-    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown."""
+    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown, gray."""
     tag: NotRequired[str]
     r"""The name of the tag to create."""
 
@@ -36,7 +37,7 @@ class UpdateTagRequestBody(BaseModel):
     r"""The name of the tag to create."""
 
     color: Optional[UpdateTagColor] = None
-    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown."""
+    r"""The color of the tag. If not provided, a random color will be used from the list: red, yellow, green, blue, purple, brown, gray."""
 
     tag: Annotated[
         Optional[str],

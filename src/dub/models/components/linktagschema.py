@@ -15,6 +15,7 @@ class LinkTagSchemaColor(str, Enum):
     BLUE = "blue"
     PURPLE = "purple"
     BROWN = "brown"
+    GRAY = "gray"
     PINK = "pink"
 
 
