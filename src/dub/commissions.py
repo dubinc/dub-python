@@ -288,7 +288,7 @@ class Commissions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.UpdateCommissionResponseBody:
-        r"""Update a commission.
+        r"""Update a commission
 
         Update an existing commission amount. This is useful for handling refunds (partial or full) or fraudulent sales.
 
@@ -326,7 +326,7 @@ class Commissions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
@@ -428,7 +428,7 @@ class Commissions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.UpdateCommissionResponseBody:
-        r"""Update a commission.
+        r"""Update a commission
 
         Update an existing commission amount. This is useful for handling refunds (partial or full) or fraudulent sales.
 
@@ -466,7 +466,7 @@ class Commissions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",

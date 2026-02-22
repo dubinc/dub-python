@@ -270,7 +270,7 @@ asyncio.run(main())
 ### [Commissions](docs/sdks/commissions/README.md)
 
 * [list](docs/sdks/commissions/README.md#list) - List all commissions
-* [update](docs/sdks/commissions/README.md#update) - Update a commission.
+* [update](docs/sdks/commissions/README.md#update) - Update a commission
 
 ### [Customers](docs/sdks/customers/README.md)
 
