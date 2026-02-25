@@ -27,6 +27,8 @@ class AnalyticsTopLinksTypedDict(TypedDict):
     r"""The custom link preview title (og:title)"""
     comments: NotRequired[Nullable[str]]
     r"""The comments of the short link"""
+    folder_id: NotRequired[Nullable[str]]
+    r"""The ID of the folder that the link belongs to (if applicable)"""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner that the link belongs to (if applicable)"""
     clicks: NotRequired[float]
@@ -72,6 +74,11 @@ class AnalyticsTopLinks(BaseModel):
     comments: OptionalNullable[str] = UNSET
     r"""The comments of the short link"""
 
+    folder_id: Annotated[OptionalNullable[str], pydantic.Field(alias="folderId")] = (
+        UNSET
+    )
+    r"""The ID of the folder that the link belongs to (if applicable)"""
+
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET
     )
@@ -92,9 +99,18 @@ class AnalyticsTopLinks(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["title", "comments", "partnerId", "clicks", "leads", "sales", "saleAmount"]
+            [
+                "title",
+                "comments",
+                "folderId",
+                "partnerId",
+                "clicks",
+                "leads",
+                "sales",
+                "saleAmount",
+            ]
         )
-        nullable_fields = set(["title", "comments", "partnerId"])
+        nullable_fields = set(["title", "comments", "folderId", "partnerId"])
         serialized = handler(self)
         m = {}
 
