@@ -2,6 +2,14 @@
 
 The field to sort the customers by. The default is `createdAt`.
 
+## Example Usage
+
+```python
+from dub.models.operations import GetCustomersQueryParamSortBy
+
+value = GetCustomersQueryParamSortBy.CREATED_AT
+```
+
 
 ## Values
 

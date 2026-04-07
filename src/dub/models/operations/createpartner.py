@@ -44,14 +44,12 @@ class CreatePartnerTestVariants(BaseModel):
 class LinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
-    key_length: NotRequired[float]
-    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
     external_id: NotRequired[Nullable[str]]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     prefix: NotRequired[str]
-    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
+    r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
     archived: NotRequired[bool]
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
     tag_ids: NotRequired[CreatePartnerTagIdsTypedDict]
@@ -95,9 +93,6 @@ class LinkPropsTypedDict(TypedDict):
 class LinkProps(BaseModel):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
-    key_length: Annotated[Optional[float], pydantic.Field(alias="keyLength")] = None
-    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
-
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
@@ -109,7 +104,7 @@ class LinkProps(BaseModel):
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
 
     prefix: Optional[str] = None
-    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
+    r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
 
     archived: Optional[bool] = None
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
@@ -187,7 +182,6 @@ class LinkProps(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
-                "keyLength",
                 "externalId",
                 "tenantId",
                 "prefix",
@@ -236,7 +230,7 @@ class LinkProps(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -322,7 +316,7 @@ class CreatePartnerRequestBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -337,6 +331,14 @@ class CreatePartnerRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+class CreatePartnerDefaultPayoutMethod(str, Enum):
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    CONNECT = "connect"
+    STABLECOIN = "stablecoin"
+    PAYPAL = "paypal"
 
 
 class CreatePartnerStatus(str, Enum):
@@ -414,7 +416,7 @@ class CreatePartnerLinks(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -647,7 +649,7 @@ class CreatePartnerFieldsPartnersConstraints(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -689,7 +691,7 @@ class CreatePartnerFields2(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -720,7 +722,7 @@ class CreatePartnerFieldsConstraints(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -762,7 +764,7 @@ class CreatePartnerFields1(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -809,6 +811,55 @@ class CreatePartnerReferralFormData(BaseModel):
     fields: List[CreatePartnerFields]
 
 
+class CreatePartnerRejectionReason(str, Enum):
+    r"""Preset reason when the application was rejected."""
+
+    NEEDS_MORE_DETAIL = "needsMoreDetail"
+    DOES_NOT_MEET_REQUIREMENTS = "doesNotMeetRequirements"
+    NOT_THE_RIGHT_FIT = "notTheRightFit"
+    OTHER = "other"
+
+
+class CreatePartnerApplicationTypedDict(TypedDict):
+    r"""Linked program application, including review outcome when applicable."""
+
+    rejection_reason: Nullable[CreatePartnerRejectionReason]
+    r"""Preset reason when the application was rejected."""
+    rejection_note: Nullable[str]
+    r"""Free-form note when the application was rejected."""
+    reviewed_at: Nullable[str]
+    r"""When the application was approved or rejected."""
+
+
+class CreatePartnerApplication(BaseModel):
+    r"""Linked program application, including review outcome when applicable."""
+
+    rejection_reason: Annotated[
+        Nullable[CreatePartnerRejectionReason], pydantic.Field(alias="rejectionReason")
+    ]
+    r"""Preset reason when the application was rejected."""
+
+    rejection_note: Annotated[Nullable[str], pydantic.Field(alias="rejectionNote")]
+    r"""Free-form note when the application was rejected."""
+
+    reviewed_at: Annotated[Nullable[str], pydantic.Field(alias="reviewedAt")]
+    r"""When the application was approved or rejected."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
 class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The created or updated partner"""
 
@@ -824,6 +875,8 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    default_payout_method: Nullable[CreatePartnerDefaultPayoutMethod]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
     paypal_email: Nullable[str]
     r"""The partner's PayPal email (for receiving payouts via PayPal)."""
     stripe_connect_id: Nullable[str]
@@ -860,6 +913,8 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     banned_reason: NotRequired[Nullable[CreatePartnerBannedReason]]
     r"""If the partner was banned from the program, this is the reason for the ban."""
     referral_form_data: NotRequired[Nullable[CreatePartnerReferralFormDataTypedDict]]
+    application: NotRequired[Nullable[CreatePartnerApplicationTypedDict]]
+    r"""Linked program application, including review outcome when applicable."""
     total_clicks: NotRequired[float]
     r"""The total number of clicks on the partner's links"""
     total_leads: NotRequired[float]
@@ -918,6 +973,12 @@ class CreatePartnerResponseBody(BaseModel):
 
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+
+    default_payout_method: Annotated[
+        Nullable[CreatePartnerDefaultPayoutMethod],
+        pydantic.Field(alias="defaultPayoutMethod"),
+    ]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
 
     paypal_email: Annotated[Nullable[str], pydantic.Field(alias="paypalEmail")]
     r"""The partner's PayPal email (for receiving payouts via PayPal)."""
@@ -997,6 +1058,9 @@ class CreatePartnerResponseBody(BaseModel):
         OptionalNullable[CreatePartnerReferralFormData],
         pydantic.Field(alias="referralFormData"),
     ] = UNSET
+
+    application: OptionalNullable[CreatePartnerApplication] = UNSET
+    r"""Linked program application, including review outcome when applicable."""
 
     total_clicks: Annotated[Optional[float], pydantic.Field(alias="totalClicks")] = 0
     r"""The total number of clicks on the partner's links"""
@@ -1083,6 +1147,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "bannedAt",
                 "bannedReason",
                 "referralFormData",
+                "application",
                 "totalClicks",
                 "totalLeads",
                 "totalConversions",
@@ -1110,6 +1175,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "image",
                 "description",
                 "country",
+                "defaultPayoutMethod",
                 "paypalEmail",
                 "stripeConnectId",
                 "payoutsEnabledAt",
@@ -1125,6 +1191,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "bannedAt",
                 "bannedReason",
                 "referralFormData",
+                "application",
                 "earningsPerClick",
                 "averageLifetimeValue",
                 "clickToLeadRate",
@@ -1144,7 +1211,7 @@ class CreatePartnerResponseBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1179,6 +1246,10 @@ except NameError:
     pass
 try:
     CreatePartnerFieldsConstraints.model_rebuild()
+except NameError:
+    pass
+try:
+    CreatePartnerApplication.model_rebuild()
 except NameError:
     pass
 try:

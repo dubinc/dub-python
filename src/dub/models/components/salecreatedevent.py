@@ -117,7 +117,7 @@ class SaleCreatedEventCustomer(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -192,7 +192,7 @@ class SaleCreatedEventClick(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -500,7 +500,7 @@ class SaleCreatedEventLink(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -540,7 +540,7 @@ class Sale(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -616,7 +616,7 @@ class SaleCreatedEventPartner(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -639,8 +639,8 @@ class SaleCreatedEventDataTypedDict(TypedDict):
     click: SaleCreatedEventClickTypedDict
     link: SaleCreatedEventLinkTypedDict
     sale: SaleTypedDict
+    metadata: Nullable[Dict[str, Any]]
     partner: NotRequired[Nullable[SaleCreatedEventPartnerTypedDict]]
-    metadata: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class SaleCreatedEventData(BaseModel):
@@ -654,20 +654,20 @@ class SaleCreatedEventData(BaseModel):
 
     sale: Sale
 
-    partner: OptionalNullable[SaleCreatedEventPartner] = UNSET
+    metadata: Nullable[Dict[str, Any]]
 
-    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    partner: OptionalNullable[SaleCreatedEventPartner] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["partner", "metadata"])
+        optional_fields = set(["partner"])
         nullable_fields = set(["partner", "metadata"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member

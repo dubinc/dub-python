@@ -2,6 +2,14 @@
 
 The status of the partner's enrollment in the program.
 
+## Example Usage
+
+```python
+from dub.models.operations import ListPartnersStatus
+
+value = ListPartnersStatus.PENDING
+```
+
 
 ## Values
 

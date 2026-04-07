@@ -2,6 +2,14 @@
 
 The reason for rejecting the submission.
 
+## Example Usage
+
+```python
+from dub.models.operations import RejectionReason
+
+value = RejectionReason.INVALID_PROOF
+```
+
 
 ## Values
 

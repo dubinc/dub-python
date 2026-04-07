@@ -117,7 +117,7 @@ class Customer(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -192,7 +192,7 @@ class LeadCreatedEventClick(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -500,7 +500,7 @@ class LeadCreatedEventLink(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -585,7 +585,7 @@ class Partner(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -607,8 +607,8 @@ class LeadCreatedEventDataTypedDict(TypedDict):
     customer: CustomerTypedDict
     click: LeadCreatedEventClickTypedDict
     link: LeadCreatedEventLinkTypedDict
+    metadata: Nullable[Dict[str, Any]]
     partner: NotRequired[Nullable[PartnerTypedDict]]
-    metadata: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class LeadCreatedEventData(BaseModel):
@@ -620,20 +620,20 @@ class LeadCreatedEventData(BaseModel):
 
     link: LeadCreatedEventLink
 
-    partner: OptionalNullable[Partner] = UNSET
+    metadata: Nullable[Dict[str, Any]]
 
-    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    partner: OptionalNullable[Partner] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["partner", "metadata"])
+        optional_fields = set(["partner"])
         nullable_fields = set(["partner", "metadata"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member

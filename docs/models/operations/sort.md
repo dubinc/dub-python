@@ -4,6 +4,14 @@ DEPRECATED. Use `sortBy` instead.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
+## Example Usage
+
+```python
+from dub.models.operations import Sort
+
+value = Sort.CREATED_AT
+```
+
 
 ## Values
 

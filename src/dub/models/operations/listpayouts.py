@@ -101,7 +101,7 @@ class ListPayoutsRequest(BaseModel):
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 1
+    ] = None
     r"""The page number for pagination."""
 
     page_size: Annotated[
@@ -130,7 +130,7 @@ class ListPayoutsRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -154,6 +154,20 @@ class ListPayoutsMode(str, Enum):
     EXTERNAL = "external"
 
 
+class Method(str, Enum):
+    CONNECT = "connect"
+    STABLECOIN = "stablecoin"
+    PAYPAL = "paypal"
+
+
+class ListPayoutsDefaultPayoutMethod(str, Enum):
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    CONNECT = "connect"
+    STABLECOIN = "stablecoin"
+    PAYPAL = "paypal"
+
+
 class ListPayoutsPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
@@ -163,6 +177,8 @@ class ListPayoutsPartnerTypedDict(TypedDict):
     r"""The partner's email address. Should be a unique value across Dub."""
     image: Nullable[str]
     r"""The partner's avatar image."""
+    default_payout_method: Nullable[ListPayoutsDefaultPayoutMethod]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
     payouts_enabled_at: Nullable[str]
     r"""The date when the partner enabled payouts."""
     country: Nullable[str]
@@ -186,6 +202,12 @@ class ListPayoutsPartner(BaseModel):
     image: Nullable[str]
     r"""The partner's avatar image."""
 
+    default_payout_method: Annotated[
+        Nullable[ListPayoutsDefaultPayoutMethod],
+        pydantic.Field(alias="defaultPayoutMethod"),
+    ]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
     payouts_enabled_at: Annotated[
         Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
     ]
@@ -204,14 +226,22 @@ class ListPayoutsPartner(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["groupId"])
         nullable_fields = set(
-            ["email", "image", "payoutsEnabledAt", "country", "groupId", "tenantId"]
+            [
+                "email",
+                "image",
+                "defaultPayoutMethod",
+                "payoutsEnabledAt",
+                "country",
+                "groupId",
+                "tenantId",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -251,7 +281,7 @@ class User(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -271,9 +301,12 @@ class ListPayoutsResponseBodyTypedDict(TypedDict):
     initiated_at: Nullable[str]
     paid_at: Nullable[str]
     mode: Nullable[ListPayoutsMode]
+    method: Nullable[Method]
     partner: ListPayoutsPartnerTypedDict
     description: NotRequired[Nullable[str]]
+    updated_at: NotRequired[str]
     failure_reason: NotRequired[Nullable[str]]
+    trace_id: NotRequired[Nullable[str]]
     user: NotRequired[Nullable[UserTypedDict]]
 
 
@@ -300,19 +333,27 @@ class ListPayoutsResponseBody(BaseModel):
 
     mode: Nullable[ListPayoutsMode]
 
+    method: Nullable[Method]
+
     partner: ListPayoutsPartner
 
     description: OptionalNullable[str] = UNSET
+
+    updated_at: Annotated[Optional[str], pydantic.Field(alias="updatedAt")] = None
 
     failure_reason: Annotated[
         OptionalNullable[str], pydantic.Field(alias="failureReason")
     ] = UNSET
 
+    trace_id: Annotated[OptionalNullable[str], pydantic.Field(alias="traceId")] = UNSET
+
     user: OptionalNullable[User] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "failureReason", "user"])
+        optional_fields = set(
+            ["description", "updatedAt", "failureReason", "traceId", "user"]
+        )
         nullable_fields = set(
             [
                 "invoiceId",
@@ -323,6 +364,8 @@ class ListPayoutsResponseBody(BaseModel):
                 "paidAt",
                 "failureReason",
                 "mode",
+                "method",
+                "traceId",
                 "user",
             ]
         )
@@ -331,7 +374,7 @@ class ListPayoutsResponseBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member

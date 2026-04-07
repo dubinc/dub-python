@@ -6,7 +6,7 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Callable, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -84,8 +84,12 @@ class ListCommissionsRequestTypedDict(TypedDict):
     end: NotRequired[str]
     r"""The end date of the date range to filter the commissions by."""
     timezone: NotRequired[str]
+    ending_before: NotRequired[str]
+    r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
+    starting_after: NotRequired[str]
+    r"""If specified, the query only searches for results after this cursor. Mutually exclusive with `endingBefore`."""
     page: NotRequired[float]
-    r"""The page number for pagination."""
+    r"""DEPRECATED. Use `startingAfter` instead."""
     page_size: NotRequired[float]
     r"""The number of items per page."""
 
@@ -181,11 +185,25 @@ class ListCommissionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
 
+    ending_before: Annotated[
+        Optional[str],
+        pydantic.Field(alias="endingBefore"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
+
+    starting_after: Annotated[
+        Optional[str],
+        pydantic.Field(alias="startingAfter"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""If specified, the query only searches for results after this cursor. Mutually exclusive with `endingBefore`."""
+
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 1
-    r"""The page number for pagination."""
+    ] = None
+    r"""DEPRECATED. Use `startingAfter` instead."""
 
     page_size: Annotated[
         Optional[float],
@@ -212,6 +230,8 @@ class ListCommissionsRequest(BaseModel):
                 "start",
                 "end",
                 "timezone",
+                "endingBefore",
+                "startingAfter",
                 "page",
                 "pageSize",
             ]
@@ -221,7 +241,7 @@ class ListCommissionsRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -299,7 +319,7 @@ class ListCommissionsPartner(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -419,7 +439,7 @@ class ListCommissionsCustomer(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -495,7 +515,7 @@ class ListCommissionsResponseBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -510,6 +530,16 @@ class ListCommissionsResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+class ListCommissionsResponseTypedDict(TypedDict):
+    result: List[ListCommissionsResponseBodyTypedDict]
+
+
+class ListCommissionsResponse(BaseModel):
+    next: Callable[[], Optional[ListCommissionsResponse]]
+
+    result: List[ListCommissionsResponseBody]
 
 
 try:

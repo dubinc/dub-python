@@ -2,6 +2,14 @@
 
 The type of trigger method: link click or QR scan
 
+## Example Usage
+
+```python
+from dub.models.components import Trigger
+
+value = Trigger.QR
+```
+
 
 ## Values
 

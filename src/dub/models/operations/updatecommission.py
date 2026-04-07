@@ -11,8 +11,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Status(str, Enum):
-    r"""Useful for marking a commission as refunded, duplicate, canceled, or fraudulent. Takes precedence over `amount` and `modifyAmount`. When a commission is marked as refunded, duplicate, canceled, or fraudulent, it will be omitted from the payout, and the payout amount will be recalculated accordingly. Paid commissions cannot be updated."""
+    r"""Useful for marking a commission as pending, refunded, duplicate, canceled, or fraudulent. Takes precedence over `saleAmount` and `modifySaleAmount`. When a commission is marked as pending, refunded, duplicate, canceled, or fraudulent, it will be omitted from the payout, and the payout amount will be recalculated accordingly. Paid commissions cannot be updated."""
 
+    PENDING = "pending"
     REFUNDED = "refunded"
     DUPLICATE = "duplicate"
     CANCELED = "canceled"
@@ -20,40 +21,76 @@ class Status(str, Enum):
 
 
 class UpdateCommissionRequestBodyTypedDict(TypedDict):
-    amount: NotRequired[float]
+    sale_amount: NotRequired[float]
     r"""The new absolute amount for the sale. Paid commissions cannot be updated."""
-    modify_amount: NotRequired[float]
-    r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it. Takes precedence over `amount`. Paid commissions cannot be updated."""
+    modify_sale_amount: NotRequired[float]
+    r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it. Takes precedence over `saleAmount`. Paid commissions cannot be updated."""
+    earnings: NotRequired[float]
+    r"""The new absolute earnings for the custom commission. Paid commissions cannot be updated."""
     currency: NotRequired[str]
     r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
     status: NotRequired[Status]
-    r"""Useful for marking a commission as refunded, duplicate, canceled, or fraudulent. Takes precedence over `amount` and `modifyAmount`. When a commission is marked as refunded, duplicate, canceled, or fraudulent, it will be omitted from the payout, and the payout amount will be recalculated accordingly. Paid commissions cannot be updated."""
+    r"""Useful for marking a commission as pending, refunded, duplicate, canceled, or fraudulent. Takes precedence over `saleAmount` and `modifySaleAmount`. When a commission is marked as pending, refunded, duplicate, canceled, or fraudulent, it will be omitted from the payout, and the payout amount will be recalculated accordingly. Paid commissions cannot be updated."""
+    amount: NotRequired[float]
+    r"""Deprecated. Use `saleAmount` instead."""
+    modify_amount: NotRequired[float]
+    r"""Deprecated. Use `modifySaleAmount` instead."""
 
 
 class UpdateCommissionRequestBody(BaseModel):
-    amount: Optional[float] = None
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = None
     r"""The new absolute amount for the sale. Paid commissions cannot be updated."""
 
-    modify_amount: Annotated[Optional[float], pydantic.Field(alias="modifyAmount")] = (
-        None
-    )
-    r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it. Takes precedence over `amount`. Paid commissions cannot be updated."""
+    modify_sale_amount: Annotated[
+        Optional[float], pydantic.Field(alias="modifySaleAmount")
+    ] = None
+    r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it. Takes precedence over `saleAmount`. Paid commissions cannot be updated."""
+
+    earnings: Optional[float] = None
+    r"""The new absolute earnings for the custom commission. Paid commissions cannot be updated."""
 
     currency: Optional[str] = "usd"
     r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
 
     status: Optional[Status] = None
-    r"""Useful for marking a commission as refunded, duplicate, canceled, or fraudulent. Takes precedence over `amount` and `modifyAmount`. When a commission is marked as refunded, duplicate, canceled, or fraudulent, it will be omitted from the payout, and the payout amount will be recalculated accordingly. Paid commissions cannot be updated."""
+    r"""Useful for marking a commission as pending, refunded, duplicate, canceled, or fraudulent. Takes precedence over `saleAmount` and `modifySaleAmount`. When a commission is marked as pending, refunded, duplicate, canceled, or fraudulent, it will be omitted from the payout, and the payout amount will be recalculated accordingly. Paid commissions cannot be updated."""
+
+    amount: Annotated[
+        Optional[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = None
+    r"""Deprecated. Use `saleAmount` instead."""
+
+    modify_amount: Annotated[
+        Optional[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="modifyAmount",
+        ),
+    ] = None
+    r"""Deprecated. Use `modifySaleAmount` instead."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["amount", "modifyAmount", "currency", "status"])
+        optional_fields = set(
+            [
+                "saleAmount",
+                "modifySaleAmount",
+                "earnings",
+                "currency",
+                "status",
+                "amount",
+                "modifyAmount",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -87,7 +124,7 @@ class UpdateCommissionRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -165,7 +202,7 @@ class UpdateCommissionPartner(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -285,7 +322,7 @@ class UpdateCommissionCustomer(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -365,7 +402,7 @@ class UpdateCommissionResponseBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member

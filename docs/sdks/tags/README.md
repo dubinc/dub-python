@@ -25,6 +25,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.tags.list(request={
+        "page": 1,
         "page_size": 50,
     })
 

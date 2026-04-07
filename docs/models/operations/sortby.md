@@ -2,6 +2,14 @@
 
 The field to sort the links by. The default is `createdAt`.
 
+## Example Usage
+
+```python
+from dub.models.operations import SortBy
+
+value = SortBy.CREATED_AT
+```
+
 
 ## Values
 

@@ -2,6 +2,14 @@
 
 The status of the submission
 
+## Example Usage
+
+```python
+from dub.models.operations import ListBountySubmissionsStatus
+
+value = ListBountySubmissionsStatus.DRAFT
+```
+
 
 ## Values
 

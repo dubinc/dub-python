@@ -96,7 +96,7 @@ class Links(BaseSDK):
 
         def next_func() -> Optional[operations.GetLinksResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page if not request.page is None else 1
+            page = request.page if isinstance(request.page, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -104,7 +104,7 @@ class Links(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 100
+            limit = request.page_size if isinstance(request.page_size, int) else 100
             if len(results[0]) < limit:
                 return None
 
@@ -123,10 +123,15 @@ class Links(BaseSDK):
                     sort_by=request.sort_by,
                     sort_order=request.sort_order,
                     sort=request.sort,
+                    ending_before=request.ending_before,
+                    starting_after=request.starting_after,
                     page=next_page,
                     page_size=request.page_size,
                 ),
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -262,7 +267,7 @@ class Links(BaseSDK):
 
         def next_func() -> Optional[operations.GetLinksResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page if not request.page is None else 1
+            page = request.page if isinstance(request.page, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -270,7 +275,7 @@ class Links(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 100
+            limit = request.page_size if isinstance(request.page_size, int) else 100
             if len(results[0]) < limit:
                 return None
 
@@ -289,10 +294,15 @@ class Links(BaseSDK):
                     sort_by=request.sort_by,
                     sort_order=request.sort_order,
                     sort=request.sort,
+                    ending_before=request.ending_before,
+                    starting_after=request.starting_after,
                     page=next_page,
                     page_size=request.page_size,
                 ),
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None

@@ -2,6 +2,14 @@
 
 The parameter to group the analytics data points by. Defaults to `count` if undefined.
 
+## Example Usage
+
+```python
+from dub.models.operations import QueryParamGroupBy
+
+value = QueryParamGroupBy.COUNT
+```
+
 
 ## Values
 

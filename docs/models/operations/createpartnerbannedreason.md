@@ -2,6 +2,14 @@
 
 If the partner was banned from the program, this is the reason for the ban.
 
+## Example Usage
+
+```python
+from dub.models.operations import CreatePartnerBannedReason
+
+value = CreatePartnerBannedReason.TOS_VIOLATION
+```
+
 
 ## Values
 

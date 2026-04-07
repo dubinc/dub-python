@@ -49,6 +49,8 @@ class ListPartnersQueryParamSortOrder(str, Enum):
 
 
 class ListPartnersRequestTypedDict(TypedDict):
+    group_id: NotRequired[str]
+    r"""A filter on the list based on the partner's `groupId` field."""
     status: NotRequired[ListPartnersQueryParamStatus]
     r"""A filter on the list based on the partner's `status` field."""
     country: NotRequired[str]
@@ -70,6 +72,13 @@ class ListPartnersRequestTypedDict(TypedDict):
 
 
 class ListPartnersRequest(BaseModel):
+    group_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="groupId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""A filter on the list based on the partner's `groupId` field."""
+
     status: Annotated[
         Optional[ListPartnersQueryParamStatus],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -118,7 +127,7 @@ class ListPartnersRequest(BaseModel):
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 1
+    ] = None
     r"""The page number for pagination."""
 
     page_size: Annotated[
@@ -132,6 +141,7 @@ class ListPartnersRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "groupId",
                 "status",
                 "country",
                 "sortBy",
@@ -148,13 +158,21 @@ class ListPartnersRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class DefaultPayoutMethod(str, Enum):
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    CONNECT = "connect"
+    STABLECOIN = "stablecoin"
+    PAYPAL = "paypal"
 
 
 class ListPartnersStatus(str, Enum):
@@ -232,7 +250,7 @@ class Links(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -463,7 +481,7 @@ class FieldsConstraints(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -505,7 +523,7 @@ class Fields2(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -536,7 +554,7 @@ class Constraints(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -578,7 +596,7 @@ class Fields1(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -625,6 +643,55 @@ class ReferralFormData(BaseModel):
     fields: List[Fields]
 
 
+class ListPartnersRejectionReason(str, Enum):
+    r"""Preset reason when the application was rejected."""
+
+    NEEDS_MORE_DETAIL = "needsMoreDetail"
+    DOES_NOT_MEET_REQUIREMENTS = "doesNotMeetRequirements"
+    NOT_THE_RIGHT_FIT = "notTheRightFit"
+    OTHER = "other"
+
+
+class ApplicationTypedDict(TypedDict):
+    r"""Linked program application, including review outcome when applicable."""
+
+    rejection_reason: Nullable[ListPartnersRejectionReason]
+    r"""Preset reason when the application was rejected."""
+    rejection_note: Nullable[str]
+    r"""Free-form note when the application was rejected."""
+    reviewed_at: Nullable[str]
+    r"""When the application was approved or rejected."""
+
+
+class Application(BaseModel):
+    r"""Linked program application, including review outcome when applicable."""
+
+    rejection_reason: Annotated[
+        Nullable[ListPartnersRejectionReason], pydantic.Field(alias="rejectionReason")
+    ]
+    r"""Preset reason when the application was rejected."""
+
+    rejection_note: Annotated[Nullable[str], pydantic.Field(alias="rejectionNote")]
+    r"""Free-form note when the application was rejected."""
+
+    reviewed_at: Annotated[Nullable[str], pydantic.Field(alias="reviewedAt")]
+    r"""When the application was approved or rejected."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
 class ListPartnersResponseBodyTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
@@ -638,6 +705,8 @@ class ListPartnersResponseBodyTypedDict(TypedDict):
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    default_payout_method: Nullable[DefaultPayoutMethod]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
     paypal_email: Nullable[str]
     r"""The partner's PayPal email (for receiving payouts via PayPal)."""
     stripe_connect_id: Nullable[str]
@@ -674,6 +743,8 @@ class ListPartnersResponseBodyTypedDict(TypedDict):
     banned_reason: NotRequired[Nullable[BannedReason]]
     r"""If the partner was banned from the program, this is the reason for the ban."""
     referral_form_data: NotRequired[Nullable[ReferralFormDataTypedDict]]
+    application: NotRequired[Nullable[ApplicationTypedDict]]
+    r"""Linked program application, including review outcome when applicable."""
     total_clicks: NotRequired[float]
     r"""The total number of clicks on the partner's links"""
     total_leads: NotRequired[float]
@@ -730,6 +801,11 @@ class ListPartnersResponseBody(BaseModel):
 
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+
+    default_payout_method: Annotated[
+        Nullable[DefaultPayoutMethod], pydantic.Field(alias="defaultPayoutMethod")
+    ]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
 
     paypal_email: Annotated[Nullable[str], pydantic.Field(alias="paypalEmail")]
     r"""The partner's PayPal email (for receiving payouts via PayPal)."""
@@ -807,6 +883,9 @@ class ListPartnersResponseBody(BaseModel):
     referral_form_data: Annotated[
         OptionalNullable[ReferralFormData], pydantic.Field(alias="referralFormData")
     ] = UNSET
+
+    application: OptionalNullable[Application] = UNSET
+    r"""Linked program application, including review outcome when applicable."""
 
     total_clicks: Annotated[Optional[float], pydantic.Field(alias="totalClicks")] = 0
     r"""The total number of clicks on the partner's links"""
@@ -893,6 +972,7 @@ class ListPartnersResponseBody(BaseModel):
                 "bannedAt",
                 "bannedReason",
                 "referralFormData",
+                "application",
                 "totalClicks",
                 "totalLeads",
                 "totalConversions",
@@ -920,6 +1000,7 @@ class ListPartnersResponseBody(BaseModel):
                 "image",
                 "description",
                 "country",
+                "defaultPayoutMethod",
                 "paypalEmail",
                 "stripeConnectId",
                 "payoutsEnabledAt",
@@ -935,6 +1016,7 @@ class ListPartnersResponseBody(BaseModel):
                 "bannedAt",
                 "bannedReason",
                 "referralFormData",
+                "application",
                 "earningsPerClick",
                 "averageLifetimeValue",
                 "clickToLeadRate",
@@ -954,7 +1036,7 @@ class ListPartnersResponseBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -981,6 +1063,10 @@ except NameError:
     pass
 try:
     Constraints.model_rebuild()
+except NameError:
+    pass
+try:
+    Application.model_rebuild()
 except NameError:
     pass
 try:

@@ -24,7 +24,9 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.folders.list(request={})
+    res = d_client.folders.list(request={
+        "page": 1,
+    })
 
     # Handle response
     print(res)

@@ -1,5 +1,13 @@
 # Two
 
+## Example Usage
+
+```python
+from dub.models.operations import Two
+
+value = Two.TAG_ID
+```
+
 
 ## Values
 

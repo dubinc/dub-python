@@ -25,6 +25,7 @@ with Dub(
 
     res = d_client.bounties.list_submissions(request={
         "bounty_id": "<id>",
+        "page": 1,
         "page_size": 50,
     })
 

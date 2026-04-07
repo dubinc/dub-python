@@ -2,6 +2,14 @@
 
 The field to sort the partners by. The default is `totalSaleAmount`.
 
+## Example Usage
+
+```python
+from dub.models.operations import ListPartnersQueryParamSortBy
+
+value = ListPartnersQueryParamSortBy.CREATED_AT
+```
+
 
 ## Values
 
