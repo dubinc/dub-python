@@ -1,5 +1,13 @@
 # CommissionCreatedEventType
 
+## Example Usage
+
+```python
+from dub.models.components import CommissionCreatedEventType
+
+value = CommissionCreatedEventType.CLICK
+```
+
 
 ## Values
 

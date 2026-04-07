@@ -2,6 +2,14 @@
 
 Filter the list of commissions by their corresponding status.
 
+## Example Usage
+
+```python
+from dub.models.operations import QueryParamStatus
+
+value = QueryParamStatus.PENDING
+```
+
 
 ## Values
 

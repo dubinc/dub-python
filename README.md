@@ -271,6 +271,7 @@ asyncio.run(main())
 
 * [list](docs/sdks/commissions/README.md#list) - List all commissions
 * [update](docs/sdks/commissions/README.md#update) - Update a commission
+* [update_many](docs/sdks/commissions/README.md#update_many) - Bulk update commissions
 
 ### [Customers](docs/sdks/customers/README.md)
 
@@ -377,6 +378,9 @@ with Dub(
     try:
 
         res = d_client.links.list(request={
+            "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+            "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+            "page": 1,
             "page_size": 50,
         })
 
@@ -444,6 +448,9 @@ with Dub(
 ) as d_client:
 
     res = d_client.links.list(request={
+        "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "page": 1,
         "page_size": 50,
     })
 
@@ -557,6 +564,9 @@ with Dub(
 ) as d_client:
 
     res = d_client.links.list(request={
+        "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "page": 1,
         "page_size": 50,
     })
 
@@ -584,6 +594,9 @@ with Dub(
 ) as d_client:
 
     res = d_client.links.list(request={
+        "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "page": 1,
         "page_size": 50,
     },
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
@@ -607,6 +620,9 @@ with Dub(
 ) as d_client:
 
     res = d_client.links.list(request={
+        "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "page": 1,
         "page_size": 50,
     })
 
@@ -635,6 +651,9 @@ with Dub(
 ) as d_client:
 
     res = d_client.links.list(request={
+        "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+        "page": 1,
         "page_size": 50,
     })
 

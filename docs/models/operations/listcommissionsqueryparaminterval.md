@@ -2,6 +2,14 @@
 
 The interval to retrieve commissions for.
 
+## Example Usage
+
+```python
+from dub.models.operations import ListCommissionsQueryParamInterval
+
+value = ListCommissionsQueryParamInterval.TWENTY_FOURH
+```
+
 
 ## Values
 

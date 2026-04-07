@@ -2,6 +2,14 @@
 
 The error code.
 
+## Example Usage
+
+```python
+from dub.models.components import Code
+
+value = Code.BAD_REQUEST
+```
+
 
 ## Values
 

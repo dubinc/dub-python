@@ -2,6 +2,14 @@
 
 The color of the tag.
 
+## Example Usage
+
+```python
+from dub.models.components import Color
+
+value = Color.RED
+```
+
 
 ## Values
 

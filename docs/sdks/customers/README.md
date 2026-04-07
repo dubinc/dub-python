@@ -25,11 +25,16 @@ with Dub(
 ) as d_client:
 
     res = d_client.customers.list(request={
+        "ending_before": "cus_1KAP4CDPBSVMMBMH9XX3YZZ0Z",
+        "starting_after": "cus_1KAP4CDPBSVMMBMH9XX3YZZ0Z",
+        "page": 1,
         "page_size": 50,
     })
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -42,7 +47,7 @@ with Dub(
 
 ### Response
 
-**[List[operations.GetCustomersResponseBody]](../../models/.md)**
+**[operations.GetCustomersResponse](../../models/operations/getcustomersresponse.md)**
 
 ### Errors
 

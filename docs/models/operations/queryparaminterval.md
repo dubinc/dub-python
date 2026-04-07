@@ -2,6 +2,14 @@
 
 The interval to retrieve analytics for. If undefined, defaults to 24h.
 
+## Example Usage
+
+```python
+from dub.models.operations import QueryParamInterval
+
+value = QueryParamInterval.TWENTY_FOURH
+```
+
 
 ## Values
 

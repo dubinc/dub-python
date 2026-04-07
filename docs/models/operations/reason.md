@@ -1,5 +1,13 @@
 # Reason
 
+## Example Usage
+
+```python
+from dub.models.operations import Reason
+
+value = Reason.TOS_VIOLATION
+```
+
 
 ## Values
 

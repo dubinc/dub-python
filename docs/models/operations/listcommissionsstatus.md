@@ -1,5 +1,13 @@
 # ListCommissionsStatus
 
+## Example Usage
+
+```python
+from dub.models.operations import ListCommissionsStatus
+
+value = ListCommissionsStatus.PENDING
+```
+
 
 ## Values
 

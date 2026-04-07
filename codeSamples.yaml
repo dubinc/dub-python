@@ -47,6 +47,7 @@ actions:
 
                 res = d_client.bounties.list_submissions(request={
                     "bounty_id": "<id>",
+                    "page": 1,
                     "page_size": 50,
                 })
 
@@ -106,8 +107,30 @@ actions:
             ) as d_client:
 
                 res = d_client.commissions.list(request={
+                    "ending_before": "cm_1KAP4CGN2Z5TPYYQ1W4JEYD56",
+                    "starting_after": "cm_1KAP4CGN2Z5TPYYQ1W4JEYD56",
+                    "page": 1,
                     "page_size": 50,
                 })
+
+                while res is not None:
+                    # Handle items
+
+                    res = res.next()
+  - target: $["paths"]["/commissions/bulk"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: bulkUpdateCommissions
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.commissions.update_many()
 
                 # Handle response
                 print(res)
@@ -144,11 +167,16 @@ actions:
             ) as d_client:
 
                 res = d_client.customers.list(request={
+                    "ending_before": "cus_1KAP4CDPBSVMMBMH9XX3YZZ0Z",
+                    "starting_after": "cus_1KAP4CDPBSVMMBMH9XX3YZZ0Z",
+                    "page": 1,
                     "page_size": 50,
                 })
 
-                # Handle response
-                print(res)
+                while res is not None:
+                    # Handle items
+
+                    res = res.next()
   - target: $["paths"]["/customers/{id}"]["delete"]
     update:
       x-codeSamples:
@@ -217,7 +245,9 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.domains.list(request={})
+                res = d_client.domains.list(request={
+                    "page": 1,
+                })
 
                 while res is not None:
                     # Handle items
@@ -362,7 +392,9 @@ actions:
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.folders.list(request={})
+                res = d_client.folders.list(request={
+                    "page": 1,
+                })
 
                 # Handle response
                 print(res)
@@ -431,6 +463,9 @@ actions:
             ) as d_client:
 
                 res = d_client.links.list(request={
+                    "ending_before": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+                    "starting_after": "link_1KAP4CDPBSVMMBMH9XX3YZZ0Z...",
+                    "page": 1,
                     "page_size": 50,
                 })
 
@@ -714,11 +749,13 @@ actions:
             ) as d_client:
 
                 res = d_client.partners.list(request={
+                    "group_id": "grp_123",
                     "status": operations.ListPartnersQueryParamStatus.APPROVED,
                     "country": "US",
                     "email": "panic@thedis.co",
                     "tenant_id": "1K0NM7HCN944PEMZ3CQPH43H8",
                     "search": "john",
+                    "page": 1,
                     "page_size": 50,
                 })
 
@@ -913,6 +950,7 @@ actions:
             ) as d_client:
 
                 res = d_client.payouts.list(request={
+                    "page": 1,
                     "page_size": 50,
                 })
 
@@ -951,6 +989,7 @@ actions:
             ) as d_client:
 
                 res = d_client.tags.list(request={
+                    "page": 1,
                     "page_size": 50,
                 })
 

@@ -2,6 +2,14 @@
 
 A short code indicating the error code returned.
 
+## Example Usage
+
+```python
+from dub.models.errors import RateLimitExceededCode
+
+value = RateLimitExceededCode.RATE_LIMIT_EXCEEDED
+```
+
 
 ## Values
 

@@ -30,11 +30,13 @@ with Dub(
 ) as d_client:
 
     res = d_client.partners.list(request={
+        "group_id": "grp_123",
         "status": operations.ListPartnersQueryParamStatus.APPROVED,
         "country": "US",
         "email": "panic@thedis.co",
         "tenant_id": "1K0NM7HCN944PEMZ3CQPH43H8",
         "search": "john",
+        "page": 1,
         "page_size": 50,
     })
 

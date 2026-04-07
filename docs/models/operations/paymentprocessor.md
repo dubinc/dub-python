@@ -2,6 +2,14 @@
 
 The payment processor via which the sale was made.
 
+## Example Usage
+
+```python
+from dub.models.operations import PaymentProcessor
+
+value = PaymentProcessor.STRIPE
+```
+
 
 ## Values
 

@@ -37,7 +37,7 @@ class ListDomainsRequest(BaseModel):
     page: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 1
+    ] = None
     r"""The page number for pagination."""
 
     page_size: Annotated[
@@ -55,7 +55,7 @@ class ListDomainsRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

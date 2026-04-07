@@ -46,14 +46,12 @@ class CreateReferralsEmbedTokenTestVariants(BaseModel):
 class CreateReferralsEmbedTokenLinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
-    key_length: NotRequired[float]
-    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
     external_id: NotRequired[Nullable[str]]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
     prefix: NotRequired[str]
-    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
+    r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
     archived: NotRequired[bool]
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
     tag_ids: NotRequired[CreateReferralsEmbedTokenTagIdsTypedDict]
@@ -99,9 +97,6 @@ class CreateReferralsEmbedTokenLinkPropsTypedDict(TypedDict):
 class CreateReferralsEmbedTokenLinkProps(BaseModel):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
-    key_length: Annotated[Optional[float], pydantic.Field(alias="keyLength")] = None
-    r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
-
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
@@ -113,7 +108,7 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
     r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
 
     prefix: Optional[str] = None
-    r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
+    r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
 
     archived: Optional[bool] = None
     r"""Whether the short link is archived. Defaults to `false` if not provided."""
@@ -191,7 +186,6 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
-                "keyLength",
                 "externalId",
                 "tenantId",
                 "prefix",
@@ -240,7 +234,7 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -328,7 +322,7 @@ class Partner(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -366,7 +360,7 @@ class CreateReferralsEmbedTokenRequestBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

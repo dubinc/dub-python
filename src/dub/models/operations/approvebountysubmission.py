@@ -30,7 +30,7 @@ class ApproveBountySubmissionRequestBody(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -83,7 +83,7 @@ class ApproveBountySubmissionRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -140,6 +140,8 @@ class ApproveBountySubmissionResponseBodyTypedDict(TypedDict):
     r"""The status of the submission"""
     performance_count: Nullable[float]
     r"""The performance count of the submission"""
+    social_metric_count: Nullable[int]
+    r"""The social metric count (views or likes) for the social content"""
     created_at: str
     r"""The date and time the submission was created"""
     completed_at: Nullable[str]
@@ -150,6 +152,10 @@ class ApproveBountySubmissionResponseBodyTypedDict(TypedDict):
     r"""The reason for rejecting the submission"""
     rejection_note: Nullable[str]
     r"""The note for rejecting the submission"""
+    period_number: int
+    r"""The period number for this submission (1-indexed)"""
+    social_metrics_last_synced_at: NotRequired[Nullable[str]]
+    r"""The date and time the submission's social metrics were last synced"""
 
 
 class ApproveBountySubmissionResponseBody(BaseModel):
@@ -181,6 +187,11 @@ class ApproveBountySubmissionResponseBody(BaseModel):
     ]
     r"""The performance count of the submission"""
 
+    social_metric_count: Annotated[
+        Nullable[int], pydantic.Field(alias="socialMetricCount")
+    ]
+    r"""The social metric count (views or likes) for the social content"""
+
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date and time the submission was created"""
 
@@ -196,17 +207,49 @@ class ApproveBountySubmissionResponseBody(BaseModel):
     rejection_note: Annotated[Nullable[str], pydantic.Field(alias="rejectionNote")]
     r"""The note for rejecting the submission"""
 
+    period_number: Annotated[int, pydantic.Field(alias="periodNumber")]
+    r"""The period number for this submission (1-indexed)"""
+
+    social_metrics_last_synced_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="socialMetricsLastSyncedAt")
+    ] = UNSET
+    r"""The date and time the submission's social metrics were last synced"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["socialMetricsLastSyncedAt"])
+        nullable_fields = set(
+            [
+                "description",
+                "urls",
+                "files",
+                "performanceCount",
+                "socialMetricCount",
+                "socialMetricsLastSyncedAt",
+                "completedAt",
+                "reviewedAt",
+                "rejectionReason",
+                "rejectionNote",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 

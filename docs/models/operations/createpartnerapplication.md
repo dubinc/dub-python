@@ -1,0 +1,12 @@
+# CreatePartnerApplication
+
+Linked program application, including review outcome when applicable.
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `rejection_reason`                                                                                           | [Nullable[operations.CreatePartnerRejectionReason]](../../models/operations/createpartnerrejectionreason.md) | :heavy_check_mark:                                                                                           | Preset reason when the application was rejected.                                                             |
+| `rejection_note`                                                                                             | *Nullable[str]*                                                                                              | :heavy_check_mark:                                                                                           | Free-form note when the application was rejected.                                                            |
+| `reviewed_at`                                                                                                | *Nullable[str]*                                                                                              | :heavy_check_mark:                                                                                           | When the application was approved or rejected.                                                               |

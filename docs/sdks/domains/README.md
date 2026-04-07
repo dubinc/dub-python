@@ -26,7 +26,9 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.domains.list(request={})
+    res = d_client.domains.list(request={
+        "page": 1,
+    })
 
     while res is not None:
         # Handle items

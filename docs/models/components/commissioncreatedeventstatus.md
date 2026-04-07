@@ -1,5 +1,13 @@
 # CommissionCreatedEventStatus
 
+## Example Usage
+
+```python
+from dub.models.components import CommissionCreatedEventStatus
+
+value = CommissionCreatedEventStatus.PENDING
+```
+
 
 ## Values
 

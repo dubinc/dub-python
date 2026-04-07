@@ -1,5 +1,13 @@
 # ListPayoutsStatus
 
+## Example Usage
+
+```python
+from dub.models.operations import ListPayoutsStatus
+
+value = ListPayoutsStatus.PENDING
+```
+
 
 ## Values
 

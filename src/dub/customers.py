@@ -6,7 +6,8 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 from dub.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union, cast
+from jsonpath import JSONPath
+from typing import Any, Dict, List, Mapping, Optional, Union, cast
 
 
 class Customers(BaseSDK):
@@ -20,7 +21,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[operations.GetCustomersResponseBody]:
+    ) -> Optional[operations.GetCustomersResponse]:
         r"""Retrieve a list of customers
 
         Retrieve a list of customers for the authenticated workspace.
@@ -95,10 +96,47 @@ class Customers(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[operations.GetCustomersResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            next_cursor = JSONPath("$[-1].id").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list(
+                request=operations.GetCustomersRequest(
+                    email=request.email,
+                    external_id=request.external_id,
+                    search=request.search,
+                    country=request.country,
+                    link_id=request.link_id,
+                    program_id=request.program_id,
+                    partner_id=request.partner_id,
+                    include_expanded_fields=request.include_expanded_fields,
+                    sort_by=request.sort_by,
+                    sort_order=request.sort_order,
+                    ending_before=request.ending_before,
+                    starting_after=next_cursor,
+                    page=request.page,
+                    page_size=request.page_size,
+                ),
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                List[operations.GetCustomersResponseBody], http_res
+            return operations.GetCustomersResponse(
+                result=unmarshal_json_response(
+                    List[operations.GetCustomersResponseBody], http_res
+                ),
+                next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -152,7 +190,7 @@ class Customers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[operations.GetCustomersResponseBody]:
+    ) -> Optional[operations.GetCustomersResponse]:
         r"""Retrieve a list of customers
 
         Retrieve a list of customers for the authenticated workspace.
@@ -227,10 +265,47 @@ class Customers(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[operations.GetCustomersResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            next_cursor = JSONPath("$[-1].id").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list(
+                request=operations.GetCustomersRequest(
+                    email=request.email,
+                    external_id=request.external_id,
+                    search=request.search,
+                    country=request.country,
+                    link_id=request.link_id,
+                    program_id=request.program_id,
+                    partner_id=request.partner_id,
+                    include_expanded_fields=request.include_expanded_fields,
+                    sort_by=request.sort_by,
+                    sort_order=request.sort_order,
+                    ending_before=request.ending_before,
+                    starting_after=next_cursor,
+                    page=request.page,
+                    page_size=request.page_size,
+                ),
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                List[operations.GetCustomersResponseBody], http_res
+            return operations.GetCustomersResponse(
+                result=unmarshal_json_response(
+                    List[operations.GetCustomersResponseBody], http_res
+                ),
+                next=next_func,
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
