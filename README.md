@@ -275,14 +275,14 @@ asyncio.run(main())
 
 ### [Customers](docs/sdks/customers/README.md)
 
-* [list](docs/sdks/customers/README.md#list) - Retrieve a list of customers
+* [list](docs/sdks/customers/README.md#list) - List all customers
 * [get](docs/sdks/customers/README.md#get) - Retrieve a customer
 * [delete](docs/sdks/customers/README.md#delete) - Delete a customer
 * [update](docs/sdks/customers/README.md#update) - Update a customer
 
 ### [Domains](docs/sdks/domains/README.md)
 
-* [list](docs/sdks/domains/README.md#list) - Retrieve a list of domains
+* [list](docs/sdks/domains/README.md#list) - List all domains
 * [create](docs/sdks/domains/README.md#create) - Create a domain
 * [delete](docs/sdks/domains/README.md#delete) - Delete a domain
 * [update](docs/sdks/domains/README.md#update) - Update a domain
@@ -295,18 +295,18 @@ asyncio.run(main())
 
 ### [Events](docs/sdks/events/README.md)
 
-* [list](docs/sdks/events/README.md#list) - Retrieve a list of events
+* [list](docs/sdks/events/README.md#list) - List all events
 
 ### [Folders](docs/sdks/folders/README.md)
 
-* [list](docs/sdks/folders/README.md#list) - Retrieve a list of folders
+* [list](docs/sdks/folders/README.md#list) - List all folders
 * [create](docs/sdks/folders/README.md#create) - Create a folder
 * [delete](docs/sdks/folders/README.md#delete) - Delete a folder
 * [update](docs/sdks/folders/README.md#update) - Update a folder
 
 ### [Links](docs/sdks/links/README.md)
 
-* [list](docs/sdks/links/README.md#list) - Retrieve a list of links
+* [list](docs/sdks/links/README.md#list) - List all links
 * [create](docs/sdks/links/README.md#create) - Create a link
 * [count](docs/sdks/links/README.md#count) - Retrieve links count
 * [get](docs/sdks/links/README.md#get) - Retrieve a link
@@ -316,6 +316,12 @@ asyncio.run(main())
 * [delete_many](docs/sdks/links/README.md#delete_many) - Bulk delete links
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
+
+### [PartnerApplications](docs/sdks/partnerapplications/README.md)
+
+* [list](docs/sdks/partnerapplications/README.md#list) - List all pending partner applications
+* [approve](docs/sdks/partnerapplications/README.md#approve) - Approve a partner application
+* [reject](docs/sdks/partnerapplications/README.md#reject) - Reject a partner application
 
 ### [Partners](docs/sdks/partners/README.md)
 
@@ -338,7 +344,7 @@ asyncio.run(main())
 
 ### [Tags](docs/sdks/tags/README.md)
 
-* [list](docs/sdks/tags/README.md#list) - Retrieve a list of tags
+* [list](docs/sdks/tags/README.md#list) - List all tags
 * [create](docs/sdks/tags/README.md#create) - Create a tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete a tag
 * [update](docs/sdks/tags/README.md#update) - Update a tag

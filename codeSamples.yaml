@@ -816,6 +816,66 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/partners/applications"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listPartnerApplications
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partner_applications.list(request={
+                    "country": "US",
+                    "group_id": "grp_123",
+                    "page": 1,
+                    "page_size": 50,
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/partners/applications/approve"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: approvePartner
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partner_applications.approve(request={
+                    "partner_id": "<id>",
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/partners/applications/reject"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: rejectPartner
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partner_applications.reject(request={
+                    "partner_id": "<id>",
+                })
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/partners/ban"]["post"]
     update:
       x-codeSamples:

@@ -21,7 +21,7 @@ class Events(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> List[operations.ListEventsResponseBody]:
-        r"""Retrieve a list of events
+        r"""List all events
 
         Retrieve a paginated list of events for the authenticated workspace.
 
@@ -79,19 +79,7 @@ class Events(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -153,7 +141,7 @@ class Events(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> List[operations.ListEventsResponseBody]:
-        r"""Retrieve a list of events
+        r"""List all events
 
         Retrieve a paginated list of events for the authenticated workspace.
 
@@ -211,19 +199,7 @@ class Events(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

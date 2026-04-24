@@ -4,14 +4,14 @@
 
 ### Available Operations
 
-* [list](#list) - Retrieve a list of customers
+* [list](#list) - List all customers
 * [get](#get) - Retrieve a customer
 * [delete](#delete) - Delete a customer
 * [update](#update) - Update a customer
 
 ## list
 
-Retrieve a list of customers for the authenticated workspace.
+Retrieve a paginated list of customers for the authenticated workspace.
 
 ### Example Usage
 
@@ -66,7 +66,7 @@ with Dub(
 
 ## get
 
-Retrieve a customer by ID for the authenticated workspace.
+Retrieve a customer by ID for the authenticated workspace. To retrieve a customer by external ID, prefix the ID with `ext_`.
 
 ### Example Usage
 

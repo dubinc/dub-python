@@ -25,7 +25,7 @@ class Commissions(BaseSDK):
     ) -> Optional[operations.ListCommissionsResponse]:
         r"""List all commissions
 
-        Retrieve a list of commissions for your partner program.
+        Retrieve a paginated list of commissions for your partner program.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -81,19 +81,7 @@ class Commissions(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -199,7 +187,7 @@ class Commissions(BaseSDK):
     ) -> Optional[operations.ListCommissionsResponse]:
         r"""List all commissions
 
-        Retrieve a list of commissions for your partner program.
+        Retrieve a paginated list of commissions for your partner program.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -255,19 +243,7 @@ class Commissions(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -436,19 +412,7 @@ class Commissions(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -576,19 +540,7 @@ class Commissions(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -720,19 +672,7 @@ class Commissions(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -864,19 +804,7 @@ class Commissions(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

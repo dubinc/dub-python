@@ -885,6 +885,8 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The date when the partner enabled payouts."""
     trusted_at: Nullable[str]
     r"""The date when the partner received the trusted badge in the partner network."""
+    identity_verified_at: Nullable[str]
+    r"""The date when the partner's identity was verified."""
     program_id: str
     r"""The program's unique ID on Dub."""
     partner_id: str
@@ -993,6 +995,11 @@ class CreatePartnerResponseBody(BaseModel):
 
     trusted_at: Annotated[Nullable[str], pydantic.Field(alias="trustedAt")]
     r"""The date when the partner received the trusted badge in the partner network."""
+
+    identity_verified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="identityVerifiedAt")
+    ]
+    r"""The date when the partner's identity was verified."""
 
     program_id: Annotated[str, pydantic.Field(alias="programId")]
     r"""The program's unique ID on Dub."""
@@ -1180,6 +1187,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "stripeConnectId",
                 "payoutsEnabledAt",
                 "trustedAt",
+                "identityVerifiedAt",
                 "groupId",
                 "tenantId",
                 "links",
