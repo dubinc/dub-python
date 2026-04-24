@@ -21,12 +21,12 @@ class Status(str, Enum):
 
 
 class UpdateCommissionRequestBodyTypedDict(TypedDict):
+    earnings: NotRequired[float]
+    r"""The new earnings amount for the commission. Paid commissions cannot be updated. If provided, will override the earnings calculated based on the sale amount and currency."""
     sale_amount: NotRequired[float]
     r"""The new absolute amount for the sale. Paid commissions cannot be updated."""
     modify_sale_amount: NotRequired[float]
     r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it. Takes precedence over `saleAmount`. Paid commissions cannot be updated."""
-    earnings: NotRequired[float]
-    r"""The new absolute earnings for the custom commission. Paid commissions cannot be updated."""
     currency: NotRequired[str]
     r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
     status: NotRequired[Status]
@@ -38,6 +38,9 @@ class UpdateCommissionRequestBodyTypedDict(TypedDict):
 
 
 class UpdateCommissionRequestBody(BaseModel):
+    earnings: Optional[float] = None
+    r"""The new earnings amount for the commission. Paid commissions cannot be updated. If provided, will override the earnings calculated based on the sale amount and currency."""
+
     sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = None
     r"""The new absolute amount for the sale. Paid commissions cannot be updated."""
 
@@ -45,9 +48,6 @@ class UpdateCommissionRequestBody(BaseModel):
         Optional[float], pydantic.Field(alias="modifySaleAmount")
     ] = None
     r"""Modify the current sale amount: use positive values to increase the amount, negative values to decrease it. Takes precedence over `saleAmount`. Paid commissions cannot be updated."""
-
-    earnings: Optional[float] = None
-    r"""The new absolute earnings for the custom commission. Paid commissions cannot be updated."""
 
     currency: Optional[str] = "usd"
     r"""The currency of the sale amount to update. Accepts ISO 4217 currency codes."""
@@ -76,9 +76,9 @@ class UpdateCommissionRequestBody(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "earnings",
                 "saleAmount",
                 "modifySaleAmount",
-                "earnings",
                 "currency",
                 "status",
                 "amount",

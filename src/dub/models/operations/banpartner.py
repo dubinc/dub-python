@@ -9,6 +9,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Reason(str, Enum):
+    r"""The reason for banning the partner."""
+
     TOS_VIOLATION = "tos_violation"
     INAPPROPRIATE_CONTENT = "inappropriate_content"
     FAKE_TRAFFIC = "fake_traffic"
@@ -19,6 +21,7 @@ class Reason(str, Enum):
 
 class BanPartnerRequestBodyTypedDict(TypedDict):
     reason: Reason
+    r"""The reason for banning the partner."""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
     tenant_id: NotRequired[Nullable[str]]
@@ -27,6 +30,7 @@ class BanPartnerRequestBodyTypedDict(TypedDict):
 
 class BanPartnerRequestBody(BaseModel):
     reason: Reason
+    r"""The reason for banning the partner."""
 
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET

@@ -10,7 +10,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class RejectionReason(str, Enum):
+class RejectBountySubmissionRejectionReason(str, Enum):
     r"""The reason for rejecting the submission."""
 
     INVALID_PROOF = "invalidProof"
@@ -21,7 +21,7 @@ class RejectionReason(str, Enum):
 
 
 class RejectBountySubmissionRequestBodyTypedDict(TypedDict):
-    rejection_reason: NotRequired[RejectionReason]
+    rejection_reason: NotRequired[RejectBountySubmissionRejectionReason]
     r"""The reason for rejecting the submission."""
     rejection_note: NotRequired[str]
     r"""The note for rejecting the submission."""
@@ -29,7 +29,8 @@ class RejectBountySubmissionRequestBodyTypedDict(TypedDict):
 
 class RejectBountySubmissionRequestBody(BaseModel):
     rejection_reason: Annotated[
-        Optional[RejectionReason], pydantic.Field(alias="rejectionReason")
+        Optional[RejectBountySubmissionRejectionReason],
+        pydantic.Field(alias="rejectionReason"),
     ] = None
     r"""The reason for rejecting the submission."""
 
