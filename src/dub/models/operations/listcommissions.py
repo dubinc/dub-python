@@ -11,9 +11,12 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Type(str, Enum):
+    r"""Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`."""
+
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
+    REFERRAL = "referral"
     CUSTOM = "custom"
 
 
@@ -59,16 +62,19 @@ class ListCommissionsQueryParamInterval(str, Enum):
 
 class ListCommissionsRequestTypedDict(TypedDict):
     type: NotRequired[Type]
+    r"""Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`."""
     customer_id: NotRequired[str]
     r"""Filter the list of commissions by the associated customer."""
     payout_id: NotRequired[str]
     r"""Filter the list of commissions by the associated payout."""
     partner_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`."""
+    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `partner_abc`, `partner_abc,partner_xyz`, `-partner_abc`."""
     tenant_id: NotRequired[str]
     r"""Filter the list of commissions by the associated partner's `tenantId` (their unique ID within your database)."""
     group_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner group."""
+    r"""Filter the list of commissions by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
+    partner_tag_id: NotRequired[str]
+    r"""Filter the list of commissions by the associated partner tag. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_abc`, `ptag_abc,ptag_xyz`, `-ptag_abc`."""
     invoice_id: NotRequired[str]
     r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
     status: NotRequired[QueryParamStatus]
@@ -99,6 +105,7 @@ class ListCommissionsRequest(BaseModel):
         Optional[Type],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+    r"""Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`."""
 
     customer_id: Annotated[
         Optional[str],
@@ -119,7 +126,7 @@ class ListCommissionsRequest(BaseModel):
         pydantic.Field(alias="partnerId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`."""
+    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `partner_abc`, `partner_abc,partner_xyz`, `-partner_abc`."""
 
     tenant_id: Annotated[
         Optional[str],
@@ -133,7 +140,14 @@ class ListCommissionsRequest(BaseModel):
         pydantic.Field(alias="groupId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by the associated partner group."""
+    r"""Filter the list of commissions by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
+
+    partner_tag_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="partnerTagId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter the list of commissions by the associated partner tag. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_abc`, `ptag_abc,ptag_xyz`, `-ptag_abc`."""
 
     invoice_id: Annotated[
         Optional[str],
@@ -222,6 +236,7 @@ class ListCommissionsRequest(BaseModel):
                 "partnerId",
                 "tenantId",
                 "groupId",
+                "partnerTagId",
                 "invoiceId",
                 "status",
                 "sortBy",
@@ -254,6 +269,7 @@ class ListCommissionsType(str, Enum):
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
+    REFERRAL = "referral"
     CUSTOM = "custom"
 
 
@@ -339,12 +355,12 @@ class ListCommissionsPartner(BaseModel):
 class ListCommissionsCustomerTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
-    name: str
-    r"""Name of the customer."""
     external_id: str
     r"""Unique identifier for the customer in the client's app."""
     created_at: str
     r"""The date the customer was created (usually the signup date or trial start date)."""
+    name: NotRequired[Nullable[str]]
+    r"""Name of the customer."""
     email: NotRequired[Nullable[str]]
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
@@ -367,14 +383,14 @@ class ListCommissionsCustomer(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
-    name: str
-    r"""Name of the customer."""
-
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""Unique identifier for the customer in the client's app."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the customer was created (usually the signup date or trial start date)."""
+
+    name: OptionalNullable[str] = UNSET
+    r"""Name of the customer."""
 
     email: OptionalNullable[str] = UNSET
     r"""Email of the customer."""
@@ -412,6 +428,7 @@ class ListCommissionsCustomer(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",
@@ -424,6 +441,7 @@ class ListCommissionsCustomer(BaseModel):
         )
         nullable_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",

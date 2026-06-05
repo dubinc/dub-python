@@ -59,6 +59,7 @@ class QueryParamGroupBy(str, Enum):
     TOP_BASE_URLS = "top_base_urls"
     TOP_PARTNERS = "top_partners"
     TOP_GROUPS = "top_groups"
+    TOP_PARTNER_TAGS = "top_partner_tags"
     UTM_SOURCES = "utm_sources"
     UTM_MEDIUMS = "utm_mediums"
     UTM_CAMPAIGNS = "utm_campaigns"
@@ -106,6 +107,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The tag ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `tag_123`, `tag_123,tag_456`, `-tag_789`."""
     folder_id: NotRequired[str]
     r"""The folder ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `folder_123`, `folder_123,folder_456`, `-folder_789`. If not provided, return analytics for all links."""
+    partner_tag_id: NotRequired[str]
+    r"""The partner tag ID(s) to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_123`, `ptag_123,ptag_456`, `-ptag_789`."""
     group_id: NotRequired[str]
     r"""The group ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `grp_123`, `grp_123,grp_456`, `-grp_789`."""
     partner_id: NotRequired[str]
@@ -226,6 +229,13 @@ class RetrieveAnalyticsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The folder ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `folder_123`, `folder_123,folder_456`, `-folder_789`. If not provided, return analytics for all links."""
+
+    partner_tag_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="partnerTagId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The partner tag ID(s) to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_123`, `ptag_123,ptag_456`, `-ptag_789`."""
 
     group_id: Annotated[
         Optional[str],
@@ -421,6 +431,7 @@ class RetrieveAnalyticsRequest(BaseModel):
                 "tenantId",
                 "tagId",
                 "folderId",
+                "partnerTagId",
                 "groupId",
                 "partnerId",
                 "customerId",

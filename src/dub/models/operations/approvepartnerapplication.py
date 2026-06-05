@@ -7,14 +7,14 @@ from pydantic import model_serializer
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ApprovePartnerRequestBodyTypedDict(TypedDict):
+class ApprovePartnerApplicationRequestBodyTypedDict(TypedDict):
     partner_id: str
     r"""The ID of the partner to approve."""
     group_id: NotRequired[Nullable[str]]
     r"""The ID of the group to assign the partner to. If not provided, the partner will be assigned to the group they applied to, or the program's default group if no application group is set."""
 
 
-class ApprovePartnerRequestBody(BaseModel):
+class ApprovePartnerApplicationRequestBody(BaseModel):
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
     r"""The ID of the partner to approve."""
 
@@ -47,14 +47,14 @@ class ApprovePartnerRequestBody(BaseModel):
         return m
 
 
-class ApprovePartnerResponseBodyTypedDict(TypedDict):
+class ApprovePartnerApplicationResponseBodyTypedDict(TypedDict):
     r"""The approved partner"""
 
     partner_id: str
     r"""The ID of the approved partner."""
 
 
-class ApprovePartnerResponseBody(BaseModel):
+class ApprovePartnerApplicationResponseBody(BaseModel):
     r"""The approved partner"""
 
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
@@ -62,10 +62,10 @@ class ApprovePartnerResponseBody(BaseModel):
 
 
 try:
-    ApprovePartnerRequestBody.model_rebuild()
+    ApprovePartnerApplicationRequestBody.model_rebuild()
 except NameError:
     pass
 try:
-    ApprovePartnerResponseBody.model_rebuild()
+    ApprovePartnerApplicationResponseBody.model_rebuild()
 except NameError:
     pass

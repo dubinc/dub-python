@@ -19,5 +19,7 @@ value = ResponseBodyPaymentProcessor.STRIPE
 | `SHOPIFY`    | shopify      |
 | `POLAR`      | polar        |
 | `PADDLE`     | paddle       |
+| `APPLE`      | apple        |
 | `REVENUECAT` | revenuecat   |
+| `DUB`        | dub          |
 | `CUSTOM`     | custom       |

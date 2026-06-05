@@ -143,7 +143,7 @@ Retrieve a partner's links by their partner ID or tenant ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="retrieveLinks" method="get" path="/partners/links" -->
+<!-- UsageSnippet language="python" operationID="retrievePartnerLinks" method="get" path="/partners/links" -->
 ```python
 from dub import Dub
 
@@ -161,14 +161,14 @@ with Dub(
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `request`                                                                          | [operations.RetrieveLinksRequest](../../models/operations/retrievelinksrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `request`                                                                                        | [operations.RetrievePartnerLinksRequest](../../models/operations/retrievepartnerlinksrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `retries`                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                 | :heavy_minus_sign:                                                                               | Configuration to override the default retry behavior of the client.                              |
 
 ### Response
 
-**[List[operations.RetrieveLinksResponseBody]](../../models/.md)**
+**[List[operations.RetrievePartnerLinksResponseBody]](../../models/.md)**
 
 ### Errors
 

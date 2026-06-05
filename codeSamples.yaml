@@ -117,6 +117,23 @@ actions:
                     # Handle items
 
                     res = res.next()
+  - target: $["paths"]["/commissions"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createCommission
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.commissions.create()
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/commissions/bulk"]["patch"]
     update:
       x-codeSamples:
@@ -842,7 +859,7 @@ actions:
     update:
       x-codeSamples:
         - lang: python
-          label: approvePartner
+          label: approvePartnerApplication
           source: |-
             from dub import Dub
 
@@ -861,7 +878,7 @@ actions:
     update:
       x-codeSamples:
         - lang: python
-          label: rejectPartner
+          label: rejectPartnerApplication
           source: |-
             from dub import Dub
 
@@ -914,7 +931,7 @@ actions:
     update:
       x-codeSamples:
         - lang: python
-          label: retrieveLinks
+          label: retrievePartnerLinks
           source: |-
             from dub import Dub
 

@@ -278,12 +278,12 @@ class UpdateCustomerResponseBodyTypedDict(TypedDict):
 
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
-    name: str
-    r"""Name of the customer."""
     external_id: str
     r"""Unique identifier for the customer in the client's app."""
     created_at: str
     r"""The date the customer was created (usually the signup date or trial start date)."""
+    name: NotRequired[Nullable[str]]
+    r"""Name of the customer."""
     email: NotRequired[Nullable[str]]
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
@@ -312,14 +312,14 @@ class UpdateCustomerResponseBody(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
-    name: str
-    r"""Name of the customer."""
-
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""Unique identifier for the customer in the client's app."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the customer was created (usually the signup date or trial start date)."""
+
+    name: OptionalNullable[str] = UNSET
+    r"""Name of the customer."""
 
     email: OptionalNullable[str] = UNSET
     r"""Email of the customer."""
@@ -367,6 +367,7 @@ class UpdateCustomerResponseBody(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",
@@ -383,6 +384,7 @@ class UpdateCustomerResponseBody(BaseModel):
         )
         nullable_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",

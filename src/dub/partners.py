@@ -518,13 +518,14 @@ class Partners(BaseSDK):
         self,
         *,
         request: Union[
-            operations.RetrieveLinksRequest, operations.RetrieveLinksRequestTypedDict
+            operations.RetrievePartnerLinksRequest,
+            operations.RetrievePartnerLinksRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[operations.RetrieveLinksResponseBody]:
+    ) -> List[operations.RetrievePartnerLinksResponseBody]:
         r"""Retrieve a partner's links.
 
         Retrieve a partner's links by their partner ID or tenant ID.
@@ -546,8 +547,8 @@ class Partners(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.RetrieveLinksRequest)
-        request = cast(operations.RetrieveLinksRequest, request)
+            request = utils.unmarshal(request, operations.RetrievePartnerLinksRequest)
+        request = cast(operations.RetrievePartnerLinksRequest, request)
 
         req = self._build_request(
             method="GET",
@@ -578,7 +579,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="retrieveLinks",
+                operation_id="retrievePartnerLinks",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -590,7 +591,7 @@ class Partners(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[operations.RetrieveLinksResponseBody], http_res
+                List[operations.RetrievePartnerLinksResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -638,13 +639,14 @@ class Partners(BaseSDK):
         self,
         *,
         request: Union[
-            operations.RetrieveLinksRequest, operations.RetrieveLinksRequestTypedDict
+            operations.RetrievePartnerLinksRequest,
+            operations.RetrievePartnerLinksRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[operations.RetrieveLinksResponseBody]:
+    ) -> List[operations.RetrievePartnerLinksResponseBody]:
         r"""Retrieve a partner's links.
 
         Retrieve a partner's links by their partner ID or tenant ID.
@@ -666,8 +668,8 @@ class Partners(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.RetrieveLinksRequest)
-        request = cast(operations.RetrieveLinksRequest, request)
+            request = utils.unmarshal(request, operations.RetrievePartnerLinksRequest)
+        request = cast(operations.RetrievePartnerLinksRequest, request)
 
         req = self._build_request_async(
             method="GET",
@@ -698,7 +700,7 @@ class Partners(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="retrieveLinks",
+                operation_id="retrievePartnerLinks",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -710,7 +712,7 @@ class Partners(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[operations.RetrieveLinksResponseBody], http_res
+                List[operations.RetrievePartnerLinksResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

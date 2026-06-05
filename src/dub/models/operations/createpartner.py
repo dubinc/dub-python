@@ -333,6 +333,16 @@ class CreatePartnerRequestBody(BaseModel):
         return m
 
 
+class CreatePartnerNetworkStatus(str, Enum):
+    r"""The partner's network status on Dub."""
+
+    DRAFT = "draft"
+    SUBMITTED = "submitted"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    TRUSTED = "trusted"
+
+
 class CreatePartnerDefaultPayoutMethod(str, Enum):
     r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
 
@@ -860,6 +870,17 @@ class CreatePartnerApplication(BaseModel):
         return m
 
 
+class CreatePartnerTagsTypedDict(TypedDict):
+    id: str
+    name: str
+
+
+class CreatePartnerTags(BaseModel):
+    id: str
+
+    name: str
+
+
 class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The created or updated partner"""
 
@@ -867,14 +888,18 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The partner's unique ID on Dub."""
     name: str
     r"""The partner's full legal name."""
-    company_name: Nullable[str]
-    r"""If the partner profile type is a company, this is the partner's legal company name."""
+    username: Nullable[str]
+    r"""The partner's unique username on Dub."""
     email: Nullable[str]
     r"""The partner's email address. Should be a unique value across Dub."""
     image: Nullable[str]
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    company_name: Nullable[str]
+    r"""If the partner profile type is a company, this is the partner's legal company name."""
+    network_status: CreatePartnerNetworkStatus
+    r"""The partner's network status on Dub."""
     default_payout_method: Nullable[CreatePartnerDefaultPayoutMethod]
     r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
     paypal_email: Nullable[str]
@@ -883,8 +908,6 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The partner's Stripe Connect ID (for receiving payouts via Stripe)."""
     payouts_enabled_at: Nullable[str]
     r"""The date when the partner enabled payouts."""
-    trusted_at: Nullable[str]
-    r"""The date when the partner received the trusted badge in the partner network."""
     identity_verified_at: Nullable[str]
     r"""The date when the partner's identity was verified."""
     program_id: str
@@ -907,6 +930,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     click_reward_id: NotRequired[Nullable[str]]
     lead_reward_id: NotRequired[Nullable[str]]
     sale_reward_id: NotRequired[Nullable[str]]
+    referral_reward_id: NotRequired[Nullable[str]]
     discount_id: NotRequired[Nullable[str]]
     application_id: NotRequired[Nullable[str]]
     r"""If the partner submitted an application to join the program, this is the ID of the application."""
@@ -917,6 +941,8 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     referral_form_data: NotRequired[Nullable[CreatePartnerReferralFormDataTypedDict]]
     application: NotRequired[Nullable[CreatePartnerApplicationTypedDict]]
     r"""Linked program application, including review outcome when applicable."""
+    tags: NotRequired[List[CreatePartnerTagsTypedDict]]
+    r"""The tags associated with the partner."""
     total_clicks: NotRequired[float]
     r"""The total number of clicks on the partner's links"""
     total_leads: NotRequired[float]
@@ -953,6 +979,8 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""The partner's Instagram username (e.g. `johndoe`)."""
     tiktok: NotRequired[Nullable[str]]
     r"""The partner's TikTok username (e.g. `johndoe`)."""
+    trusted_at: NotRequired[Nullable[str]]
+    r"""DEPRECATED: Use `networkStatus` instead."""
 
 
 class CreatePartnerResponseBody(BaseModel):
@@ -964,8 +992,8 @@ class CreatePartnerResponseBody(BaseModel):
     name: str
     r"""The partner's full legal name."""
 
-    company_name: Annotated[Nullable[str], pydantic.Field(alias="companyName")]
-    r"""If the partner profile type is a company, this is the partner's legal company name."""
+    username: Nullable[str]
+    r"""The partner's unique username on Dub."""
 
     email: Nullable[str]
     r"""The partner's email address. Should be a unique value across Dub."""
@@ -975,6 +1003,14 @@ class CreatePartnerResponseBody(BaseModel):
 
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+
+    company_name: Annotated[Nullable[str], pydantic.Field(alias="companyName")]
+    r"""If the partner profile type is a company, this is the partner's legal company name."""
+
+    network_status: Annotated[
+        CreatePartnerNetworkStatus, pydantic.Field(alias="networkStatus")
+    ]
+    r"""The partner's network status on Dub."""
 
     default_payout_method: Annotated[
         Nullable[CreatePartnerDefaultPayoutMethod],
@@ -992,9 +1028,6 @@ class CreatePartnerResponseBody(BaseModel):
         Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
     ]
     r"""The date when the partner enabled payouts."""
-
-    trusted_at: Annotated[Nullable[str], pydantic.Field(alias="trustedAt")]
-    r"""The date when the partner received the trusted badge in the partner network."""
 
     identity_verified_at: Annotated[
         Nullable[str], pydantic.Field(alias="identityVerifiedAt")
@@ -1041,6 +1074,10 @@ class CreatePartnerResponseBody(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="saleRewardId")
     ] = UNSET
 
+    referral_reward_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="referralRewardId")
+    ] = UNSET
+
     discount_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="discountId")
     ] = UNSET
@@ -1068,6 +1105,9 @@ class CreatePartnerResponseBody(BaseModel):
 
     application: OptionalNullable[CreatePartnerApplication] = UNSET
     r"""Linked program application, including review outcome when applicable."""
+
+    tags: Optional[List[CreatePartnerTags]] = None
+    r"""The tags associated with the partner."""
 
     total_clicks: Annotated[Optional[float], pydantic.Field(alias="totalClicks")] = 0
     r"""The total number of clicks on the partner's links"""
@@ -1139,6 +1179,15 @@ class CreatePartnerResponseBody(BaseModel):
     tiktok: OptionalNullable[str] = UNSET
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
+    trusted_at: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="trustedAt",
+        ),
+    ] = UNSET
+    r"""DEPRECATED: Use `networkStatus` instead."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -1149,12 +1198,14 @@ class CreatePartnerResponseBody(BaseModel):
                 "clickRewardId",
                 "leadRewardId",
                 "saleRewardId",
+                "referralRewardId",
                 "discountId",
                 "applicationId",
                 "bannedAt",
                 "bannedReason",
                 "referralFormData",
                 "application",
+                "tags",
                 "totalClicks",
                 "totalLeads",
                 "totalConversions",
@@ -1173,20 +1224,21 @@ class CreatePartnerResponseBody(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "trustedAt",
             ]
         )
         nullable_fields = set(
             [
-                "companyName",
+                "username",
                 "email",
                 "image",
                 "description",
                 "country",
+                "companyName",
                 "defaultPayoutMethod",
                 "paypalEmail",
                 "stripeConnectId",
                 "payoutsEnabledAt",
-                "trustedAt",
                 "identityVerifiedAt",
                 "groupId",
                 "tenantId",
@@ -1194,6 +1246,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "clickRewardId",
                 "leadRewardId",
                 "saleRewardId",
+                "referralRewardId",
                 "discountId",
                 "applicationId",
                 "bannedAt",
@@ -1212,6 +1265,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "trustedAt",
             ]
         )
         serialized = handler(self)

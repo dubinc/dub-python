@@ -11,9 +11,10 @@ value = ListCommissionsType.CLICK
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `CLICK`  | click    |
-| `LEAD`   | lead     |
-| `SALE`   | sale     |
-| `CUSTOM` | custom   |
+| Name       | Value      |
+| ---------- | ---------- |
+| `CLICK`    | click      |
+| `LEAD`     | lead       |
+| `SALE`     | sale       |
+| `REFERRAL` | referral   |
+| `CUSTOM`   | custom     |

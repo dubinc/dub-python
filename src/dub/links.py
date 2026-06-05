@@ -92,8 +92,8 @@ class Links(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if isinstance(request.page_size, int) else 100
-            if len(results[0]) < limit:
+            limit_ = request.page_size if isinstance(request.page_size, int) else 100
+            if len(results[0]) < limit_:
                 return None
 
             return self.list(
@@ -108,9 +108,6 @@ class Links(BaseSDK):
                     tenant_id=request.tenant_id,
                     show_archived=request.show_archived,
                     with_tags=request.with_tags,
-                    sort_by=request.sort_by,
-                    sort_order=request.sort_order,
-                    sort=request.sort,
                     ending_before=request.ending_before,
                     starting_after=request.starting_after,
                     page=next_page,
@@ -251,8 +248,8 @@ class Links(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if isinstance(request.page_size, int) else 100
-            if len(results[0]) < limit:
+            limit_ = request.page_size if isinstance(request.page_size, int) else 100
+            if len(results[0]) < limit_:
                 return None
 
             return self.list(
@@ -267,9 +264,6 @@ class Links(BaseSDK):
                     tenant_id=request.tenant_id,
                     show_archived=request.show_archived,
                     with_tags=request.with_tags,
-                    sort_by=request.sort_by,
-                    sort_order=request.sort_order,
-                    sort=request.sort,
                     ending_before=request.ending_before,
                     starting_after=request.starting_after,
                     page=next_page,
