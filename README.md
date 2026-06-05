@@ -270,6 +270,7 @@ asyncio.run(main())
 ### [Commissions](docs/sdks/commissions/README.md)
 
 * [list](docs/sdks/commissions/README.md#list) - List all commissions
+* [create](docs/sdks/commissions/README.md#create) - Create commission
 * [update](docs/sdks/commissions/README.md#update) - Update a commission
 * [update_many](docs/sdks/commissions/README.md#update_many) - Bulk update commissions
 

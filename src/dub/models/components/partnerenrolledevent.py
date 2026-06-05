@@ -14,6 +14,16 @@ class PartnerEnrolledEventEvent(str, Enum):
     PARTNER_ENROLLED = "partner.enrolled"
 
 
+class NetworkStatus(str, Enum):
+    r"""The partner's network status on Dub."""
+
+    DRAFT = "draft"
+    SUBMITTED = "submitted"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    TRUSTED = "trusted"
+
+
 class DefaultPayoutMethod(str, Enum):
     r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
 
@@ -537,19 +547,34 @@ class Application(BaseModel):
         return m
 
 
+class TagsTypedDict(TypedDict):
+    id: str
+    name: str
+
+
+class Tags(BaseModel):
+    id: str
+
+    name: str
+
+
 class PartnerEnrolledEventDataTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
     r"""The partner's full legal name."""
-    company_name: Nullable[str]
-    r"""If the partner profile type is a company, this is the partner's legal company name."""
+    username: Nullable[str]
+    r"""The partner's unique username on Dub."""
     email: Nullable[str]
     r"""The partner's email address. Should be a unique value across Dub."""
     image: Nullable[str]
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+    company_name: Nullable[str]
+    r"""If the partner profile type is a company, this is the partner's legal company name."""
+    network_status: NetworkStatus
+    r"""The partner's network status on Dub."""
     default_payout_method: Nullable[DefaultPayoutMethod]
     r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
     paypal_email: Nullable[str]
@@ -558,8 +583,6 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     r"""The partner's Stripe Connect ID (for receiving payouts via Stripe)."""
     payouts_enabled_at: Nullable[str]
     r"""The date when the partner enabled payouts."""
-    trusted_at: Nullable[str]
-    r"""The date when the partner received the trusted badge in the partner network."""
     identity_verified_at: Nullable[str]
     r"""The date when the partner's identity was verified."""
     program_id: str
@@ -582,6 +605,7 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     click_reward_id: NotRequired[Nullable[str]]
     lead_reward_id: NotRequired[Nullable[str]]
     sale_reward_id: NotRequired[Nullable[str]]
+    referral_reward_id: NotRequired[Nullable[str]]
     discount_id: NotRequired[Nullable[str]]
     application_id: NotRequired[Nullable[str]]
     r"""If the partner submitted an application to join the program, this is the ID of the application."""
@@ -592,6 +616,8 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     referral_form_data: NotRequired[Nullable[ReferralFormDataTypedDict]]
     application: NotRequired[Nullable[ApplicationTypedDict]]
     r"""Linked program application, including review outcome when applicable."""
+    tags: NotRequired[List[TagsTypedDict]]
+    r"""The tags associated with the partner."""
     total_clicks: NotRequired[float]
     r"""The total number of clicks on the partner's links"""
     total_leads: NotRequired[float]
@@ -628,6 +654,8 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     r"""The partner's Instagram username (e.g. `johndoe`)."""
     tiktok: NotRequired[Nullable[str]]
     r"""The partner's TikTok username (e.g. `johndoe`)."""
+    trusted_at: NotRequired[Nullable[str]]
+    r"""DEPRECATED: Use `networkStatus` instead."""
 
 
 class PartnerEnrolledEventData(BaseModel):
@@ -637,8 +665,8 @@ class PartnerEnrolledEventData(BaseModel):
     name: str
     r"""The partner's full legal name."""
 
-    company_name: Annotated[Nullable[str], pydantic.Field(alias="companyName")]
-    r"""If the partner profile type is a company, this is the partner's legal company name."""
+    username: Nullable[str]
+    r"""The partner's unique username on Dub."""
 
     email: Nullable[str]
     r"""The partner's email address. Should be a unique value across Dub."""
@@ -648,6 +676,12 @@ class PartnerEnrolledEventData(BaseModel):
 
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
+
+    company_name: Annotated[Nullable[str], pydantic.Field(alias="companyName")]
+    r"""If the partner profile type is a company, this is the partner's legal company name."""
+
+    network_status: Annotated[NetworkStatus, pydantic.Field(alias="networkStatus")]
+    r"""The partner's network status on Dub."""
 
     default_payout_method: Annotated[
         Nullable[DefaultPayoutMethod], pydantic.Field(alias="defaultPayoutMethod")
@@ -664,9 +698,6 @@ class PartnerEnrolledEventData(BaseModel):
         Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
     ]
     r"""The date when the partner enabled payouts."""
-
-    trusted_at: Annotated[Nullable[str], pydantic.Field(alias="trustedAt")]
-    r"""The date when the partner received the trusted badge in the partner network."""
 
     identity_verified_at: Annotated[
         Nullable[str], pydantic.Field(alias="identityVerifiedAt")
@@ -713,6 +744,10 @@ class PartnerEnrolledEventData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="saleRewardId")
     ] = UNSET
 
+    referral_reward_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="referralRewardId")
+    ] = UNSET
+
     discount_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="discountId")
     ] = UNSET
@@ -738,6 +773,9 @@ class PartnerEnrolledEventData(BaseModel):
 
     application: OptionalNullable[Application] = UNSET
     r"""Linked program application, including review outcome when applicable."""
+
+    tags: Optional[List[Tags]] = None
+    r"""The tags associated with the partner."""
 
     total_clicks: Annotated[Optional[float], pydantic.Field(alias="totalClicks")] = 0
     r"""The total number of clicks on the partner's links"""
@@ -809,6 +847,15 @@ class PartnerEnrolledEventData(BaseModel):
     tiktok: OptionalNullable[str] = UNSET
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
+    trusted_at: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="trustedAt",
+        ),
+    ] = UNSET
+    r"""DEPRECATED: Use `networkStatus` instead."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -819,12 +866,14 @@ class PartnerEnrolledEventData(BaseModel):
                 "clickRewardId",
                 "leadRewardId",
                 "saleRewardId",
+                "referralRewardId",
                 "discountId",
                 "applicationId",
                 "bannedAt",
                 "bannedReason",
                 "referralFormData",
                 "application",
+                "tags",
                 "totalClicks",
                 "totalLeads",
                 "totalConversions",
@@ -843,20 +892,21 @@ class PartnerEnrolledEventData(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "trustedAt",
             ]
         )
         nullable_fields = set(
             [
-                "companyName",
+                "username",
                 "email",
                 "image",
                 "description",
                 "country",
+                "companyName",
                 "defaultPayoutMethod",
                 "paypalEmail",
                 "stripeConnectId",
                 "payoutsEnabledAt",
-                "trustedAt",
                 "identityVerifiedAt",
                 "groupId",
                 "tenantId",
@@ -864,6 +914,7 @@ class PartnerEnrolledEventData(BaseModel):
                 "clickRewardId",
                 "leadRewardId",
                 "saleRewardId",
+                "referralRewardId",
                 "discountId",
                 "applicationId",
                 "bannedAt",
@@ -882,6 +933,7 @@ class PartnerEnrolledEventData(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "trustedAt",
             ]
         )
         serialized = handler(self)

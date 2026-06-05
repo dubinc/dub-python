@@ -10,14 +10,14 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class GetTagsQueryParamSortBy(str, Enum):
+class QueryParamSortBy(str, Enum):
     r"""The field to sort the tags by."""
 
     NAME = "name"
     CREATED_AT = "createdAt"
 
 
-class GetTagsQueryParamSortOrder(str, Enum):
+class QueryParamSortOrder(str, Enum):
     r"""The order to sort the tags by."""
 
     ASC = "asc"
@@ -33,9 +33,9 @@ r"""IDs of tags to filter by."""
 
 
 class GetTagsRequestTypedDict(TypedDict):
-    sort_by: NotRequired[GetTagsQueryParamSortBy]
+    sort_by: NotRequired[QueryParamSortBy]
     r"""The field to sort the tags by."""
-    sort_order: NotRequired[GetTagsQueryParamSortOrder]
+    sort_order: NotRequired[QueryParamSortOrder]
     r"""The order to sort the tags by."""
     search: NotRequired[str]
     r"""The search term to filter the tags by."""
@@ -49,17 +49,17 @@ class GetTagsRequestTypedDict(TypedDict):
 
 class GetTagsRequest(BaseModel):
     sort_by: Annotated[
-        Optional[GetTagsQueryParamSortBy],
+        Optional[QueryParamSortBy],
         pydantic.Field(alias="sortBy"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = GetTagsQueryParamSortBy.NAME
+    ] = QueryParamSortBy.NAME
     r"""The field to sort the tags by."""
 
     sort_order: Annotated[
-        Optional[GetTagsQueryParamSortOrder],
+        Optional[QueryParamSortOrder],
         pydantic.Field(alias="sortOrder"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = GetTagsQueryParamSortOrder.ASC
+    ] = QueryParamSortOrder.ASC
     r"""The order to sort the tags by."""
 
     search: Annotated[

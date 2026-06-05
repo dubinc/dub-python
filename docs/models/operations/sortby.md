@@ -1,21 +1,18 @@
 # SortBy
 
-The field to sort the links by. The default is `createdAt`.
+The field to sort the events by. The default is `timestamp`.
 
 ## Example Usage
 
 ```python
 from dub.models.operations import SortBy
 
-value = SortBy.CREATED_AT
+value = SortBy.TIMESTAMP
 ```
 
 
 ## Values
 
-| Name           | Value          |
-| -------------- | -------------- |
-| `CREATED_AT`   | createdAt      |
-| `CLICKS`       | clicks         |
-| `SALE_AMOUNT`  | saleAmount     |
-| `LAST_CLICKED` | lastClicked    |
+| Name        | Value       |
+| ----------- | ----------- |
+| `TIMESTAMP` | timestamp   |

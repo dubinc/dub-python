@@ -1,5 +1,7 @@
 # Type
 
+Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`.
+
 ## Example Usage
 
 ```python
@@ -11,9 +13,10 @@ value = Type.CLICK
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `CLICK`  | click    |
-| `LEAD`   | lead     |
-| `SALE`   | sale     |
-| `CUSTOM` | custom   |
+| Name       | Value      |
+| ---------- | ---------- |
+| `CLICK`    | click      |
+| `LEAD`     | lead       |
+| `SALE`     | sale       |
+| `REFERRAL` | referral   |
+| `CUSTOM`   | custom     |

@@ -193,14 +193,14 @@ class Link(BaseModel):
         return m
 
 
-class CustomerTypedDict(TypedDict):
+class TrackLeadCustomerTypedDict(TypedDict):
     name: Nullable[str]
     email: Nullable[str]
     avatar: Nullable[str]
     external_id: Nullable[str]
 
 
-class Customer(BaseModel):
+class TrackLeadCustomer(BaseModel):
     name: Nullable[str]
 
     email: Nullable[str]
@@ -229,7 +229,7 @@ class TrackLeadResponseBodyTypedDict(TypedDict):
 
     click: ClickTypedDict
     link: Nullable[LinkTypedDict]
-    customer: CustomerTypedDict
+    customer: TrackLeadCustomerTypedDict
 
 
 class TrackLeadResponseBody(BaseModel):
@@ -239,7 +239,7 @@ class TrackLeadResponseBody(BaseModel):
 
     link: Nullable[Link]
 
-    customer: Customer
+    customer: TrackLeadCustomer
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -265,6 +265,6 @@ try:
 except NameError:
     pass
 try:
-    Customer.model_rebuild()
+    TrackLeadCustomer.model_rebuild()
 except NameError:
     pass

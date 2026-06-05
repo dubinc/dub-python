@@ -46,14 +46,14 @@ class QueryParamSaleType(str, Enum):
     RECURRING = "recurring"
 
 
-class QueryParamSortOrder(str, Enum):
+class SortOrder(str, Enum):
     r"""The sort order. The default is `desc`."""
 
     ASC = "asc"
     DESC = "desc"
 
 
-class QueryParamSortBy(str, Enum):
+class SortBy(str, Enum):
     r"""The field to sort the events by. The default is `timestamp`."""
 
     TIMESTAMP = "timestamp"
@@ -86,6 +86,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""The tag ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `tag_123`, `tag_123,tag_456`, `-tag_789`."""
     folder_id: NotRequired[str]
     r"""The folder ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `folder_123`, `folder_123,folder_456`, `-folder_789`. If not provided, return analytics for all links."""
+    partner_tag_id: NotRequired[str]
+    r"""The partner tag ID(s) to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_123`, `ptag_123,ptag_456`, `-ptag_789`."""
     group_id: NotRequired[str]
     r"""The group ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `grp_123`, `grp_123,grp_456`, `-grp_789`."""
     partner_id: NotRequired[str]
@@ -146,9 +148,9 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""Deprecated: Use the `trigger` field instead. Filter for QR code scans. If true, filter for QR codes only. If false, filter for links only. If undefined, return both."""
     page: NotRequired[float]
     limit: NotRequired[float]
-    sort_order: NotRequired[QueryParamSortOrder]
+    sort_order: NotRequired[SortOrder]
     r"""The sort order. The default is `desc`."""
-    sort_by: NotRequired[QueryParamSortBy]
+    sort_by: NotRequired[SortBy]
     r"""The field to sort the events by. The default is `timestamp`."""
     order: NotRequired[Order]
     r"""DEPRECATED. Use `sortOrder` instead."""
@@ -207,6 +209,13 @@ class ListEventsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The folder ID to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `folder_123`, `folder_123,folder_456`, `-folder_789`. If not provided, return analytics for all links."""
+
+    partner_tag_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="partnerTagId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The partner tag ID(s) to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_123`, `ptag_123,ptag_456`, `-ptag_789`."""
 
     group_id: Annotated[
         Optional[str],
@@ -400,17 +409,17 @@ class ListEventsRequest(BaseModel):
     ] = 100
 
     sort_order: Annotated[
-        Optional[QueryParamSortOrder],
+        Optional[SortOrder],
         pydantic.Field(alias="sortOrder"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = QueryParamSortOrder.DESC
+    ] = SortOrder.DESC
     r"""The sort order. The default is `desc`."""
 
     sort_by: Annotated[
-        Optional[QueryParamSortBy],
+        Optional[SortBy],
         pydantic.Field(alias="sortBy"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = QueryParamSortBy.TIMESTAMP
+    ] = SortBy.TIMESTAMP
     r"""The field to sort the events by. The default is `timestamp`."""
 
     order: Annotated[
@@ -431,6 +440,7 @@ class ListEventsRequest(BaseModel):
                 "tenantId",
                 "tagId",
                 "folderId",
+                "partnerTagId",
                 "groupId",
                 "partnerId",
                 "customerId",
@@ -492,7 +502,9 @@ class ResponseBodyPaymentProcessor(str, Enum):
     SHOPIFY = "shopify"
     POLAR = "polar"
     PADDLE = "paddle"
+    APPLE = "apple"
     REVENUECAT = "revenuecat"
+    DUB = "dub"
     CUSTOM = "custom"
 
 
@@ -942,12 +954,12 @@ class ListEventsResponseBodyClick(BaseModel):
 class ResponseBodyCustomerTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
-    name: str
-    r"""Name of the customer."""
     external_id: str
     r"""Unique identifier for the customer in the client's app."""
     created_at: str
     r"""The date the customer was created (usually the signup date or trial start date)."""
+    name: NotRequired[Nullable[str]]
+    r"""Name of the customer."""
     email: NotRequired[Nullable[str]]
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
@@ -970,14 +982,14 @@ class ResponseBodyCustomer(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
-    name: str
-    r"""Name of the customer."""
-
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""Unique identifier for the customer in the client's app."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the customer was created (usually the signup date or trial start date)."""
+
+    name: OptionalNullable[str] = UNSET
+    r"""Name of the customer."""
 
     email: OptionalNullable[str] = UNSET
     r"""Email of the customer."""
@@ -1015,6 +1027,7 @@ class ResponseBodyCustomer(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",
@@ -1027,6 +1040,7 @@ class ResponseBodyCustomer(BaseModel):
         )
         nullable_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",
@@ -1669,12 +1683,12 @@ class ResponseBodyLink(BaseModel):
 class ListEventsResponseBodyCustomerTypedDict(TypedDict):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
-    name: str
-    r"""Name of the customer."""
     external_id: str
     r"""Unique identifier for the customer in the client's app."""
     created_at: str
     r"""The date the customer was created (usually the signup date or trial start date)."""
+    name: NotRequired[Nullable[str]]
+    r"""Name of the customer."""
     email: NotRequired[Nullable[str]]
     r"""Email of the customer."""
     avatar: NotRequired[Nullable[str]]
@@ -1697,14 +1711,14 @@ class ListEventsResponseBodyCustomer(BaseModel):
     id: str
     r"""The unique ID of the customer. You may use either the customer's `id` on Dub (obtained via `/customers` endpoint) or their `externalId` (unique ID within your system, prefixed with `ext_`, e.g. `ext_123`)."""
 
-    name: str
-    r"""Name of the customer."""
-
     external_id: Annotated[str, pydantic.Field(alias="externalId")]
     r"""Unique identifier for the customer in the client's app."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date the customer was created (usually the signup date or trial start date)."""
+
+    name: OptionalNullable[str] = UNSET
+    r"""Name of the customer."""
 
     email: OptionalNullable[str] = UNSET
     r"""Email of the customer."""
@@ -1742,6 +1756,7 @@ class ListEventsResponseBodyCustomer(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",
@@ -1754,6 +1769,7 @@ class ListEventsResponseBodyCustomer(BaseModel):
         )
         nullable_fields = set(
             [
+                "name",
                 "email",
                 "avatar",
                 "stripeCustomerId",

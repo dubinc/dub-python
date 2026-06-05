@@ -67,7 +67,7 @@ Approve a pending partner application to your program. The partner will be enrol
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="approvePartner" method="post" path="/partners/applications/approve" -->
+<!-- UsageSnippet language="python" operationID="approvePartnerApplication" method="post" path="/partners/applications/approve" -->
 ```python
 from dub import Dub
 
@@ -87,14 +87,14 @@ with Dub(
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.ApprovePartnerRequestBody](../../models/operations/approvepartnerrequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                          | [operations.ApprovePartnerApplicationRequestBody](../../models/operations/approvepartnerapplicationrequestbody.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| `retries`                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                   | :heavy_minus_sign:                                                                                                 | Configuration to override the default retry behavior of the client.                                                |
 
 ### Response
 
-**[operations.ApprovePartnerResponseBody](../../models/operations/approvepartnerresponsebody.md)**
+**[operations.ApprovePartnerApplicationResponseBody](../../models/operations/approvepartnerapplicationresponsebody.md)**
 
 ### Errors
 
@@ -117,7 +117,7 @@ Reject a pending partner application to your program. The partner will be notifi
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="rejectPartner" method="post" path="/partners/applications/reject" -->
+<!-- UsageSnippet language="python" operationID="rejectPartnerApplication" method="post" path="/partners/applications/reject" -->
 ```python
 from dub import Dub
 
@@ -137,14 +137,14 @@ with Dub(
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `request`                                                                                  | [operations.RejectPartnerRequestBody](../../models/operations/rejectpartnerrequestbody.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
-| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                        | [operations.RejectPartnerApplicationRequestBody](../../models/operations/rejectpartnerapplicationrequestbody.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `retries`                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                 | :heavy_minus_sign:                                                                                               | Configuration to override the default retry behavior of the client.                                              |
 
 ### Response
 
-**[operations.RejectPartnerResponseBody](../../models/operations/rejectpartnerresponsebody.md)**
+**[operations.RejectPartnerApplicationResponseBody](../../models/operations/rejectpartnerapplicationresponsebody.md)**
 
 ### Errors
 

@@ -35,14 +35,13 @@ class UpdateFolderRequestBody(BaseModel):
 
     access_level: Annotated[
         OptionalNullable[UpdateFolderAccessLevel], pydantic.Field(alias="accessLevel")
-    ] = None
+    ] = UNSET
     r"""The access level of the folder within the workspace."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["name", "description", "accessLevel"])
         nullable_fields = set(["description", "accessLevel"])
-        null_default_fields = set(["accessLevel"])
         serialized = handler(self)
         m = {}
 
@@ -51,10 +50,7 @@ class UpdateFolderRequestBody(BaseModel):
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
-                and (
-                    self.__pydantic_fields_set__.intersection({n})
-                    or k in null_default_fields
-                )  # pylint: disable=no-member
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
             )
 
             if val != UNSET_SENTINEL:

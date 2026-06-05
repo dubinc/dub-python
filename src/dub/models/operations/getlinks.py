@@ -4,17 +4,10 @@ from __future__ import annotations
 from dub.models.components import linkschema as components_linkschema
 from dub.types import BaseModel, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
-from enum import Enum
 import pydantic
 from pydantic import model_serializer
 from typing import Callable, List, Optional, Union
-from typing_extensions import (
-    Annotated,
-    NotRequired,
-    TypeAliasType,
-    TypedDict,
-    deprecated,
-)
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 QueryParamTagIdsTypedDict = TypeAliasType(
@@ -35,34 +28,6 @@ r"""The unique name of the tags assigned to the short link (case insensitive).""
 
 QueryParamTagNames = TypeAliasType("QueryParamTagNames", Union[str, List[str]])
 r"""The unique name of the tags assigned to the short link (case insensitive)."""
-
-
-class SortBy(str, Enum):
-    r"""The field to sort the links by. The default is `createdAt`."""
-
-    CREATED_AT = "createdAt"
-    CLICKS = "clicks"
-    SALE_AMOUNT = "saleAmount"
-    LAST_CLICKED = "lastClicked"
-
-
-class SortOrder(str, Enum):
-    r"""The sort order. The default is `desc`."""
-
-    ASC = "asc"
-    DESC = "desc"
-
-
-@deprecated(
-    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-)
-class Sort(str, Enum):
-    r"""DEPRECATED. Use `sortBy` instead."""
-
-    CREATED_AT = "createdAt"
-    CLICKS = "clicks"
-    SALE_AMOUNT = "saleAmount"
-    LAST_CLICKED = "lastClicked"
 
 
 class GetLinksRequestTypedDict(TypedDict):
@@ -86,12 +51,6 @@ class GetLinksRequestTypedDict(TypedDict):
     r"""Whether to include archived links in the response. Defaults to `false` if not provided."""
     with_tags: NotRequired[bool]
     r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
-    sort_by: NotRequired[SortBy]
-    r"""The field to sort the links by. The default is `createdAt`."""
-    sort_order: NotRequired[SortOrder]
-    r"""The sort order. The default is `desc`."""
-    sort: NotRequired[Sort]
-    r"""DEPRECATED. Use `sortBy` instead."""
     ending_before: NotRequired[str]
     r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
     starting_after: NotRequired[str]
@@ -171,26 +130,6 @@ class GetLinksRequest(BaseModel):
     ] = False
     r"""DEPRECATED. Filter for links that have at least one tag assigned to them."""
 
-    sort_by: Annotated[
-        Optional[SortBy],
-        pydantic.Field(alias="sortBy"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = SortBy.CREATED_AT
-    r"""The field to sort the links by. The default is `createdAt`."""
-
-    sort_order: Annotated[
-        Optional[SortOrder],
-        pydantic.Field(alias="sortOrder"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = SortOrder.DESC
-    r"""The sort order. The default is `desc`."""
-
-    sort: Annotated[
-        Optional[Sort],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = Sort.CREATED_AT
-    r"""DEPRECATED. Use `sortBy` instead."""
-
     ending_before: Annotated[
         Optional[str],
         pydantic.Field(alias="endingBefore"),
@@ -232,9 +171,6 @@ class GetLinksRequest(BaseModel):
                 "tenantId",
                 "showArchived",
                 "withTags",
-                "sortBy",
-                "sortOrder",
-                "sort",
                 "endingBefore",
                 "startingAfter",
                 "page",

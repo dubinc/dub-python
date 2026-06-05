@@ -94,8 +94,8 @@ class Domains(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if isinstance(request.page_size, int) else 50
-            if len(results[0]) < limit:
+            limit_ = request.page_size if isinstance(request.page_size, int) else 50
+            if len(results[0]) < limit_:
                 return None
 
             return self.list(
@@ -242,8 +242,8 @@ class Domains(BaseSDK):
             results = JSONPath("$").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if isinstance(request.page_size, int) else 50
-            if len(results[0]) < limit:
+            limit_ = request.page_size if isinstance(request.page_size, int) else 50
+            if len(results[0]) < limit_:
                 return None
 
             return self.list(
