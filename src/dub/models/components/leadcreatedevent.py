@@ -151,6 +151,7 @@ class LeadCreatedEventClickTypedDict(TypedDict):
     referer_url: str
     qr: bool
     ip: str
+    ua: NotRequired[Nullable[str]]
     trigger: NotRequired[Nullable[str]]
 
 
@@ -183,12 +184,14 @@ class LeadCreatedEventClick(BaseModel):
 
     ip: str
 
+    ua: OptionalNullable[str] = UNSET
+
     trigger: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["trigger"])
-        nullable_fields = set(["trigger"])
+        optional_fields = set(["ua", "trigger"])
+        nullable_fields = set(["ua", "trigger"])
         serialized = handler(self)
         m = {}
 

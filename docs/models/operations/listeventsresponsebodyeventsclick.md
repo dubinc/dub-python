@@ -15,6 +15,7 @@
 | `device`                | *str*                   | :heavy_check_mark:      | N/A                     |
 | `browser`               | *str*                   | :heavy_check_mark:      | N/A                     |
 | `os`                    | *str*                   | :heavy_check_mark:      | N/A                     |
+| `ua`                    | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
 | `trigger`               | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
 | `referer`               | *str*                   | :heavy_check_mark:      | N/A                     |
 | `referer_url`           | *str*                   | :heavy_check_mark:      | N/A                     |

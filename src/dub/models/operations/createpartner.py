@@ -349,6 +349,7 @@ class CreatePartnerDefaultPayoutMethod(str, Enum):
     CONNECT = "connect"
     STABLECOIN = "stablecoin"
     PAYPAL = "paypal"
+    TREMENDOUS = "tremendous"
 
 
 class CreatePartnerStatus(str, Enum):

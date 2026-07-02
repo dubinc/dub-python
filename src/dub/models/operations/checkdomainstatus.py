@@ -3,6 +3,7 @@
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, UNSET_SENTINEL
 from dub.utils import FieldMetadata, QueryParamMetadata
+import pydantic
 from pydantic import model_serializer
 from typing import List, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
@@ -28,15 +29,50 @@ class CheckDomainStatusRequest(BaseModel):
     r"""The domains to search. We only support .link domains for now."""
 
 
+class PricesTypedDict(TypedDict):
+    r"""Price details for the domain. Will be null if the domain is not available."""
+
+    registration: Nullable[float]
+    r"""The domain's registration price in USD cents."""
+    renewal: Nullable[float]
+    r"""The domain's renewal price in USD cents."""
+
+
+class Prices(BaseModel):
+    r"""Price details for the domain. Will be null if the domain is not available."""
+
+    registration: Nullable[float]
+    r"""The domain's registration price in USD cents."""
+
+    renewal: Nullable[float]
+    r"""The domain's renewal price in USD cents."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
 class CheckDomainStatusResponseBodyTypedDict(TypedDict):
     domain: str
     r"""The domain name."""
     available: bool
     r"""Whether the domain is available."""
-    price: Nullable[str]
-    r"""The price description."""
     premium: Nullable[bool]
     r"""Whether the domain is a premium domain."""
+    prices: Nullable[PricesTypedDict]
+    r"""Price details for the domain. Will be null if the domain is not available."""
+    price: Nullable[str]
+    r"""Deprecated: Use `prices` instead."""
 
 
 class CheckDomainStatusResponseBody(BaseModel):
@@ -46,11 +82,19 @@ class CheckDomainStatusResponseBody(BaseModel):
     available: bool
     r"""Whether the domain is available."""
 
-    price: Nullable[str]
-    r"""The price description."""
-
     premium: Nullable[bool]
     r"""Whether the domain is a premium domain."""
+
+    prices: Nullable[Prices]
+    r"""Price details for the domain. Will be null if the domain is not available."""
+
+    price: Annotated[
+        Nullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ]
+    r"""Deprecated: Use `prices` instead."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

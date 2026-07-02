@@ -16,3 +16,4 @@ value = Method.CONNECT
 | `CONNECT`    | connect      |
 | `STABLECOIN` | stablecoin   |
 | `PAYPAL`     | paypal       |
+| `TREMENDOUS` | tremendous   |

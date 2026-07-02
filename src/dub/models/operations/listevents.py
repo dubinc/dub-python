@@ -891,6 +891,7 @@ class ListEventsResponseBodyClickTypedDict(TypedDict):
     referer_url: str
     qr: bool
     ip: str
+    ua: NotRequired[Nullable[str]]
     trigger: NotRequired[Nullable[str]]
 
 
@@ -923,12 +924,14 @@ class ListEventsResponseBodyClick(BaseModel):
 
     ip: str
 
+    ua: OptionalNullable[str] = UNSET
+
     trigger: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["trigger"])
-        nullable_fields = set(["trigger"])
+        optional_fields = set(["ua", "trigger"])
+        nullable_fields = set(["ua", "trigger"])
         serialized = handler(self)
         m = {}
 
@@ -1310,6 +1313,7 @@ class ResponseBodyClickTypedDict(TypedDict):
     referer_url: str
     qr: bool
     ip: str
+    ua: NotRequired[Nullable[str]]
     trigger: NotRequired[Nullable[str]]
 
 
@@ -1342,12 +1346,14 @@ class ResponseBodyClick(BaseModel):
 
     ip: str
 
+    ua: OptionalNullable[str] = UNSET
+
     trigger: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["trigger"])
-        nullable_fields = set(["trigger"])
+        optional_fields = set(["ua", "trigger"])
+        nullable_fields = set(["ua", "trigger"])
         serialized = handler(self)
         m = {}
 
@@ -2005,6 +2011,7 @@ class ListEventsResponseBodyEventsClickTypedDict(TypedDict):
     referer_url: str
     qr: bool
     ip: str
+    ua: NotRequired[Nullable[str]]
     trigger: NotRequired[Nullable[str]]
 
 
@@ -2037,12 +2044,14 @@ class ListEventsResponseBodyEventsClick(BaseModel):
 
     ip: str
 
+    ua: OptionalNullable[str] = UNSET
+
     trigger: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["trigger"])
-        nullable_fields = set(["trigger"])
+        optional_fields = set(["ua", "trigger"])
+        nullable_fields = set(["ua", "trigger"])
         serialized = handler(self)
         m = {}
 

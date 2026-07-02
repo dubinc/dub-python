@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class AccessLevel(str, Enum):
-    r"""The access level of the folder within the workspace."""
+    r"""The workspace-level access level settings for the folder. Default is `write` which allows full access to the folder for all team members. The other options are `read` (view-only access) and `null` (no access) and are only available on Business plans and above."""
 
     WRITE = "write"
     READ = "read"
@@ -21,7 +21,7 @@ class CreateFolderRequestBodyTypedDict(TypedDict):
     description: NotRequired[Nullable[str]]
     r"""The description of the folder."""
     access_level: NotRequired[Nullable[AccessLevel]]
-    r"""The access level of the folder within the workspace."""
+    r"""The workspace-level access level settings for the folder. Default is `write` which allows full access to the folder for all team members. The other options are `read` (view-only access) and `null` (no access) and are only available on Business plans and above."""
 
 
 class CreateFolderRequestBody(BaseModel):
@@ -33,14 +33,13 @@ class CreateFolderRequestBody(BaseModel):
 
     access_level: Annotated[
         OptionalNullable[AccessLevel], pydantic.Field(alias="accessLevel")
-    ] = None
-    r"""The access level of the folder within the workspace."""
+    ] = AccessLevel.WRITE
+    r"""The workspace-level access level settings for the folder. Default is `write` which allows full access to the folder for all team members. The other options are `read` (view-only access) and `null` (no access) and are only available on Business plans and above."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["description", "accessLevel"])
         nullable_fields = set(["description", "accessLevel"])
-        null_default_fields = set(["accessLevel"])
         serialized = handler(self)
         m = {}
 
@@ -49,10 +48,7 @@ class CreateFolderRequestBody(BaseModel):
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
-                and (
-                    self.__pydantic_fields_set__.intersection({n})
-                    or k in null_default_fields
-                )  # pylint: disable=no-member
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
             )
 
             if val != UNSET_SENTINEL:
