@@ -30,6 +30,7 @@ class DefaultPayoutMethod(str, Enum):
     CONNECT = "connect"
     STABLECOIN = "stablecoin"
     PAYPAL = "paypal"
+    TREMENDOUS = "tremendous"
 
 
 class Status(str, Enum):

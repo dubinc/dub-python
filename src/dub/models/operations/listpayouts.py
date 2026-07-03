@@ -46,6 +46,8 @@ class ListPayoutsRequestTypedDict(TypedDict):
     r"""Filter the list of payouts by the associated partner's `tenantId` (their unique ID within your database)."""
     invoice_id: NotRequired[str]
     r"""Filter the list of payouts by invoice ID (the unique ID of the invoice you receive for each batch payout you process on Dub). Pending payouts will not have an invoice ID."""
+    group_id: NotRequired[str]
+    r"""Filter the list of payouts by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
     sort_by: NotRequired[ListPayoutsQueryParamSortBy]
     r"""The field to sort the list of payouts by."""
     sort_order: NotRequired[ListPayoutsQueryParamSortOrder]
@@ -84,6 +86,13 @@ class ListPayoutsRequest(BaseModel):
     ] = None
     r"""Filter the list of payouts by invoice ID (the unique ID of the invoice you receive for each batch payout you process on Dub). Pending payouts will not have an invoice ID."""
 
+    group_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="groupId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter the list of payouts by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
+
     sort_by: Annotated[
         Optional[ListPayoutsQueryParamSortBy],
         pydantic.Field(alias="sortBy"),
@@ -119,6 +128,7 @@ class ListPayoutsRequest(BaseModel):
                 "partnerId",
                 "tenantId",
                 "invoiceId",
+                "groupId",
                 "sortBy",
                 "sortOrder",
                 "page",
@@ -158,6 +168,7 @@ class Method(str, Enum):
     CONNECT = "connect"
     STABLECOIN = "stablecoin"
     PAYPAL = "paypal"
+    TREMENDOUS = "tremendous"
 
 
 class ListPayoutsDefaultPayoutMethod(str, Enum):
@@ -166,6 +177,7 @@ class ListPayoutsDefaultPayoutMethod(str, Enum):
     CONNECT = "connect"
     STABLECOIN = "stablecoin"
     PAYPAL = "paypal"
+    TREMENDOUS = "tremendous"
 
 
 class ListPayoutsPartnerTypedDict(TypedDict):

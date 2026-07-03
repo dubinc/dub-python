@@ -74,6 +74,8 @@ if TYPE_CHECKING:
         CheckDomainStatusResponseBodyTypedDict,
         Domains,
         DomainsTypedDict,
+        Prices,
+        PricesTypedDict,
     )
     from .createcommission import (
         CreateCommissionRequestBody,
@@ -983,6 +985,8 @@ __all__ = [
     "Partner",
     "PartnerTypedDict",
     "PaymentProcessor",
+    "Prices",
+    "PricesTypedDict",
     "QueryParamEvent",
     "QueryParamGroupBy",
     "QueryParamInterval",
@@ -1217,6 +1221,8 @@ _dynamic_imports: dict[str, str] = {
     "CheckDomainStatusResponseBodyTypedDict": ".checkdomainstatus",
     "Domains": ".checkdomainstatus",
     "DomainsTypedDict": ".checkdomainstatus",
+    "Prices": ".checkdomainstatus",
+    "PricesTypedDict": ".checkdomainstatus",
     "CreateCommissionRequestBody": ".createcommission",
     "CreateCommissionRequestBodyCommissionsType": ".createcommission",
     "CreateCommissionRequestBodyType": ".createcommission",

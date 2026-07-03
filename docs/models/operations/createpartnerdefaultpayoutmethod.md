@@ -18,3 +18,4 @@ value = CreatePartnerDefaultPayoutMethod.CONNECT
 | `CONNECT`    | connect      |
 | `STABLECOIN` | stablecoin   |
 | `PAYPAL`     | paypal       |
+| `TREMENDOUS` | tremendous   |
