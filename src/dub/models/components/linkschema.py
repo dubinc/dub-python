@@ -67,8 +67,6 @@ class LinkSchemaTypedDict(TypedDict):
     r"""The tags assigned to the short link."""
     folder_id: Nullable[str]
     r"""The unique ID of the folder assigned to the short link."""
-    webhook_ids: List[str]
-    r"""The IDs of the webhooks that the short link is associated with."""
     comments: Nullable[str]
     r"""The comments for the short link."""
     short_link: str
@@ -99,6 +97,8 @@ class LinkSchemaTypedDict(TypedDict):
     r"""Deprecated: Use `tags` instead. The unique ID of the tag assigned to the short link."""
     project_id: str
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+    webhook_ids: List[str]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
     track_conversion: NotRequired[bool]
     r"""Whether to track conversions for the short link."""
     archived: NotRequired[bool]
@@ -193,9 +193,6 @@ class LinkSchema(BaseModel):
     folder_id: Annotated[Nullable[str], pydantic.Field(alias="folderId")]
     r"""The unique ID of the folder assigned to the short link."""
 
-    webhook_ids: Annotated[List[str], pydantic.Field(alias="webhookIds")]
-    r"""The IDs of the webhooks that the short link is associated with."""
-
     comments: Nullable[str]
     r"""The comments for the short link."""
 
@@ -252,6 +249,15 @@ class LinkSchema(BaseModel):
         ),
     ]
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+
+    webhook_ids: Annotated[
+        List[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="webhookIds",
+        ),
+    ]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
     track_conversion: Annotated[
         Optional[bool], pydantic.Field(alias="trackConversion")

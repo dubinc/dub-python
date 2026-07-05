@@ -103,8 +103,6 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""The UTM content of the short link. If set, this will populate or override the UTM content in the destination URL."""
     ref: NotRequired[Nullable[str]]
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
-    webhook_ids: NotRequired[Nullable[List[str]]]
-    r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
     test_variants: NotRequired[Nullable[List[UpdateLinkTestVariantsTypedDict]]]
     r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
     test_started_at: NotRequired[Nullable[str]]
@@ -115,6 +113,8 @@ class UpdateLinkRequestBodyTypedDict(TypedDict):
     r"""Deprecated: Use `dashboard` instead. Whether the short link's stats are publicly accessible. Defaults to `false` if not provided."""
     tag_id: NotRequired[Nullable[str]]
     r"""Deprecated: Use `tagIds` instead. The unique ID of the tag assigned to the short link."""
+    webhook_ids: NotRequired[Nullable[List[str]]]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
 
 class UpdateLinkRequestBody(BaseModel):
@@ -232,11 +232,6 @@ class UpdateLinkRequestBody(BaseModel):
     ref: OptionalNullable[str] = UNSET
     r"""The referral tag of the short link. If set, this will populate or override the `ref` query parameter in the destination URL."""
 
-    webhook_ids: Annotated[
-        OptionalNullable[List[str]], pydantic.Field(alias="webhookIds")
-    ] = UNSET
-    r"""An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
-
     test_variants: Annotated[
         OptionalNullable[List[UpdateLinkTestVariants]],
         pydantic.Field(alias="testVariants"),
@@ -270,6 +265,15 @@ class UpdateLinkRequestBody(BaseModel):
         ),
     ] = UNSET
     r"""Deprecated: Use `tagIds` instead. The unique ID of the tag assigned to the short link."""
+
+    webhook_ids: Annotated[
+        OptionalNullable[List[str]],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="webhookIds",
+        ),
+    ] = UNSET
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -307,12 +311,12 @@ class UpdateLinkRequestBody(BaseModel):
                 "utm_term",
                 "utm_content",
                 "ref",
-                "webhookIds",
                 "testVariants",
                 "testStartedAt",
                 "testCompletedAt",
                 "publicStats",
                 "tagId",
+                "webhookIds",
             ]
         )
         nullable_fields = set(
@@ -339,11 +343,11 @@ class UpdateLinkRequestBody(BaseModel):
                 "utm_term",
                 "utm_content",
                 "ref",
-                "webhookIds",
                 "testVariants",
                 "testStartedAt",
                 "testCompletedAt",
                 "tagId",
+                "webhookIds",
             ]
         )
         serialized = handler(self)
