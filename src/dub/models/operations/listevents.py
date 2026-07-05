@@ -622,8 +622,6 @@ class ListEventsResponseBodyLinkTypedDict(TypedDict):
     r"""The tags assigned to the short link."""
     folder_id: Nullable[str]
     r"""The unique ID of the folder assigned to the short link."""
-    webhook_ids: List[str]
-    r"""The IDs of the webhooks that the short link is associated with."""
     comments: Nullable[str]
     r"""The comments for the short link."""
     short_link: str
@@ -652,6 +650,8 @@ class ListEventsResponseBodyLinkTypedDict(TypedDict):
     r"""Deprecated: Use `tags` instead. The unique ID of the tag assigned to the short link."""
     project_id: str
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+    webhook_ids: List[str]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
     test_variants: NotRequired[
         Nullable[List[ListEventsResponseBodyEventsTestVariantsTypedDict]]
     ]
@@ -740,9 +740,6 @@ class ListEventsResponseBodyLink(BaseModel):
     folder_id: Annotated[Nullable[str], pydantic.Field(alias="folderId")]
     r"""The unique ID of the folder assigned to the short link."""
 
-    webhook_ids: Annotated[List[str], pydantic.Field(alias="webhookIds")]
-    r"""The IDs of the webhooks that the short link is associated with."""
-
     comments: Nullable[str]
     r"""The comments for the short link."""
 
@@ -799,6 +796,15 @@ class ListEventsResponseBodyLink(BaseModel):
         ),
     ]
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+
+    webhook_ids: Annotated[
+        List[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="webhookIds",
+        ),
+    ]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
     test_variants: Annotated[
         OptionalNullable[List[ListEventsResponseBodyEventsTestVariants]],
@@ -1432,8 +1438,6 @@ class ResponseBodyLinkTypedDict(TypedDict):
     r"""The tags assigned to the short link."""
     folder_id: Nullable[str]
     r"""The unique ID of the folder assigned to the short link."""
-    webhook_ids: List[str]
-    r"""The IDs of the webhooks that the short link is associated with."""
     comments: Nullable[str]
     r"""The comments for the short link."""
     short_link: str
@@ -1462,6 +1466,8 @@ class ResponseBodyLinkTypedDict(TypedDict):
     r"""Deprecated: Use `tags` instead. The unique ID of the tag assigned to the short link."""
     project_id: str
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+    webhook_ids: List[str]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
     test_variants: NotRequired[
         Nullable[List[ListEventsResponseBodyTestVariantsTypedDict]]
     ]
@@ -1550,9 +1556,6 @@ class ResponseBodyLink(BaseModel):
     folder_id: Annotated[Nullable[str], pydantic.Field(alias="folderId")]
     r"""The unique ID of the folder assigned to the short link."""
 
-    webhook_ids: Annotated[List[str], pydantic.Field(alias="webhookIds")]
-    r"""The IDs of the webhooks that the short link is associated with."""
-
     comments: Nullable[str]
     r"""The comments for the short link."""
 
@@ -1609,6 +1612,15 @@ class ResponseBodyLink(BaseModel):
         ),
     ]
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+
+    webhook_ids: Annotated[
+        List[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="webhookIds",
+        ),
+    ]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
     test_variants: Annotated[
         OptionalNullable[List[ListEventsResponseBodyTestVariants]],
@@ -2130,8 +2142,6 @@ class ListEventsResponseBodyEventsLinkTypedDict(TypedDict):
     r"""The tags assigned to the short link."""
     folder_id: Nullable[str]
     r"""The unique ID of the folder assigned to the short link."""
-    webhook_ids: List[str]
-    r"""The IDs of the webhooks that the short link is associated with."""
     comments: Nullable[str]
     r"""The comments for the short link."""
     short_link: str
@@ -2160,6 +2170,8 @@ class ListEventsResponseBodyEventsLinkTypedDict(TypedDict):
     r"""Deprecated: Use `tags` instead. The unique ID of the tag assigned to the short link."""
     project_id: str
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+    webhook_ids: List[str]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
     test_variants: NotRequired[Nullable[List[ResponseBodyTestVariantsTypedDict]]]
     r"""An array of A/B test URLs and the percentage of traffic to send to each URL."""
     clicks: NotRequired[float]
@@ -2246,9 +2258,6 @@ class ListEventsResponseBodyEventsLink(BaseModel):
     folder_id: Annotated[Nullable[str], pydantic.Field(alias="folderId")]
     r"""The unique ID of the folder assigned to the short link."""
 
-    webhook_ids: Annotated[List[str], pydantic.Field(alias="webhookIds")]
-    r"""The IDs of the webhooks that the short link is associated with."""
-
     comments: Nullable[str]
     r"""The comments for the short link."""
 
@@ -2305,6 +2314,15 @@ class ListEventsResponseBodyEventsLink(BaseModel):
         ),
     ]
     r"""Deprecated: Use `workspaceId` instead. The project ID of the short link."""
+
+    webhook_ids: Annotated[
+        List[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="webhookIds",
+        ),
+    ]
+    r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
     test_variants: Annotated[
         OptionalNullable[List[ResponseBodyTestVariants]],

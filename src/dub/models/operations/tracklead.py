@@ -32,7 +32,7 @@ class TrackLeadRequestBodyTypedDict(TypedDict):
     r"""The avatar URL of the customer."""
     mode: NotRequired[Mode]
     r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub; `deferred` will defer the lead event creation to a subsequent request."""
-    event_quantity: NotRequired[Nullable[float]]
+    event_quantity: NotRequired[Nullable[int]]
     r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
     metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
@@ -67,7 +67,7 @@ class TrackLeadRequestBody(BaseModel):
     r"""The mode to use for tracking the lead event. `async` will not block the request; `wait` will block the request until the lead event is fully recorded in Dub; `deferred` will defer the lead event creation to a subsequent request."""
 
     event_quantity: Annotated[
-        OptionalNullable[float], pydantic.Field(alias="eventQuantity")
+        OptionalNullable[int], pydantic.Field(alias="eventQuantity")
     ] = UNSET
     r"""The numerical value associated with this lead event (e.g., number of provisioned seats in a free trial). If defined as N, the lead event will be tracked N times."""
 
