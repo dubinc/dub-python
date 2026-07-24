@@ -149,6 +149,7 @@ class UpdateCommissionStatus(str, Enum):
     DUPLICATE = "duplicate"
     FRAUD = "fraud"
     CANCELED = "canceled"
+    HOLD = "hold"
 
 
 class UpdateCommissionPartnerTypedDict(TypedDict):
@@ -356,6 +357,8 @@ class UpdateCommissionResponseBodyTypedDict(TypedDict):
     quantity: float
     created_at: str
     updated_at: str
+    paid_at: Nullable[str]
+    r"""The date the commission was paid out to the partner. Null if not paid yet."""
     partner: UpdateCommissionPartnerTypedDict
     type: NotRequired[UpdateCommissionType]
     user_id: NotRequired[Nullable[str]]
@@ -387,6 +390,9 @@ class UpdateCommissionResponseBody(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
+    paid_at: Annotated[Nullable[str], pydantic.Field(alias="paidAt")]
+    r"""The date the commission was paid out to the partner. Null if not paid yet."""
+
     partner: UpdateCommissionPartner
 
     type: Optional[UpdateCommissionType] = None
@@ -399,7 +405,9 @@ class UpdateCommissionResponseBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["type", "userId", "customer"])
-        nullable_fields = set(["invoiceId", "description", "userId", "customer"])
+        nullable_fields = set(
+            ["invoiceId", "description", "userId", "paidAt", "customer"]
+        )
         serialized = handler(self)
         m = {}
 
