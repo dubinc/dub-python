@@ -595,9 +595,9 @@ class ListEventsResponseBodyLinkTypedDict(TypedDict):
     partner_id: Nullable[str]
     r"""The ID of the partner the short link is associated with."""
     archived: bool
-    expires_at: str
+    expires_at: Nullable[str]
     expired_url: Nullable[str]
-    disabled_at: str
+    disabled_at: Nullable[str]
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     proxy: bool
@@ -638,12 +638,12 @@ class ListEventsResponseBodyLinkTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
-    test_started_at: str
-    test_completed_at: str
+    test_started_at: Nullable[str]
+    test_completed_at: Nullable[str]
     user_id: Nullable[str]
     workspace_id: str
     r"""The workspace ID of the short link."""
-    last_clicked: str
+    last_clicked: Nullable[str]
     created_at: str
     updated_at: str
     tag_id: Nullable[str]
@@ -696,11 +696,11 @@ class ListEventsResponseBodyLink(BaseModel):
 
     archived: bool
 
-    expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
 
-    disabled_at: Annotated[str, pydantic.Field(alias="disabledAt")]
+    disabled_at: Annotated[Nullable[str], pydantic.Field(alias="disabledAt")]
 
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
@@ -764,16 +764,16 @@ class ListEventsResponseBodyLink(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
-    test_started_at: Annotated[str, pydantic.Field(alias="testStartedAt")]
+    test_started_at: Annotated[Nullable[str], pydantic.Field(alias="testStartedAt")]
 
-    test_completed_at: Annotated[str, pydantic.Field(alias="testCompletedAt")]
+    test_completed_at: Annotated[Nullable[str], pydantic.Field(alias="testCompletedAt")]
 
     user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
     r"""The workspace ID of the short link."""
 
-    last_clicked: Annotated[str, pydantic.Field(alias="lastClicked")]
+    last_clicked: Annotated[Nullable[str], pydantic.Field(alias="lastClicked")]
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
@@ -838,7 +838,9 @@ class ListEventsResponseBodyLink(BaseModel):
                 "tenantId",
                 "programId",
                 "partnerId",
+                "expiresAt",
                 "expiredUrl",
+                "disabledAt",
                 "password",
                 "title",
                 "description",
@@ -856,7 +858,10 @@ class ListEventsResponseBodyLink(BaseModel):
                 "utm_term",
                 "utm_content",
                 "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
                 "userId",
+                "lastClicked",
                 "tagId",
             ]
         )
@@ -1411,9 +1416,9 @@ class ResponseBodyLinkTypedDict(TypedDict):
     partner_id: Nullable[str]
     r"""The ID of the partner the short link is associated with."""
     archived: bool
-    expires_at: str
+    expires_at: Nullable[str]
     expired_url: Nullable[str]
-    disabled_at: str
+    disabled_at: Nullable[str]
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     proxy: bool
@@ -1454,12 +1459,12 @@ class ResponseBodyLinkTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
-    test_started_at: str
-    test_completed_at: str
+    test_started_at: Nullable[str]
+    test_completed_at: Nullable[str]
     user_id: Nullable[str]
     workspace_id: str
     r"""The workspace ID of the short link."""
-    last_clicked: str
+    last_clicked: Nullable[str]
     created_at: str
     updated_at: str
     tag_id: Nullable[str]
@@ -1512,11 +1517,11 @@ class ResponseBodyLink(BaseModel):
 
     archived: bool
 
-    expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
 
-    disabled_at: Annotated[str, pydantic.Field(alias="disabledAt")]
+    disabled_at: Annotated[Nullable[str], pydantic.Field(alias="disabledAt")]
 
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
@@ -1580,16 +1585,16 @@ class ResponseBodyLink(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
-    test_started_at: Annotated[str, pydantic.Field(alias="testStartedAt")]
+    test_started_at: Annotated[Nullable[str], pydantic.Field(alias="testStartedAt")]
 
-    test_completed_at: Annotated[str, pydantic.Field(alias="testCompletedAt")]
+    test_completed_at: Annotated[Nullable[str], pydantic.Field(alias="testCompletedAt")]
 
     user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
     r"""The workspace ID of the short link."""
 
-    last_clicked: Annotated[str, pydantic.Field(alias="lastClicked")]
+    last_clicked: Annotated[Nullable[str], pydantic.Field(alias="lastClicked")]
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
@@ -1654,7 +1659,9 @@ class ResponseBodyLink(BaseModel):
                 "tenantId",
                 "programId",
                 "partnerId",
+                "expiresAt",
                 "expiredUrl",
+                "disabledAt",
                 "password",
                 "title",
                 "description",
@@ -1672,7 +1679,10 @@ class ResponseBodyLink(BaseModel):
                 "utm_term",
                 "utm_content",
                 "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
                 "userId",
+                "lastClicked",
                 "tagId",
             ]
         )
@@ -2115,9 +2125,9 @@ class ListEventsResponseBodyEventsLinkTypedDict(TypedDict):
     partner_id: Nullable[str]
     r"""The ID of the partner the short link is associated with."""
     archived: bool
-    expires_at: str
+    expires_at: Nullable[str]
     expired_url: Nullable[str]
-    disabled_at: str
+    disabled_at: Nullable[str]
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
     proxy: bool
@@ -2158,12 +2168,12 @@ class ListEventsResponseBodyEventsLinkTypedDict(TypedDict):
     r"""The UTM term of the short link."""
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
-    test_started_at: str
-    test_completed_at: str
+    test_started_at: Nullable[str]
+    test_completed_at: Nullable[str]
     user_id: Nullable[str]
     workspace_id: str
     r"""The workspace ID of the short link."""
-    last_clicked: str
+    last_clicked: Nullable[str]
     created_at: str
     updated_at: str
     tag_id: Nullable[str]
@@ -2214,11 +2224,11 @@ class ListEventsResponseBodyEventsLink(BaseModel):
 
     archived: bool
 
-    expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
 
     expired_url: Annotated[Nullable[str], pydantic.Field(alias="expiredUrl")]
 
-    disabled_at: Annotated[str, pydantic.Field(alias="disabledAt")]
+    disabled_at: Annotated[Nullable[str], pydantic.Field(alias="disabledAt")]
 
     password: Nullable[str]
     r"""The password required to access the destination URL of the short link."""
@@ -2282,16 +2292,16 @@ class ListEventsResponseBodyEventsLink(BaseModel):
     utm_content: Nullable[str]
     r"""The UTM content of the short link."""
 
-    test_started_at: Annotated[str, pydantic.Field(alias="testStartedAt")]
+    test_started_at: Annotated[Nullable[str], pydantic.Field(alias="testStartedAt")]
 
-    test_completed_at: Annotated[str, pydantic.Field(alias="testCompletedAt")]
+    test_completed_at: Annotated[Nullable[str], pydantic.Field(alias="testCompletedAt")]
 
     user_id: Annotated[Nullable[str], pydantic.Field(alias="userId")]
 
     workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
     r"""The workspace ID of the short link."""
 
-    last_clicked: Annotated[str, pydantic.Field(alias="lastClicked")]
+    last_clicked: Annotated[Nullable[str], pydantic.Field(alias="lastClicked")]
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
@@ -2356,7 +2366,9 @@ class ListEventsResponseBodyEventsLink(BaseModel):
                 "tenantId",
                 "programId",
                 "partnerId",
+                "expiresAt",
                 "expiredUrl",
+                "disabledAt",
                 "password",
                 "title",
                 "description",
@@ -2374,7 +2386,10 @@ class ListEventsResponseBodyEventsLink(BaseModel):
                 "utm_term",
                 "utm_content",
                 "testVariants",
+                "testStartedAt",
+                "testCompletedAt",
                 "userId",
+                "lastClicked",
                 "tagId",
             ]
         )

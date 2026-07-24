@@ -30,6 +30,7 @@ class QueryParamStatus(str, Enum):
     DUPLICATE = "duplicate"
     FRAUD = "fraud"
     CANCELED = "canceled"
+    HOLD = "hold"
 
 
 class ListCommissionsQueryParamSortBy(str, Enum):
@@ -94,9 +95,9 @@ class ListCommissionsRequestTypedDict(TypedDict):
     r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
     starting_after: NotRequired[str]
     r"""If specified, the query only searches for results after this cursor. Mutually exclusive with `endingBefore`."""
-    page: NotRequired[float]
+    page: NotRequired[int]
     r"""DEPRECATED. Use `startingAfter` instead."""
-    page_size: NotRequired[float]
+    page_size: NotRequired[int]
     r"""The number of items per page."""
 
 
@@ -214,13 +215,13 @@ class ListCommissionsRequest(BaseModel):
     r"""If specified, the query only searches for results after this cursor. Mutually exclusive with `endingBefore`."""
 
     page: Annotated[
-        Optional[float],
+        Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""DEPRECATED. Use `startingAfter` instead."""
 
     page_size: Annotated[
-        Optional[float],
+        Optional[int],
         pydantic.Field(alias="pageSize"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 100
@@ -281,6 +282,7 @@ class ListCommissionsStatus(str, Enum):
     DUPLICATE = "duplicate"
     FRAUD = "fraud"
     CANCELED = "canceled"
+    HOLD = "hold"
 
 
 class ListCommissionsPartnerTypedDict(TypedDict):
@@ -486,6 +488,8 @@ class ListCommissionsResponseBodyTypedDict(TypedDict):
     quantity: float
     created_at: str
     updated_at: str
+    paid_at: Nullable[str]
+    r"""The date the commission was paid out to the partner. Null if not paid yet."""
     partner: ListCommissionsPartnerTypedDict
     type: NotRequired[ListCommissionsType]
     user_id: NotRequired[Nullable[str]]
@@ -515,6 +519,9 @@ class ListCommissionsResponseBody(BaseModel):
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
 
+    paid_at: Annotated[Nullable[str], pydantic.Field(alias="paidAt")]
+    r"""The date the commission was paid out to the partner. Null if not paid yet."""
+
     partner: ListCommissionsPartner
 
     type: Optional[ListCommissionsType] = None
@@ -527,7 +534,9 @@ class ListCommissionsResponseBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["type", "userId", "customer"])
-        nullable_fields = set(["invoiceId", "description", "userId", "customer"])
+        nullable_fields = set(
+            ["invoiceId", "description", "userId", "paidAt", "customer"]
+        )
         serialized = handler(self)
         m = {}
 

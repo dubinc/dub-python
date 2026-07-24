@@ -51,9 +51,9 @@ class GetCustomersRequestTypedDict(TypedDict):
     r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
     starting_after: NotRequired[str]
     r"""If specified, the query only searches for results after this cursor. Mutually exclusive with `endingBefore`."""
-    page: NotRequired[float]
+    page: NotRequired[int]
     r"""DEPRECATED. Use `startingAfter` instead."""
-    page_size: NotRequired[float]
+    page_size: NotRequired[int]
     r"""The number of items per page."""
 
 
@@ -140,13 +140,13 @@ class GetCustomersRequest(BaseModel):
     r"""If specified, the query only searches for results after this cursor. Mutually exclusive with `endingBefore`."""
 
     page: Annotated[
-        Optional[float],
+        Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""DEPRECATED. Use `startingAfter` instead."""
 
     page_size: Annotated[
-        Optional[float],
+        Optional[int],
         pydantic.Field(alias="pageSize"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 100

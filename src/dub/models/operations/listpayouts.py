@@ -52,9 +52,9 @@ class ListPayoutsRequestTypedDict(TypedDict):
     r"""The field to sort the list of payouts by."""
     sort_order: NotRequired[ListPayoutsQueryParamSortOrder]
     r"""The sort order for the list of payouts."""
-    page: NotRequired[float]
+    page: NotRequired[int]
     r"""The page number for pagination."""
-    page_size: NotRequired[float]
+    page_size: NotRequired[int]
     r"""The number of items per page."""
 
 
@@ -108,13 +108,13 @@ class ListPayoutsRequest(BaseModel):
     r"""The sort order for the list of payouts."""
 
     page: Annotated[
-        Optional[float],
+        Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The page number for pagination."""
 
     page_size: Annotated[
-        Optional[float],
+        Optional[int],
         pydantic.Field(alias="pageSize"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 100

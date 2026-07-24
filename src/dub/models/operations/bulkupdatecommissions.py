@@ -39,6 +39,7 @@ class BulkUpdateCommissionsCommissionsStatus(str, Enum):
     DUPLICATE = "duplicate"
     FRAUD = "fraud"
     CANCELED = "canceled"
+    HOLD = "hold"
 
 
 class BulkUpdateCommissionsResponseBodyTypedDict(TypedDict):

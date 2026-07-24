@@ -64,10 +64,10 @@ class ListPartnersRequestTypedDict(TypedDict):
     tenant_id: NotRequired[str]
     r"""Filter the partner list based on the partner's `tenantId`. The value must be a string. Takes precedence over `email` and `search`."""
     search: NotRequired[str]
-    r"""A search query to filter partners by ID, name, email, or link."""
-    page: NotRequired[float]
+    r"""A search query to filter partners by ID, name, email, or company name."""
+    page: NotRequired[int]
     r"""The page number for pagination."""
-    page_size: NotRequired[float]
+    page_size: NotRequired[int]
     r"""The number of items per page."""
 
 
@@ -122,16 +122,16 @@ class ListPartnersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""A search query to filter partners by ID, name, email, or link."""
+    r"""A search query to filter partners by ID, name, email, or company name."""
 
     page: Annotated[
-        Optional[float],
+        Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The page number for pagination."""
 
     page_size: Annotated[
-        Optional[float],
+        Optional[int],
         pydantic.Field(alias="pageSize"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 100
