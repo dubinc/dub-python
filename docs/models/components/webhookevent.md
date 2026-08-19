@@ -47,3 +47,9 @@ value: components.PartnerApplicationSubmittedEvent = /* values here */
 value: components.CommissionCreatedEvent = /* values here */
 ```
 
+### `components.DiscountCodeWebhookEvent`
+
+```python
+value: components.DiscountCodeWebhookEvent = /* values here */
+```
+
