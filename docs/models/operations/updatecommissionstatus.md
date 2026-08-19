@@ -20,3 +20,4 @@ value = UpdateCommissionStatus.PENDING
 | `DUPLICATE` | duplicate   |
 | `FRAUD`     | fraud       |
 | `CANCELED`  | canceled    |
+| `HOLD`      | hold        |

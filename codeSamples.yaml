@@ -249,6 +249,60 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/discount-codes"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listDiscountCodes
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.discount_codes.list(request={
+                    "page": 1,
+                    "page_size": 50,
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/discount-codes"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createDiscountCode
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.discount_codes.create()
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/discount-codes/{idOrCode}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: deleteDiscountCode
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.discount_codes.delete(id_or_code="dcode_1JVR7XRCSR0EDBAF39FZ4PMYE")
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/domains"]["get"]
     update:
       x-codeSamples:

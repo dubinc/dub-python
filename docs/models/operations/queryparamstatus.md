@@ -22,3 +22,4 @@ value = QueryParamStatus.PENDING
 | `DUPLICATE` | duplicate   |
 | `FRAUD`     | fraud       |
 | `CANCELED`  | canceled    |
+| `HOLD`      | hold        |
