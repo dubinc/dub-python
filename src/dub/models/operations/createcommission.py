@@ -346,11 +346,13 @@ class RequestBody1TypedDict(TypedDict):
     partner_id: str
     r"""The ID of the partner to create the commission for."""
     amount: float
-    r"""The commission amount in cents."""
+    r"""The commission amount in cents. Use a negative amount to create a clawback."""
     date_: NotRequired[Nullable[str]]
     r"""If not provided, the current date will be used."""
     description: NotRequired[Nullable[str]]
-    r"""The description of the commission."""
+    r"""The description of the commission. Required for clawbacks (negative `amount`).
+    May be a known clawback reason (`order_canceled`, `fraud`, `terms_violation`, `tracking_error`, `payment_failed`, `ineligible_partner`, `duplicate_commission`) or an arbitrary string (max 190 characters).
+    """
 
 
 class RequestBody1(BaseModel):
@@ -360,13 +362,15 @@ class RequestBody1(BaseModel):
     r"""The ID of the partner to create the commission for."""
 
     amount: float
-    r"""The commission amount in cents."""
+    r"""The commission amount in cents. Use a negative amount to create a clawback."""
 
     date_: Annotated[OptionalNullable[str], pydantic.Field(alias="date")] = UNSET
     r"""If not provided, the current date will be used."""
 
     description: OptionalNullable[str] = UNSET
-    r"""The description of the commission."""
+    r"""The description of the commission. Required for clawbacks (negative `amount`).
+    May be a known clawback reason (`order_canceled`, `fraud`, `terms_violation`, `tracking_error`, `payment_failed`, `ineligible_partner`, `duplicate_commission`) or an arbitrary string (max 190 characters).
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
