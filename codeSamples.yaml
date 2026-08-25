@@ -124,13 +124,18 @@ actions:
           label: createCommission
           source: |-
             from dub import Dub
+            from dub.models import operations
 
 
             with Dub(
                 token="DUB_API_KEY",
             ) as d_client:
 
-                res = d_client.commissions.create()
+                res = d_client.commissions.create(request={
+                    "type": operations.CreateCommissionRequestBodyType.LEAD,
+                    "partner_id": "<id>",
+                    "lead_event_name": "Sign up",
+                })
 
                 # Handle response
                 print(res)
