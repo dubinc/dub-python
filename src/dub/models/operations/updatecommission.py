@@ -8,7 +8,7 @@ from dub.utils import FieldMetadata, PathParamMetadata, RequestMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -136,6 +136,8 @@ class UpdateCommissionRequest(BaseModel):
 
 
 class UpdateCommissionType(str, Enum):
+    r"""The type of commission. Can be `click`, `lead`, `sale`, `referral`, or `custom`."""
+
     CLICK = "click"
     LEAD = "lead"
     SALE = "sale"
@@ -144,6 +146,8 @@ class UpdateCommissionType(str, Enum):
 
 
 class UpdateCommissionStatus(str, Enum):
+    r"""The current status of the commission."""
+
     PENDING = "pending"
     PROCESSED = "processed"
     PAID = "paid"
@@ -350,19 +354,31 @@ class UpdateCommissionResponseBodyTypedDict(TypedDict):
 
     id: str
     r"""The commission's unique ID on Dub."""
+    type: UpdateCommissionType
+    r"""The type of commission. Can be `click`, `lead`, `sale`, `referral`, or `custom`."""
     amount: float
+    r"""The associated event amount in cents. For sale commissions, this is the sale amount."""
     earnings: float
+    r"""The amount earned by the partner, in cents."""
     currency: str
+    r"""The currency of the commission, as an ISO 4217 currency code."""
     status: UpdateCommissionStatus
+    r"""The current status of the commission."""
     invoice_id: Nullable[str]
+    r"""The associated invoice ID. Only set for sale commissions."""
     description: Nullable[str]
+    r"""An optional description of the commission."""
     quantity: float
+    r"""The event quantity. Used for click and lead commissions; typically `1` for sale and custom commissions."""
+    metadata: Nullable[Dict[str, Any]]
+    r"""User-provided metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`)."""
     created_at: str
+    r"""The date and time when the commission was created."""
     updated_at: str
+    r"""The date and time when the commission was last updated."""
     paid_at: Nullable[str]
     r"""The date the commission was paid out to the partner. Null if not paid yet."""
     partner: UpdateCommissionPartnerTypedDict
-    type: NotRequired[UpdateCommissionType]
     user_id: NotRequired[Nullable[str]]
     r"""The user who created the manual commission."""
     customer: NotRequired[Nullable[UpdateCommissionCustomerTypedDict]]
@@ -374,30 +390,43 @@ class UpdateCommissionResponseBody(BaseModel):
     id: str
     r"""The commission's unique ID on Dub."""
 
+    type: UpdateCommissionType
+    r"""The type of commission. Can be `click`, `lead`, `sale`, `referral`, or `custom`."""
+
     amount: float
+    r"""The associated event amount in cents. For sale commissions, this is the sale amount."""
 
     earnings: float
+    r"""The amount earned by the partner, in cents."""
 
     currency: str
+    r"""The currency of the commission, as an ISO 4217 currency code."""
 
     status: UpdateCommissionStatus
+    r"""The current status of the commission."""
 
     invoice_id: Annotated[Nullable[str], pydantic.Field(alias="invoiceId")]
+    r"""The associated invoice ID. Only set for sale commissions."""
 
     description: Nullable[str]
+    r"""An optional description of the commission."""
 
     quantity: float
+    r"""The event quantity. Used for click and lead commissions; typically `1` for sale and custom commissions."""
+
+    metadata: Nullable[Dict[str, Any]]
+    r"""User-provided metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`)."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+    r"""The date and time when the commission was created."""
 
     updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
+    r"""The date and time when the commission was last updated."""
 
     paid_at: Annotated[Nullable[str], pydantic.Field(alias="paidAt")]
     r"""The date the commission was paid out to the partner. Null if not paid yet."""
 
     partner: UpdateCommissionPartner
-
-    type: Optional[UpdateCommissionType] = None
 
     user_id: Annotated[OptionalNullable[str], pydantic.Field(alias="userId")] = UNSET
     r"""The user who created the manual commission."""
@@ -406,9 +435,9 @@ class UpdateCommissionResponseBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["type", "userId", "customer"])
+        optional_fields = set(["userId", "customer"])
         nullable_fields = set(
-            ["invoiceId", "description", "userId", "paidAt", "customer"]
+            ["invoiceId", "description", "userId", "metadata", "paidAt", "customer"]
         )
         serialized = handler(self)
         m = {}

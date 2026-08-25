@@ -195,7 +195,7 @@ class TrackSaleCustomer(BaseModel):
         return m
 
 
-class SaleTypedDict(TypedDict):
+class TrackSaleSaleTypedDict(TypedDict):
     amount: float
     currency: str
     payment_processor: str
@@ -203,7 +203,7 @@ class SaleTypedDict(TypedDict):
     metadata: Nullable[Dict[str, Any]]
 
 
-class Sale(BaseModel):
+class TrackSaleSale(BaseModel):
     amount: float
 
     currency: str
@@ -234,7 +234,7 @@ class TrackSaleResponseBodyTypedDict(TypedDict):
 
     event_name: str
     customer: Nullable[TrackSaleCustomerTypedDict]
-    sale: Nullable[SaleTypedDict]
+    sale: Nullable[TrackSaleSaleTypedDict]
 
 
 class TrackSaleResponseBody(BaseModel):
@@ -244,7 +244,7 @@ class TrackSaleResponseBody(BaseModel):
 
     customer: Nullable[TrackSaleCustomer]
 
-    sale: Nullable[Sale]
+    sale: Nullable[TrackSaleSale]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -270,7 +270,7 @@ try:
 except NameError:
     pass
 try:
-    Sale.model_rebuild()
+    TrackSaleSale.model_rebuild()
 except NameError:
     pass
 try:

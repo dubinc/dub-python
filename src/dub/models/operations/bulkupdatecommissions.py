@@ -34,6 +34,8 @@ class BulkUpdateCommissionsRequestBody(BaseModel):
 
 
 class BulkUpdateCommissionsCommissionsStatus(str, Enum):
+    r"""The current status of the commission."""
+
     PENDING = "pending"
     PROCESSED = "processed"
     PAID = "paid"
@@ -48,6 +50,7 @@ class BulkUpdateCommissionsResponseBodyTypedDict(TypedDict):
     id: str
     r"""The commission's unique ID on Dub."""
     status: BulkUpdateCommissionsCommissionsStatus
+    r"""The current status of the commission."""
 
 
 class BulkUpdateCommissionsResponseBody(BaseModel):
@@ -55,6 +58,7 @@ class BulkUpdateCommissionsResponseBody(BaseModel):
     r"""The commission's unique ID on Dub."""
 
     status: BulkUpdateCommissionsCommissionsStatus
+    r"""The current status of the commission."""
 
 
 try:

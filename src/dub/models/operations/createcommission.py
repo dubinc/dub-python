@@ -8,7 +8,7 @@ from dub.utils import get_discriminator
 from enum import Enum
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Union
+from typing import Any, Dict, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -82,6 +82,100 @@ class RequestBodyCustomer(BaseModel):
         return m
 
 
+class RequestBodyPaymentProcessor(str, Enum):
+    r"""The payment processor via which the sale was made."""
+
+    STRIPE = "stripe"
+    SHOPIFY = "shopify"
+    POLAR = "polar"
+    PADDLE = "paddle"
+    APPLE = "apple"
+    REVENUECAT = "revenuecat"
+    DUB = "dub"
+    CUSTOM = "custom"
+
+
+class SaleTypedDict(TypedDict):
+    r"""The sale event object to associate the commission with."""
+
+    amount: NotRequired[Nullable[float]]
+    r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1580` JPY). Learn more: https://d.to/currency"""
+    currency: NotRequired[str]
+    r"""The currency of the sale. Accepts ISO 4217 currency codes. Sales will be automatically converted and stored as USD at the latest exchange rates. Learn more: https://d.to/currency"""
+    event_name: NotRequired[str]
+    r"""The name of the sale event. Recommended format: `Invoice paid` or `Subscription created`."""
+    payment_processor: NotRequired[RequestBodyPaymentProcessor]
+    r"""The payment processor via which the sale was made."""
+    invoice_id: NotRequired[Nullable[str]]
+    r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
+
+
+class Sale(BaseModel):
+    r"""The sale event object to associate the commission with."""
+
+    amount: OptionalNullable[float] = UNSET
+    r"""The amount of the sale in cents (for all two-decimal currencies). If the sale is in a zero-decimal currency, pass the full integer value (e.g. `1580` JPY). Learn more: https://d.to/currency"""
+
+    currency: Optional[str] = "usd"
+    r"""The currency of the sale. Accepts ISO 4217 currency codes. Sales will be automatically converted and stored as USD at the latest exchange rates. Learn more: https://d.to/currency"""
+
+    event_name: Annotated[Optional[str], pydantic.Field(alias="eventName")] = "Purchase"
+    r"""The name of the sale event. Recommended format: `Invoice paid` or `Subscription created`."""
+
+    payment_processor: Annotated[
+        Optional[RequestBodyPaymentProcessor], pydantic.Field(alias="paymentProcessor")
+    ] = RequestBodyPaymentProcessor.CUSTOM
+    r"""The payment processor via which the sale was made."""
+
+    invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
+        None
+    )
+    r"""The invoice ID of the sale. Can be used as a idempotency key – only one sale event can be recorded for a given invoice ID."""
+
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Additional metadata to be stored with the sale event. Max 10,000 characters when stringified."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "currency",
+                "eventName",
+                "paymentProcessor",
+                "invoiceId",
+                "metadata",
+            ]
+        )
+        nullable_fields = set(["amount", "invoiceId", "metadata"])
+        null_default_fields = set(["invoiceId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (
+                    self.__pydantic_fields_set__.intersection({n})
+                    or k in null_default_fields
+                )  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class RequestBody3TypedDict(TypedDict):
     type: CreateCommissionRequestBodyCommissionsType
     partner_id: str
@@ -93,15 +187,19 @@ class RequestBody3TypedDict(TypedDict):
     link_id: NotRequired[Nullable[str]]
     r"""The partner link ID to associate the commission with. If not provided, default to the link with the most revenue."""
     import_stripe_invoices: NotRequired[Nullable[bool]]
-    r"""When `true`, import all unimported paid Stripe invoices for the customer and create a commission for each. When `false`, create a single manual sale event using `saleAmount`."""
-    sale_amount: NotRequired[Nullable[float]]
-    r"""Required when `importStripeInvoices` is `false`. The sale amount in cents for the manual sale event. Ignored when importing from Stripe."""
-    sale_event_date: NotRequired[Nullable[str]]
+    r"""When `true`, import all unimported paid Stripe invoices for the customer and create a commission for each. When `false`, create a single manual sale event using `sale.amount` (or deprecated `saleAmount`)."""
+    date_: NotRequired[Nullable[str]]
     r"""Only used when `importStripeInvoices` is `false`. The date of the manual sale event. Defaults to the current date and time if not provided."""
+    sale: NotRequired[Nullable[SaleTypedDict]]
+    r"""The sale event object to associate the commission with."""
+    sale_event_date: NotRequired[Nullable[str]]
+    r"""Deprecated: Use `date` instead."""
+    sale_amount: NotRequired[Nullable[float]]
+    r"""Deprecated: Use `sale.amount` instead."""
     invoice_id: NotRequired[Nullable[str]]
-    r"""Only used when `importStripeInvoices` is `false`. An optional invoice ID to attach to the generated sale event and commission entry for deduplication."""
+    r"""Deprecated: Use `sale.invoiceId` instead."""
     product_id: NotRequired[Nullable[str]]
-    r"""Only used when `importStripeInvoices` is `false`. An optional product ID stored on the sale event metadata – will also impact commission earnings calculation (if a `Sale` `Product ID` modifier is set)."""
+    r"""Deprecated: Use `sale.metadata.productId` instead."""
 
 
 class RequestBody3(BaseModel):
@@ -124,27 +222,49 @@ class RequestBody3(BaseModel):
     import_stripe_invoices: Annotated[
         OptionalNullable[bool], pydantic.Field(alias="importStripeInvoices")
     ] = False
-    r"""When `true`, import all unimported paid Stripe invoices for the customer and create a commission for each. When `false`, create a single manual sale event using `saleAmount`."""
+    r"""When `true`, import all unimported paid Stripe invoices for the customer and create a commission for each. When `false`, create a single manual sale event using `sale.amount` (or deprecated `saleAmount`)."""
 
-    sale_amount: Annotated[
-        OptionalNullable[float], pydantic.Field(alias="saleAmount")
-    ] = UNSET
-    r"""Required when `importStripeInvoices` is `false`. The sale amount in cents for the manual sale event. Ignored when importing from Stripe."""
-
-    sale_event_date: Annotated[
-        OptionalNullable[str], pydantic.Field(alias="saleEventDate")
-    ] = UNSET
+    date_: Annotated[OptionalNullable[str], pydantic.Field(alias="date")] = UNSET
     r"""Only used when `importStripeInvoices` is `false`. The date of the manual sale event. Defaults to the current date and time if not provided."""
 
-    invoice_id: Annotated[OptionalNullable[str], pydantic.Field(alias="invoiceId")] = (
-        UNSET
-    )
-    r"""Only used when `importStripeInvoices` is `false`. An optional invoice ID to attach to the generated sale event and commission entry for deduplication."""
+    sale: OptionalNullable[Sale] = UNSET
+    r"""The sale event object to associate the commission with."""
 
-    product_id: Annotated[OptionalNullable[str], pydantic.Field(alias="productId")] = (
-        UNSET
-    )
-    r"""Only used when `importStripeInvoices` is `false`. An optional product ID stored on the sale event metadata – will also impact commission earnings calculation (if a `Sale` `Product ID` modifier is set)."""
+    sale_event_date: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="saleEventDate",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `date` instead."""
+
+    sale_amount: Annotated[
+        OptionalNullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="saleAmount",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `sale.amount` instead."""
+
+    invoice_id: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="invoiceId",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `sale.invoiceId` instead."""
+
+    product_id: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="productId",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `sale.metadata.productId` instead."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -154,8 +274,10 @@ class RequestBody3(BaseModel):
                 "customer",
                 "linkId",
                 "importStripeInvoices",
-                "saleAmount",
+                "date",
+                "sale",
                 "saleEventDate",
+                "saleAmount",
                 "invoiceId",
                 "productId",
             ]
@@ -166,8 +288,10 @@ class RequestBody3(BaseModel):
                 "customer",
                 "linkId",
                 "importStripeInvoices",
-                "saleAmount",
+                "date",
+                "sale",
                 "saleEventDate",
+                "saleAmount",
                 "invoiceId",
                 "productId",
             ]
@@ -264,6 +388,52 @@ class Customer(BaseModel):
         return m
 
 
+class LeadTypedDict(TypedDict):
+    r"""The lead event object to associate the commission with."""
+
+    event_name: NotRequired[Nullable[str]]
+    r"""The name of the lead event to track. If not provided, defaults to 'Sign up'."""
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
+
+
+class Lead(BaseModel):
+    r"""The lead event object to associate the commission with."""
+
+    event_name: Annotated[OptionalNullable[str], pydantic.Field(alias="eventName")] = (
+        UNSET
+    )
+    r"""The name of the lead event to track. If not provided, defaults to 'Sign up'."""
+
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Additional metadata to be stored with the lead event. Max 10,000 characters."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["eventName", "metadata"])
+        nullable_fields = set(["eventName", "metadata"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class RequestBody2TypedDict(TypedDict):
     type: CreateCommissionRequestBodyType
     partner_id: str
@@ -274,10 +444,14 @@ class RequestBody2TypedDict(TypedDict):
     r"""The full customer object to associate the commission with. Useful for creating the customer on demand."""
     link_id: NotRequired[Nullable[str]]
     r"""The partner link ID to associate the commission with. If not provided, default to the link with the most revenue."""
-    lead_event_date: NotRequired[Nullable[str]]
+    date_: NotRequired[Nullable[str]]
     r"""The date and time of the lead event. If not provided, defaults to the current date and time."""
+    lead: NotRequired[Nullable[LeadTypedDict]]
+    r"""The lead event object to associate the commission with."""
+    lead_event_date: NotRequired[Nullable[str]]
+    r"""Deprecated: Use `date` instead. The date and time of the lead event. If not provided, defaults to the current date and time."""
     lead_event_name: NotRequired[Nullable[str]]
-    r"""The name of the lead event. If not provided, defaults to 'Sign up'."""
+    r"""Deprecated: Use `lead.eventName` instead. The name of the lead event. If not provided, defaults to 'Sign up'."""
 
 
 class RequestBody2(BaseModel):
@@ -297,23 +471,53 @@ class RequestBody2(BaseModel):
     link_id: Annotated[OptionalNullable[str], pydantic.Field(alias="linkId")] = UNSET
     r"""The partner link ID to associate the commission with. If not provided, default to the link with the most revenue."""
 
-    lead_event_date: Annotated[
-        OptionalNullable[str], pydantic.Field(alias="leadEventDate")
-    ] = UNSET
+    date_: Annotated[OptionalNullable[str], pydantic.Field(alias="date")] = UNSET
     r"""The date and time of the lead event. If not provided, defaults to the current date and time."""
 
+    lead: OptionalNullable[Lead] = UNSET
+    r"""The lead event object to associate the commission with."""
+
+    lead_event_date: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="leadEventDate",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `date` instead. The date and time of the lead event. If not provided, defaults to the current date and time."""
+
     lead_event_name: Annotated[
-        OptionalNullable[str], pydantic.Field(alias="leadEventName")
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="leadEventName",
+        ),
     ] = "Sign up"
-    r"""The name of the lead event. If not provided, defaults to 'Sign up'."""
+    r"""Deprecated: Use `lead.eventName` instead. The name of the lead event. If not provided, defaults to 'Sign up'."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["customerId", "customer", "linkId", "leadEventDate", "leadEventName"]
+            [
+                "customerId",
+                "customer",
+                "linkId",
+                "date",
+                "lead",
+                "leadEventDate",
+                "leadEventName",
+            ]
         )
         nullable_fields = set(
-            ["customerId", "customer", "linkId", "leadEventDate", "leadEventName"]
+            [
+                "customerId",
+                "customer",
+                "linkId",
+                "date",
+                "lead",
+                "leadEventDate",
+                "leadEventName",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -346,13 +550,11 @@ class RequestBody1TypedDict(TypedDict):
     partner_id: str
     r"""The ID of the partner to create the commission for."""
     amount: float
-    r"""The commission amount in cents. Use a negative amount to create a clawback."""
+    r"""The commission earnings amount in cents. Use a negative amount to create a clawback."""
     date_: NotRequired[Nullable[str]]
     r"""If not provided, the current date will be used."""
     description: NotRequired[Nullable[str]]
-    r"""The description of the commission. Required for clawbacks (negative `amount`).
-    May be a known clawback reason (`order_canceled`, `fraud`, `terms_violation`, `tracking_error`, `payment_failed`, `ineligible_partner`, `duplicate_commission`) or an arbitrary string (max 190 characters).
-    """
+    r"""The description of the commission. Required for clawbacks (negative `amount`). May be a known clawback reason (`order_canceled`, `fraud`, `terms_violation`, `tracking_error`, `payment_failed`, `ineligible_partner`, `duplicate_commission`) or an arbitrary string (max 190 characters)."""
 
 
 class RequestBody1(BaseModel):
@@ -362,15 +564,13 @@ class RequestBody1(BaseModel):
     r"""The ID of the partner to create the commission for."""
 
     amount: float
-    r"""The commission amount in cents. Use a negative amount to create a clawback."""
+    r"""The commission earnings amount in cents. Use a negative amount to create a clawback."""
 
     date_: Annotated[OptionalNullable[str], pydantic.Field(alias="date")] = UNSET
     r"""If not provided, the current date will be used."""
 
     description: OptionalNullable[str] = UNSET
-    r"""The description of the commission. Required for clawbacks (negative `amount`).
-    May be a known clawback reason (`order_canceled`, `fraud`, `terms_violation`, `tracking_error`, `payment_failed`, `ineligible_partner`, `duplicate_commission`) or an arbitrary string (max 190 characters).
-    """
+    r"""The description of the commission. Required for clawbacks (negative `amount`). May be a known clawback reason (`order_canceled`, `fraud`, `terms_violation`, `tracking_error`, `payment_failed`, `ineligible_partner`, `duplicate_commission`) or an arbitrary string (max 190 characters)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -434,11 +634,19 @@ try:
 except NameError:
     pass
 try:
+    Sale.model_rebuild()
+except NameError:
+    pass
+try:
     RequestBody3.model_rebuild()
 except NameError:
     pass
 try:
     Customer.model_rebuild()
+except NameError:
+    pass
+try:
+    Lead.model_rebuild()
 except NameError:
     pass
 try:
