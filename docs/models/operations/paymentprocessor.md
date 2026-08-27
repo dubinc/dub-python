@@ -13,13 +13,14 @@ value = PaymentProcessor.STRIPE
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `STRIPE`     | stripe       |
-| `SHOPIFY`    | shopify      |
-| `POLAR`      | polar        |
-| `PADDLE`     | paddle       |
-| `APPLE`      | apple        |
-| `REVENUECAT` | revenuecat   |
-| `DUB`        | dub          |
-| `CUSTOM`     | custom       |
+| Name           | Value          |
+| -------------- | -------------- |
+| `STRIPE`       | stripe         |
+| `SHOPIFY`      | shopify        |
+| `POLAR`        | polar          |
+| `PADDLE`       | paddle         |
+| `APPLE`        | apple          |
+| `REVENUECAT`   | revenuecat     |
+| `LEMONSQUEEZY` | lemonsqueezy   |
+| `DUB`          | dub            |
+| `CUSTOM`       | custom         |

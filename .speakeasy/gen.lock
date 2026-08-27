@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 53827a65e285fd3db20e85620cbad055
+  docChecksum: c647693603977a0469863f2033c7dff0
   docVersion: 0.0.1
-  speakeasyVersion: 1.795.3
-  generationVersion: 2.932.9
-  releaseVersion: 0.38.2
-  configChecksum: 40bb3bf095a683adc9dd4d025c066c88
+  speakeasyVersion: 1.796.1
+  generationVersion: 2.933.0
+  releaseVersion: 0.38.3
+  configChecksum: 0e7b70f6c4c36febbc1e24bb563984d8
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 persistentEdits:
-  generation_id: 6c70f029-1de8-482f-88e8-46d710786729
-  pristine_commit_hash: ee6567479c6d88bb42fd3e1aa80e0997dce71138
-  pristine_tree_hash: 583ec2d9fc183b17768ba65f54dfdeae006c8bca
+  generation_id: c09d9626-a544-49aa-a47e-4400e3ff5dd5
+  pristine_commit_hash: 9baf4daf26616bfc613e2cd2746102e8a9e805ae
+  pristine_tree_hash: e365783c647d779a8c715db6cf0267d6b55134eb
 features:
   python:
     additionalDependencies: 1.1.0
     constsAndDefaults: 1.0.7
-    core: 6.1.0
+    core: 6.1.2
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     enumUnions: 0.1.1
@@ -36,7 +36,7 @@ features:
     nullables: 1.0.2
     pagination: 3.0.10
     responseFormat: 1.1.0
-    retries: 3.1.0
+    retries: 3.1.1
     sdkHooks: 1.3.0
     unions: 3.1.9
 trackedFiles:
@@ -1326,8 +1326,8 @@ trackedFiles:
     pristine_git_object: 2ae770ffc88df22a7d91642a4e55b70009cf77b0
   docs/models/operations/listcommissionsrequest.md:
     id: 3db2f1c49f34
-    last_write_checksum: sha1:78e06070e24d4a321e60abb5a9c1302d49407b7a
-    pristine_git_object: 6e1fa261bcc010b394454645759c61c065a491ba
+    last_write_checksum: sha1:1dfe9f1923661fe6755dba69301e073051416258
+    pristine_git_object: d4bad81992b376b279f031f65993a7b8ddfeb9f9
   docs/models/operations/listcommissionsresponse.md:
     id: 6de464f720eb
     last_write_checksum: sha1:c4dbf265a81bbe2f55bff665719e90d616884df0
@@ -1542,8 +1542,8 @@ trackedFiles:
     pristine_git_object: c260a79574f41f6ab0a44f7c48843403015f9522
   docs/models/operations/paymentprocessor.md:
     id: 9aa57ef1a35a
-    last_write_checksum: sha1:ff41c9ba4efd0f9c3b8da6a2dc08e96e1c8e1038
-    pristine_git_object: 0fca3a35fd6cffa9a22c3b13e550eb40dc31db84
+    last_write_checksum: sha1:87954952bd99ad0802aba9fa791939e69c9ac20a
+    pristine_git_object: 7a8b9ce9dd1c5e6aeec224420947051b780fbb72
   docs/models/operations/prices.md:
     id: e7ba4944650f
     last_write_checksum: sha1:04c9df190cee6ed1342a843021d6eb8ce1f968a7
@@ -1662,8 +1662,8 @@ trackedFiles:
     pristine_git_object: e87b797bdc39c7c6df95635d73a2cf572d43b880
   docs/models/operations/requestbodypaymentprocessor.md:
     id: d2968729261f
-    last_write_checksum: sha1:bd697be3186891f173c446177a86177fa46e2c84
-    pristine_git_object: faa0dc74b0e933c5fb25a23ad324d3101c43ef14
+    last_write_checksum: sha1:6f4766708603b502cc735c20cf5b95d92e00263a
+    pristine_git_object: e3cb21db7a4ebd7f2c2d5ebdb49e6cc090d0b257
   docs/models/operations/requestbodytype.md:
     id: 5fab74cc68be
     last_write_checksum: sha1:d2d564549acaf2673778e00461e35168d51d218f
@@ -1690,8 +1690,8 @@ trackedFiles:
     pristine_git_object: af9c47354e9aa96738e09e9f972fbce4ae17d938
   docs/models/operations/responsebodypaymentprocessor.md:
     id: b6fe3aac607d
-    last_write_checksum: sha1:2cb59373f164499e0e1763f9d73cd7347a4781c4
-    pristine_git_object: a5123819dcd3b8845c892e1c164fd69105dc77b7
+    last_write_checksum: sha1:d8be020a840b3393c3382e8d02d21132d73dd142
+    pristine_git_object: 4e125d5bdc9c269471b7d1e2133c619bf807220c
   docs/models/operations/responsebodysale.md:
     id: 04737e13a9e2
     last_write_checksum: sha1:fa030b0a6ebc14060840b8d05bbd5d6388cd143f
@@ -1982,8 +1982,8 @@ trackedFiles:
     pristine_git_object: 69f22ad78b9f5532033cfcc52f873bef47342e31
   docs/sdks/commissions/README.md:
     id: 12d4eb833558
-    last_write_checksum: sha1:56d80fb41efa2398d9978b5593b8c6aa78e5a3f3
-    pristine_git_object: ded6def6ea1cb3ae47c6ccd441448d3bcf4ef301
+    last_write_checksum: sha1:c9a10a10090319ba6b9b258314e934243cfdb592
+    pristine_git_object: 2e93e411cd30dbaaa8f6194a21e98e4add9f7f8c
   docs/sdks/customers/README.md:
     id: 9332759cffc2
     last_write_checksum: sha1:6ba12c01dcf573031658bc740f1f0c0c6048e690
@@ -2050,8 +2050,8 @@ trackedFiles:
     pristine_git_object: 0694fc0429fe2e082727e6847677957b9027e81e
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1e5e6bad76a13a20b0bc875f3e74d754ddc7cb38
-    pristine_git_object: d44367e7d824c4280eca03b7ecd574549fd1a222
+    last_write_checksum: sha1:8e8ce819d7e853a77ed36ef871aa55483cbf9b30
+    pristine_git_object: 9b4852b834a1675a8b49861af46045886220141a
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:fc1720a0d9880ce696669caa9dd625d9756a735e
@@ -2078,8 +2078,8 @@ trackedFiles:
     pristine_git_object: 9aa8b5ebdfd5ac42874b590795c2c08268149c49
   src/dub/_version.py:
     id: 2e88e1f01047
-    last_write_checksum: sha1:9b55f4a5267807f8ef668077a119c53e418ddfda
-    pristine_git_object: aeb668769a1a315b7bc22cecf77b6174a92e7abe
+    last_write_checksum: sha1:22fb318d09773e2ee650cc731f37d1a61e9b9de7
+    pristine_git_object: 4dd30bfd1513e45a143209504612ae4ad7e6054c
   src/dub/analytics.py:
     id: b7a4fa47e744
     last_write_checksum: sha1:c6edd8f776799bf60568649add5dd903942a2318
@@ -2094,8 +2094,8 @@ trackedFiles:
     pristine_git_object: 94c96409ab3c33fe78a9cd17d4ada39a31bc3fd9
   src/dub/commissions.py:
     id: 4d162906099e
-    last_write_checksum: sha1:b414dca4f737f6009fb3507ac6aca8f7e0f176fa
-    pristine_git_object: 68068ea35f809982619146f6ffba6c324d51cd2b
+    last_write_checksum: sha1:0045b36996ed753762cf81b4ff6603207e117fe1
+    pristine_git_object: 8edbaf46fcd3d539a2c16b3a014eded9c4ec6b5d
   src/dub/customers.py:
     id: 4a816dd98656
     last_write_checksum: sha1:65a88a7ae7707aea78573c8f04506b4d0150829a
@@ -2370,8 +2370,8 @@ trackedFiles:
     pristine_git_object: 1118b46c891746852d79b28245308afb40cf5e6d
   src/dub/models/operations/createcommission.py:
     id: 810d6b61c8c5
-    last_write_checksum: sha1:f18fce8fcbbe04ae2260bcec6e1c0b482f938505
-    pristine_git_object: a8d80b8963c80b32f8dde4df6dcd35e75b6fb5d2
+    last_write_checksum: sha1:745755ad94f3b2b0994edea42f26a0d4fb2cb00f
+    pristine_git_object: b544fb9052be45fcf9e79aab77a3941555668b8e
   src/dub/models/operations/creatediscountcode.py:
     id: a3277c158e98
     last_write_checksum: sha1:bbd0bcd35039a65735e7405ff1d0f21464cd4474
@@ -2466,8 +2466,8 @@ trackedFiles:
     pristine_git_object: c5414e72d2855f6023ba9340d87283bfb1871dde
   src/dub/models/operations/listcommissions.py:
     id: 992f4436b681
-    last_write_checksum: sha1:99fc340667ef8594d4121fd0651f95aee909de96
-    pristine_git_object: 3985f10f5db97075efda9ec4fcbc76a4b9f85157
+    last_write_checksum: sha1:cb57a61b06db025f4220bd843dd167da30e097f6
+    pristine_git_object: 4a4d9bfa1445ffe9ba48e274523d5ce433007fad
   src/dub/models/operations/listdiscountcodes.py:
     id: 68d5de2415f6
     last_write_checksum: sha1:26d3ab3c5627e939f4bbca94c527850ead0ddc03
@@ -2478,8 +2478,8 @@ trackedFiles:
     pristine_git_object: 2da09a9d662fc3305bc5e7006dd9164494ec5979
   src/dub/models/operations/listevents.py:
     id: e65c95de179b
-    last_write_checksum: sha1:d90ae6f5ea5016e89da0718e4129a90f09cdebb8
-    pristine_git_object: 8b2fc1c9a17c2d439ee4fb4bbe41433933e084df
+    last_write_checksum: sha1:7ad081e9398815192fa22caf62d63ad4e3aec28c
+    pristine_git_object: 3d22740844f12d13dc68700ba0ec5841ffd3fac5
   src/dub/models/operations/listfolders.py:
     id: 42dbcd5bbad8
     last_write_checksum: sha1:689f89c2d58f9196fc579cfe741d229df4aa2982
@@ -2526,8 +2526,8 @@ trackedFiles:
     pristine_git_object: 455add1388cb43b9237c58c46a6087ce83a430c9
   src/dub/models/operations/tracksale.py:
     id: 9a199b0a5b7f
-    last_write_checksum: sha1:3b5fe074fdc9a82dfdf0ab4d9a0edc096c52207d
-    pristine_git_object: 568954141b8e63030930fe55a93a34d776c685b2
+    last_write_checksum: sha1:6906ac6c573e7cf6be12897fb7950553796ad540
+    pristine_git_object: 05c189e06e91d08b5aab9e7d9d7d739ef0fa1404
   src/dub/models/operations/updatecommission.py:
     id: 5efb92f68d93
     last_write_checksum: sha1:d7b32b10d55bc818b6f789545538a978ce1bd689
@@ -2658,8 +2658,8 @@ trackedFiles:
     pristine_git_object: 1186634fcd6ddaf5e42de7718379ce3d53c21970
   src/dub/utils/retries.py:
     id: 4125a14dcfaa
-    last_write_checksum: sha1:94ea3ad8eb30eff8e365d5ef857913df292466c3
-    pristine_git_object: dfc47593680816fc45df5ea3b24e8edf617691cb
+    last_write_checksum: sha1:6d360d567c5fa6887d08f7f6d03d78f9c4f556a0
+    pristine_git_object: 8e11505dd0bd76f3948b20fec5b6b4f4948e8962
   src/dub/utils/security.py:
     id: fe008e7f9c9e
     last_write_checksum: sha1:d8844a800b89a1be09089d76d2f6ca072ff94b41
@@ -3796,6 +3796,7 @@ examples:
           pageSize: 50
           endingBefore: "cm_1KAP4CGN2Z5TPYYQ1W4JEYD56"
           startingAfter: "cm_1KAP4CGN2Z5TPYYQ1W4JEYD56"
+          query: "metadata['key']='value'"
       responses:
         "200":
           application/json: [{"id": "cm_1JVR7XRCSR0EDBAF39FZ4PMYE", "type": "sale", "amount": 3320.11, "earnings": 7217.59, "currency": "Ethiopian Birr", "status": "refunded", "invoiceId": "<id>", "description": "entire apud whereas maintainer or impressionable beyond mindless", "quantity": 9385.84, "metadata": {"key": "<value>", "key1": "<value>"}, "createdAt": "1725904231169", "updatedAt": "1735639009138", "paidAt": "<value>", "partner": {"id": "<id>", "name": "<value>", "email": "Robb.Connelly98@yahoo.com", "image": "https://picsum.photos/seed/Iy5IMeaTL/492/441", "payoutsEnabledAt": "<value>", "country": "Greenland"}}, {"id": "cm_1JVR7XRCSR0EDBAF39FZ4PMYE", "type": "lead", "amount": 3320.11, "earnings": 7217.59, "currency": "Ethiopian Birr", "status": "refunded", "invoiceId": "<id>", "description": null, "quantity": 4998.11, "metadata": {"key": "<value>", "key1": "<value>"}, "createdAt": "1725904231169", "updatedAt": "1735639009138", "paidAt": "<value>", "partner": {"id": "<id>", "name": "<value>", "email": "Robb.Connelly98@yahoo.com", "image": "https://picsum.photos/seed/Iy5IMeaTL/492/441", "payoutsEnabledAt": "<value>", "country": "Greenland"}}]
@@ -4368,11 +4369,7 @@ examples:
           application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes:
-  * `dub.commissions.list()`:  `response.[]` **Changed**
-  * `dub.commissions.create()`:  `request` **Changed**
-  * `dub.commissions.update()`:  `response` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `dub.events.list()`:  `response.[].union(sale).sale.payment_processor.enum(lemonsqueezy)` **Added** (Breaking ⚠️)\n* `dub.track.sale()`: \n  *  `request.payment_processor.enum(lemonsqueezy)` **Added**\n* `dub.commissions.list()`: \n  *  `request.query` **Added**\n* `dub.commissions.create()`: \n  *  `request.union(sale).sale.payment_processor.enum(lemonsqueezy)` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

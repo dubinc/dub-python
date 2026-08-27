@@ -93,6 +93,8 @@ class ListCommissionsRequestTypedDict(TypedDict):
     end: NotRequired[str]
     r"""The end date of the date range to filter the commissions by."""
     timezone: NotRequired[str]
+    query: NotRequired[str]
+    r"""Filter by lead or sale event metadata. Top-level keys only. Compares string values only — numeric and boolean metadata values are not matched."""
     ending_before: NotRequired[str]
     r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
     starting_after: NotRequired[str]
@@ -202,6 +204,12 @@ class ListCommissionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
 
+    query: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by lead or sale event metadata. Top-level keys only. Compares string values only — numeric and boolean metadata values are not matched."""
+
     ending_before: Annotated[
         Optional[str],
         pydantic.Field(alias="endingBefore"),
@@ -248,6 +256,7 @@ class ListCommissionsRequest(BaseModel):
                 "start",
                 "end",
                 "timezone",
+                "query",
                 "endingBefore",
                 "startingAfter",
                 "page",
