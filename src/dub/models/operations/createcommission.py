@@ -91,6 +91,7 @@ class RequestBodyPaymentProcessor(str, Enum):
     PADDLE = "paddle"
     APPLE = "apple"
     REVENUECAT = "revenuecat"
+    LEMONSQUEEZY = "lemonsqueezy"
     DUB = "dub"
     CUSTOM = "custom"
 

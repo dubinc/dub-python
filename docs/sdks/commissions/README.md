@@ -25,6 +25,7 @@ with Dub(
 ) as d_client:
 
     res = d_client.commissions.list(request={
+        "query": "metadata['key']='value'",
         "ending_before": "cm_1KAP4CGN2Z5TPYYQ1W4JEYD56",
         "starting_after": "cm_1KAP4CGN2Z5TPYYQ1W4JEYD56",
         "page": 1,
