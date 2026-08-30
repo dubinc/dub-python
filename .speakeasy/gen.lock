@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 7dc89d725e13a575f09e0bbe2c501f53
+  docChecksum: 052da4959733457f8d8107004470863b
   docVersion: 0.0.1
   speakeasyVersion: 1.796.2
   generationVersion: 2.933.0
-  releaseVersion: 0.38.4
-  configChecksum: 1122febfefaa4602949fa827aed7d57e
+  releaseVersion: 0.38.5
+  configChecksum: e45b49987b000d56d2af1f2740fa5dcb
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
 persistentEdits:
-  generation_id: fed178eb-f795-4eb6-a07e-ebe3ff5b84b8
-  pristine_commit_hash: f29f7404df1dfe2912e0b4d31de3d36f692eae85
-  pristine_tree_hash: f983ea92fc4223e2e5308d2d662826a70b099aae
+  generation_id: 66f21a0e-f4c3-4785-b555-40d1b95582f8
+  pristine_commit_hash: b3e090d1e2674f156ca635be8882006f9f81a4e1
+  pristine_tree_hash: e8d0482367681fe6ea3b39a97140b575580e6e2d
 features:
   python:
     additionalDependencies: 1.1.0
@@ -1330,8 +1330,8 @@ trackedFiles:
     pristine_git_object: 2ae770ffc88df22a7d91642a4e55b70009cf77b0
   docs/models/operations/listcommissionsrequest.md:
     id: 3db2f1c49f34
-    last_write_checksum: sha1:1dfe9f1923661fe6755dba69301e073051416258
-    pristine_git_object: d4bad81992b376b279f031f65993a7b8ddfeb9f9
+    last_write_checksum: sha1:b04ba2cbd7cfc0dc96536d878801cf1e441d087c
+    pristine_git_object: 8de4f367b262a2a18127bc84aa4d10133216f615
   docs/models/operations/listcommissionsresponse.md:
     id: 6de464f720eb
     last_write_checksum: sha1:c4dbf265a81bbe2f55bff665719e90d616884df0
@@ -1822,8 +1822,8 @@ trackedFiles:
     pristine_git_object: 024ab2970d1a03d45bfd01fd03dcd1fa6a3b0dc6
   docs/models/operations/type.md:
     id: 8e39682ca85e
-    last_write_checksum: sha1:5b75236e7563c6651b31b4d60c8461152a2262ee
-    pristine_git_object: e9de83f0c33eda8012e2385bc373f11c09972e2e
+    last_write_checksum: sha1:1cf353c8450cb9200ad59b9b26572446fb9ad1b6
+    pristine_git_object: 12e34d3ee44106c7dd211218e5bfea176c756ed8
   docs/models/operations/updatecommissioncustomer.md:
     id: 19d4c8993860
     last_write_checksum: sha1:dca3126dda8caa333e67d90d51f95a75b446f8fc
@@ -2054,8 +2054,8 @@ trackedFiles:
     pristine_git_object: 0694fc0429fe2e082727e6847677957b9027e81e
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:88a4e660eaa72a1de169e2299352b72cb34019b8
-    pristine_git_object: 4d3761aaf7e93836db4a5075a67b8bab8f5233c5
+    last_write_checksum: sha1:0c8d1e2f80bed80cee5f07182f781f8f4cf04fe2
+    pristine_git_object: 84ee0c1eccf2c51da3504582cea617d1464d7021
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:fc1720a0d9880ce696669caa9dd625d9756a735e
@@ -2082,8 +2082,8 @@ trackedFiles:
     pristine_git_object: 9aa8b5ebdfd5ac42874b590795c2c08268149c49
   src/dub/_version.py:
     id: 2e88e1f01047
-    last_write_checksum: sha1:11f280e64e60592f236b25f84e42e6488b86d3ff
-    pristine_git_object: ed12e28bbeae624c851e89779d43e8ba98e4b888
+    last_write_checksum: sha1:95b9c40377d8b4b528e539b16ddcbb7854670563
+    pristine_git_object: df24334e81e26785e109296f61f21b90fdbd60f5
   src/dub/analytics.py:
     id: b7a4fa47e744
     last_write_checksum: sha1:c6edd8f776799bf60568649add5dd903942a2318
@@ -2474,8 +2474,8 @@ trackedFiles:
     pristine_git_object: c5414e72d2855f6023ba9340d87283bfb1871dde
   src/dub/models/operations/listcommissions.py:
     id: 992f4436b681
-    last_write_checksum: sha1:cb57a61b06db025f4220bd843dd167da30e097f6
-    pristine_git_object: 4a4d9bfa1445ffe9ba48e274523d5ce433007fad
+    last_write_checksum: sha1:56f6081cd3fc1fa415a3b25bc57a2a6297ee8d0f
+    pristine_git_object: f361d08f033e376ff930b81944e3c717de28f2c2
   src/dub/models/operations/listdiscountcodes.py:
     id: 68d5de2415f6
     last_write_checksum: sha1:26d3ab3c5627e939f4bbca94c527850ead0ddc03
@@ -4377,7 +4377,6 @@ examples:
           application/json: {"error": {"code": "internal_server_error", "message": "The requested resource was not found.", "doc_url": "https://dub.co/docs/api-reference/errors#internal-server_error"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `dub.analytics.retrieve()`: \n  *  `request` **Changed**\n  *  `response.union(Array<AnalyticsEventNames>)` **Added** (Breaking ⚠️)\n* `dub.events.list()`: \n  *  `request.event_name` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
