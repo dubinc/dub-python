@@ -120,6 +120,8 @@ class ListEventsRequestTypedDict(TypedDict):
     r"""The OS to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Windows`, `Mac,Windows,Linux`, `-Windows`."""
     trigger: NotRequired[str]
     r"""The trigger to retrieve analytics for. Valid values: qr, link, pageview. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `qr`, `qr,link`, `-qr`. If undefined, returns all trigger types."""
+    event_name: NotRequired[str]
+    r"""The conversion event name to retrieve analytics for. Only available for lead and sale events. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Sign up`, `Sign up,Purchase`, `-Sign up`."""
     referer: NotRequired[str]
     r"""The referer hostname to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `google.com`, `google.com,twitter.com`, `-facebook.com`."""
     referer_url: NotRequired[str]
@@ -313,6 +315,13 @@ class ListEventsRequest(BaseModel):
     ] = None
     r"""The trigger to retrieve analytics for. Valid values: qr, link, pageview. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `qr`, `qr,link`, `-qr`. If undefined, returns all trigger types."""
 
+    event_name: Annotated[
+        Optional[str],
+        pydantic.Field(alias="eventName"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The conversion event name to retrieve analytics for. Only available for lead and sale events. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Sign up`, `Sign up,Purchase`, `-Sign up`."""
+
     referer: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -460,6 +469,7 @@ class ListEventsRequest(BaseModel):
                 "browser",
                 "os",
                 "trigger",
+                "eventName",
                 "referer",
                 "refererUrl",
                 "url",

@@ -22,6 +22,7 @@ if TYPE_CHECKING:
         Region,
     )
     from .analyticsdevices import AnalyticsDevices, AnalyticsDevicesTypedDict
+    from .analyticseventnames import AnalyticsEventNames, AnalyticsEventNamesTypedDict
     from .analyticsos import AnalyticsOS, AnalyticsOSTypedDict
     from .analyticsreferers import AnalyticsReferers, AnalyticsReferersTypedDict
     from .analyticsrefererurls import (
@@ -259,6 +260,8 @@ __all__ = [
     "AnalyticsCountriesTypedDict",
     "AnalyticsDevices",
     "AnalyticsDevicesTypedDict",
+    "AnalyticsEventNames",
+    "AnalyticsEventNamesTypedDict",
     "AnalyticsOS",
     "AnalyticsOSTypedDict",
     "AnalyticsRefererUrls",
@@ -480,6 +483,8 @@ _dynamic_imports: dict[str, str] = {
     "Region": ".analyticscountries",
     "AnalyticsDevices": ".analyticsdevices",
     "AnalyticsDevicesTypedDict": ".analyticsdevices",
+    "AnalyticsEventNames": ".analyticseventnames",
+    "AnalyticsEventNamesTypedDict": ".analyticseventnames",
     "AnalyticsOS": ".analyticsos",
     "AnalyticsOSTypedDict": ".analyticsos",
     "AnalyticsReferers": ".analyticsreferers",

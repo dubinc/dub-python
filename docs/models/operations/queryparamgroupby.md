@@ -26,6 +26,7 @@ value = QueryParamGroupBy.COUNT
 | `OS`               | os                 |
 | `TRIGGER`          | trigger            |
 | `TRIGGERS`         | triggers           |
+| `EVENT_NAMES`      | event_names        |
 | `REFERERS`         | referers           |
 | `REFERER_URLS`     | referer_urls       |
 | `TOP_FOLDERS`      | top_folders        |
