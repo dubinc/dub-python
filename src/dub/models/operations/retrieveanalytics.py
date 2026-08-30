@@ -10,6 +10,7 @@ from dub.models.components import (
     analyticscount as components_analyticscount,
     analyticscountries as components_analyticscountries,
     analyticsdevices as components_analyticsdevices,
+    analyticseventnames as components_analyticseventnames,
     analyticsos as components_analyticsos,
     analyticsreferers as components_analyticsreferers,
     analyticsrefererurls as components_analyticsrefererurls,
@@ -51,6 +52,7 @@ class QueryParamGroupBy(str, Enum):
     OS = "os"
     TRIGGER = "trigger"
     TRIGGERS = "triggers"
+    EVENT_NAMES = "event_names"
     REFERERS = "referers"
     REFERER_URLS = "referer_urls"
     TOP_FOLDERS = "top_folders"
@@ -141,6 +143,8 @@ class RetrieveAnalyticsRequestTypedDict(TypedDict):
     r"""The OS to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Windows`, `Mac,Windows,Linux`, `-Windows`."""
     trigger: NotRequired[str]
     r"""The trigger to retrieve analytics for. Valid values: qr, link, pageview. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `qr`, `qr,link`, `-qr`. If undefined, returns all trigger types."""
+    event_name: NotRequired[str]
+    r"""The conversion event name to retrieve analytics for. Only available for lead and sale events. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Sign up`, `Sign up,Purchase`, `-Sign up`."""
     referer: NotRequired[str]
     r"""The referer hostname to retrieve analytics for. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `google.com`, `google.com,twitter.com`, `-facebook.com`."""
     referer_url: NotRequired[str]
@@ -332,6 +336,13 @@ class RetrieveAnalyticsRequest(BaseModel):
     ] = None
     r"""The trigger to retrieve analytics for. Valid values: qr, link, pageview. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `qr`, `qr,link`, `-qr`. If undefined, returns all trigger types."""
 
+    event_name: Annotated[
+        Optional[str],
+        pydantic.Field(alias="eventName"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The conversion event name to retrieve analytics for. Only available for lead and sale events. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `Sign up`, `Sign up,Purchase`, `-Sign up`."""
+
     referer: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -449,6 +460,7 @@ class RetrieveAnalyticsRequest(BaseModel):
                 "browser",
                 "os",
                 "trigger",
+                "eventName",
                 "referer",
                 "refererUrl",
                 "url",
@@ -492,6 +504,7 @@ RetrieveAnalyticsResponseBodyTypedDict = TypeAliasType(
         List[components_analyticsbrowsers.AnalyticsBrowsersTypedDict],
         List[components_analyticsos.AnalyticsOSTypedDict],
         List[components_analyticstriggers.AnalyticsTriggersTypedDict],
+        List[components_analyticseventnames.AnalyticsEventNamesTypedDict],
         List[components_analyticsreferers.AnalyticsReferersTypedDict],
         List[components_analyticsrefererurls.AnalyticsRefererUrlsTypedDict],
         List[components_analyticstoplinks.AnalyticsTopLinksTypedDict],
@@ -514,6 +527,7 @@ RetrieveAnalyticsResponseBody = TypeAliasType(
         List[components_analyticsbrowsers.AnalyticsBrowsers],
         List[components_analyticsos.AnalyticsOS],
         List[components_analyticstriggers.AnalyticsTriggers],
+        List[components_analyticseventnames.AnalyticsEventNames],
         List[components_analyticsreferers.AnalyticsReferers],
         List[components_analyticsrefererurls.AnalyticsRefererUrls],
         List[components_analyticstoplinks.AnalyticsTopLinks],

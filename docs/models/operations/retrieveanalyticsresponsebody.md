@@ -65,6 +65,12 @@ value: List[components.AnalyticsOS] = /* values here */
 value: List[components.AnalyticsTriggers] = /* values here */
 ```
 
+### `List[components.AnalyticsEventNames]`
+
+```python
+value: List[components.AnalyticsEventNames] = /* values here */
+```
+
 ### `List[components.AnalyticsReferers]`
 
 ```python
