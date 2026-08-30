@@ -13,7 +13,12 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Type(str, Enum):
-    r"""Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`."""
+    r"""Filter the list of commissions by type.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples:
+    - \"sale\"
+    - \"sale,lead\"
+    - \"-click\"
+    """
 
     CLICK = "click"
     LEAD = "lead"
@@ -65,19 +70,41 @@ class ListCommissionsQueryParamInterval(str, Enum):
 
 class ListCommissionsRequestTypedDict(TypedDict):
     type: NotRequired[Type]
-    r"""Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`."""
+    r"""Filter the list of commissions by type.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples:
+    - \"sale\" 
+    - \"sale,lead\" 
+    - \"-click\" 
+    """
     customer_id: NotRequired[str]
     r"""Filter the list of commissions by the associated customer."""
     payout_id: NotRequired[str]
     r"""Filter the list of commissions by the associated payout."""
     partner_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `partner_abc`, `partner_abc,partner_xyz`, `-partner_abc`."""
+    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`).
+    Examples:
+    - \"partner_abc\" 
+    - \"partner_abc,partner_xyz\" 
+    - \"-partner_abc\" 
+    """
     tenant_id: NotRequired[str]
     r"""Filter the list of commissions by the associated partner's `tenantId` (their unique ID within your database)."""
     group_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
+    r"""Filter the list of commissions by the associated partner group.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples:
+    - \"group_abc\" 
+    - \"group_abc,group_xyz\" 
+    - \"-group_abc\" 
+    """
     partner_tag_id: NotRequired[str]
-    r"""Filter the list of commissions by the associated partner tag. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_abc`, `ptag_abc,ptag_xyz`, `-ptag_abc`."""
+    r"""Filter the list of commissions by the associated partner tag.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`).
+    Examples:
+    - \"ptag_abc\" 
+    - \"ptag_abc,ptag_xyz\" 
+    - \"-ptag_abc\" 
+    """
     invoice_id: NotRequired[str]
     r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
     status: NotRequired[QueryParamStatus]
@@ -94,7 +121,11 @@ class ListCommissionsRequestTypedDict(TypedDict):
     r"""The end date of the date range to filter the commissions by."""
     timezone: NotRequired[str]
     query: NotRequired[str]
-    r"""Filter by lead or sale event metadata. Top-level keys only. Compares string values only — numeric and boolean metadata values are not matched."""
+    r"""Filter by lead or sale event metadata. Top-level keys only. Compares string values only — numeric and boolean metadata values are not matched.
+    Examples:
+    - \"metadata['key']='value'\" 
+    - \"metadata['key']!='value'\" 
+    """
     ending_before: NotRequired[str]
     r"""If specified, the query only searches for results before this cursor. Mutually exclusive with `startingAfter`."""
     starting_after: NotRequired[str]
@@ -110,7 +141,12 @@ class ListCommissionsRequest(BaseModel):
         Optional[Type],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by type. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `sale`, `sale,lead`, `-click`."""
+    r"""Filter the list of commissions by type.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples:
+    - \"sale\" 
+    - \"sale,lead\" 
+    - \"-click\" 
+    """
 
     customer_id: Annotated[
         Optional[str],
@@ -131,7 +167,13 @@ class ListCommissionsRequest(BaseModel):
         pydantic.Field(alias="partnerId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `partner_abc`, `partner_abc,partner_xyz`, `-partner_abc`."""
+    r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`).
+    Examples:
+    - \"partner_abc\" 
+    - \"partner_abc,partner_xyz\" 
+    - \"-partner_abc\" 
+    """
 
     tenant_id: Annotated[
         Optional[str],
@@ -145,14 +187,25 @@ class ListCommissionsRequest(BaseModel):
         pydantic.Field(alias="groupId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
+    r"""Filter the list of commissions by the associated partner group.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples:
+    - \"group_abc\" 
+    - \"group_abc,group_xyz\" 
+    - \"-group_abc\" 
+    """
 
     partner_tag_id: Annotated[
         Optional[str],
         pydantic.Field(alias="partnerTagId"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter the list of commissions by the associated partner tag. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_abc`, `ptag_abc,ptag_xyz`, `-ptag_abc`."""
+    r"""Filter the list of commissions by the associated partner tag.
+    Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`).
+    Examples:
+    - \"ptag_abc\" 
+    - \"ptag_abc,ptag_xyz\" 
+    - \"-ptag_abc\" 
+    """
 
     invoice_id: Annotated[
         Optional[str],
@@ -208,7 +261,11 @@ class ListCommissionsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter by lead or sale event metadata. Top-level keys only. Compares string values only — numeric and boolean metadata values are not matched."""
+    r"""Filter by lead or sale event metadata. Top-level keys only. Compares string values only — numeric and boolean metadata values are not matched.
+    Examples:
+    - \"metadata['key']='value'\" 
+    - \"metadata['key']!='value'\" 
+    """
 
     ending_before: Annotated[
         Optional[str],
