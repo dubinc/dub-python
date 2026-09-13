@@ -288,7 +288,7 @@ class CommissionCreatedEventDataTypedDict(TypedDict):
     quantity: float
     r"""The event quantity. Used for click and lead commissions; typically `1` for sale and custom commissions."""
     metadata: Nullable[Dict[str, Any]]
-    r"""User-provided metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`)."""
+    r"""Metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`), or from Stripe webhook metadata."""
     created_at: str
     r"""The date and time when the commission was created."""
     updated_at: str
@@ -329,7 +329,7 @@ class CommissionCreatedEventData(BaseModel):
     r"""The event quantity. Used for click and lead commissions; typically `1` for sale and custom commissions."""
 
     metadata: Nullable[Dict[str, Any]]
-    r"""User-provided metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`)."""
+    r"""Metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`), or from Stripe webhook metadata."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date and time when the commission was created."""
