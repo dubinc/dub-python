@@ -28,6 +28,8 @@ class UpdateCustomerRequestBodyTypedDict(TypedDict):
     r"""The customer's Stripe customer ID. This is useful for attributing recurring sale events to the partner who referred the customer."""
     country: NotRequired[str]
     r"""The customer's country in ISO 3166-1 alpha-2 format. Updating this field will only affect the customer's country in Dub's system (and has no effect on existing conversion events)."""
+    subscription_canceled_at: NotRequired[Nullable[str]]
+    r"""The date the customer canceled their subscription. Set to a timestamp to mark the subscription as canceled, or `null` to clear it (e.g. if they resubscribe)."""
 
 
 class UpdateCustomerRequestBody(BaseModel):
@@ -51,12 +53,27 @@ class UpdateCustomerRequestBody(BaseModel):
     country: Optional[str] = None
     r"""The customer's country in ISO 3166-1 alpha-2 format. Updating this field will only affect the customer's country in Dub's system (and has no effect on existing conversion events)."""
 
+    subscription_canceled_at: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="subscriptionCanceledAt")
+    ] = UNSET
+    r"""The date the customer canceled their subscription. Set to a timestamp to mark the subscription as canceled, or `null` to clear it (e.g. if they resubscribe)."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["email", "name", "avatar", "externalId", "stripeCustomerId", "country"]
+            [
+                "email",
+                "name",
+                "avatar",
+                "externalId",
+                "stripeCustomerId",
+                "country",
+                "subscriptionCanceledAt",
+            ]
         )
-        nullable_fields = set(["email", "name", "avatar", "stripeCustomerId"])
+        nullable_fields = set(
+            ["email", "name", "avatar", "stripeCustomerId", "subscriptionCanceledAt"]
+        )
         serialized = handler(self)
         m = {}
 

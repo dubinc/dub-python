@@ -932,6 +932,7 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     lead_reward_id: NotRequired[Nullable[str]]
     sale_reward_id: NotRequired[Nullable[str]]
     referral_reward_id: NotRequired[Nullable[str]]
+    custom_reward_id: NotRequired[Nullable[str]]
     discount_id: NotRequired[Nullable[str]]
     application_id: NotRequired[Nullable[str]]
     r"""If the partner submitted an application to join the program, this is the ID of the application."""
@@ -1079,6 +1080,10 @@ class CreatePartnerResponseBody(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="referralRewardId")
     ] = UNSET
 
+    custom_reward_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="customRewardId")
+    ] = UNSET
+
     discount_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="discountId")
     ] = UNSET
@@ -1200,6 +1205,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "leadRewardId",
                 "saleRewardId",
                 "referralRewardId",
+                "customRewardId",
                 "discountId",
                 "applicationId",
                 "bannedAt",
@@ -1248,6 +1254,7 @@ class CreatePartnerResponseBody(BaseModel):
                 "leadRewardId",
                 "saleRewardId",
                 "referralRewardId",
+                "customRewardId",
                 "discountId",
                 "applicationId",
                 "bannedAt",

@@ -255,7 +255,7 @@ class CreatePartnerLinkRequestBodyTypedDict(TypedDict):
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
     url: NotRequired[Nullable[str]]
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
+    r"""The URL to shorten (if not provided, the program's default URL will be used)."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     comments: NotRequired[Nullable[str]]
@@ -276,7 +276,7 @@ class CreatePartnerLinkRequestBody(BaseModel):
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
 
     url: OptionalNullable[str] = UNSET
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
+    r"""The URL to shorten (if not provided, the program's default URL will be used)."""
 
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
