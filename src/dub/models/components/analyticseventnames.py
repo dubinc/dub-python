@@ -25,16 +25,16 @@ class AnalyticsEventNames(BaseModel):
     event_name: Annotated[str, pydantic.Field(alias="eventName")]
     r"""The name of the conversion event (lead or sale)"""
 
-    clicks: Optional[float] = 0
+    clicks: Optional[float] = 0.0
     r"""The number of clicks from this event name"""
 
-    leads: Optional[float] = 0
+    leads: Optional[float] = 0.0
     r"""The number of leads from this event name"""
 
-    sales: Optional[float] = 0
+    sales: Optional[float] = 0.0
     r"""The number of sales from this event name"""
 
-    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0.0
     r"""The total amount of sales from this event name, in cents"""
 
     @model_serializer(mode="wrap")
