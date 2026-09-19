@@ -25,16 +25,16 @@ class AnalyticsDevices(BaseModel):
     device: str
     r"""The name of the device"""
 
-    clicks: Optional[float] = 0
+    clicks: Optional[float] = 0.0
     r"""The number of clicks from this device"""
 
-    leads: Optional[float] = 0
+    leads: Optional[float] = 0.0
     r"""The number of leads from this device"""
 
-    sales: Optional[float] = 0
+    sales: Optional[float] = 0.0
     r"""The number of sales from this device"""
 
-    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0.0
     r"""The total amount of sales from this device, in cents"""
 
     @model_serializer(mode="wrap")
