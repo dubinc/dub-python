@@ -25,16 +25,16 @@ class AnalyticsReferers(BaseModel):
     referer: str
     r"""The name of the referer. If unknown, this will be `(direct)`"""
 
-    clicks: Optional[float] = 0
+    clicks: Optional[float] = 0.0
     r"""The number of clicks from this referer"""
 
-    leads: Optional[float] = 0
+    leads: Optional[float] = 0.0
     r"""The number of leads from this referer"""
 
-    sales: Optional[float] = 0
+    sales: Optional[float] = 0.0
     r"""The number of sales from this referer"""
 
-    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0.0
     r"""The total amount of sales from this referer, in cents"""
 
     @model_serializer(mode="wrap")

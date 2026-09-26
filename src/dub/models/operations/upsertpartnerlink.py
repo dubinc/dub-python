@@ -251,7 +251,7 @@ class UpsertPartnerLinkLinkProps(BaseModel):
 
 class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
     url: str
-    r"""The URL to upsert for. Will throw an error if the domain doesn't match the program's default URL domain."""
+    r"""The URL to upsert for."""
     partner_id: NotRequired[Nullable[str]]
     r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
     tenant_id: NotRequired[Nullable[str]]
@@ -266,7 +266,7 @@ class UpsertPartnerLinkRequestBodyTypedDict(TypedDict):
 
 class UpsertPartnerLinkRequestBody(BaseModel):
     url: str
-    r"""The URL to upsert for. Will throw an error if the domain doesn't match the program's default URL domain."""
+    r"""The URL to upsert for."""
 
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET

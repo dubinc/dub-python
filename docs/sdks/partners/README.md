@@ -96,11 +96,11 @@ with Dub(
             "test_variants": [
                 {
                     "url": "https://example.com/variant-1",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
                 {
                     "url": "https://example.com/variant-2",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
             ],
         },
@@ -209,11 +209,11 @@ with Dub(
             "test_variants": [
                 {
                     "url": "https://example.com/variant-1",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
                 {
                     "url": "https://example.com/variant-2",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
             ],
         },
@@ -275,11 +275,11 @@ with Dub(
             "test_variants": [
                 {
                     "url": "https://example.com/variant-1",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
                 {
                     "url": "https://example.com/variant-2",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
             ],
         },

@@ -55,7 +55,7 @@ class GetQRCodeRequest(BaseModel):
     size: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 600
+    ] = 600.0
     r"""The size of the QR code in pixels. Defaults to `600` if not provided."""
 
     level: Annotated[
@@ -88,7 +88,7 @@ class GetQRCodeRequest(BaseModel):
     margin: Annotated[
         Optional[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 2
+    ] = 2.0
     r"""The size of the margin around the QR code. Defaults to 2 if not provided."""
 
     include_margin: Annotated[
