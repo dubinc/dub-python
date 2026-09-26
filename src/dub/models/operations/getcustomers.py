@@ -32,7 +32,7 @@ class GetCustomersRequestTypedDict(TypedDict):
     external_id: NotRequired[str]
     r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string. Takes precedence over `search`."""
     search: NotRequired[str]
-    r"""A search query to filter customers by email, externalId, or name. If `email` or `externalId` is provided, this will be ignored."""
+    r"""A search query to filter customers by email, name, or customer ID (`cus_...`). If `email` or `externalId` is provided, this will be ignored."""
     country: NotRequired[str]
     r"""A filter on the list based on the customer's `country` field."""
     link_id: NotRequired[str]
@@ -75,7 +75,7 @@ class GetCustomersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""A search query to filter customers by email, externalId, or name. If `email` or `externalId` is provided, this will be ignored."""
+    r"""A search query to filter customers by email, name, or customer ID (`cus_...`). If `email` or `externalId` is provided, this will be ignored."""
 
     country: Annotated[
         Optional[str],

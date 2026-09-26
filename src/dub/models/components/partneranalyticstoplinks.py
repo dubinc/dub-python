@@ -85,19 +85,19 @@ class PartnerAnalyticsTopLinks(BaseModel):
     )
     r"""The ID of the partner that the link belongs to (if applicable)"""
 
-    clicks: Optional[float] = 0
+    clicks: Optional[float] = 0.0
     r"""The number of clicks from this link"""
 
-    leads: Optional[float] = 0
+    leads: Optional[float] = 0.0
     r"""The number of leads from this link"""
 
-    sales: Optional[float] = 0
+    sales: Optional[float] = 0.0
     r"""The number of sales from this link"""
 
-    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0.0
     r"""The total amount of sales from this link, in cents"""
 
-    earnings: Optional[float] = 0
+    earnings: Optional[float] = 0.0
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
