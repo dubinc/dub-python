@@ -25,7 +25,7 @@ class Type(str, Enum):
     CUSTOM = "custom"
 
 
-class QueryParamStatus(str, Enum):
+class ListCommissionsQueryParamStatus(str, Enum):
     r"""Filter the list of commissions by their corresponding status."""
 
     PENDING = "pending"
@@ -78,6 +78,8 @@ class ListCommissionsRequestTypedDict(TypedDict):
     r"""Filter the list of commissions by the associated customer."""
     payout_id: NotRequired[str]
     r"""Filter the list of commissions by the associated payout."""
+    bounty_submission_id: NotRequired[str]
+    r"""Filter the list of commissions by the associated bounty submission."""
     partner_id: NotRequired[str]
     r"""Filter the list of commissions by the associated partner. When specified, takes precedence over `tenantId`.
     Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`).
@@ -105,7 +107,7 @@ class ListCommissionsRequestTypedDict(TypedDict):
     """
     invoice_id: NotRequired[str]
     r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
-    status: NotRequired[QueryParamStatus]
+    status: NotRequired[ListCommissionsQueryParamStatus]
     r"""Filter the list of commissions by their corresponding status."""
     sort_by: NotRequired[ListCommissionsQueryParamSortBy]
     r"""The field to sort the list of commissions by."""
@@ -160,6 +162,13 @@ class ListCommissionsRequest(BaseModel):
     ] = None
     r"""Filter the list of commissions by the associated payout."""
 
+    bounty_submission_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="bountySubmissionId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter the list of commissions by the associated bounty submission."""
+
     partner_id: Annotated[
         Optional[str],
         pydantic.Field(alias="partnerId"),
@@ -213,7 +222,7 @@ class ListCommissionsRequest(BaseModel):
     r"""Filter the list of commissions by the associated invoice. Since invoiceId is unique on a per-program basis, this will only return one commission per invoice."""
 
     status: Annotated[
-        Optional[QueryParamStatus],
+        Optional[ListCommissionsQueryParamStatus],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter the list of commissions by their corresponding status."""
@@ -299,6 +308,7 @@ class ListCommissionsRequest(BaseModel):
                 "type",
                 "customerId",
                 "payoutId",
+                "bountySubmissionId",
                 "partnerId",
                 "tenantId",
                 "groupId",
@@ -566,7 +576,7 @@ class ListCommissionsResponseBodyTypedDict(TypedDict):
     quantity: float
     r"""The event quantity. Used for click and lead commissions; typically `1` for sale and custom commissions."""
     metadata: Nullable[Dict[str, Any]]
-    r"""User-provided metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`)."""
+    r"""Metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`), or from Stripe webhook metadata."""
     created_at: str
     r"""The date and time when the commission was created."""
     updated_at: str
@@ -608,7 +618,7 @@ class ListCommissionsResponseBody(BaseModel):
     r"""The event quantity. Used for click and lead commissions; typically `1` for sale and custom commissions."""
 
     metadata: Nullable[Dict[str, Any]]
-    r"""User-provided metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`)."""
+    r"""Metadata from the associated lead or sale event (`lead.metadata` / `sale.metadata`), or from Stripe webhook metadata."""
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The date and time when the commission was created."""

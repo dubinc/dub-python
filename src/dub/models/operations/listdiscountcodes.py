@@ -14,6 +14,8 @@ class ListDiscountCodesRequestTypedDict(TypedDict):
     r"""The ID of the partner to retrieve discount codes for. If omitted, returns discount codes for the whole program."""
     discount_id: NotRequired[str]
     r"""Filter discount codes by discount ID."""
+    code: NotRequired[str]
+    r"""Filter discount codes by the alphanumeric code (e.g. `PARTNER10OFF`)."""
     page: NotRequired[int]
     r"""The page number for pagination. The first page is `1`."""
     page_size: NotRequired[int]
@@ -35,6 +37,12 @@ class ListDiscountCodesRequest(BaseModel):
     ] = None
     r"""Filter discount codes by discount ID."""
 
+    code: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter discount codes by the alphanumeric code (e.g. `PARTNER10OFF`)."""
+
     page: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -50,7 +58,7 @@ class ListDiscountCodesRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["partnerId", "discountId", "page", "pageSize"])
+        optional_fields = set(["partnerId", "discountId", "code", "page", "pageSize"])
         serialized = handler(self)
         m = {}
 

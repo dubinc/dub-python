@@ -1,11 +1,11 @@
-# PartnerApplicationSubmittedEventEvent
+# ProgramApplicationSubmittedEventEvent
 
 ## Example Usage
 
 ```python
-from dub.models.components import PartnerApplicationSubmittedEventEvent
+from dub.models.components import ProgramApplicationSubmittedEventEvent
 
-value = PartnerApplicationSubmittedEventEvent.PARTNER_APPLICATION_SUBMITTED
+value = ProgramApplicationSubmittedEventEvent.PARTNER_APPLICATION_SUBMITTED
 ```
 
 

@@ -9,22 +9,22 @@ from dub.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union, cast
 
 
-class PartnerApplications(BaseSDK):
+class ProgramApplications(BaseSDK):
     def list(
         self,
         *,
         request: Union[
-            operations.ListPartnerApplicationsRequest,
-            operations.ListPartnerApplicationsRequestTypedDict,
+            operations.ListProgramApplicationsRequest,
+            operations.ListProgramApplicationsRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[operations.ListPartnerApplicationsResponseBody]:
-        r"""List all pending partner applications
+    ) -> List[operations.ListProgramApplicationsResponseBody]:
+        r"""List all program applications
 
-        Retrieve a paginated list of pending applications for your partner program.
+        Retrieve a paginated list of applications for your partner program. Filter by `status` to list pending, approved, or rejected applications.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -44,13 +44,13 @@ class PartnerApplications(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, operations.ListPartnerApplicationsRequest
+                request, operations.ListProgramApplicationsRequest
             )
-        request = cast(operations.ListPartnerApplicationsRequest, request)
+        request = cast(operations.ListProgramApplicationsRequest, request)
 
         req = self._build_request(
             method="GET",
-            path="/partners/applications",
+            path="/program-applications",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -77,10 +77,10 @@ class PartnerApplications(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listPartnerApplications",
+                operation_id="listProgramApplications",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
-                tags=["Partner Applications"],
+                tags=["Program Applications"],
                 extensions=None,
             ),
             request=req,
@@ -91,7 +91,7 @@ class PartnerApplications(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[operations.ListPartnerApplicationsResponseBody], http_res
+                List[operations.ListProgramApplicationsResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -139,17 +139,17 @@ class PartnerApplications(BaseSDK):
         self,
         *,
         request: Union[
-            operations.ListPartnerApplicationsRequest,
-            operations.ListPartnerApplicationsRequestTypedDict,
+            operations.ListProgramApplicationsRequest,
+            operations.ListProgramApplicationsRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[operations.ListPartnerApplicationsResponseBody]:
-        r"""List all pending partner applications
+    ) -> List[operations.ListProgramApplicationsResponseBody]:
+        r"""List all program applications
 
-        Retrieve a paginated list of pending applications for your partner program.
+        Retrieve a paginated list of applications for your partner program. Filter by `status` to list pending, approved, or rejected applications.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -169,13 +169,13 @@ class PartnerApplications(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, operations.ListPartnerApplicationsRequest
+                request, operations.ListProgramApplicationsRequest
             )
-        request = cast(operations.ListPartnerApplicationsRequest, request)
+        request = cast(operations.ListProgramApplicationsRequest, request)
 
         req = self._build_request_async(
             method="GET",
-            path="/partners/applications",
+            path="/program-applications",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -202,10 +202,10 @@ class PartnerApplications(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listPartnerApplications",
+                operation_id="listProgramApplications",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
-                tags=["Partner Applications"],
+                tags=["Program Applications"],
                 extensions=None,
             ),
             request=req,
@@ -216,7 +216,7 @@ class PartnerApplications(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                List[operations.ListPartnerApplicationsResponseBody], http_res
+                List[operations.ListProgramApplicationsResponseBody], http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -264,14 +264,14 @@ class PartnerApplications(BaseSDK):
         self,
         *,
         request: Union[
-            operations.ApprovePartnerApplicationRequestBody,
-            operations.ApprovePartnerApplicationRequestBodyTypedDict,
+            operations.ApproveProgramApplicationRequestBody,
+            operations.ApproveProgramApplicationRequestBodyTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.ApprovePartnerApplicationResponseBody:
+    ) -> operations.ApproveProgramApplicationResponseBody:
         r"""Approve a partner application
 
         Approve a pending partner application to your program. The partner will be enrolled in the specified group and notified of the approval.
@@ -294,13 +294,13 @@ class PartnerApplications(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, operations.ApprovePartnerApplicationRequestBody
+                request, operations.ApproveProgramApplicationRequestBody
             )
-        request = cast(operations.ApprovePartnerApplicationRequestBody, request)
+        request = cast(operations.ApproveProgramApplicationRequestBody, request)
 
         req = self._build_request(
             method="POST",
-            path="/partners/applications/approve",
+            path="/program-applications/approve",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -316,7 +316,7 @@ class PartnerApplications(BaseSDK):
                 False,
                 False,
                 "json",
-                operations.ApprovePartnerApplicationRequestBody,
+                operations.ApproveProgramApplicationRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -334,10 +334,10 @@ class PartnerApplications(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="approvePartnerApplication",
+                operation_id="approveProgramApplication",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
-                tags=["Partner Applications"],
+                tags=["Program Applications"],
                 extensions=None,
             ),
             request=req,
@@ -348,7 +348,7 @@ class PartnerApplications(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                operations.ApprovePartnerApplicationResponseBody, http_res
+                operations.ApproveProgramApplicationResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -396,14 +396,14 @@ class PartnerApplications(BaseSDK):
         self,
         *,
         request: Union[
-            operations.ApprovePartnerApplicationRequestBody,
-            operations.ApprovePartnerApplicationRequestBodyTypedDict,
+            operations.ApproveProgramApplicationRequestBody,
+            operations.ApproveProgramApplicationRequestBodyTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.ApprovePartnerApplicationResponseBody:
+    ) -> operations.ApproveProgramApplicationResponseBody:
         r"""Approve a partner application
 
         Approve a pending partner application to your program. The partner will be enrolled in the specified group and notified of the approval.
@@ -426,13 +426,13 @@ class PartnerApplications(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, operations.ApprovePartnerApplicationRequestBody
+                request, operations.ApproveProgramApplicationRequestBody
             )
-        request = cast(operations.ApprovePartnerApplicationRequestBody, request)
+        request = cast(operations.ApproveProgramApplicationRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
-            path="/partners/applications/approve",
+            path="/program-applications/approve",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -448,7 +448,7 @@ class PartnerApplications(BaseSDK):
                 False,
                 False,
                 "json",
-                operations.ApprovePartnerApplicationRequestBody,
+                operations.ApproveProgramApplicationRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -466,10 +466,10 @@ class PartnerApplications(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="approvePartnerApplication",
+                operation_id="approveProgramApplication",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
-                tags=["Partner Applications"],
+                tags=["Program Applications"],
                 extensions=None,
             ),
             request=req,
@@ -480,7 +480,7 @@ class PartnerApplications(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                operations.ApprovePartnerApplicationResponseBody, http_res
+                operations.ApproveProgramApplicationResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -528,14 +528,14 @@ class PartnerApplications(BaseSDK):
         self,
         *,
         request: Union[
-            operations.RejectPartnerApplicationRequestBody,
-            operations.RejectPartnerApplicationRequestBodyTypedDict,
+            operations.RejectProgramApplicationRequestBody,
+            operations.RejectProgramApplicationRequestBodyTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.RejectPartnerApplicationResponseBody:
+    ) -> operations.RejectProgramApplicationResponseBody:
         r"""Reject a partner application
 
         Reject a pending partner application to your program. The partner will be notified via email that their application was not approved.
@@ -558,13 +558,13 @@ class PartnerApplications(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, operations.RejectPartnerApplicationRequestBody
+                request, operations.RejectProgramApplicationRequestBody
             )
-        request = cast(operations.RejectPartnerApplicationRequestBody, request)
+        request = cast(operations.RejectProgramApplicationRequestBody, request)
 
         req = self._build_request(
             method="POST",
-            path="/partners/applications/reject",
+            path="/program-applications/reject",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -580,7 +580,7 @@ class PartnerApplications(BaseSDK):
                 False,
                 False,
                 "json",
-                operations.RejectPartnerApplicationRequestBody,
+                operations.RejectProgramApplicationRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -598,10 +598,10 @@ class PartnerApplications(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="rejectPartnerApplication",
+                operation_id="rejectProgramApplication",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
-                tags=["Partner Applications"],
+                tags=["Program Applications"],
                 extensions=None,
             ),
             request=req,
@@ -612,7 +612,7 @@ class PartnerApplications(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                operations.RejectPartnerApplicationResponseBody, http_res
+                operations.RejectProgramApplicationResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -660,14 +660,14 @@ class PartnerApplications(BaseSDK):
         self,
         *,
         request: Union[
-            operations.RejectPartnerApplicationRequestBody,
-            operations.RejectPartnerApplicationRequestBodyTypedDict,
+            operations.RejectProgramApplicationRequestBody,
+            operations.RejectProgramApplicationRequestBodyTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.RejectPartnerApplicationResponseBody:
+    ) -> operations.RejectProgramApplicationResponseBody:
         r"""Reject a partner application
 
         Reject a pending partner application to your program. The partner will be notified via email that their application was not approved.
@@ -690,13 +690,13 @@ class PartnerApplications(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, operations.RejectPartnerApplicationRequestBody
+                request, operations.RejectProgramApplicationRequestBody
             )
-        request = cast(operations.RejectPartnerApplicationRequestBody, request)
+        request = cast(operations.RejectProgramApplicationRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
-            path="/partners/applications/reject",
+            path="/program-applications/reject",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -712,7 +712,7 @@ class PartnerApplications(BaseSDK):
                 False,
                 False,
                 "json",
-                operations.RejectPartnerApplicationRequestBody,
+                operations.RejectProgramApplicationRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -730,10 +730,10 @@ class PartnerApplications(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="rejectPartnerApplication",
+                operation_id="rejectProgramApplication",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
-                tags=["Partner Applications"],
+                tags=["Program Applications"],
                 extensions=None,
             ),
             request=req,
@@ -744,7 +744,7 @@ class PartnerApplications(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                operations.RejectPartnerApplicationResponseBody, http_res
+                operations.RejectProgramApplicationResponseBody, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

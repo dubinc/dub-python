@@ -26,7 +26,7 @@ class ReapplicationTimeframe(str, Enum):
     NEVER = "never"
 
 
-class RejectPartnerApplicationRequestBodyTypedDict(TypedDict):
+class RejectProgramApplicationRequestBodyTypedDict(TypedDict):
     partner_id: str
     r"""The ID of the partner to reject."""
     rejection_reason: NotRequired[RejectionReason]
@@ -41,7 +41,7 @@ class RejectPartnerApplicationRequestBodyTypedDict(TypedDict):
     r"""The reason for flagging the partner for fraud. Required when flagForFraud is true."""
 
 
-class RejectPartnerApplicationRequestBody(BaseModel):
+class RejectProgramApplicationRequestBody(BaseModel):
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
     r"""The ID of the partner to reject."""
 
@@ -95,14 +95,14 @@ class RejectPartnerApplicationRequestBody(BaseModel):
         return m
 
 
-class RejectPartnerApplicationResponseBodyTypedDict(TypedDict):
+class RejectProgramApplicationResponseBodyTypedDict(TypedDict):
     r"""The rejected partner"""
 
     partner_id: str
     r"""The ID of the rejected partner."""
 
 
-class RejectPartnerApplicationResponseBody(BaseModel):
+class RejectProgramApplicationResponseBody(BaseModel):
     r"""The rejected partner"""
 
     partner_id: Annotated[str, pydantic.Field(alias="partnerId")]
@@ -110,10 +110,10 @@ class RejectPartnerApplicationResponseBody(BaseModel):
 
 
 try:
-    RejectPartnerApplicationRequestBody.model_rebuild()
+    RejectProgramApplicationRequestBody.model_rebuild()
 except NameError:
     pass
 try:
-    RejectPartnerApplicationResponseBody.model_rebuild()
+    RejectProgramApplicationResponseBody.model_rebuild()
 except NameError:
     pass
