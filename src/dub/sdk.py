@@ -26,9 +26,9 @@ if TYPE_CHECKING:
     from dub.events import Events
     from dub.folders import Folders
     from dub.links import Links
-    from dub.partner_applications import PartnerApplications
     from dub.partners import Partners
     from dub.payouts import Payouts
+    from dub.program_applications import ProgramApplications
     from dub.qr_codes import QRCodes
     from dub.tags import Tags
     from dub.track import Track
@@ -46,7 +46,7 @@ class Dub(BaseSDK):
     track: "Track"
     customers: "Customers"
     partners: "Partners"
-    partner_applications: "PartnerApplications"
+    program_applications: "ProgramApplications"
     discount_codes: "DiscountCodes"
     commissions: "Commissions"
     payouts: "Payouts"
@@ -63,7 +63,7 @@ class Dub(BaseSDK):
         "track": ("dub.track", "Track"),
         "customers": ("dub.customers", "Customers"),
         "partners": ("dub.partners", "Partners"),
-        "partner_applications": ("dub.partner_applications", "PartnerApplications"),
+        "program_applications": ("dub.program_applications", "ProgramApplications"),
         "discount_codes": ("dub.discount_codes", "DiscountCodes"),
         "commissions": ("dub.commissions", "Commissions"),
         "payouts": ("dub.payouts", "Payouts"),

@@ -10,18 +10,39 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ListPartnerApplicationsRequestTypedDict(TypedDict):
+class ListProgramApplicationsQueryParamSortOrder(str, Enum):
+    r"""The sort order. The default is `desc`."""
+
+    ASC = "asc"
+    DESC = "desc"
+
+
+class QueryParamStatus(str, Enum):
+    r"""Filter applications by status. One of `pending`, `approved`, or `rejected`. Defaults to `pending`."""
+
+    PENDING = "pending"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+
+
+class ListProgramApplicationsRequestTypedDict(TypedDict):
     country: NotRequired[str]
     r"""A filter on the list based on the partner's `country` field."""
     group_id: NotRequired[str]
     r"""A filter on the list based on the partner's `groupId` field."""
+    sort_order: NotRequired[ListProgramApplicationsQueryParamSortOrder]
+    r"""The sort order. The default is `desc`."""
+    search: NotRequired[str]
+    r"""Filter applications by name, email, or company name. Partial matches are supported. An exact partner ID is also matched."""
+    status: NotRequired[QueryParamStatus]
+    r"""Filter applications by status. One of `pending`, `approved`, or `rejected`. Defaults to `pending`."""
     page: NotRequired[int]
     r"""The page number for pagination. The first page is `1`."""
     page_size: NotRequired[int]
     r"""The number of items per page."""
 
 
-class ListPartnerApplicationsRequest(BaseModel):
+class ListProgramApplicationsRequest(BaseModel):
     country: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -34,6 +55,25 @@ class ListPartnerApplicationsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""A filter on the list based on the partner's `groupId` field."""
+
+    sort_order: Annotated[
+        Optional[ListProgramApplicationsQueryParamSortOrder],
+        pydantic.Field(alias="sortOrder"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = ListProgramApplicationsQueryParamSortOrder.DESC
+    r"""The sort order. The default is `desc`."""
+
+    search: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter applications by name, email, or company name. Partial matches are supported. An exact partner ID is also matched."""
+
+    status: Annotated[
+        Optional[QueryParamStatus],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = QueryParamStatus.PENDING
+    r"""Filter applications by status. One of `pending`, `approved`, or `rejected`. Defaults to `pending`."""
 
     page: Annotated[
         Optional[int],
@@ -50,7 +90,9 @@ class ListPartnerApplicationsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["country", "groupId", "page", "pageSize"])
+        optional_fields = set(
+            ["country", "groupId", "sortOrder", "search", "status", "page", "pageSize"]
+        )
         serialized = handler(self)
         m = {}
 
@@ -65,7 +107,7 @@ class ListPartnerApplicationsRequest(BaseModel):
         return m
 
 
-class ListPartnerApplicationsStatus(str, Enum):
+class ListProgramApplicationsStatus(str, Enum):
     r"""The status of the partner's enrollment in the program."""
 
     PENDING = "pending"
@@ -78,7 +120,63 @@ class ListPartnerApplicationsStatus(str, Enum):
     ARCHIVED = "archived"
 
 
-class ListPartnerApplicationsPartnerTypedDict(TypedDict):
+class ListProgramApplicationsNetworkStatus(str, Enum):
+    r"""The partner's network status on Dub."""
+
+    DRAFT = "draft"
+    SUBMITTED = "submitted"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    TRUSTED = "trusted"
+
+
+class ListProgramApplicationsDefaultPayoutMethod(str, Enum):
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    CONNECT = "connect"
+    STABLECOIN = "stablecoin"
+    PAYPAL = "paypal"
+    TREMENDOUS = "tremendous"
+
+
+class ListProgramApplicationsType(str, Enum):
+    WEBSITE = "website"
+    YOUTUBE = "youtube"
+    TWITTER = "twitter"
+    LINKEDIN = "linkedin"
+    INSTAGRAM = "instagram"
+    TIKTOK = "tiktok"
+
+
+class PlatformsTypedDict(TypedDict):
+    type: ListProgramApplicationsType
+    identifier: str
+    verified_at: Nullable[str]
+
+
+class Platforms(BaseModel):
+    type: ListProgramApplicationsType
+
+    identifier: str
+
+    verified_at: Annotated[Nullable[str], pydantic.Field(alias="verifiedAt")]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class ListProgramApplicationsPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -91,8 +189,14 @@ class ListPartnerApplicationsPartnerTypedDict(TypedDict):
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
-    status: ListPartnerApplicationsStatus
+    status: ListProgramApplicationsStatus
     r"""The status of the partner's enrollment in the program."""
+    network_status: ListProgramApplicationsNetworkStatus
+    r"""The partner's network status on Dub."""
+    default_payout_method: Nullable[ListProgramApplicationsDefaultPayoutMethod]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+    payouts_enabled_at: Nullable[str]
+    r"""The date when the partner enabled payouts."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
     group_id: NotRequired[Nullable[str]]
@@ -109,9 +213,11 @@ class ListPartnerApplicationsPartnerTypedDict(TypedDict):
     r"""The partner's Instagram username (e.g. `johndoe`)."""
     tiktok: NotRequired[Nullable[str]]
     r"""The partner's TikTok username (e.g. `johndoe`)."""
+    platforms: NotRequired[Nullable[List[PlatformsTypedDict]]]
+    r"""The partner's website and social profiles, including when each was verified."""
 
 
-class ListPartnerApplicationsPartner(BaseModel):
+class ListProgramApplicationsPartner(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -130,8 +236,24 @@ class ListPartnerApplicationsPartner(BaseModel):
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
 
-    status: ListPartnerApplicationsStatus
+    status: ListProgramApplicationsStatus
     r"""The status of the partner's enrollment in the program."""
+
+    network_status: Annotated[
+        ListProgramApplicationsNetworkStatus, pydantic.Field(alias="networkStatus")
+    ]
+    r"""The partner's network status on Dub."""
+
+    default_payout_method: Annotated[
+        Nullable[ListProgramApplicationsDefaultPayoutMethod],
+        pydantic.Field(alias="defaultPayoutMethod"),
+    ]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    payouts_enabled_at: Annotated[
+        Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
+    ]
+    r"""The date when the partner enabled payouts."""
 
     description: OptionalNullable[str] = UNSET
     r"""A brief description of the partner and their background."""
@@ -157,6 +279,9 @@ class ListPartnerApplicationsPartner(BaseModel):
     tiktok: OptionalNullable[str] = UNSET
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
+    platforms: OptionalNullable[List[Platforms]] = UNSET
+    r"""The partner's website and social profiles, including when each was verified."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -169,6 +294,7 @@ class ListPartnerApplicationsPartner(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "platforms",
             ]
         )
         nullable_fields = set(
@@ -185,6 +311,9 @@ class ListPartnerApplicationsPartner(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "defaultPayoutMethod",
+                "payoutsEnabledAt",
+                "platforms",
             ]
         )
         serialized = handler(self)
@@ -234,19 +363,19 @@ class ApplicationFormData(BaseModel):
         return m
 
 
-class ListPartnerApplicationsResponseBodyTypedDict(TypedDict):
+class ListProgramApplicationsResponseBodyTypedDict(TypedDict):
     id: str
     created_at: str
-    partner: ListPartnerApplicationsPartnerTypedDict
+    partner: ListProgramApplicationsPartnerTypedDict
     application_form_data: Nullable[List[ApplicationFormDataTypedDict]]
 
 
-class ListPartnerApplicationsResponseBody(BaseModel):
+class ListProgramApplicationsResponseBody(BaseModel):
     id: str
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    partner: ListPartnerApplicationsPartner
+    partner: ListProgramApplicationsPartner
 
     application_form_data: Annotated[
         Nullable[List[ApplicationFormData]], pydantic.Field(alias="applicationFormData")
@@ -268,10 +397,14 @@ class ListPartnerApplicationsResponseBody(BaseModel):
 
 
 try:
-    ListPartnerApplicationsPartner.model_rebuild()
+    Platforms.model_rebuild()
 except NameError:
     pass
 try:
-    ListPartnerApplicationsResponseBody.model_rebuild()
+    ListProgramApplicationsPartner.model_rebuild()
+except NameError:
+    pass
+try:
+    ListProgramApplicationsResponseBody.model_rebuild()
 except NameError:
     pass

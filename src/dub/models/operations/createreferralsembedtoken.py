@@ -47,9 +47,9 @@ class CreateReferralsEmbedTokenLinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
     external_id: NotRequired[Nullable[str]]
-    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
     tenant_id: NotRequired[Nullable[str]]
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
     prefix: NotRequired[str]
     r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
     archived: NotRequired[bool]
@@ -100,12 +100,12 @@ class CreateReferralsEmbedTokenLinkProps(BaseModel):
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
-    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
 
     tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
         UNSET
     )
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
 
     prefix: Optional[str] = None
     r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""

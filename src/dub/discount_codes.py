@@ -24,7 +24,7 @@ class DiscountCodes(BaseSDK):
     ) -> List[components.DiscountCodeSchema]:
         r"""List discount codes
 
-        Retrieve a paginated list of discount codes for a partner / a given discount / the whole program.
+        Retrieve a paginated list of discount codes in a program or filtered by partner, discount, or code.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -147,7 +147,7 @@ class DiscountCodes(BaseSDK):
     ) -> List[components.DiscountCodeSchema]:
         r"""List discount codes
 
-        Retrieve a paginated list of discount codes for a partner / a given discount / the whole program.
+        Retrieve a paginated list of discount codes in a program or filtered by partner, discount, or code.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method

@@ -1,20 +1,20 @@
-# PartnerApplications
+# ProgramApplications
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List all pending partner applications
+* [list](#list) - List all program applications
 * [approve](#approve) - Approve a partner application
 * [reject](#reject) - Reject a partner application
 
 ## list
 
-Retrieve a paginated list of pending applications for your partner program.
+Retrieve a paginated list of applications for your partner program. Filter by `status` to list pending, approved, or rejected applications.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listPartnerApplications" method="get" path="/partners/applications" -->
+<!-- UsageSnippet language="python" operationID="listProgramApplications" method="get" path="/program-applications" -->
 ```python
 from dub import Dub
 
@@ -23,7 +23,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.partner_applications.list(request={
+    res = d_client.program_applications.list(request={
         "country": "US",
         "group_id": "grp_123",
         "page": 1,
@@ -39,12 +39,12 @@ with Dub(
 
 | Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                              | [operations.ListPartnerApplicationsRequest](../../models/operations/listpartnerapplicationsrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `request`                                                                                              | [operations.ListProgramApplicationsRequest](../../models/operations/listprogramapplicationsrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
 | `retries`                                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                       | :heavy_minus_sign:                                                                                     | Configuration to override the default retry behavior of the client.                                    |
 
 ### Response
 
-**[List[operations.ListPartnerApplicationsResponseBody]](../../models/.md)**
+**[List[operations.ListProgramApplicationsResponseBody]](../../models/.md)**
 
 ### Errors
 
@@ -67,7 +67,7 @@ Approve a pending partner application to your program. The partner will be enrol
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="approvePartnerApplication" method="post" path="/partners/applications/approve" -->
+<!-- UsageSnippet language="python" operationID="approveProgramApplication" method="post" path="/program-applications/approve" -->
 ```python
 from dub import Dub
 
@@ -76,7 +76,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.partner_applications.approve(request={
+    res = d_client.program_applications.approve(request={
         "partner_id": "<id>",
     })
 
@@ -89,12 +89,12 @@ with Dub(
 
 | Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                          | [operations.ApprovePartnerApplicationRequestBody](../../models/operations/approvepartnerapplicationrequestbody.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| `request`                                                                                                          | [operations.ApproveProgramApplicationRequestBody](../../models/operations/approveprogramapplicationrequestbody.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
 | `retries`                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                   | :heavy_minus_sign:                                                                                                 | Configuration to override the default retry behavior of the client.                                                |
 
 ### Response
 
-**[operations.ApprovePartnerApplicationResponseBody](../../models/operations/approvepartnerapplicationresponsebody.md)**
+**[operations.ApproveProgramApplicationResponseBody](../../models/operations/approveprogramapplicationresponsebody.md)**
 
 ### Errors
 
@@ -117,7 +117,7 @@ Reject a pending partner application to your program. The partner will be notifi
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="rejectPartnerApplication" method="post" path="/partners/applications/reject" -->
+<!-- UsageSnippet language="python" operationID="rejectProgramApplication" method="post" path="/program-applications/reject" -->
 ```python
 from dub import Dub
 
@@ -126,7 +126,7 @@ with Dub(
     token="DUB_API_KEY",
 ) as d_client:
 
-    res = d_client.partner_applications.reject(request={
+    res = d_client.program_applications.reject(request={
         "partner_id": "<id>",
     })
 
@@ -139,12 +139,12 @@ with Dub(
 
 | Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                        | [operations.RejectPartnerApplicationRequestBody](../../models/operations/rejectpartnerapplicationrequestbody.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| `request`                                                                                                        | [operations.RejectProgramApplicationRequestBody](../../models/operations/rejectprogramapplicationrequestbody.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
 | `retries`                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                 | :heavy_minus_sign:                                                                                               | Configuration to override the default retry behavior of the client.                                              |
 
 ### Response
 
-**[operations.RejectPartnerApplicationResponseBody](../../models/operations/rejectpartnerapplicationresponsebody.md)**
+**[operations.RejectProgramApplicationResponseBody](../../models/operations/rejectprogramapplicationresponsebody.md)**
 
 ### Errors
 

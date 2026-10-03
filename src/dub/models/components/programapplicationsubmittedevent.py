@@ -9,11 +9,11 @@ from typing import List
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PartnerApplicationSubmittedEventEvent(str, Enum):
+class ProgramApplicationSubmittedEventEvent(str, Enum):
     PARTNER_APPLICATION_SUBMITTED = "partner.application_submitted"
 
 
-class PartnerApplicationSubmittedEventStatus(str, Enum):
+class ProgramApplicationSubmittedEventStatus(str, Enum):
     r"""The status of the partner's enrollment in the program."""
 
     PENDING = "pending"
@@ -26,7 +26,7 @@ class PartnerApplicationSubmittedEventStatus(str, Enum):
     ARCHIVED = "archived"
 
 
-class PartnerApplicationSubmittedEventPartnerTypedDict(TypedDict):
+class ProgramApplicationSubmittedEventPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -39,7 +39,7 @@ class PartnerApplicationSubmittedEventPartnerTypedDict(TypedDict):
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
-    status: PartnerApplicationSubmittedEventStatus
+    status: ProgramApplicationSubmittedEventStatus
     r"""The status of the partner's enrollment in the program."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
@@ -59,7 +59,7 @@ class PartnerApplicationSubmittedEventPartnerTypedDict(TypedDict):
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
 
-class PartnerApplicationSubmittedEventPartner(BaseModel):
+class ProgramApplicationSubmittedEventPartner(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -78,7 +78,7 @@ class PartnerApplicationSubmittedEventPartner(BaseModel):
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
 
-    status: PartnerApplicationSubmittedEventStatus
+    status: ProgramApplicationSubmittedEventStatus
     r"""The status of the partner's enrollment in the program."""
 
     description: OptionalNullable[str] = UNSET
@@ -182,19 +182,19 @@ class ApplicationFormData(BaseModel):
         return m
 
 
-class PartnerApplicationSubmittedEventDataTypedDict(TypedDict):
+class ProgramApplicationSubmittedEventDataTypedDict(TypedDict):
     id: str
     created_at: str
-    partner: PartnerApplicationSubmittedEventPartnerTypedDict
+    partner: ProgramApplicationSubmittedEventPartnerTypedDict
     application_form_data: Nullable[List[ApplicationFormDataTypedDict]]
 
 
-class PartnerApplicationSubmittedEventData(BaseModel):
+class ProgramApplicationSubmittedEventData(BaseModel):
     id: str
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    partner: PartnerApplicationSubmittedEventPartner
+    partner: ProgramApplicationSubmittedEventPartner
 
     application_form_data: Annotated[
         Nullable[List[ApplicationFormData]], pydantic.Field(alias="applicationFormData")
@@ -215,36 +215,36 @@ class PartnerApplicationSubmittedEventData(BaseModel):
         return m
 
 
-class PartnerApplicationSubmittedEventTypedDict(TypedDict):
+class ProgramApplicationSubmittedEventTypedDict(TypedDict):
     r"""Triggered when a partner submits an application to join a program."""
 
     id: str
-    event: PartnerApplicationSubmittedEventEvent
+    event: ProgramApplicationSubmittedEventEvent
     created_at: str
-    data: PartnerApplicationSubmittedEventDataTypedDict
+    data: ProgramApplicationSubmittedEventDataTypedDict
 
 
-class PartnerApplicationSubmittedEvent(BaseModel):
+class ProgramApplicationSubmittedEvent(BaseModel):
     r"""Triggered when a partner submits an application to join a program."""
 
     id: str
 
-    event: PartnerApplicationSubmittedEventEvent
+    event: ProgramApplicationSubmittedEventEvent
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    data: PartnerApplicationSubmittedEventData
+    data: ProgramApplicationSubmittedEventData
 
 
 try:
-    PartnerApplicationSubmittedEventPartner.model_rebuild()
+    ProgramApplicationSubmittedEventPartner.model_rebuild()
 except NameError:
     pass
 try:
-    PartnerApplicationSubmittedEventData.model_rebuild()
+    ProgramApplicationSubmittedEventData.model_rebuild()
 except NameError:
     pass
 try:
-    PartnerApplicationSubmittedEvent.model_rebuild()
+    ProgramApplicationSubmittedEvent.model_rebuild()
 except NameError:
     pass

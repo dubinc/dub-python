@@ -40,16 +40,16 @@ class AnalyticsCountries(BaseModel):
 
     city: Optional[City] = City.WILDCARD_
 
-    clicks: Optional[float] = 0
+    clicks: Optional[float] = 0.0
     r"""The number of clicks from this country"""
 
-    leads: Optional[float] = 0
+    leads: Optional[float] = 0.0
     r"""The number of leads from this country"""
 
-    sales: Optional[float] = 0
+    sales: Optional[float] = 0.0
     r"""The number of sales from this country"""
 
-    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0.0
     r"""The total amount of sales from this country, in cents"""
 
     @model_serializer(mode="wrap")

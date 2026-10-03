@@ -1,13 +1,13 @@
-# PartnerApplicationSubmittedEventStatus
+# ProgramApplicationSubmittedEventStatus
 
 The status of the partner's enrollment in the program.
 
 ## Example Usage
 
 ```python
-from dub.models.components import PartnerApplicationSubmittedEventStatus
+from dub.models.components import ProgramApplicationSubmittedEventStatus
 
-value = PartnerApplicationSubmittedEventStatus.PENDING
+value = ProgramApplicationSubmittedEventStatus.PENDING
 ```
 
 

@@ -1,0 +1,10 @@
+# Platforms
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | [operations.ListProgramApplicationsType](../../models/operations/listprogramapplicationstype.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `identifier`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `verified_at`                                                                                    | *Nullable[str]*                                                                                  | :heavy_check_mark:                                                                               | N/A                                                                                              |
