@@ -45,7 +45,7 @@ class DataTypedDict(TypedDict):
     url: NotRequired[str]
     r"""The destination URL of the short link."""
     tenant_id: NotRequired[Nullable[str]]
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
     program_id: NotRequired[Nullable[str]]
     r"""The ID of the program the short link is associated with."""
     partner_id: NotRequired[Nullable[str]]
@@ -121,7 +121,7 @@ class Data(BaseModel):
     tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
         UNSET
     )
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
 
     program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
         UNSET

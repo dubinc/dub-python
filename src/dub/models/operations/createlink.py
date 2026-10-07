@@ -49,9 +49,9 @@ class CreateLinkRequestBodyTypedDict(TypedDict):
     key_length: NotRequired[float]
     r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
     external_id: NotRequired[Nullable[str]]
-    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
     tenant_id: NotRequired[Nullable[str]]
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
     program_id: NotRequired[Nullable[str]]
     r"""The ID of the program the short link is associated with."""
     partner_id: NotRequired[Nullable[str]]
@@ -138,12 +138,12 @@ class CreateLinkRequestBody(BaseModel):
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
-    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
 
     tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
         UNSET
     )
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
 
     program_id: Annotated[OptionalNullable[str], pydantic.Field(alias="programId")] = (
         UNSET

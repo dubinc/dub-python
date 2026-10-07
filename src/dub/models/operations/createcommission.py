@@ -6,7 +6,7 @@ from dub.utils import get_discriminator
 from enum import Enum
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -78,6 +78,22 @@ class RequestBodyCustomer(BaseModel):
                     m[k] = val
 
         return m
+
+
+class StripeInvoicesToImport1(str, Enum):
+    ALL = "all"
+
+
+StripeInvoicesToImportTypedDict = TypeAliasType(
+    "StripeInvoicesToImportTypedDict", Union[StripeInvoicesToImport1, List[str]]
+)
+r"""Import paid Stripe invoices for the customer and create a commission for each. Pass `all` to import every unimported, paid invoice, or an array of Stripe invoice IDs to import only those invoices. Refunded invoices are not imported. When not provided, create a single manual sale event using `sale.amount`"""
+
+
+StripeInvoicesToImport = TypeAliasType(
+    "StripeInvoicesToImport", Union[StripeInvoicesToImport1, List[str]]
+)
+r"""Import paid Stripe invoices for the customer and create a commission for each. Pass `all` to import every unimported, paid invoice, or an array of Stripe invoice IDs to import only those invoices. Refunded invoices are not imported. When not provided, create a single manual sale event using `sale.amount`"""
 
 
 class RequestBodyPaymentProcessor(str, Enum):
@@ -187,12 +203,14 @@ class RequestBody3TypedDict(TypedDict):
     r"""The partner link ID to associate the commission with. If neither `linkId` nor `discountCode` is provided, default to the link with the most revenue."""
     discount_code: NotRequired[Nullable[str]]
     r"""The partner discount code to resolve the associated link. Use this when the link ID is unknown. Cannot be provided together with `linkId`."""
-    import_stripe_invoices: NotRequired[Nullable[bool]]
-    r"""When `true`, import all unimported paid Stripe invoices for the customer and create a commission for each. When `false`, create a single manual sale event using `sale.amount` (or deprecated `saleAmount`)."""
+    stripe_invoices_to_import: NotRequired[Nullable[StripeInvoicesToImportTypedDict]]
+    r"""Import paid Stripe invoices for the customer and create a commission for each. Pass `all` to import every unimported, paid invoice, or an array of Stripe invoice IDs to import only those invoices. Refunded invoices are not imported. When not provided, create a single manual sale event using `sale.amount`"""
     date_: NotRequired[Nullable[str]]
-    r"""Only used when `importStripeInvoices` is `false`. The date of the manual sale event. Defaults to the current date and time if not provided."""
+    r"""Only used when `stripeInvoicesToImport` is not provided. The date of the manual sale event. Defaults to the current date and time if not provided."""
     sale: NotRequired[Nullable[SaleTypedDict]]
     r"""The sale event object to associate the commission with."""
+    import_stripe_invoices: NotRequired[Nullable[bool]]
+    r"""Deprecated: Use `stripeInvoicesToImport: all` instead."""
     sale_event_date: NotRequired[Nullable[str]]
     r"""Deprecated: Use `date` instead."""
     sale_amount: NotRequired[Nullable[float]]
@@ -225,16 +243,26 @@ class RequestBody3(BaseModel):
     ] = UNSET
     r"""The partner discount code to resolve the associated link. Use this when the link ID is unknown. Cannot be provided together with `linkId`."""
 
-    import_stripe_invoices: Annotated[
-        OptionalNullable[bool], pydantic.Field(alias="importStripeInvoices")
-    ] = False
-    r"""When `true`, import all unimported paid Stripe invoices for the customer and create a commission for each. When `false`, create a single manual sale event using `sale.amount` (or deprecated `saleAmount`)."""
+    stripe_invoices_to_import: Annotated[
+        OptionalNullable[StripeInvoicesToImport],
+        pydantic.Field(alias="stripeInvoicesToImport"),
+    ] = UNSET
+    r"""Import paid Stripe invoices for the customer and create a commission for each. Pass `all` to import every unimported, paid invoice, or an array of Stripe invoice IDs to import only those invoices. Refunded invoices are not imported. When not provided, create a single manual sale event using `sale.amount`"""
 
     date_: Annotated[OptionalNullable[str], pydantic.Field(alias="date")] = UNSET
-    r"""Only used when `importStripeInvoices` is `false`. The date of the manual sale event. Defaults to the current date and time if not provided."""
+    r"""Only used when `stripeInvoicesToImport` is not provided. The date of the manual sale event. Defaults to the current date and time if not provided."""
 
     sale: OptionalNullable[Sale] = UNSET
     r"""The sale event object to associate the commission with."""
+
+    import_stripe_invoices: Annotated[
+        OptionalNullable[bool],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="importStripeInvoices",
+        ),
+    ] = UNSET
+    r"""Deprecated: Use `stripeInvoicesToImport: all` instead."""
 
     sale_event_date: Annotated[
         OptionalNullable[str],
@@ -280,9 +308,10 @@ class RequestBody3(BaseModel):
                 "customer",
                 "linkId",
                 "discountCode",
-                "importStripeInvoices",
+                "stripeInvoicesToImport",
                 "date",
                 "sale",
+                "importStripeInvoices",
                 "saleEventDate",
                 "saleAmount",
                 "invoiceId",
@@ -295,9 +324,10 @@ class RequestBody3(BaseModel):
                 "customer",
                 "linkId",
                 "discountCode",
-                "importStripeInvoices",
+                "stripeInvoicesToImport",
                 "date",
                 "sale",
+                "importStripeInvoices",
                 "saleEventDate",
                 "saleAmount",
                 "invoiceId",

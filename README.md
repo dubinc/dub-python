@@ -126,11 +126,11 @@ with Dub(
         "test_variants": [
             {
                 "url": "https://example.com/variant-1",
-                "percentage": 50,
+                "percentage": 50.0,
             },
             {
                 "url": "https://example.com/variant-2",
-                "percentage": 50,
+                "percentage": 50.0,
             },
         ],
     })
@@ -163,11 +163,11 @@ async def main():
             "test_variants": [
                 {
                     "url": "https://example.com/variant-1",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
                 {
                     "url": "https://example.com/variant-2",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
             ],
         })
@@ -198,11 +198,11 @@ with Dub(
         "test_variants": [
             {
                 "url": "https://example.com/variant-1",
-                "percentage": 50,
+                "percentage": 50.0,
             },
             {
                 "url": "https://example.com/variant-2",
-                "percentage": 50,
+                "percentage": 50.0,
             },
         ],
     })
@@ -235,11 +235,11 @@ async def main():
             "test_variants": [
                 {
                     "url": "https://example.com/variant-1",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
                 {
                     "url": "https://example.com/variant-2",
-                    "percentage": 50,
+                    "percentage": 50.0,
                 },
             ],
         })
@@ -324,12 +324,6 @@ asyncio.run(main())
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
 
-### [PartnerApplications](docs/sdks/partnerapplications/README.md)
-
-* [list](docs/sdks/partnerapplications/README.md#list) - List all pending partner applications
-* [approve](docs/sdks/partnerapplications/README.md#approve) - Approve a partner application
-* [reject](docs/sdks/partnerapplications/README.md#reject) - Reject a partner application
-
 ### [Partners](docs/sdks/partners/README.md)
 
 * [list](docs/sdks/partners/README.md#list) - List all partners
@@ -344,6 +338,12 @@ asyncio.run(main())
 ### [Payouts](docs/sdks/payouts/README.md)
 
 * [list](docs/sdks/payouts/README.md#list) - List all payouts
+
+### [ProgramApplications](docs/sdks/programapplications/README.md)
+
+* [list](docs/sdks/programapplications/README.md#list) - List all program applications
+* [approve](docs/sdks/programapplications/README.md#approve) - Approve a partner application
+* [reject](docs/sdks/programapplications/README.md#reject) - Reject a partner application
 
 ### [QRCodes](docs/sdks/qrcodes/README.md)
 

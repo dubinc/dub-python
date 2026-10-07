@@ -47,9 +47,9 @@ class CreatePartnerLinkLinkPropsTypedDict(TypedDict):
     r"""Additional properties that you can pass to the partner's short link. Will be used to override the default link properties for this partner."""
 
     external_id: NotRequired[Nullable[str]]
-    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
     tenant_id: NotRequired[Nullable[str]]
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
     prefix: NotRequired[str]
     r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
     archived: NotRequired[bool]
@@ -98,12 +98,12 @@ class CreatePartnerLinkLinkProps(BaseModel):
     external_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
-    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace."""
+    r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
 
     tenant_id: Annotated[OptionalNullable[str], pydantic.Field(alias="tenantId")] = (
         UNSET
     )
-    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant."""
+    r"""The ID of the tenant that created the link inside your system. If set, it can be used to fetch all links for a tenant. Pass `null` or an empty string to remove it."""
 
     prefix: Optional[str] = None
     r"""Path prefix for each default referral link slug (e.g. `/c/` → `https://{domain}/c/{identity}`). If the group has multiple default links, a short random suffix is appended to the identity segment for uniqueness (e.g. `c/jane-a7f2`)."""
@@ -255,7 +255,7 @@ class CreatePartnerLinkRequestBodyTypedDict(TypedDict):
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
     url: NotRequired[Nullable[str]]
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
+    r"""The URL to shorten (if not provided, the program's default URL will be used)."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
     comments: NotRequired[Nullable[str]]
@@ -276,7 +276,7 @@ class CreatePartnerLinkRequestBody(BaseModel):
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
 
     url: OptionalNullable[str] = UNSET
-    r"""The URL to shorten (if not provided, the program's default URL will be used). Will throw an error if the domain doesn't match the program's default URL domain."""
+    r"""The URL to shorten (if not provided, the program's default URL will be used)."""
 
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""

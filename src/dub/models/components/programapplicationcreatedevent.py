@@ -9,11 +9,11 @@ from typing import List
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PartnerApplicationSubmittedEventEvent(str, Enum):
-    PARTNER_APPLICATION_SUBMITTED = "partner.application_submitted"
+class ProgramApplicationCreatedEventEvent(str, Enum):
+    PROGRAM_APPLICATION_CREATED = "program_application.created"
 
 
-class PartnerApplicationSubmittedEventStatus(str, Enum):
+class ProgramApplicationCreatedEventStatus(str, Enum):
     r"""The status of the partner's enrollment in the program."""
 
     PENDING = "pending"
@@ -26,7 +26,63 @@ class PartnerApplicationSubmittedEventStatus(str, Enum):
     ARCHIVED = "archived"
 
 
-class PartnerApplicationSubmittedEventPartnerTypedDict(TypedDict):
+class ProgramApplicationCreatedEventNetworkStatus(str, Enum):
+    r"""The partner's network status on Dub."""
+
+    DRAFT = "draft"
+    SUBMITTED = "submitted"
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    TRUSTED = "trusted"
+
+
+class ProgramApplicationCreatedEventDefaultPayoutMethod(str, Enum):
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    CONNECT = "connect"
+    STABLECOIN = "stablecoin"
+    PAYPAL = "paypal"
+    TREMENDOUS = "tremendous"
+
+
+class ProgramApplicationCreatedEventType(str, Enum):
+    WEBSITE = "website"
+    YOUTUBE = "youtube"
+    TWITTER = "twitter"
+    LINKEDIN = "linkedin"
+    INSTAGRAM = "instagram"
+    TIKTOK = "tiktok"
+
+
+class PlatformsTypedDict(TypedDict):
+    type: ProgramApplicationCreatedEventType
+    identifier: str
+    verified_at: Nullable[str]
+
+
+class Platforms(BaseModel):
+    type: ProgramApplicationCreatedEventType
+
+    identifier: str
+
+    verified_at: Annotated[Nullable[str], pydantic.Field(alias="verifiedAt")]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class ProgramApplicationCreatedEventPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -39,8 +95,14 @@ class PartnerApplicationSubmittedEventPartnerTypedDict(TypedDict):
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
-    status: PartnerApplicationSubmittedEventStatus
+    status: ProgramApplicationCreatedEventStatus
     r"""The status of the partner's enrollment in the program."""
+    network_status: ProgramApplicationCreatedEventNetworkStatus
+    r"""The partner's network status on Dub."""
+    default_payout_method: Nullable[ProgramApplicationCreatedEventDefaultPayoutMethod]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+    payouts_enabled_at: Nullable[str]
+    r"""The date when the partner enabled payouts."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
     group_id: NotRequired[Nullable[str]]
@@ -57,9 +119,11 @@ class PartnerApplicationSubmittedEventPartnerTypedDict(TypedDict):
     r"""The partner's Instagram username (e.g. `johndoe`)."""
     tiktok: NotRequired[Nullable[str]]
     r"""The partner's TikTok username (e.g. `johndoe`)."""
+    platforms: NotRequired[Nullable[List[PlatformsTypedDict]]]
+    r"""The partner's website and social profiles, including when each was verified."""
 
 
-class PartnerApplicationSubmittedEventPartner(BaseModel):
+class ProgramApplicationCreatedEventPartner(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -78,8 +142,25 @@ class PartnerApplicationSubmittedEventPartner(BaseModel):
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
 
-    status: PartnerApplicationSubmittedEventStatus
+    status: ProgramApplicationCreatedEventStatus
     r"""The status of the partner's enrollment in the program."""
+
+    network_status: Annotated[
+        ProgramApplicationCreatedEventNetworkStatus,
+        pydantic.Field(alias="networkStatus"),
+    ]
+    r"""The partner's network status on Dub."""
+
+    default_payout_method: Annotated[
+        Nullable[ProgramApplicationCreatedEventDefaultPayoutMethod],
+        pydantic.Field(alias="defaultPayoutMethod"),
+    ]
+    r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
+
+    payouts_enabled_at: Annotated[
+        Nullable[str], pydantic.Field(alias="payoutsEnabledAt")
+    ]
+    r"""The date when the partner enabled payouts."""
 
     description: OptionalNullable[str] = UNSET
     r"""A brief description of the partner and their background."""
@@ -105,6 +186,9 @@ class PartnerApplicationSubmittedEventPartner(BaseModel):
     tiktok: OptionalNullable[str] = UNSET
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
+    platforms: OptionalNullable[List[Platforms]] = UNSET
+    r"""The partner's website and social profiles, including when each was verified."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -117,6 +201,7 @@ class PartnerApplicationSubmittedEventPartner(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "platforms",
             ]
         )
         nullable_fields = set(
@@ -133,6 +218,9 @@ class PartnerApplicationSubmittedEventPartner(BaseModel):
                 "linkedin",
                 "instagram",
                 "tiktok",
+                "defaultPayoutMethod",
+                "payoutsEnabledAt",
+                "platforms",
             ]
         )
         serialized = handler(self)
@@ -157,12 +245,12 @@ class PartnerApplicationSubmittedEventPartner(BaseModel):
         return m
 
 
-class ApplicationFormDataTypedDict(TypedDict):
+class ProgramApplicationCreatedEventApplicationFormDataTypedDict(TypedDict):
     label: str
     value: Nullable[str]
 
 
-class ApplicationFormData(BaseModel):
+class ProgramApplicationCreatedEventApplicationFormData(BaseModel):
     label: str
 
     value: Nullable[str]
@@ -182,22 +270,25 @@ class ApplicationFormData(BaseModel):
         return m
 
 
-class PartnerApplicationSubmittedEventDataTypedDict(TypedDict):
+class ProgramApplicationCreatedEventDataTypedDict(TypedDict):
     id: str
     created_at: str
-    partner: PartnerApplicationSubmittedEventPartnerTypedDict
-    application_form_data: Nullable[List[ApplicationFormDataTypedDict]]
+    partner: ProgramApplicationCreatedEventPartnerTypedDict
+    application_form_data: Nullable[
+        List[ProgramApplicationCreatedEventApplicationFormDataTypedDict]
+    ]
 
 
-class PartnerApplicationSubmittedEventData(BaseModel):
+class ProgramApplicationCreatedEventData(BaseModel):
     id: str
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    partner: PartnerApplicationSubmittedEventPartner
+    partner: ProgramApplicationCreatedEventPartner
 
     application_form_data: Annotated[
-        Nullable[List[ApplicationFormData]], pydantic.Field(alias="applicationFormData")
+        Nullable[List[ProgramApplicationCreatedEventApplicationFormData]],
+        pydantic.Field(alias="applicationFormData"),
     ]
 
     @model_serializer(mode="wrap")
@@ -215,36 +306,40 @@ class PartnerApplicationSubmittedEventData(BaseModel):
         return m
 
 
-class PartnerApplicationSubmittedEventTypedDict(TypedDict):
+class ProgramApplicationCreatedEventTypedDict(TypedDict):
     r"""Triggered when a partner submits an application to join a program."""
 
     id: str
-    event: PartnerApplicationSubmittedEventEvent
+    event: ProgramApplicationCreatedEventEvent
     created_at: str
-    data: PartnerApplicationSubmittedEventDataTypedDict
+    data: ProgramApplicationCreatedEventDataTypedDict
 
 
-class PartnerApplicationSubmittedEvent(BaseModel):
+class ProgramApplicationCreatedEvent(BaseModel):
     r"""Triggered when a partner submits an application to join a program."""
 
     id: str
 
-    event: PartnerApplicationSubmittedEventEvent
+    event: ProgramApplicationCreatedEventEvent
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    data: PartnerApplicationSubmittedEventData
+    data: ProgramApplicationCreatedEventData
 
 
 try:
-    PartnerApplicationSubmittedEventPartner.model_rebuild()
+    Platforms.model_rebuild()
 except NameError:
     pass
 try:
-    PartnerApplicationSubmittedEventData.model_rebuild()
+    ProgramApplicationCreatedEventPartner.model_rebuild()
 except NameError:
     pass
 try:
-    PartnerApplicationSubmittedEvent.model_rebuild()
+    ProgramApplicationCreatedEventData.model_rebuild()
+except NameError:
+    pass
+try:
+    ProgramApplicationCreatedEvent.model_rebuild()
 except NameError:
     pass
