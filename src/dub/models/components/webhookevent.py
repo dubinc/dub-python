@@ -12,12 +12,16 @@ from .discountcodewebhookevent import (
 from .leadcreatedevent import LeadCreatedEvent, LeadCreatedEventTypedDict
 from .linkclickedevent import LinkClickedEvent, LinkClickedEventTypedDict
 from .linkwebhookevent import LinkWebhookEvent, LinkWebhookEventTypedDict
-from .partnerapplicationsubmittedevent import (
-    PartnerApplicationSubmittedEvent,
-    PartnerApplicationSubmittedEventTypedDict,
-)
 from .partnerenrolledevent import PartnerEnrolledEvent, PartnerEnrolledEventTypedDict
 from .partnermergedevent import PartnerMergedEvent, PartnerMergedEventTypedDict
+from .programapplicationcreatedevent import (
+    ProgramApplicationCreatedEvent,
+    ProgramApplicationCreatedEventTypedDict,
+)
+from .programapplicationsubmittedevent import (
+    ProgramApplicationSubmittedEvent,
+    ProgramApplicationSubmittedEventTypedDict,
+)
 from .salecreatedevent import SaleCreatedEvent, SaleCreatedEventTypedDict
 from typing import Union
 from typing_extensions import TypeAliasType
@@ -31,7 +35,8 @@ WebhookEventTypedDict = TypeAliasType(
         LeadCreatedEventTypedDict,
         SaleCreatedEventTypedDict,
         PartnerEnrolledEventTypedDict,
-        PartnerApplicationSubmittedEventTypedDict,
+        ProgramApplicationSubmittedEventTypedDict,
+        ProgramApplicationCreatedEventTypedDict,
         PartnerMergedEventTypedDict,
         CommissionCreatedEventTypedDict,
         DiscountCodeWebhookEventTypedDict,
@@ -48,7 +53,8 @@ WebhookEvent = TypeAliasType(
         LeadCreatedEvent,
         SaleCreatedEvent,
         PartnerEnrolledEvent,
-        PartnerApplicationSubmittedEvent,
+        ProgramApplicationSubmittedEvent,
+        ProgramApplicationCreatedEvent,
         PartnerMergedEvent,
         CommissionCreatedEvent,
         DiscountCodeWebhookEvent,

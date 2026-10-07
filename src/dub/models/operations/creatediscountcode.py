@@ -14,7 +14,7 @@ class CreateDiscountCodeRequestBodyTypedDict(TypedDict):
     link_id: str
     r"""The ID of the partner's referral link to associate this discount code with. Each link can only have one discount code."""
     code: NotRequired[str]
-    r"""The discount code to create. If omitted, a unique code will be generated automatically from the partner's name."""
+    r"""The discount code to create. If omitted, a unique code will be generated automatically from the partner's name. Stripe and Shopify codes can only contain letters, numbers, dashes, and underscores. Custom provider codes can contain any characters."""
 
 
 class CreateDiscountCodeRequestBody(BaseModel):
@@ -25,7 +25,7 @@ class CreateDiscountCodeRequestBody(BaseModel):
     r"""The ID of the partner's referral link to associate this discount code with. Each link can only have one discount code."""
 
     code: Optional[str] = None
-    r"""The discount code to create. If omitted, a unique code will be generated automatically from the partner's name."""
+    r"""The discount code to create. If omitted, a unique code will be generated automatically from the partner's name. Stripe and Shopify codes can only contain letters, numbers, dashes, and underscores. Custom provider codes can contain any characters."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

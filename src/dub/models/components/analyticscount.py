@@ -20,16 +20,16 @@ class AnalyticsCountTypedDict(TypedDict):
 
 
 class AnalyticsCount(BaseModel):
-    clicks: Optional[float] = 0
+    clicks: Optional[float] = 0.0
     r"""The total number of clicks"""
 
-    leads: Optional[float] = 0
+    leads: Optional[float] = 0.0
     r"""The total number of leads"""
 
-    sales: Optional[float] = 0
+    sales: Optional[float] = 0.0
     r"""The total number of sales"""
 
-    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0
+    sale_amount: Annotated[Optional[float], pydantic.Field(alias="saleAmount")] = 0.0
     r"""The total amount of sales, in cents"""
 
     @model_serializer(mode="wrap")

@@ -2,70 +2,18 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List
+from typing_extensions import Annotated, NotRequired, TypedDict, deprecated
 
 
-class ListPartnerApplicationsRequestTypedDict(TypedDict):
-    country: NotRequired[str]
-    r"""A filter on the list based on the partner's `country` field."""
-    group_id: NotRequired[str]
-    r"""A filter on the list based on the partner's `groupId` field."""
-    page: NotRequired[int]
-    r"""The page number for pagination. The first page is `1`."""
-    page_size: NotRequired[int]
-    r"""The number of items per page."""
+class ProgramApplicationSubmittedEventEvent(str, Enum):
+    PARTNER_APPLICATION_SUBMITTED = "partner.application_submitted"
 
 
-class ListPartnerApplicationsRequest(BaseModel):
-    country: Annotated[
-        Optional[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""A filter on the list based on the partner's `country` field."""
-
-    group_id: Annotated[
-        Optional[str],
-        pydantic.Field(alias="groupId"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""A filter on the list based on the partner's `groupId` field."""
-
-    page: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The page number for pagination. The first page is `1`."""
-
-    page_size: Annotated[
-        Optional[int],
-        pydantic.Field(alias="pageSize"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 100
-    r"""The number of items per page."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["country", "groupId", "page", "pageSize"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class ListPartnerApplicationsStatus(str, Enum):
+class ProgramApplicationSubmittedEventStatus(str, Enum):
     r"""The status of the partner's enrollment in the program."""
 
     PENDING = "pending"
@@ -78,7 +26,7 @@ class ListPartnerApplicationsStatus(str, Enum):
     ARCHIVED = "archived"
 
 
-class ListPartnerApplicationsPartnerTypedDict(TypedDict):
+class ProgramApplicationSubmittedEventPartnerTypedDict(TypedDict):
     id: str
     r"""The partner's unique ID on Dub."""
     name: str
@@ -91,7 +39,7 @@ class ListPartnerApplicationsPartnerTypedDict(TypedDict):
     r"""The partner's avatar image."""
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
-    status: ListPartnerApplicationsStatus
+    status: ProgramApplicationSubmittedEventStatus
     r"""The status of the partner's enrollment in the program."""
     description: NotRequired[Nullable[str]]
     r"""A brief description of the partner and their background."""
@@ -111,7 +59,7 @@ class ListPartnerApplicationsPartnerTypedDict(TypedDict):
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
 
-class ListPartnerApplicationsPartner(BaseModel):
+class ProgramApplicationSubmittedEventPartner(BaseModel):
     id: str
     r"""The partner's unique ID on Dub."""
 
@@ -130,7 +78,7 @@ class ListPartnerApplicationsPartner(BaseModel):
     country: Nullable[str]
     r"""The partner's country (required for tax purposes)."""
 
-    status: ListPartnerApplicationsStatus
+    status: ProgramApplicationSubmittedEventStatus
     r"""The status of the partner's enrollment in the program."""
 
     description: OptionalNullable[str] = UNSET
@@ -234,19 +182,19 @@ class ApplicationFormData(BaseModel):
         return m
 
 
-class ListPartnerApplicationsResponseBodyTypedDict(TypedDict):
+class ProgramApplicationSubmittedEventDataTypedDict(TypedDict):
     id: str
     created_at: str
-    partner: ListPartnerApplicationsPartnerTypedDict
+    partner: ProgramApplicationSubmittedEventPartnerTypedDict
     application_form_data: Nullable[List[ApplicationFormDataTypedDict]]
 
 
-class ListPartnerApplicationsResponseBody(BaseModel):
+class ProgramApplicationSubmittedEventData(BaseModel):
     id: str
 
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
 
-    partner: ListPartnerApplicationsPartner
+    partner: ProgramApplicationSubmittedEventPartner
 
     application_form_data: Annotated[
         Nullable[List[ApplicationFormData]], pydantic.Field(alias="applicationFormData")
@@ -267,11 +215,42 @@ class ListPartnerApplicationsResponseBody(BaseModel):
         return m
 
 
+@deprecated(
+    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+)
+class ProgramApplicationSubmittedEventTypedDict(TypedDict):
+    r"""Deprecated: Use `program_application.created` instead. Triggered when a partner submits an application to join a program."""
+
+    id: str
+    event: ProgramApplicationSubmittedEventEvent
+    created_at: str
+    data: ProgramApplicationSubmittedEventDataTypedDict
+
+
+@deprecated(
+    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+)
+class ProgramApplicationSubmittedEvent(BaseModel):
+    r"""Deprecated: Use `program_application.created` instead. Triggered when a partner submits an application to join a program."""
+
+    id: str
+
+    event: ProgramApplicationSubmittedEventEvent
+
+    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+
+    data: ProgramApplicationSubmittedEventData
+
+
 try:
-    ListPartnerApplicationsPartner.model_rebuild()
+    ProgramApplicationSubmittedEventPartner.model_rebuild()
 except NameError:
     pass
 try:
-    ListPartnerApplicationsResponseBody.model_rebuild()
+    ProgramApplicationSubmittedEventData.model_rebuild()
+except NameError:
+    pass
+try:
+    ProgramApplicationSubmittedEvent.model_rebuild()
 except NameError:
     pass

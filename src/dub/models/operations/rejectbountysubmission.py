@@ -128,6 +128,7 @@ class RejectBountySubmissionStatus(str, Enum):
     SUBMITTED = "submitted"
     APPROVED = "approved"
     REJECTED = "rejected"
+    PARTIALLY_APPROVED = "partiallyApproved"
 
 
 class RejectBountySubmissionResponseBodyTypedDict(TypedDict):
@@ -165,6 +166,8 @@ class RejectBountySubmissionResponseBodyTypedDict(TypedDict):
     r"""The period number for this submission (1-indexed)"""
     social_metrics_last_synced_at: NotRequired[Nullable[str]]
     r"""The date and time the submission's social metrics were last synced"""
+    approved_social_metric_threshold: NotRequired[Nullable[int]]
+    r"""The highest social metric milestone that has been approved and paid out for this submission"""
 
 
 class RejectBountySubmissionResponseBody(BaseModel):
@@ -224,9 +227,16 @@ class RejectBountySubmissionResponseBody(BaseModel):
     ] = UNSET
     r"""The date and time the submission's social metrics were last synced"""
 
+    approved_social_metric_threshold: Annotated[
+        OptionalNullable[int], pydantic.Field(alias="approvedSocialMetricThreshold")
+    ] = UNSET
+    r"""The highest social metric milestone that has been approved and paid out for this submission"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["socialMetricsLastSyncedAt"])
+        optional_fields = set(
+            ["socialMetricsLastSyncedAt", "approvedSocialMetricThreshold"]
+        )
         nullable_fields = set(
             [
                 "description",
@@ -235,6 +245,7 @@ class RejectBountySubmissionResponseBody(BaseModel):
                 "performanceCount",
                 "socialMetricCount",
                 "socialMetricsLastSyncedAt",
+                "approvedSocialMetricThreshold",
                 "completedAt",
                 "reviewedAt",
                 "rejectionReason",
