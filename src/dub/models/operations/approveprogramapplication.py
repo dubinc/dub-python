@@ -4,7 +4,7 @@ from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -15,6 +15,10 @@ class ApproveProgramApplicationRequestBodyTypedDict(TypedDict):
     r"""The ID of the application to approve. If not provided, the partner's most recent pending or rejected application is used. For a partner who is already approved in the program, only a pending application is used."""
     group_id: NotRequired[Nullable[str]]
     r"""The ID of the group to assign the partner to. If not provided, the partner will be assigned to the group they applied to, or the program's default group if no application group is set."""
+    tag_ids: NotRequired[List[str]]
+    r"""The IDs of the partner tags to assign as part of approval. Existing tags are kept. Takes priority over `tagNames` only when it contains at least one ID."""
+    tag_names: NotRequired[List[str]]
+    r"""The names of the partner tags to assign as part of approval. Existing tags are kept. Ignored only when `tagIds` contains at least one ID."""
 
 
 class ApproveProgramApplicationRequestBody(BaseModel):
@@ -29,9 +33,15 @@ class ApproveProgramApplicationRequestBody(BaseModel):
     group_id: Annotated[OptionalNullable[str], pydantic.Field(alias="groupId")] = UNSET
     r"""The ID of the group to assign the partner to. If not provided, the partner will be assigned to the group they applied to, or the program's default group if no application group is set."""
 
+    tag_ids: Annotated[Optional[List[str]], pydantic.Field(alias="tagIds")] = None
+    r"""The IDs of the partner tags to assign as part of approval. Existing tags are kept. Takes priority over `tagNames` only when it contains at least one ID."""
+
+    tag_names: Annotated[Optional[List[str]], pydantic.Field(alias="tagNames")] = None
+    r"""The names of the partner tags to assign as part of approval. Existing tags are kept. Ignored only when `tagIds` contains at least one ID."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["applicationId", "groupId"])
+        optional_fields = set(["applicationId", "groupId", "tagIds", "tagNames"])
         nullable_fields = set(["groupId"])
         serialized = handler(self)
         m = {}
