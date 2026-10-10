@@ -264,6 +264,10 @@ class PartnerTypedDict(TypedDict):
     r"""The partner's unique ID in your system. Useful for retrieving the partner's links and stats later on. If not provided, the partner will be created as a standalone partner."""
     group_id: NotRequired[str]
     r"""The group ID to add the partner to. If not provided, the partner will be added to the default group."""
+    tag_ids: NotRequired[List[str]]
+    r"""The IDs of the partner tags to assign when creating the partner. Existing tags are kept. Takes priority over `tagNames` only when it contains at least one ID."""
+    tag_names: NotRequired[List[str]]
+    r"""The names of the partner tags to assign when creating the partner. Existing tags are kept. Ignored only when `tagIds` contains at least one ID."""
     country: NotRequired[Nullable[str]]
     r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
     description: NotRequired[Nullable[str]]
@@ -291,6 +295,12 @@ class Partner(BaseModel):
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupId")] = None
     r"""The group ID to add the partner to. If not provided, the partner will be added to the default group."""
 
+    tag_ids: Annotated[Optional[List[str]], pydantic.Field(alias="tagIds")] = None
+    r"""The IDs of the partner tags to assign when creating the partner. Existing tags are kept. Takes priority over `tagNames` only when it contains at least one ID."""
+
+    tag_names: Annotated[Optional[List[str]], pydantic.Field(alias="tagNames")] = None
+    r"""The names of the partner tags to assign when creating the partner. Existing tags are kept. Ignored only when `tagIds` contains at least one ID."""
+
     country: OptionalNullable[str] = UNSET
     r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
 
@@ -311,6 +321,8 @@ class Partner(BaseModel):
                 "image",
                 "tenantId",
                 "groupId",
+                "tagIds",
+                "tagNames",
                 "country",
                 "description",
                 "linkProps",
