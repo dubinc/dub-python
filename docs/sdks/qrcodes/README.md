@@ -23,6 +23,7 @@ with Dub(
 
     res = d_client.qr_codes.get(request={
         "url": "https://needy-newsstand.biz/",
+        "bg_color": "#FFFFFF",
     })
 
     # Handle response
@@ -39,7 +40,7 @@ with Dub(
 
 ### Response
 
-**[str](../../models/.md)**
+**[operations.GetQRCodeResponse](../../models/operations/getqrcoderesponse.md)**
 
 ### Errors
 

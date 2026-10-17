@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from dub.utils import get_discriminator
 from enum import Enum
 import pydantic
-from pydantic import Discriminator, Tag, model_serializer
+from pydantic import model_serializer
 from typing import List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -260,6 +259,10 @@ class CreatePartnerRequestBodyTypedDict(TypedDict):
     r"""The partner's unique ID in your system. Useful for retrieving the partner's links and stats later on. If not provided, the partner will be created as a standalone partner."""
     group_id: NotRequired[str]
     r"""The group ID to add the partner to. If not provided, the partner will be added to the default group."""
+    tag_ids: NotRequired[List[str]]
+    r"""The IDs of the partner tags to assign when creating the partner. Existing tags are kept. Takes priority over `tagNames` only when it contains at least one ID."""
+    tag_names: NotRequired[List[str]]
+    r"""The names of the partner tags to assign when creating the partner. Existing tags are kept. Ignored only when `tagIds` contains at least one ID."""
     country: NotRequired[Nullable[str]]
     r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
     description: NotRequired[Nullable[str]]
@@ -287,6 +290,12 @@ class CreatePartnerRequestBody(BaseModel):
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupId")] = None
     r"""The group ID to add the partner to. If not provided, the partner will be added to the default group."""
 
+    tag_ids: Annotated[Optional[List[str]], pydantic.Field(alias="tagIds")] = None
+    r"""The IDs of the partner tags to assign when creating the partner. Existing tags are kept. Takes priority over `tagNames` only when it contains at least one ID."""
+
+    tag_names: Annotated[Optional[List[str]], pydantic.Field(alias="tagNames")] = None
+    r"""The names of the partner tags to assign when creating the partner. Existing tags are kept. Ignored only when `tagIds` contains at least one ID."""
+
     country: OptionalNullable[str] = UNSET
     r"""The partner's country of residence. Must be passed as a 2-letter ISO 3166-1 country code. See https://d.to/geo for more information."""
 
@@ -305,6 +314,8 @@ class CreatePartnerRequestBody(BaseModel):
                 "image",
                 "tenantId",
                 "groupId",
+                "tagIds",
+                "tagNames",
                 "country",
                 "description",
                 "linkProps",
@@ -447,381 +458,6 @@ class CreatePartnerBannedReason(str, Enum):
     BRAND_ABUSE = "brand_abuse"
 
 
-class CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormData8Type(
-    str, Enum
-):
-    PHONE = "phone"
-
-
-class Fields8TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormData8Type
-
-
-class Fields8(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormData8Type
-
-
-class CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormDataType(
-    str, Enum
-):
-    NUMBER = "number"
-
-
-class Fields7TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormDataType
-
-
-class Fields7(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyReferralFormDataType
-
-
-class CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyType(str, Enum):
-    MULTI_SELECT = "multiSelect"
-
-
-class CreatePartnerFieldsPartnersOptionsTypedDict(TypedDict):
-    label: str
-    value: str
-
-
-class CreatePartnerFieldsPartnersOptions(BaseModel):
-    label: str
-
-    value: str
-
-
-class Fields6TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyType
-    options: List[CreatePartnerFieldsPartnersOptionsTypedDict]
-
-
-class Fields6(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONResponseBodyType
-
-    options: List[CreatePartnerFieldsPartnersOptions]
-
-
-class CreatePartnerFieldsPartnersResponse201ApplicationJSONType(str, Enum):
-    DATE = "date"
-
-
-class Fields5TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONType
-
-
-class Fields5(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersResponse201ApplicationJSONType
-
-
-class CreatePartnerFieldsPartnersResponse201Type(str, Enum):
-    COUNTRY = "country"
-
-
-class CreatePartnerFields4TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersResponse201Type
-
-
-class CreatePartnerFields4(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersResponse201Type
-
-
-class CreatePartnerFieldsPartnersResponseType(str, Enum):
-    SELECT = "select"
-
-
-class CreatePartnerFieldsOptionsTypedDict(TypedDict):
-    label: str
-    value: str
-
-
-class CreatePartnerFieldsOptions(BaseModel):
-    label: str
-
-    value: str
-
-
-class CreatePartnerFields3TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersResponseType
-    options: List[CreatePartnerFieldsOptionsTypedDict]
-
-
-class CreatePartnerFields3(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersResponseType
-
-    options: List[CreatePartnerFieldsOptions]
-
-
-class CreatePartnerFieldsPartnersType(str, Enum):
-    TEXTAREA = "textarea"
-
-
-class CreatePartnerFieldsPartnersConstraintsTypedDict(TypedDict):
-    max_length: NotRequired[int]
-
-
-class CreatePartnerFieldsPartnersConstraints(BaseModel):
-    max_length: Annotated[Optional[int], pydantic.Field(alias="maxLength")] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["maxLength"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class CreatePartnerFields2TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsPartnersType
-    constraints: NotRequired[CreatePartnerFieldsPartnersConstraintsTypedDict]
-
-
-class CreatePartnerFields2(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsPartnersType
-
-    constraints: Optional[CreatePartnerFieldsPartnersConstraints] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["constraints"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class CreatePartnerFieldsType(str, Enum):
-    TEXT = "text"
-
-
-class CreatePartnerFieldsConstraintsTypedDict(TypedDict):
-    max_length: NotRequired[int]
-    pattern: NotRequired[str]
-
-
-class CreatePartnerFieldsConstraints(BaseModel):
-    max_length: Annotated[Optional[int], pydantic.Field(alias="maxLength")] = None
-
-    pattern: Optional[str] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["maxLength", "pattern"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class CreatePartnerFields1TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: CreatePartnerFieldsType
-    constraints: NotRequired[CreatePartnerFieldsConstraintsTypedDict]
-
-
-class CreatePartnerFields1(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: CreatePartnerFieldsType
-
-    constraints: Optional[CreatePartnerFieldsConstraints] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["constraints"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-CreatePartnerFieldsTypedDict = TypeAliasType(
-    "CreatePartnerFieldsTypedDict",
-    Union[
-        CreatePartnerFields4TypedDict,
-        Fields5TypedDict,
-        Fields7TypedDict,
-        Fields8TypedDict,
-        CreatePartnerFields1TypedDict,
-        CreatePartnerFields2TypedDict,
-        CreatePartnerFields3TypedDict,
-        Fields6TypedDict,
-    ],
-)
-
-
-CreatePartnerFields = Annotated[
-    Union[
-        Annotated[CreatePartnerFields1, Tag("text")],
-        Annotated[CreatePartnerFields2, Tag("textarea")],
-        Annotated[CreatePartnerFields3, Tag("select")],
-        Annotated[CreatePartnerFields4, Tag("country")],
-        Annotated[Fields5, Tag("date")],
-        Annotated[Fields6, Tag("multiSelect")],
-        Annotated[Fields7, Tag("number")],
-        Annotated[Fields8, Tag("phone")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
-
-
-class CreatePartnerReferralFormDataTypedDict(TypedDict):
-    fields: List[CreatePartnerFieldsTypedDict]
-
-
-class CreatePartnerReferralFormData(BaseModel):
-    fields: List[CreatePartnerFields]
-
-
 class CreatePartnerRejectionReason(str, Enum):
     r"""Preset reason when the application was rejected."""
 
@@ -940,7 +576,6 @@ class CreatePartnerResponseBodyTypedDict(TypedDict):
     r"""If the partner was banned from the program, this is the date of the ban."""
     banned_reason: NotRequired[Nullable[CreatePartnerBannedReason]]
     r"""If the partner was banned from the program, this is the reason for the ban."""
-    referral_form_data: NotRequired[Nullable[CreatePartnerReferralFormDataTypedDict]]
     application: NotRequired[Nullable[CreatePartnerApplicationTypedDict]]
     r"""Linked program application, including review outcome when applicable."""
     tags: NotRequired[List[CreatePartnerTagsTypedDict]]
@@ -1104,11 +739,6 @@ class CreatePartnerResponseBody(BaseModel):
     ] = UNSET
     r"""If the partner was banned from the program, this is the reason for the ban."""
 
-    referral_form_data: Annotated[
-        OptionalNullable[CreatePartnerReferralFormData],
-        pydantic.Field(alias="referralFormData"),
-    ] = UNSET
-
     application: OptionalNullable[CreatePartnerApplication] = UNSET
     r"""Linked program application, including review outcome when applicable."""
 
@@ -1210,7 +840,6 @@ class CreatePartnerResponseBody(BaseModel):
                 "applicationId",
                 "bannedAt",
                 "bannedReason",
-                "referralFormData",
                 "application",
                 "tags",
                 "totalClicks",
@@ -1259,7 +888,6 @@ class CreatePartnerResponseBody(BaseModel):
                 "applicationId",
                 "bannedAt",
                 "bannedReason",
-                "referralFormData",
                 "application",
                 "earningsPerClick",
                 "averageLifetimeValue",
@@ -1308,14 +936,6 @@ except NameError:
     pass
 try:
     CreatePartnerLinks.model_rebuild()
-except NameError:
-    pass
-try:
-    CreatePartnerFieldsPartnersConstraints.model_rebuild()
-except NameError:
-    pass
-try:
-    CreatePartnerFieldsConstraints.model_rebuild()
 except NameError:
     pass
 try:
