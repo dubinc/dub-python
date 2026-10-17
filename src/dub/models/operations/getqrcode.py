@@ -6,8 +6,8 @@ from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class Level(str, Enum):
@@ -17,6 +17,13 @@ class Level(str, Enum):
     M = "M"
     Q = "Q"
     H = "H"
+
+
+class Format(str, Enum):
+    r"""The format of the QR code. Defaults to `png` if not provided."""
+
+    PNG = "png"
+    SVG = "svg"
 
 
 class GetQRCodeRequestTypedDict(TypedDict):
@@ -31,13 +38,15 @@ class GetQRCodeRequestTypedDict(TypedDict):
     fg_color: NotRequired[str]
     r"""The foreground color of the QR code in hex format. Defaults to `#000000` if not provided."""
     bg_color: NotRequired[str]
-    r"""The background color of the QR code in hex format. Defaults to `#ffffff` if not provided."""
+    r"""The background color of the QR code in hex format. Defaults to `#ffffff` for `png`. When omitted for `svg`, the background is transparent."""
     hide_logo: NotRequired[bool]
     r"""Whether to hide the logo in the QR code. Can only be used with a paid plan on Dub."""
     margin: NotRequired[float]
     r"""The size of the margin around the QR code. Defaults to 2 if not provided."""
     include_margin: NotRequired[bool]
     r"""DEPRECATED: Margin is included by default. Use the `margin` prop to customize the margin size."""
+    format_: NotRequired[Format]
+    r"""The format of the QR code. Defaults to `png` if not provided."""
 
 
 class GetQRCodeRequest(BaseModel):
@@ -75,8 +84,8 @@ class GetQRCodeRequest(BaseModel):
         Optional[str],
         pydantic.Field(alias="bgColor"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = "#FFFFFF"
-    r"""The background color of the QR code in hex format. Defaults to `#ffffff` if not provided."""
+    ] = None
+    r"""The background color of the QR code in hex format. Defaults to `#ffffff` for `png`. When omitted for `svg`, the background is transparent."""
 
     hide_logo: Annotated[
         Optional[bool],
@@ -98,6 +107,13 @@ class GetQRCodeRequest(BaseModel):
     ] = True
     r"""DEPRECATED: Margin is included by default. Use the `margin` prop to customize the margin size."""
 
+    format_: Annotated[
+        Optional[Format],
+        pydantic.Field(alias="format"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = Format.PNG
+    r"""The format of the QR code. Defaults to `png` if not provided."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -110,6 +126,7 @@ class GetQRCodeRequest(BaseModel):
                 "hideLogo",
                 "margin",
                 "includeMargin",
+                "format",
             ]
         )
         serialized = handler(self)
@@ -124,3 +141,11 @@ class GetQRCodeRequest(BaseModel):
                     m[k] = val
 
         return m
+
+
+GetQRCodeResponseTypedDict = TypeAliasType(
+    "GetQRCodeResponseTypedDict", Union[str, str]
+)
+
+
+GetQRCodeResponse = TypeAliasType("GetQRCodeResponse", Union[str, str])

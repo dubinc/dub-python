@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from dub.utils import FieldMetadata, QueryParamMetadata, get_discriminator
+from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
-from pydantic import Discriminator, Tag, model_serializer
-from typing import List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ListPartnersQueryParamStatus(str, Enum):
@@ -281,379 +281,6 @@ class BannedReason(str, Enum):
     BRAND_ABUSE = "brand_abuse"
 
 
-class ListPartnersFieldsPartnersResponse200ApplicationJSONResponseBodyReferralFormDataType(
-    str, Enum
-):
-    PHONE = "phone"
-
-
-class EightTypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsPartnersResponse200ApplicationJSONResponseBodyReferralFormDataType
-
-
-class Eight(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsPartnersResponse200ApplicationJSONResponseBodyReferralFormDataType
-
-
-class ListPartnersFieldsPartnersResponse200ApplicationJSONResponseBodyType(str, Enum):
-    NUMBER = "number"
-
-
-class SevenTypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsPartnersResponse200ApplicationJSONResponseBodyType
-
-
-class Seven(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsPartnersResponse200ApplicationJSONResponseBodyType
-
-
-class ListPartnersFieldsPartnersResponse200ApplicationJSONType(str, Enum):
-    MULTI_SELECT = "multiSelect"
-
-
-class FieldsOptionsTypedDict(TypedDict):
-    label: str
-    value: str
-
-
-class FieldsOptions(BaseModel):
-    label: str
-
-    value: str
-
-
-class SixTypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsPartnersResponse200ApplicationJSONType
-    options: List[FieldsOptionsTypedDict]
-
-
-class Six(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsPartnersResponse200ApplicationJSONType
-
-    options: List[FieldsOptions]
-
-
-class ListPartnersFieldsPartnersResponse200Type(str, Enum):
-    DATE = "date"
-
-
-class FiveTypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsPartnersResponse200Type
-
-
-class Five(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsPartnersResponse200Type
-
-
-class ListPartnersFieldsPartnersResponseType(str, Enum):
-    COUNTRY = "country"
-
-
-class Fields4TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsPartnersResponseType
-
-
-class Fields4(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsPartnersResponseType
-
-
-class ListPartnersFieldsPartnersType(str, Enum):
-    SELECT = "select"
-
-
-class OptionsTypedDict(TypedDict):
-    label: str
-    value: str
-
-
-class Options(BaseModel):
-    label: str
-
-    value: str
-
-
-class Fields3TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsPartnersType
-    options: List[OptionsTypedDict]
-
-
-class Fields3(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsPartnersType
-
-    options: List[Options]
-
-
-class ListPartnersFieldsType(str, Enum):
-    TEXTAREA = "textarea"
-
-
-class FieldsConstraintsTypedDict(TypedDict):
-    max_length: NotRequired[int]
-
-
-class FieldsConstraints(BaseModel):
-    max_length: Annotated[Optional[int], pydantic.Field(alias="maxLength")] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["maxLength"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class Fields2TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: ListPartnersFieldsType
-    constraints: NotRequired[FieldsConstraintsTypedDict]
-
-
-class Fields2(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: ListPartnersFieldsType
-
-    constraints: Optional[FieldsConstraints] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["constraints"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class FieldsType(str, Enum):
-    TEXT = "text"
-
-
-class ConstraintsTypedDict(TypedDict):
-    max_length: NotRequired[int]
-    pattern: NotRequired[str]
-
-
-class Constraints(BaseModel):
-    max_length: Annotated[Optional[int], pydantic.Field(alias="maxLength")] = None
-
-    pattern: Optional[str] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["maxLength", "pattern"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class Fields1TypedDict(TypedDict):
-    key: str
-    label: str
-    required: bool
-    locked: bool
-    position: int
-    type: FieldsType
-    constraints: NotRequired[ConstraintsTypedDict]
-
-
-class Fields1(BaseModel):
-    key: str
-
-    label: str
-
-    required: bool
-
-    locked: bool
-
-    position: int
-
-    type: FieldsType
-
-    constraints: Optional[Constraints] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["constraints"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-FieldsTypedDict = TypeAliasType(
-    "FieldsTypedDict",
-    Union[
-        Fields4TypedDict,
-        FiveTypedDict,
-        SevenTypedDict,
-        EightTypedDict,
-        Fields1TypedDict,
-        Fields2TypedDict,
-        Fields3TypedDict,
-        SixTypedDict,
-    ],
-)
-
-
-Fields = Annotated[
-    Union[
-        Annotated[Fields1, Tag("text")],
-        Annotated[Fields2, Tag("textarea")],
-        Annotated[Fields3, Tag("select")],
-        Annotated[Fields4, Tag("country")],
-        Annotated[Five, Tag("date")],
-        Annotated[Six, Tag("multiSelect")],
-        Annotated[Seven, Tag("number")],
-        Annotated[Eight, Tag("phone")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
-
-
-class ReferralFormDataTypedDict(TypedDict):
-    fields: List[FieldsTypedDict]
-
-
-class ReferralFormData(BaseModel):
-    fields: List[Fields]
-
-
 class ListPartnersRejectionReason(str, Enum):
     r"""Preset reason when the application was rejected."""
 
@@ -770,7 +397,6 @@ class ListPartnersResponseBodyTypedDict(TypedDict):
     r"""If the partner was banned from the program, this is the date of the ban."""
     banned_reason: NotRequired[Nullable[BannedReason]]
     r"""If the partner was banned from the program, this is the reason for the ban."""
-    referral_form_data: NotRequired[Nullable[ReferralFormDataTypedDict]]
     application: NotRequired[Nullable[ApplicationTypedDict]]
     r"""Linked program application, including review outcome when applicable."""
     tags: NotRequired[List[TagsTypedDict]]
@@ -928,10 +554,6 @@ class ListPartnersResponseBody(BaseModel):
     ] = UNSET
     r"""If the partner was banned from the program, this is the reason for the ban."""
 
-    referral_form_data: Annotated[
-        OptionalNullable[ReferralFormData], pydantic.Field(alias="referralFormData")
-    ] = UNSET
-
     application: OptionalNullable[Application] = UNSET
     r"""Linked program application, including review outcome when applicable."""
 
@@ -1033,7 +655,6 @@ class ListPartnersResponseBody(BaseModel):
                 "applicationId",
                 "bannedAt",
                 "bannedReason",
-                "referralFormData",
                 "application",
                 "tags",
                 "totalClicks",
@@ -1082,7 +703,6 @@ class ListPartnersResponseBody(BaseModel):
                 "applicationId",
                 "bannedAt",
                 "bannedReason",
-                "referralFormData",
                 "application",
                 "earningsPerClick",
                 "averageLifetimeValue",
@@ -1123,14 +743,6 @@ class ListPartnersResponseBody(BaseModel):
 
 try:
     Links.model_rebuild()
-except NameError:
-    pass
-try:
-    FieldsConstraints.model_rebuild()
-except NameError:
-    pass
-try:
-    Constraints.model_rebuild()
 except NameError:
     pass
 try:
