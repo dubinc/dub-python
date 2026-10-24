@@ -128,6 +128,7 @@ class ListProgramApplicationsNetworkStatus(str, Enum):
     APPROVED = "approved"
     REJECTED = "rejected"
     TRUSTED = "trusted"
+    BANNED = "banned"
 
 
 class ListProgramApplicationsDefaultPayoutMethod(str, Enum):

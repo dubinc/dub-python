@@ -61,7 +61,7 @@ class RequestBodyTypedDict(TypedDict):
     program_id: NotRequired[Nullable[str]]
     r"""The ID of the program the short link is associated with."""
     partner_id: NotRequired[Nullable[str]]
-    r"""The ID of the partner the short link is associated with."""
+    r"""The ID of the partner the short link is associated with. Pass `null` or an empty string to remove the partner. Removing the partner also removes the program association."""
     prefix: NotRequired[str]
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     track_conversion: NotRequired[bool]
@@ -159,7 +159,7 @@ class RequestBody(BaseModel):
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET
     )
-    r"""The ID of the partner the short link is associated with."""
+    r"""The ID of the partner the short link is associated with. Pass `null` or an empty string to remove the partner. Removing the partner also removes the program association."""
 
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""

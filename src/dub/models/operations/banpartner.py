@@ -5,6 +5,7 @@ from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTIN
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -26,6 +27,10 @@ class BanPartnerRequestBodyTypedDict(TypedDict):
     r"""The ID of the partner to create a link for. Will take precedence over `tenantId` if provided."""
     tenant_id: NotRequired[Nullable[str]]
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
+    flag_for_fraud: NotRequired[bool]
+    r"""Whether to flag the partner for fraud review by the Dub team."""
+    flag_for_fraud_reason: NotRequired[str]
+    r"""The reason for flagging the partner for fraud. Required when flagForFraud is true."""
 
 
 class BanPartnerRequestBody(BaseModel):
@@ -42,9 +47,21 @@ class BanPartnerRequestBody(BaseModel):
     )
     r"""The ID of the partner in your system. If both `partnerId` and `tenantId` are not provided, an error will be thrown."""
 
+    flag_for_fraud: Annotated[Optional[bool], pydantic.Field(alias="flagForFraud")] = (
+        None
+    )
+    r"""Whether to flag the partner for fraud review by the Dub team."""
+
+    flag_for_fraud_reason: Annotated[
+        Optional[str], pydantic.Field(alias="flagForFraudReason")
+    ] = None
+    r"""The reason for flagging the partner for fraud. Required when flagForFraud is true."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["partnerId", "tenantId"])
+        optional_fields = set(
+            ["partnerId", "tenantId", "flagForFraud", "flagForFraudReason"]
+        )
         nullable_fields = set(["partnerId", "tenantId"])
         serialized = handler(self)
         m = {}
