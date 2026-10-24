@@ -34,6 +34,7 @@ class ProgramApplicationCreatedEventNetworkStatus(str, Enum):
     APPROVED = "approved"
     REJECTED = "rejected"
     TRUSTED = "trusted"
+    BANNED = "banned"
 
 
 class ProgramApplicationCreatedEventDefaultPayoutMethod(str, Enum):
