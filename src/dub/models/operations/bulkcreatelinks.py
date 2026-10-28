@@ -5,7 +5,15 @@ from dub.models.components import (
     linkerrorschema as components_linkerrorschema,
     linkschema as components_linkschema,
 )
-from dub.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from dub.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Dict, List, Optional, Union
@@ -61,7 +69,7 @@ class RequestBodyTypedDict(TypedDict):
     program_id: NotRequired[Nullable[str]]
     r"""The ID of the program the short link is associated with."""
     partner_id: NotRequired[Nullable[str]]
-    r"""The ID of the partner the short link is associated with."""
+    r"""The ID of the partner the short link is associated with. Pass `null` or an empty string to remove the partner. Removing the partner also removes the program association."""
     prefix: NotRequired[str]
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
     track_conversion: NotRequired[bool]
@@ -159,7 +167,7 @@ class RequestBody(BaseModel):
     partner_id: Annotated[OptionalNullable[str], pydantic.Field(alias="partnerId")] = (
         UNSET
     )
-    r"""The ID of the partner the short link is associated with."""
+    r"""The ID of the partner the short link is associated with. Pass `null` or an empty string to remove the partner. Removing the partner also removes the program association."""
 
     prefix: Optional[str] = None
     r"""The prefix of the short link slug for randomly-generated keys (e.g. if prefix is `/c/`, generated keys will be in the `/c/:key` format). Will be ignored if `key` is provided."""
@@ -295,6 +303,9 @@ class RequestBody(BaseModel):
     r"""Deprecated: You can now enable link.clicked webhooks for all links in a workspace or folder without passing this field manually. An array of webhook IDs to trigger when the link is clicked. These webhooks will receive click event data."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -370,11 +381,14 @@ class RequestBody(BaseModel):
                 "webhookIds",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

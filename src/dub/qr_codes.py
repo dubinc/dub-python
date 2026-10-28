@@ -6,7 +6,13 @@ from dub._hooks import HookContext
 from dub.models import errors, operations
 from dub.types import BaseModel, OptionalNullable, UNSET
 from dub.utils.unmarshal_json_response import unmarshal_json_response
+from enum import Enum
 from typing import Any, Mapping, Optional, Union, cast
+
+
+class GetAcceptEnum(str, Enum):
+    IMAGE_PNG = "image/png"
+    IMAGE_SVG_PLUS_XML = "image/svg+xml"
 
 
 class QRCodes(BaseSDK):
@@ -18,9 +24,10 @@ class QRCodes(BaseSDK):
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
+        accept_header_override: Optional[GetAcceptEnum] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> str:
+    ) -> operations.GetQRCodeResponse:
         r"""Retrieve a QR code
 
         Retrieve a QR code for a link.
@@ -29,6 +36,7 @@ class QRCodes(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -55,7 +63,9 @@ class QRCodes(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="image/png",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "image/png;q=1, image/svg+xml;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -87,6 +97,8 @@ class QRCodes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "image/png"):
+            return http_res.text
+        if utils.match_response(http_res, "200", "image/svg+xml"):
             return http_res.text
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)
@@ -138,9 +150,10 @@ class QRCodes(BaseSDK):
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
+        accept_header_override: Optional[GetAcceptEnum] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> str:
+    ) -> operations.GetQRCodeResponse:
         r"""Retrieve a QR code
 
         Retrieve a QR code for a link.
@@ -149,6 +162,7 @@ class QRCodes(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -175,7 +189,9 @@ class QRCodes(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="image/png",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "image/png;q=1, image/svg+xml;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -207,6 +223,8 @@ class QRCodes(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "image/png"):
+            return http_res.text
+        if utils.match_response(http_res, "200", "image/svg+xml"):
             return http_res.text
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.BadRequestData, http_res)

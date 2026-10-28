@@ -20,3 +20,4 @@ value = NetworkStatus.DRAFT
 | `APPROVED`  | approved    |
 | `REJECTED`  | rejected    |
 | `TRUSTED`   | trusted     |
+| `BANNED`    | banned      |
