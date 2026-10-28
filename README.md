@@ -707,6 +707,7 @@ def main():
         token="DUB_API_KEY",
     ) as d_client:
         # Rest of application here...
+        pass
 
 
 # Or when using async:
@@ -716,6 +717,7 @@ async def amain():
         token="DUB_API_KEY",
     ) as d_client:
         # Rest of application here...
+        pass
 ```
 <!-- End Resource Management [resource-management] -->
 

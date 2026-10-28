@@ -20,3 +20,4 @@ value = BulkUpdateCommissionsStatus.PENDING
 | `DUPLICATE` | duplicate   |
 | `CANCELED`  | canceled    |
 | `FRAUD`     | fraud       |
+| `HOLD`      | hold        |
