@@ -12,6 +12,7 @@ from .discountcodewebhookevent import (
 from .leadcreatedevent import LeadCreatedEvent, LeadCreatedEventTypedDict
 from .linkclickedevent import LinkClickedEvent, LinkClickedEventTypedDict
 from .linkwebhookevent import LinkWebhookEvent, LinkWebhookEventTypedDict
+from .messagereceivedevent import MessageReceivedEvent, MessageReceivedEventTypedDict
 from .partnerenrolledevent import PartnerEnrolledEvent, PartnerEnrolledEventTypedDict
 from .partnermergedevent import PartnerMergedEvent, PartnerMergedEventTypedDict
 from .programapplicationcreatedevent import (
@@ -40,6 +41,7 @@ WebhookEventTypedDict = TypeAliasType(
         PartnerMergedEventTypedDict,
         CommissionCreatedEventTypedDict,
         DiscountCodeWebhookEventTypedDict,
+        MessageReceivedEventTypedDict,
     ],
 )
 r"""Webhook event schema"""
@@ -58,6 +60,7 @@ WebhookEvent = TypeAliasType(
         PartnerMergedEvent,
         CommissionCreatedEvent,
         DiscountCodeWebhookEvent,
+        MessageReceivedEvent,
     ],
 )
 r"""Webhook event schema"""

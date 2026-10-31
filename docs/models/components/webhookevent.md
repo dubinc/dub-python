@@ -65,3 +65,9 @@ value: components.CommissionCreatedEvent = /* values here */
 value: components.DiscountCodeWebhookEvent = /* values here */
 ```
 
+### `components.MessageReceivedEvent`
+
+```python
+value: components.MessageReceivedEvent = /* values here */
+```
+
