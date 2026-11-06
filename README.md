@@ -324,6 +324,11 @@ asyncio.run(main())
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
 
+### [Messages](docs/sdks/messages/README.md)
+
+* [list](docs/sdks/messages/README.md#list) - List all messages
+* [create](docs/sdks/messages/README.md#create) - Send a message to a partner
+
 ### [Partners](docs/sdks/partners/README.md)
 
 * [list](docs/sdks/partners/README.md#list) - List all partners
