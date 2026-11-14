@@ -26,6 +26,7 @@ if TYPE_CHECKING:
     from dub.events import Events
     from dub.folders import Folders
     from dub.links import Links
+    from dub.messages import Messages
     from dub.partners import Partners
     from dub.payouts import Payouts
     from dub.program_applications import ProgramApplications
@@ -53,6 +54,7 @@ class Dub(BaseSDK):
     embed_tokens: "EmbedTokens"
     qr_codes: "QRCodes"
     bounties: "Bounties"
+    messages: "Messages"
     _sub_sdk_map = {
         "links": ("dub.links", "Links"),
         "analytics": ("dub.analytics", "Analytics"),
@@ -70,6 +72,7 @@ class Dub(BaseSDK):
         "embed_tokens": ("dub.embed_tokens", "EmbedTokens"),
         "qr_codes": ("dub.qr_codes", "QRCodes"),
         "bounties": ("dub.bounties", "Bounties"),
+        "messages": ("dub.messages", "Messages"),
     }
 
     def __init__(
