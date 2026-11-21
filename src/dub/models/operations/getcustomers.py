@@ -10,6 +10,7 @@ from dub.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from dub.types.basemodel import current_filtered_dump
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
@@ -40,7 +41,7 @@ class GetCustomersRequestTypedDict(TypedDict):
     external_id: NotRequired[str]
     r"""A case-sensitive filter on the list based on the customer's `externalId` field. The value must be a string. Takes precedence over `search`."""
     search: NotRequired[str]
-    r"""A search query to filter customers by email, name, or customer ID (`cus_...`). If `email` or `externalId` is provided, this will be ignored."""
+    r"""A search query to filter customers by email, name, or customer ID. Queries starting with `cus_` exact-match the customer's Dub ID or Stripe customer ID. If `email` or `externalId` is provided, this will be ignored."""
     country: NotRequired[str]
     r"""A filter on the list based on the customer's `country` field."""
     link_id: NotRequired[str]
@@ -83,7 +84,7 @@ class GetCustomersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""A search query to filter customers by email, name, or customer ID (`cus_...`). If `email` or `externalId` is provided, this will be ignored."""
+    r"""A search query to filter customers by email, name, or customer ID. Queries starting with `cus_` exact-match the customer's Dub ID or Stripe customer ID. If `email` or `externalId` is provided, this will be ignored."""
 
     country: Annotated[
         Optional[str],
@@ -184,12 +185,13 @@ class GetCustomersRequest(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -240,12 +242,13 @@ class GetCustomersLink(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -285,12 +288,13 @@ class GetCustomersPartner(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -345,12 +349,13 @@ class Discount(BaseModel):
             ["maxDuration", "couponId", "couponTestId", "description", "partnersCount"]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
@@ -495,12 +500,13 @@ class GetCustomersResponseBody(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
