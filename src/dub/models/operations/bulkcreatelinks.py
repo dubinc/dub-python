@@ -14,6 +14,7 @@ from dub.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from dub.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Dict, List, Optional, Union
@@ -60,7 +61,7 @@ class RequestBodyTypedDict(TypedDict):
     r"""The domain of the short link (without protocol). If not provided, the primary domain for the workspace will be used (or `dub.sh` if the workspace has no domains)."""
     key: NotRequired[str]
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
-    key_length: NotRequired[float]
+    key_length: NotRequired[int]
     r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
     external_id: NotRequired[Nullable[str]]
     r"""The ID of the link in your database. If set, it can be used to identify the link in future API requests (must be prefixed with 'ext_' when passed as a query parameter). This key is unique across your workspace. Pass `null` or an empty string to remove it."""
@@ -146,7 +147,7 @@ class RequestBody(BaseModel):
     key: Optional[str] = None
     r"""The short link slug. If not provided, a random 7-character slug will be generated."""
 
-    key_length: Annotated[Optional[float], pydantic.Field(alias="keyLength")] = None
+    key_length: Annotated[Optional[int], pydantic.Field(alias="keyLength")] = None
     r"""The length of the short link slug. Defaults to 7 if not provided. When used with `prefix`, the total length of the key will be `prefix.length + keyLength`."""
 
     external_id: Annotated[
@@ -382,12 +383,13 @@ class RequestBody(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (

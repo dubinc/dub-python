@@ -10,6 +10,7 @@ from dub.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from dub.types.basemodel import current_filtered_dump
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -21,7 +22,7 @@ class PartnerEnrolledEventEvent(str, Enum):
     PARTNER_ENROLLED = "partner.enrolled"
 
 
-class NetworkStatus(str, Enum):
+class PartnerEnrolledEventNetworkStatus(str, Enum):
     r"""The partner's network status on Dub."""
 
     DRAFT = "draft"
@@ -115,12 +116,13 @@ class Links(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["clicks", "leads", "conversions", "sales", "saleAmount"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -182,12 +184,13 @@ class Application(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -223,7 +226,7 @@ class PartnerEnrolledEventDataTypedDict(TypedDict):
     r"""The partner's country (required for tax purposes)."""
     company_name: Nullable[str]
     r"""If the partner profile type is a company, this is the partner's legal company name."""
-    network_status: NetworkStatus
+    network_status: PartnerEnrolledEventNetworkStatus
     r"""The partner's network status on Dub."""
     default_payout_method: Nullable[DefaultPayoutMethod]
     r"""The partner's default payout method. Connect: Bank account payouts via Stripe Connect; Stablecoin: USDC payouts directly to a crypto wallet; PayPal: Payouts via PayPal"""
@@ -330,7 +333,9 @@ class PartnerEnrolledEventData(BaseModel):
     company_name: Annotated[Nullable[str], pydantic.Field(alias="companyName")]
     r"""If the partner profile type is a company, this is the partner's legal company name."""
 
-    network_status: Annotated[NetworkStatus, pydantic.Field(alias="networkStatus")]
+    network_status: Annotated[
+        PartnerEnrolledEventNetworkStatus, pydantic.Field(alias="networkStatus")
+    ]
     r"""The partner's network status on Dub."""
 
     default_payout_method: Annotated[
@@ -590,12 +595,13 @@ class PartnerEnrolledEventData(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
