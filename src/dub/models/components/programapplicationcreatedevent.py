@@ -10,6 +10,7 @@ from dub.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from dub.types.basemodel import current_filtered_dump
 from enum import Enum
 import pydantic
 from pydantic import model_serializer
@@ -63,7 +64,7 @@ class ProgramApplicationCreatedEventType(str, Enum):
     TIKTOK = "tiktok"
 
 
-class PlatformsTypedDict(TypedDict):
+class ProgramApplicationCreatedEventPlatformsTypedDict(TypedDict):
     type: ProgramApplicationCreatedEventType
     identifier: str
     verified_at: Nullable[str]
@@ -75,7 +76,7 @@ class PlatformsTypedDict(TypedDict):
     r"""Video views for YouTube, or impressions for other social profiles."""
 
 
-class Platforms(BaseModel):
+class ProgramApplicationCreatedEventPlatforms(BaseModel):
     type: ProgramApplicationCreatedEventType
 
     identifier: str
@@ -99,12 +100,13 @@ class Platforms(BaseModel):
         optional_fields = set(["subscribers", "posts", "views"])
         nullable_fields = set(["verifiedAt"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
@@ -160,7 +162,9 @@ class ProgramApplicationCreatedEventPartnerTypedDict(TypedDict):
     r"""The partner's Instagram username (e.g. `johndoe`)."""
     tiktok: NotRequired[Nullable[str]]
     r"""The partner's TikTok username (e.g. `johndoe`)."""
-    platforms: NotRequired[Nullable[List[PlatformsTypedDict]]]
+    platforms: NotRequired[
+        Nullable[List[ProgramApplicationCreatedEventPlatformsTypedDict]]
+    ]
     r"""The partner's website and social profiles, including when each was verified and audience stats (subscribers, views, and posts)."""
 
 
@@ -227,7 +231,7 @@ class ProgramApplicationCreatedEventPartner(BaseModel):
     tiktok: OptionalNullable[str] = UNSET
     r"""The partner's TikTok username (e.g. `johndoe`)."""
 
-    platforms: OptionalNullable[List[Platforms]] = UNSET
+    platforms: OptionalNullable[List[ProgramApplicationCreatedEventPlatforms]] = UNSET
     r"""The partner's website and social profiles, including when each was verified and audience stats (subscribers, views, and posts)."""
 
     @model_serializer(mode="wrap")
@@ -268,12 +272,13 @@ class ProgramApplicationCreatedEventPartner(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
@@ -308,12 +313,13 @@ class ProgramApplicationCreatedEventApplicationFormData(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -350,12 +356,13 @@ class ProgramApplicationCreatedEventData(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -387,7 +394,7 @@ class ProgramApplicationCreatedEvent(BaseModel):
 
 
 try:
-    Platforms.model_rebuild()
+    ProgramApplicationCreatedEventPlatforms.model_rebuild()
 except NameError:
     pass
 try:

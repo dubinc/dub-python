@@ -26,3 +26,4 @@ value = Code.BAD_REQUEST
 | `UNPROCESSABLE_ENTITY`  | unprocessable_entity    |
 | `RATE_LIMIT_EXCEEDED`   | rate_limit_exceeded     |
 | `INTERNAL_SERVER_ERROR` | internal_server_error   |
+| `SERVICE_UNAVAILABLE`   | service_unavailable     |
