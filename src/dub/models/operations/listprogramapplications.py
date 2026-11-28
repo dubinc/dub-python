@@ -10,6 +10,7 @@ from dub.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from dub.types.basemodel import current_filtered_dump
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
@@ -25,7 +26,7 @@ class ListProgramApplicationsQueryParamSortOrder(str, Enum):
     DESC = "desc"
 
 
-class QueryParamStatus(str, Enum):
+class ListProgramApplicationsQueryParamStatus(str, Enum):
     r"""Filter applications by status. One of `pending`, `approved`, or `rejected`. Defaults to `pending`."""
 
     PENDING = "pending"
@@ -42,7 +43,7 @@ class ListProgramApplicationsRequestTypedDict(TypedDict):
     r"""The sort order. The default is `desc`."""
     search: NotRequired[str]
     r"""Filter applications by name, email, or company name. Partial matches are supported. An exact partner ID is also matched."""
-    status: NotRequired[QueryParamStatus]
+    status: NotRequired[ListProgramApplicationsQueryParamStatus]
     r"""Filter applications by status. One of `pending`, `approved`, or `rejected`. Defaults to `pending`."""
     page: NotRequired[int]
     r"""The page number for pagination. The first page is `1`."""
@@ -78,9 +79,9 @@ class ListProgramApplicationsRequest(BaseModel):
     r"""Filter applications by name, email, or company name. Partial matches are supported. An exact partner ID is also matched."""
 
     status: Annotated[
-        Optional[QueryParamStatus],
+        Optional[ListProgramApplicationsQueryParamStatus],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = QueryParamStatus.PENDING
+    ] = ListProgramApplicationsQueryParamStatus.PENDING
     r"""Filter applications by status. One of `pending`, `approved`, or `rejected`. Defaults to `pending`."""
 
     page: Annotated[
@@ -105,12 +106,13 @@ class ListProgramApplicationsRequest(BaseModel):
             ["country", "groupId", "sortOrder", "search", "status", "page", "pageSize"]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -199,12 +201,13 @@ class Platforms(BaseModel):
         optional_fields = set(["subscribers", "posts", "views"])
         nullable_fields = set(["verifiedAt"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
@@ -367,12 +370,13 @@ class ListProgramApplicationsPartner(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
@@ -407,12 +411,13 @@ class ApplicationFormData(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -446,12 +451,13 @@ class ListProgramApplicationsResponseBody(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 

@@ -324,6 +324,11 @@ asyncio.run(main())
 * [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
 
+### [Messages](docs/sdks/messages/README.md)
+
+* [list](docs/sdks/messages/README.md#list) - List all messages
+* [create](docs/sdks/messages/README.md#create) - Send a message to a partner
+
 ### [Partners](docs/sdks/partners/README.md)
 
 * [list](docs/sdks/partners/README.md#list) - List all partners
@@ -331,9 +336,12 @@ asyncio.run(main())
 * [retrieve_links](docs/sdks/partners/README.md#retrieve_links) - Retrieve a partner's links.
 * [create_link](docs/sdks/partners/README.md#create_link) - Create a link for a partner
 * [upsert_link](docs/sdks/partners/README.md#upsert_link) - Upsert a link for a partner
+* [list_network](docs/sdks/partners/README.md#list_network) - List all partners in the network
 * [analytics](docs/sdks/partners/README.md#analytics) - Retrieve analytics for a partner
 * [ban](docs/sdks/partners/README.md#ban) - Ban a partner
 * [deactivate](docs/sdks/partners/README.md#deactivate) - Deactivate a partner
+* [update_tags](docs/sdks/partners/README.md#update_tags) - Update the tags of partners
+* [update_group](docs/sdks/partners/README.md#update_group) - Update the group of partners
 
 ### [Payouts](docs/sdks/payouts/README.md)
 

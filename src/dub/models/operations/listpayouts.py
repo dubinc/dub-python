@@ -10,6 +10,7 @@ from dub.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from dub.types.basemodel import current_filtered_dump
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
@@ -56,6 +57,8 @@ class ListPayoutsRequestTypedDict(TypedDict):
     r"""Filter the list of payouts by invoice ID (the unique ID of the invoice you receive for each batch payout you process on Dub). Pending payouts will not have an invoice ID."""
     group_id: NotRequired[str]
     r"""Filter the list of payouts by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
+    partner_tag_id: NotRequired[str]
+    r"""Filter the list of payouts by the associated partner tag. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_abc`, `ptag_abc,ptag_xyz`, `-ptag_abc`."""
     sort_by: NotRequired[ListPayoutsQueryParamSortBy]
     r"""The field to sort the list of payouts by."""
     sort_order: NotRequired[ListPayoutsQueryParamSortOrder]
@@ -101,6 +104,13 @@ class ListPayoutsRequest(BaseModel):
     ] = None
     r"""Filter the list of payouts by the associated partner group. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `group_abc`, `group_abc,group_xyz`, `-group_abc`."""
 
+    partner_tag_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="partnerTagId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter the list of payouts by the associated partner tag. Supports advanced filtering: single value, multiple values (comma-separated), or exclusion (prefix with `-`). Examples: `ptag_abc`, `ptag_abc,ptag_xyz`, `-ptag_abc`."""
+
     sort_by: Annotated[
         Optional[ListPayoutsQueryParamSortBy],
         pydantic.Field(alias="sortBy"),
@@ -140,6 +150,7 @@ class ListPayoutsRequest(BaseModel):
                 "tenantId",
                 "invoiceId",
                 "groupId",
+                "partnerTagId",
                 "sortBy",
                 "sortOrder",
                 "page",
@@ -147,12 +158,13 @@ class ListPayoutsRequest(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -284,12 +296,13 @@ class ListPayoutsPartner(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
@@ -330,12 +343,13 @@ class User(BaseModel):
 
     def serialize_model(self, handler):
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -429,12 +443,13 @@ class ListPayoutsResponseBody(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (

@@ -811,6 +811,44 @@ actions:
 
                 # Handle response
                 print(res)
+  - target: $["paths"]["/messages"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listMessages
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.messages.list(request={
+                    "ending_before": "msg_1KAP4CDPBSVMMBMH9XX3YZZ0Z",
+                    "starting_after": "msg_1KAP4CDPBSVMMBMH9XX3YZZ0Z",
+                    "page_size": 50,
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/messages"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: createMessage
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.messages.create()
+
+                # Handle response
+                print(res)
   - target: $["paths"]["/partners"]["get"]
     update:
       x-codeSamples:
@@ -1009,6 +1047,72 @@ actions:
                             },
                         ],
                     },
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/partners/network"]["get"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: listNetworkPartners
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.list_network(request={
+                    "page": 1,
+                    "page_size": 50,
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/partners/update-group"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: updatePartnersGroup
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.update_group(request={
+                    "partner_ids": [
+                        "pn_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+                    ],
+                    "group_id": "grp_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+                })
+
+                # Handle response
+                print(res)
+  - target: $["paths"]["/partners/update-tags"]["post"]
+    update:
+      x-codeSamples:
+        - lang: python
+          label: updatePartnerTags
+          source: |-
+            from dub import Dub
+
+
+            with Dub(
+                token="DUB_API_KEY",
+            ) as d_client:
+
+                res = d_client.partners.update_tags(request={
+                    "partner_ids": [
+                        "pn_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+                    ],
+                    "add_tag_ids": [
+                        "ptag_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+                    ],
                 })
 
                 # Handle response

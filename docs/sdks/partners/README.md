@@ -9,9 +9,12 @@
 * [retrieve_links](#retrieve_links) - Retrieve a partner's links.
 * [create_link](#create_link) - Create a link for a partner
 * [upsert_link](#upsert_link) - Upsert a link for a partner
+* [list_network](#list_network) - List all partners in the network
 * [analytics](#analytics) - Retrieve analytics for a partner
 * [ban](#ban) - Ban a partner
 * [deactivate](#deactivate) - Deactivate a partner
+* [update_tags](#update_tags) - Update the tags of partners
+* [update_group](#update_group) - Update the group of partners
 
 ## list
 
@@ -316,6 +319,57 @@ with Dub(
 | errors.InternalServerError | 500                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## list_network
+
+List the partners in the Dub partner network for your program. The partner network must be enabled for the program.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listNetworkPartners" method="get" path="/partners/network" -->
+```python
+from dub import Dub
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.partners.list_network(request={
+        "page": 1,
+        "page_size": 50,
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `request`                                                                                      | [operations.ListNetworkPartnersRequest](../../models/operations/listnetworkpartnersrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `retries`                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                               | :heavy_minus_sign:                                                                             | Configuration to override the default retry behavior of the client.                            |
+
+### Response
+
+**[List[components.NetworkPartner]](../../models/.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
 ## analytics
 
 Retrieve analytics for a partner within a program. The response type vary based on the `groupBy` query parameter.
@@ -447,6 +501,114 @@ with Dub(
 ### Response
 
 **[operations.DeactivatePartnerResponseBody](../../models/operations/deactivatepartnerresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## update_tags
+
+Add and remove partner tags on up to 100 partners enrolled in your program. Tags that a partner already has are not added again, and tags a partner does not have are skipped on removal. The call fails without changes if any partner is not enrolled in your program or any tag is not in your program.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="updatePartnerTags" method="post" path="/partners/update-tags" -->
+```python
+from dub import Dub
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.partners.update_tags(request={
+        "partner_ids": [
+            "pn_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+        ],
+        "add_tag_ids": [
+            "ptag_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+        ],
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `request`                                                                                          | [operations.UpdatePartnerTagsRequestBody](../../models/operations/updatepartnertagsrequestbody.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `retries`                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                   | :heavy_minus_sign:                                                                                 | Configuration to override the default retry behavior of the client.                                |
+
+### Response
+
+**[operations.UpdatePartnerTagsResponseBody](../../models/operations/updatepartnertagsresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## update_group
+
+Move up to 100 partners enrolled in your program into a group. They get the group's rewards and discount. Partners already in the group are skipped, unless `disableGroupMove` is set, in which case their setting is updated and they're counted. The call fails without changes if any partner is not enrolled in your program.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="updatePartnersGroup" method="post" path="/partners/update-group" -->
+```python
+from dub import Dub
+
+
+with Dub(
+    token="DUB_API_KEY",
+) as d_client:
+
+    res = d_client.partners.update_group(request={
+        "partner_ids": [
+            "pn_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+        ],
+        "group_id": "grp_1JRQ9DY1X0PDS2G0WGZ7EYTXD",
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                              | [operations.UpdatePartnersGroupRequestBody](../../models/operations/updatepartnersgrouprequestbody.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `retries`                                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                       | :heavy_minus_sign:                                                                                     | Configuration to override the default retry behavior of the client.                                    |
+
+### Response
+
+**[operations.UpdatePartnersGroupResponseBody](../../models/operations/updatepartnersgroupresponsebody.md)**
 
 ### Errors
 
